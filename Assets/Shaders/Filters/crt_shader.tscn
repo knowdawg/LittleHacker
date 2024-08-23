@@ -1,0 +1,23 @@
+[gd_scene load_steps=6 format=3 uid="uid://b5fa63t6v138o"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_mxqt6"]
+[ext_resource type="Script" path="res://Assets/Shaders/Filters/crt_shader.gd" id="2_cdaoo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vv0ic"]
+resource_local_to_scene = true
+shader = ExtResource("1_mxqt6")
+shader_parameter/pixelsWidth = 72.0
+shader_parameter/pixelsHight = 64.0
+
+[sub_resource type="Gradient" id="Gradient_cl2et"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uempg"]
+gradient = SubResource("Gradient_cl2et")
+
+[node name="CRTShader" type="Sprite2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_vv0ic")
+texture = SubResource("GradientTexture2D_uempg")
+script = ExtResource("2_cdaoo")
