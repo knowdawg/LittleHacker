@@ -1,0 +1,165 @@
+[gd_scene load_steps=17 format=3 uid="uid://q5240bomkjnk"]
+
+[ext_resource type="Script" path="res://Objects/WorldObjects/PunchingBag/punching_bag.gd" id="1_r7mwc"]
+[ext_resource type="Texture2D" uid="uid://c0g0on4gr8gcx" path="res://Assets/Sprites/WorldObjects/PunchingBag.png" id="2_8c1gs"]
+[ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/HitFlashComponent/hit_flash_component.tscn" id="3_k8r6e"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_uqtpl"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_sowm4"]
+[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="5_y1pcd"]
+[ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="6_b738j"]
+[ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="7_3h6d6"]
+
+[sub_resource type="Animation" id="Animation_e6aca"]
+resource_name = "HitLeft"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [1, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LightOccluder2D:occluder:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(1, -4, 4, -4, 3, 0, 0, 0), PackedVector2Array(-1, -4, 2, -4, 2, 0, -1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_sd6ws"]
+resource_name = "HitRight"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [2, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LightOccluder2D:occluder:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [PackedVector2Array(-3, -4, 0, -4, 1, 0, -2, 0), PackedVector2Array(-1, -4, 2, -4, 2, 0, -1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_yeci2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LightOccluder2D:occluder:polygon")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [PackedVector2Array(-1, -4, 2, -4, 2, 0, -1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0k4ry"]
+_data = {
+"HitLeft": SubResource("Animation_e6aca"),
+"HitRight": SubResource("Animation_sd6ws"),
+"RESET": SubResource("Animation_yeci2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fi2kx"]
+size = Vector2(3, 4)
+
+[sub_resource type="Gradient" id="Gradient_sxj37"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.752941, 0.580392, 0.45098, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x2ekh"]
+gradient = SubResource("Gradient_sxj37")
+width = 4
+height = 4
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wk3sr"]
+polygon = PackedVector2Array(-1, -4, 2, -4, 2, 0, -1, 0)
+
+[node name="PunchingBag" type="Node2D"]
+script = ExtResource("1_r7mwc")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+clip_children = 2
+texture_filter = 1
+position = Vector2(0, -2)
+texture = ExtResource("2_8c1gs")
+hframes = 3
+
+[node name="HitFlashComponent" parent="Sprite" instance=ExtResource("3_k8r6e")]
+
+[node name="SpriteAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0k4ry")
+}
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_componnet") instance=ExtResource("3_uqtpl")]
+position = Vector2(0, -2)
+collision_layer = 8
+health_componnet = NodePath("../HealthComponent")
+IFRAMETIMER = 0.1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visible = false
+shape = SubResource("RectangleShape2D_fi2kx")
+
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("parrent", "knockbackComponent", "hitEfects") instance=ExtResource("4_sowm4")]
+parrent = NodePath("..")
+knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
+hitEfects = [NodePath("../Sprite/HitFlashComponent"), NodePath("DirectionalHitParticlesComponent"), NodePath("HitParticles")]
+locked = true
+
+[node name="DirectionalHitParticlesComponent" parent="HealthComponent" instance=ExtResource("5_y1pcd")]
+position = Vector2(0, -2)
+texture = SubResource("GradientTexture2D_x2ekh")
+
+[node name="HitParticles" parent="HealthComponent" instance=ExtResource("7_3h6d6")]
+texture = SubResource("GradientTexture2D_x2ekh")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_wk3sr")
+occluder_light_mask = 0
+
+[node name="BidirectionalKnockbackComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("6_b738j")]
+parent = NodePath("..")

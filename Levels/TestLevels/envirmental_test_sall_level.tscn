@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=21 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="3_d3k5u"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_n8lu4"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="5_dscvh"]
+[ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="8_ywwlo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -17,7 +18,7 @@ shader_parameter/palete = ExtResource("3_d3k5u")
 
 [sub_resource type="Gradient" id="Gradient_8u10m"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.262745, 0.235294, 0.243137, 1)
+colors = PackedColorArray(0.419608, 0.376471, 0.388235, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mu1s5"]
 gradient = SubResource("Gradient_8u10m")
@@ -36,7 +37,7 @@ shader_parameter/add_margins = true
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nxn0r"]
-polygon = PackedVector2Array(-96, -14, -72, -14, -48, 10, -24, 10, 24, 26, 64, 26, 64, 18, 72, 18, 72, 10, 80, 10, 80, -54, 96, -54, 96, 54, -96, 54)
+polygon = PackedVector2Array(-96, -14, -72, -14, -72, -6, -64, -6, -64, 2, -56, 2, -56, 10, -48, 10, -48, 18, -24, 18, -24, 26, 64, 26, 64, 18, 72, 18, 72, 10, 80, 10, 80, -54, 96, -54, 96, 54, -96, 54)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rvq4r"]
 polygon = PackedVector2Array(-24, -9, -24, -14, -56, -14, -56, -9)
@@ -50,8 +51,8 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_nfx2l"]
 gradient = SubResource("Gradient_j08of")
-width = 256
-height = 256
+width = 128
+height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -70,6 +71,7 @@ fill_to = Vector2(0.8, 0.8)
 
 [node name="EnvirmentalTestSallLevel" type="Node2D"]
 texture_filter = 1
+scale = Vector2(4, 4)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -192.0
@@ -81,7 +83,6 @@ color = Color(0, 0, 0, 1)
 [node name="Background" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_x6hkg")
 position = Vector2(192, 108)
-scale = Vector2(2, 2)
 texture = SubResource("GradientTexture2D_mu1s5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
@@ -93,7 +94,6 @@ size = Vector2i(192, 108)
 [node name="Envirment" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_2ioux")
 position = Vector2(192, 108)
-scale = Vector2(2, 2)
 texture = SubResource("ViewportTexture_mjem6")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Envirment"]
@@ -112,7 +112,16 @@ position = Vector2(88, 16)
 occluder = SubResource("OccluderPolygon2D_rvq4r")
 occluder_light_mask = 0
 
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="Envirment"]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(37, -5)
+occluder = SubResource("OccluderPolygon2D_rvq4r")
+occluder_light_mask = 0
+
 [node name="Collitions" type="Node2D" parent="."]
+visible = false
+position = Vector2(96, 54)
+scale = Vector2(0.5, 0.5)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Collitions"]
 position = Vector2(96, 54)
@@ -120,7 +129,7 @@ scale = Vector2(40, 40)
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collitions/StaticBody2D"]
 position = Vector2(0, 1.175)
-polygon = PackedVector2Array(-2.4, -0.525, -1.2, -0.525, -1.2, -0.125, -0.8, -0.125, -0.8, 0.275, -0.4, 0.275, -0.4, 0.675, 0, 0.675, 1.2, 0.675, 3.6, 1.475, 5.6, 1.475, 5.6, 1.075, 6, 1.075, 6, 0.675, 6.4, 0.675, 6.4, -2.525, 7.2, -2.525, 7.2, 2.875, -2.4, 2.875)
+polygon = PackedVector2Array(-2.4, -0.525, -1.2, -0.525, -1.2, -0.125, -0.8, -0.125, -0.8, 0.275, -0.4, 0.275, -0.4, 0.675, 0, 0.675, 0, 1.075, 1.2, 1.075, 1.2, 1.475, 5.6, 1.475, 5.6, 1.075, 6, 1.075, 6, 0.675, 6.4, 0.675, 6.4, -2.525, 7.2, -2.525, 7.2, 2.875, -2.4, 2.875)
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="Collitions"]
 position = Vector2(96, 54)
@@ -138,13 +147,24 @@ scale = Vector2(40, 40)
 position = Vector2(0, 1.175)
 polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.325)
 
+[node name="StaticBody2D4" type="StaticBody2D" parent="Collitions"]
+position = Vector2(170, 44)
+scale = Vector2(40, 40)
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collitions/StaticBody2D4"]
+position = Vector2(0, 1.175)
+polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.325)
+
+[node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
+position = Vector2(184, 88)
+
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(104, 80)
+position = Vector2(150, 82)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -2)
 
-[node name="Lighting" type="ColorRect" parent="Player"]
+[node name="SoftLighting" type="ColorRect" parent="Player"]
 material = SubResource("ShaderMaterial_hks5v")
 anchors_preset = 15
 anchor_right = 1.0
@@ -157,27 +177,15 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(120, 48)
+position = Vector2(158.5, 80)
+color = Color(0.247059, 0.247059, 0.247059, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
 [node name="Polygon2D" type="Polygon2D" parent="PointLight2D"]
-polygon = PackedVector2Array(-1, 0, -1, -2, 7, -2, 7, 32, 5, 32, 5, 0)
+position = Vector2(-4, -16)
+polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 
 [node name="Sprite2D" type="Sprite2D" parent="PointLight2D"]
-position = Vector2(0, 2)
-texture = SubResource("GradientTexture2D_51qsl")
-
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(288, 128)
-energy = 0.0
-shadow_enabled = true
-texture = SubResource("GradientTexture2D_nfx2l")
-
-[node name="Polygon2D" type="Polygon2D" parent="PointLight2D2"]
-polygon = PackedVector2Array(-1, 0, -1, -2, 7, -2, 7, 32, 5, 32, 5, 0)
-
-[node name="Sprite2D" type="Sprite2D" parent="PointLight2D2"]
-position = Vector2(0, 2)
 texture = SubResource("GradientTexture2D_51qsl")

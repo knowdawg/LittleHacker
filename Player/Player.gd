@@ -4,13 +4,14 @@ class_name Player
 @export var sprite : Sprite2D
 @export var weaponSprite : Sprite2D
 
-const SPEED = 70.0
-const JUMP_VELOCITY = -130.0
+const SPEED = 70.0 * 2.0
+const JUMP_VELOCITY = -140.0 * 2.0
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = 500 * 2.0 #ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var v : Vector2 = Vector2.ZERO #substitute for velocity so that the charectar will freze if canMove / canFall is false
+var knockbackVector : Vector2 = Vector2.ZERO
 var dashV : Vector2 = Vector2.ZERO
 var coyoteTime : float = 0.0
 
@@ -28,6 +29,11 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 			v.y = 0
 			v.y += gravity * delta
 		velocity.y += v.y
+		
+		if is_on_floor():
+			knockbackVector.y = 0.0
+		velocity.y += knockbackVector.y
+		knockbackVector.y = move_toward(knockbackVector.y, 0, 20.0 * delta * 60)
 	
 	if canMove:
 		var direction = Input.get_axis("Left", "Right")
@@ -39,6 +45,9 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
 		velocity.x += v.x
+		
+		velocity.x += knockbackVector.x
+		knockbackVector.x = move_toward(knockbackVector.x, 0, 20.0 * delta * 60)
 	
 	if dashV.x != 0.0:
 		velocity += dashV
@@ -47,11 +56,6 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 		sprite.flip_h = true
 	if velocity.x < -5:
 		sprite.flip_h = false
-		
-	
-	#curX = global_position.x
-	#print(curX - prevX)
-	#prevX = curX
 	
 	move_and_slide()
 
@@ -78,3 +82,6 @@ func canParry():
 var parrying = false
 func setParry(isParry : bool):
 	parrying = isParry
+
+func _on_attack_down_area_entered(_area: Area2D) -> void:
+	jump()

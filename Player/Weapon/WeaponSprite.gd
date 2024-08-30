@@ -5,11 +5,15 @@ extends Sprite2D
 func _ready():
 	position = parent.global_position
 
+func _process(_delta: float) -> void:
+	if flip_h == true:
+		$LightOccluder2D.scale.x = -1
+	else:
+		$LightOccluder2D.scale.x = 1
+
 func moveTowardsPlayerNormal(delta):
 	position.x = lerp(position.x, parent.global_position.x, delta * 10)
 	position.y = lerp(position.y, parent.global_position.y, delta * 10)
 
 func moveTowardsPlayerFast(_delta):
-	#position.x = lerp(position.x, parent.global_position.x, delta * 40)
-	#position.y = lerp(position.y, parent.global_position.y, delta * 40)
 	position = parent.global_position

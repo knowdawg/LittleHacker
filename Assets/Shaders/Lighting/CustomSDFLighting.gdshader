@@ -20,20 +20,22 @@ void light() {
 	float distanceNeededToTravel = length(lightPosNormalized - SCREEN_UV);
 	float disTraveled = 0.0;
 	float sdfDistanceTraveled = 0.0;
-	for(int i = 0; i < 150; i++){
+	float falloff = 0.025;
+	for(int i = 0; i < 100; i++){
 		vec2 curPos = SCREEN_UV + (angleVector * disTraveled);
 		sdfVal = texture_sdf(screen_uv_to_sdf(curPos));
 		if(disTraveled > distanceNeededToTravel){
 			break;
 		}
+
 		if(sdfVal <= 0.0){
-			intensity -= 0.05;
+			intensity -= falloff * max(abs(sdfVal), 0.1);
 		}
-		disTraveled += screenSize.x * 1.0;
+		disTraveled += screenSize.x * max(abs(sdfVal), 0.1);
 	}
 
 	intensity = clamp(intensity, 0.0, 1.0);
 
 	//sdfVal = texture_sdf(screen_uv_to_sdf(SCREEN_UV));//vec4(abs(sdfVal * 0.1), 1.0, 1.0, 1.0);
-	LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * intensity * 3.0, LIGHT_COLOR.a);
+	LIGHT = vec4(LIGHT_COLOR.rgb * COLOR.rgb * intensity * 4.0, LIGHT_COLOR.a);
 }

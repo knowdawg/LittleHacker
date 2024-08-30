@@ -24,7 +24,7 @@ void fragment() {
 	//bloom += texture(TEXTURE, curvedUV + vec2(0.0, -1.0/ pixelsHight));
 	//bloom /= 6.0;
 	//bloom = smoothstep(0.0, 0.9, bloom);
-	
+
 	float r = texture(TEXTURE, curvedUV).r * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI))), 0.16);
 	float g = texture(TEXTURE, curvedUV).g * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (2.0 * PI)/3.0)), 0.16);
 	float b = texture(TEXTURE, curvedUV).b * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (4.0 * PI)/3.0)), 0.16);

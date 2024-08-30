@@ -1,9 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://doimwfp7cb8h"]
+[gd_scene load_steps=9 format=3 uid="uid://doimwfp7cb8h"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_rxxlu"]
 [ext_resource type="Texture2D" uid="uid://dbxjlqn25v1qy" path="res://Assets/Sprites/EnvirmentTextures/CoblestoneTexture.tres" id="2_5k7ln"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="3_rvijp"]
-[ext_resource type="Script" path="res://Levels/TestLevels/light_occluder_2d.gd" id="4_im5f0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rxmyq"]
 shader = ExtResource("1_rxxlu")
@@ -22,7 +21,7 @@ width = 192
 height = 108
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1pi8e"]
-polygon = PackedVector2Array(-144, 32, 16, 32, 16, -64, -24, -64, -24, -32, -28, -32, -28, -28, -32, -28, -32, -24, -52, -24, -76, -32, -88, -32, -92, -32, -92, -36, -96, -36, -96, -40, -100, -40, -100, -44, -144, -44)
+polygon = PackedVector2Array(-144, 32, 16, 32, 16, -64, -24, -64, -24, -32, -28, -32, -28, -28, -32, -28, -32, -24, -76, -24, -76, -28, -88, -28, -88, -32, -88, -32, -88, -32, -92, -32, -92, -36, -96, -36, -96, -40, -100, -40, -100, -44, -144, -44)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l0lni"]
 polygon = PackedVector2Array(-92, -45.5, -76, -45.5, -76, -48, -92, -48)
@@ -39,18 +38,21 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(224, 128)
 scale = Vector2(2, 2)
 occluder = SubResource("OccluderPolygon2D_1pi8e")
-script = ExtResource("4_im5f0")
 
 [node name="LightOccluder2D2" type="LightOccluder2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(224, 136)
 scale = Vector2(2, 2)
 occluder = SubResource("OccluderPolygon2D_l0lni")
-script = ExtResource("4_im5f0")
 
 [node name="LightOccluder2D3" type="LightOccluder2D" parent="."]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(312, 152)
 scale = Vector2(2, 2)
 occluder = SubResource("OccluderPolygon2D_l0lni")
-script = ExtResource("4_im5f0")
+
+[node name="LightOccluder2D4" type="LightOccluder2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(261, 131)
+scale = Vector2(2, 2)
+occluder = SubResource("OccluderPolygon2D_l0lni")

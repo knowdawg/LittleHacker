@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dc8ilsyf3576k"]
+
+[ext_resource type="Script" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.gd" id="1_n2dy0"]
+
+[node name="OmniDirectionalKnockbackComponent" type="Node2D"]
+script = ExtResource("1_n2dy0")

@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bta4purlxvmqj"]
+
+[ext_resource type="Script" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.gd" id="1_q0ppv"]
+
+[node name="BidirectionalKnockbackComponent" type="Node2D"]
+script = ExtResource("1_q0ppv")
+dirLeft = Vector2(-1, 0)
+dirRight = Vector2(1, 0)

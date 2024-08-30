@@ -7,6 +7,8 @@ class_name PlayerAttackDown
 @export var player : Player
 @export var weaponStateMachine : PlayerWeaponStateMachine
 
+@export var downAttackComponent : AttackComponent
+
 var t = 0.0
 func enter():
 	weaponAnimator.play("AttackDown")
@@ -17,6 +19,13 @@ func update(delta):
 	weaponSprite.moveTowardsPlayerFast(delta)
 	
 	t -= delta
+	
+	if t < 0.3 and t > 0.2:
+		downAttackComponent.enable()
+	else:
+		downAttackComponent.disable()
+	
+	
 	if t >= 0.3:
 		weaponSprite.flip_h = playerSprite.flip_h
 		if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
