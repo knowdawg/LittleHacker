@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://q5240bomkjnk"]
+[gd_scene load_steps=18 format=3 uid="uid://q5240bomkjnk"]
 
 [ext_resource type="Script" path="res://Objects/WorldObjects/PunchingBag/punching_bag.gd" id="1_r7mwc"]
 [ext_resource type="Texture2D" uid="uid://c0g0on4gr8gcx" path="res://Assets/Sprites/WorldObjects/PunchingBag.png" id="2_8c1gs"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="5_y1pcd"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="6_b738j"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="7_3h6d6"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="9_x0otv"]
 
 [sub_resource type="Animation" id="Animation_e6aca"]
 resource_name = "HitLeft"
@@ -163,3 +164,6 @@ occluder_light_mask = 0
 
 [node name="BidirectionalKnockbackComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("6_b738j")]
 parent = NodePath("..")
+
+[node name="EnemyHeathbar" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("9_x0otv")]
+follow = NodePath("../Sprite")

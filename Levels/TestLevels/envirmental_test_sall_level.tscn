@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=22 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -8,6 +8,7 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_n8lu4"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="5_dscvh"]
 [ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="8_ywwlo"]
+[ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -158,6 +159,15 @@ polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.32
 [node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
 position = Vector2(184, 88)
 
+[node name="PunchingBag2" parent="." instance=ExtResource("8_ywwlo")]
+position = Vector2(196, 88)
+
+[node name="PunchingBag3" parent="." instance=ExtResource("8_ywwlo")]
+position = Vector2(152, 124)
+
+[node name="PunchingBag4" parent="." instance=ExtResource("8_ywwlo")]
+position = Vector2(236, 108)
+
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
 position = Vector2(150, 82)
 
@@ -189,3 +199,5 @@ polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 
 [node name="Sprite2D" type="Sprite2D" parent="PointLight2D"]
 texture = SubResource("GradientTexture2D_51qsl")
+
+[node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]

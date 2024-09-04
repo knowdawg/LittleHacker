@@ -1,7 +1,8 @@
-[gd_scene load_steps=56 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=58 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_hn6pj"]
 [ext_resource type="Script" path="res://Player/Idle.gd" id="3_y4nyp"]
 [ext_resource type="Script" path="res://Player/Run.gd" id="4_jsdmc"]
 [ext_resource type="Texture2D" uid="uid://b52jfkhcgjsnc" path="res://Player/SmallPlayerSprite/SmallCharectar.png" id="4_vrrec"]
@@ -22,6 +23,9 @@
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="19_0ng1i"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yskb1"]
+size = Vector2(2, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxj8g"]
 size = Vector2(2, 4)
 
 [sub_resource type="Gradient" id="Gradient_huiik"]
@@ -543,6 +547,13 @@ weaponSprite = NodePath("WeaponDislocator/WeaponSprite")
 visible = false
 position = Vector2(0, -2)
 shape = SubResource("RectangleShape2D_yskb1")
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("2_hn6pj")]
+position = Vector2(0, -2)
+collision_layer = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+shape = SubResource("RectangleShape2D_dxj8g")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 position = Vector2(0, -2)

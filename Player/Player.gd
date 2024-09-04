@@ -64,6 +64,9 @@ func _physics_process(delta):
 	if is_on_floor():
 		coyoteTime = 0.1
 
+func _process(_delta: float) -> void:
+	Game.player = self
+
 func canCoyoteJump():
 	return coyoteTime > 0.0
 

@@ -1,0 +1,35 @@
+[gd_scene load_steps=7 format=3 uid="uid://ct3iy3bd7qrp8"]
+
+[ext_resource type="Script" path="res://UI/CursorFollower/cursor_follower.gd" id="1_6udny"]
+[ext_resource type="Texture2D" uid="uid://b1kruq5o8pyia" path="res://Assets/Sprites/UI/MouseFollower.png" id="2_l83kn"]
+[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="3_dxch7"]
+[ext_resource type="Script" path="res://UI/CursorFollower/free.gd" id="4_ifd0d"]
+[ext_resource type="Script" path="res://UI/CursorFollower/focused.gd" id="5_f0gdm"]
+[ext_resource type="Script" path="res://UI/CursorFollower/locked.gd" id="6_rimj4"]
+
+[node name="CursorFollower" type="Node2D"]
+script = ExtResource("1_6udny")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 100
+texture_filter = 1
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_l83kn")
+hframes = 2
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("3_dxch7")
+initial_state = NodePath("Free")
+
+[node name="Free" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent")]
+script = ExtResource("4_ifd0d")
+parent = NodePath("../..")
+
+[node name="Focused" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent")]
+script = ExtResource("5_f0gdm")
+parent = NodePath("../..")
+
+[node name="Locked" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "sprite")]
+script = ExtResource("6_rimj4")
+parent = NodePath("../..")
+sprite = NodePath("../../Sprite2D")
