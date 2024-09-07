@@ -556,6 +556,7 @@ collision_layer = 4
 shape = SubResource("RectangleShape2D_dxj8g")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 position = Vector2(0, -2)
 color = Color(0.196078, 0.196078, 0.196078, 1)
 energy = 0.0
@@ -595,7 +596,7 @@ script = ExtResource("7_5l01g")
 animated_player_sprite = NodePath("../../SpriteAnimator")
 player = NodePath("../..")
 rollSpeedCurve = SubResource("Curve_js843")
-rollSpeedMultiplier = 16000.0
+rollSpeedMultiplier = 4000.0
 playerStateMachine = NodePath("..")
 
 [node name="GroundParry" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "player", "sm")]
@@ -664,7 +665,6 @@ playerStateMachine = NodePath("../../StateMachine")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponDislocator" node_paths=PackedStringArray("parent")]
 texture_filter = 1
-scale = Vector2(4, 4)
 texture = ExtResource("8_4p1cl")
 hframes = 24
 script = ExtResource("14_bw1kr")
@@ -679,6 +679,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
 hitEfect = ExtResource("19_0ng1i")
 attack_damage = 1.0
+weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 
@@ -692,6 +693,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
 hitEfect = ExtResource("19_0ng1i")
 attack_damage = 1.0
+weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 
@@ -705,6 +707,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
 hitEfect = ExtResource("19_0ng1i")
 attack_damage = 1.0
+weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(0, 1)
 
@@ -718,6 +721,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
 hitEfect = ExtResource("19_0ng1i")
 attack_damage = 1.0
+weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(0, -1)
 

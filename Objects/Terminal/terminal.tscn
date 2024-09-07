@@ -1,0 +1,288 @@
+[gd_scene load_steps=18 format=3 uid="uid://cqfxmyyowlul4"]
+
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="1_gwhp1"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Textures/GridLines.gdshader" id="1_xrjgr"]
+[ext_resource type="Script" path="res://Objects/Terminal/Terminal.gd" id="2_sb8lu"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7xu"]
+shader = ExtResource("1_xrjgr")
+shader_parameter/hLines = 20.0
+shader_parameter/vLines = 35.0
+shader_parameter/col = Color(1, 0, 0, 1)
+shader_parameter/progress = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ivdlh"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_hqruo"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_5gtcm"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kfr07"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_tvf65"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_733po"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_rs14j"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_47jj7"]
+
+[sub_resource type="Theme" id="Theme_vk6dq"]
+TextEdit/fonts/font = ExtResource("1_gwhp1")
+TextEdit/styles/focus = SubResource("StyleBoxEmpty_ivdlh")
+TextEdit/styles/normal = SubResource("StyleBoxEmpty_hqruo")
+TextEdit/styles/read_only = SubResource("StyleBoxEmpty_5gtcm")
+VScrollBar/styles/grabber = SubResource("StyleBoxEmpty_kfr07")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxEmpty_tvf65")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxEmpty_733po")
+VScrollBar/styles/scroll = SubResource("StyleBoxEmpty_rs14j")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_47jj7")
+
+[sub_resource type="Animation" id="Animation_p5m22"]
+resource_name = "Show"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0), Color(1, 0, 0, 0.156863), Color(1, 0, 0, 0.117647)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextEdit:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextEdit:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shader:material:shader_parameter/progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ojpji"]
+resource_name = "Hide"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.117647), Color(1, 0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextEdit:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextEdit:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shader:material:shader_parameter/progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_v1idu"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 0, 0, 0.0588235)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextEdit:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("TextEdit:mouse_filter")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Shader:material:shader_parameter/progress")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ffwbk"]
+_data = {
+"Hide": SubResource("Animation_ojpji"),
+"RESET": SubResource("Animation_v1idu"),
+"Show": SubResource("Animation_p5m22")
+}
+
+[node name="Terminal" type="CanvasLayer"]
+layer = 10
+visible = false
+
+[node name="Shader" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_mc7xu")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+modulate = Color(1, 0, 0, 0.0588235)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextEdit" type="TextEdit" parent="."]
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.02
+anchor_right = 0.98
+anchor_bottom = 0.98
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_vk6dq")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 1
+theme_override_font_sizes/font_size = 50
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+wrap_mode = 1
+scroll_past_end_of_file = true
+script = ExtResource("2_sb8lu")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="TextEdit"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_ffwbk")
+}

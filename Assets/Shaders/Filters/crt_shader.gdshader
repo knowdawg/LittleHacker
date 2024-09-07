@@ -7,15 +7,15 @@ uniform float pixelsHight : hint_range(1, 2000, 1);
 vec2 curve(vec2 uv){
 	uv = (uv - 0.5) * 2.0;
 	uv *= 1.1;
-	uv.x *= 1.0 + pow((abs(uv.y) / 16.0 * 1.5), 2.0);
-	uv.y *= 1.0 + pow((abs(uv.x) / 9.0 * 1.5), 2.0);
+	uv.x *= 1.0 + pow((abs(uv.y) / 16.0 * 1.0), 2.0);
+	uv.y *= 1.0 + pow((abs(uv.x) / 9.0 * 1.0), 2.0);
 	uv  = (uv / 2.0) + 0.5;
 	uv =  uv *0.92 + 0.04;
 	return uv;
 }
 
 void fragment() {
-	vec2 curvedUV = UV;//curve(UV);
+	vec2 curvedUV = curve(UV);
 
 	//vec4 bloom =  texture(TEXTURE, curvedUV);
 	//bloom += texture(TEXTURE, curvedUV + vec2(0.5/ pixelsWidth, 0.0));

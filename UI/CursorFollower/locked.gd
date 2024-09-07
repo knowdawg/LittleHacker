@@ -14,14 +14,17 @@ func enter():
 		sprite.frame = 1
 
 func update(_delta):
-	parent.position = target.follow.global_position / 4.0
+	parent.position = target.follow.global_position
+	
+	if Input.is_action_just_pressed("SwitchBar"):
+		target.nextBar()
 	
 	if Input.is_action_just_pressed("LockOn"):
 		var gmp = EnemyHealthBarPositionManager.getActualGlobalMousePosition()
 		var closestHealthBar : EnemyHealthBar = EnemyHealthBarPositionManager.getClossestEnemyHealthBar(gmp)
 		if closestHealthBar:
-			var dis = closestHealthBar.follow.global_position.distance_to(gmp * 4.0)
-			if dis < 80:
+			var dis = closestHealthBar.follow.global_position.distance_to(gmp)
+			if dis < 25:
 				trasitioned.emit(self, "Focused")
 			else:
 				trasitioned.emit(self, "Free")

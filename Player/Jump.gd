@@ -20,5 +20,5 @@ func update_physics(delta):
 
 func enter():
 	player.jump();
-	t = 0
 	animated_player_sprite.play("JumpStart")
+	t = 0

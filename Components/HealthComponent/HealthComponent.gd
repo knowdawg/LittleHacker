@@ -8,6 +8,10 @@ class_name HealthComponent
 
 @export var MAX_HEALTH := 10.0
 var health : float
+
+@export var MAX_WEAKNESS := 20.0
+var weakness : float = 0.0
+
 @export var locked = false
 
 func _ready():
@@ -28,6 +32,21 @@ func set_health(val : float):
 	else:
 		health = val
 
+func get_weakness():
+	return weakness
+
+func get_max_weakness():
+	return MAX_WEAKNESS
+
+func set_max_weakness(val : float):
+	MAX_WEAKNESS = val
+
+func set_weakness(val : float):
+	if val > MAX_WEAKNESS:
+		weakness = MAX_WEAKNESS
+	else:
+		weakness = val
+
 func damage(attack : Attack):
 	if locked == true:
 		#can put in a resource / class that can be changed / created as I wish
@@ -35,6 +54,7 @@ func damage(attack : Attack):
 		pass
 	
 	health -= attack.attack_damage
+	set_weakness(weakness + attack.weakness_damage)
 	
 	if hitEfects.size() > 0:
 		for p in hitEfects:

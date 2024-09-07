@@ -20,7 +20,7 @@ void light() {
 	float distanceNeededToTravel = length(lightPosNormalized - SCREEN_UV);
 	float disTraveled = 0.0;
 	float sdfDistanceTraveled = 0.0;
-	float falloff = 0.025;
+	float falloff = 0.03;
 	for(int i = 0; i < 100; i++){
 		vec2 curPos = SCREEN_UV + (angleVector * disTraveled);
 		sdfVal = texture_sdf(screen_uv_to_sdf(curPos));

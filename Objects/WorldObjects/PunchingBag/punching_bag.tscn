@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://q5240bomkjnk"]
+[gd_scene load_steps=19 format=3 uid="uid://q5240bomkjnk"]
 
 [ext_resource type="Script" path="res://Objects/WorldObjects/PunchingBag/punching_bag.gd" id="1_r7mwc"]
 [ext_resource type="Texture2D" uid="uid://c0g0on4gr8gcx" path="res://Assets/Sprites/WorldObjects/PunchingBag.png" id="2_8c1gs"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="6_b738j"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="7_3h6d6"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="9_x0otv"]
+[ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="10_wmgvs"]
 
 [sub_resource type="Animation" id="Animation_e6aca"]
 resource_name = "HitLeft"
@@ -111,8 +112,8 @@ colors = PackedColorArray(0.752941, 0.580392, 0.45098, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_x2ekh"]
 gradient = SubResource("Gradient_sxj37")
-width = 4
-height = 4
+width = 1
+height = 1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wk3sr"]
 polygon = PackedVector2Array(-1, -4, 2, -4, 2, 0, -1, 0)
@@ -148,7 +149,6 @@ shape = SubResource("RectangleShape2D_fi2kx")
 parrent = NodePath("..")
 knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
 hitEfects = [NodePath("../Sprite/HitFlashComponent"), NodePath("DirectionalHitParticlesComponent"), NodePath("HitParticles")]
-locked = true
 
 [node name="DirectionalHitParticlesComponent" parent="HealthComponent" instance=ExtResource("5_y1pcd")]
 position = Vector2(0, -2)
@@ -165,5 +165,25 @@ occluder_light_mask = 0
 [node name="BidirectionalKnockbackComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("6_b738j")]
 parent = NodePath("..")
 
-[node name="EnemyHeathbar" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("9_x0otv")]
+[node name="EnemyHeathbar" parent="." node_paths=PackedStringArray("follow", "healthComponent", "hackCommands") instance=ExtResource("9_x0otv")]
 follow = NodePath("../Sprite")
+healthComponent = NodePath("../HealthComponent")
+hackCommands = [NodePath("HackCommandComponent"), NodePath("HackCommandComponent2"), NodePath("HackCommandComponent3")]
+
+[node name="HackCommandComponent" parent="EnemyHeathbar" node_paths=PackedStringArray("healthComponent", "enemyHealthBar") instance=ExtResource("10_wmgvs")]
+cost = 5.0
+hackName = "Blast"
+healthComponent = NodePath("../../HealthComponent")
+enemyHealthBar = NodePath("..")
+
+[node name="HackCommandComponent2" parent="EnemyHeathbar" node_paths=PackedStringArray("healthComponent", "enemyHealthBar") instance=ExtResource("10_wmgvs")]
+cost = 10.0
+hackName = "Absorb"
+healthComponent = NodePath("../../HealthComponent")
+enemyHealthBar = NodePath("..")
+
+[node name="HackCommandComponent3" parent="EnemyHeathbar" node_paths=PackedStringArray("healthComponent", "enemyHealthBar") instance=ExtResource("10_wmgvs")]
+cost = 15.0
+hackName = "Shatter"
+healthComponent = NodePath("../../HealthComponent")
+enemyHealthBar = NodePath("..")

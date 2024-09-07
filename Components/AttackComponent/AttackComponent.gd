@@ -6,6 +6,7 @@ class_name AttackComponent
 @export var numberOfHitEffect : int = 1
 
 @export var attack_damage : float
+@export var weakness_damage : float
 @export var knockback_force: float
 @export var knockbackVector : Vector2
 @export var isSpikes : bool = false
@@ -23,6 +24,7 @@ func _on_area_entered(area):
 		
 		var attack = Attack.new()
 		attack.attack_damage = attack_damage
+		attack.weakness_damage = weakness_damage
 		attack.knockback_force = knockback_force
 		attack.attack_position = global_position
 		attack.attackID = attackID

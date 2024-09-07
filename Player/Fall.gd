@@ -14,7 +14,7 @@ func update_physics(delta):
 		animated_scale.play("HitGround")
 		return
 	
-	if Input.is_action_just_pressed("Jump"):
+	if playerStateMachine.inputBuffer == "Jump":
 		if player.canCoyoteJump() == true:
 			trasitioned.emit(self, "Jump")
 

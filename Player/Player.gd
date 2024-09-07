@@ -4,11 +4,11 @@ class_name Player
 @export var sprite : Sprite2D
 @export var weaponSprite : Sprite2D
 
-const SPEED = 70.0 * 2.0
-const JUMP_VELOCITY = -140.0 * 2.0
+const SPEED = 70.0 * 0.45
+const JUMP_VELOCITY = -140.0 * 0.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = 500 * 2.0 #ProjectSettings.get_setting("physics/2d/default_gravity")
+var gravity = 500 * 0.5 #ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var v : Vector2 = Vector2.ZERO #substitute for velocity so that the charectar will freze if canMove / canFall is false
 var knockbackVector : Vector2 = Vector2.ZERO
@@ -28,6 +28,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 		if is_on_ceiling():
 			v.y = 0
 			v.y += gravity * delta
+			
 		velocity.y += v.y
 		
 		if is_on_floor():
@@ -37,6 +38,8 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	
 	if canMove:
 		var direction = Input.get_axis("Left", "Right")
+		if Game.inTerminal:
+			direction = 0
 		if direction:
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
 			if is_on_floor():
@@ -44,8 +47,8 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 				#velocity += get_floor_normal() * v
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
-		velocity.x += v.x
 		
+		velocity.x += v.x
 		velocity.x += knockbackVector.x
 		knockbackVector.x = move_toward(knockbackVector.x, 0, 20.0 * delta * 60)
 	

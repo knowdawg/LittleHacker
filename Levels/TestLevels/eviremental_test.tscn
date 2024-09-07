@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=6 format=3 uid="uid://dlfxfm3ebd5n7"]
 
 [ext_resource type="PackedScene" uid="uid://c8x60h4peckug" path="res://Levels/TestLevels/envirmental_test_sall_level.tscn" id="1_6d02k"]
 [ext_resource type="PackedScene" uid="uid://b5fa63t6v138o" path="res://Assets/Shaders/Filters/crt_shader.tscn" id="1_8qks8"]
@@ -10,26 +10,37 @@ shader = ExtResource("2_f6ogn")
 shader_parameter/pixelsWidth = 256.0
 shader_parameter/pixelsHight = 144.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_p3tks"]
+viewport_path = NodePath("SubViewportContainer/SmallEnvirementViewport")
+
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1
 
-[node name="SmallEnvirementViewport" type="SubViewport" parent="."]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+
+[node name="SmallEnvirementViewport" type="SubViewport" parent="SubViewportContainer"]
 disable_3d = true
 handle_input_locally = false
-size = Vector2i(512, 288)
+size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="EnvirmentalTestSallLevel" parent="SmallEnvirementViewport" instance=ExtResource("1_6d02k")]
+[node name="EnvirmentalTestSallLevel" parent="SubViewportContainer/SmallEnvirementViewport" instance=ExtResource("1_6d02k")]
 
 [node name="CRTShader" parent="." node_paths=PackedStringArray("subScreen") instance=ExtResource("1_8qks8")]
 material = SubResource("ShaderMaterial_0qigq")
-subScreen = NodePath("../SmallEnvirementViewport")
+texture = SubResource("ViewportTexture_p3tks")
+subScreen = NodePath("../SubViewportContainer/SmallEnvirementViewport")
 
 [node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3.5, 3.5)
+zoom = Vector2(1.4, 1.4)
 
 [node name="Line2D" type="Line2D" parent="."]
-points = PackedVector2Array(0, -145, 254, -142, 256, 0, 254, 142, 0, 145, -254, 142, -256, 0, -254, -142)
+points = PackedVector2Array(0, -364, 640, -360, 644, 0, 640, 360, 0, 364, -640, 360, -644, 0, -640, -360)
 closed = true
-width = 4.0
+width = 12.0
+default_color = Color(0, 0, 0, 1)
 antialiased = true

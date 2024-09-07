@@ -4,15 +4,15 @@ var healthbars : Array[EnemyHealthBar] = []
 
 func getActualGlobalMousePosition():
 	var mp = get_global_mouse_position()
+	mp /= 10.0 #getResolutionRatio()
 	if is_instance_valid(Game.player):
 		mp += Game.player.global_position
-	mp *= 0.25
 	return mp
 
 var comparePos = Vector2.ZERO
 func getClossestEnemyHealthBar(fromPos : Vector2):
 	if healthbars.size() > 0:
-		comparePos = fromPos * 4.0
+		comparePos = fromPos 
 		healthbars.sort_custom(custSort)
 		return healthbars[0]
 	else:
@@ -25,3 +25,9 @@ func custSort(a : EnemyHealthBar, b : EnemyHealthBar):
 		return true
 	else:
 		return false
+
+func clear():
+	healthbars = []
+
+func getResolutionRatio():
+	return get_viewport_rect().size.y / 720.0

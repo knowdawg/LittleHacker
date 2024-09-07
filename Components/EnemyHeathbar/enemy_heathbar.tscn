@@ -1,99 +1,60 @@
-[gd_scene load_steps=10 format=3 uid="uid://c80slj0a6d2vi"]
+[gd_scene load_steps=21 format=3 uid="uid://c80slj0a6d2vi"]
 
 [ext_resource type="Texture2D" uid="uid://kmtr0ey7kxch" path="res://Assets/Sprites/UI/EnemyHeathbar.png" id="1_ds140"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/GlitchEffect.gdshader" id="2_kgj68"]
 [ext_resource type="Script" path="res://Components/EnemyHeathbar/enemy_heathbar.gd" id="2_vxjlb"]
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="4_6r2o3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lkw7n"]
 shader = ExtResource("2_kgj68")
-shader_parameter/shake_power = 0.03
+shader_parameter/shake_power = 0.0
 shader_parameter/shake_rate = 0.2
 shader_parameter/shake_speed = 5.0
 shader_parameter/shake_block_size = 30.5
-shader_parameter/shake_color_rate = 0.01
+shader_parameter/shake_color_rate = 0.0
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_qnwo2"]
 diffuse_texture = ExtResource("1_ds140")
 
-[sub_resource type="Animation" id="Animation_5iyrm"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.03]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.01]
-}
+[sub_resource type="Gradient" id="Gradient_sa664"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.811765, 0.341176, 0.239216, 1)
 
-[sub_resource type="Animation" id="Animation_xabsy"]
-resource_name = "Deactivate"
-length = 0.35
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [7, 6, 5, 4, 3, 2, 1]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.3, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.03, 0.03, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.15, 0.35),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 0.0, 0.01, 0.0]
-}
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dsvpv"]
+gradient = SubResource("Gradient_sa664")
+width = 49
+height = 2
+
+[sub_resource type="Gradient" id="Gradient_q1a8f"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.811765, 0.341176, 0.239216, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ck0jw"]
+gradient = SubResource("Gradient_q1a8f")
+width = 49
+height = 7
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gnt5r"]
+gradient = SubResource("Gradient_sa664")
+width = 49
+height = 2
+
+[sub_resource type="Gradient" id="Gradient_ir0iv"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.45098, 0.745098, 0.827451, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xx3is"]
+gradient = SubResource("Gradient_ir0iv")
+width = 45
+
+[sub_resource type="Gradient" id="Gradient_h1d6m"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.447059, 0.745098, 0.827451, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ilf75"]
+gradient = SubResource("Gradient_h1d6m")
+width = 45
+height = 7
 
 [sub_resource type="Animation" id="Animation_shtd6"]
 resource_name = "Activate"
@@ -102,58 +63,287 @@ step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2, 0.25),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.03, 0.03, 0.0]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.01, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_xabsy"]
+resource_name = "Deactivate"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.03, 0.03, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [5, 5, 4, 3]
+}
+
+[sub_resource type="Animation" id="Animation_eexl2"]
+resource_name = "Glitch"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.1, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.01, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.25, 0.25), Vector2(0.25, 0.2), Vector2(0.25, 0.25)]
+}
+
+[sub_resource type="Animation" id="Animation_5iyrm"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:material:shader_parameter/shake_power")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:material:shader_parameter/shake_color_rate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.25, 0.25)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rga7j"]
 _data = {
 "Activate": SubResource("Animation_shtd6"),
 "Deactivate": SubResource("Animation_xabsy"),
+"Glitch": SubResource("Animation_eexl2"),
 "RESET": SubResource("Animation_5iyrm")
 }
 
-[node name="EnemyHeathbar" type="Node"]
+[node name="EnemyHeathbar" type="Node" node_paths=PackedStringArray("nuetralActiveBars", "healthActiveBars", "weaknessActiveBars", "healthBars", "weaknessBars")]
 script = ExtResource("2_vxjlb")
+nuetralActiveBars = [NodePath("Sprite2D/HealthBarNuetral"), NodePath("Sprite2D/WeaknessBarNuetral")]
+healthActiveBars = [NodePath("Sprite2D/HealthBarHealth"), NodePath("Sprite2D/WeaknessBarHealth")]
+weaknessActiveBars = [NodePath("Sprite2D/WeaknessBarWeakness"), NodePath("Sprite2D/HealthBarWeakness")]
+healthBars = [NodePath("Sprite2D/HealthBarNuetral"), NodePath("Sprite2D/HealthBarHealth"), NodePath("Sprite2D/HealthBarWeakness")]
+weaknessBars = [NodePath("Sprite2D/WeaknessBarNuetral"), NodePath("Sprite2D/WeaknessBarHealth"), NodePath("Sprite2D/WeaknessBarWeakness")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 texture_repeat = 1
 material = SubResource("ShaderMaterial_lkw7n")
-scale = Vector2(2, 2)
+scale = Vector2(0.25, 0.25)
 texture = SubResource("CanvasTexture_qnwo2")
-offset = Vector2(16, 8)
-hframes = 8
+offset = Vector2(32, 12)
+hframes = 6
+
+[node name="HealthBarNuetral" type="TextureProgressBar" parent="Sprite2D"]
+visible = false
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 12.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_dsvpv")
+
+[node name="HealthBarHealth" type="TextureProgressBar" parent="Sprite2D"]
+visible = false
+offset_left = 12.0
+offset_top = 11.0
+offset_right = 76.0
+offset_bottom = 75.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_ck0jw")
+
+[node name="HealthBarWeakness" type="TextureProgressBar" parent="Sprite2D"]
+visible = false
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 61.0
+offset_bottom = 12.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_gnt5r")
+
+[node name="WeaknessBarNuetral" type="TextureProgressBar" parent="Sprite2D"]
+visible = false
+offset_left = 14.0
+offset_top = 13.0
+offset_right = 63.0
+offset_bottom = 14.0
+value = 100.0
+texture_progress = SubResource("GradientTexture1D_xx3is")
+
+[node name="WeaknessBarHealth" type="TextureProgressBar" parent="Sprite2D"]
+visible = false
+offset_left = 14.0
+offset_top = 19.0
+offset_right = 63.0
+offset_bottom = 20.0
+value = 100.0
+texture_progress = SubResource("GradientTexture1D_xx3is")
+
+[node name="WeaknessBarWeakness" type="TextureProgressBar" parent="Sprite2D"]
+visible = false
+offset_left = 14.0
+offset_top = 13.0
+offset_right = 63.0
+offset_bottom = 20.0
+value = 100.0
+texture_progress = SubResource("GradientTexture2D_ilf75")
+
+[node name="HealthLabel" type="Label" parent="Sprite2D"]
+visible = false
+z_index = 1
+texture_filter = 1
+offset_left = 17.0
+offset_top = 6.0
+offset_right = 57.0
+offset_bottom = 17.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_6r2o3")
+text = "TEST"
+horizontal_alignment = 1
+
+[node name="WeaknessLabel" type="Label" parent="Sprite2D"]
+visible = false
+z_index = 1
+texture_filter = 1
+offset_left = 17.0
+offset_top = 8.0
+offset_right = 57.0
+offset_bottom = 19.0
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("4_6r2o3")
+text = "TEST"
+horizontal_alignment = 1
+
+[node name="HackCoponentPosition" type="Node2D" parent="Sprite2D"]
+
+[node name="Loc1" type="Marker2D" parent="Sprite2D/HackCoponentPosition"]
+position = Vector2(12, 24)
+
+[node name="Loc2" type="Marker2D" parent="Sprite2D/HackCoponentPosition"]
+position = Vector2(36, 30)
+
+[node name="Loc3" type="Marker2D" parent="Sprite2D/HackCoponentPosition"]
+position = Vector2(61, 24)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
