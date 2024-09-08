@@ -684,7 +684,6 @@ knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackLeft"]
-visible = false
 position = Vector2(-5, -2.5)
 shape = SubResource("RectangleShape2D_0shqs")
 
@@ -698,7 +697,6 @@ knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackRight"]
-visible = false
 position = Vector2(5, -2.5)
 shape = SubResource("RectangleShape2D_0shqs")
 

@@ -4,6 +4,7 @@ class_name HackCommandComponent
 @export var cost = 0.0
 @export var hackName = ""
 @export var hackExecuteScene : PackedScene
+@export var enemy : Node2D
 @export var commandSpawnPos : Node2D
 @export var healthComponent : HealthComponent
 @export var enemyHealthBar : EnemyHealthBar
@@ -39,4 +40,4 @@ func executeHack():
 	var p = hackExecuteScene.instantiate()
 	commandSpawnPos.add_child(p)
 	p.initialize()
-	commandSpawnPos
+	healthComponent.set_weakness(healthComponent.get_weakness() - cost)

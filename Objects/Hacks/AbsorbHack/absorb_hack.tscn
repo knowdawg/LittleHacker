@@ -1,0 +1,197 @@
+[gd_scene load_steps=17 format=3 uid="uid://b35cqyb8nutv1"]
+
+[ext_resource type="Script" path="res://Objects/Hacks/AbsorbHack/absorb_hack.gd" id="1_4digu"]
+[ext_resource type="PackedScene" uid="uid://chkylrbd78k57" path="res://Components/trailComponent/trail_component.tscn" id="2_15web"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="3_ae78f"]
+[ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="3_v3lrv"]
+
+[sub_resource type="Curve" id="Curve_c0bvo"]
+max_value = 2.0
+_data = [Vector2(0, 0.594723), 0.0, -2.80103, 0, 0, Vector2(0.502164, 0.0950227), 0.0, 0.0, 0, 0, Vector2(1, 2), 12.0203, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="Animation" id="Animation_u7koq"]
+resource_name = "Hack"
+length = 0.3
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.02, 0.08, 0.1, 0.12, 0.18, 0.2, 0.22, 0.28),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_oi7ji"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bga8s"]
+_data = {
+"Hack": SubResource("Animation_u7koq"),
+"RESET": SubResource("Animation_oi7ji")
+}
+
+[sub_resource type="Gradient" id="Gradient_3il7m"]
+colors = PackedColorArray(0.607843, 0, 1, 1, 0, 1, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_va2c1"]
+gradient = SubResource("Gradient_3il7m")
+
+[sub_resource type="Curve" id="Curve_00t63"]
+max_value = 3.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_fyh36"]
+curve = SubResource("Curve_00t63")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kvful"]
+particle_flag_disable_z = true
+angle_min = 1.07288e-05
+angle_max = 360.0
+spread = 180.0
+initial_velocity_min = 10.0
+initial_velocity_max = 15.0
+gravity = Vector3(0, 0, 0)
+damping_min = 15.0
+damping_max = 15.0
+scale_curve = SubResource("CurveTexture_fyh36")
+color_ramp = SubResource("GradientTexture1D_va2c1")
+
+[sub_resource type="Gradient" id="Gradient_mehoa"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p67wo"]
+gradient = SubResource("Gradient_mehoa")
+width = 1
+height = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sje8b"]
+radius = 1.0
+
+[node name="AbsorbHack" type="Node2D" node_paths=PackedStringArray("orbs")]
+script = ExtResource("1_4digu")
+orbs = [NodePath("Orb1"), NodePath("Orb2"), NodePath("Orb3"), NodePath("Orb4"), NodePath("Orb5"), NodePath("Orb6")]
+speedCurve = SubResource("Curve_c0bvo")
+
+[node name="Orb1" type="Marker2D" parent="."]
+
+[node name="Orb2" type="Marker2D" parent="."]
+
+[node name="Orb3" type="Marker2D" parent="."]
+
+[node name="Orb4" type="Marker2D" parent="."]
+
+[node name="Orb5" type="Marker2D" parent="."]
+
+[node name="Orb6" type="Marker2D" parent="."]
+
+[node name="Trails" type="Node" parent="."]
+
+[node name="TrailComponent" parent="Trails" node_paths=PackedStringArray("follow") instance=ExtResource("2_15web")]
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+follow = NodePath("../../Orb1")
+
+[node name="TrailComponent2" parent="Trails" node_paths=PackedStringArray("follow") instance=ExtResource("2_15web")]
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+follow = NodePath("../../Orb2")
+
+[node name="TrailComponent3" parent="Trails" node_paths=PackedStringArray("follow") instance=ExtResource("2_15web")]
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+follow = NodePath("../../Orb3")
+
+[node name="TrailComponent4" parent="Trails" node_paths=PackedStringArray("follow") instance=ExtResource("2_15web")]
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+follow = NodePath("../../Orb4")
+
+[node name="TrailComponent5" parent="Trails" node_paths=PackedStringArray("follow") instance=ExtResource("2_15web")]
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+follow = NodePath("../../Orb5")
+
+[node name="TrailComponent6" parent="Trails" node_paths=PackedStringArray("follow") instance=ExtResource("2_15web")]
+width = 0.5
+default_color = Color(0, 1, 0, 1)
+follow = NodePath("../../Orb6")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bga8s")
+}
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+emitting = false
+amount = 32
+process_material = SubResource("ParticleProcessMaterial_kvful")
+texture = SubResource("GradientTexture2D_p67wo")
+lifetime = 0.5
+preprocess = 0.2
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("3_ae78f")]
+collision_mask = 8
+collisionShape = NodePath("CollisionShape2D")
+hitEfect = ExtResource("3_v3lrv")
+attack_damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+shape = SubResource("CircleShape2D_sje8b")

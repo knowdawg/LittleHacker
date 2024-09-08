@@ -28,12 +28,12 @@ func executeTerminalCommand(commandName : String) -> String:
 	var n = commandName.to_lower()
 	n = n.replace("/", "")
 	
+	if selectedHealthBar:
+		var selectedEnemyCommands = selectedHealthBar.hackCommands
 	
-	var selectedEnemyCommands = selectedHealthBar.hackCommands
-	
-	for c in selectedEnemyCommands:
-		if c.hackName.to_lower() == n:
-			return "    Error: Not Enough Weakness"
+		for c in selectedEnemyCommands:
+			if c.hackName.to_lower() == n:
+				return "    Error: Not Enough Weakness"
 	
 	if n == "commands":
 		var r = ""
@@ -41,6 +41,7 @@ func executeTerminalCommand(commandName : String) -> String:
 		if !selectedHealthBar:
 			return "    Error: No Commands Found"
 		
+		var selectedEnemyCommands = selectedHealthBar.hackCommands
 		if selectedEnemyCommands.size() == 0:
 			return "    Error: No Commands Found"
 		

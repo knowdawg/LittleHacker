@@ -22,7 +22,7 @@ func update(delta):
 	weaponSprite.moveTowardsPlayerFast(delta)
 	
 	if t < 0.3 and t > 0.2:
-		if playerSprite.flip_h == false:
+		if weaponSprite.flip_h == false:
 			leftAttackComponent.enable()
 		else:
 			rightAttackComponent.enable()
