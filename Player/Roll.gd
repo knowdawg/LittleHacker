@@ -6,6 +6,7 @@ class_name SmallPlayerRoll
 @export var rollSpeedCurve : Curve
 @export var rollSpeedMultiplier : float = 6000;
 @export var playerStateMachine : PlayerStateMachine
+@export var hurtboxForIframes : HurtboxComponent
 
 var rollTime : float = 0.6;
 var t : float = 0.0;
@@ -18,6 +19,9 @@ func update_physics(delta):
 	var progress : float = t / rollTime
 	var speed : float = rollSpeedCurve.sample(progress) * rollSpeedMultiplier * direction * delta
 	player.dashV.x = speed
+	
+	if t <= 0.2:
+		hurtboxForIframes.ift = 0.05
 	
 	if progress >= 0.75 and Input.get_axis("Left", "Right") != 0:
 		trasitioned.emit(self, "Run")

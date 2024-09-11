@@ -1,27 +1,38 @@
-[gd_scene load_steps=9 format=3 uid="uid://d0lxs0ykh7kii"]
+[gd_scene load_steps=14 format=3 uid="uid://d0lxs0ykh7kii"]
 
 [ext_resource type="Script" path="res://Objects/Hacks/BlastHack/blast_hack.gd" id="1_6v7ox"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_f227o"]
+[ext_resource type="Texture2D" uid="uid://dh3ou38ffs4qq" path="res://Assets/Sprites/Effects/RedExsplotion.png" id="2_fijkj"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="4_sywak"]
 
-[sub_resource type="Gradient" id="Gradient_v7d24"]
-interpolation_mode = 1
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+[sub_resource type="Gradient" id="Gradient_libaj"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 0)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_edf5v"]
-gradient = SubResource("Gradient_v7d24")
-width = 32
-height = 32
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rop6y"]
+gradient = SubResource("Gradient_libaj")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ej5pi"]
+resource_local_to_scene = true
+shader = ExtResource("4_sywak")
+shader_parameter/progress = 0.0
+shader_parameter/intensity = 0.0
+
+[sub_resource type="Gradient" id="Gradient_q8b2j"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gqbs6"]
+gradient = SubResource("Gradient_q8b2j")
+
 [sub_resource type="CircleShape2D" id="CircleShape2D_2wjr0"]
-radius = 13.0
+radius = 12.0
 
 [sub_resource type="Animation" id="Animation_q2n1q"]
 resource_name = "Blast"
-length = 0.3
-step = 0.1
+step = 0.05
 tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -42,26 +53,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05), Vector2(1, 1), Vector2(1.2, 1.2)]
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9, 10, 11]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/path = NodePath("Shockwave:material:shader_parameter/progress")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+"values": [0.0, 0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Shockwave:material:shader_parameter/intensity")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 5.0, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_fcekj"]
@@ -69,26 +104,50 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/path = NodePath("Sprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1e-05, 1e-05)]
+"update": 1,
+"values": [0]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/path = NodePath("Shockwave:material:shader_parameter/progress")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Color(1, 1, 1, 1)]
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Shockwave:material:shader_parameter/intensity")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_g4s5t"]
@@ -100,9 +159,19 @@ _data = {
 [node name="BlastHack" type="Node2D"]
 script = ExtResource("1_6v7ox")
 
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0, 0, 0, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_rop6y")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(1e-05, 1e-05)
-texture = SubResource("GradientTexture2D_edf5v")
+texture_filter = 1
+texture = ExtResource("2_fijkj")
+hframes = 12
+
+[node name="Shockwave" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_ej5pi")
+texture = SubResource("GradientTexture2D_gqbs6")
 
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("2_f227o")]
 collision_mask = 8

@@ -31,10 +31,6 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 			
 		velocity.y += v.y
 		
-		if is_on_floor():
-			knockbackVector.y = 0.0
-		velocity.y += knockbackVector.y
-		knockbackVector.y = move_toward(knockbackVector.y, 0, 20.0 * delta * 60)
 	
 	if canMove:
 		var direction = Input.get_axis("Left", "Right")
@@ -47,10 +43,16 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 				#velocity += get_floor_normal() * v
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
-		
-		velocity.x += v.x
-		velocity.x += knockbackVector.x
-		knockbackVector.x = move_toward(knockbackVector.x, 0, 20.0 * delta * 60)
+	
+	#Knockback
+	if is_on_floor():
+		knockbackVector.y = 0.0
+	velocity.y += knockbackVector.y
+	knockbackVector.y = move_toward(knockbackVector.y, 0, 10.0 * delta * 60)
+	
+	velocity.x += v.x
+	velocity.x += knockbackVector.x
+	knockbackVector.x = move_toward(knockbackVector.x, 0, 10.0 * delta * 60)
 	
 	if dashV.x != 0.0:
 		velocity += dashV
@@ -91,3 +93,20 @@ func setParry(isParry : bool):
 
 func _on_attack_down_area_entered(_area: Area2D) -> void:
 	jump()
+
+func hitFromLeft(_attack : Attack):
+	knockbackVector.x = 100.0
+	v.x = 0.0
+	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	Game.slowTime(0.3, 0.1)
+
+func hitFromRight(_attack : Attack):
+	knockbackVector.x = -100.0
+	v.x = 0.0
+	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	Game.slowTime(0.3, 0.1)
+
+
+func parry(_attack : Attack):
+	pass
+	#$StateMachine.onChildTransition($StateMachine.current_state, "Stun")

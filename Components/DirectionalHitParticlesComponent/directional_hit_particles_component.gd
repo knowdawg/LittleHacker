@@ -26,5 +26,5 @@ func hitFromDown(_attack : Attack):
 	emitting = true
 
 func hitFromDirection(_attack : Attack, knockBack : Vector2):
-	rotation = knockBack.angle()
+	rotation = knockBack.angle()# + PI
 	emitting = true

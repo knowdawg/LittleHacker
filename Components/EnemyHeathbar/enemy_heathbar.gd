@@ -12,11 +12,15 @@ class_name EnemyHealthBar
 @export var healthBars : Array[TextureProgressBar]
 @export var weaknessBars : Array[TextureProgressBar]
 
+
 func _ready() -> void:
 	$Sprite2D.visible = false
 	curBar = "neither"
 	EnemyHealthBarPositionManager.healthbars.append(self)
 	
+	drawLines()
+
+func drawLines():
 	hackCommands.sort_custom(sortHacks)
 	var endPositions : Array = $Sprite2D/HackCoponentPosition.get_children()
 	
@@ -25,9 +29,11 @@ func _ready() -> void:
 	for i in hackCommands.size():
 		var startPos = hackCommands[i].cost / healthComponent.get_max_weakness()
 		startPos *= 11.0 #num of pixels
+		hackCommands[i].clear_points()
 		hackCommands[i].add_point(Vector2(startPos + xOffeset, yPos) + follow.global_position)
 		hackCommands[i].add_point(Vector2(startPos + xOffeset, yPos + 2.5) + follow.global_position)
-		hackCommands[i].add_point(endPositions[i].global_position + follow.global_position)
+		hackCommands[i].add_point(endPositions[i].position * 0.25 + follow.global_position)
+
 
 func sortHacks(a : HackCommandComponent, b : HackCommandComponent):
 	if a.cost < b.cost:
@@ -37,6 +43,8 @@ func sortHacks(a : HackCommandComponent, b : HackCommandComponent):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
+	drawLines()
+	
 	var healthPercentage : float = healthComponent.get_health() / healthComponent.get_max_health()
 	var weaknessPercentage : float = healthComponent.get_weakness() / healthComponent.get_max_weakness()
 	

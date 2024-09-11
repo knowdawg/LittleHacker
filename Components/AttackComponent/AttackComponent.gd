@@ -12,6 +12,8 @@ class_name AttackComponent
 @export var isSpikes : bool = false
 @export var disabled : bool = true
 
+@export var healthComponent : HealthComponent
+
 @onready var attackID : float = randf()
 
 func _ready() -> void:
@@ -28,6 +30,8 @@ func _on_area_entered(area):
 		attack.knockback_force = knockback_force
 		attack.attack_position = global_position
 		attack.attackID = attackID
+		if healthComponent:
+			attack.healthComponent = healthComponent
 		
 		attack.knockback_vector = knockbackVector
 		

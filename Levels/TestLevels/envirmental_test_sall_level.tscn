@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=24 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="8_ywwlo"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
 [ext_resource type="PackedScene" uid="uid://cqfxmyyowlul4" path="res://Objects/Terminal/terminal.tscn" id="10_e4m8l"]
+[ext_resource type="PackedScene" uid="uid://ciq13p31itcpw" path="res://Objects/Enemies/TestEnemy/test_enemy.tscn" id="11_jyroq"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -207,3 +208,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]
+
+[node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
+position = Vector2(215, 134)

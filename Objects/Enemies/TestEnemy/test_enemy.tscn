@@ -1,0 +1,266 @@
+[gd_scene load_steps=25 format=3 uid="uid://ciq13p31itcpw"]
+
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
+[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/idle.gd" id="2_4v4p0"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/chase.gd" id="3_p5on1"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/attack.gd" id="4_l276g"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/dead.gd" id="5_wdh1o"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="6_n62ka"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="6_qbqsc"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="8_xodr3"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="9_t230s"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="10_30k11"]
+[ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
+[ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
+[ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
+[ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
+size = Vector2(2, 6)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6uq1"]
+radius = 32.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_75jaq"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4ms6j"]
+polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
+
+[sub_resource type="Animation" id="Animation_wddfg"]
+resource_name = "Attack1"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.35, 0.6, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.663225, 0.698132, -1.5708, -1.5708, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon/AttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.35, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_m3v1i"]
+resource_name = "Chase"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:skew")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, -0.0872665]
+}
+
+[sub_resource type="Animation" id="Animation_nkupm"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0.9), Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wx3py"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Polygon2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Polygon2D:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Weapon:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
+_data = {
+"Attack1": SubResource("Animation_wddfg"),
+"Chase": SubResource("Animation_m3v1i"),
+"Idle": SubResource("Animation_nkupm"),
+"RESET": SubResource("Animation_wx3py")
+}
+
+[node name="TestEnemy" type="CharacterBody2D"]
+collision_layer = 0
+script = ExtResource("1_tas1o")
+
+[node name="HealthbarPos" type="Marker2D" parent="."]
+position = Vector2(0, -3)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_fn2c5")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("1_ysl6l")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "playerProximity")]
+script = ExtResource("2_4v4p0")
+agroState = NodePath("../Chase")
+animator = NodePath("../../AnimationPlayer")
+playerProximity = NodePath("../../Components/AgroProximity")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "attackStates", "animator", "playerProximity", "attackProximity", "movement")]
+script = ExtResource("3_p5on1")
+idleState = NodePath("../Idle")
+attackStates = [NodePath("../Attack")]
+animator = NodePath("../../AnimationPlayer")
+playerProximity = NodePath("../../Components/AgroProximity")
+attackProximity = NodePath("../../Components/AttackProximity")
+movement = NodePath("../../Components/MovementComponent")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator")]
+script = ExtResource("4_l276g")
+attackLength = 1.0
+agroState = NodePath("../Chase")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("5_wdh1o")
+
+[node name="Components" type="Node2D" parent="."]
+
+[node name="MovementComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("6_qbqsc")]
+parent = NodePath("../..")
+
+[node name="AgroProximity" parent="Components" instance=ExtResource("6_n62ka")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/AgroProximity"]
+visible = false
+shape = SubResource("CircleShape2D_m6uq1")
+
+[node name="AttackProximity" parent="Components" instance=ExtResource("6_n62ka")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/AttackProximity"]
+shape = SubResource("CircleShape2D_75jaq")
+
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent") instance=ExtResource("9_t230s")]
+parrent = NodePath("../..")
+MAX_HEALTH = 30.0
+
+[node name="EnemyHeathbar" parent="Components" node_paths=PackedStringArray("follow", "healthComponent", "hackCommands") instance=ExtResource("10_30k11")]
+follow = NodePath("../../HealthbarPos")
+healthComponent = NodePath("../HealthComponent")
+hackCommands = [NodePath("HackCommandComponent"), NodePath("HackCommandComponent2"), NodePath("HackCommandComponent3")]
+
+[node name="HackCommandComponent" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
+cost = 5.0
+hackName = "Blast"
+hackExecuteScene = ExtResource("12_6fwhq")
+enemy = NodePath("../../..")
+commandSpawnPos = NodePath("../../../HealthbarPos")
+healthComponent = NodePath("../../HealthComponent")
+enemyHealthBar = NodePath("..")
+
+[node name="HackCommandComponent2" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
+cost = 10.0
+hackName = "Absorb"
+hackExecuteScene = ExtResource("13_3ks4v")
+enemy = NodePath("../../..")
+commandSpawnPos = NodePath("../../../HealthbarPos")
+healthComponent = NodePath("../../HealthComponent")
+enemyHealthBar = NodePath("..")
+
+[node name="HackCommandComponent3" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
+cost = 15.0
+hackName = "Overload"
+hackExecuteScene = ExtResource("14_h1kpy")
+enemy = NodePath("../../..")
+commandSpawnPos = NodePath("../../../HealthbarPos")
+healthComponent = NodePath("../../HealthComponent")
+enemyHealthBar = NodePath("..")
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="Polygon2D"]
+occluder = SubResource("OccluderPolygon2D_4ms6j")
+
+[node name="Weapon" type="Node2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="Weapon"]
+color = Color(1, 0, 0, 1)
+polygon = PackedVector2Array(0, 0, -1, -11, 1, -11)
+
+[node name="AttackComponent" parent="Weapon" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
+collision_mask = 4
+collisionShape = NodePath("CollisionPolygon2D")
+attack_damage = 1.0
+weakness_damage = 1.0
+healthComponent = NodePath("../../Components/HealthComponent")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Weapon/AttackComponent"]
+visible = false
+polygon = PackedVector2Array(4.80825e-07, -11, 3, -11, 9, -8, 11, 4.80825e-07, 0, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_5f5r3")
+}

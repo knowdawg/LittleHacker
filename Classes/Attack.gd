@@ -10,6 +10,6 @@ var parryPosition : Vector2 = Vector2.ZERO
 var isParryable : bool = true
 var isHazard : bool = false
 
-var parent
+var healthComponent : HealthComponent
 
 var attackID : float = 0.0

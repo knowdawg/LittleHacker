@@ -50,8 +50,8 @@ void fragment() {
 	vec4 topCell = texture(prevFrame, UV - vec2(0.0, inverseResolution.y));
 	vec4 downCell = texture(prevFrame, UV + vec2(0.0, inverseResolution.y));
 
-	float subAmount = 0.5;
-	float mulAmount = 2.0;
+	float subAmount = 0.0;
+	float mulAmount = 1.0;
 	centerCell.xy = (centerCell.xy - subAmount) * mulAmount;
 	rightCell.xy = (rightCell.xy - subAmount) * mulAmount;
 	leftCell.xy = (leftCell.xy - subAmount) * mulAmount;
@@ -146,8 +146,8 @@ resource_local_to_scene = true
 shader = SubResource("Shader_eylr8")
 shader_parameter/resolution = Vector2(128, 128)
 shader_parameter/gravity = Vector2(0, 0)
-shader_parameter/ballX = 0.65
-shader_parameter/ballY = 0.8
+shader_parameter/ballX = 0.61
+shader_parameter/ballY = 0.4
 shader_parameter/prevFrame = SubResource("ViewportTexture_3ovcw")
 shader_parameter/externalForces = SubResource("ViewportTexture_6ow4v")
 

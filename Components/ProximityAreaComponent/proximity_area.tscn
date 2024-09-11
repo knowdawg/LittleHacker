@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://brujq4dkn34nd"]
+
+[ext_resource type="Script" path="res://Components/ProximityAreaComponent/ProximityArea.gd" id="1_dkwi5"]
+
+[node name="ProximityArea" type="Area2D"]
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("1_dkwi5")
