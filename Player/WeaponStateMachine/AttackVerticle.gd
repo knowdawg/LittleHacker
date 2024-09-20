@@ -27,8 +27,10 @@ func update(delta):
 	
 	if t >= 0.3:
 		weaponSprite.flip_h = playerSprite.flip_h
-		if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
-			trasitioned.emit(self, "Parry")
-			return
+	
+	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
+		trasitioned.emit(self, "Parry")
+		return
+	
 	if t <= 0.0:
 		trasitioned.emit(self, "Idle")

@@ -9,14 +9,17 @@ var g = Vector2.ZERO
 #Velocities are cleared each frame.
 var velocities : Array[Vector2] = []
 var accelerations : Array[Vector2] = []
-func _physics_process(_delta: float) -> void:
-	
+func _physics_process(delta: float) -> void:
 	#Gravity
 	g += Vector2(0.0, gravity)
 	if parent is CharacterBody2D:
 		if parent.is_on_floor():
 			g = Vector2.ZERO
 	velocities.append(g)
+	
+	#Force Vector
+	force = lerp(force, Vector2.ZERO, delta * 10.0)
+	velocities.append(force)
 	
 	for v in velocities:
 		if parent is CharacterBody2D:
@@ -34,3 +37,15 @@ func moveTowardsPlayer(speed, delta):
 		dirVec *= speed * delta
 		v += dirVec
 	velocities.append(v)
+
+func moveAwayFromPlayer(speed, delta):
+	var v = Vector2.ZERO
+	if is_instance_valid(Game.player):
+		var dirVec = (Game.player.global_position - parent.global_position).normalized()
+		dirVec *= speed * delta
+		v += -dirVec
+	velocities.append(v)
+
+var force = Vector2.ZERO
+func applyForce(forceVec : Vector2, forceAmplitude : float):
+	force += forceVec.normalized() * forceAmplitude

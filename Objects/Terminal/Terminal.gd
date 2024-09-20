@@ -1,41 +1,47 @@
-extends TextEdit
+extends CanvasLayer
+
+@onready var textBox = $Text
+@onready var entryBox = $Entry
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if Game.inTerminal:
-		grab_focus()
+		entryBox.grab_focus()
 	
 	if Input.is_action_just_pressed("Terminal"):
-		if !has_focus():
+		if !entryBox.has_focus():
 			enter()
 			
 	if Input.is_action_just_pressed("SubmitTerminal"):
-		if has_focus():
+		if entryBox.has_focus():
 			setCarrotToEnd()
-			var line = get_line(get_line_count()-2)
+			entryBox.clear()
 			
-			if !HackCommandManager.executeCommand(line):
-				var h = HackCommandManager.executeTerminalCommand(line)
-				insert_line_at(get_line_count()-1, h)
+			var t = entryBox.text
+			t = t.to_lower()
+			t = t.replace("/", "")
+			print("Test" + t)
+			textBox.insert_line_at(textBox.get_line_count()-1, t)
+			if !HackCommandManager.executeCommand(t):
+				var h = HackCommandManager.executeTerminalCommand(t)
+				textBox.insert_line_at(textBox.get_line_count()-1, h)
 			else:
-				var l = line.to_lower()
-				l = l.replace("/", "")
-				insert_line_at(get_line_count()-1, "    Executing " + l + "...")
+				textBox.insert_line_at(textBox.get_line_count()-1, "    Executing " + t + "...")
 			exit()
 
 func setCarrotToEnd():
-	set_caret_line(get_line_count()-1)
-	set_caret_column(100)
+	textBox.set_caret_line(textBox.get_line_count()-1)
+	textBox.set_caret_column(100)
 
 func enter():
 	Game.inTerminal = true
 	setCarrotToEnd()
-	insert_text_at_caret("/")
+	entryBox.insert_text_at_caret("/")
 	$AnimationPlayer.play("Show")
-	grab_focus()
+	entryBox.grab_focus()
 
 func exit():
 	setCarrotToEnd()
 	Game.inTerminal = false
-	release_focus()
+	entryBox.release_focus()
 	$AnimationPlayer.play("Hide")

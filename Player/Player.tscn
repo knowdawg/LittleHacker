@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=93 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://Player/stun.gd" id="14_a7jjx"]
 [ext_resource type="Script" path="res://Player/Weapon/WeaponSprite.gd" id="14_bw1kr"]
 [ext_resource type="Script" path="res://Player/WeaponStateMachine/AttackDown.gd" id="14_lcqka"]
+[ext_resource type="Script" path="res://Player/parry_stun.gd" id="15_8fvrf"]
 [ext_resource type="Script" path="res://Player/WeaponStateMachine/Parry.gd" id="17_rv26y"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="18_3hvnj"]
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="19_0ng1i"]
@@ -30,7 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://cwfrw5n1nbnws" path="res://Components/ParryIntercenpterComponent/parry_intercepter_component.tscn" id="28_7xl6g"]
 [ext_resource type="Script" path="res://Player/parry_particles.gd" id="29_tbcwx"]
 [ext_resource type="Script" path="res://Player/ParryLight.gd" id="30_t8rxg"]
-[ext_resource type="Texture2D" uid="uid://cgbgfq3jmjo73" path="res://Assets/Sprites/Effects/ParryEffect.png" id="31_3rlw2"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="32_3xbax"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yskb1"]
 size = Vector2(2, 4)
@@ -63,6 +64,10 @@ fill_to = Vector2(0.8, 0.8)
 [sub_resource type="Curve" id="Curve_js843"]
 _data = [Vector2(0, 0.496565), 0.0, 0.0, 0, 0, Vector2(0.0985402, 1), -1.94425e-07, -1.94425e-07, 0, 0, Vector2(0.445652, 0.00478458), -9.03389, -9.03389, 0, 0, Vector2(0.51087, 0.162679), 0.0, 0.0, 0, 0, Vector2(1, 0), -0.284575, 0.0, 0, 0]
 point_count = 5
+
+[sub_resource type="Curve" id="Curve_k2pfp"]
+_data = [Vector2(0, 1), 0.0, -3.32666, 0, 0, Vector2(1, 0), 0.000895127, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_60vrk"]
 polygon = PackedVector2Array(-5, -4, -4, -4, -4, -5, -3, -5, -3, -6, -2, -6, -2, -7, 2, -7, 2, -6, 3, -6, 3, -5, 4, -5, 4, -4, 3, -4, 1, -6, -1, -6, -4, -3, -4, -1, -1, 2, 1, 2, 2, 1, 3, 1, 3, 2, 2, 2, 2, 3, -2, 3, -2, 2, -3, 2, -3, 1, -4, 1, -4, 0, -5, 0, -5, -3)
@@ -651,17 +656,81 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(0, 0, 0, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(0, 0, 0, 1)]
 }
-tracks/1/type = "value"
+tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("GPUParticles2D")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5]
+"values": [true]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("GPUParticles2D2")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"restart"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GPUParticles2D2:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Flare:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.1, 1e-05), Vector2(0.1, 1), Vector2(0.1, 1.3)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Flare:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_3waij"]
@@ -681,14 +750,50 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/path = NodePath("GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [5]
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Flare:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.1, 1e-05)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Flare:modulate")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_drnmj"]
@@ -696,6 +801,44 @@ _data = {
 "Flash": SubResource("Animation_3sevd"),
 "RESET": SubResource("Animation_3waij")
 }
+
+[sub_resource type="Curve" id="Curve_ck15e"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_awjaw"]
+curve = SubResource("Curve_ck15e")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_4qdl4"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 5.0
+initial_velocity_min = 150.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_awjaw")
+
+[sub_resource type="Gradient" id="Gradient_pt0gi"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a51en"]
+gradient = SubResource("Gradient_pt0gi")
+width = 1
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_so85b"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.990361)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_glagt"]
+gradient = SubResource("Gradient_so85b")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite")]
 collision_layer = 4
@@ -792,6 +935,12 @@ stunTime = 0.15
 animator = NodePath("../../SpriteAnimator")
 scaleAnimator = NodePath("../../ScaleAnimator")
 parent = NodePath("../..")
+
+[node name="ParryStun" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("15_8fvrf")
+player = NodePath("../..")
+rollSpeedCurve = SubResource("Curve_k2pfp")
+rollSpeedMultiplier = 3000.0
 
 [node name="WeaponStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("11_v7ndi")
@@ -959,6 +1108,7 @@ efects = [NodePath("../WeaponDislocator/WeaponSprite/HitFlashComponent"), NodePa
 parent = NodePath("..")
 
 [node name="HitParticles" parent="ParryIntercepterComponent" instance=ExtResource("3_412y7")]
+visible = false
 position = Vector2(0, -2)
 amount = 8
 texture = SubResource("GradientTexture2D_gs043")
@@ -988,11 +1138,36 @@ libraries = {
 "": SubResource("AnimationLibrary_drnmj")
 }
 
-[node name="Sprite2D" type="Sprite2D" parent="ParryIntercepterComponent/PointLight2D"]
+[node name="GPUParticles2D" type="GPUParticles2D" parent="ParryIntercepterComponent/PointLight2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_4qdl4")
+texture = SubResource("GradientTexture2D_a51en")
+lifetime = 0.3
+one_shot = true
+preprocess = 0.05
+explosiveness = 0.8
+trail_enabled = true
+trail_lifetime = 0.05
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="ParryIntercepterComponent/PointLight2D"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_4qdl4")
+texture = SubResource("GradientTexture2D_a51en")
+lifetime = 0.2
+one_shot = true
+preprocess = 0.05
+explosiveness = 0.8
+trail_enabled = true
+trail_lifetime = 0.05
+
+[node name="OmniDirectionalKnockbackComponent" parent="ParryIntercepterComponent/PointLight2D" instance=ExtResource("32_3xbax")]
+
+[node name="Flare" type="Sprite2D" parent="ParryIntercepterComponent/PointLight2D"]
+modulate = Color(1, 1, 1, 0)
 texture_filter = 1
-texture = ExtResource("31_3rlw2")
-hframes = 6
-frame = 5
+scale = Vector2(0.1, 1e-05)
+skew = 1.309
+texture = SubResource("GradientTexture2D_glagt")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05

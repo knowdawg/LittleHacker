@@ -1,6 +1,9 @@
 extends PointLight2D
 
 
-func hitEfect(_attack : Attack):
-	$Sprite2D.rotation = randf_range(0, PI * 2.0)
+func hitEfect(attack : Attack):
+	var angle : Vector2 = $OmniDirectionalKnockbackComponent.returnVec(attack)
+	$GPUParticles2D.rotation = angle.angle()
+	$GPUParticles2D2.rotation = angle.angle() + PI
+	$Flare.rotation = angle.angle() + (PI / 12.0)
 	$AnimationPlayer.play("Flash")

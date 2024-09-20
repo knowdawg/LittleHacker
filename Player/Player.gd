@@ -56,11 +56,12 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	
 	if dashV.x != 0.0:
 		velocity += dashV
-		
-	if velocity.x > 5:
-		sprite.flip_h = true
-	if velocity.x < -5:
-		sprite.flip_h = false
+	
+	if canMove:
+		if velocity.x > 5:
+			sprite.flip_h = true
+		if velocity.x < -5:
+			sprite.flip_h = false
 	
 	move_and_slide()
 
@@ -106,7 +107,8 @@ func hitFromRight(_attack : Attack):
 	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
 	Game.slowTime(0.3, 0.1)
 
-
+var parryStunTime = 0.3
 func parry(_attack : Attack):
-	pass
-	#$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	if is_on_floor():
+		parryStunTime = 0.3 #modify based on attack knockback
+		$StateMachine.onChildTransition($StateMachine.current_state, "ParryStun")

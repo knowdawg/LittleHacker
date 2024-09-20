@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://cqfxmyyowlul4"]
 
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="1_gwhp1"]
+[ext_resource type="Script" path="res://Objects/Terminal/terminal.gd" id="1_pu5lf"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Textures/GridLines.gdshader" id="1_xrjgr"]
-[ext_resource type="Script" path="res://Objects/Terminal/Terminal.gd" id="2_sb8lu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7xu"]
 shader = ExtResource("1_xrjgr")
@@ -57,7 +57,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextEdit:modulate")
+tracks/1/path = NodePath("Text:modulate")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -81,7 +81,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TextEdit:mouse_filter")
+tracks/3/path = NodePath("Text:mouse_filter")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -120,7 +120,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextEdit:modulate")
+tracks/1/path = NodePath("Text:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -144,7 +144,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TextEdit:mouse_filter")
+tracks/3/path = NodePath("Text:mouse_filter")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -184,7 +184,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("TextEdit:modulate")
+tracks/1/path = NodePath("Text:modulate")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -208,7 +208,7 @@ tracks/2/keys = {
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("TextEdit:mouse_filter")
+tracks/3/path = NodePath("Text:mouse_filter")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
@@ -240,6 +240,7 @@ _data = {
 [node name="Terminal" type="CanvasLayer"]
 layer = 10
 visible = false
+script = ExtResource("1_pu5lf")
 
 [node name="Shader" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_mc7xu")
@@ -257,12 +258,41 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="TextEdit" type="TextEdit" parent="."]
+[node name="Entry" type="TextEdit" parent="."]
+anchors_preset = -1
+anchor_left = 0.02
+anchor_top = 0.889
+anchor_right = 0.967
+anchor_bottom = 0.98
+offset_left = -0.400002
+offset_top = -0.120056
+offset_right = -0.640137
+offset_bottom = -0.400024
+grow_horizontal = 2
+grow_vertical = 0
+theme = SubResource("Theme_vk6dq")
+theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_constants/outline_size = 2
+theme_override_font_sizes/font_size = 75
+context_menu_enabled = false
+shortcut_keys_enabled = false
+selecting_enabled = false
+deselect_on_focus_loss_enabled = false
+drag_and_drop_selection_enabled = false
+virtual_keyboard_enabled = false
+middle_mouse_paste_enabled = false
+
+[node name="Text" type="TextEdit" parent="."]
 anchors_preset = -1
 anchor_left = 0.02
 anchor_top = 0.02
 anchor_right = 0.98
-anchor_bottom = 0.98
+anchor_bottom = 0.889
+offset_left = -0.400002
+offset_top = 0.4
+offset_right = -0.600098
+offset_bottom = -0.120056
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_vk6dq")
@@ -270,6 +300,7 @@ theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_constants/outline_size = 1
 theme_override_font_sizes/font_size = 50
+editable = false
 context_menu_enabled = false
 shortcut_keys_enabled = false
 selecting_enabled = false
@@ -281,10 +312,8 @@ wrap_mode = 1
 scroll_past_end_of_file = true
 caret_blink = true
 caret_blink_interval = 0.3
-script = ExtResource("2_sb8lu")
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="TextEdit"]
-root_node = NodePath("../..")
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_ffwbk")
 }

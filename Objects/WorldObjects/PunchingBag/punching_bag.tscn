@@ -119,6 +119,7 @@ width = 1
 height = 1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wk3sr"]
+resource_local_to_scene = true
 polygon = PackedVector2Array(-1, -4, 2, -4, 2, 0, -1, 0)
 
 [node name="PunchingBag" type="Node2D"]
@@ -166,6 +167,7 @@ texture = SubResource("GradientTexture2D_x2ekh")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 modulate = Color(1, 1, 1, 0)
+position = Vector2(-0.5, 0)
 occluder = SubResource("OccluderPolygon2D_wk3sr")
 occluder_light_mask = 0
 

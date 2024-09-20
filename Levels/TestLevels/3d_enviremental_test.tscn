@@ -1,0 +1,83 @@
+[gd_scene load_steps=12 format=3 uid="uid://dwdcwogte48ui"]
+
+[ext_resource type="PackedScene" uid="uid://c8x60h4peckug" path="res://Levels/TestLevels/envirmental_test_sall_level.tscn" id="1_g3qik"]
+[ext_resource type="Script" path="res://Levels/TestLevels/character_body_3d.gd" id="2_cj6wj"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0g1bq"]
+sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+ground_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
+
+[sub_resource type="Sky" id="Sky_i4t0f"]
+sky_material = SubResource("ProceduralSkyMaterial_0g1bq")
+
+[sub_resource type="Environment" id="Environment_ov422"]
+background_mode = 2
+sky = SubResource("Sky_i4t0f")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_dhdjn"]
+viewport_path = NodePath("SmallEnvirementViewport")
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ein6w"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_nuqia"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_k6fvq"]
+size = Vector3(84.6686, 1, 74.9537)
+
+[sub_resource type="ORMMaterial3D" id="ORMMaterial3D_h2m0q"]
+albedo_color = Color(0.588235, 0.588235, 0.588235, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_rrn0h"]
+size = Vector2(500, 500)
+
+[node name="3DEnvirementalTest" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ov422")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="SmallEnvirementViewport" type="SubViewport" parent="."]
+disable_3d = true
+handle_input_locally = false
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+
+[node name="EnvirmentalTestSallLevel" parent="SmallEnvirementViewport" instance=ExtResource("1_g3qik")]
+
+[node name="Sprite3D" type="Sprite3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+pixel_size = 0.002
+texture_filter = 0
+texture = SubResource("ViewportTexture_dhdjn")
+
+[node name="CharacterBody3D" type="CharacterBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 9.21)
+script = ExtResource("2_cj6wj")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="CharacterBody3D"]
+shape = SubResource("CapsuleShape3D_ein6w")
+
+[node name="TwitchPivot" type="Node3D" parent="CharacterBody3D"]
+
+[node name="PitchPivot" type="Node3D" parent="CharacterBody3D/TwitchPivot"]
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D/TwitchPivot/PitchPivot"]
+current = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CharacterBody3D"]
+mesh = SubResource("CapsuleMesh_nuqia")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.23695, 0, 0.491547)
+shape = SubResource("BoxShape3D_k6fvq")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+material_override = SubResource("ORMMaterial3D_h2m0q")
+mesh = SubResource("PlaneMesh_rrn0h")

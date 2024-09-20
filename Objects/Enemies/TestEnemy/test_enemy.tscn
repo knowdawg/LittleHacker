@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=35 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -8,13 +8,18 @@
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/dead.gd" id="5_wdh1o"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="6_n62ka"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="6_qbqsc"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/parried.gd" id="7_82gm8"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="8_xodr3"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="9_t230s"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="10_30k11"]
+[ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="10_53r62"]
+[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
 [ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
 [ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
 [ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="20_guqxo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
 size = Vector2(2, 6)
@@ -23,6 +28,23 @@ size = Vector2(2, 6)
 radius = 32.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_75jaq"]
+
+[sub_resource type="Gradient" id="Gradient_r1yx0"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u65ke"]
+gradient = SubResource("Gradient_r1yx0")
+width = 1
+height = 1
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y137f"]
+gradient = SubResource("Gradient_r1yx0")
+width = 1
+height = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qllm4"]
+size = Vector2(2, 6)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4ms6j"]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
@@ -96,6 +118,34 @@ tracks/0/keys = {
 "update": 0,
 "values": [Vector2(1, 1), Vector2(1, 0.9), Vector2(1, 1)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Weapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_h0g38"]
+resource_name = "Parried"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Weapon:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-1.22173, 0.0, 0.174533, 0.0]
+}
 
 [sub_resource type="Animation" id="Animation_wx3py"]
 length = 0.001
@@ -141,6 +191,7 @@ _data = {
 "Attack1": SubResource("Animation_wddfg"),
 "Chase": SubResource("Animation_m3v1i"),
 "Idle": SubResource("Animation_nkupm"),
+"Parried": SubResource("Animation_h0g38"),
 "RESET": SubResource("Animation_wx3py")
 }
 
@@ -183,6 +234,15 @@ animator = NodePath("../../AnimationPlayer")
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("5_wdh1o")
 
+[node name="Parried" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
+script = ExtResource("7_82gm8")
+parryLength = 0.5
+nextState = NodePath("../Idle")
+parrent = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+movement = NodePath("../../Components/MovementComponent")
+kbCom = NodePath("../../OmniDirectionalKnockbackComponent")
+
 [node name="Components" type="Node2D" parent="."]
 
 [node name="MovementComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("6_qbqsc")]
@@ -199,11 +259,21 @@ shape = SubResource("CircleShape2D_m6uq1")
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/AttackProximity"]
+visible = false
 shape = SubResource("CircleShape2D_75jaq")
 
-[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent") instance=ExtResource("9_t230s")]
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent", "hitEfects") instance=ExtResource("9_t230s")]
 parrent = NodePath("../..")
+hitEfects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
 MAX_HEALTH = 30.0
+
+[node name="HitParticles" parent="Components/HealthComponent" instance=ExtResource("10_53r62")]
+position = Vector2(0, -3)
+texture = SubResource("GradientTexture2D_u65ke")
+
+[node name="DirectionalParticlesComponent" parent="Components/HealthComponent" instance=ExtResource("11_b30xt")]
+position = Vector2(0, -3)
+texture = SubResource("GradientTexture2D_y137f")
 
 [node name="EnemyHeathbar" parent="Components" node_paths=PackedStringArray("follow", "healthComponent", "hackCommands") instance=ExtResource("10_30k11")]
 follow = NodePath("../../HealthbarPos")
@@ -237,6 +307,14 @@ commandSpawnPos = NodePath("../../../HealthbarPos")
 healthComponent = NodePath("../../HealthComponent")
 enemyHealthBar = NodePath("..")
 
+[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("health_componnet") instance=ExtResource("15_eo6el")]
+collision_layer = 8
+health_componnet = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_qllm4")
+
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
 
@@ -249,9 +327,10 @@ occluder = SubResource("OccluderPolygon2D_4ms6j")
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, -1, -11, 1, -11)
 
-[node name="AttackComponent" parent="Weapon" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
+[node name="AttackComponent" parent="Weapon" node_paths=PackedStringArray("collisionShape", "thingToCallOnParry", "healthComponent") instance=ExtResource("8_xodr3")]
 collision_mask = 4
 collisionShape = NodePath("CollisionPolygon2D")
+thingToCallOnParry = NodePath("../..")
 attack_damage = 1.0
 weakness_damage = 1.0
 healthComponent = NodePath("../../Components/HealthComponent")
@@ -264,3 +343,5 @@ polygon = PackedVector2Array(4.80825e-07, -11, 3, -11, 9, -8, 11, 4.80825e-07, 0
 libraries = {
 "": SubResource("AnimationLibrary_5f5r3")
 }
+
+[node name="OmniDirectionalKnockbackComponent" parent="." instance=ExtResource("20_guqxo")]
