@@ -8,7 +8,7 @@ extends State
 
 @export_group("Necesary Nodes")
 @export var animator : AnimationPlayer
-@export var playerProximity : ProximityAreaComponent
+@export var deAggroProximity : ProximityAreaComponent
 @export var attackProximity : ProximityAreaComponent
 @export var movement : MovementComponent
 
@@ -16,11 +16,11 @@ func enter():
 	animator.play("Chase")
 
 func update(delta):
-	if !playerProximity.is_player_inside():
+	if !deAggroProximity.is_player_inside():
 		trasitioned.emit(self, idleState.name)
 	
 	if attackProximity.is_player_inside():
 		var nextState = attackStates[randi_range(0, attackStates.size() - 1)]
 		trasitioned.emit(self, nextState.name)
 	
-	movement.moveTowardsPlayer(speed, delta)
+	movement.moveTowardsPlayerX(speed, delta)

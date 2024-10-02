@@ -28,6 +28,7 @@ func _on_area_entered(area):
 		hurtboxSignal = area.parry
 		if !hurtboxSignal.is_connected(parried):
 			hurtboxSignal.connect(parried)
+			$Timer.start()
 		
 		var hurtbox : HurtboxComponent = area
 		
@@ -52,7 +53,7 @@ func _on_area_entered(area):
 				e.initialize(area.global_position)
 		
 func generateAttackID():
-	attackID = randf()
+	attackID = randf_range(0.0, 10000.0)
 
 func disable():
 	collisionShape.disabled = true
@@ -62,6 +63,11 @@ func enable():
 	generateAttackID()
 
 func parried(attack : Attack):
-	hurtboxSignal.disconnect(parried)
+	if hurtboxSignal.is_connected(parried):
+		hurtboxSignal.disconnect(parried)
 	if thingToCallOnParry:
 		thingToCallOnParry.parried(attack)
+
+func _on_timer_timeout() -> void:
+	if hurtboxSignal.is_connected(parried):
+		hurtboxSignal.disconnect(parried)

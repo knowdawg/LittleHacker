@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://cqfxmyyowlul4"]
 
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="1_gwhp1"]
-[ext_resource type="Script" path="res://Objects/Terminal/terminal.gd" id="1_pu5lf"]
+[ext_resource type="Script" path="res://Objects/Terminal/Terminal.gd" id="1_rmm1k"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Textures/GridLines.gdshader" id="1_xrjgr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7xu"]
@@ -40,7 +40,7 @@ VScrollBar/styles/scroll_focus = SubResource("StyleBoxEmpty_47jj7")
 
 [sub_resource type="Animation" id="Animation_ojpji"]
 resource_name = "Hide"
-length = 3.0
+length = 4.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -61,10 +61,10 @@ tracks/1/path = NodePath("Text:modulate")
 tracks/1/interp = 2
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.7, 3),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.392157), Color(1, 1, 1, 0)]
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -73,7 +73,7 @@ tracks/2/path = NodePath(".:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(3),
+"times": PackedFloat32Array(4),
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
@@ -240,7 +240,7 @@ _data = {
 [node name="Terminal" type="CanvasLayer"]
 layer = 10
 visible = false
-script = ExtResource("1_pu5lf")
+script = ExtResource("1_rmm1k")
 
 [node name="Shader" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_mc7xu")
@@ -273,7 +273,7 @@ grow_vertical = 0
 theme = SubResource("Theme_vk6dq")
 theme_override_colors/font_outline_color = Color(1, 0, 0, 1)
 theme_override_colors/font_color = Color(1, 1, 1, 1)
-theme_override_constants/outline_size = 2
+theme_override_constants/outline_size = 5
 theme_override_font_sizes/font_size = 75
 context_menu_enabled = false
 shortcut_keys_enabled = false

@@ -11,7 +11,11 @@ class_name HackCommandComponent
 
 func _ready() -> void:
 	$Label.text = hackName
-	HackCommandManager.hackCommands.append(self)
+	HackCommandManager.addCommand(self)
+	healthComponent.death.connect(delete)
+
+func delete():
+	HackCommandManager.removeCommand(self)
 
 var wasVisible = false
 func _process(_delta: float) -> void:
@@ -20,7 +24,8 @@ func _process(_delta: float) -> void:
 	wasVisible = visible
 	
 	var offset = Vector2(-3, -1)
-	$Label.position = points[2] + offset
+	if points.size() > 0:
+		$Label.position = points[2] + offset
 
 func showGlitch():
 	$AnimationPlayer.play("Glitch")

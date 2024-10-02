@@ -174,18 +174,6 @@ texture = SubResource("GradientTexture2D_51qsl")
 [node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
 position = Vector2(166, 93)
 
-[node name="PunchingBag2" parent="." instance=ExtResource("8_ywwlo")]
-position = Vector2(142, 93)
-
-[node name="PunchingBag3" parent="." instance=ExtResource("8_ywwlo")]
-position = Vector2(183, 88)
-
-[node name="PunchingBag4" parent="." instance=ExtResource("8_ywwlo")]
-position = Vector2(140, 117)
-
-[node name="PunchingBag5" parent="." instance=ExtResource("8_ywwlo")]
-position = Vector2(176, 133)
-
 [node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
@@ -210,4 +198,4 @@ grow_vertical = 2
 [node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]
 
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(215, 134)
+position = Vector2(192, 80)

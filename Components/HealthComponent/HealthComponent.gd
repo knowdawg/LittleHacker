@@ -6,6 +6,8 @@ class_name HealthComponent
 
 @export var hitEfects : Array[Node2D] = []
 
+@export var emitSignalOnDeath : bool = true
+
 @export var MAX_HEALTH := 10.0
 var health : float
 
@@ -13,6 +15,8 @@ var health : float
 var weakness : float = 0.0
 
 @export var locked = false
+
+signal death
 
 func _ready():
 	health = MAX_HEALTH
@@ -61,6 +65,8 @@ func damage(attack : Attack):
 			p.hitEfect(attack)
 	
 	if health <= 0:
+		if emitSignalOnDeath:
+			death.emit()
 		if parrent.has_method("death"):
 			parrent.death(attack)
 		return

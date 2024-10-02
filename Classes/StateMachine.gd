@@ -40,3 +40,13 @@ func onChildTransition(state : State, new_state_name):
 	new_state.enter()
 	
 	current_state = new_state
+
+func switchStates(newState):
+	var n = states.get(newState.to_lower())
+	
+	if current_state:
+		current_state.exit(n)
+	
+	n.enter()
+	
+	current_state = n

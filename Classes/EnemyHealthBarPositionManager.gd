@@ -2,6 +2,24 @@ extends Node2D
 
 var healthbars : Array[EnemyHealthBar] = []
 
+func addHealthbar(h : EnemyHealthBar):
+	for he in healthbars:
+		if he == h:
+			return
+	healthbars.append(h)
+
+func removeHealbar(h : EnemyHealthBar):
+	for i in healthbars.size():
+		if healthbars[i] == h:
+			healthbars.remove_at(i)
+			return
+
+func hasHealthbar(h : EnemyHealthBar) -> bool:
+	for he in healthbars:
+		if he == h:
+			return true
+	return false
+
 func getActualGlobalMousePosition():
 	var mp = get_global_mouse_position()
 	mp /= 10.0 #getResolutionRatio()

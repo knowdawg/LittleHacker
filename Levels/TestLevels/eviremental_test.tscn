@@ -9,6 +9,7 @@ resource_local_to_scene = true
 shader = ExtResource("2_f6ogn")
 shader_parameter/pixelsWidth = 256.0
 shader_parameter/pixelsHight = 144.0
+shader_parameter/bloomIntensity = null
 
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1

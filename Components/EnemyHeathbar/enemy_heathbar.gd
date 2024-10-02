@@ -16,9 +16,16 @@ class_name EnemyHealthBar
 func _ready() -> void:
 	$Sprite2D.visible = false
 	curBar = "neither"
-	EnemyHealthBarPositionManager.healthbars.append(self)
+	EnemyHealthBarPositionManager.addHealthbar(self)
+	healthComponent.death.connect(delete)
 	
 	drawLines()
+
+func delete():
+	if active:
+		deactivate()
+	EnemyHealthBarPositionManager.removeHealbar(self)
+	
 
 func drawLines():
 	hackCommands.sort_custom(sortHacks)

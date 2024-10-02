@@ -874,6 +874,7 @@ position = Vector2(0, -2)
 collision_layer = 4
 parryForgivenesTimer = NodePath("../Timer")
 health_componnet = NodePath("../HealthComponent")
+IFRAMETIMER = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_dxj8g")
@@ -1170,7 +1171,7 @@ skew = 1.309
 texture = SubResource("GradientTexture2D_glagt")
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.07
 one_shot = true
 
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]

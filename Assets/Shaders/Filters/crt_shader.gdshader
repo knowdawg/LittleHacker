@@ -3,6 +3,7 @@ render_mode unshaded;
 
 uniform float pixelsWidth : hint_range(1, 2000, 1);
 uniform float pixelsHight : hint_range(1, 2000, 1);
+uniform float bloomIntensity : hint_range(0.0, 1.0);
 
 vec2 curve(vec2 uv){
 	uv = (uv - 0.5) * 2.0;
@@ -17,13 +18,14 @@ vec2 curve(vec2 uv){
 void fragment() {
 	vec2 curvedUV = curve(UV);
 
-	//vec4 bloom =  texture(TEXTURE, curvedUV);
-	//bloom += texture(TEXTURE, curvedUV + vec2(0.5/ pixelsWidth, 0.0));
-	//bloom += texture(TEXTURE, curvedUV + vec2(0.0, 1.0/ pixelsHight));
-	//bloom += texture(TEXTURE, curvedUV + vec2(-0.5/ pixelsWidth, 0.0));
-	//bloom += texture(TEXTURE, curvedUV + vec2(0.0, -1.0/ pixelsHight));
-	//bloom /= 6.0;
-	//bloom = smoothstep(0.0, 0.9, bloom);
+	vec4 bloom =  texture(TEXTURE, curvedUV);
+	bloom += texture(TEXTURE, curvedUV + vec2(0.5/ pixelsWidth, 0.0));
+	bloom += texture(TEXTURE, curvedUV + vec2(0.0, 1.0/ pixelsHight));
+	bloom += texture(TEXTURE, curvedUV + vec2(-0.5/ pixelsWidth, 0.0));
+	bloom += texture(TEXTURE, curvedUV + vec2(0.0, -1.0/ pixelsHight));
+	bloom /= 5.0;
+	bloom *= bloomIntensity * 1.0;
+	bloom = smoothstep(0.5, 1.0, bloom);
 
 	float r = texture(TEXTURE, curvedUV).r * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI))), 0.16);
 	float g = texture(TEXTURE, curvedUV).g * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (2.0 * PI)/3.0)), 0.16);
@@ -44,7 +46,7 @@ void fragment() {
 	c.rgb += scanner;
 	c.rgb -= seperator;
 	c.rgb *= darkEdges;
-	//c.rgb += bloom.rgb;
+	c.rgb += bloom.rgb;
 
 	COLOR = c;
 }

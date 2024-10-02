@@ -12,6 +12,10 @@ var direction : float = 1.0
 func enter():
 	rollTime = player.parryStunTime
 	t = 0.0
+	if player.parriedAttack.attack_position > player.global_position:
+		direction = 1.0
+	else:
+		direction = -1.0
 
 func update_physics(delta):
 	player.update_physics(delta, true, false)
@@ -23,3 +27,6 @@ func update_physics(delta):
 	if progress >= 1.0:
 		trasitioned.emit(self, "Idle")
 		return
+
+func exit(_newState):
+	player.dashV.x = 0

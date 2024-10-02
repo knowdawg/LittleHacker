@@ -5,6 +5,8 @@ class_name MovementComponent
 @export var gravity : float = 0.0
 var g = Vector2.ZERO
 
+var falling : bool = false
+
 #Each Movement Function adds to velocities. Velocities are then added to the parents velocty.
 #Velocities are cleared each frame.
 var velocities : Array[Vector2] = []
@@ -28,7 +30,20 @@ func _physics_process(delta: float) -> void:
 			parent.velocity = Vector2.ZERO
 		else:
 			parent.position += v
+			
+	updateStatus(velocities)
+	
 	velocities.clear()
+
+func updateStatus(velocities : Array[Vector2]):
+	var summedVelocities = Vector2.ZERO
+	for v in velocities:
+		summedVelocities += v
+	
+	if summedVelocities.y < 0:
+		falling = true
+	else:
+		falling = false
 
 func moveTowardsPlayer(speed, delta):
 	var v = Vector2.ZERO
@@ -36,6 +51,24 @@ func moveTowardsPlayer(speed, delta):
 		var dirVec = (Game.player.global_position - parent.global_position).normalized()
 		dirVec *= speed * delta
 		v += dirVec
+	velocities.append(v)
+
+func moveTowardsPlayerX(speed, delta):
+	var v = Vector2.ZERO
+	if is_instance_valid(Game.player):
+		if Game.player.global_position.x > parent.global_position.x:
+			v.x = speed * delta
+		else:
+			v.x = -speed * delta
+	velocities.append(v)
+
+func moveTowardsPlayerY(speed, delta):
+	var v = Vector2.ZERO
+	if is_instance_valid(Game.player):
+		if Game.player.global_position.y > parent.global_position.y:
+			v.y = speed * delta
+		else:
+			v.y = -speed * delta
 	velocities.append(v)
 
 func moveAwayFromPlayer(speed, delta):
@@ -49,3 +82,6 @@ func moveAwayFromPlayer(speed, delta):
 var force = Vector2.ZERO
 func applyForce(forceVec : Vector2, forceAmplitude : float):
 	force += forceVec.normalized() * forceAmplitude
+
+func resetForces():
+	force = Vector2.ZERO

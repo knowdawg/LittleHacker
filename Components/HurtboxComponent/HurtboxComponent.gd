@@ -15,6 +15,7 @@ var attackIDIveBeenHitBy = []
 func _process(delta):
 	ift -= delta
 	spikesIfr -= delta
+	
 
 func damage(attack: Attack):
 	if parrying:

@@ -15,13 +15,17 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("SubmitTerminal"):
 		if entryBox.has_focus():
 			setCarrotToEnd()
-			entryBox.clear()
 			
-			var t = entryBox.text
+			entryBox.backspace()
+			var t = entryBox.get_text()
 			t = t.to_lower()
 			t = t.replace("/", "")
-			print("Test" + t)
-			textBox.insert_line_at(textBox.get_line_count()-1, t)
+			var ogT = t
+			t = autoCorrect(t)
+			
+			entryBox.clear()
+			
+			textBox.insert_line_at(textBox.get_line_count()-1, ogT)
 			if !HackCommandManager.executeCommand(t):
 				var h = HackCommandManager.executeTerminalCommand(t)
 				textBox.insert_line_at(textBox.get_line_count()-1, h)
@@ -29,19 +33,37 @@ func _process(_delta: float) -> void:
 				textBox.insert_line_at(textBox.get_line_count()-1, "    Executing " + t + "...")
 			exit()
 
+func autoCorrect(s : String) -> String:
+	var listOfWords : Array[String] = HackCommandManager.getCommandsNames()
+	var distance : float = 0.24 #Also setves as a threshold
+	var index = -1
+	
+	for i in listOfWords.size():
+		var d = listOfWords[i].similarity(s)
+		if d > distance:
+			distance = d
+			index = i
+	
+	if index == -1:
+		return s
+	
+	return(listOfWords[index])
+
+
 func setCarrotToEnd():
 	textBox.set_caret_line(textBox.get_line_count()-1)
 	textBox.set_caret_column(100)
 
 func enter():
-	Game.inTerminal = true
+	Game.setTerminal(true)
 	setCarrotToEnd()
 	entryBox.insert_text_at_caret("/")
 	$AnimationPlayer.play("Show")
 	entryBox.grab_focus()
 
+
 func exit():
 	setCarrotToEnd()
-	Game.inTerminal = false
+	Game.setTerminal(false)
 	entryBox.release_focus()
 	$AnimationPlayer.play("Hide")

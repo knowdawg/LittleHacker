@@ -14,6 +14,14 @@ func enter():
 		sprite.frame = 1
 
 func update(_delta):
+	if !EnemyHealthBarPositionManager.hasHealthbar(target):
+		trasitioned.emit(self, "Free")
+		return
+	
+	if !is_instance_valid(target):
+		trasitioned.emit(self, "Free")
+		return
+	
 	parent.position = target.follow.global_position
 	
 	if Input.is_action_just_pressed("SwitchBar"):
@@ -32,5 +40,6 @@ func update(_delta):
 			trasitioned.emit(self, "Free")
 
 func exit(_newState):
-	target.deactivate()
+	if is_instance_valid(target):
+		target.deactivate()
 	sprite.frame = 0

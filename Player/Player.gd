@@ -99,16 +99,18 @@ func hitFromLeft(_attack : Attack):
 	knockbackVector.x = 100.0
 	v.x = 0.0
 	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
-	Game.slowTime(0.3, 0.1)
+	#Game.slowTime(0.3, 0.01)
 
 func hitFromRight(_attack : Attack):
 	knockbackVector.x = -100.0
 	v.x = 0.0
 	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
-	Game.slowTime(0.3, 0.1)
+	#Game.slowTime(0.3, 0.01)
 
 var parryStunTime = 0.3
-func parry(_attack : Attack):
+var parriedAttack : Attack
+func parry(attack : Attack):
+	parriedAttack = attack
 	if is_on_floor():
 		parryStunTime = 0.3 #modify based on attack knockback
 		$StateMachine.onChildTransition($StateMachine.current_state, "ParryStun")
