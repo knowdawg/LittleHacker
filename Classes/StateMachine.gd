@@ -14,7 +14,7 @@ func _ready():
 			child.trasitioned.connect(onChildTransition)
 	
 	if initial_state:
-		initial_state.enter()
+		initial_state.enter(null)
 		current_state = initial_state
 
 func _process(delta):
@@ -25,28 +25,22 @@ func _physics_process(delta):
 	if current_state:
 		current_state.update_physics(delta)
 
+#Called by the signal
 func onChildTransition(state : State, new_state_name):
 	if state != current_state:
 		return
 	
-	var new_state = states.get(new_state_name.to_lower())
-	
-	if !new_state:
-		return
-	
-	if current_state:
-		current_state.exit(new_state)
-	
-	new_state.enter()
-	
-	current_state = new_state
+	switchStates(new_state_name)
 
+#Call for manualy overwriting State
 func switchStates(newState):
 	var n = states.get(newState.to_lower())
 	
+	var prevState : State = null
 	if current_state:
+		prevState = current_state
 		current_state.exit(n)
 	
-	n.enter()
+	n.enter(prevState)
 	
 	current_state = n

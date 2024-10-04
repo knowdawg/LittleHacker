@@ -6,7 +6,7 @@ class_name PlayerWeaponSwapSides
 @export var player : Player
 @export var weaponStateMachine : PlayerWeaponStateMachine
 
-func enter():
+func enter(_prevState):
 	weaponAnimator.play("Swap")
 
 func update(delta):

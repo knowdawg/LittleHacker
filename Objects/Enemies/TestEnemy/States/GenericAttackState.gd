@@ -20,8 +20,9 @@ class_name GenericAttackState
 @export_group("ParrySettings")
 @export var dontReactToParryTimes : Array[Vector2]
 
+var dir = 1.0
 var t = 0.0
-func enter():
+func enter(_prevState):
 	t = 0.0
 	animator.play(animationName)
 	if nodeToFlip and parent:
@@ -29,6 +30,12 @@ func enter():
 			nodeToFlip.scale.x = 1.0
 		else:
 			nodeToFlip.scale.x = -1.0
+	
+	if parent:
+		if parent.position.x > Game.player.global_position.x: 
+			dir = -1.0
+		else:
+			dir = 1.0
 
 func update(delta):
 	t += delta
@@ -36,7 +43,8 @@ func update(delta):
 	if movementPeriods.size() > 0:
 		for v in movementPeriods:
 			if t > v.x and t < v.y:
-				movement.moveTowardsPlayer(v.z, delta)
+				#movement.applyForce(Vector2(dir, 0), -v.z * 0.003)
+				movement.move(Vector2(dir, 0), v.z, delta)
 	
 	if t >= attackLength:
 		trasitioned.emit(self, agroState.name)

@@ -3,7 +3,7 @@ extends State
 @export var parent : CursorFollower
 
 var target : EnemyHealthBar
-func enter():
+func enter(_prevState):
 	var gmp = EnemyHealthBarPositionManager.getActualGlobalMousePosition()
 	var closestHealthBar : EnemyHealthBar = EnemyHealthBarPositionManager.getClossestEnemyHealthBar(gmp)
 	

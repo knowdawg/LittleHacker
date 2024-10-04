@@ -4,7 +4,7 @@ extends State
 @export var sprite : Sprite2D
 
 var target : EnemyHealthBar
-func enter():
+func enter(_prevState):
 	var gmp = EnemyHealthBarPositionManager.getActualGlobalMousePosition()
 	var closestHealthBar : EnemyHealthBar = EnemyHealthBarPositionManager.getClossestEnemyHealthBar(gmp)
 	

@@ -3,13 +3,16 @@ extends State
 @export var player : Player
 @export var rollSpeedCurve : Curve
 @export var rollSpeedMultiplier : float = 6000;
+@export var animator : AnimationPlayer
 
 var rollTime : float = 0.3;
 var t : float = 0.0;
 
 var direction : float = 1.0
 
-func enter():
+func enter(_prevState):
+	if player.is_on_floor():
+		animator.play("ParryStun")
 	rollTime = player.parryStunTime
 	t = 0.0
 	if player.parriedAttack.attack_position > player.global_position:

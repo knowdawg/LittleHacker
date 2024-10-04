@@ -10,7 +10,7 @@ class_name PlayerAttackDown
 @export var downAttackComponent : AttackComponent
 
 var t = 0.0
-func enter():
+func enter(_prevState):
 	weaponAnimator.play("AttackDown")
 	weaponSprite.flip_h = playerSprite.flip_h
 	t = 0.4

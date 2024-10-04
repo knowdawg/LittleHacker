@@ -18,7 +18,7 @@ func update_physics(delta):
 	if player.velocity.y >= 0.0:
 		trasitioned.emit(self, "Fall")
 
-func enter():
+func enter(_prevState):
 	player.jump();
 	animated_player_sprite.play("JumpStart")
 	t = 0

@@ -21,7 +21,7 @@ func _ready():
 			child.trasitioned.connect(onChildTransition)
 	
 	if initial_state:
-		initial_state.enter()
+		initial_state.enter(null)
 		current_state = initial_state
 
 var inputBuffer = ""
@@ -64,9 +64,11 @@ func onChildTransition(state : State, new_state_name):
 	if !new_state:
 		return
 	
+	var prevState : State
 	if current_state:
+		prevState = current_state
 		current_state.exit(new_state)
 	
-	new_state.enter()
+	new_state.enter(prevState)
 	
 	current_state = new_state

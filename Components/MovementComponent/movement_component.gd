@@ -79,6 +79,10 @@ func moveAwayFromPlayer(speed, delta):
 		v += -dirVec
 	velocities.append(v)
 
+func move(dir : Vector2, amplitude : float, delta):
+	var v = dir * amplitude * delta
+	velocities.append(v)
+
 var force = Vector2.ZERO
 func applyForce(forceVec : Vector2, forceAmplitude : float):
 	force += forceVec.normalized() * forceAmplitude

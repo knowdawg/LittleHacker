@@ -8,7 +8,7 @@ class_name StationaryIdle
 @export var animator : AnimationPlayer
 @export var playerProximity : ProximityAreaComponent
 
-func enter():
+func enter(_prevState):
 	animator.play("Idle")
 
 func update(_delta):

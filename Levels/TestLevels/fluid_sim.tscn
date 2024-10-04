@@ -37,7 +37,7 @@ void fragment() {
 	vec2 newForce = vec2(0.0);
 
 	//Centeral Finite Diference Scale (Mabye to store the data in the middle of the cell? idk)
-	float cScale = 0.5;
+	float cScale = 1.0;
 
 	float s = k / dt;
 
@@ -50,7 +50,7 @@ void fragment() {
 	vec4 topCell = texture(prevFrame, UV - vec2(0.0, inverseResolution.y));
 	vec4 downCell = texture(prevFrame, UV + vec2(0.0, inverseResolution.y));
 
-	float subAmount = 0.0;
+	float subAmount = 0.5;
 	float mulAmount = 1.0;
 	centerCell.xy = (centerCell.xy - subAmount) * mulAmount;
 	rightCell.xy = (rightCell.xy - subAmount) * mulAmount;
@@ -67,7 +67,7 @@ void fragment() {
 
 	//Solve for density
 	centerCell.z -= dt * dot(vec3(ddx, uDiv), centerCell.xyz);
-	//centerCell.z = clamp(centerCell.z, 0.5, 3.0); //Breaks
+	centerCell.z = clamp(centerCell.z, 0.5, 3.0); //Breaks
 
 	//Solve for Velocity
 	vec2 pdx = s * ddx; //original
@@ -97,24 +97,24 @@ void fragment() {
 	if(distance(UV, vec2(ballX, ballY)) < 0.05){
 		centerCell.rgb = vec3(normalize(UV - vec2(ballX, ballY)) * -vec2(1.0, 1.0), 1.0);
 	}
-	if(UV.y >= 0.98){
-		if(abs(UV.x - 0.5) < 0.5){
-			centerCell.rgb = vec3(0.0, 1.0, 1.0);
-		}
-	}
+	//if(UV.y >= 0.98){
+		//if(abs(UV.x - 0.5) < 0.5){
+			//centerCell.rgb = vec3(0.0, 1.0, 1.0);
+		//}
+	//}
 
 	//float dis = 1.0 - distance(UV, vec2(ballX, ballY));
 	//dis = smoothstep(0.90, 1.0, dis);
 	//centerCell.x = dis;
 
 	//centerCell.y *= smoothstep(.5,.48,abs(UV.y-0.5)); //alt
-	centerCell.z -= 0.01 * dt;
-	centerCell.x -= 0.02 * dt;
-	centerCell.y -= 0.02 * dt;
+	//centerCell.z -= 0.01 * dt;
+	//centerCell.x -= 0.02 * dt;
+	//centerCell.y -= 0.02 * dt;
 
 	float borders = 1.0 - abs(UV.x - 0.5);
-	borders = smoothstep(0.5, 0.6, borders);
-	borders -= smoothstep(0.6, 1.0, 1.0 - UV.y);
+	borders = smoothstep(0.5, 0.7, borders);
+	borders -= smoothstep(0.5, 2.0, 1.0 - UV.y);
 	centerCell.z *= borders;
 
 	//centerCell.z *= step(0.1, topCell.z + downCell.z + leftCell.z + rightCell.z);
@@ -129,9 +129,10 @@ void fragment() {
 
 	//centerCell = clamp(centerCell, vec4(0.0), vec4(1.0));
 	centerCell.xy = centerCell.xy; //* vec2(-1.0, 1.0);
-
-	COLOR = centerCell; //vec4(1.0);
-	//COLOR.z = borders;
+	
+	
+	COLOR = centerCell;
+	//COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 }
 "
 
@@ -146,8 +147,8 @@ resource_local_to_scene = true
 shader = SubResource("Shader_eylr8")
 shader_parameter/resolution = Vector2(128, 128)
 shader_parameter/gravity = Vector2(0, 0)
-shader_parameter/ballX = 0.61
-shader_parameter/ballY = 0.4
+shader_parameter/ballX = 0.0
+shader_parameter/ballY = 0.73
 shader_parameter/prevFrame = SubResource("ViewportTexture_3ovcw")
 shader_parameter/externalForces = SubResource("ViewportTexture_6ow4v")
 

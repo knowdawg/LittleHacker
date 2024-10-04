@@ -11,7 +11,7 @@ class_name PlayerWeaponAttackHorizontal
 @export var rightAttackComponent : AttackComponent
 
 var t = 0.0
-func enter():
+func enter(_prevState):
 	weaponAnimator.play("AttackHorizontal")
 	weaponSprite.flip_h = playerSprite.flip_h
 	t = 0.4

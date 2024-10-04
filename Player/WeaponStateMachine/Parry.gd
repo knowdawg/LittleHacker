@@ -10,7 +10,7 @@ class_name PlayerWeaponParry
 @export var playerHurtBox : HurtboxComponent
 
 var t = 0.0
-func enter():
+func enter(_prevState):
 	t = 0.0
 	
 	weaponAnimator.stop()
@@ -29,7 +29,7 @@ func update(delta):
 	weaponSprite.moveTowardsPlayerFast(delta)
 	
 	if weaponStateMachine.inputBuffer == "Parry" and chainParry == true:
-		enter()
+		enter(null)
 	
 	t += delta
 	if t <= 0.15:

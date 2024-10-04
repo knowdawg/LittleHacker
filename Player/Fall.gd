@@ -18,5 +18,5 @@ func update_physics(delta):
 		if player.canCoyoteJump() == true:
 			trasitioned.emit(self, "Jump")
 
-func enter():
+func enter(_prevState):
 	animated_player_sprite.play("Fall")

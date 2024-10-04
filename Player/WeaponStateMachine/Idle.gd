@@ -7,7 +7,7 @@ class_name PlayerWeaponIdle
 @export var player : Player
 @export var weaponStateMachine : PlayerWeaponStateMachine
 
-func enter():
+func enter(_prevState):
 	weaponAnimator.play("Idle")
 
 func update(delta):

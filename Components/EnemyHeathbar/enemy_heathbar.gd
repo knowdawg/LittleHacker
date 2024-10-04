@@ -28,6 +28,12 @@ func delete():
 	
 
 func drawLines():
+	if is_instance_valid(Game.player):
+		if Game.player.global_position.x > follow.global_position.x:
+			pass
+		else:
+			pass
+	
 	hackCommands.sort_custom(sortHacks)
 	var endPositions : Array = $Sprite2D/HackCoponentPosition.get_children()
 	

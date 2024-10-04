@@ -158,8 +158,8 @@ position = Vector2(0, 1.175)
 polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.325)
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(158.5, 80)
-color = Color(0.247059, 0.247059, 0.247059, 0)
+position = Vector2(151, 80)
+color = Color(0.247059, 1, 0.247059, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
@@ -171,13 +171,41 @@ polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 [node name="Sprite2D" type="Sprite2D" parent="PointLight2D"]
 texture = SubResource("GradientTexture2D_51qsl")
 
+[node name="PointLight2D2" type="PointLight2D" parent="."]
+position = Vector2(229, 96)
+color = Color(0.247059, 0.247059, 1, 0)
+energy = 0.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nfx2l")
+
+[node name="Polygon2D" type="Polygon2D" parent="PointLight2D2"]
+position = Vector2(-4, -16)
+polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="PointLight2D2"]
+texture = SubResource("GradientTexture2D_51qsl")
+
+[node name="PointLight2D3" type="PointLight2D" parent="."]
+position = Vector2(190, 120)
+color = Color(0.882353, 0.247059, 0.247059, 0)
+energy = 0.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nfx2l")
+
+[node name="Polygon2D" type="Polygon2D" parent="PointLight2D3"]
+position = Vector2(-4, -16)
+polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="PointLight2D3"]
+texture = SubResource("GradientTexture2D_51qsl")
+
 [node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
 position = Vector2(166, 93)
 
 [node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(150, 82)
+position = Vector2(110, 88)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -2)
@@ -195,7 +223,7 @@ offset_bottom = 52.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]
-
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(192, 80)
+position = Vector2(199, 134)
+
+[node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]

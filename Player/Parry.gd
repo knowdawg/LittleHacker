@@ -5,7 +5,7 @@ class_name PlayerGroundParry
 @export var player : Player
 @export var sm : PlayerStateMachine
 
-func enter():
+func enter(_prevState):
 	t = 0.4
 	animated_player_sprite.play("GroundParry")
 	player.v.x = 0.0

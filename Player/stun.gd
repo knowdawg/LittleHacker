@@ -6,7 +6,7 @@ class_name PlayerStun
 @export var scaleAnimator : AnimationPlayer
 @export var parent : Player
 
-func enter():
+func enter(_prevState):
 	animator.play("Stun")
 	scaleAnimator.play("Stun")
 	t = 0.0

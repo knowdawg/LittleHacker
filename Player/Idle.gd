@@ -23,5 +23,5 @@ func update_physics(delta):
 		playerStateMachine.resetInputBuffer()
 		return
 
-func enter():
+func enter(_prevState):
 	animator.play("Idle")

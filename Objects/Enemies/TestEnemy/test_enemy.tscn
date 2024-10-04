@@ -463,14 +463,16 @@ agroState = NodePath("../Chase")
 animator = NodePath("../../AnimationPlayer")
 playerProximity = NodePath("../../Components/AgroProximity")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "attackStates", "animator", "deAggroProximity", "attackProximity", "movement")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement")]
 script = ExtResource("3_p5on1")
 idleState = NodePath("../Idle")
-attackStates = [NodePath("../Attack"), NodePath("../TrippleAttack")]
+nextStates = [NodePath("../Attack"), NodePath("../TrippleAttack")]
 animator = NodePath("../../AnimationPlayer")
 deAggroProximity = NodePath("../../Components/DeAgroProximity")
 attackProximity = NodePath("../../Components/AttackProximity")
 movement = NodePath("../../Components/MovementComponent")
+
+[node name="InRange" type="Node" parent="StateMachine"]
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
@@ -592,6 +594,7 @@ polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Polygon2D"]
 occluder = SubResource("OccluderPolygon2D_4ms6j")
+occluder_light_mask = 0
 
 [node name="FlipPivot" type="Node2D" parent="."]
 

@@ -12,7 +12,7 @@ extends State
 @export var kbCom : OmniDirectionalKnockbackComponent
 
 var t = 0.0
-func enter():
+func enter(_prevState):
 	t = 0.0
 	animator.play("Parried")
 	movement.applyForce(kbCom.returnVecFromTwoObjects(parrent, Game.player), 30.0)

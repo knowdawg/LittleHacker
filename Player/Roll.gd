@@ -30,7 +30,7 @@ func update_physics(delta):
 		trasitioned.emit(self, "Idle")
 		return
 
-func enter():
+func enter(_prevState):
 	t = 0.0;
 	player.v.x = 0;
 	animated_player_sprite.play("Roll")

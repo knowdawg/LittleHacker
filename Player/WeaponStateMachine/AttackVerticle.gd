@@ -10,7 +10,7 @@ class_name PlayerWeaponAttackVerticle
 @export var upAttackComponent : AttackComponent
 
 var t = 0.0
-func enter():
+func enter(_prevState):
 	weaponAnimator.play("AttackVerticle")
 	weaponSprite.flip_h = playerSprite.flip_h
 	t = 0.4
