@@ -17,6 +17,11 @@ func update_physics(delta):
 	if playerStateMachine.inputBuffer == "Jump":
 		if player.canCoyoteJump() == true:
 			trasitioned.emit(self, "Jump")
+			return
+			
+	if player.is_on_wall():
+		trasitioned.emit(self, "WallCling")
+		return
 
 func enter(_prevState):
 	animated_player_sprite.play("Fall")

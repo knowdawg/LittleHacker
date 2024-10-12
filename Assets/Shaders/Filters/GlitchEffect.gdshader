@@ -18,6 +18,8 @@ uniform float shake_block_size = 30.5;
 uniform float shake_color_rate : hint_range( 0.0, 1.0 ) = 0.01;
 // スクリーン
 uniform sampler2D screen_texture : hint_screen_texture;
+uniform float transparency : hint_range(0.0, 1.0, 0.1);
+
 
 float random( float seed )
 {
@@ -46,5 +48,6 @@ void fragment(){
 	,	textureLod( TEXTURE, fixed_uv + vec2( -shake_color_rate, 0.0 ), 0.0 ).b
 	,	enable_shift
 	);
+	pixel_color.a = transparency * pixel_color.a;
 	COLOR = pixel_color;
 }

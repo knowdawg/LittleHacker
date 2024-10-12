@@ -25,6 +25,17 @@ func update_physics(delta):
 	
 	if progress >= 0.75 and Input.get_axis("Left", "Right") != 0:
 		trasitioned.emit(self, "Run")
+		return
+	
+	if progress >= 0.2 and playerStateMachine.inputBuffer == "Jump" and player.canCoyoteJump() == true:
+		var dir = player.getSpriteDirection()
+		if progress <= 0.3:
+			player.rollJumpBoost.x = 45.0 * dir
+		elif progress <= 0.5:
+			player.rollJumpBoost.x = 35.0 * dir
+		
+		trasitioned.emit(self, "Jump")
+		return
 	
 	if progress >= 1.0:
 		trasitioned.emit(self, "Idle")

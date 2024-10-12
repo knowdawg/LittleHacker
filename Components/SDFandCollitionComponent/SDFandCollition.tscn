@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://d4jk8bbxbaeki"]
+
+[ext_resource type="Script" path="res://Components/SDFandCollitionComponent/sd_fand_collition.gd" id="1_yemlt"]
+
+[node name="LightOccluder2D5" type="LightOccluder2D"]
+occluder_light_mask = 0
+script = ExtResource("1_yemlt")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]

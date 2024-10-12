@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=103 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="3_412y7"]
 [ext_resource type="Script" path="res://Player/Idle.gd" id="3_y4nyp"]
 [ext_resource type="Script" path="res://Player/Run.gd" id="4_jsdmc"]
-[ext_resource type="Texture2D" uid="uid://b52jfkhcgjsnc" path="res://Player/SmallPlayerSprite/SmallCharectar.png" id="4_vrrec"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="4_xxukg"]
 [ext_resource type="Script" path="res://Player/Jump.gd" id="5_8j04r"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="5_38mkd"]
@@ -24,14 +23,18 @@
 [ext_resource type="Script" path="res://Player/Weapon/WeaponSprite.gd" id="14_bw1kr"]
 [ext_resource type="Script" path="res://Player/WeaponStateMachine/AttackDown.gd" id="14_lcqka"]
 [ext_resource type="Script" path="res://Player/parry_stun.gd" id="15_8fvrf"]
+[ext_resource type="Script" path="res://Player/wall_cling.gd" id="16_i10sr"]
 [ext_resource type="Script" path="res://Player/WeaponStateMachine/Parry.gd" id="17_rv26y"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="18_3hvnj"]
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="19_0ng1i"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/HitFlashComponent/hit_flash_component.tscn" id="23_v12ij"]
 [ext_resource type="PackedScene" uid="uid://cwfrw5n1nbnws" path="res://Components/ParryIntercenpterComponent/parry_intercepter_component.tscn" id="28_7xl6g"]
+[ext_resource type="Texture2D" uid="uid://b52jfkhcgjsnc" path="res://Player/SmallPlayerSprite/SmallCharectar.png" id="28_x4rxf"]
 [ext_resource type="Script" path="res://Player/parry_particles.gd" id="29_tbcwx"]
 [ext_resource type="Script" path="res://Player/ParryLight.gd" id="30_t8rxg"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="32_3xbax"]
+[ext_resource type="Script" path="res://Player/Effects/parry_explotion.gd" id="33_ntv7t"]
+[ext_resource type="Texture2D" uid="uid://dlf83870nvaoi" path="res://Assets/Sprites/Effects/ParryExplotion.png" id="33_nxmct"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yskb1"]
 size = Vector2(2, 4)
@@ -68,6 +71,10 @@ point_count = 5
 [sub_resource type="Curve" id="Curve_k2pfp"]
 _data = [Vector2(0, 1), 0.0, -3.32666, 0, 0, Vector2(1, 0), 0.000895127, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="Curve" id="Curve_udogh"]
+_data = [Vector2(0, 0.00440526), 0.0, -0.0640265, 0, 0, Vector2(0.380762, 0.27533), 1.76437, 1.76437, 0, 0, Vector2(1, 1), 0.153365, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_60vrk"]
 polygon = PackedVector2Array(-5, -4, -4, -4, -4, -5, -3, -5, -3, -6, -2, -6, -2, -7, 2, -7, 2, -6, 3, -6, 3, -5, 4, -5, 4, -4, 3, -4, 1, -6, -1, -6, -4, -3, -4, -1, -1, 2, 1, 2, 2, 1, 3, 1, 3, 2, 2, 2, 2, 3, -2, 3, -2, 2, -3, 2, -3, 1, -4, 1, -4, 0, -5, 0, -5, -3)
@@ -311,6 +318,7 @@ tracks/1/keys = {
 resource_name = "Run"
 length = 0.8
 loop_mode = 1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -339,6 +347,22 @@ tracks/0/keys = {
 "values": [0]
 }
 
+[sub_resource type="Animation" id="Animation_5ypfg"]
+resource_name = "WallCling"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [47]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2wqp"]
 _data = {
 "Dash": SubResource("Animation_7ugr1"),
@@ -354,7 +378,8 @@ _data = {
 "RESET": SubResource("Animation_edsbw"),
 "Roll": SubResource("Animation_p5rim"),
 "Run": SubResource("Animation_43kgi"),
-"Stun": SubResource("Animation_t7nm8")
+"Stun": SubResource("Animation_t7nm8"),
+"WallCling": SubResource("Animation_5ypfg")
 }
 
 [sub_resource type="Animation" id="Animation_gl1a5"]
@@ -440,13 +465,31 @@ tracks/0/keys = {
 "values": [Vector2(1, 1), Vector2(3, 0.2), Vector2(0.5, 1.5), Vector2(1, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_unlac"]
+resource_name = "WallCling"
+length = 0.1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PlayerVisual:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.6, 1.3), Vector2(1, 1)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0xm6f"]
 _data = {
 "HitGround": SubResource("Animation_gl1a5"),
 "Jump": SubResource("Animation_fgfhu"),
 "RESET": SubResource("Animation_uuh13"),
 "Roll": SubResource("Animation_0y4ng"),
-"Stun": SubResource("Animation_v5xkb")
+"Stun": SubResource("Animation_v5xkb"),
+"WallCling": SubResource("Animation_unlac")
 }
 
 [sub_resource type="Animation" id="Animation_uga6c"]
@@ -830,6 +873,68 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
+[sub_resource type="Animation" id="Animation_dlc11"]
+resource_name = "Animate"
+length = 0.4
+step = 0.08
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.08, 0.16, 0.24),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.384615),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_ltc66"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w7p1b"]
+_data = {
+"Animate": SubResource("Animation_dlc11"),
+"RESET": SubResource("Animation_ltc66")
+}
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite")]
 collision_layer = 4
 collision_mask = 3
@@ -933,6 +1038,15 @@ player = NodePath("../..")
 rollSpeedCurve = SubResource("Curve_k2pfp")
 rollSpeedMultiplier = 3000.0
 animator = NodePath("../../SpriteAnimator")
+
+[node name="WallCling" type="Node" parent="StateMachine" node_paths=PackedStringArray("playerSprite", "animator", "player", "scaleAnimtor", "playerStateMachine")]
+script = ExtResource("16_i10sr")
+playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
+animator = NodePath("../../SpriteAnimator")
+player = NodePath("../..")
+scaleAnimtor = NodePath("../../ScaleAnimator")
+playerStateMachine = NodePath("..")
+slideSpeedCurve = SubResource("Curve_udogh")
 
 [node name="WeaponStateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("11_v7ndi")
@@ -1067,8 +1181,8 @@ shape = SubResource("RectangleShape2D_ekw0v")
 clip_children = 2
 texture_filter = 1
 position = Vector2(0, -4)
-texture = ExtResource("4_vrrec")
-hframes = 47
+texture = ExtResource("28_x4rxf")
+hframes = 53
 frame = 1
 
 [node name="HitFlashComponent" parent="PlayerVisual/PlayerSprite" instance=ExtResource("23_v12ij")]
@@ -1096,7 +1210,7 @@ occluder_light_mask = 0
 
 [node name="ParryIntercepterComponent" parent="." node_paths=PackedStringArray("hurtBoxToIntercept", "efects", "parent") instance=ExtResource("28_7xl6g")]
 hurtBoxToIntercept = NodePath("../HurtboxComponent")
-efects = [NodePath("../WeaponDislocator/WeaponSprite/HitFlashComponent"), NodePath("HitParticles"), NodePath("ParryParticles"), NodePath("PointLight2D")]
+efects = [NodePath("../WeaponDislocator/WeaponSprite/HitFlashComponent"), NodePath("HitParticles"), NodePath("ParryParticles"), NodePath("PointLight2D"), NodePath("ParryExplotion")]
 parent = NodePath("..")
 
 [node name="HitParticles" parent="ParryIntercepterComponent" instance=ExtResource("3_412y7")]
@@ -1162,6 +1276,20 @@ texture_filter = 1
 scale = Vector2(0.1, 1e-05)
 skew = 1.309
 texture = SubResource("GradientTexture2D_glagt")
+
+[node name="ParryExplotion" type="Sprite2D" parent="ParryIntercepterComponent"]
+visible = false
+modulate = Color(1, 1, 1, 0.482353)
+texture_filter = 1
+position = Vector2(0, -2)
+texture = ExtResource("33_nxmct")
+hframes = 5
+script = ExtResource("33_ntv7t")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParryIntercepterComponent/ParryExplotion"]
+libraries = {
+"": SubResource("AnimationLibrary_w7p1b")
+}
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.07

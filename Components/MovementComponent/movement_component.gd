@@ -89,3 +89,20 @@ func applyForce(forceVec : Vector2, forceAmplitude : float):
 
 func resetForces():
 	force = Vector2.ZERO
+
+
+func getVectorToPlayer(pos : Vector2, normalized : bool = true):
+	if is_instance_valid(Game.player):
+		var v = pos - Game.player.global_position
+		if normalized:
+			v = v.normalized()
+		return v
+	return Vector2.ZERO
+
+func getVectorToPlayerX(pos : Vector2):
+	if is_instance_valid(Game.player):
+		var v = pos - Game.player.global_position
+		v.y = 0.0
+		v = v.normalized()
+		return v
+	return Vector2.ZERO

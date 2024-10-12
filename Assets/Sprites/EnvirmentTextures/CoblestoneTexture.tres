@@ -2,7 +2,7 @@
 
 [sub_resource type="Gradient" id="Gradient_0s0kw"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_mimw8"]
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_uohvj"]
 noise_type = 2
 frequency = 0.2
 fractal_octaves = 1
@@ -14,4 +14,4 @@ domain_warp_fractal_octaves = 1
 [resource]
 seamless = true
 color_ramp = SubResource("Gradient_0s0kw")
-noise = SubResource("FastNoiseLite_mimw8")
+noise = SubResource("FastNoiseLite_uohvj")

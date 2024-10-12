@@ -12,11 +12,10 @@ var gravity = 500 * 0.5 #ProjectSettings.get_setting("physics/2d/default_gravity
 
 var v : Vector2 = Vector2.ZERO #substitute for velocity so that the charectar will freze if canMove / canFall is false
 var knockbackVector : Vector2 = Vector2.ZERO
+var slideVector : Vector2 = Vector2.ZERO
+var rollJumpBoost : Vector2 = Vector2.ZERO
 var dashV : Vector2 = Vector2.ZERO
 var coyoteTime : float = 0.0
-
-var curX = 0.0
-var prevX = 0.0
 func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	velocity = Vector2.ZERO
 	
@@ -38,9 +37,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 			direction = 0
 		if direction:
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
-			if is_on_floor():
-				pass
-				#velocity += get_floor_normal() * v
+			velocity.x += v.x
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
 	
@@ -50,7 +47,14 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	velocity.y += knockbackVector.y
 	knockbackVector.y = move_toward(knockbackVector.y, 0, 10.0 * delta * 60)
 	
-	velocity.x += v.x
+	#Slide
+	velocity += slideVector
+	
+	#rollJumpBoost.x = clamp(rollJumpBoost.x, -SPEED - v.x, SPEED - v.x)
+	velocity += rollJumpBoost
+	rollJumpBoost.x = move_toward(rollJumpBoost.x, 0, delta * 100.0)
+	
+	#velocity.x += v.x
 	velocity.x += knockbackVector.x
 	knockbackVector.x = move_toward(knockbackVector.x, 0, 10.0 * delta * 60)
 	
@@ -67,7 +71,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 
 func _physics_process(delta):
 	coyoteTime -= delta
-	if is_on_floor():
+	if is_on_floor() or $StateMachine.current_state is PlayerWallCling:
 		coyoteTime = 0.1
 
 func _process(_delta: float) -> void:
@@ -114,3 +118,9 @@ func parry(attack : Attack):
 	if is_on_floor():
 		parryStunTime = 0.3 #modify based on attack knockback
 		$StateMachine.onChildTransition($StateMachine.current_state, "ParryStun")
+
+func getSpriteDirection()->float:
+	var dir = 1.0
+	if sprite.flip_h == false:
+		dir = -1.0
+	return dir

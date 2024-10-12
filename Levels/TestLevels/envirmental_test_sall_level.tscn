@@ -1,27 +1,44 @@
-[gd_scene load_steps=24 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=28 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
-[ext_resource type="Texture2D" uid="uid://dbxjlqn25v1qy" path="res://Assets/Sprites/EnvirmentTextures/CoblestoneTexture.tres" id="2_2enig"]
 [ext_resource type="PackedScene" uid="uid://d3dlqrfslc2a0" path="res://Player/Player.tscn" id="2_cqdsx"]
-[ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="3_d3k5u"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_n8lu4"]
+[ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="2_jhjfi"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="5_dscvh"]
+[ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="5_nf44p"]
 [ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="8_ywwlo"]
+[ext_resource type="PackedScene" uid="uid://bnj1t3t7sac5h" path="res://Test/goathead_cutscene.tscn" id="9_mq0xw"]
+[ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="9_plpma"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
 [ext_resource type="PackedScene" uid="uid://cqfxmyyowlul4" path="res://Objects/Terminal/terminal.tscn" id="10_e4m8l"]
 [ext_resource type="PackedScene" uid="uid://ciq13p31itcpw" path="res://Objects/Enemies/TestEnemy/test_enemy.tscn" id="11_jyroq"]
+
+[sub_resource type="Gradient" id="Gradient_b40qp"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xupw"]
+noise_type = 2
+frequency = 0.331
+fractal_octaves = 1
+fractal_gain = 0.2
+cellular_distance_function = 3
+cellular_return_type = 0
+domain_warp_fractal_octaves = 1
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mnqt3"]
+seamless = true
+color_ramp = SubResource("Gradient_b40qp")
+noise = SubResource("FastNoiseLite_1xupw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
 shader_parameter/size = Vector2(192, 108)
 shader_parameter/noiseResolution = Vector2(512, 512)
-shader_parameter/noiseTex = ExtResource("2_2enig")
-shader_parameter/palete = ExtResource("3_d3k5u")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_mnqt3")
+shader_parameter/palete = ExtResource("2_jhjfi")
 
 [sub_resource type="Gradient" id="Gradient_8u10m"]
 offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.419608, 0.376471, 0.388235, 1)
+colors = PackedColorArray(0.419608, 0.376471, 0.384314, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_mu1s5"]
 gradient = SubResource("Gradient_8u10m")
@@ -39,11 +56,14 @@ shader_parameter/add_margins = true
 [sub_resource type="ViewportTexture" id="ViewportTexture_mjem6"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_nxn0r"]
-polygon = PackedVector2Array(-96, -14, -72, -14, -72, -6, -64, -6, -64, 2, -56, 2, -56, 10, -48, 10, -48, 18, -24, 18, -24, 26, 64, 26, 64, 18, 72, 18, 72, 10, 80, 10, 80, -54, 96, -54, 96, 54, -96, 54)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r37xo"]
+polygon = PackedVector2Array(77, 40, 109, 40, 109, 35, 77, 35)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_rvq4r"]
-polygon = PackedVector2Array(-24, -9, -24, -14, -56, -14, -56, -9)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6t2ub"]
+polygon = PackedVector2Array(-115, 17, -27, 17, -27, 25, -19, 25, -19, 33, -11, 33, -11, 41, -3, 41, -3, 49, 21, 49, 21, 57, 109, 57, 109, 49, 117, 49, 117, 41, 125, 41, 125, -23, 205, -23, 205, 169, -339, 169, -339, -23, -307, -23, -307, 41, -227, 41, -227, 113, -83, 113, -83, 73, -211, 73, -211, 57, -195, 57, -195, 41, -115, 41)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_85t5d"]
+polygon = PackedVector2Array(72, 32, 104, 32, 104, 40, 72, 40)
 
 [sub_resource type="Gradient" id="Gradient_j08of"]
 interpolation_mode = 2
@@ -69,11 +89,10 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_hks5v"]
-shader = ExtResource("3_n8lu4")
-
 [node name="EnvirmentalTestSallLevel" type="Node2D"]
 texture_filter = 1
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -192.0
@@ -89,7 +108,7 @@ texture = SubResource("GradientTexture2D_mu1s5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(192, 108)
+size = Vector2i(768, 432)
 
 [node name="EnviremtalPartOfEnvirmentalTest" parent="SubViewport" instance=ExtResource("1_b6j48")]
 
@@ -98,105 +117,97 @@ material = SubResource("ShaderMaterial_2ioux")
 position = Vector2(192, 108)
 texture = SubResource("ViewportTexture_mjem6")
 
-[node name="LightOccluder2D" type="LightOccluder2D" parent="Envirment"]
-modulate = Color(1, 1, 1, 0)
-occluder = SubResource("OccluderPolygon2D_nxn0r")
-occluder_light_mask = 0
-
-[node name="LightOccluder2D2" type="LightOccluder2D" parent="Envirment"]
-modulate = Color(1, 1, 1, 0)
-occluder = SubResource("OccluderPolygon2D_rvq4r")
-occluder_light_mask = 0
-
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="Envirment"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(88, 16)
-occluder = SubResource("OccluderPolygon2D_rvq4r")
-occluder_light_mask = 0
-
-[node name="LightOccluder2D4" type="LightOccluder2D" parent="Envirment"]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(37, -5)
-occluder = SubResource("OccluderPolygon2D_rvq4r")
-occluder_light_mask = 0
-
-[node name="Collitions" type="Node2D" parent="."]
+[node name="Node2D" type="Node2D" parent="Envirment"]
 visible = false
-position = Vector2(96, 54)
-scale = Vector2(0.5, 0.5)
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Collitions"]
-position = Vector2(96, 54)
-scale = Vector2(40, 40)
+[node name="LightOccluder2D5" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-133, -49)
+occluder = SubResource("OccluderPolygon2D_r37xo")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collitions/StaticBody2D"]
-position = Vector2(0, 1.175)
-polygon = PackedVector2Array(-2.4, -0.525, -1.2, -0.525, -1.2, -0.125, -0.8, -0.125, -0.8, 0.275, -0.4, 0.275, -0.4, 0.675, 0, 0.675, 0, 1.075, 1.2, 1.075, 1.2, 1.475, 5.6, 1.475, 5.6, 1.075, 6, 1.075, 6, 0.675, 6.4, 0.675, 6.4, -2.525, 7.2, -2.525, 7.2, 2.875, -2.4, 2.875)
+[node name="LightOccluder2D6" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-96, -54)
+occluder = SubResource("OccluderPolygon2D_r37xo")
 
-[node name="StaticBody2D2" type="StaticBody2D" parent="Collitions"]
-position = Vector2(96, 54)
-scale = Vector2(40, 40)
+[node name="LightOccluder2D7" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-45, -33)
+occluder = SubResource("OccluderPolygon2D_r37xo")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collitions/StaticBody2D2"]
-position = Vector2(0, 1.175)
-polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.325)
+[node name="LightOccluder2D8" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-45, -33)
+occluder = SubResource("OccluderPolygon2D_6t2ub")
 
-[node name="StaticBody2D3" type="StaticBody2D" parent="Collitions"]
-position = Vector2(272, 86)
-scale = Vector2(40, 40)
+[node name="LightOccluder2D9" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-272, -48)
+occluder = SubResource("OccluderPolygon2D_85t5d")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collitions/StaticBody2D3"]
-position = Vector2(0, 1.175)
-polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.325)
+[node name="LightOccluder2D10" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-320, -48)
+occluder = SubResource("OccluderPolygon2D_85t5d")
 
-[node name="StaticBody2D4" type="StaticBody2D" parent="Collitions"]
-position = Vector2(170, 44)
-scale = Vector2(40, 40)
+[node name="LightOccluder2D11" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-376, -48)
+occluder = SubResource("OccluderPolygon2D_85t5d")
 
-[node name="CollisionShape2D" type="CollisionPolygon2D" parent="Collitions/StaticBody2D4"]
-position = Vector2(0, 1.175)
-polygon = PackedVector2Array(-0.4, -0.525, 1.2, -0.525, 1.2, -0.325, -0.4, -0.325)
+[node name="LightOccluder2D12" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-440, -48)
+occluder = SubResource("OccluderPolygon2D_85t5d")
 
-[node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(151, 80)
-color = Color(0.247059, 1, 0.247059, 0)
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="Lights"]
+position = Vector2(159, 110)
+color = Color(0.254902, 0.254902, 0.254902, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
-[node name="Polygon2D" type="Polygon2D" parent="PointLight2D"]
+[node name="Polygon2D" type="Polygon2D" parent="Lights/PointLight2D"]
 position = Vector2(-4, -16)
 polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 
-[node name="Sprite2D" type="Sprite2D" parent="PointLight2D"]
+[node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D"]
 texture = SubResource("GradientTexture2D_51qsl")
 
-[node name="PointLight2D2" type="PointLight2D" parent="."]
-position = Vector2(229, 96)
-color = Color(0.247059, 0.247059, 1, 0)
+[node name="PointLight2D2" type="PointLight2D" parent="Lights"]
+position = Vector2(-17, 102)
+color = Color(1, 0, 0, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
-[node name="Polygon2D" type="Polygon2D" parent="PointLight2D2"]
+[node name="Polygon2D" type="Polygon2D" parent="Lights/PointLight2D2"]
 position = Vector2(-4, -16)
 polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 
-[node name="Sprite2D" type="Sprite2D" parent="PointLight2D2"]
+[node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D2"]
 texture = SubResource("GradientTexture2D_51qsl")
 
-[node name="PointLight2D3" type="PointLight2D" parent="."]
-position = Vector2(190, 120)
-color = Color(0.882353, 0.247059, 0.247059, 0)
+[node name="PointLight2D3" type="PointLight2D" parent="Lights"]
+position = Vector2(-126, 102)
+color = Color(0, 1, 0, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
-[node name="Polygon2D" type="Polygon2D" parent="PointLight2D3"]
+[node name="Polygon2D" type="Polygon2D" parent="Lights/PointLight2D3"]
 position = Vector2(-4, -16)
 polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 
-[node name="Sprite2D" type="Sprite2D" parent="PointLight2D3"]
+[node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D3"]
+texture = SubResource("GradientTexture2D_51qsl")
+
+[node name="PointLight2D4" type="PointLight2D" parent="Lights"]
+position = Vector2(-58, 118)
+color = Color(0, 0, 1, 0)
+energy = 0.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nfx2l")
+
+[node name="Polygon2D" type="Polygon2D" parent="Lights/PointLight2D4"]
+position = Vector2(-4, -16)
+polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D4"]
 texture = SubResource("GradientTexture2D_51qsl")
 
 [node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
@@ -204,26 +215,22 @@ position = Vector2(166, 93)
 
 [node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]
 
+[node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
+position = Vector2(191, 124)
+
+[node name="GoatheadCutscene" parent="." instance=ExtResource("9_mq0xw")]
+position = Vector2(239, 79)
+
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(110, 88)
+position = Vector2(41, 92)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -2)
 zoom = Vector2(10, 10)
 
-[node name="SoftLighting" type="ColorRect" parent="Player"]
-material = SubResource("ShaderMaterial_hks5v")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -96.0
-offset_top = -56.0
-offset_right = 96.0
-offset_bottom = 52.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
 
-[node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(199, 134)
+[node name="SoftLighting" parent="." instance=ExtResource("9_plpma")]
 
 [node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]

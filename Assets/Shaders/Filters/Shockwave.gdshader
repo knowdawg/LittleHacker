@@ -3,7 +3,7 @@ render_mode unshaded;
 
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 uniform float progress : hint_range(0.0, 2.0);
-uniform float intensity : hint_range(0.0, 10.0);
+uniform float intensity : hint_range(-10.0, 10.0);
 
 void fragment() {
 	//Clip Space
@@ -19,6 +19,6 @@ void fragment() {
 	vec4 c = texture(SCREEN_TEXTURE, SCREEN_UV - offset * intensity);
 	//c.r = ring;
 
-	c.a = smoothstep(0.0, 0.05, length(offset * intensity));
+	//c.a = smoothstep(0.0, 0.05, length(offset * intensity));
 	COLOR = c;
 }

@@ -16,7 +16,7 @@ void fragment() {
 	//sdfVal = fract(1.0 - clamp(0.0, 1.0, sdfVal));
 
 	//val += step(sdfVal, 1.0);
-	val -= smoothstep(0.0, 1.0, sdfVal * (10.0 / size.x));
+	val -= smoothstep(0.0, 1.0, sdfVal * (0.04));
 
 	val = ceil(val * 4.0) / 4.0;
 	vec4 c = texture(palete, vec2(val, 1.0));

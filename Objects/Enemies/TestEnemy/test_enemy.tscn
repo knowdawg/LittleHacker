@@ -1,10 +1,11 @@
-[gd_scene load_steps=41 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=42 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/idle.gd" id="2_4v4p0"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/chase.gd" id="3_p5on1"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericAttackState.gd" id="4_l276g"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/in_range.gd" id="5_f3wn7"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/dead.gd" id="5_wdh1o"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="6_n62ka"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="6_qbqsc"]
@@ -466,19 +467,24 @@ playerProximity = NodePath("../../Components/AgroProximity")
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement")]
 script = ExtResource("3_p5on1")
 idleState = NodePath("../Idle")
-nextStates = [NodePath("../Attack"), NodePath("../TrippleAttack")]
+nextStates = [NodePath("../Attack"), NodePath("../TrippleAttack"), NodePath("../InRange")]
 animator = NodePath("../../AnimationPlayer")
 deAggroProximity = NodePath("../../Components/DeAgroProximity")
 attackProximity = NodePath("../../Components/AttackProximity")
 movement = NodePath("../../Components/MovementComponent")
 
-[node name="InRange" type="Node" parent="StateMachine"]
+[node name="InRange" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "movementComponent", "proximity", "nextStates")]
+script = ExtResource("5_f3wn7")
+parent = NodePath("../..")
+movementComponent = NodePath("../../Components/MovementComponent")
+proximity = NodePath("../../Components/AttackProximity")
+nextStates = [NodePath("../Attack"), NodePath("../TrippleAttack")]
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
 attackLength = 1.0
 animationName = "Attack1"
-agroState = NodePath("../Chase")
+agroState = NodePath("../InRange")
 animator = NodePath("../../AnimationPlayer")
 nodeToFlip = NodePath("../../FlipPivot")
 parent = NodePath("../..")
@@ -489,7 +495,7 @@ movementPeriods = Array[Vector3]([Vector3(0.3, 0.4, 2000)])
 script = ExtResource("4_l276g")
 attackLength = 1.5
 animationName = "TrippleAttack"
-agroState = NodePath("../Chase")
+agroState = NodePath("../InRange")
 animator = NodePath("../../AnimationPlayer")
 nodeToFlip = NodePath("../../FlipPivot")
 parent = NodePath("../..")
@@ -503,7 +509,7 @@ script = ExtResource("5_wdh1o")
 [node name="Parried" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("7_82gm8")
 parryLength = 0.5
-nextState = NodePath("../Idle")
+nextState = NodePath("../InRange")
 parrent = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 movement = NodePath("../../Components/MovementComponent")
@@ -533,7 +539,6 @@ shape = SubResource("CircleShape2D_mjd2h")
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/AttackProximity"]
-visible = false
 shape = SubResource("CircleShape2D_75jaq")
 
 [node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent", "hitEfects") instance=ExtResource("9_t230s")]

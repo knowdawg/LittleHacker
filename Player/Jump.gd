@@ -17,6 +17,7 @@ func update_physics(delta):
 	
 	if player.velocity.y >= 0.0:
 		trasitioned.emit(self, "Fall")
+		return
 
 func enter(_prevState):
 	player.jump();
