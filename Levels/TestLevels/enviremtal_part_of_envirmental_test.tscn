@@ -7,8 +7,10 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rxmyq"]
 shader = ExtResource("1_rxxlu")
+shader_parameter/paleteSize = 4.0
 shader_parameter/size = Vector2(768, 432)
 shader_parameter/noiseResolution = Vector2(512, 512)
+shader_parameter/shading = 0.04
 shader_parameter/noiseTex = ExtResource("2_5k7ln")
 shader_parameter/palete = ExtResource("3_clohi")
 
@@ -39,32 +41,40 @@ position = Vector2(96, 54)
 texture = SubResource("GradientTexture2D_e0fs7")
 
 [node name="LightOccluder2D5" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-37, 5)
 occluder = SubResource("OccluderPolygon2D_0e157")
 
 [node name="LightOccluder2D6" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 occluder = SubResource("OccluderPolygon2D_0e157")
 
 [node name="LightOccluder2D7" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(51, 21)
 occluder = SubResource("OccluderPolygon2D_0e157")
 
 [node name="LightOccluder2D8" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(51, 21)
 occluder = SubResource("OccluderPolygon2D_bqhib")
 
 [node name="LightOccluder2D9" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-176, 6)
 occluder = SubResource("OccluderPolygon2D_mx2bi")
 
 [node name="LightOccluder2D10" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-224, 6)
 occluder = SubResource("OccluderPolygon2D_mx2bi")
 
 [node name="LightOccluder2D11" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-280, 6)
 occluder = SubResource("OccluderPolygon2D_mx2bi")
 
 [node name="LightOccluder2D12" parent="." instance=ExtResource("4_hk0n4")]
+modulate = Color(1, 1, 1, 0)
 position = Vector2(-344, 6)
 occluder = SubResource("OccluderPolygon2D_mx2bi")

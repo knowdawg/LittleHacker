@@ -13,24 +13,24 @@ var t = 0.0
 func enter(_prevState):
 	weaponAnimator.play("AttackVerticle")
 	weaponSprite.flip_h = playerSprite.flip_h
-	t = 0.4
+	t = 0.0
 
 func update(delta):
 	weaponSprite.moveTowardsPlayerFast(delta)
 	
-	t -= delta
+	t += delta
 	
-	if t < 0.3 and t > 0.2:
+	if t < 0.4 and t > 0.3:
 		upAttackComponent.enable()
 	else:
 		upAttackComponent.disable()
 	
-	if t >= 0.3:
+	if t <= 0.1:
 		weaponSprite.flip_h = playerSprite.flip_h
 	
 	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
 		trasitioned.emit(self, "Parry")
 		return
 	
-	if t <= 0.0:
+	if t >= 0.7:
 		trasitioned.emit(self, "Idle")

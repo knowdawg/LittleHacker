@@ -19,14 +19,12 @@ func calculateKnockback(attack : Attack):
 	
 	var minDis = min(disLeft, disRight)
 	
-	if disLeft == disRight: #if they are the same, pick a random one
-		var r = randi_range(0, 1)
-		if r == 0:
-			disLeft += 0.1
-			minDis = disLeft
-		else:
-			disRight += 0.1
-			minDis = disRight
+	if disLeft == disRight: #if they are the same
+		kbVec = (attack.attack_position - global_position).normalized()
+		
+		disLeft = kbVec.distance_to(dirLeft)
+		disRight = kbVec.distance_to(dirRight)
+		minDis = min(disLeft, disRight)
 	
 	if minDis == disRight:
 		if parent.has_method("hitFromRight"):

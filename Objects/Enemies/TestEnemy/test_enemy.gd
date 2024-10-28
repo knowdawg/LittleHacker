@@ -1,10 +1,18 @@
 extends CharacterBody2D
 
+@export var movementComponent : MovementComponent
+
 func _process(_delta: float) -> void:
 	pass
 
 func hit(_attack):
 	pass
+
+func hitFromRight(attack : Attack):
+	movementComponent.applyForce(Vector2(-1, 0), attack.knockback_force)
+
+func hitFromLeft(attack : Attack):
+	movementComponent.applyForce(Vector2(1, 0), attack.knockback_force)
 
 func death(_attack):
 	$StateMachine.switchStates("Dead")

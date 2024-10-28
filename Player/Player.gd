@@ -37,9 +37,10 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 			direction = 0
 		if direction:
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
-			velocity.x += v.x
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
+	
+	velocity.x += v.x
 	
 	#Knockback
 	if is_on_floor():
@@ -57,6 +58,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	#velocity.x += v.x
 	velocity.x += knockbackVector.x
 	knockbackVector.x = move_toward(knockbackVector.x, 0, 10.0 * delta * 60)
+	
 	
 	if dashV.x != 0.0:
 		velocity += dashV

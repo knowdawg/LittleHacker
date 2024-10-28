@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=43 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -21,6 +21,7 @@
 [ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="20_guqxo"]
+[ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="20_lhe68"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
 size = Vector2(2, 6)
@@ -443,9 +444,10 @@ initial_velocity_max = 250.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_gkrha")
 
-[node name="TestEnemy" type="CharacterBody2D"]
+[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("movementComponent")]
 collision_layer = 0
 script = ExtResource("1_tas1o")
+movementComponent = NodePath("Components/MovementComponent")
 
 [node name="HealthbarPos" type="Marker2D" parent="."]
 position = Vector2(0, -3)
@@ -489,7 +491,7 @@ animator = NodePath("../../AnimationPlayer")
 nodeToFlip = NodePath("../../FlipPivot")
 parent = NodePath("../..")
 movement = NodePath("../../Components/MovementComponent")
-movementPeriods = Array[Vector3]([Vector3(0.3, 0.4, 2000)])
+movementPeriods = Array[Vector3]([Vector3(0.3, 0.4, 4000)])
 
 [node name="TrippleAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
@@ -541,8 +543,9 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/AttackProximity"]
 shape = SubResource("CircleShape2D_75jaq")
 
-[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent", "hitEfects") instance=ExtResource("9_t230s")]
+[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent", "knockbackComponent", "hitEfects") instance=ExtResource("9_t230s")]
 parrent = NodePath("../..")
+knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
 hitEfects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
 MAX_HEALTH = 30.0
 
@@ -593,6 +596,9 @@ health_componnet = NodePath("../HealthComponent")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_qllm4")
+
+[node name="BidirectionalKnockbackComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("20_lhe68")]
+parent = NodePath("../..")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
