@@ -1,5 +1,5 @@
 extends State
-class_name PlayerWeaponParry
+class_name PlayerWeaponDashParry
 
 @export var weaponAnimator : AnimationPlayer
 @export var weaponSprite : Sprite2D
@@ -13,10 +13,10 @@ func enter(_prevState):
 	t = 0.0
 	
 	weaponAnimator.stop()
-	weaponAnimator.play("Parry")
+	weaponAnimator.play("DashParry")
 	
-	player.setParry(true)
-	playerStateMachine.enterParry()
+	#player.setParry(true)
+	#playerStateMachine.enterParry()
 	chainParry = false
 	if weaponStateMachine.inputBuffer == "Parry":
 		weaponStateMachine.inputBuffer = ""
@@ -25,22 +25,18 @@ func _ready():
 	playerHurtBox.parry.connect(onParry)
 
 func update(delta):
-	if t < 0.1 and playerStateMachine.current_state is SmallPlayerRoll:
-		trasitioned.emit(self, "DashParry")
-		return
-	
 	weaponSprite.moveTowardsPlayerFast(delta)
 	
 	if weaponStateMachine.inputBuffer == "Parry" and chainParry == true:
-		enter(null)
+		trasitioned.emit(self, "Parry")
 	
 	t += delta
-	if t <= 0.15:
-		playerHurtBox.setParry(true, 1)
+	if t >= 0.3 and t <= 0.6:
+		playerHurtBox.setParry(true, 2)
 	else:
 		playerHurtBox.setParry(false)
 	
-	if t >= 0.4:
+	if t >= 1.0:
 		trasitioned.emit(self, "Idle")
 
 var chainParry = false
@@ -48,5 +44,5 @@ func onParry(_attack : Attack):
 	chainParry = true
 
 func exit(_newState):
-	player.setParry(false)
+	#player.setParry(false)
 	playerHurtBox.parrying = false

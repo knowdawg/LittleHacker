@@ -6,6 +6,7 @@ class_name GenericAttackState
 
 @export_group("Next States")
 @export var agroState : State
+@export var parryState : State
 
 @export_group("Necesary Nodes")
 @export var animator : AnimationPlayer
@@ -44,7 +45,8 @@ func update(delta):
 		for v in movementPeriods:
 			if t > v.x and t < v.y:
 				#movement.applyForce(Vector2(dir, 0), -v.z * 0.003)
-				movement.move(Vector2(dir, 0), v.z, delta)
+				var dif : float = abs(v.x - v.y)
+				movement.move(Vector2(dir, 0), v.z / dif, delta * 60)
 	
 	if t >= attackLength:
 		trasitioned.emit(self, agroState.name)
@@ -55,3 +57,6 @@ func canParry():
 			if t > v.x and t < v.y:
 				return false
 	return true
+	
+func getParryState():
+	return parryState

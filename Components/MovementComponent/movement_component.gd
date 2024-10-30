@@ -7,6 +7,7 @@ var g = Vector2.ZERO
 
 var falling : bool = false
 
+var direction = 1
 #Each Movement Function adds to velocities. Velocities are then added to the parents velocty.
 #Velocities are cleared each frame.
 var velocities : Array[Vector2] = []
@@ -23,6 +24,7 @@ func _physics_process(delta: float) -> void:
 	force = lerp(force, Vector2.ZERO, delta * 10.0)
 	velocities.append(force)
 	
+	var totalForce : Vector2 = Vector2.ZERO
 	for v in velocities:
 		if parent is CharacterBody2D:
 			parent.velocity += v
@@ -30,7 +32,13 @@ func _physics_process(delta: float) -> void:
 			parent.velocity = Vector2.ZERO
 		else:
 			parent.position += v
-			
+		totalForce += v
+	
+	if totalForce.x >= 0:
+		direction = 1
+	else:
+		direction = -1
+	
 	updateStatus(velocities)
 	
 	velocities.clear()
@@ -90,7 +98,6 @@ func applyForce(forceVec : Vector2, forceAmplitude : float):
 func resetForces():
 	force = Vector2.ZERO
 
-
 func getVectorToPlayer(pos : Vector2, normalized : bool = true):
 	if is_instance_valid(Game.player):
 		var v = pos - Game.player.global_position
@@ -106,3 +113,6 @@ func getVectorToPlayerX(pos : Vector2):
 		v = v.normalized()
 		return v
 	return Vector2.ZERO
+
+func setPosition(pos : Vector2):
+	parent.position = pos

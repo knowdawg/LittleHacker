@@ -23,7 +23,10 @@ func parried(_attack : Attack):
 	if $StateMachine.current_state.has_method("canParry"):
 		if !$StateMachine.current_state.canParry():
 			return
-	$StateMachine.onChildTransition($StateMachine.current_state, "Parried")
+	if $StateMachine.current_state.has_method("getParryState"):
+		$StateMachine.onChildTransition($StateMachine.current_state, $StateMachine.current_state.getParryState().name)
+	else:
+		$StateMachine.onChildTransition($StateMachine.current_state, "Parried")
 	$FlipPivot/RotationPivot/AttackComponent.call_deferred("disable")
 
 

@@ -6,6 +6,7 @@ class_name PlayerWeaponIdle
 @export var weaponSprite : Sprite2D
 @export var player : Player
 @export var weaponStateMachine : PlayerWeaponStateMachine
+@export var playerStateMachine : PlayerStateMachine
 
 func enter(_prevState):
 	weaponAnimator.play("Idle")
@@ -14,7 +15,10 @@ func update(delta):
 	weaponSprite.moveTowardsPlayerNormal(delta)
 	
 	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
-		trasitioned.emit(self, "Parry")
+		if playerStateMachine.current_state is SmallPlayerRoll:
+			trasitioned.emit(self, "DashParry")
+		else:
+			trasitioned.emit(self, "Parry")
 		return
 	
 	if weaponStateMachine.inputBuffer == "Attack":

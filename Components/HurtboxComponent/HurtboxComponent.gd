@@ -8,6 +8,8 @@ signal parry
 @export var IFRAMETIMER : float = 0.0
 var ift : float = 0.0
 
+var parryStrength = 0
+
 var spikesIfr : float = 0.0
 
 var attackIDIveBeenHitBy = []
@@ -15,10 +17,9 @@ var attackIDIveBeenHitBy = []
 func _process(delta):
 	ift -= delta
 	spikesIfr -= delta
-	
 
 func damage(attack: Attack):
-	if parrying:
+	if parrying and attack.attackStrength <= parryStrength:
 		parryStuff(attack)
 		return
 	attackBuffer = attack
@@ -31,11 +32,14 @@ func parryStuff(attack : Attack):
 	parry.emit(attack)
 	attackIDIveBeenHitBy.append(attack.attackID)
 	if attack.healthComponent:
-		attack.healthComponent.set_weakness(attack.healthComponent.get_weakness() + 3)
+		if parryStrength == 1:
+			attack.healthComponent.set_weakness(attack.healthComponent.get_weakness() + 3)
+		elif parryStrength == 2:
+			attack.healthComponent.set_weakness(attack.healthComponent.get_weakness() + 6)
 
 var attackBuffer : Attack
 func damageStuff():
-	if parrying == true:
+	if parrying == true and attackBuffer.attackStrength <= parryStrength:
 		parryStuff(attackBuffer)
 		return
 	for a in attackIDIveBeenHitBy:
@@ -62,3 +66,16 @@ func is_iframe_active():
 
 func setIFrameTimer(val : float):
 	ift = val
+
+#strength of the parry
+# 0 = no parry
+# 1 = normal parry
+# 2 = dash parry
+# 3 = ...
+func setParry(isParrying : bool, strength = 1):
+	if isParrying:
+		parrying = true
+		parryStrength = strength
+	else:
+		parrying = false
+		parryStrength = 0

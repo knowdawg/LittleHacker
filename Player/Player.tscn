@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=104 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="19_0ng1i"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/HitFlashComponent/hit_flash_component.tscn" id="23_v12ij"]
 [ext_resource type="Texture2D" uid="uid://b5hhs6r2kw0ox" path="res://Player/SmallPlayerSprite/PlayerWeapon.png" id="24_6qj5u"]
+[ext_resource type="Script" path="res://Player/WeaponStateMachine/dash_parry.gd" id="24_vbp78"]
 [ext_resource type="PackedScene" uid="uid://cwfrw5n1nbnws" path="res://Components/ParryIntercenpterComponent/parry_intercepter_component.tscn" id="28_7xl6g"]
 [ext_resource type="Texture2D" uid="uid://b52jfkhcgjsnc" path="res://Player/SmallPlayerSprite/SmallCharectar.png" id="28_x4rxf"]
 [ext_resource type="Script" path="res://Player/parry_particles.gd" id="29_tbcwx"]
@@ -639,11 +640,28 @@ tracks/1/keys = {
 "values": [PackedVector2Array(-3, -4, 4, -4, 4, -3, -3, -3), PackedVector2Array(-4, -4, -1, -4, -1, -3, -4, -3), PackedVector2Array(-4, -4, -2, -4, -2, -3, -4, -3)]
 }
 
+[sub_resource type="Animation" id="Animation_hwemm"]
+resource_name = "DashParry"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [33, 34, 35, 36, 37, 38, 39, 40, 41, 42]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwd5y"]
 _data = {
 "AttackDown": SubResource("Animation_uga6c"),
 "AttackHorizontal": SubResource("Animation_72lbq"),
 "AttackVerticle": SubResource("Animation_d4l8w"),
+"DashParry": SubResource("Animation_hwemm"),
 "Idle": SubResource("Animation_cxjel"),
 "Parry": SubResource("Animation_stc87"),
 "RESET": SubResource("Animation_rek6a"),
@@ -1050,54 +1068,67 @@ slideSpeedCurve = SubResource("Curve_udogh")
 script = ExtResource("11_v7ndi")
 initial_state = NodePath("Idle")
 
-[node name="AttackHorizontal" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "leftAttackComponent", "rightAttackComponent")]
+[node name="AttackHorizontal" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "leftAttackComponent", "rightAttackComponent")]
 script = ExtResource("10_d677x")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 player = NodePath("../..")
 weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
 leftAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/AttackLeft")
 rightAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/AttackRight")
 playerMovementCurve = SubResource("Curve_afej6")
 
-[node name="AttackVerticle" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "upAttackComponent")]
+[node name="AttackVerticle" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "upAttackComponent")]
 script = ExtResource("13_dq04x")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 player = NodePath("../..")
 weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
 upAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/AttackUp")
 
-[node name="AttackDown" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "downAttackComponent")]
+[node name="AttackDown" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "downAttackComponent")]
 script = ExtResource("14_lcqka")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 player = NodePath("../..")
 weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
 downAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/AttackDown")
 
-[node name="SwapSides" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "player", "weaponStateMachine")]
+[node name="SwapSides" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "player", "weaponStateMachine", "playerStateMachine")]
 script = ExtResource("11_s4bm2")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 player = NodePath("../..")
 weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
 
-[node name="Idle" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "playerSprite", "weaponSprite", "player", "weaponStateMachine")]
+[node name="Idle" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "playerSprite", "weaponSprite", "player", "weaponStateMachine", "playerStateMachine")]
 script = ExtResource("11_45rs4")
 weaponAnimator = NodePath("../../WeaponAnimator")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 player = NodePath("../..")
 weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
 
-[node name="Parry" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "playerSprite", "weaponSprite", "player", "weaponStateMachine", "playerStateMachine", "playerHurtBox")]
+[node name="Parry" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "player", "weaponStateMachine", "playerStateMachine", "playerHurtBox")]
 script = ExtResource("17_rv26y")
 weaponAnimator = NodePath("../../WeaponAnimator")
-playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
+weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
+player = NodePath("../..")
+weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
+playerHurtBox = NodePath("../../HurtboxComponent")
+
+[node name="DashParry" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "player", "weaponStateMachine", "playerStateMachine", "playerHurtBox")]
+script = ExtResource("24_vbp78")
+weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 player = NodePath("../..")
 weaponStateMachine = NodePath("..")
@@ -1110,7 +1141,7 @@ playerHurtBox = NodePath("../../HurtboxComponent")
 clip_children = 2
 texture_filter = 1
 texture = ExtResource("24_6qj5u")
-hframes = 32
+hframes = 43
 script = ExtResource("14_bw1kr")
 parent = NodePath("../..")
 
@@ -1154,6 +1185,7 @@ knockback_force = 50.0
 knockbackVector = Vector2(0, 1)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackDown"]
+visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_dq4fh")
 
@@ -1167,6 +1199,7 @@ knockback_force = 80.0
 knockbackVector = Vector2(0, -1)
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackUp"]
+visible = false
 position = Vector2(0, -9)
 polygon = PackedVector2Array(-6, 0, -1, -8, 1, -8, 6, 0, 7, 8, -7, 8)
 

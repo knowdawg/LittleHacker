@@ -6,6 +6,7 @@ class_name PlayerWeaponAttackVerticle
 @export var playerSprite : Sprite2D
 @export var player : Player
 @export var weaponStateMachine : PlayerWeaponStateMachine
+@export var playerStateMachine : PlayerStateMachine
 
 @export var upAttackComponent : AttackComponent
 
@@ -29,7 +30,10 @@ func update(delta):
 		weaponSprite.flip_h = playerSprite.flip_h
 	
 	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
-		trasitioned.emit(self, "Parry")
+		if playerStateMachine.current_state is SmallPlayerRoll:
+			trasitioned.emit(self, "DashParry")
+		else:
+			trasitioned.emit(self, "Parry")
 		return
 	
 	if t >= 0.7:

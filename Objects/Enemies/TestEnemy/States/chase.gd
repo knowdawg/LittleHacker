@@ -10,6 +10,7 @@ extends State
 @export var animator : AnimationPlayer
 @export var deAggroProximity : ProximityAreaComponent
 @export var attackProximity : ProximityAreaComponent
+@export var longRangeProximity : ProximityAreaComponent
 @export var movement : MovementComponent
 
 func enter(_prevState):
@@ -24,3 +25,11 @@ func update(delta):
 		trasitioned.emit(self, nextState.name)
 	
 	movement.moveTowardsPlayerX(speed, delta)
+
+func chanceForLongRangeAttack():
+	if longRangeProximity.is_player_inside():
+		if randf() < 0.5:
+			trasitioned.emit(self, "Thrust")
+
+func _ready() -> void:
+	longRangeProximity.onPlayerEnter.connect(chanceForLongRangeAttack)

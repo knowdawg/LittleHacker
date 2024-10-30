@@ -1,6 +1,9 @@
 extends Area2D
 class_name ProximityAreaComponent
 
+signal onPlayerEnter
+signal onPlayerExit
+
 #var a = null
 #func get_camera_bounds():
 	#var areas = get_overlapping_areas()
@@ -15,6 +18,8 @@ class_name ProximityAreaComponent
 			#return area.get_parent()
 	#return null
 
+
+
 func is_player_inside():
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
@@ -28,3 +33,12 @@ func get_player():
 		if body is Player:
 			return body
 	return null
+
+
+func _on_body_entered(body: Node2D) -> void:
+	if body is Player:
+		onPlayerEnter.emit()
+
+func _on_body_exited(body: Node2D) -> void:
+	if body is Player:
+		onPlayerExit.emit()

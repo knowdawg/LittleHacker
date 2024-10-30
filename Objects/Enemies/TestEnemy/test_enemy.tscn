@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=48 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="6_qbqsc"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/parried.gd" id="7_82gm8"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="8_xodr3"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/parried_big.gd" id="9_crb1k"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="9_t230s"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="10_30k11"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="10_53r62"]
@@ -35,6 +36,9 @@ radius = 67.0298
 [sub_resource type="CircleShape2D" id="CircleShape2D_75jaq"]
 radius = 13.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ba7ob"]
+size = Vector2(42, 6)
+
 [sub_resource type="Gradient" id="Gradient_r1yx0"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -54,6 +58,9 @@ size = Vector2(2, 6)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4ms6j"]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ho5uu"]
+size = Vector2(10, 6)
 
 [sub_resource type="Animation" id="Animation_wddfg"]
 resource_name = "Attack1"
@@ -328,6 +335,18 @@ tracks/7/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 1)]
 }
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("FlipPivot/RotationPivot:skew")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-0.0872665]
+}
 
 [sub_resource type="Animation" id="Animation_fkh4v"]
 resource_name = "TrippleAttack"
@@ -417,6 +436,72 @@ tracks/3/keys = {
 "values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_a4xb8"]
+resource_name = "Thrust"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.1, 1.2, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.20602, 1.20602, -5.23599, -5.23599, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/ThrustAttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8mrrs"]
+resource_name = "ParriedBig"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.349066, 0.349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0523599, -0.0174533, 0.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
 _data = {
 "Attack1": SubResource("Animation_wddfg"),
@@ -424,7 +509,9 @@ _data = {
 "Death": SubResource("Animation_tmal0"),
 "Idle": SubResource("Animation_nkupm"),
 "Parried": SubResource("Animation_h0g38"),
+"ParriedBig": SubResource("Animation_8mrrs"),
 "RESET": SubResource("Animation_wx3py"),
+"Thrust": SubResource("Animation_a4xb8"),
 "TrippleAttack": SubResource("Animation_fkh4v")
 }
 
@@ -466,13 +553,14 @@ agroState = NodePath("../Chase")
 animator = NodePath("../../AnimationPlayer")
 playerProximity = NodePath("../../Components/AgroProximity")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "longRangeProximity", "movement")]
 script = ExtResource("3_p5on1")
 idleState = NodePath("../Idle")
-nextStates = [NodePath("../Attack"), NodePath("../TrippleAttack"), NodePath("../InRange")]
+nextStates = [NodePath("../InRange")]
 animator = NodePath("../../AnimationPlayer")
 deAggroProximity = NodePath("../../Components/DeAgroProximity")
 attackProximity = NodePath("../../Components/AttackProximity")
+longRangeProximity = NodePath("../../Components/ThrustProximity")
 movement = NodePath("../../Components/MovementComponent")
 
 [node name="InRange" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "movementComponent", "proximity", "nextStates")]
@@ -480,29 +568,31 @@ script = ExtResource("5_f3wn7")
 parent = NodePath("../..")
 movementComponent = NodePath("../../Components/MovementComponent")
 proximity = NodePath("../../Components/AttackProximity")
-nextStates = [NodePath("../Attack"), NodePath("../TrippleAttack")]
+nextStates = [NodePath("../Thrust"), NodePath("../Attack"), NodePath("../TrippleAttack")]
 
-[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
 attackLength = 1.0
 animationName = "Attack1"
 agroState = NodePath("../InRange")
+parryState = NodePath("../Parried")
 animator = NodePath("../../AnimationPlayer")
 nodeToFlip = NodePath("../../FlipPivot")
 parent = NodePath("../..")
 movement = NodePath("../../Components/MovementComponent")
-movementPeriods = Array[Vector3]([Vector3(0.3, 0.4, 4000)])
+movementPeriods = Array[Vector3]([Vector3(0.3, 0.4, 6)])
 
-[node name="TrippleAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="TrippleAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
 attackLength = 1.5
 animationName = "TrippleAttack"
 agroState = NodePath("../InRange")
+parryState = NodePath("../Parried")
 animator = NodePath("../../AnimationPlayer")
 nodeToFlip = NodePath("../../FlipPivot")
 parent = NodePath("../..")
 movement = NodePath("../../Components/MovementComponent")
-movementPeriods = Array[Vector3]([Vector3(0.4, 0.5, 2000), Vector3(0.6, 0.7, 2000), Vector3(0.8, 0.9, 2000), Vector3(1.2, 1.3, 2000)])
+movementPeriods = Array[Vector3]([Vector3(0.4, 0.5, 3), Vector3(0.6, 0.7, 3), Vector3(0.8, 0.9, 3), Vector3(1.2, 1.3, 3)])
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.2)])
 
 [node name="Dead" type="Node" parent="StateMachine"]
@@ -511,11 +601,35 @@ script = ExtResource("5_wdh1o")
 [node name="Parried" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("7_82gm8")
 parryLength = 0.5
+animationName = "Parried"
 nextState = NodePath("../InRange")
 parrent = NodePath("../..")
 animator = NodePath("../../AnimationPlayer")
 movement = NodePath("../../Components/MovementComponent")
 kbCom = NodePath("../../OmniDirectionalKnockbackComponent")
+
+[node name="ParriedBig" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
+script = ExtResource("9_crb1k")
+parryLength = 2.0
+animationName = "ParriedBig"
+knockback = 100.0
+nextState = NodePath("../InRange")
+parrent = NodePath("../..")
+animator = NodePath("../../AnimationPlayer")
+movement = NodePath("../../Components/MovementComponent")
+kbCom = NodePath("../../OmniDirectionalKnockbackComponent")
+
+[node name="Thrust" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+script = ExtResource("4_l276g")
+attackLength = 3.0
+animationName = "Thrust"
+agroState = NodePath("../InRange")
+parryState = NodePath("../ParriedBig")
+animator = NodePath("../../AnimationPlayer")
+nodeToFlip = NodePath("../../FlipPivot")
+parent = NodePath("../..")
+movement = NodePath("../../Components/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0, 0.4, -20), Vector3(1.1, 1.2, 40)])
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -541,7 +655,15 @@ shape = SubResource("CircleShape2D_mjd2h")
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/AttackProximity"]
+visible = false
 shape = SubResource("CircleShape2D_75jaq")
+
+[node name="ThrustProximity" parent="Components" instance=ExtResource("6_n62ka")]
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/ThrustProximity"]
+position = Vector2(0, -3)
+shape = SubResource("RectangleShape2D_ba7ob")
 
 [node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent", "knockbackComponent", "hitEfects") instance=ExtResource("9_t230s")]
 parrent = NodePath("../..")
@@ -609,7 +731,20 @@ occluder_light_mask = 0
 
 [node name="FlipPivot" type="Node2D" parent="."]
 
+[node name="ThrustAttackComponent" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "thingToCallOnParry", "healthComponent") instance=ExtResource("8_xodr3")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+thingToCallOnParry = NodePath("../..")
+attack_damage = 1.0
+weakness_damage = 1.0
+healthComponent = NodePath("../../Components/HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/ThrustAttackComponent"]
+position = Vector2(-5, -3)
+shape = SubResource("RectangleShape2D_ho5uu")
+
 [node name="RotationPivot" type="Node2D" parent="FlipPivot"]
+skew = -0.0872665
 
 [node name="Polygon2D" type="Polygon2D" parent="FlipPivot/RotationPivot"]
 color = Color(1, 0, 0, 1)
