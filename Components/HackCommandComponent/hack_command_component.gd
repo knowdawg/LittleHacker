@@ -39,7 +39,7 @@ func setActive(isActive : bool):
 		$Label.add_theme_color_override("font_color", "ffffff")
 
 func isExecutable():
-	return (healthComponent.get_weakness() >= cost and enemyHealthBar.active)
+	return (healthComponent.get_weakness() >= cost)# and enemyHealthBar.active)
 
 func executeHack():
 	var p = hackExecuteScene.instantiate()

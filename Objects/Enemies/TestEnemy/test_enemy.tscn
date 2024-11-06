@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=50 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="9_t230s"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="10_30k11"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="10_53r62"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="10_ehbhi"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
 [ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
@@ -169,6 +170,62 @@ tracks/3/keys = {
 "values": [true]
 }
 
+[sub_resource type="Animation" id="Animation_axw0y"]
+resource_name = "Hacked"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:skew")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/ThrustAttackComponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipPivot/RotationPivot/AttackComponent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_nkupm"]
 resource_name = "Idle"
 loop_mode = 1
@@ -235,6 +292,35 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_8mrrs"]
+resource_name = "ParriedBig"
+length = 2.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.349066, 0.349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:skew")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0523599, -0.0174533, 0.0]
 }
 
 [sub_resource type="Animation" id="Animation_wx3py"]
@@ -348,6 +434,43 @@ tracks/8/keys = {
 "values": [-0.0872665]
 }
 
+[sub_resource type="Animation" id="Animation_a4xb8"]
+resource_name = "Thrust"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1.1, 1.2, 1.6, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.20602, 1.20602, -5.23599, -5.23599, 0.0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/ThrustAttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_fkh4v"]
 resource_name = "TrippleAttack"
 length = 1.5
@@ -436,77 +559,12 @@ tracks/3/keys = {
 "values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
 }
 
-[sub_resource type="Animation" id="Animation_a4xb8"]
-resource_name = "Thrust"
-length = 3.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 1.1, 1.2, 1.6, 3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, 1.20602, 1.20602, -5.23599, -5.23599, 0.0]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FlipPivot/ThrustAttackComponent")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [],
-"method": &"generateAttackID"
-}, {
-"args": [],
-"method": &"enable"
-}, {
-"args": [],
-"method": &"disable"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_8mrrs"]
-resource_name = "ParriedBig"
-length = 2.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1.7, 2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [0.349066, 0.349066, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FlipPivot/RotationPivot:skew")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [-0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0523599, -0.0174533, 0.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
 _data = {
 "Attack1": SubResource("Animation_wddfg"),
 "Chase": SubResource("Animation_m3v1i"),
 "Death": SubResource("Animation_tmal0"),
+"Hacked": SubResource("Animation_axw0y"),
 "Idle": SubResource("Animation_nkupm"),
 "Parried": SubResource("Animation_h0g38"),
 "ParriedBig": SubResource("Animation_8mrrs"),
@@ -543,9 +601,11 @@ position = Vector2(0, -3)
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_fn2c5")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
 script = ExtResource("1_ysl6l")
 initial_state = NodePath("Idle")
+hackedState = NodePath("Hacked")
+parent = NodePath("..")
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "playerProximity")]
 script = ExtResource("2_4v4p0")
@@ -568,7 +628,7 @@ script = ExtResource("5_f3wn7")
 parent = NodePath("../..")
 movementComponent = NodePath("../../Components/MovementComponent")
 proximity = NodePath("../../Components/AttackProximity")
-nextStates = [NodePath("../Thrust"), NodePath("../Attack"), NodePath("../TrippleAttack")]
+nextStates = [NodePath("../Attack")]
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
@@ -631,6 +691,23 @@ parent = NodePath("../..")
 movement = NodePath("../../Components/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0, 0.4, -20), Vector3(1.1, 1.2, 40)])
 
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "leftGrabPos", "rightGrabPos", "animationPlayer")]
+script = ExtResource("10_ehbhi")
+stateMachine = NodePath("..")
+parent = NodePath("../..")
+movement = NodePath("../../Components/MovementComponent")
+nextState = NodePath("../Chase")
+leftGrabPos = NodePath("LeftGrabPos")
+rightGrabPos = NodePath("RightGrabPos")
+animationName = "Hacked"
+animationPlayer = NodePath("../../AnimationPlayer")
+
+[node name="LeftGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(-1, -2)
+
+[node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(1, -2)
+
 [node name="Components" type="Node2D" parent="."]
 
 [node name="MovementComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("6_qbqsc")]
@@ -669,7 +746,7 @@ shape = SubResource("RectangleShape2D_ba7ob")
 parrent = NodePath("../..")
 knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
 hitEfects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
-MAX_HEALTH = 30.0
+MAX_HEALTH = 30000.0
 
 [node name="HitParticles" parent="Components/HealthComponent" instance=ExtResource("10_53r62")]
 position = Vector2(0, -3)
@@ -679,10 +756,11 @@ texture = SubResource("GradientTexture2D_u65ke")
 position = Vector2(0, -3)
 texture = SubResource("GradientTexture2D_y137f")
 
-[node name="EnemyHeathbar" parent="Components" node_paths=PackedStringArray("follow", "healthComponent", "hackCommands") instance=ExtResource("10_30k11")]
+[node name="EnemyHeathbar" parent="Components" node_paths=PackedStringArray("follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("10_30k11")]
 follow = NodePath("../../HealthbarPos")
 healthComponent = NodePath("../HealthComponent")
 hackCommands = [NodePath("HackCommandComponent"), NodePath("HackCommandComponent2"), NodePath("HackCommandComponent3")]
+stateMachine = NodePath("../../StateMachine")
 
 [node name="HackCommandComponent" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
 cost = 5.0
@@ -711,8 +789,9 @@ commandSpawnPos = NodePath("../../../HealthbarPos")
 healthComponent = NodePath("../../HealthComponent")
 enemyHealthBar = NodePath("..")
 
-[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("health_componnet") instance=ExtResource("15_eo6el")]
+[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("15_eo6el")]
 collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
 health_componnet = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
@@ -737,6 +816,7 @@ collisionShape = NodePath("CollisionShape2D")
 thingToCallOnParry = NodePath("../..")
 attack_damage = 1.0
 weakness_damage = 1.0
+attackStrength = 2
 healthComponent = NodePath("../../Components/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/ThrustAttackComponent"]

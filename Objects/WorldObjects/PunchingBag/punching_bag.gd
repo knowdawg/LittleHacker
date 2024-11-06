@@ -7,3 +7,6 @@ func hitFromLeft(_attack : Attack):
 
 func hitFromRight(_attack : Attack):
 	animator.play("HitRight")
+
+func enterHack(_attack : Attack):
+	Game.hackedEnemy = self

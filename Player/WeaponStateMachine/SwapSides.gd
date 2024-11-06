@@ -30,6 +30,10 @@ func update(delta):
 		else:
 			trasitioned.emit(self, "AttackHorizontal")
 			return
+		
+	if weaponStateMachine.inputBuffer == "HackAttack" and playerStateMachine.canHackAttack():
+		trasitioned.emit(self, "HackAttack")
+		return
 
 func _on_weapon_animator_animation_finished(anim_name):
 	if anim_name == "Swap":

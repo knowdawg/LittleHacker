@@ -176,7 +176,7 @@ occluder = SubResource("OccluderPolygon2D_85t5d")
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
 position = Vector2(148, 110)
-color = Color(0.254902, 0.254902, 0.254902, 0)
+color = Color(0.156863, 0.156863, 0.156863, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
@@ -186,6 +186,34 @@ position = Vector2(-4, -16)
 polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 
 [node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D"]
+texture = SubResource("GradientTexture2D_51qsl")
+
+[node name="PointLight2D5" type="PointLight2D" parent="Lights"]
+position = Vector2(94, 78)
+color = Color(0.156863, 0.156863, 0.156863, 0)
+energy = 0.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nfx2l")
+
+[node name="Polygon2D" type="Polygon2D" parent="Lights/PointLight2D5"]
+position = Vector2(-4, -16)
+polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D5"]
+texture = SubResource("GradientTexture2D_51qsl")
+
+[node name="PointLight2D6" type="PointLight2D" parent="Lights"]
+position = Vector2(12, 78)
+color = Color(0.156863, 0.156863, 0.156863, 0)
+energy = 0.0
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_nfx2l")
+
+[node name="Polygon2D" type="Polygon2D" parent="Lights/PointLight2D6"]
+position = Vector2(-4, -16)
+polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
+
+[node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D6"]
 texture = SubResource("GradientTexture2D_51qsl")
 
 [node name="PointLight2D2" type="PointLight2D" parent="Lights"]
@@ -233,20 +261,27 @@ texture = SubResource("GradientTexture2D_51qsl")
 [node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
 position = Vector2(166, 93)
 
+[node name="PunchingBag2" parent="." instance=ExtResource("8_ywwlo")]
+position = Vector2(81, 91)
+
 [node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]
+visible = false
 
 [node name="PointLight2D5" type="PointLight2D" parent="CursorFollower"]
 visible = false
-color = Color(0.254902, 0.254902, 0.254902, 0)
+color = Color(0.235294, 0.235294, 0.235294, 0)
 energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(191, 124)
+position = Vector2(62, 91)
 
 [node name="GoatheadCutscene" parent="." instance=ExtResource("9_mq0xw")]
 position = Vector2(239, 79)
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
 position = Vector2(107, 87)
@@ -255,9 +290,13 @@ position = Vector2(107, 87)
 position = Vector2(0, -2)
 zoom = Vector2(10, 10)
 
-[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 copy_mode = 2
 
 [node name="SoftLighting" parent="." instance=ExtResource("9_plpma")]
+offset_left = 11.0
+offset_top = 31.0
+offset_right = 203.0
+offset_bottom = 139.0
 
 [node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]

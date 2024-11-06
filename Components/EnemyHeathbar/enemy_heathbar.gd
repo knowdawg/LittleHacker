@@ -4,6 +4,7 @@ class_name EnemyHealthBar
 @export var follow : Node2D
 @export var healthComponent : HealthComponent
 @export var hackCommands : Array[HackCommandComponent]
+@export var stateMachine : StateMachine
 
 @export_group("Bar Catagories")
 @export var nuetralActiveBars : Array[TextureProgressBar]
@@ -19,7 +20,14 @@ func _ready() -> void:
 	EnemyHealthBarPositionManager.addHealthbar(self)
 	healthComponent.death.connect(delete)
 	
+	if stateMachine:
+		stateMachine.onHacked.connect(addCommandsToGame)
+	
 	drawLines()
+
+func addCommandsToGame():
+	for i in hackCommands:
+		Game.hacks.append(i)
 
 func delete():
 	if active:

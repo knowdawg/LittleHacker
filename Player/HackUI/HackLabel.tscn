@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://cifd12sk13prw"]
+
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="1_nkdpi"]
+
+[sub_resource type="Animation" id="Animation_8do35"]
+resource_name = "CrossOut"
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.1, 0, 1, -0.4, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.133333)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Line2D:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0, 0.7, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.1, 0.233333)
+}
+
+[sub_resource type="Animation" id="Animation_p50rw"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:scale:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Line2D:scale:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fjv40"]
+_data = {
+"CrossOut": SubResource("Animation_8do35"),
+"RESET": SubResource("Animation_p50rw")
+}
+
+[sub_resource type="Curve" id="Curve_btgys"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_x1au5"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.869955, 0.0075959), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_xc0cg"]
+curve = SubResource("Curve_x1au5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ow0wi"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1, 3, 1)
+spread = 5.0
+initial_velocity_min = 2000.0
+initial_velocity_max = 3000.0
+gravity = Vector3(0, 0, 0)
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_xc0cg")
+color = Color(0, 0, 0, 1)
+
+[node name="Bottom" type="RichTextLabel"]
+offset_right = 75.0
+offset_bottom = 23.0
+theme_override_constants/outline_size = 3
+theme_override_fonts/normal_font = ExtResource("1_nkdpi")
+bbcode_enabled = true
+text = "Testing"
+fit_content = true
+scroll_active = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_fjv40")
+}
+
+[node name="Line2D" type="Line2D" parent="."]
+position = Vector2(0, 8.5)
+scale = Vector2(1e-05, 1)
+points = PackedVector2Array(0, 0, 48, 0)
+width = 3.0
+width_curve = SubResource("Curve_btgys")
+default_color = Color(0, 0, 0, 1)
+
+[node name="CrossOutParticles" type="GPUParticles2D" parent="."]
+position = Vector2(0, 9)
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_ow0wi")
+lifetime = 0.03
+one_shot = true
+explosiveness = 1.0
+fixed_fps = 300
+interpolate = false
+trail_enabled = true
+trail_lifetime = 0.02

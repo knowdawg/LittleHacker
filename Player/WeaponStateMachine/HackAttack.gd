@@ -1,5 +1,5 @@
 extends State
-class_name PlayerWeaponAttackHorizontal
+class_name PlayerWeaponHackAttack
 
 @export var attackTime : float = 0.7
 @export var weaponAnimator : AnimationPlayer
@@ -8,42 +8,53 @@ class_name PlayerWeaponAttackHorizontal
 @export var player : Player
 @export var weaponStateMachine : PlayerWeaponStateMachine
 @export var playerStateMachine : PlayerStateMachine
+@export var playerHurtBox : HurtboxComponent
 
 @export var leftAttackComponent : AttackComponent
 @export var rightAttackComponent : AttackComponent
 
-@export var playerMovementCurve : Curve
+func leaveState():
+	trasitioned.emit(self, "Idle")
 
 var t = 0.0
 func enter(_prevState):
-	weaponAnimator.play("AttackHorizontal")
+	playerStateMachine.switchStates("HackAttack")
+	weaponAnimator.play("HackAttack")
 	weaponSprite.flip_h = playerSprite.flip_h
 	t = 0.0
 	leftAttackComponent.generateAttackID()
 	rightAttackComponent.generateAttackID()
 
 func update(delta):
-	weaponSprite.moveTowardsPlayerFast(delta)
+	if playerStateMachine.current_state is PlayerHackMode:
+		return
+	elif !playerStateMachine.current_state is PlayerHackAttack:
+		trasitioned.emit(self, "Idle")
+		return
 	
-	if t < 0.4 and t > 0.3:
+	weaponSprite.moveTowardsPlayerNormal(delta)
+	
+	if t < 0.8 and t > 0.5:
 		if weaponSprite.flip_h == false:
 			leftAttackComponent.enable()
 		else:
 			rightAttackComponent.enable()
+		
+		playerHurtBox.setParry(true, 1)
+		
 	else:
 		leftAttackComponent.disable()
-		rightAttackComponent.disable()
+		playerHurtBox.setParry(false)
 	
 	t += delta
 	if t <= 0.1:
 		weaponSprite.flip_h = playerSprite.flip_h
-		
-	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
-		if playerStateMachine.current_state is SmallPlayerRoll:
-			trasitioned.emit(self, "DashParry")
-		else:
-			trasitioned.emit(self, "Parry")
-		return
 	
 	if t > attackTime:
 		trasitioned.emit(self, "Idle")
+
+func exit(_nextState):
+	playerHurtBox.setParry(false)
+	weaponSprite.visible = true
+	leftAttackComponent.call_deferred("disable")
+	rightAttackComponent.call_deferred("disable")

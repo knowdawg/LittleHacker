@@ -2,6 +2,8 @@ extends Node
 class_name StateMachine
 
 @export var initial_state : State
+@export var hackedState : State
+@export var parent : Node
 
 var current_state : State
 var states : Dictionary = {}
@@ -44,3 +46,14 @@ func switchStates(newState):
 	n.enter(prevState)
 	
 	current_state = n
+
+signal onHacked
+signal onHackFinished
+
+func enterHackMode():
+	switchStates(hackedState.name)
+	Game.hackedEnemy = parent
+	onHacked.emit()
+
+func exitHackMode():
+	onHackFinished.emit()

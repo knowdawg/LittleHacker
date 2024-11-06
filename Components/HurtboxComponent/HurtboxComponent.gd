@@ -1,11 +1,13 @@
 extends Area2D
 class_name HurtboxComponent
 
+@export var stateMachine : StateMachine
 @export var parrying : bool = false
 @export var parryForgivenesTimer : Timer
 signal parry
 @export var health_componnet : HealthComponent
 @export var IFRAMETIMER : float = 0.0
+@export var isHackable = true
 var ift : float = 0.0
 
 var parryStrength = 0
@@ -79,3 +81,12 @@ func setParry(isParrying : bool, strength = 1):
 	else:
 		parrying = false
 		parryStrength = 0
+
+func enterHack(_attack : Attack) -> bool:
+	if !isHackable:
+		return false
+	if !stateMachine:
+		return false
+	
+	stateMachine.enterHackMode()
+	return true

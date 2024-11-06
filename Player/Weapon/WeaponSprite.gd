@@ -4,8 +4,13 @@ extends Sprite2D
 
 func _ready():
 	position = parent.global_position
+	Game.enterHackMode.connect(hide)
+	Game.exitHackMode.connect(show)
 
 func _process(_delta: float) -> void:
+	if Game.inHackMode == true:
+		visible = false
+	
 	if flip_h == true:
 		$LightOccluder2D.scale.x = -1
 	else:

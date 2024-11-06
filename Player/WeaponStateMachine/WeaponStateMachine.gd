@@ -13,6 +13,9 @@ func _process(delta):
 	if Input.is_action_just_pressed("Parry"):
 		inputBuffer = "Parry"
 		t = 0.2
+	if Input.is_action_just_pressed("HackAttack"):
+		inputBuffer = "HackAttack"
+		t = 0.2
 	
 	if t <= 0.0:
 		inputBuffer = ""

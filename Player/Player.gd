@@ -79,6 +79,9 @@ func _physics_process(delta):
 func _process(_delta: float) -> void:
 	Game.player = self
 
+func _ready():
+	Game.enterHackMode.connect(enterHackMode)
+
 func canCoyoteJump():
 	return coyoteTime > 0.0
 
@@ -117,6 +120,11 @@ var parryStunTime = 0.3
 var parriedAttack : Attack
 func parry(attack : Attack):
 	parriedAttack = attack
+	
+	var c = $StateMachine.current_state #dont enter if in a certain state
+	if c is PlayerHackAttack or c is PlayerHackMode:
+		return
+		
 	if is_on_floor():
 		parryStunTime = 0.3 #modify based on attack knockback
 		$StateMachine.onChildTransition($StateMachine.current_state, "ParryStun")
@@ -126,3 +134,6 @@ func getSpriteDirection()->float:
 	if sprite.flip_h == false:
 		dir = -1.0
 	return dir
+
+func enterHackMode():
+	pass

@@ -8,11 +8,13 @@ class_name AttackComponent
 
 @export var attack_damage : float
 @export var weakness_damage : float
+@export var attackStrength : int = 1
 @export var knockback_force: float
 @export var knockbackVector : Vector2
 @export var attackName : String = ""
 @export var isSpikes : bool = false
 @export var disabled : bool = true
+@export var isHackAttack : bool = false
 
 @export var healthComponent : HealthComponent
 
@@ -39,10 +41,17 @@ func _on_area_entered(area):
 		attack.attack_position = global_position
 		attack.attackID = attackID
 		attack.attackName = attackName
+		attack.isHackAttack = isHackAttack
+		attack.attackStrength = attackStrength
 		if healthComponent:
 			attack.healthComponent = healthComponent
 		
 		attack.knockback_vector = knockbackVector
+		
+		if isHackAttack:
+			if Game.hackedEnemy == null and hurtbox.enterHack(attack):
+				Game.setHackMode(true)
+			return
 		
 		hurtbox.damage(attack)
 		
@@ -51,6 +60,7 @@ func _on_area_entered(area):
 				var e = hitEfect.instantiate()
 				area.add_child(e)
 				e.initialize(area.global_position)
+		
 		
 func generateAttackID():
 	attackID = randf_range(0.0, 10000.0)

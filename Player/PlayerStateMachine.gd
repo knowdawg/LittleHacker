@@ -7,14 +7,25 @@ class_name PlayerStateMachine
 var current_state : State
 var states : Dictionary = {}
 
+var statesThatCanGoIntoHackAttack = [SmallPlayerIdle, SmallPlayerRun]
+func canHackAttack() -> bool:
+	if current_state is SmallPlayerIdle or current_state is SmallPlayerRun:
+		return true
+	return false
+
 func enterParry():
 	if current_state is SmallPlayerRoll:
 		pass
 	if parent.is_on_floor():
 		current_state.trasitioned.emit(current_state, "GroundParry")
 
+func enterHackMode():
+	switchStates("HackMode")
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	Game.enterHackMode.connect(enterHackMode)
+	
 	for child in get_children():
 		if child is State:
 			states[child.name.to_lower()] = child
@@ -23,6 +34,8 @@ func _ready():
 	if initial_state:
 		initial_state.enter(null)
 		current_state = initial_state
+
+
 
 var inputBuffer = ""
 var t = 0.15
@@ -55,20 +68,22 @@ func _physics_process(delta):
 	if current_state:
 		current_state.update_physics(delta)
 
+#Called by the signal
 func onChildTransition(state : State, new_state_name):
 	if state != current_state:
 		return
 	
-	var new_state = states.get(new_state_name.to_lower())
+	switchStates(new_state_name)
+
+#Call for manualy overwriting State
+func switchStates(newState):
+	var n = states.get(newState.to_lower())
 	
-	if !new_state:
-		return
-	
-	var prevState : State
+	var prevState : State = null
 	if current_state:
 		prevState = current_state
-		current_state.exit(new_state)
+		current_state.exit(n)
 	
-	new_state.enter(prevState)
+	n.enter(prevState)
 	
-	current_state = new_state
+	current_state = n

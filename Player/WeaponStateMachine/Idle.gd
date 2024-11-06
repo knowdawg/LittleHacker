@@ -31,7 +31,11 @@ func update(delta):
 		else:
 			trasitioned.emit(self, "AttackHorizontal")
 			return
-		
+	
+	if weaponStateMachine.inputBuffer == "HackAttack" and playerStateMachine.canHackAttack():
+		trasitioned.emit(self, "HackAttack")
+		return
+	
 	if playerSprite.flip_h != weaponSprite.flip_h:
 		trasitioned.emit(self, "SwapSides")
 		return

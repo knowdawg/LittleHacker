@@ -24,7 +24,7 @@ void light() {
 	float distanceNeededToTravel = length(lightPosNormalized - SCREEN_UV);
 	float disTraveled = 0.0;
 	float sdfDistanceTraveled = 0.0;
-	float falloff = 0.03;
+	float falloff = 0.03; //0.01
 
 	float finished = 0.0;
 	//Marching Algorithm
