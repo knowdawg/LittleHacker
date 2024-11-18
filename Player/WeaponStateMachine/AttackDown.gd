@@ -14,6 +14,7 @@ var t = 0.0
 func enter(_prevState):
 	weaponAnimator.play("AttackDown")
 	weaponSprite.flip_h = playerSprite.flip_h
+	downAttackComponent.generateAttackID()
 	t = 0.4
 
 func update(delta):

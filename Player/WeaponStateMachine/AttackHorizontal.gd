@@ -22,6 +22,7 @@ func enter(_prevState):
 	leftAttackComponent.generateAttackID()
 	rightAttackComponent.generateAttackID()
 
+
 func update(delta):
 	weaponSprite.moveTowardsPlayerFast(delta)
 	

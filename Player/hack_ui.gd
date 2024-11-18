@@ -45,12 +45,13 @@ func _process(_delta: float) -> void:
 					$SelectLineContainer/SelectParticles.emitting = true
 			
 		var d = $SelectLineContainer.rotation_degrees
+		var mul = -player.getSpriteDirection() #Swap rotation when UI is in oposite direciton
 		if activeHack == 0:
-			$SelectLineContainer.rotation_degrees = lerp(d, 9.0, 0.5)
+			$SelectLineContainer.rotation_degrees = lerp(d, 9.0 * mul, 0.5)
 		if activeHack == 1:
 			$SelectLineContainer.rotation_degrees = lerp(d, 0.0, 0.5)
 		if activeHack == 2:
-			$SelectLineContainer.rotation_degrees = lerp(d, -9.0, 0.5)
+			$SelectLineContainer.rotation_degrees = lerp(d, -9.0 * mul, 0.5)
 	else:
 		prevActiveHack = -1
 

@@ -2,6 +2,7 @@ extends Node2D
 class_name BiDirectionalKnockbackComponent
 
 @export var parent : Node
+@export var movement : MovementComponent
 
 @export var dirLeft : Vector2 = Vector2.ZERO
 @export var dirRight : Vector2 = Vector2.ZERO
@@ -29,11 +30,15 @@ func calculateKnockback(attack : Attack):
 	if minDis == disRight:
 		if parent.has_method("hitFromRight"):
 			parent.hitFromRight(attack)
+		elif movement:
+			movement.applyForce(dirLeft, attack.knockback_force)
 		else:
 			printerr("Parent Does Not Have Required Functions To Utilize Bi Directional Knockback")
 
 	if minDis == disLeft:
 		if parent.has_method("hitFromLeft"):
 			parent.hitFromLeft(attack)
+		elif movement:
+			movement.applyForce(dirRight, attack.knockback_force)
 		else:
 			printerr("Parent Does Not Have Required Functions To Utilize Bi Directional Knockback")

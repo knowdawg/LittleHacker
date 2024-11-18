@@ -1,10 +1,11 @@
-[gd_scene load_steps=22 format=3 uid="uid://q5240bomkjnk"]
+[gd_scene load_steps=23 format=3 uid="uid://q5240bomkjnk"]
 
 [ext_resource type="Script" path="res://Objects/WorldObjects/PunchingBag/punching_bag.gd" id="1_r7mwc"]
 [ext_resource type="Texture2D" uid="uid://c0g0on4gr8gcx" path="res://Assets/Sprites/WorldObjects/PunchingBag.png" id="2_8c1gs"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/HitFlashComponent/hit_flash_component.tscn" id="3_k8r6e"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_uqtpl"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_sowm4"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="5_xraul"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="5_y1pcd"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="6_b738j"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="7_3h6d6"]
@@ -152,18 +153,20 @@ health_componnet = NodePath("../HealthComponent")
 visible = false
 shape = SubResource("RectangleShape2D_fi2kx")
 
-[node name="HealthComponent" parent="." node_paths=PackedStringArray("parrent", "knockbackComponent", "hitEfects") instance=ExtResource("4_sowm4")]
-parrent = NodePath("..")
+[node name="EnemyHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("5_xraul")]
+healthComponent = NodePath("../HealthComponent")
+hitEffects = [NodePath("DirectionalHitParticlesComponent"), NodePath("HitParticles")]
 knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
-hitEfects = [NodePath("../Sprite/HitFlashComponent"), NodePath("DirectionalHitParticlesComponent"), NodePath("HitParticles")]
-MAX_HEALTH = 100.0
 
-[node name="DirectionalHitParticlesComponent" parent="HealthComponent" instance=ExtResource("5_y1pcd")]
+[node name="DirectionalHitParticlesComponent" parent="EnemyHitComponent" instance=ExtResource("5_y1pcd")]
 position = Vector2(0, -2)
 texture = SubResource("GradientTexture2D_x2ekh")
 
-[node name="HitParticles" parent="HealthComponent" instance=ExtResource("7_3h6d6")]
+[node name="HitParticles" parent="EnemyHitComponent" instance=ExtResource("7_3h6d6")]
 texture = SubResource("GradientTexture2D_x2ekh")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_sowm4")]
+MAX_HEALTH = 100.0
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
 modulate = Color(1, 1, 1, 0)

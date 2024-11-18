@@ -22,7 +22,8 @@ func enterParry():
 func enterHackMode():
 	switchStates("HackMode")
 
-# Called when the node enters the scene tree for the first time.
+
+@export var attackComponentsThatCanBeParried : Array[AttackComponent] = []
 func _ready():
 	Game.enterHackMode.connect(enterHackMode)
 	
@@ -34,7 +35,13 @@ func _ready():
 	if initial_state:
 		initial_state.enter(null)
 		current_state = initial_state
+	
+	for a in attackComponentsThatCanBeParried:
+		a.gotParried.connect(gotBlocked)
 
+
+func gotBlocked(_attack):
+	print("Blocked :(")
 
 
 var inputBuffer = ""

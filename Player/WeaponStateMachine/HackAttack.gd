@@ -40,7 +40,7 @@ func update(delta):
 		else:
 			rightAttackComponent.enable()
 		
-		playerHurtBox.setParry(true, 1)
+		#playerHurtBox.setParry(true, 1)
 		
 	else:
 		leftAttackComponent.disable()

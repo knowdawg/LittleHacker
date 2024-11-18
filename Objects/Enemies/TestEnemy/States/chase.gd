@@ -8,13 +8,14 @@ extends State
 
 @export_group("Necesary Nodes")
 @export var animator : AnimationPlayer
+@export var animationName : String
 @export var deAggroProximity : ProximityAreaComponent
 @export var attackProximity : ProximityAreaComponent
 @export var longRangeProximity : ProximityAreaComponent
 @export var movement : MovementComponent
 
 func enter(_prevState):
-	animator.play("Chase")
+	animator.play(animationName)
 
 func update(delta):
 	if !deAggroProximity.is_player_inside():

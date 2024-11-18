@@ -21,6 +21,11 @@ func _process(delta):
 	spikesIfr -= delta
 
 func damage(attack: Attack):
+	for a in attackIDIveBeenHitBy:
+		if attack.attackID == a:
+			return
+	attackIDIveBeenHitBy.append(attack.attackID)
+	
 	if parrying and attack.attackStrength <= parryStrength:
 		parryStuff(attack)
 		return
@@ -32,7 +37,6 @@ func damage(attack: Attack):
 
 func parryStuff(attack : Attack):
 	parry.emit(attack)
-	attackIDIveBeenHitBy.append(attack.attackID)
 	if attack.healthComponent:
 		if parryStrength == 1:
 			attack.healthComponent.set_weakness(attack.healthComponent.get_weakness() + 3)
@@ -44,10 +48,6 @@ func damageStuff():
 	if parrying == true and attackBuffer.attackStrength <= parryStrength:
 		parryStuff(attackBuffer)
 		return
-	for a in attackIDIveBeenHitBy:
-		if attackBuffer.attackID == a:
-			return
-	attackIDIveBeenHitBy.append(attackBuffer.attackID)
 	if ift >= 0.0:
 		return
 	ift = IFRAMETIMER

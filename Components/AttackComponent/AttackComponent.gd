@@ -2,7 +2,6 @@ extends Area2D
 class_name AttackComponent
 
 @export var collisionShape : Node2D
-@export var thingToCallOnParry : Node
 @export var hitEfect : PackedScene
 @export var numberOfHitEffect : int = 1
 
@@ -19,6 +18,8 @@ class_name AttackComponent
 @export var healthComponent : HealthComponent
 
 @onready var attackID : float = randf()
+
+signal gotParried
 
 func _ready() -> void:
 	if disabled:
@@ -70,13 +71,12 @@ func disable():
 
 func enable():
 	collisionShape.disabled = false
-	generateAttackID()
 
 func parried(attack : Attack):
 	if hurtboxSignal.is_connected(parried):
 		hurtboxSignal.disconnect(parried)
-	if thingToCallOnParry:
-		thingToCallOnParry.parried(attack)
+	call_deferred("disable")
+	gotParried.emit(attack)
 
 func _on_timer_timeout() -> void:
 	if hurtboxSignal.is_connected(parried):

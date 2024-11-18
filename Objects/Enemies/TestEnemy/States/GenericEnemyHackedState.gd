@@ -1,4 +1,5 @@
 extends State
+class_name GenericEnemyHackedState
 
 @export var stateMachine : StateMachine
 @export var parent : Node2D

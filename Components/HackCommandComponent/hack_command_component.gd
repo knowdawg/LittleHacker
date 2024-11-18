@@ -14,7 +14,7 @@ func _ready() -> void:
 	HackCommandManager.addCommand(self)
 	healthComponent.death.connect(delete)
 
-func delete():
+func delete(_attack):
 	HackCommandManager.removeCommand(self)
 
 var wasVisible = false

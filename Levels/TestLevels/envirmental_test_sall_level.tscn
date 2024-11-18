@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=29 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -6,12 +6,12 @@
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="2_jhjfi"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="5_dscvh"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="5_nf44p"]
-[ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="8_ywwlo"]
 [ext_resource type="PackedScene" uid="uid://bnj1t3t7sac5h" path="res://Test/goathead_cutscene.tscn" id="9_mq0xw"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="9_plpma"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
 [ext_resource type="PackedScene" uid="uid://cqfxmyyowlul4" path="res://Objects/Terminal/terminal.tscn" id="10_e4m8l"]
 [ext_resource type="PackedScene" uid="uid://ciq13p31itcpw" path="res://Objects/Enemies/TestEnemy/test_enemy.tscn" id="11_jyroq"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/ScreenMirroring.gdshader" id="13_mu6m5"]
 
 [sub_resource type="Gradient" id="Gradient_b40qp"]
 
@@ -88,6 +88,9 @@ height = 16
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5x6j7"]
+shader = ExtResource("13_mu6m5")
 
 [node name="EnvirmentalTestSallLevel" type="Node2D"]
 texture_filter = 1
@@ -258,12 +261,6 @@ polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 [node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D4"]
 texture = SubResource("GradientTexture2D_51qsl")
 
-[node name="PunchingBag" parent="." instance=ExtResource("8_ywwlo")]
-position = Vector2(166, 93)
-
-[node name="PunchingBag2" parent="." instance=ExtResource("8_ywwlo")]
-position = Vector2(81, 91)
-
 [node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]
 visible = false
 
@@ -275,7 +272,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(62, 91)
+position = Vector2(62, 85)
 
 [node name="GoatheadCutscene" parent="." instance=ExtResource("9_mq0xw")]
 position = Vector2(239, 79)
@@ -300,3 +297,14 @@ offset_right = 203.0
 offset_bottom = 139.0
 
 [node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="MirrorShader" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_5x6j7")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

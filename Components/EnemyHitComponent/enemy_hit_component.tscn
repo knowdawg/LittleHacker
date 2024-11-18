@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://bov1lwrx7vmuy"]
+
+[ext_resource type="Script" path="res://Components/EnemyHitComponent/enemy_hit_component.gd" id="1_7wgro"]
+
+[node name="OnHitComponent" type="Node2D"]
+script = ExtResource("1_7wgro")

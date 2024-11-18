@@ -3,6 +3,7 @@ class_name SmallPlayerJump
 
 @export var animated_player_sprite : AnimationPlayer
 @export var player : Player
+#@export var playerStateMachine : PlayerStateMachine
 
 var t : float = 0.0
 func update_physics(delta):
@@ -21,5 +22,7 @@ func update_physics(delta):
 
 func enter(_prevState):
 	player.jump();
+	#if !Input.is_action_pressed("Jump"):
+		#player.killJump()
 	animated_player_sprite.play("JumpStart")
 	t = 0

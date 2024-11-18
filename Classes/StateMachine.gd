@@ -35,7 +35,7 @@ func onChildTransition(state : State, new_state_name):
 	switchStates(new_state_name)
 
 #Call for manualy overwriting State
-func switchStates(newState):
+func switchStates(newState : String):
 	var n = states.get(newState.to_lower())
 	
 	var prevState : State = null

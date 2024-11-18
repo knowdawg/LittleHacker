@@ -5,7 +5,8 @@ extends Node2D
 @export var parent : Node2D
 
 func _ready() -> void:
-	hurtBoxToIntercept.parry.connect(parry)
+	if hurtBoxToIntercept:
+		hurtBoxToIntercept.parry.connect(parry)
 
 func parry(attack : Attack):
 	for e in efects:

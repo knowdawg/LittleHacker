@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=56 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -18,12 +18,16 @@
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="10_ehbhi"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/block.gd" id="11_osv0s"]
 [ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
 [ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
 [ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="20_guqxo"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="20_lhe68"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="23_x1w5s"]
+[ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="24_r225t"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="25_bky6c"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
 size = Vector2(2, 6)
@@ -40,6 +44,9 @@ radius = 13.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ba7ob"]
 size = Vector2(42, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qllm4"]
+size = Vector2(2, 6)
+
 [sub_resource type="Gradient" id="Gradient_r1yx0"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
@@ -54,14 +61,14 @@ gradient = SubResource("Gradient_r1yx0")
 width = 1
 height = 1
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qllm4"]
-size = Vector2(2, 6)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4ms6j"]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ho5uu"]
 size = Vector2(10, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j84vt"]
+size = Vector2(2, 6)
 
 [sub_resource type="Animation" id="Animation_wddfg"]
 resource_name = "Attack1"
@@ -98,6 +105,18 @@ tracks/1/keys = {
 "method": &"disable"
 }]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_m3v1i"]
 resource_name = "Chase"
@@ -115,6 +134,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [0.0, 0.0872665, -0.0872665]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_tmal0"]
@@ -168,6 +199,20 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [true]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_axw0y"]
@@ -252,6 +297,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_h0g38"]
@@ -433,6 +490,18 @@ tracks/8/keys = {
 "update": 0,
 "values": [-0.0872665]
 }
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_a4xb8"]
 resource_name = "Thrust"
@@ -558,10 +627,63 @@ tracks/3/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 1), Color(1, 1, 0, 1), Color(1, 1, 0, 1), Color(1, 0, 0, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_65dm6"]
+resource_name = "Block"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.0472, -2.79253, -2.79253, -1.39626, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(1.19209e-07, -8), Vector2(1.19209e-07, -8), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot/Polygon2D:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0.392157, 0.392157, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0.784314, 0.784314, 1), Color(1, 0, 0, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
 _data = {
 "Attack1": SubResource("Animation_wddfg"),
+"Block": SubResource("Animation_65dm6"),
 "Chase": SubResource("Animation_m3v1i"),
 "Death": SubResource("Animation_tmal0"),
 "Hacked": SubResource("Animation_axw0y"),
@@ -589,10 +711,9 @@ initial_velocity_max = 250.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_gkrha")
 
-[node name="TestEnemy" type="CharacterBody2D" node_paths=PackedStringArray("movementComponent")]
+[node name="TestEnemy" type="CharacterBody2D"]
 collision_layer = 0
 script = ExtResource("1_tas1o")
-movementComponent = NodePath("Components/MovementComponent")
 
 [node name="HealthbarPos" type="Marker2D" parent="."]
 position = Vector2(0, -3)
@@ -611,6 +732,7 @@ parent = NodePath("..")
 script = ExtResource("2_4v4p0")
 agroState = NodePath("../Chase")
 animator = NodePath("../../AnimationPlayer")
+animationName = "Idle"
 playerProximity = NodePath("../../Components/AgroProximity")
 
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "longRangeProximity", "movement")]
@@ -618,6 +740,7 @@ script = ExtResource("3_p5on1")
 idleState = NodePath("../Idle")
 nextStates = [NodePath("../InRange")]
 animator = NodePath("../../AnimationPlayer")
+animationName = "Chase"
 deAggroProximity = NodePath("../../Components/DeAgroProximity")
 attackProximity = NodePath("../../Components/AttackProximity")
 longRangeProximity = NodePath("../../Components/ThrustProximity")
@@ -628,7 +751,9 @@ script = ExtResource("5_f3wn7")
 parent = NodePath("../..")
 movementComponent = NodePath("../../Components/MovementComponent")
 proximity = NodePath("../../Components/AttackProximity")
-nextStates = [NodePath("../Attack")]
+nextStates = [NodePath("../Block")]
+usableMovement = Array[int]([0, 1])
+maxMoves = 3
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")
@@ -655,8 +780,10 @@ movement = NodePath("../../Components/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0.4, 0.5, 3), Vector3(0.6, 0.7, 3), Vector3(0.8, 0.9, 3), Vector3(1.2, 1.3, 3)])
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.2)])
 
-[node name="Dead" type="Node" parent="StateMachine"]
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("5_wdh1o")
+animator = NodePath("../../AnimationPlayer")
+animationName = "Death"
 
 [node name="Parried" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("7_82gm8")
@@ -670,6 +797,7 @@ kbCom = NodePath("../../OmniDirectionalKnockbackComponent")
 
 [node name="ParriedBig" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("9_crb1k")
+offset = Vector2(5, 0)
 parryLength = 2.0
 animationName = "ParriedBig"
 knockback = 100.0
@@ -708,11 +836,22 @@ position = Vector2(-1, -2)
 [node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
 position = Vector2(1, -2)
 
-[node name="Components" type="Node2D" parent="."]
-
-[node name="MovementComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("6_qbqsc")]
+[node name="Block" type="Node" parent="StateMachine" node_paths=PackedStringArray("onBlockEffects", "nextState", "stateOnBlock", "stateOnGuardBreak", "stateMachine", "parent", "nodeToFlip", "hurtboxComponent", "animator", "blockWall")]
+script = ExtResource("11_osv0s")
+onBlockEffects = [NodePath("../../FlipPivot/BlockEffects/DirectionalParticlesComponent")]
+nextState = NodePath("../InRange")
+stateOnBlock = NodePath("../TrippleAttack")
+stateOnGuardBreak = NodePath("../Thrust")
+stateMachine = NodePath("..")
 parent = NodePath("../..")
-gravity = 10.0
+nodeToFlip = NodePath("../../FlipPivot")
+hurtboxComponent = NodePath("../../Components/HurtboxComponent")
+animator = NodePath("../../AnimationPlayer")
+animationName = "Block"
+animationLength = 2.0
+blockWall = NodePath("../../FlipPivot/BlockWall")
+
+[node name="Components" type="Node2D" parent="."]
 
 [node name="AgroProximity" parent="Components" instance=ExtResource("6_n62ka")]
 collision_mask = 4
@@ -736,25 +875,28 @@ visible = false
 shape = SubResource("CircleShape2D_75jaq")
 
 [node name="ThrustProximity" parent="Components" instance=ExtResource("6_n62ka")]
+visible = false
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/ThrustProximity"]
 position = Vector2(0, -3)
 shape = SubResource("RectangleShape2D_ba7ob")
 
-[node name="HealthComponent" parent="Components" node_paths=PackedStringArray("parrent", "knockbackComponent", "hitEfects") instance=ExtResource("9_t230s")]
-parrent = NodePath("../..")
-knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
-hitEfects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
-MAX_HEALTH = 30000.0
+[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("15_eo6el")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
 
-[node name="HitParticles" parent="Components/HealthComponent" instance=ExtResource("10_53r62")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
 position = Vector2(0, -3)
-texture = SubResource("GradientTexture2D_u65ke")
+shape = SubResource("RectangleShape2D_qllm4")
 
-[node name="DirectionalParticlesComponent" parent="Components/HealthComponent" instance=ExtResource("11_b30xt")]
-position = Vector2(0, -3)
-texture = SubResource("GradientTexture2D_y137f")
+[node name="MovementComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("6_qbqsc")]
+parent = NodePath("../..")
+gravity = 10.0
+
+[node name="HealthComponent" parent="Components" instance=ExtResource("9_t230s")]
+MAX_HEALTH = 30.0
 
 [node name="EnemyHeathbar" parent="Components" node_paths=PackedStringArray("follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("10_30k11")]
 follow = NodePath("../../HealthbarPos")
@@ -789,17 +931,31 @@ commandSpawnPos = NodePath("../../../HealthbarPos")
 healthComponent = NodePath("../../HealthComponent")
 enemyHealthBar = NodePath("..")
 
-[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("15_eo6el")]
-collision_layer = 8
-stateMachine = NodePath("../../StateMachine")
-health_componnet = NodePath("../HealthComponent")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
-position = Vector2(0, -3)
-shape = SubResource("RectangleShape2D_qllm4")
-
-[node name="BidirectionalKnockbackComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("20_lhe68")]
+[node name="BidirectionalKnockbackComponent" parent="Components" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("20_lhe68")]
 parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="DeathComponent" parent="Components" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("23_x1w5s")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+stateToSwitchTo = NodePath("../../StateMachine/Dead")
+
+[node name="EnemyParriedComponent" parent="Components" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("24_r225t")]
+attackComponents = [NodePath("../../FlipPivot/ThrustAttackComponent"), NodePath("../../FlipPivot/RotationPivot/AttackComponent")]
+stateMachine = NodePath("../../StateMachine")
+
+[node name="EnemyHitComponent" parent="Components" node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("25_bky6c")]
+healthComponent = NodePath("../HealthComponent")
+hitEffects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
+knockbackComponent = NodePath("../BidirectionalKnockbackComponent")
+
+[node name="HitParticles" parent="Components/EnemyHitComponent" instance=ExtResource("10_53r62")]
+position = Vector2(0, -3)
+texture = SubResource("GradientTexture2D_u65ke")
+
+[node name="DirectionalParticlesComponent" parent="Components/EnemyHitComponent" instance=ExtResource("11_b30xt")]
+position = Vector2(0, -3)
+texture = SubResource("GradientTexture2D_y137f")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
@@ -810,10 +966,10 @@ occluder_light_mask = 0
 
 [node name="FlipPivot" type="Node2D" parent="."]
 
-[node name="ThrustAttackComponent" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "thingToCallOnParry", "healthComponent") instance=ExtResource("8_xodr3")]
+[node name="ThrustAttackComponent" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
+visible = false
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
-thingToCallOnParry = NodePath("../..")
 attack_damage = 1.0
 weakness_damage = 1.0
 attackStrength = 2
@@ -830,16 +986,29 @@ skew = -0.0872665
 color = Color(1, 0, 0, 1)
 polygon = PackedVector2Array(0, 0, -1, -11, 1, -11)
 
-[node name="AttackComponent" parent="FlipPivot/RotationPivot" node_paths=PackedStringArray("collisionShape", "thingToCallOnParry", "healthComponent") instance=ExtResource("8_xodr3")]
+[node name="AttackComponent" parent="FlipPivot/RotationPivot" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
+visible = false
 collision_mask = 4
 collisionShape = NodePath("CollisionPolygon2D")
-thingToCallOnParry = NodePath("../../..")
 attack_damage = 1.0
 weakness_damage = 1.0
 healthComponent = NodePath("../../../Components/HealthComponent")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlipPivot/RotationPivot/AttackComponent"]
 polygon = PackedVector2Array(4.80825e-07, -11, 3, -11, 9, -8, 11, 4.80825e-07, 0, 0)
+
+[node name="BlockWall" type="StaticBody2D" parent="FlipPivot"]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/BlockWall"]
+position = Vector2(-1, -3)
+shape = SubResource("RectangleShape2D_j84vt")
+
+[node name="BlockEffects" type="Node2D" parent="FlipPivot"]
+
+[node name="DirectionalParticlesComponent" parent="FlipPivot/BlockEffects" instance=ExtResource("11_b30xt")]
+omniDirectional = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -870,5 +1039,3 @@ preprocess = 0.05
 explosiveness = 1.0
 trail_enabled = true
 trail_lifetime = 0.1
-
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

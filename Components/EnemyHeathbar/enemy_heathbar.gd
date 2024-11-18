@@ -29,7 +29,7 @@ func addCommandsToGame():
 	for i in hackCommands:
 		Game.hacks.append(i)
 
-func delete():
+func delete(_attack):
 	if active:
 		deactivate()
 	EnemyHealthBarPositionManager.removeHealbar(self)
