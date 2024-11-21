@@ -22,3 +22,9 @@ func moveTowardsPlayerNormal(delta):
 
 func moveTowardsPlayerFast(_delta):
 	position = parent.global_position
+
+func getDirection():
+	if flip_h:
+		return -1.0
+	else:
+		return 1.0

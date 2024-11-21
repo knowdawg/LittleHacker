@@ -1,4 +1,4 @@
-[gd_scene load_steps=56 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=82 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -14,9 +14,9 @@
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/parried_big.gd" id="9_crb1k"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="9_t230s"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="10_30k11"]
-[ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/HitParticles/hit_particles.tscn" id="10_53r62"]
+[ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="10_53r62"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="10_ehbhi"]
-[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
+[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/block.gd" id="11_osv0s"]
 [ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
@@ -28,6 +28,10 @@
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="23_x1w5s"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="24_r225t"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="25_bky6c"]
+[ext_resource type="PackedScene" uid="uid://b2livsf15r2fv" path="res://Components/VisualEffectComponents/FlareComponent/flare_effect_component.tscn" id="27_gou6c"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BlockEffect.gdshader" id="28_jr6e5"]
+[ext_resource type="PackedScene" uid="uid://b30hfek6xr8i1" path="res://Components/VisualEffectComponents/LightFlashComponent/light_effect_component.tscn" id="28_wtubw"]
+[ext_resource type="Script" path="res://Components/VisualEffectComponents/BlockEffect/block_effect.gd" id="29_5g1vb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
 size = Vector2(2, 6)
@@ -64,11 +68,118 @@ height = 1
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_4ms6j"]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
 
+[sub_resource type="Curve" id="Curve_04yu7"]
+max_value = 100.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.578529, 100), 324.68, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_l05r4"]
+curve = SubResource("Curve_04yu7")
+
+[sub_resource type="Curve" id="Curve_s7ygo"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0914513, 1), 0.0, 0.0, 0, 0, Vector2(0.371769, 0.337983), -1.3562, -1.3562, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_ymk2u"]
+curve = SubResource("Curve_s7ygo")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_58wka"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 25.0
+initial_velocity_min = 300.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+linear_accel_min = -2.23517e-06
+linear_accel_max = -2.23517e-06
+damping_min = 31.687
+damping_max = 31.687
+damping_curve = SubResource("CurveTexture_l05r4")
+scale_curve = SubResource("CurveTexture_ymk2u")
+
+[sub_resource type="Gradient" id="Gradient_5s73d"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5incm"]
+gradient = SubResource("Gradient_5s73d")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Curve" id="Curve_o2mvo"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 324.68, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_73rb2"]
+curve = SubResource("Curve_o2mvo")
+
+[sub_resource type="Curve" id="Curve_0d0tw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976821, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_tqkq4"]
+curve = SubResource("Curve_0d0tw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_l5oq4"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 25.0
+initial_velocity_max = 400.0
+gravity = Vector3(0, 0, 0)
+damping_min = 100.0
+damping_max = 100.0
+damping_curve = SubResource("CurveTexture_73rb2")
+scale_curve = SubResource("CurveTexture_tqkq4")
+
+[sub_resource type="Gradient" id="Gradient_nx0x1"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_2xwhe"]
+gradient = SubResource("Gradient_nx0x1")
+width = 1
+height = 1
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ho5uu"]
 size = Vector2(10, 6)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gex5m"]
+size = Vector2(19, 10)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j84vt"]
 size = Vector2(2, 6)
+
+[sub_resource type="Curve" id="Curve_6vj1o"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_4w0n5"]
+curve = SubResource("Curve_6vj1o")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_nf5bt"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+direction = Vector3(0, 0, 0)
+spread = 15.0
+initial_velocity_min = 200.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_4w0n5")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ar86"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8lmn"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_7ar86")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_641qy"]
+shader = ExtResource("28_jr6e5")
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/noise = SubResource("NoiseTexture2D_g8lmn")
 
 [sub_resource type="Animation" id="Animation_wddfg"]
 resource_name = "Attack1"
@@ -116,6 +227,133 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_65dm6"]
+resource_name = "Block"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -1.0472, -2.79253, -2.79253, -1.39626, 6.28319]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -3), Vector2(1.19209e-07, -8), Vector2(1.19209e-07, -8), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot/Polygon2D:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 1.8, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 0, 0, 1), Color(1, 0.392157, 0.392157, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0.784314, 0.784314, 1), Color(1, 0, 0, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Block")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"blockStartedEffecs"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ff2vx"]
+resource_name = "BlockAttack"
+length = 0.7
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-2.96706, -2.96706, 0.872665, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.5, -8), Vector2(0.5, -8), Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot/Polygon2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.25, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 1), Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipPivot/BlockAttack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlipPivot/RotationPivot/Polygon2D:color")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0.588235, 0.588235, 1), Color(1, 0, 0, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_m3v1i"]
@@ -350,6 +588,18 @@ tracks/2/keys = {
 "update": 0,
 "values": [Color(1, 0, 0, 1)]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_8mrrs"]
 resource_name = "ParriedBig"
@@ -378,6 +628,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [-0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0872665, -0.0872665, 0.0523599, -0.0174533, 0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_wx3py"]
@@ -501,6 +763,18 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("FlipPivot/RotationPivot/Polygon2D:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_a4xb8"]
@@ -640,50 +914,11 @@ tracks/4/keys = {
 "values": [Vector2(0, 0)]
 }
 
-[sub_resource type="Animation" id="Animation_65dm6"]
-resource_name = "Block"
-length = 2.0
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 1.8, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [0.0, -1.0472, -2.79253, -2.79253, -1.39626, 6.28319]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 0), Vector2(0, -3), Vector2(1.19209e-07, -8), Vector2(1.19209e-07, -8), Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("FlipPivot/RotationPivot/Polygon2D:color")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 1.7, 1.8, 2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Color(1, 0, 0, 1), Color(1, 0.392157, 0.392157, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 0.784314, 0.784314, 1), Color(1, 0, 0, 1)]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
 _data = {
 "Attack1": SubResource("Animation_wddfg"),
 "Block": SubResource("Animation_65dm6"),
+"BlockAttack": SubResource("Animation_ff2vx"),
 "Chase": SubResource("Animation_m3v1i"),
 "Death": SubResource("Animation_tmal0"),
 "Hacked": SubResource("Animation_axw0y"),
@@ -836,20 +1071,35 @@ position = Vector2(-1, -2)
 [node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
 position = Vector2(1, -2)
 
-[node name="Block" type="Node" parent="StateMachine" node_paths=PackedStringArray("onBlockEffects", "nextState", "stateOnBlock", "stateOnGuardBreak", "stateMachine", "parent", "nodeToFlip", "hurtboxComponent", "animator", "blockWall")]
+[node name="Block" type="Node" parent="StateMachine" node_paths=PackedStringArray("onBlockStartedEffects", "onBlockEffects", "nextState", "stateOnBlock", "stateOnGuardBreak", "stateMachine", "parent", "nodeToFlip", "healthComponent", "hurtboxComponent", "animator", "blockWall", "blockEffect")]
 script = ExtResource("11_osv0s")
-onBlockEffects = [NodePath("../../FlipPivot/BlockEffects/DirectionalParticlesComponent")]
+onBlockStartedEffects = [NodePath("../../FlipPivot/BlockInitiallize1"), NodePath("../../FlipPivot/BlockInitiallize2")]
+onBlockEffects = [NodePath("../../BlockEffects/HitParticles"), NodePath("../../BlockEffects/DirectionalParticlesComponent"), NodePath("../../BlockEffects/DirectionalParticlesComponent2"), NodePath("../../BlockEffects/FlareEffectComponent"), NodePath("../../BlockEffects/LightEffectComponent")]
 nextState = NodePath("../InRange")
-stateOnBlock = NodePath("../TrippleAttack")
-stateOnGuardBreak = NodePath("../Thrust")
+stateOnBlock = NodePath("../BlockAttack")
+stateOnGuardBreak = NodePath("../Parried")
 stateMachine = NodePath("..")
 parent = NodePath("../..")
 nodeToFlip = NodePath("../../FlipPivot")
+healthComponent = NodePath("../../Components/HealthComponent")
 hurtboxComponent = NodePath("../../Components/HurtboxComponent")
 animator = NodePath("../../AnimationPlayer")
 animationName = "Block"
 animationLength = 2.0
 blockWall = NodePath("../../FlipPivot/BlockWall")
+blockEffect = NodePath("../../FlipPivot/BlockEffect")
+
+[node name="BlockAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+script = ExtResource("4_l276g")
+attackLength = 0.7
+animationName = "BlockAttack"
+agroState = NodePath("../Chase")
+parryState = NodePath("../Parried")
+animator = NodePath("../../AnimationPlayer")
+nodeToFlip = NodePath("../../FlipPivot")
+parent = NodePath("../..")
+movement = NodePath("../../Components/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0.2, 0.3, 8)])
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -941,7 +1191,7 @@ stateMachine = NodePath("../../StateMachine")
 stateToSwitchTo = NodePath("../../StateMachine/Dead")
 
 [node name="EnemyParriedComponent" parent="Components" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("24_r225t")]
-attackComponents = [NodePath("../../FlipPivot/ThrustAttackComponent"), NodePath("../../FlipPivot/RotationPivot/AttackComponent")]
+attackComponents = [NodePath("../../FlipPivot/ThrustAttackComponent"), NodePath("../../FlipPivot/RotationPivot/AttackComponent"), NodePath("../../FlipPivot/BlockAttack")]
 stateMachine = NodePath("../../StateMachine")
 
 [node name="EnemyHitComponent" parent="Components" node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("25_bky6c")]
@@ -964,10 +1214,39 @@ polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
 occluder = SubResource("OccluderPolygon2D_4ms6j")
 occluder_light_mask = 0
 
+[node name="BlockEffects" type="Node2D" parent="."]
+
+[node name="HitParticles" parent="BlockEffects" instance=ExtResource("10_53r62")]
+amount = 8
+
+[node name="DirectionalParticlesComponent" parent="BlockEffects" instance=ExtResource("11_b30xt")]
+visible = false
+scale = Vector2(-1, 1)
+process_material = SubResource("ParticleProcessMaterial_58wka")
+texture = SubResource("GradientTexture2D_5incm")
+lifetime = 0.4
+preprocess = 0.0
+omniDirectional = false
+
+[node name="DirectionalParticlesComponent2" parent="BlockEffects" instance=ExtResource("11_b30xt")]
+position = Vector2(0, -3)
+rotation = 3.14159
+scale = Vector2(-1, -1)
+process_material = SubResource("ParticleProcessMaterial_l5oq4")
+texture = SubResource("GradientTexture2D_2xwhe")
+lifetime = 0.4
+explosiveness = 0.8
+omniDirectional = false
+
+[node name="FlareEffectComponent" parent="BlockEffects" instance=ExtResource("27_gou6c")]
+position = Vector2(7.15256e-07, -3)
+rotation = 1.5708
+
+[node name="LightEffectComponent" parent="BlockEffects" instance=ExtResource("28_wtubw")]
+
 [node name="FlipPivot" type="Node2D" parent="."]
 
 [node name="ThrustAttackComponent" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
-visible = false
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 attack_damage = 1.0
@@ -976,8 +1255,20 @@ attackStrength = 2
 healthComponent = NodePath("../../Components/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/ThrustAttackComponent"]
+visible = false
 position = Vector2(-5, -3)
 shape = SubResource("RectangleShape2D_ho5uu")
+
+[node name="BlockAttack" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+attack_damage = 1.0
+weakness_damage = 1.0
+healthComponent = NodePath("../../Components/HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/BlockAttack"]
+position = Vector2(-9.5, -5)
+shape = SubResource("RectangleShape2D_gex5m")
 
 [node name="RotationPivot" type="Node2D" parent="FlipPivot"]
 skew = -0.0872665
@@ -1005,10 +1296,42 @@ collision_mask = 0
 position = Vector2(-1, -3)
 shape = SubResource("RectangleShape2D_j84vt")
 
-[node name="BlockEffects" type="Node2D" parent="FlipPivot"]
+[node name="BlockInitiallize1" type="GPUParticles2D" parent="FlipPivot"]
+position = Vector2(-2, -3)
+rotation = 2.0944
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_nf5bt")
+lifetime = 0.2
+one_shot = true
+preprocess = 0.05
+explosiveness = 0.8
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 4
+trail_section_subdivisions = 2
 
-[node name="DirectionalParticlesComponent" parent="FlipPivot/BlockEffects" instance=ExtResource("11_b30xt")]
-omniDirectional = false
+[node name="BlockInitiallize2" type="GPUParticles2D" parent="FlipPivot"]
+position = Vector2(-2, -3)
+rotation = 5.23599
+emitting = false
+amount = 6
+process_material = SubResource("ParticleProcessMaterial_nf5bt")
+lifetime = 0.2
+one_shot = true
+preprocess = 0.05
+explosiveness = 0.8
+trail_enabled = true
+trail_lifetime = 0.1
+trail_sections = 4
+trail_section_subdivisions = 2
+
+[node name="BlockEffect" type="Line2D" parent="FlipPivot"]
+visible = false
+material = SubResource("ShaderMaterial_641qy")
+points = PackedVector2Array(0, -8, -3, 2)
+texture_mode = 2
+script = ExtResource("29_5g1vb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

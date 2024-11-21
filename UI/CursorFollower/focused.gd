@@ -11,7 +11,8 @@ func enter(_prevState):
 		target = closestHealthBar
 
 func update(delta):
-	
+	if !is_instance_valid(target):
+		return
 	parent.position = lerp(parent.position, target.follow.global_position, delta * 30.0)
 	
 	var gmp = EnemyHealthBarPositionManager.getActualGlobalMousePosition()

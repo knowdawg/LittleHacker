@@ -41,7 +41,7 @@ func _ready():
 
 
 func gotBlocked(_attack):
-	print("Blocked :(")
+	switchStates("Blocked")
 
 
 var inputBuffer = ""
@@ -94,3 +94,8 @@ func switchStates(newState):
 	n.enter(prevState)
 	
 	current_state = n
+
+func noWeaponInputs():
+	if current_state is PlayerBlocked:
+		return true
+	return false

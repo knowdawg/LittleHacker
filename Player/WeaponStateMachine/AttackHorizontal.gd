@@ -38,8 +38,11 @@ func update(delta):
 	t += delta
 	if t <= 0.1:
 		weaponSprite.flip_h = playerSprite.flip_h
+		if playerStateMachine.current_state is SmallPlayerRoll:
+			trasitioned.emit(self, "DashAttack")
+			return
 		
-	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
+	if weaponStateMachine.inputBuffer == "Parry":
 		if playerStateMachine.current_state is SmallPlayerRoll:
 			trasitioned.emit(self, "DashParry")
 		else:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://boaqnrhkb5ukt"]
 
-[ext_resource type="Script" path="res://Components/DirectionalHitParticlesComponent/directional_hit_particles_component.gd" id="1_mogjx"]
+[ext_resource type="Script" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.gd" id="1_mogjx"]
 [ext_resource type="PackedScene" uid="uid://crcxcymm072ik" path="res://Components/KnockbackComponents/FourDirectionalKnockbackComponent/four_directional_knockback_component.tscn" id="2_vh5yb"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="3_axet3"]
 

@@ -94,9 +94,6 @@ func jump():
 func killJump():
 	v.y /= 2.0;
 
-func canParry():
-	return true
-
 var parrying = false
 func setParry(isParry : bool):
 	parrying = isParry

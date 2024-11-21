@@ -27,7 +27,7 @@ func update(delta):
 	else:
 		downAttackComponent.disable()
 	
-	if weaponStateMachine.inputBuffer == "Parry" and player.canParry():
+	if weaponStateMachine.inputBuffer == "Parry":
 		if playerStateMachine.current_state is SmallPlayerRoll:
 			trasitioned.emit(self, "DashParry")
 		else:
