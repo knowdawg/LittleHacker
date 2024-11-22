@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr8t41k422n1f"]
+
+[ext_resource type="Script" path="res://Components/GrabComponent/grab_component.gd" id="1_el0wd"]
+
+[node name="GrabComponent" type="Node"]
+script = ExtResource("1_el0wd")
+
+[node name="Marker2D" type="Marker2D" parent="."]

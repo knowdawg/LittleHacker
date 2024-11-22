@@ -274,6 +274,12 @@ texture = SubResource("GradientTexture2D_nfx2l")
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
 position = Vector2(62, 85)
 
+[node name="TestEnemy2" parent="." instance=ExtResource("11_jyroq")]
+position = Vector2(45, 183)
+
+[node name="TestEnemy3" parent="." instance=ExtResource("11_jyroq")]
+position = Vector2(-25, 181)
+
 [node name="GoatheadCutscene" parent="." instance=ExtResource("9_mq0xw")]
 position = Vector2(239, 79)
 
@@ -286,6 +292,7 @@ position = Vector2(107, 87)
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -2)
 zoom = Vector2(10, 10)
+position_smoothing_speed = 10.0
 
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 copy_mode = 2

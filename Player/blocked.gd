@@ -2,6 +2,7 @@ extends State
 class_name PlayerBlocked
 
 @export var spriteAnimator : AnimationPlayer
+@export var scaleAnimator : AnimationPlayer
 @export var playerSprite : Sprite2D
 @export var player : Player
 @export var rollSpeedCurve : Curve
@@ -15,6 +16,7 @@ var direction = 1.0
 func enter(_prevState):
 	t = 0.0
 	spriteAnimator.play("Blocked")
+	scaleAnimator.play("Blocked")
 	player.v.x = 0.0
 	direction = weaponSprite.getDirection()
 	

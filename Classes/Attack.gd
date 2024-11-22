@@ -12,6 +12,9 @@ var parryPosition : Vector2 = Vector2.ZERO
 var isParryable : bool = true
 var isHazard : bool = false
 var isHackAttack : bool = false
+var isPogo : bool = false
+var isGrabAttack : bool = false
+var grabComponent : GrabComponent
 
 var healthComponent : HealthComponent
 

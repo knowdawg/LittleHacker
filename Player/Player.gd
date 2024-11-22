@@ -3,6 +3,9 @@ class_name Player
 
 @export var sprite : Sprite2D
 @export var weaponSprite : Sprite2D
+@export var healthComponent : HealthComponent
+@export var hurtboxComponent : HurtboxComponent
+@export var stateMachine : PlayerStateMachine
 
 const SPEED = 70.0 * 0.45
 const JUMP_VELOCITY = -140.0 * 0.5
@@ -80,6 +83,7 @@ func _process(_delta: float) -> void:
 	Game.player = self
 
 func _ready():
+	$HealthComponent.grabbed.connect(grabbed)
 	Game.enterHackMode.connect(enterHackMode)
 
 func canCoyoteJump():
@@ -104,13 +108,15 @@ func _on_attack_down_area_entered(_area: Area2D) -> void:
 func hitFromLeft(_attack : Attack):
 	knockbackVector.x = 100.0
 	v.x = 0.0
-	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	if !stateMachine.current_state is PlayerGrabbed:
+		$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
 	#Game.slowTime(0.3, 0.01)
 
 func hitFromRight(_attack : Attack):
 	knockbackVector.x = -100.0
 	v.x = 0.0
-	$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	if !stateMachine.current_state is PlayerGrabbed:
+		$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
 	#Game.slowTime(0.3, 0.01)
 
 var parryStunTime = 0.3
@@ -134,3 +140,17 @@ func getSpriteDirection()->float:
 
 func enterHackMode():
 	pass
+
+func grabbed(attack : Attack):
+	hurtboxComponent.call_deferred("disable")
+	attack.grabComponent.setActive(true, self)
+	stateMachine.switchStates("Grabbed")
+
+func releaseGrab():
+	hurtboxComponent.enable()
+	rotation = 0
+	stateMachine.switchStates("Idle")
+
+func dealDirectDamage(attack : Attack):
+	$ScaleAnimator.play("Stun")
+	healthComponent.damage(attack)

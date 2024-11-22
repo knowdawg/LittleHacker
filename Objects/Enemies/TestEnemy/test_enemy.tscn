@@ -1,4 +1,4 @@
-[gd_scene load_steps=82 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=88 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/block.gd" id="11_osv0s"]
 [ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
+[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/generic_grab_attack.gd" id="12_y1w8q"]
 [ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
 [ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
@@ -32,6 +33,7 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Effects/BlockEffect.gdshader" id="28_jr6e5"]
 [ext_resource type="PackedScene" uid="uid://b30hfek6xr8i1" path="res://Components/VisualEffectComponents/LightFlashComponent/light_effect_component.tscn" id="28_wtubw"]
 [ext_resource type="Script" path="res://Components/VisualEffectComponents/BlockEffect/block_effect.gd" id="29_5g1vb"]
+[ext_resource type="PackedScene" uid="uid://dr8t41k422n1f" path="res://Components/GrabComponent/grab_component.tscn" id="31_273nn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
 size = Vector2(2, 6)
@@ -149,6 +151,9 @@ size = Vector2(10, 6)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gex5m"]
 size = Vector2(19, 10)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_60dum"]
+radius = 2.0
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j84vt"]
 size = Vector2(2, 6)
 
@@ -191,10 +196,10 @@ tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.3, 0.35, 0.6, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.35, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
-"values": [0.0, 0.663225, 0.698132, -1.5708, -1.5708, 0.0]
+"values": [0.0, 0.663225, 0.698132, -1.5708, -1.5708]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -384,6 +389,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_tmal0"]
@@ -776,6 +793,18 @@ tracks/10/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("FlipPivot/RotationPivot:scale")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_a4xb8"]
 resource_name = "Thrust"
@@ -914,6 +943,155 @@ tracks/4/keys = {
 "values": [Vector2(0, 0)]
 }
 
+[sub_resource type="Animation" id="Animation_o1kyx"]
+resource_name = "GrabAttack"
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:skew")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0472, 1.5708, 1.91986, 2.96706]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/3/interp = 2
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.7, 0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(7, -3), Vector2(0, -3), Vector2(-24, -3), Vector2(-29, -14)]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("FlipPivot/RotationPivot/GrabAttack")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_rieex"]
+resource_name = "GrabMissed"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [2.96706, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-29, -14), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_53ukd"]
+resource_name = "GrabHit"
+length = 2.0
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("FlipPivot/RotationPivot:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [2.96706, 6.28319, 6.28319, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("FlipPivot/RotationPivot:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.6, 0.7, 1.4, 1.45, 1.7, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-29, -14), Vector2(-30, -25), Vector2(-30, -30), Vector2(-30, 0), Vector2(-30, 0), Vector2(-30, -10), Vector2(-30, -10), Vector2(0, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("FlipPivot/RotationPivot/GrabComponent")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1.4, 1.425),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [1],
+"method": &"dealDamageToObject"
+}, {
+"args": [1],
+"method": &"dealDamageToObject"
+}, {
+"args": [false, null],
+"method": &"setActive"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
 _data = {
 "Attack1": SubResource("Animation_wddfg"),
@@ -921,6 +1099,9 @@ _data = {
 "BlockAttack": SubResource("Animation_ff2vx"),
 "Chase": SubResource("Animation_m3v1i"),
 "Death": SubResource("Animation_tmal0"),
+"GrabAttack": SubResource("Animation_o1kyx"),
+"GrabHit": SubResource("Animation_53ukd"),
+"GrabMissed": SubResource("Animation_rieex"),
 "Hacked": SubResource("Animation_axw0y"),
 "Idle": SubResource("Animation_nkupm"),
 "Parried": SubResource("Animation_h0g38"),
@@ -986,7 +1167,7 @@ script = ExtResource("5_f3wn7")
 parent = NodePath("../..")
 movementComponent = NodePath("../../Components/MovementComponent")
 proximity = NodePath("../../Components/AttackProximity")
-nextStates = [NodePath("../Block")]
+nextStates = [NodePath("../GrabAttack"), NodePath("../Attack"), NodePath("../TrippleAttack"), NodePath("../Block")]
 usableMovement = Array[int]([0, 1])
 maxMoves = 3
 
@@ -1071,10 +1252,11 @@ position = Vector2(-1, -2)
 [node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
 position = Vector2(1, -2)
 
-[node name="Block" type="Node" parent="StateMachine" node_paths=PackedStringArray("onBlockStartedEffects", "onBlockEffects", "nextState", "stateOnBlock", "stateOnGuardBreak", "stateMachine", "parent", "nodeToFlip", "healthComponent", "hurtboxComponent", "animator", "blockWall", "blockEffect")]
+[node name="Block" type="Node" parent="StateMachine" node_paths=PackedStringArray("onBlockStartedEffects", "onBlockEffects", "onGuardBreak", "nextState", "stateOnBlock", "stateOnGuardBreak", "stateMachine", "parent", "nodeToFlip", "healthComponent", "hurtboxComponent", "animator", "blockWall", "blockEffect")]
 script = ExtResource("11_osv0s")
 onBlockStartedEffects = [NodePath("../../FlipPivot/BlockInitiallize1"), NodePath("../../FlipPivot/BlockInitiallize2")]
 onBlockEffects = [NodePath("../../BlockEffects/HitParticles"), NodePath("../../BlockEffects/DirectionalParticlesComponent"), NodePath("../../BlockEffects/DirectionalParticlesComponent2"), NodePath("../../BlockEffects/FlareEffectComponent"), NodePath("../../BlockEffects/LightEffectComponent")]
+onGuardBreak = [NodePath("../../BlockEffects/LightEffectComponent"), NodePath("../../BlockEffects/FlareEffectComponent"), NodePath("../../BlockEffects/HitParticles")]
 nextState = NodePath("../InRange")
 stateOnBlock = NodePath("../BlockAttack")
 stateOnGuardBreak = NodePath("../Parried")
@@ -1093,13 +1275,46 @@ blockEffect = NodePath("../../FlipPivot/BlockEffect")
 script = ExtResource("4_l276g")
 attackLength = 0.7
 animationName = "BlockAttack"
-agroState = NodePath("../Chase")
+agroState = NodePath("../InRange")
 parryState = NodePath("../Parried")
 animator = NodePath("../../AnimationPlayer")
 nodeToFlip = NodePath("../../FlipPivot")
 parent = NodePath("../..")
 movement = NodePath("../../Components/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0.2, 0.3, 8)])
+
+[node name="GrabAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("onPogoState", "grabHitState", "grabMissedState", "attackComponent", "healthComponent", "stateMachine", "agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+script = ExtResource("12_y1w8q")
+onPogoState = NodePath("../Parried")
+grabHitState = NodePath("../GrabSuccesfull")
+grabMissedState = NodePath("../GrabFailed")
+attackComponent = NodePath("../../FlipPivot/RotationPivot/GrabAttack")
+healthComponent = NodePath("../../Components/HealthComponent")
+stateMachine = NodePath("..")
+attackLength = 1.0
+animationName = "GrabAttack"
+agroState = NodePath("../InRange")
+parryState = NodePath("../Parried")
+animator = NodePath("../../AnimationPlayer")
+nodeToFlip = NodePath("../../FlipPivot")
+parent = NodePath("../..")
+movement = NodePath("../../Components/MovementComponent")
+
+[node name="GrabSuccesfull" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator")]
+script = ExtResource("4_l276g")
+attackLength = 2.0
+animationName = "GrabHit"
+agroState = NodePath("../InRange")
+parryState = NodePath("../Parried")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="GrabFailed" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator")]
+script = ExtResource("4_l276g")
+attackLength = 1.0
+animationName = "GrabMissed"
+agroState = NodePath("../InRange")
+parryState = NodePath("../Parried")
+animator = NodePath("../../AnimationPlayer")
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -1217,6 +1432,7 @@ occluder_light_mask = 0
 [node name="BlockEffects" type="Node2D" parent="."]
 
 [node name="HitParticles" parent="BlockEffects" instance=ExtResource("10_53r62")]
+position = Vector2(0, -3)
 amount = 8
 
 [node name="DirectionalParticlesComponent" parent="BlockEffects" instance=ExtResource("11_b30xt")]
@@ -1249,10 +1465,10 @@ rotation = 1.5708
 [node name="ThrustAttackComponent" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../Components/HealthComponent")
 attack_damage = 1.0
 weakness_damage = 1.0
 attackStrength = 2
-healthComponent = NodePath("../../Components/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/ThrustAttackComponent"]
 visible = false
@@ -1262,9 +1478,9 @@ shape = SubResource("RectangleShape2D_ho5uu")
 [node name="BlockAttack" parent="FlipPivot" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("8_xodr3")]
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../Components/HealthComponent")
 attack_damage = 1.0
 weakness_damage = 1.0
-healthComponent = NodePath("../../Components/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/BlockAttack"]
 position = Vector2(-9.5, -5)
@@ -1281,12 +1497,27 @@ polygon = PackedVector2Array(0, 0, -1, -11, 1, -11)
 visible = false
 collision_mask = 4
 collisionShape = NodePath("CollisionPolygon2D")
+healthComponent = NodePath("../../../Components/HealthComponent")
 attack_damage = 1.0
 weakness_damage = 1.0
-healthComponent = NodePath("../../../Components/HealthComponent")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="FlipPivot/RotationPivot/AttackComponent"]
 polygon = PackedVector2Array(4.80825e-07, -11, 3, -11, 9, -8, 11, 4.80825e-07, 0, 0)
+
+[node name="GrabAttack" parent="FlipPivot/RotationPivot" node_paths=PackedStringArray("collisionShape", "healthComponent", "grabNode") instance=ExtResource("8_xodr3")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../../Components/HealthComponent")
+attack_damage = 1.0
+weakness_damage = 1.0
+isGrabAttack = true
+grabNode = NodePath("../GrabComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlipPivot/RotationPivot/GrabAttack"]
+shape = SubResource("CircleShape2D_60dum")
+
+[node name="GrabComponent" parent="FlipPivot/RotationPivot" node_paths=PackedStringArray("nodeToFollow") instance=ExtResource("31_273nn")]
+nodeToFollow = NodePath("../Polygon2D")
 
 [node name="BlockWall" type="StaticBody2D" parent="FlipPivot"]
 collision_layer = 32

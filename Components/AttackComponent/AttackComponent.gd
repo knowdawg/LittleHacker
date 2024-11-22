@@ -1,25 +1,35 @@
 extends Area2D
 class_name AttackComponent
 
+@export var attackName : String = ""
 @export var collisionShape : Node2D
-@export var hitEfect : PackedScene
-@export var numberOfHitEffect : int = 1
+@export var healthComponent : HealthComponent
+@export var disabled : bool = true
 
+@export_group("Damage")
 @export var attack_damage : float
 @export var weakness_damage : float
 @export var attackStrength : int = 1
+
+@export_group("Knockback")
 @export var knockback_force: float
 @export var knockbackVector : Vector2
-@export var attackName : String = ""
-@export var isSpikes : bool = false
-@export var disabled : bool = true
-@export var isHackAttack : bool = false
 
-@export var healthComponent : HealthComponent
+@export_group("Flags")
+@export var isSpikes : bool = false
+@export var isHackAttack : bool = false
+@export var isPogo : bool = false
+@export var isGrabAttack : bool = false
+@export var grabNode : GrabComponent
+
+@export_group("Hit Effects")
+@export var hitEfect : PackedScene
+@export var numberOfHitEffect : int = 1
 
 @onready var attackID : float = randf()
 
 signal gotParried
+signal grabSucessful
 
 func _ready() -> void:
 	if disabled:
@@ -43,6 +53,8 @@ func _on_area_entered(area):
 		attack.attackID = attackID
 		attack.attackName = attackName
 		attack.isHackAttack = isHackAttack
+		attack.isPogo = isPogo
+		attack.isGrabAttack = isGrabAttack
 		attack.attackStrength = attackStrength
 		if healthComponent:
 			attack.healthComponent = healthComponent
@@ -54,7 +66,11 @@ func _on_area_entered(area):
 				Game.setHackMode(true)
 			return
 		
+		if isGrabAttack:
+			attack.grabComponent = grabNode
+			grabSucessful.emit(attack)
 		hurtbox.damage(attack)
+		
 		
 		if hitEfect:
 			for num in numberOfHitEffect:

@@ -2,6 +2,7 @@ extends State
 
 @export var onBlockStartedEffects : Array[Node2D] = []
 @export var onBlockEffects : Array[Node2D] = []
+@export var onGuardBreak : Array[Node2D] = []
 
 @export_group("States")
 @export var nextState : State
@@ -70,9 +71,14 @@ func onParry(attack):
 		
 		trasitioned.emit(self, stateOnBlock.name)
 
-func onBlockBroken(_attack):
+func onBlockBroken(attack):
 	if stateMachine.current_state == self:
 		if t > 0.4 and t < 1.7:
+			
+			for b in onGuardBreak:
+				b.hitEfect(attack)
+			
+			healthComponent.set_weakness(healthComponent.get_weakness() + 3)
 			trasitioned.emit(self, stateOnGuardBreak.name)
 
 func _ready():

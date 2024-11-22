@@ -26,7 +26,7 @@ func enter(_prevState):
 func update(delta):
 	weaponSprite.moveTowardsPlayerFast(delta)
 	
-	if t < 0.4 and t > 0.3:
+	if t < 0.2 and t > 0.1:
 		if weaponSprite.flip_h == false:
 			leftAttackComponent.enable()
 		else:

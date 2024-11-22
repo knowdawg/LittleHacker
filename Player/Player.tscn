@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=168 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="18_3hvnj"]
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="19_0ng1i"]
 [ext_resource type="Script" path="res://Player/blocked.gd" id="20_hceas"]
+[ext_resource type="Script" path="res://Player/grabbed.gd" id="21_njjf0"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="23_v12ij"]
 [ext_resource type="Texture2D" uid="uid://b5hhs6r2kw0ox" path="res://Player/SmallPlayerSprite/PlayerWeapon.png" id="24_6qj5u"]
 [ext_resource type="Script" path="res://Player/WeaponStateMachine/dash_parry.gd" id="24_vbp78"]
@@ -1555,6 +1556,23 @@ _data = {
 "WallCling": SubResource("Animation_5ypfg")
 }
 
+[sub_resource type="Animation" id="Animation_0fvf1"]
+resource_name = "Blocked"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../PlayerVisual:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(3, 0.7), Vector2(1, 1), Vector2(1, 1.2), Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_e6d8l"]
 resource_name = "HackAttack"
 length = 1.1
@@ -1691,6 +1709,7 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0xm6f"]
 _data = {
+"Blocked": SubResource("Animation_0fvf1"),
 "HackAttack": SubResource("Animation_e6d8l"),
 "HackMode": SubResource("Animation_qegnx"),
 "HitGround": SubResource("Animation_gl1a5"),
@@ -1719,7 +1738,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_72lbq"]
 resource_name = "AttackHorizontal"
-length = 0.7
+length = 0.5
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1728,10 +1747,10 @@ tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [13, 14, 15, 16, 17, 18, 19]
+"values": [15, 16, 17, 18, 19, 13, 14]
 }
 
 [sub_resource type="Animation" id="Animation_d4l8w"]
@@ -1748,6 +1767,23 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [25, 26, 27, 28, 29, 30, 31]
+}
+
+[sub_resource type="Animation" id="Animation_asndm"]
+resource_name = "DashAttack"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
 }
 
 [sub_resource type="Animation" id="Animation_hwemm"]
@@ -1904,23 +1940,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [PackedVector2Array(-3, -4, 4, -4, 4, -3, -3, -3), PackedVector2Array(-4, -4, -1, -4, -1, -3, -4, -3), PackedVector2Array(-4, -4, -2, -4, -2, -3, -4, -3)]
-}
-
-[sub_resource type="Animation" id="Animation_asndm"]
-resource_name = "DashAttack"
-length = 1.4
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(-2.23517e-08, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwd5y"]
@@ -2220,12 +2239,15 @@ _data = {
 "RESET": SubResource("Animation_ltc66")
 }
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite", "healthComponent", "hurtboxComponent", "stateMachine")]
 collision_layer = 4
 collision_mask = 35
 script = ExtResource("1_lek16")
 sprite = NodePath("PlayerVisual/PlayerSprite")
 weaponSprite = NodePath("WeaponDislocator/WeaponSprite")
+healthComponent = NodePath("HealthComponent")
+hurtboxComponent = NodePath("HurtboxComponent")
+stateMachine = NodePath("StateMachine")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -2275,7 +2297,7 @@ texture = SubResource("GradientTexture2D_ufcdm")
 script = ExtResource("1_8slbu")
 initial_state = NodePath("Idle")
 parent = NodePath("..")
-attackComponentsThatCanBeParried = [NodePath("../WeaponDislocator/WeaponSprite/AttackLeft"), NodePath("../WeaponDislocator/WeaponSprite/AttackRight"), NodePath("../WeaponDislocator/WeaponSprite/AttackDown"), NodePath("../WeaponDislocator/WeaponSprite/AttackUp")]
+attackComponentsThatCanBeParried = [NodePath("../WeaponDislocator/WeaponSprite/AttackLeft"), NodePath("../WeaponDislocator/WeaponSprite/AttackRight"), NodePath("../WeaponDislocator/WeaponSprite/AttackDown"), NodePath("../WeaponDislocator/WeaponSprite/AttackUp"), NodePath("../WeaponDislocator/WeaponSprite/HackAttackLeft"), NodePath("../WeaponDislocator/WeaponSprite/HackAttackRight")]
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "player", "playerStateMachine")]
 script = ExtResource("3_y4nyp")
@@ -2358,14 +2380,19 @@ hackEffects = NodePath("../../HackEffects")
 rollSpeedCurve = SubResource("Curve_6o701")
 rollSpeedMultiplier = 10000.0
 
-[node name="Blocked" type="Node" parent="StateMachine" node_paths=PackedStringArray("spriteAnimator", "playerSprite", "player", "weaponSprite")]
+[node name="Blocked" type="Node" parent="StateMachine" node_paths=PackedStringArray("spriteAnimator", "scaleAnimator", "playerSprite", "player", "weaponSprite")]
 script = ExtResource("20_hceas")
 spriteAnimator = NodePath("../../SpriteAnimator")
+scaleAnimator = NodePath("../../ScaleAnimator")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 player = NodePath("../..")
 rollSpeedCurve = SubResource("Curve_pi37o")
 rollSpeedMultiplier = 1000.0
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
+
+[node name="Grabbed" type="Node" parent="StateMachine" node_paths=PackedStringArray("spriteAnimator")]
+script = ExtResource("21_njjf0")
+spriteAnimator = NodePath("../../SpriteAnimator")
 
 [node name="WeaponStateMachine" type="Node" parent="." node_paths=PackedStringArray("pStateMachine", "initial_state")]
 script = ExtResource("11_v7ndi")
@@ -2374,6 +2401,7 @@ initial_state = NodePath("Idle")
 
 [node name="AttackHorizontal" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "leftAttackComponent", "rightAttackComponent")]
 script = ExtResource("10_d677x")
+attackTime = 0.5
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
@@ -2441,7 +2469,7 @@ playerHurtBox = NodePath("../../HurtboxComponent")
 
 [node name="DashAttack" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "leftAttackComponent", "rightAttackComponent")]
 script = ExtResource("29_mnusl")
-attackTime = 1.4
+attackTime = 0.9
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
@@ -2481,11 +2509,11 @@ occluder_light_mask = 0
 [node name="AttackLeft" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
 collisionShape = NodePath("CollisionPolygon2D")
-hitEfect = ExtResource("19_0ng1i")
-attack_damage = 3.0
+attack_damage = 1.0
 weakness_damage = 1.0
 knockback_force = 80.0
 knockbackVector = Vector2(-1, 0)
+hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackLeft"]
 polygon = PackedVector2Array(-12, -3, -12, -2, -1, 4, 2, 4, 7, 0, -6, -3, 1, -8, 9, -7, 1, -11, -4, -11)
@@ -2493,11 +2521,11 @@ polygon = PackedVector2Array(-12, -3, -12, -2, -1, 4, 2, 4, 7, 0, -6, -3, 1, -8,
 [node name="AttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
 collisionShape = NodePath("CollisionPolygon2D")
-hitEfect = ExtResource("19_0ng1i")
-attack_damage = 3.0
+attack_damage = 1.0
 weakness_damage = 1.0
 knockback_force = 80.0
 knockbackVector = Vector2(1, 0)
+hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackRight"]
 polygon = PackedVector2Array(12, -2, 12, -3, 4, -11, -1, -11, -9, -7, 1, -8, 6, -3, -7, 0, -2, 4, 1, 4)
@@ -2505,11 +2533,12 @@ polygon = PackedVector2Array(12, -2, 12, -3, 4, -11, -1, -11, -9, -7, 1, -8, 6, 
 [node name="AttackDown" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
-hitEfect = ExtResource("19_0ng1i")
 attack_damage = 1.0
 weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(0, 1)
+isPogo = true
+hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackDown"]
 position = Vector2(0, 2)
@@ -2518,11 +2547,11 @@ shape = SubResource("RectangleShape2D_dq4fh")
 [node name="AttackUp" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
-hitEfect = ExtResource("19_0ng1i")
 attack_damage = 3.0
 weakness_damage = 1.0
 knockback_force = 80.0
 knockbackVector = Vector2(0, -1)
+hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackUp"]
 position = Vector2(0, -9)
@@ -2533,9 +2562,9 @@ polygon = PackedVector2Array(-6, 0, -1, -8, 1, -8, 6, 0, 7, 8, -7, 8)
 [node name="HackAttackLeft" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
-numberOfHitEffect = 0
 knockbackVector = Vector2(-1, 0)
 isHackAttack = true
+numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/HackAttackLeft"]
 position = Vector2(-2.5, -2)
@@ -2544,9 +2573,9 @@ shape = SubResource("RectangleShape2D_0sr2h")
 [node name="HackAttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
-numberOfHitEffect = 0
 knockbackVector = Vector2(1, 0)
 isHackAttack = true
+numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/HackAttackRight"]
 position = Vector2(2.5, -2)

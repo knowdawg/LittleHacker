@@ -28,9 +28,8 @@ func update(delta):
 	movement.moveTowardsPlayerX(speed, delta)
 
 func chanceForLongRangeAttack():
-	return
 	if longRangeProximity.is_player_inside():
-		if randf() < 0.5:
+		if randf() < 0.2:
 			trasitioned.emit(self, "Thrust")
 
 func _ready() -> void:

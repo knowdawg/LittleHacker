@@ -23,7 +23,7 @@ class_name GenericAttackState
 
 var dir = 1.0
 var t = 0.0
-func enter(_prevState):
+func enter(prevState):
 	t = 0.0
 	animator.play(animationName)
 	if nodeToFlip and parent:
@@ -37,6 +37,10 @@ func enter(_prevState):
 			dir = -1.0
 		else:
 			dir = 1.0
+	customEnter(prevState)
+
+func customEnter(_prevSate):
+	pass
 
 func update(delta):
 	t += delta

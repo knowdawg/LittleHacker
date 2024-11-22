@@ -33,7 +33,7 @@ func _process(_delta: float) -> void:
 				activeHack = 0
 		
 		if Input.is_action_just_pressed("HackAttack"):
-			if !Game.hacks[activeHack].isExecutable():
+			if Game.hacks[activeHack].isExecutable():
 				if labels[activeHack].isCrossed == false:
 					Game.hacks[activeHack].executeHack()
 					#Remove Shakyness of text

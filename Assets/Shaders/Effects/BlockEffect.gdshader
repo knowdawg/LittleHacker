@@ -15,4 +15,3 @@ void fragment() {
 	c *= color;
 	COLOR = c;
 }
-

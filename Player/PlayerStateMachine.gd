@@ -96,6 +96,6 @@ func switchStates(newState):
 	current_state = n
 
 func noWeaponInputs():
-	if current_state is PlayerBlocked:
+	if current_state is PlayerBlocked or current_state is PlayerGrabbed:
 		return true
 	return false

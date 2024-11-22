@@ -12,6 +12,7 @@ var weakness : float = 0.0
 
 signal death(attack : Attack)
 signal hit(attack : Attack)
+signal grabbed(attack : Attack)
 
 func _ready():
 	health = MAX_HEALTH
@@ -51,10 +52,14 @@ func damage(attack : Attack):
 		#can put in a resource / class that can be changed / created as I wish
 		return
 	
+	
 	health -= attack.attack_damage
 	set_weakness(weakness + attack.weakness_damage)
 	
 	hit.emit(attack)
+	
+	if attack.isGrabAttack:
+		grabbed.emit(attack)
 	
 	if health <= 0:
 		death.emit(attack)

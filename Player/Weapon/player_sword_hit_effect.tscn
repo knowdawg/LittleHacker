@@ -65,6 +65,7 @@ _data = {
 }
 
 [node name="PlayerSwordHitEffect" type="Node2D"]
+scale = Vector2(3, 1)
 script = ExtResource("1_wqyyl")
 
 [node name="Line2D" type="Line2D" parent="."]

@@ -26,6 +26,10 @@ func damage(attack: Attack):
 			return
 	attackIDIveBeenHitBy.append(attack.attackID)
 	
+	if attack.isGrabAttack:
+		health_componnet.damage(attack)
+		return
+	
 	if parrying and attack.attackStrength <= parryStrength:
 		parryStuff(attack)
 		return
@@ -61,6 +65,9 @@ func _ready() -> void:
 func disable():
 	$CollisionShape2D.disabled = true
 
+func enable():
+	$CollisionShape2D.disabled = false
+
 func is_iframe_active():
 	if ift >= 0:
 		return true
@@ -82,7 +89,14 @@ func setParry(isParrying : bool, strength = 1):
 		parrying = false
 		parryStrength = 0
 
-func enterHack(_attack : Attack) -> bool:
+func enterHack(attack : Attack) -> bool:
+	for a in attackIDIveBeenHitBy:
+		if attack.attackID == a:
+			return false
+	attackIDIveBeenHitBy.append(attack.attackID)
+	if parrying:
+		parry.emit(attack)
+		return false
 	if !isHackable:
 		return false
 	if !stateMachine:
