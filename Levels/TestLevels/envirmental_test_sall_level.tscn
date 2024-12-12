@@ -1,39 +1,26 @@
-[gd_scene load_steps=29 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=31 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
 [ext_resource type="PackedScene" uid="uid://d3dlqrfslc2a0" path="res://Player/Player.tscn" id="2_cqdsx"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="2_jhjfi"]
+[ext_resource type="Texture2D" uid="uid://8yaj25wh5jum" path="res://Materials/BrokenBricks.png" id="4_kdadv"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="5_dscvh"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="5_nf44p"]
-[ext_resource type="PackedScene" uid="uid://bnj1t3t7sac5h" path="res://Test/goathead_cutscene.tscn" id="9_mq0xw"]
+[ext_resource type="Texture2D" uid="uid://f3g82nbvqcei" path="res://Assets/Sprites/WorldObjects/StiltHouseTest2.png" id="7_8ltoj"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="9_plpma"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
+[ext_resource type="PackedScene" uid="uid://dow45nohhanl5" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.tscn" id="10_52a1i"]
 [ext_resource type="PackedScene" uid="uid://cqfxmyyowlul4" path="res://Objects/Terminal/terminal.tscn" id="10_e4m8l"]
 [ext_resource type="PackedScene" uid="uid://ciq13p31itcpw" path="res://Objects/Enemies/TestEnemy/test_enemy.tscn" id="11_jyroq"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/ScreenMirroring.gdshader" id="13_mu6m5"]
-
-[sub_resource type="Gradient" id="Gradient_b40qp"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xupw"]
-noise_type = 2
-frequency = 0.331
-fractal_octaves = 1
-fractal_gain = 0.2
-cellular_distance_function = 3
-cellular_return_type = 0
-domain_warp_fractal_octaves = 1
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_mnqt3"]
-seamless = true
-color_ramp = SubResource("Gradient_b40qp")
-noise = SubResource("FastNoiseLite_1xupw")
+[ext_resource type="Texture2D" uid="uid://bpeh571apnjq2" path="res://Assets/Sprites/WorldObjects/StiltHouseTest.png" id="13_o8sn2"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
 shader_parameter/size = Vector2(192, 108)
-shader_parameter/noiseResolution = Vector2(512, 512)
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_mnqt3")
+shader_parameter/noiseResolution = Vector2(64, 64)
+shader_parameter/noiseTex = ExtResource("4_kdadv")
 shader_parameter/palete = ExtResource("2_jhjfi")
 
 [sub_resource type="Gradient" id="Gradient_8u10m"]
@@ -48,7 +35,7 @@ height = 108
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ioux"]
 shader = ExtResource("5_dscvh")
 shader_parameter/color = Color(0.215686, 0.290196, 0.313726, 1)
-shader_parameter/width = 1.0
+shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = true
 shader_parameter/add_margins = true
@@ -56,14 +43,20 @@ shader_parameter/add_margins = true
 [sub_resource type="ViewportTexture" id="ViewportTexture_mjem6"]
 viewport_path = NodePath("SubViewport")
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_r37xo"]
-polygon = PackedVector2Array(77, 40, 109, 40, 109, 35, 77, 35)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6t2ub"]
-polygon = PackedVector2Array(-115, 17, -27, 17, -27, 25, -19, 25, -19, 33, -11, 33, -11, 41, -3, 41, -3, 49, 21, 49, 21, 57, 109, 57, 109, 49, 117, 49, 117, 41, 125, 41, 125, -23, 205, -23, 205, 169, -339, 169, -339, -23, -307, -23, -307, 41, -227, 41, -227, 113, -83, 113, -83, 73, -211, 73, -211, 57, -195, 57, -195, 41, -115, 41)
+polygon = PackedVector2Array(-115, 17, -26, 17, -26, 57, 21, 57, 109, 57, 109, 49, 117, 49, 117, 41, 125, 41, 125, -23, 205, -23, 205, 169, -339, 169, -339, -23, -306, -23, -306, 41, -226, 41, -226, 113, -83, 113, -83, 74, -211, 74, -211, 57, -195, 57, -195, 41, -115, 41)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_85t5d"]
 polygon = PackedVector2Array(72, 32, 104, 32, 104, 40, 72, 40)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_gdmfa"]
+polygon = PackedVector2Array(-9, -1, 8, -1, 8, 1, -9, 1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_coin6"]
+polygon = PackedVector2Array(25, -1, 25, 1, -27, 1, -27, -1)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ky5rq"]
+polygon = PackedVector2Array(6, 2, 11, 2, 15, 0, 15, 2, 11, 3, 6, 3, -6, -4, -6, -6)
 
 [sub_resource type="Gradient" id="Gradient_j08of"]
 interpolation_mode = 2
@@ -132,6 +125,8 @@ texture = SubResource("GradientTexture2D_mu1s5")
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
+sdf_oversize = 0
+sdf_scale = 0
 size = Vector2i(768, 432)
 
 [node name="EnviremtalPartOfEnvirmentalTest" parent="SubViewport" instance=ExtResource("1_b6j48")]
@@ -142,18 +137,6 @@ position = Vector2(192, 108)
 texture = SubResource("ViewportTexture_mjem6")
 
 [node name="Node2D" type="Node2D" parent="Envirment"]
-
-[node name="LightOccluder2D5" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
-position = Vector2(-133, -49)
-occluder = SubResource("OccluderPolygon2D_r37xo")
-
-[node name="LightOccluder2D6" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
-position = Vector2(-96, -54)
-occluder = SubResource("OccluderPolygon2D_r37xo")
-
-[node name="LightOccluder2D7" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
-position = Vector2(-45, -33)
-occluder = SubResource("OccluderPolygon2D_r37xo")
 
 [node name="LightOccluder2D8" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
 position = Vector2(-45, -33)
@@ -175,10 +158,31 @@ occluder = SubResource("OccluderPolygon2D_85t5d")
 position = Vector2(-440, -48)
 occluder = SubResource("OccluderPolygon2D_85t5d")
 
+[node name="LightOccluder2D13" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-59, -11)
+occluder = SubResource("OccluderPolygon2D_gdmfa")
+
+[node name="LightOccluder2D14" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(52, -11)
+occluder = SubResource("OccluderPolygon2D_gdmfa")
+
+[node name="LightOccluder2D15" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-3, -17)
+occluder = SubResource("OccluderPolygon2D_coin6")
+
+[node name="LightOccluder2D16" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(28, -12)
+occluder = SubResource("OccluderPolygon2D_ky5rq")
+
+[node name="LightOccluder2D17" parent="Envirment/Node2D" instance=ExtResource("5_nf44p")]
+position = Vector2(-36, -12)
+scale = Vector2(-1, 1)
+occluder = SubResource("OccluderPolygon2D_ky5rq")
+
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="Lights"]
-position = Vector2(148, 110)
+position = Vector2(188, 118)
 color = Color(0.156863, 0.156863, 0.156863, 0)
 energy = 0.0
 shadow_enabled = true
@@ -261,6 +265,15 @@ polygon = PackedVector2Array(3, 15, 3, 14, 7, 14, 7, 30, 6, 30, 6, 15)
 [node name="Sprite2D" type="Sprite2D" parent="Lights/PointLight2D4"]
 texture = SubResource("GradientTexture2D_51qsl")
 
+[node name="StiltHouseTest2" type="Sprite2D" parent="."]
+position = Vector2(156, 100)
+texture = ExtResource("7_8ltoj")
+
+[node name="StiltHouseTest3" type="Sprite2D" parent="."]
+position = Vector2(220, 100)
+texture = ExtResource("7_8ltoj")
+flip_h = true
+
 [node name="CursorFollower" parent="." instance=ExtResource("9_v20c8")]
 visible = false
 
@@ -271,8 +284,111 @@ energy = 0.0
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_nfx2l")
 
+[node name="StiltHouseTest" type="Sprite2D" parent="."]
+position = Vector2(311, 20)
+texture = ExtResource("13_o8sn2")
+
+[node name="ProceduralRope" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+numOfSegments = 35.0
+ropeDis = 4.0
+flexibility = 0.5
+isColidable = true
+
+[node name="start" type="Marker2D" parent="ProceduralRope"]
+position = Vector2(-160, 52)
+
+[node name="end" type="Marker2D" parent="ProceduralRope"]
+position = Vector2(32, 92)
+
+[node name="ProceduralRope2" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+endPointLocked = false
+numOfSegments = 10.0
+ropeDis = 2.0
+
+[node name="start" type="Marker2D" parent="ProceduralRope2"]
+position = Vector2(176, 109)
+
+[node name="end" type="Marker2D" parent="ProceduralRope2"]
+position = Vector2(176, 128)
+
+[node name="ProceduralRope3" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+endPointLocked = false
+numOfSegments = 10.0
+ropeDis = 2.0
+
+[node name="start" type="Marker2D" parent="ProceduralRope3"]
+position = Vector2(179, 109)
+
+[node name="end" type="Marker2D" parent="ProceduralRope3"]
+position = Vector2(179, 128)
+
+[node name="ProceduralRope4" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+endPointLocked = false
+numOfSegments = 10.0
+ropeDis = 2.0
+
+[node name="start" type="Marker2D" parent="ProceduralRope4"]
+position = Vector2(182, 109)
+
+[node name="end" type="Marker2D" parent="ProceduralRope4"]
+position = Vector2(182, 128)
+
+[node name="ProceduralRope5" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+endPointLocked = false
+numOfSegments = 10.0
+ropeDis = 2.0
+
+[node name="start" type="Marker2D" parent="ProceduralRope5"]
+position = Vector2(185, 109)
+
+[node name="end" type="Marker2D" parent="ProceduralRope5"]
+position = Vector2(185, 128)
+
+[node name="ProceduralRope6" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+endPointLocked = false
+numOfSegments = 10.0
+ropeDis = 2.0
+
+[node name="start" type="Marker2D" parent="ProceduralRope6"]
+position = Vector2(188, 109)
+
+[node name="end" type="Marker2D" parent="ProceduralRope6"]
+position = Vector2(188, 128)
+
+[node name="ProceduralRope7" parent="." node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeColor = Color(0.905882, 0.835294, 0.701961, 1)
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+numOfSegments = 30.0
+ropeDis = 2.0
+isColidable = true
+
+[node name="start" type="Marker2D" parent="ProceduralRope7"]
+position = Vector2(252, 96)
+
+[node name="end" type="Marker2D" parent="ProceduralRope7"]
+position = Vector2(272, 52)
+
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(62, 85)
+position = Vector2(62, 86)
 
 [node name="TestEnemy2" parent="." instance=ExtResource("11_jyroq")]
 position = Vector2(45, 183)
@@ -280,14 +396,11 @@ position = Vector2(45, 183)
 [node name="TestEnemy3" parent="." instance=ExtResource("11_jyroq")]
 position = Vector2(-25, 181)
 
-[node name="GoatheadCutscene" parent="." instance=ExtResource("9_mq0xw")]
-position = Vector2(239, 79)
-
 [node name="BackBufferCopy" type="BackBufferCopy" parent="."]
 copy_mode = 2
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(107, 87)
+position = Vector2(246, 86)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -2)

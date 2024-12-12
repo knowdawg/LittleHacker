@@ -1,7 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://doimwfp7cb8h"]
+[gd_scene load_steps=10 format=3 uid="uid://doimwfp7cb8h"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_rxxlu"]
-[ext_resource type="Texture2D" uid="uid://dbxjlqn25v1qy" path="res://Assets/Sprites/EnvirmentTextures/CoblestoneTexture.tres" id="2_5k7ln"]
+[ext_resource type="Texture2D" uid="uid://8yaj25wh5jum" path="res://Materials/BrokenBricks.png" id="2_8lfym"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="3_clohi"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="4_hk0n4"]
 
@@ -9,9 +9,9 @@
 shader = ExtResource("1_rxxlu")
 shader_parameter/paleteSize = 4.0
 shader_parameter/size = Vector2(768, 432)
-shader_parameter/noiseResolution = Vector2(512, 512)
+shader_parameter/noiseResolution = Vector2(96, 96)
 shader_parameter/shading = 0.04
-shader_parameter/noiseTex = ExtResource("2_5k7ln")
+shader_parameter/noiseTex = ExtResource("2_8lfym")
 shader_parameter/palete = ExtResource("3_clohi")
 
 [sub_resource type="Gradient" id="Gradient_u2xu1"]
@@ -23,11 +23,8 @@ gradient = SubResource("Gradient_u2xu1")
 width = 768
 height = 432
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0e157"]
-polygon = PackedVector2Array(77, 40, 109, 40, 109, 35, 77, 35)
-
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bqhib"]
-polygon = PackedVector2Array(-115, 17, -27, 17, -27, 25, -19, 25, -19, 33, -11, 33, -11, 41, -3, 41, -3, 49, 21, 49, 21, 57, 109, 57, 109, 49, 117, 49, 117, 41, 125, 41, 125, -23, 205, -23, 205, 169, -339, 169, -339, -23, -307, -23, -307, 41, -227, 41, -227, 113, -83, 113, -83, 73, -211, 73, -211, 57, -195, 57, -195, 41, -115, 41)
+polygon = PackedVector2Array(-115, 17, -27, 17, -27, 57, 21, 57, 109, 57, 109, 49, 117, 49, 117, 41, 125, 41, 125, -23, 205, -23, 205, 169, -339, 169, -339, -23, -307, -23, -307, 41, -227, 41, -227, 113, -83, 113, -83, 73, -211, 73, -211, 57, -195, 57, -195, 41, -115, 41)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mx2bi"]
 polygon = PackedVector2Array(72, 32, 104, 32, 104, 40, 72, 40)
@@ -39,20 +36,6 @@ position = Vector2(288, 162)
 material = SubResource("ShaderMaterial_rxmyq")
 position = Vector2(96, 54)
 texture = SubResource("GradientTexture2D_e0fs7")
-
-[node name="LightOccluder2D5" parent="." instance=ExtResource("4_hk0n4")]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(-37, 5)
-occluder = SubResource("OccluderPolygon2D_0e157")
-
-[node name="LightOccluder2D6" parent="." instance=ExtResource("4_hk0n4")]
-modulate = Color(1, 1, 1, 0)
-occluder = SubResource("OccluderPolygon2D_0e157")
-
-[node name="LightOccluder2D7" parent="." instance=ExtResource("4_hk0n4")]
-modulate = Color(1, 1, 1, 0)
-position = Vector2(51, 21)
-occluder = SubResource("OccluderPolygon2D_0e157")
 
 [node name="LightOccluder2D8" parent="." instance=ExtResource("4_hk0n4")]
 modulate = Color(1, 1, 1, 0)

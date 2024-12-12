@@ -1,4 +1,4 @@
-[gd_scene load_steps=168 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=171 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -51,6 +51,9 @@
 [ext_resource type="Script" path="res://Player/HackUI/hack_label.gd" id="38_o42eg"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hsgsq"]
+size = Vector2(2, 4)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yskb1"]
 size = Vector2(2, 4)
 
@@ -68,13 +71,11 @@ size = Vector2(2, 4)
 
 [sub_resource type="Gradient" id="Gradient_huiik"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.65, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+offsets = PackedFloat32Array(0.200811, 0.600406, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.170203, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ufcdm"]
 gradient = SubResource("Gradient_huiik")
-width = 16
-height = 16
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -2239,6 +2240,22 @@ _data = {
 "RESET": SubResource("Animation_ltc66")
 }
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jal7f"]
+bg_color = Color(0.12549, 0.180392, 0.215686, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+corner_radius_top_right = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_62h5m"]
+bg_color = Color(0, 0.866667, 0.352941, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 1)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite", "healthComponent", "hurtboxComponent", "stateMachine")]
 collision_layer = 4
 collision_mask = 35
@@ -2248,6 +2265,13 @@ weaponSprite = NodePath("WeaponDislocator/WeaponSprite")
 healthComponent = NodePath("HealthComponent")
 hurtboxComponent = NodePath("HurtboxComponent")
 stateMachine = NodePath("StateMachine")
+
+[node name="Test" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Test"]
+position = Vector2(0, -2)
+shape = SubResource("RectangleShape2D_hsgsq")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
@@ -2287,9 +2311,8 @@ IFRAMETIMER = 0.5
 shape = SubResource("RectangleShape2D_dxj8g")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-visible = false
 position = Vector2(0, -2)
-color = Color(0.196078, 0.196078, 0.196078, 1)
+color = Color(0.137255, 0.137255, 0.137255, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ufcdm")
 
@@ -2912,6 +2935,19 @@ libraries = {
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.07
 one_shot = true
+
+[node name="PlayerUI" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ProgressBar" type="ProgressBar" parent="PlayerUI"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 376.0
+offset_bottom = 48.0
+theme_override_font_sizes/font_size = 21
+theme_override_styles/background = SubResource("StyleBoxFlat_jal7f")
+theme_override_styles/fill = SubResource("StyleBoxFlat_62h5m")
+value = 50.0
 
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]

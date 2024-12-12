@@ -28,7 +28,7 @@ void light() {
 
 	float finished = 0.0;
 	//Marching Algorithm
-	for(int i = 0; i < 200; i++){
+	for(int i = 0; i < 300; i++){
 		if(disTraveled > distanceNeededToTravel){
 			finished = 1.0;
 			break;

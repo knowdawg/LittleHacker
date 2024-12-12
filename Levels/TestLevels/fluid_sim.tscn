@@ -96,6 +96,7 @@ void fragment() {
 	//Boundry Conditions
 	if(distance(UV, vec2(ballX, ballY)) < 0.05){
 		centerCell.rgb = vec3(normalize(UV - vec2(ballX, ballY)) * -vec2(1.0, 1.0), 1.0);
+		//centerCell.rgb = vec3(0.0, 0.0, 1.0);
 	}
 	//if(UV.y >= 0.98){
 		//if(abs(UV.x - 0.5) < 0.5){
@@ -108,14 +109,14 @@ void fragment() {
 	//centerCell.x = dis;
 
 	//centerCell.y *= smoothstep(.5,.48,abs(UV.y-0.5)); //alt
-	//centerCell.z -= 0.01 * dt;
-	//centerCell.x -= 0.02 * dt;
-	//centerCell.y -= 0.02 * dt;
+	centerCell.z -= 0.02 * dt;
+	centerCell.x -= 0.02 * dt;
+	centerCell.y -= 0.02 * dt;
 
-	float borders = 1.0 - abs(UV.x - 0.5);
-	borders = smoothstep(0.5, 0.7, borders);
-	borders -= smoothstep(0.5, 2.0, 1.0 - UV.y);
-	centerCell.z *= borders;
+	//float borders = 1.0 - abs(UV.x - 0.5);
+	//borders = smoothstep(0.5, 0.7, borders);
+	//borders -= smoothstep(0.5, 2.0, 1.0 - UV.y);
+	//centerCell.z *= borders;
 
 	//centerCell.z *= step(0.1, topCell.z + downCell.z + leftCell.z + rightCell.z);
 	//centerCell.x *= centerCell.z;
@@ -129,8 +130,8 @@ void fragment() {
 
 	//centerCell = clamp(centerCell, vec4(0.0), vec4(1.0));
 	centerCell.xy = centerCell.xy; //* vec2(-1.0, 1.0);
-	
-	
+
+
 	COLOR = centerCell;
 	//COLOR = vec4(0.0, 0.0, 0.0, 1.0);
 }
@@ -145,10 +146,10 @@ viewport_path = NodePath("SubViewport")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p8ird"]
 resource_local_to_scene = true
 shader = SubResource("Shader_eylr8")
-shader_parameter/resolution = Vector2(128, 128)
+shader_parameter/resolution = Vector2(256, 256)
 shader_parameter/gravity = Vector2(0, 0)
-shader_parameter/ballX = 0.0
-shader_parameter/ballY = 0.73
+shader_parameter/ballX = 0.61
+shader_parameter/ballY = 0.59
 shader_parameter/prevFrame = SubResource("ViewportTexture_3ovcw")
 shader_parameter/externalForces = SubResource("ViewportTexture_6ow4v")
 

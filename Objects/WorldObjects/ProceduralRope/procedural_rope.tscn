@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://dow45nohhanl5"]
+
+[ext_resource type="Script" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.gd" id="1_ql1l5"]
+
+[node name="ProceduralRope" type="Node"]
+script = ExtResource("1_ql1l5")
+endPointLocked = true
+numOfSegments = 20.0
+
+[node name="Line2D" type="Line2D" parent="."]
+width = 1.0
+
+[node name="RopeSegments" type="Node2D" parent="."]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+visible = false
+collision_layer = 2
+collision_mask = 0

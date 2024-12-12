@@ -20,6 +20,7 @@ var rollJumpBoost : Vector2 = Vector2.ZERO
 var dashV : Vector2 = Vector2.ZERO
 var coyoteTime : float = 0.0
 func update_physics(delta, canFall : bool = true, canMove : bool = true):
+	
 	velocity = Vector2.ZERO
 	
 	if canFall:
@@ -42,6 +43,11 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
+		
+		if Input.is_action_pressed("Down"):
+			set_collision_mask_value(2, false)
+		else:
+			set_collision_mask_value(2, true)
 	
 	velocity.x += v.x
 	
