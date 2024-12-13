@@ -6,10 +6,10 @@ uniform float widthOfTexture : hint_range(0.0, 100.0);
 
 void fragment() {
 	vec4 c = vec4(1.0);
-	
+
 	vec4 t = texture(text, UV * widthOfRope / widthOfTexture);
 	c = t;
-	
+
 	COLOR = c;
 }
 

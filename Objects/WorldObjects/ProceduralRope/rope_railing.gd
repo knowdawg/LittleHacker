@@ -6,6 +6,8 @@ var rope : ProceduralRope
 
 var procRope = preload("res://Objects/WorldObjects/ProceduralRope/procedural_rope.tscn")
 
+var offsetMultiplier : float = 1.0
+
 func _process(_delta: float) -> void:
 	if ropeIndex and rope:
 		if ropeIndex < rope.ropeSegments.size() - 1 and ropeIndex != 0:
@@ -16,7 +18,7 @@ func _process(_delta: float) -> void:
 			rotation = a
 			
 			#offset in the corect direction
-			var x = Vector2(-sin(a), cos(a))
+			var x = Vector2(-sin(a), cos(a)) * offsetMultiplier
 			position = x * texture.get_size() / 2.0
 		else: #original ropes always point strait up so offset them acordingly
 			position = Vector2(0.0, -1.0) * texture.get_size() / 2.0
@@ -26,10 +28,18 @@ func _process(_delta: float) -> void:
 func _ready() -> void:
 	if ropeIndex == 0:
 		return
+	
+	if rope.railingsOnlyOnFront == false:
+		if randf() > 0.5:
+			offsetMultiplier = -1.0
+	
+	if rope.conectRailins == false:
+		return
 	#create a new rope and conect it to the prev rope
 	var conectedRailing : RopeRailing = rope.railings[rope.railings.find(self) - 1]
 	var sizeOfRope : float = global_position.distance_to(conectedRailing.global_position)
 	var r = procRope.instantiate()
+	r.ropeTexture = rope.railingRopeTexture
 	r.numOfRailings = 0
 	r.ropeWidth = 0.5
 	r.startPoint = self

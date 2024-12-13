@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="4_hk0n4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rxmyq"]
+resource_local_to_scene = true
 shader = ExtResource("1_rxxlu")
 shader_parameter/paleteSize = 4.0
 shader_parameter/size = Vector2(768, 432)

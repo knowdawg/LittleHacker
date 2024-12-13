@@ -40,7 +40,7 @@ void light() {
 		sdfVal = texture_sdf(screen_uv_to_sdf(curPos));
 		intensity += falloff * min(sdfVal, 0.0); //If sdfVal in negative, it is subtracted. If it is positive, nothing happens because of the min function
 		disTraveled += screenSize.x * abs(sdfVal);
-		disTraveled += 0.001;//0.005 //Bump the distance traveled to speed up the algorithm and to prevent the raymarching from moving zero every loop.
+		disTraveled += 0.001;//0.005//Bump the distance traveled to speed up the algorithm and to prevent the raymarching from moving zero every loop.
 	}
 	intensity *= finished;
 

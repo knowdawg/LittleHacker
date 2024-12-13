@@ -2,12 +2,17 @@ extends Node
 class_name ProceduralRope
 
 @export_group("Rope Visuals")
-@export var ropeColor : Color
+@export var ropeTexture : Texture2D
 @export var ropeWidth : float = 1.0
-@export var railingTexture : Texture2D
+@export_subgroup("Railings")
 @export var numOfRailings : int = 4
+@export var railingTexture : Texture2D
+@export var conectRailins : bool = false
+@export var railingsOnlyOnFront : bool = false
+@export var railingRopeTexture : Texture2D
 
 @export_group("Rope Simulation")
+@export var gravity : Vector2 = Vector2(0.0, 0.1)
 @export var startPoint : Node2D
 @export var endPoint : Node2D
 @export var startPointLocked : bool = true
@@ -38,6 +43,7 @@ func _ready() -> void:
 	#Create the Segments
 	for i in range(numOfSegments):
 		var r = RopeSegment.new()
+		r.gravity = gravity
 		r.parent = self
 		r.flexibility = flexibility
 		r.global_position = startPoint.global_position + ((i / numOfSegments) * (endPoint.global_position - startPoint.global_position))
@@ -52,7 +58,7 @@ func _ready() -> void:
 			$StaticBody2D.add_child(c)
 	
 	#set line atribures
-	line.default_color = ropeColor
+	line.material.set_shader_parameter("text", ropeTexture)
 	line.width = ropeWidth
 	
 	#Create the Railings
