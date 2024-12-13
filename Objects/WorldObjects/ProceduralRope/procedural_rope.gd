@@ -1,7 +1,11 @@
 extends Node
 class_name ProceduralRope
 
+@export_group("Rope Visuals")
 @export var ropeColor : Color
+@export var ropeWidth : float = 1.0
+@export var railingTexture : Texture2D
+@export var numOfRailings : int = 4
 
 @export_group("Rope Simulation")
 @export var startPoint : Node2D
@@ -17,6 +21,9 @@ class_name ProceduralRope
 
 @onready var line = $Line2D
 @onready var ropeSegments : Array[RopeSegment]
+var railings : Array[RopeRailing]
+
+var railingGap : int
 
 func _ready() -> void:
 	if !startPoint or !endPoint:
@@ -28,6 +35,7 @@ func _ready() -> void:
 	else:
 		$StaticBody2D.set_collision_layer_value(2, false)
 	
+	#Create the Segments
 	for i in range(numOfSegments):
 		var r = RopeSegment.new()
 		r.parent = self
@@ -36,37 +44,58 @@ func _ready() -> void:
 		ropeSegments.append(r)
 		$RopeSegments.add_child(r)
 		
-		var c = CollisionShape2D.new()
-		c.shape = SegmentShape2D.new()
-		c.one_way_collision = true
-		$StaticBody2D.add_child(c)
+		#create Collition Shapes
+		if isColidable:
+			var c = CollisionShape2D.new()
+			c.shape = SegmentShape2D.new()
+			c.one_way_collision = true
+			$StaticBody2D.add_child(c)
 	
+	#set line atribures
 	line.default_color = ropeColor
+	line.width = ropeWidth
 	
+	#Create the Railings
+	if numOfRailings > 0:
+		railingGap = floor(numOfSegments / numOfRailings) #Number of segments between each railing
+		for i in numOfRailings + 1: #+1 so that there is one at the very end
+			var ropeIndex : int = i * railingGap
+			ropeIndex = clamp(ropeIndex, 0, numOfSegments -1)
+			var s : RopeRailing = RopeRailing.new()
+			s.texture = railingTexture
+			s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
+			s.rope = self
+			s.ropeIndex = ropeIndex
+			railings.append(s)
+			ropeSegments[ropeIndex].add_child(s)
+		
+	#Precalculate the rope a bit so its not flying everywhere at the start
 	for i in range(100):
-		solveRope()
+		solveRope(1.0 / 60.0)
 
 func _process(delta: float) -> void:
-	solveRope()
+	solveRope(delta)
 	
 	line.clear_points()
 	for s in ropeSegments:
 		line.add_point(s.global_position)
 	
-	for c in $StaticBody2D.get_children().size() - 1:
-		var col : CollisionShape2D = $StaticBody2D.get_child(c)
-		var sh : SegmentShape2D = col.shape
-		sh.a = ropeSegments[c].global_position
-		sh.b = ropeSegments[c + 1].global_position
+	#get collition Shapes
+	if isColidable:
+		for c in $StaticBody2D.get_children().size() - 1:
+			var col : CollisionShape2D = $StaticBody2D.get_child(c)
+			var sh : SegmentShape2D = col.shape
+			sh.a = ropeSegments[c].global_position
+			sh.b = ropeSegments[c + 1].global_position
 
-func solveRope():
+func solveRope(delta):
 	for s in ropeSegments:
-		s.solvePosition()
+		s.solvePosition(delta)
 	
-	for i in range(25):
+	for i in range(25): #More itterations = more acurate ropes
 		solveContraints()
 
-func solveContraints():
+func solveContraints(): #Black box magical method !!!!
 	if startPointLocked:
 		ropeSegments[0].global_position = startPoint.global_position
 	if endPointLocked:

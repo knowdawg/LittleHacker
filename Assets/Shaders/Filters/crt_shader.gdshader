@@ -15,6 +15,7 @@ vec2 curve(vec2 uv){
 }
 
 void fragment() {
+	vec4 ogScreen = texture(TEXTURE, UV);
 	//Simulate CRT screen curve
 	vec2 curvedUV = curve(UV);
 
@@ -42,5 +43,5 @@ void fragment() {
 	c.rgb -= seperator;
 	c.rgb *= darkEdges;
 
-	COLOR = c;
+	COLOR = c;//ogScreen;//c;
 }

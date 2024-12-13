@@ -1,16 +1,31 @@
-[gd_scene load_steps=2 format=3 uid="uid://dow45nohhanl5"]
+[gd_scene load_steps=6 format=3 uid="uid://dow45nohhanl5"]
 
 [ext_resource type="Script" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.gd" id="1_ql1l5"]
+[ext_resource type="Texture2D" uid="uid://kdjg3lbm285l" path="res://Assets/Sprites/WorldObjects/RopeRailing.png" id="2_ghpcp"]
+[ext_resource type="Shader" path="res://Objects/WorldObjects/ProceduralRope/RopeMaterial.gdshader" id="2_w2cyb"]
+[ext_resource type="Texture2D" uid="uid://bc6o3t40m07u2" path="res://Assets/Sprites/WorldObjects/Rope.png" id="3_yy2di"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wbcct"]
+shader = ExtResource("2_w2cyb")
+shader_parameter/widthOfRope = 1.0
+shader_parameter/widthOfTexture = 16.0
+shader_parameter/text = ExtResource("3_yy2di")
 
 [node name="ProceduralRope" type="Node"]
 script = ExtResource("1_ql1l5")
+railingTexture = ExtResource("2_ghpcp")
 endPointLocked = true
 numOfSegments = 20.0
 
-[node name="Line2D" type="Line2D" parent="."]
-width = 1.0
-
 [node name="RopeSegments" type="Node2D" parent="."]
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_wbcct")
+points = PackedVector2Array(-107, -51, 73, -51)
+width = 1.0
+texture_mode = 1
+begin_cap_mode = 2
+end_cap_mode = 2
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false
