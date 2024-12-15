@@ -205,18 +205,18 @@ position = Vector2(460, 170)
 texture = SubResource("ViewportTexture_8rvlm")
 
 [node name="Grass" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(163, -122)
+position = Vector2(162, -121)
 texture = ExtResource("9_ngoqs")
 
 [node name="Grass2" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(154, -122)
+position = Vector2(153, -121)
 texture = ExtResource("9_ngoqs")
 
 [node name="Grass3" parent="Sprite2D" instance=ExtResource("8_wmvar")]
 position = Vector2(185, -122)
 
 [node name="Grass4" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(177, -122)
+position = Vector2(176, -121)
 texture = ExtResource("9_234pb")
 
 [node name="Grass5" parent="Sprite2D" instance=ExtResource("8_wmvar")]

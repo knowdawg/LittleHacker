@@ -11,7 +11,9 @@ void fragment() {
 	if(c.r == 0.5 || c.r == 0.0){
 		c.r = o.r;
 	}
-	//c.r += o.r;
+	if(o.g > c.g){
+		c.g = o.g;
+	}
 	
 	COLOR = c;
 }
