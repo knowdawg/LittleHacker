@@ -87,7 +87,16 @@ func _physics_process(delta):
 
 func _process(_delta: float) -> void:
 	Game.player = self
-
+	
+	if !VelocityBuffer.shapes.has($ColorRect):
+		VelocityBuffer.shapes.append($ColorRect)
+	
+	var thing = -clamp(velocity.x / 200.0, -0.5, 0.5)
+	if velocity.x != 0:
+		$ColorRect.color = Color(thing + 0.5, 1.0, 0.0, 1.0)
+	else:
+		$ColorRect.color = Color(0.0, 0.0, 0.0, 1.0)
+		
 func _ready():
 	$HealthComponent.grabbed.connect(grabbed)
 	Game.enterHackMode.connect(enterHackMode)

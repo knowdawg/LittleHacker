@@ -8,14 +8,17 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l0pqa"]
 shader = ExtResource("1_vlhbu")
-shader_parameter/size = Vector2(100, 300)
-shader_parameter/blend = 0.01
+shader_parameter/size = Vector2(300, 300)
+shader_parameter/blend = 4.75e-08
+shader_parameter/smoothness = 2.375e-08
+shader_parameter/advantage = -0.7
 shader_parameter/paleteSize1 = 4.0
 shader_parameter/noiseResolution1 = Vector2(96, 96)
 shader_parameter/shading1 = 0.04
 shader_parameter/paleteSize2 = 6.0
 shader_parameter/noiseResolution2 = Vector2(512, 512)
 shader_parameter/shading2 = 0.03
+shader_parameter/blendOffsetMultiplier = 3.0
 shader_parameter/noiseTex1 = ExtResource("2_mqsw5")
 shader_parameter/palete1 = ExtResource("3_c738h")
 shader_parameter/noiseTex2 = ExtResource("3_odf4b")
@@ -27,17 +30,17 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_jqmt7"]
 gradient = SubResource("Gradient_fvto2")
-width = 100
+width = 300
 height = 300
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_0psqh"]
-polygon = PackedVector2Array(-195, -1, 205, -1, 205, 191, -179, 191)
+polygon = PackedVector2Array(-307, -1, 205, -1, 205, 191, -298, 191)
 
 [node name="EnvirmentTestingMix" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_l0pqa")
-position = Vector2(50, 150)
+position = Vector2(150, 150)
 texture = SubResource("GradientTexture2D_jqmt7")
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]

@@ -2266,6 +2266,13 @@ healthComponent = NodePath("HealthComponent")
 hurtboxComponent = NodePath("HurtboxComponent")
 stateMachine = NodePath("StateMachine")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_left = -2.0
+offset_top = -6.0
+offset_right = 2.0
+color = Color(1, 1, 0, 1)
+
 [node name="Test" type="Area2D" parent="."]
 collision_layer = 0
 

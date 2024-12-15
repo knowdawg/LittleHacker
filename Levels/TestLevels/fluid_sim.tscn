@@ -1,23 +1,15 @@
-[gd_scene load_steps=12 format=3 uid="uid://duuow1rs2d810"]
+[gd_scene load_steps=10 format=3 uid="uid://duuow1rs2d810"]
 
 [ext_resource type="Shader" path="res://Levels/TestLevels/SDFListenerFluidSim.gdshader" id="1_a5oeb"]
 [ext_resource type="Shader" path="res://Levels/TestLevels/fluid_sim_translator.gdshader" id="2_hyw44"]
 
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_pg8hj"]
-frequency = 0.04
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nixhi"]
-width = 128
-height = 128
-seamless = true
-seamless_blend_skirt = 1.0
-noise = SubResource("FastNoiseLite_pg8hj")
+[sub_resource type="ViewportTexture" id="ViewportTexture_u6ktg"]
+viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ihw2i"]
 resource_local_to_scene = true
 shader = ExtResource("1_a5oeb")
-shader_parameter/noise = SubResource("NoiseTexture2D_nixhi")
+shader_parameter/smoke = SubResource("ViewportTexture_u6ktg")
 
 [sub_resource type="Shader" id="Shader_eylr8"]
 code = "shader_type canvas_item;
@@ -137,21 +129,17 @@ void fragment() {
 }
 "
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_6ow4v"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_dbwyw"]
 viewport_path = NodePath("SDFListener")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_3ovcw"]
-viewport_path = NodePath("SubViewport")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p8ird"]
 resource_local_to_scene = true
 shader = SubResource("Shader_eylr8")
 shader_parameter/resolution = Vector2(256, 256)
 shader_parameter/gravity = Vector2(0, 0)
-shader_parameter/ballX = 0.61
-shader_parameter/ballY = 0.59
-shader_parameter/prevFrame = SubResource("ViewportTexture_3ovcw")
-shader_parameter/externalForces = SubResource("ViewportTexture_6ow4v")
+shader_parameter/ballX = 0.39
+shader_parameter/ballY = 0.39
+shader_parameter/prevFrame = SubResource("ViewportTexture_dbwyw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sm4on"]
 shader = ExtResource("2_hyw44")
@@ -164,7 +152,6 @@ viewport_path = NodePath("SubViewport")
 [node name="SDFListener" type="SubViewport" parent="."]
 size = Vector2i(128, 128)
 render_target_clear_mode = 2
-render_target_update_mode = 4
 
 [node name="SDFListener" type="ColorRect" parent="SDFListener"]
 material = SubResource("ShaderMaterial_ihw2i")
@@ -177,8 +164,6 @@ color = Color(0, 0, 0, 1)
 
 [node name="SubViewport" type="SubViewport" parent="."]
 size = Vector2i(128, 128)
-render_target_clear_mode = 2
-render_target_update_mode = 4
 
 [node name="ColorRect" type="ColorRect" parent="SubViewport"]
 material = SubResource("ShaderMaterial_p8ird")
@@ -192,4 +177,5 @@ color = Color(0, 0, 0, 1)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
 material = SubResource("ShaderMaterial_sm4on")
+position = Vector2(0, -64)
 texture = SubResource("ViewportTexture_o2gd8")

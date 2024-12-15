@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=41 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -9,6 +9,9 @@
 [ext_resource type="PackedScene" uid="uid://b5u4m4y4r72tk" path="res://Levels/TestLevels/envirment_testing_mix.tscn" id="6_a158i"]
 [ext_resource type="Texture2D" uid="uid://f3g82nbvqcei" path="res://Assets/Sprites/WorldObjects/StiltHouseTest2.png" id="7_8ltoj"]
 [ext_resource type="PackedScene" uid="uid://cepxb5yr5odxp" path="res://Levels/TestLevels/envirement_test_mossy_area.tscn" id="7_bs0kl"]
+[ext_resource type="PackedScene" uid="uid://bk47m1sonbns4" path="res://Objects/WorldObjects/Grass/grass.tscn" id="8_wmvar"]
+[ext_resource type="Texture2D" uid="uid://difecvmbpjmiu" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="9_234pb"]
+[ext_resource type="Texture2D" uid="uid://dubxjhfu1npue" path="res://Assets/Sprites/WorldObjects/Grass3.png" id="9_ngoqs"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="9_plpma"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
 [ext_resource type="PackedScene" uid="uid://dow45nohhanl5" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.tscn" id="10_52a1i"]
@@ -21,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bpeh571apnjq2" path="res://Assets/Sprites/WorldObjects/StiltHouseTest.png" id="13_o8sn2"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="16_a5nql"]
 [ext_resource type="Script" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
+[ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="18_rpvuy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -42,7 +46,7 @@ height = 108
 viewport_path = NodePath("SubViewport")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6t2ub"]
-polygon = PackedVector2Array(-115, 17, -26, 17, -26, 57, 21, 57, 125, 57, 125, -23, 384, -23, 384, 73, 575, 73, 575, 42, 447, 42, 447, -23, 639, -23, 639, 129, 429, 169, -339, 169, -339, -23, -306, -23, -306, 41, -226, 41, -226, 113, -83, 113, -83, 74, -211, 74, -211, 57, -195, 57, -195, 41, -115, 41)
+polygon = PackedVector2Array(-115, 17, -26, 17, -26, 57, 21, 57, 125, 57, 125, -23, 592, -23, 592, 73, 783, 73, 783, 42, 655, 42, 655, -23, 848, -23, 847, 129, 429, 169, -339, 169, -339, -23, -306, -23, -306, 41, -226, 41, -226, 113, -83, 113, -83, 74, -211, 74, -211, 57, -195, 57, -195, 41, -115, 41)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_85t5d"]
 polygon = PackedVector2Array(72, 32, 104, 32, 104, 40, 72, 40)
@@ -90,13 +94,18 @@ shader = ExtResource("13_mu6m5")
 texture_filter = 1
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
+visible = false
 color = Color(0.819608, 0.878431, 0.937255, 1)
+
+[node name="CanvasModulate2" type="CanvasModulate" parent="."]
+visible = false
+color = Color(0.913725, 1, 0.92549, 1)
 
 [node name="ColorRect" type="ColorRect" parent="."]
 offset_left = -192.0
 offset_top = -128.0
-offset_right = 576.0
-offset_bottom = 392.0
+offset_right = 982.0
+offset_bottom = 437.0
 color = Color(0, 0, 0, 1)
 
 [node name="Background" type="Sprite2D" parent="."]
@@ -180,21 +189,41 @@ size = Vector2i(384, 216)
 [node name="EnvirementTestMossyArea" parent="SubViewport3" instance=ExtResource("7_bs0kl")]
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-position = Vector2(594, 96)
+position = Vector2(802, 96)
 texture = SubResource("ViewportTexture_oli84")
 
 [node name="SubViewport2" type="SubViewport" parent="."]
 transparent_bg = true
 sdf_oversize = 0
 sdf_scale = 0
-size = Vector2i(100, 300)
+size = Vector2i(300, 300)
 
 [node name="EnvirmentTestingMix" parent="SubViewport2" instance=ExtResource("6_a158i")]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(364, 170)
+position = Vector2(460, 170)
 texture = SubResource("ViewportTexture_8rvlm")
-flip_h = true
+
+[node name="Grass" parent="Sprite2D" instance=ExtResource("8_wmvar")]
+position = Vector2(163, -122)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass2" parent="Sprite2D" instance=ExtResource("8_wmvar")]
+position = Vector2(154, -122)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass3" parent="Sprite2D" instance=ExtResource("8_wmvar")]
+position = Vector2(185, -122)
+
+[node name="Grass4" parent="Sprite2D" instance=ExtResource("8_wmvar")]
+position = Vector2(177, -122)
+texture = ExtResource("9_234pb")
+
+[node name="Grass5" parent="Sprite2D" instance=ExtResource("8_wmvar")]
+position = Vector2(143, -122)
+
+[node name="Grass6" parent="Sprite2D" instance=ExtResource("8_wmvar")]
+position = Vector2(135, -122)
 
 [node name="Lights" type="Node2D" parent="."]
 
@@ -325,6 +354,7 @@ startPoint = NodePath("start")
 endPoint = NodePath("end")
 numOfSegments = 14.0
 ropeDis = 1.0
+flexibility = 0.0
 isColidable = true
 
 [node name="start" type="Marker2D" parent="Ropes/ProceduralRope8"]
@@ -343,6 +373,7 @@ startPoint = NodePath("start")
 endPoint = NodePath("end")
 numOfSegments = 12.0
 ropeDis = 2.0
+flexibility = 0.0
 isColidable = true
 
 [node name="start" type="Marker2D" parent="Ropes/ProceduralRope10"]
@@ -361,6 +392,7 @@ startPoint = NodePath("start")
 endPoint = NodePath("end")
 numOfSegments = 12.0
 ropeDis = 2.0
+flexibility = 0.0
 isColidable = true
 
 [node name="start" type="Marker2D" parent="Ropes/ProceduralRope11"]
@@ -368,6 +400,81 @@ position = Vector2(224, 90)
 
 [node name="end" type="Marker2D" parent="Ropes/ProceduralRope11"]
 position = Vector2(245, 96)
+
+[node name="ProceduralRope12" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeTexture = ExtResource("11_nqees")
+numOfRailings = 12
+conectRailins = true
+railingsOnlyOnFront = true
+railingRopeTexture = ExtResource("11_nqees")
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+numOfSegments = 24.0
+ropeDis = 3.0
+flexibility = 0.0
+isColidable = true
+
+[node name="start" type="Marker2D" parent="Ropes/ProceduralRope12"]
+position = Vector2(739, 52)
+
+[node name="end" type="Marker2D" parent="Ropes/ProceduralRope12"]
+position = Vector2(802, 76)
+
+[node name="ProceduralRope15" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeTexture = ExtResource("11_nqees")
+numOfRailings = 10
+conectRailins = true
+railingsOnlyOnFront = true
+railingRopeTexture = ExtResource("11_nqees")
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+ropeDis = 3.0
+flexibility = 0.0
+isColidable = true
+
+[node name="start" type="Marker2D" parent="Ropes/ProceduralRope15"]
+position = Vector2(739, 52)
+
+[node name="end" type="Marker2D" parent="Ropes/ProceduralRope15"]
+position = Vector2(802, 52)
+
+[node name="ProceduralRope13" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeTexture = ExtResource("11_nqees")
+numOfRailings = 12
+conectRailins = true
+railingsOnlyOnFront = true
+railingRopeTexture = ExtResource("11_nqees")
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+numOfSegments = 24.0
+ropeDis = 3.0
+flexibility = 0.0
+isColidable = true
+
+[node name="start" type="Marker2D" parent="Ropes/ProceduralRope13"]
+position = Vector2(739, 100)
+
+[node name="end" type="Marker2D" parent="Ropes/ProceduralRope13"]
+position = Vector2(802, 76)
+
+[node name="ProceduralRope14" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
+ropeTexture = ExtResource("11_nqees")
+numOfRailings = 12
+conectRailins = true
+railingsOnlyOnFront = true
+railingRopeTexture = ExtResource("11_nqees")
+startPoint = NodePath("start")
+endPoint = NodePath("end")
+numOfSegments = 24.0
+ropeDis = 3.0
+flexibility = 0.0
+isColidable = true
+
+[node name="start" type="Marker2D" parent="Ropes/ProceduralRope14"]
+position = Vector2(739, 100)
+
+[node name="end" type="Marker2D" parent="Ropes/ProceduralRope14"]
+position = Vector2(802, 116)
 
 [node name="Vine" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
 ropeTexture = ExtResource("11_nqees")
@@ -380,10 +487,10 @@ numOfSegments = 14.0
 ropeDis = 2.0
 
 [node name="start" type="Marker2D" parent="Ropes/Vine"]
-position = Vector2(608, 117)
+position = Vector2(816, 117)
 
 [node name="end" type="Marker2D" parent="Ropes/Vine"]
-position = Vector2(608, 144)
+position = Vector2(816, 144)
 
 [node name="Vine2" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
 ropeTexture = ExtResource("11_nqees")
@@ -396,124 +503,10 @@ numOfSegments = 10.0
 ropeDis = 2.0
 
 [node name="start" type="Marker2D" parent="Ropes/Vine2"]
-position = Vector2(616, 117)
+position = Vector2(824, 117)
 
 [node name="end" type="Marker2D" parent="Ropes/Vine2"]
-position = Vector2(616, 136)
-
-[node name="Grass" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("11_nqees")
-ropeWidth = 0.5
-numOfRailings = 0
-railingTexture = ExtResource("12_foyy8")
-gravity = Vector2(0, -0.5)
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-endPointLocked = false
-numOfSegments = 3.0
-ropeDis = 1.0
-flexibility = 0.0
-
-[node name="start" type="Marker2D" parent="Ropes/Grass"]
-position = Vector2(600, 148)
-
-[node name="end" type="Marker2D" parent="Ropes/Grass"]
-position = Vector2(600, 144)
-
-[node name="Grass2" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("11_nqees")
-ropeWidth = 0.5
-numOfRailings = 0
-railingTexture = ExtResource("12_foyy8")
-gravity = Vector2(0, -0.5)
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-endPointLocked = false
-numOfSegments = 3.0
-ropeDis = 1.0
-flexibility = 0.0
-
-[node name="start" type="Marker2D" parent="Ropes/Grass2"]
-position = Vector2(601, 148)
-
-[node name="end" type="Marker2D" parent="Ropes/Grass2"]
-position = Vector2(601, 144)
-
-[node name="Grass3" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("11_nqees")
-ropeWidth = 0.5
-numOfRailings = 0
-railingTexture = ExtResource("12_foyy8")
-gravity = Vector2(0, -0.5)
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-endPointLocked = false
-numOfSegments = 3.0
-ropeDis = 1.0
-flexibility = 0.0
-
-[node name="start" type="Marker2D" parent="Ropes/Grass3"]
-position = Vector2(603, 148)
-
-[node name="end" type="Marker2D" parent="Ropes/Grass3"]
-position = Vector2(603, 144)
-
-[node name="Grass4" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("11_nqees")
-ropeWidth = 0.5
-numOfRailings = 0
-railingTexture = ExtResource("12_foyy8")
-gravity = Vector2(0, -0.5)
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-endPointLocked = false
-numOfSegments = 3.0
-ropeDis = 1.0
-flexibility = 0.0
-
-[node name="start" type="Marker2D" parent="Ropes/Grass4"]
-position = Vector2(605, 148)
-
-[node name="end" type="Marker2D" parent="Ropes/Grass4"]
-position = Vector2(605, 144)
-
-[node name="Grass5" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("11_nqees")
-ropeWidth = 0.5
-numOfRailings = 0
-railingTexture = ExtResource("12_foyy8")
-gravity = Vector2(0, -0.5)
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-endPointLocked = false
-numOfSegments = 3.0
-ropeDis = 1.0
-flexibility = 0.0
-
-[node name="start" type="Marker2D" parent="Ropes/Grass5"]
-position = Vector2(606, 148)
-
-[node name="end" type="Marker2D" parent="Ropes/Grass5"]
-position = Vector2(606, 144)
-
-[node name="Grass6" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("11_nqees")
-ropeWidth = 0.5
-numOfRailings = 0
-railingTexture = ExtResource("12_foyy8")
-gravity = Vector2(0, -0.5)
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-endPointLocked = false
-numOfSegments = 3.0
-ropeDis = 1.0
-flexibility = 0.0
-
-[node name="start" type="Marker2D" parent="Ropes/Grass6"]
-position = Vector2(608, 148)
-
-[node name="end" type="Marker2D" parent="Ropes/Grass6"]
-position = Vector2(608, 144)
+position = Vector2(824, 136)
 
 [node name="StiltHouseTest" type="Sprite2D" parent="."]
 position = Vector2(311, 20)
@@ -542,12 +535,12 @@ visible = false
 copy_mode = 2
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(574, 129)
+position = Vector2(655, 31)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(0, -2)
 zoom = Vector2(10, 10)
 position_smoothing_speed = 10.0
+script = ExtResource("18_rpvuy")
 
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 z_index = 100

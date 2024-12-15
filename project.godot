@@ -24,6 +24,7 @@ config/icon="res://icon.svg"
 EnemyHealthBarPositionManager="*res://Classes/EnemyHealthBarPositionManager.gd"
 Game="*res://Classes/Game.gd"
 HackCommandManager="*res://Classes/HackCommandManager.gd"
+VelocityBuffer="*res://Classes/VelocityBuffer/velocity_buffer.tscn"
 
 [display]
 
@@ -118,3 +119,10 @@ HackAttack={
 [physics]
 
 2d/default_gravity=500.0
+
+[shader_globals]
+
+VelocityBuffer={
+"type": "sampler2D",
+"value": ""
+}

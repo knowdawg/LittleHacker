@@ -1,6 +1,7 @@
 extends Node
 
 var player : Player
+var camera : Camera2D
 
 var inTerminal = false
 signal terminalOn

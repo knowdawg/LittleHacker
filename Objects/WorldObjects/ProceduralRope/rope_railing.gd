@@ -19,7 +19,7 @@ func _process(_delta: float) -> void:
 			
 			#offset in the corect direction
 			var x = Vector2(-sin(a), cos(a)) * offsetMultiplier
-			position = x * texture.get_size() / 2.0
+			position = x * Vector2(0.5, 0.5) + x * texture.get_size() / 2.0
 		else: #original ropes always point strait up so offset them acordingly
 			position = Vector2(0.0, -1.0) * texture.get_size() / 2.0
 	else:
@@ -46,8 +46,8 @@ func _ready() -> void:
 	r.endPoint = conectedRailing
 	r.startPointLocked = true
 	r.endPointLocked = true
-	r.numOfSegments = sizeOfRope * 0.5
-	r.ropeDis = 2.5
+	r.numOfSegments = sizeOfRope * 0.7
+	r.ropeDis = 2.0
 	r.flexibility = 1.0
 	r.isColidable = false
 	
