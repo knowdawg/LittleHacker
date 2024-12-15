@@ -1,4 +1,4 @@
-[gd_scene load_steps=41 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=40 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -10,7 +10,6 @@
 [ext_resource type="Texture2D" uid="uid://f3g82nbvqcei" path="res://Assets/Sprites/WorldObjects/StiltHouseTest2.png" id="7_8ltoj"]
 [ext_resource type="PackedScene" uid="uid://cepxb5yr5odxp" path="res://Levels/TestLevels/envirement_test_mossy_area.tscn" id="7_bs0kl"]
 [ext_resource type="PackedScene" uid="uid://bk47m1sonbns4" path="res://Objects/WorldObjects/Grass/grass.tscn" id="8_wmvar"]
-[ext_resource type="Texture2D" uid="uid://difecvmbpjmiu" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="9_234pb"]
 [ext_resource type="Texture2D" uid="uid://dubxjhfu1npue" path="res://Assets/Sprites/WorldObjects/Grass3.png" id="9_ngoqs"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="9_plpma"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="9_v20c8"]
@@ -203,27 +202,6 @@ size = Vector2i(300, 300)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(460, 170)
 texture = SubResource("ViewportTexture_8rvlm")
-
-[node name="Grass" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(162, -121)
-texture = ExtResource("9_ngoqs")
-
-[node name="Grass2" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(153, -121)
-texture = ExtResource("9_ngoqs")
-
-[node name="Grass3" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(185, -122)
-
-[node name="Grass4" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(176, -121)
-texture = ExtResource("9_234pb")
-
-[node name="Grass5" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(143, -122)
-
-[node name="Grass6" parent="Sprite2D" instance=ExtResource("8_wmvar")]
-position = Vector2(135, -122)
 
 [node name="Lights" type="Node2D" parent="."]
 
@@ -541,6 +519,71 @@ position = Vector2(655, 31)
 zoom = Vector2(10, 10)
 position_smoothing_speed = 10.0
 script = ExtResource("18_rpvuy")
+
+[node name="Decorations" type="Node2D" parent="."]
+
+[node name="Grass" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(624, 51)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass2" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(613, 51)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass3" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(645, 49)
+
+[node name="Grass4" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(636, 51)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass5" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(603, 49)
+
+[node name="Grass6" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(595, 49)
+
+[node name="Grass7" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(608, 52)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass8" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(597, 52)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass9" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(629, 50)
+
+[node name="Grass10" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(620, 52)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass11" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(587, 50)
+
+[node name="Grass12" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(579, 50)
+
+[node name="Grass13" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(561, 51)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass14" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(550, 51)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass15" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(582, 49)
+
+[node name="Grass16" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(573, 51)
+texture = ExtResource("9_ngoqs")
+
+[node name="Grass17" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(540, 49)
+
+[node name="Grass18" parent="Decorations" instance=ExtResource("8_wmvar")]
+position = Vector2(532, 49)
 
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 z_index = 100

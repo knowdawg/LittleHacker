@@ -1,8 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpgqff80ka4bq"]
+[gd_scene load_steps=15 format=3 uid="uid://dpgqff80ka4bq"]
 
 [ext_resource type="Shader" path="res://Classes/VelocityBuffer/prev_velocity_buffer.gdshader" id="1_dtqy0"]
 [ext_resource type="Shader" path="res://Classes/VelocityBuffer/velocity_buffer.gdshader" id="1_idome"]
 [ext_resource type="Script" path="res://Classes/VelocityBuffer/velocity_buffer.gd" id="1_ntehb"]
+[ext_resource type="Shader" path="res://Classes/VelocityBuffer/FinalOutputInterpreter.gdshader" id="4_i4k6e"]
+[ext_resource type="Shader" path="res://Classes/VelocityBuffer/testing.gdshader" id="5_3wqeg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q5mp6"]
 viewport_path = NodePath("CurFrame")
@@ -22,11 +24,23 @@ resource_local_to_scene = true
 shader = ExtResource("1_idome")
 shader_parameter/otherViewport = SubResource("ViewportTexture_q3of3")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_vngd6"]
-viewport_path = NodePath("PrevFrame")
-
-[sub_resource type="ViewportTexture" id="ViewportTexture_cthpp"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_p1skq"]
 viewport_path = NodePath("CurFrame")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_03af5"]
+resource_local_to_scene = true
+shader = ExtResource("4_i4k6e")
+shader_parameter/size = Vector2(128, 72)
+shader_parameter/curFrame = SubResource("ViewportTexture_p1skq")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_qfjsj"]
+viewport_path = NodePath("Interpreter")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_l6ntf"]
+shader = ExtResource("5_3wqeg")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_1qhv5"]
+viewport_path = NodePath("Interpreter")
 
 [node name="VelocityBuffer" type="Node2D"]
 script = ExtResource("1_ntehb")
@@ -65,15 +79,28 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Sprite2D2" type="Sprite2D" parent="."]
-visible = false
-texture_filter = 1
-position = Vector2(-222, -2)
-texture = SubResource("ViewportTexture_vngd6")
+[node name="Interpreter" type="SubViewport" parent="."]
+size = Vector2i(256, 144)
+render_target_update_mode = 4
+
+[node name="interpreter" type="ColorRect" parent="Interpreter"]
+material = SubResource("ShaderMaterial_03af5")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Texture" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
 position = Vector2(105, 57)
-texture = SubResource("ViewportTexture_cthpp")
+texture = SubResource("ViewportTexture_qfjsj")
+
+[node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_l6ntf")
+position = Vector2(101, 184)
+texture = SubResource("ViewportTexture_1qhv5")

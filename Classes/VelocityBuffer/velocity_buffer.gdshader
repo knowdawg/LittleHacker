@@ -14,6 +14,10 @@ void fragment() {
 	if(o.g > c.g){
 		c.g = o.g;
 	}
+	if(c.b != 1.0 && c.b != 0.2){
+		c.b = o.b;
+	}
+	
 	
 	COLOR = c;
 }

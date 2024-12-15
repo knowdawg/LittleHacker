@@ -8,6 +8,7 @@ var myShapes : Array[ColorRect] = []
 @onready var texture = $CanvasLayer/Texture
 
 var prevCamPos : Vector2 = Vector2.ZERO
+var totalCameraPosChange : Vector2 = Vector2.ZERO
 func _process(delta: float) -> void:
 	for i in shapeHolder.get_children():
 		i.queue_free()
@@ -19,7 +20,7 @@ func _process(delta: float) -> void:
 			myShape.color = s.color
 			myShape.size = s.size
 			shapeHolder.add_child(myShape)
-			myShape.position = s.get_global_transform_with_canvas().origin * 0.1
+			myShape.position = round(s.get_global_transform_with_canvas().origin * 0.1)
 	
 	var c = Game.camera
 	var cameraPositionChange = c.global_position - prevCamPos
