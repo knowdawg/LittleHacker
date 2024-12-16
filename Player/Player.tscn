@@ -1,9 +1,10 @@
-[gd_scene load_steps=171 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=172 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_hn6pj"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="2_l0uvv"]
+[ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="2_mnd2b"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="3_412y7"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="3_nr8gu"]
 [ext_resource type="Script" path="res://Player/Idle.gd" id="3_y4nyp"]
@@ -2266,12 +2267,8 @@ healthComponent = NodePath("HealthComponent")
 hurtboxComponent = NodePath("HurtboxComponent")
 stateMachine = NodePath("StateMachine")
 
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -1.0
-offset_top = -4.0
-offset_right = 1.0
-color = Color(1, 1, 0, 1)
+[node name="ColorRect" parent="." node_paths=PackedStringArray("thingToTrack") instance=ExtResource("2_mnd2b")]
+thingToTrack = NodePath("..")
 
 [node name="Test" type="Area2D" parent="."]
 collision_layer = 0

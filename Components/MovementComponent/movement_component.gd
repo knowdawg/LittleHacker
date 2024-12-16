@@ -53,6 +53,12 @@ func updateStatus(velocities : Array[Vector2]):
 	else:
 		falling = false
 
+func getVelocity():
+	var velocityTotal = Vector2.ZERO
+	for v in velocities:
+		velocityTotal += v
+	return velocityTotal
+
 func moveTowardsPlayer(speed, delta):
 	var v = Vector2.ZERO
 	if is_instance_valid(Game.player):

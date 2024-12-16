@@ -1,4 +1,4 @@
-[gd_scene load_steps=88 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=89 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="25_bky6c"]
 [ext_resource type="PackedScene" uid="uid://b2livsf15r2fv" path="res://Components/VisualEffectComponents/FlareComponent/flare_effect_component.tscn" id="27_gou6c"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Effects/BlockEffect.gdshader" id="28_jr6e5"]
+[ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="28_n6epm"]
 [ext_resource type="PackedScene" uid="uid://b30hfek6xr8i1" path="res://Components/VisualEffectComponents/LightFlashComponent/light_effect_component.tscn" id="28_wtubw"]
 [ext_resource type="Script" path="res://Components/VisualEffectComponents/BlockEffect/block_effect.gd" id="29_5g1vb"]
 [ext_resource type="PackedScene" uid="uid://dr8t41k422n1f" path="res://Components/GrabComponent/grab_component.tscn" id="31_273nn"]
@@ -1422,6 +1423,10 @@ texture = SubResource("GradientTexture2D_u65ke")
 [node name="DirectionalParticlesComponent" parent="Components/EnemyHitComponent" instance=ExtResource("11_b30xt")]
 position = Vector2(0, -3)
 texture = SubResource("GradientTexture2D_y137f")
+
+[node name="VelocityBufferComponent" parent="Components" node_paths=PackedStringArray("thingToTrack") instance=ExtResource("28_n6epm")]
+offset_top = -6.0
+thingToTrack = NodePath("../..")
 
 [node name="Polygon2D" type="Polygon2D" parent="."]
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)

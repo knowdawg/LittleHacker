@@ -30,6 +30,7 @@ func _ready() -> void:
 		return
 	
 	if rope.railingsOnlyOnFront == false:
+		randomize()
 		if randf() > 0.5:
 			offsetMultiplier = -1.0
 	

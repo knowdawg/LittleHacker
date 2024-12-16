@@ -87,20 +87,11 @@ func _physics_process(delta):
 
 func _process(_delta: float) -> void:
 	Game.player = self
-	
-	if !VelocityBuffer.shapes.has($ColorRect):
-		VelocityBuffer.shapes.append($ColorRect)
-	
-	var red = -clamp(velocity.x / 200.0, -0.5, 0.5)
-	var blue = 1.0
-	if velocity.x > 0:
-		blue = 0.2
-	
-	if velocity.x != 0:
-		$ColorRect.color = Color(red + 0.5, 1.0, blue, 1.0)
-	else:
-		$ColorRect.color = Color(0.5, 0.0, 0.0, 1.0)
 		
+	var c : Camera2D = Game.camera
+	var camPos = c.global_position
+	var snapDis = (camPos - floor(camPos) - Vector2(0.0, 1.0)) / Vector2(128, 72)
+	RenderingServer.global_shader_parameter_set("CameraSnapDistance", snapDis)
 	
 func _ready():
 	$HealthComponent.grabbed.connect(grabbed)

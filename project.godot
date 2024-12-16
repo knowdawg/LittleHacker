@@ -126,3 +126,7 @@ VelocityBuffer={
 "type": "sampler2D",
 "value": ""
 }
+CameraSnapDistance={
+"type": "vec2",
+"value": Vector2(0, 0)
+}

@@ -84,6 +84,7 @@ func _process(delta: float) -> void:
 	
 	line.clear_points()
 	for s in ropeSegments:
+		var nearestWholePoint : Vector2 = round(s.global_position)
 		line.add_point(s.global_position)
 	
 	#get collition Shapes
@@ -93,6 +94,7 @@ func _process(delta: float) -> void:
 			var sh : SegmentShape2D = col.shape
 			sh.a = ropeSegments[c].global_position
 			sh.b = ropeSegments[c + 1].global_position
+
 
 func solveRope(delta):
 	for s in ropeSegments:
