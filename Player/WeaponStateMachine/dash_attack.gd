@@ -23,12 +23,12 @@ func enter(_prevState):
 
 
 func update(delta):
-	if t >= 0.45 and t < 0.6:
+	if t >= 0.7 and t < 0.9:
 		weaponSprite.moveTowardsPlayerFast(delta)
-	elif t >= 0.6:
+	if t >= 0.9:
 		weaponSprite.moveTowardsPlayerNormal(delta)
 	
-	if t < 0.6 and t > 0.5:
+	if t > 0.7 and t < 0.8:
 		if weaponSprite.flip_h == false:
 			leftAttackComponent.enable()
 		else:
@@ -40,7 +40,15 @@ func update(delta):
 	t += delta
 	if t <= 0.1:
 		weaponSprite.flip_h = playerSprite.flip_h
-		
+	
+	if t > 1.2:
+		if weaponStateMachine.inputBuffer == "Attack":
+			if Input.is_action_pressed("Down"):
+				trasitioned.emit(self, "AttackDown")
+				return
+			else:
+				trasitioned.emit(self, "AttackHorizontal")
+	
 	if weaponStateMachine.inputBuffer == "Parry":
 		if playerStateMachine.current_state is SmallPlayerRoll:
 			trasitioned.emit(self, "DashParry")

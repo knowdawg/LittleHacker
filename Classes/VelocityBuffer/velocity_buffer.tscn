@@ -39,8 +39,8 @@ viewport_path = NodePath("Interpreter")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l6ntf"]
 shader = ExtResource("5_3wqeg")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_1qhv5"]
-viewport_path = NodePath("Interpreter")
+[sub_resource type="ViewportTexture" id="ViewportTexture_u7ris"]
+viewport_path = NodePath("CurFrame")
 
 [node name="VelocityBuffer" type="Node2D"]
 script = ExtResource("1_ntehb")
@@ -99,8 +99,7 @@ position = Vector2(105, 57)
 texture = SubResource("ViewportTexture_qfjsj")
 
 [node name="Sprite2D2" type="Sprite2D" parent="CanvasLayer"]
-visible = false
 texture_filter = 1
 material = SubResource("ShaderMaterial_l6ntf")
-position = Vector2(101, 184)
-texture = SubResource("ViewportTexture_1qhv5")
+position = Vector2(348, 44)
+texture = SubResource("ViewportTexture_u7ris")

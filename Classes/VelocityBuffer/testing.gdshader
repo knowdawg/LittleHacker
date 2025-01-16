@@ -4,9 +4,9 @@ shader_type canvas_item;
 
 void fragment() {
 	vec4 c = texture(TEXTURE, UV);
-	
-	c.rg = vec2(0.0);
-	
+
+	//c.rg = vec2(0.0);
+
 	COLOR = c;
 }
 

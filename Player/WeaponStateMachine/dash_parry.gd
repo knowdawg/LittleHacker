@@ -25,7 +25,10 @@ func _ready():
 	playerHurtBox.parry.connect(onParry)
 
 func update(delta):
-	weaponSprite.moveTowardsPlayerFast(delta)
+	if t > 0.6 and t < 1.0:
+		weaponSprite.moveTowardsPlayerFast(delta)
+	if t > 1.0:
+		weaponSprite.moveTowardsPlayerNormal(delta)
 	
 	if weaponStateMachine.inputBuffer == "Parry" and chainParry == true:
 		trasitioned.emit(self, "Parry")
@@ -36,7 +39,7 @@ func update(delta):
 	else:
 		playerHurtBox.setParry(false)
 	
-	if t >= 1.0:
+	if t >= 1.6:
 		trasitioned.emit(self, "Idle")
 
 var chainParry = false

@@ -29,7 +29,10 @@ func update(delta):
 		trasitioned.emit(self, "DashParry")
 		return
 	
-	weaponSprite.moveTowardsPlayerFast(delta)
+	if t < 0.35:
+		weaponSprite.moveTowardsPlayerFast(delta)
+	else:
+		weaponSprite.moveTowardsPlayerNormal(delta)
 	
 	if weaponStateMachine.inputBuffer == "Parry" and chainParry == true:
 		enter(null)

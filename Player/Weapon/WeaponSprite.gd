@@ -8,6 +8,8 @@ func _ready():
 	Game.exitHackMode.connect(show)
 
 func _process(_delta: float) -> void:
+	global_position = (global_position * 4.0).round() / 4.0 #Make the position a bit snapy
+	
 	if Game.inHackMode == true:
 		visible = false
 	

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=41 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -23,6 +23,8 @@
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="16_a5nql"]
 [ext_resource type="Script" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
 [ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="18_rpvuy"]
+[ext_resource type="Texture2D" uid="uid://0y415e8nk50y" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="19_2fqmj"]
+[ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="20_hfd02"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -499,7 +501,7 @@ texture = ExtResource("7_8ltoj")
 flip_h = true
 
 [node name="TestEnemy" parent="." instance=ExtResource("11_jyroq")]
-position = Vector2(572, 29)
+position = Vector2(439, 35)
 
 [node name="TestEnemy2" parent="." instance=ExtResource("11_jyroq")]
 position = Vector2(45, 183)
@@ -523,64 +525,72 @@ script = ExtResource("18_rpvuy")
 position = Vector2(7, 0)
 
 [node name="Grass3" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(492, 49)
+position = Vector2(492, 48)
 
 [node name="Grass4" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(509, 49)
+position = Vector2(509, 48)
 
 [node name="Grass5" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(520, 49)
+position = Vector2(520, 48)
 
 [node name="Grass6" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(546, 49)
+position = Vector2(546, 48)
 
 [node name="Grass7" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(568, 49)
+position = Vector2(568, 48)
 
 [node name="Grass8" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(457, 49)
+position = Vector2(457, 48)
 
 [node name="Grass9" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(416, 49)
+position = Vector2(416, 48)
 
 [node name="Grass10" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(560, 49)
+position = Vector2(560, 48)
 
 [node name="Grass11" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(581, 49)
+position = Vector2(581, 48)
 
 [node name="Grass12" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(589, 49)
+position = Vector2(589, 48)
 
 [node name="Grass13" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(595, 49)
+position = Vector2(595, 48)
 
 [node name="Grass14" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(607, 49)
+position = Vector2(607, 48)
 
 [node name="Grass15" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(615, 49)
+position = Vector2(615, 48)
 
 [node name="Grass16" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(623, 49)
+position = Vector2(623, 48)
 
 [node name="Grass17" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(627, 49)
+position = Vector2(627, 48)
 
 [node name="Grass18" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(640, 49)
+position = Vector2(640, 48)
+texture = ExtResource("19_2fqmj")
 
 [node name="Grass19" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(652, 49)
+position = Vector2(652, 48)
+texture = ExtResource("19_2fqmj")
 
 [node name="Grass20" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(663, 49)
+position = Vector2(663, 48)
+texture = ExtResource("19_2fqmj")
 
 [node name="Grass21" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(671, 49)
+position = Vector2(671, 48)
+texture = ExtResource("19_2fqmj")
 
 [node name="Grass22" parent="Decorations2" instance=ExtResource("8_wmvar")]
-position = Vector2(676, 49)
+position = Vector2(676, 48)
+texture = ExtResource("19_2fqmj")
+
+[node name="PunchingBag" parent="Decorations2" instance=ExtResource("20_hfd02")]
+position = Vector2(695, 51)
 
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 z_index = 100

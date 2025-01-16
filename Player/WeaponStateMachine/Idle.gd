@@ -8,11 +8,15 @@ class_name PlayerWeaponIdle
 @export var weaponStateMachine : PlayerWeaponStateMachine
 @export var playerStateMachine : PlayerStateMachine
 
+var t : float = 0.0
 func enter(_prevState):
+	t = 0.0
 	weaponAnimator.play("Idle")
 
 func update(delta):
+	t+= delta
 	weaponSprite.moveTowardsPlayerNormal(delta)
+	weaponSprite.position.y += sin(t * 2.0) * 0.2
 	
 	if weaponStateMachine.inputBuffer == "Parry":
 		if playerStateMachine.current_state is SmallPlayerRoll:
@@ -43,3 +47,6 @@ func update(delta):
 		trasitioned.emit(self, "SwapSides")
 		return
 	
+
+func exit(_newState):
+	pass
