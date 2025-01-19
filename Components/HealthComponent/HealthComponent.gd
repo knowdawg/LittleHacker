@@ -48,6 +48,8 @@ func set_weakness(val : float):
 		weakness = val
 
 func damage(attack : Attack):
+	if attack.isGrabAttack:
+		grabbed.emit(attack)
 	if locked == true:
 		#can put in a resource / class that can be changed / created as I wish
 		return
@@ -58,8 +60,6 @@ func damage(attack : Attack):
 	
 	hit.emit(attack)
 	
-	if attack.isGrabAttack:
-		grabbed.emit(attack)
 	
 	if health <= 0:
 		death.emit(attack)

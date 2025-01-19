@@ -2,6 +2,11 @@ extends State
 
 @export var speed : float = 500.0
 
+@export_group("Interval Movement")
+@export var useIntervalMovement : bool = false
+@export var animationLength : float = 0.0
+@export var movementIntervals : Array[Vector3] = []
+
 @export_group("Next States")
 @export var idleState : State
 @export var nextStates : Array[State]
@@ -14,18 +19,35 @@ extends State
 @export var longRangeProximity : ProximityAreaComponent
 @export var movement : MovementComponent
 
+@export_group("Optional Nodes")
+@export var spriteDirector : SpriteDirectorComponent
+
+var t : float = 0.0
 func enter(_prevState):
+	t = 0.0
 	animator.play(animationName)
 
 func update(delta):
+	if spriteDirector:
+		spriteDirector.lookAtPlayer()
 	if !deAggroProximity.is_player_inside():
 		trasitioned.emit(self, idleState.name)
+		return
 	
 	if attackProximity.is_player_inside():
 		var nextState = nextStates[randi_range(0, nextStates.size() - 1)]
 		trasitioned.emit(self, nextState.name)
+		return
 	
-	movement.moveTowardsPlayerX(speed, delta)
+	if !useIntervalMovement:
+		movement.moveTowardsPlayerX(speed, delta)
+	else:
+		t += delta
+		if t > animationLength:
+			t -= animationLength
+		for i in movementIntervals:
+			if t > i.x and t < i.y:
+				movement.moveTowardsPlayerX(i.z, delta)
 
 func chanceForLongRangeAttack():
 	if longRangeProximity.is_player_inside():
@@ -33,4 +55,5 @@ func chanceForLongRangeAttack():
 			trasitioned.emit(self, "Thrust")
 
 func _ready() -> void:
-	longRangeProximity.onPlayerEnter.connect(chanceForLongRangeAttack)
+	if longRangeProximity:
+		longRangeProximity.onPlayerEnter.connect(chanceForLongRangeAttack)

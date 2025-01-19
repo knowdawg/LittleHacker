@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://b35cqyb8nutv1"]
 
-[ext_resource type="Script" path="res://Objects/Hacks/AbsorbHack/absorb_hack.gd" id="1_4digu"]
+[ext_resource type="Script" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/AbsorbHack/absorb_hack.gd" id="1_4digu"]
 [ext_resource type="PackedScene" uid="uid://chkylrbd78k57" path="res://Components/VisualEffectComponents/trailComponent/trail_component.tscn" id="2_15web"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="3_ae78f"]
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="3_v3lrv"]

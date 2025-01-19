@@ -1,6 +1,7 @@
 extends Node
 class_name EnemyHealthBar
 
+@export var parent : CharacterBody2D
 @export var follow : Node2D
 @export var healthComponent : HealthComponent
 @export var hackCommands : Array[HackCommandComponent]
@@ -21,13 +22,18 @@ func _ready() -> void:
 	healthComponent.death.connect(delete)
 	
 	if stateMachine:
-		stateMachine.onHacked.connect(addCommandsToGame)
+		stateMachine.onHacked.connect(enterHackMode)
 	
 	drawLines()
 
+func enterHackMode():
+	addCommandsToGame()
+	Game.hackedEnemy = parent
+	Game.setHackMode(true)
+
 func addCommandsToGame():
 	for i in hackCommands:
-		Game.hacks.append(i)
+		HackCommandManager.hackCommands.append(i)
 
 func delete(_attack):
 	if active:
@@ -102,13 +108,11 @@ func activate():
 	active = true
 	$Sprite2D.visible = true
 	$AnimationPlayer.play("Activate")
-	HackCommandManager.selectedHealthBar = self
 
 func deactivate():
 	active = false
 	curBar = "neither"
 	$AnimationPlayer.play("Deactivate")
-	HackCommandManager.selectedHealthBar = null
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Deactivate":

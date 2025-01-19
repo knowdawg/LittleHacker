@@ -19,10 +19,10 @@
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/block.gd" id="11_osv0s"]
-[ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="12_6fwhq"]
+[ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/BlastHack/blast_hack.tscn" id="12_6fwhq"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/generic_grab_attack.gd" id="12_y1w8q"]
-[ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
-[ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
+[ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
+[ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="20_guqxo"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="20_lhe68"]
@@ -1170,8 +1170,6 @@ parent = NodePath("../..")
 movementComponent = NodePath("../../Components/MovementComponent")
 proximity = NodePath("../../Components/AttackProximity")
 nextStates = [NodePath("../GrabAttack"), NodePath("../Attack"), NodePath("../TrippleAttack"), NodePath("../Block")]
-usableMovement = Array[int]([0, 1])
-maxMoves = 3
 
 [node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("4_l276g")

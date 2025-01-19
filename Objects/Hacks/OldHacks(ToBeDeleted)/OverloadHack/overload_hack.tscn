@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://bi8lrccq5xytc"]
 
-[ext_resource type="Script" path="res://Objects/Hacks/OverloadHack/overload_hack.gd" id="1_a33un"]
+[ext_resource type="Script" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/OverloadHack/overload_hack.gd" id="1_a33un"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_w4f8o"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="3_ea7u7"]
 

@@ -39,6 +39,20 @@ func update(delta):
 	else:
 		playerHurtBox.setParry(false)
 	
+	if t >= 1.0:
+		if weaponStateMachine.inputBuffer == "HackAttack" and playerStateMachine.canHackAttack():
+			trasitioned.emit(self, "HackAttack")
+			return
+		if weaponStateMachine.inputBuffer == "Attack":
+			if Input.is_action_pressed("Down"):
+				trasitioned.emit(self, "AttackDown")
+				return
+			trasitioned.emit(self, "AttackHorizontal")
+			return
+		if weaponStateMachine.inputBuffer == "Parry":
+			trasitioned.emit(self, "Parry")
+			return
+	
 	if t >= 1.6:
 		trasitioned.emit(self, "Idle")
 

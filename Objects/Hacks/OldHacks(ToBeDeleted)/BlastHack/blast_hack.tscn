@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://d0lxs0ykh7kii"]
 
-[ext_resource type="Script" path="res://Objects/Hacks/BlastHack/blast_hack.gd" id="1_6v7ox"]
+[ext_resource type="Script" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/BlastHack/blast_hack.gd" id="1_6v7ox"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_f227o"]
 [ext_resource type="Texture2D" uid="uid://dh3ou38ffs4qq" path="res://Assets/Sprites/Effects/RedExsplotion.png" id="2_fijkj"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="4_sywak"]

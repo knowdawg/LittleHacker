@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c50x0ma4r25le"]
+
+[ext_resource type="Script" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.gd" id="1_k0bch"]
+
+[node name="StateSwitchHack" type="Line2D"]
+script = ExtResource("1_k0bch")

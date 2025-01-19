@@ -9,9 +9,12 @@ class_name PlayerWeaponIdle
 @export var playerStateMachine : PlayerStateMachine
 
 var t : float = 0.0
-func enter(_prevState):
+func enter(prevState):
 	t = 0.0
-	weaponAnimator.play("Idle")
+	if prevState is PlayerWeaponHackAttack:
+		weaponAnimator.play("SwordReform")
+	else:
+		weaponAnimator.play("Idle")
 
 func update(delta):
 	t+= delta
@@ -43,7 +46,7 @@ func update(delta):
 		trasitioned.emit(self, "HackAttack")
 		return
 	
-	if playerSprite.flip_h != weaponSprite.flip_h:
+	if playerSprite.flip_h != weaponSprite.flip_h and weaponAnimator.current_animation != "SwordReform":
 		trasitioned.emit(self, "SwapSides")
 		return
 	

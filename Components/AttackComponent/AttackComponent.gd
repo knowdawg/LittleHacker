@@ -61,10 +61,10 @@ func _on_area_entered(area):
 		
 		attack.knockback_vector = knockbackVector
 		
-		if isHackAttack:
-			if Game.hackedEnemy == null and hurtbox.enterHack(attack):
-				Game.setHackMode(true)
-			return
+		#if isHackAttack:
+			##if Game.hackedEnemy == null and hurtbox.enterHack(attack):
+				##Game.setHackMode(true)
+			#return
 		
 		if isGrabAttack:
 			attack.grabComponent = grabNode

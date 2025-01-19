@@ -11,9 +11,9 @@
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="7_3h6d6"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="9_x0otv"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="10_wmgvs"]
-[ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/BlastHack/blast_hack.tscn" id="11_r8yyg"]
-[ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/AbsorbHack/absorb_hack.tscn" id="12_ryyjl"]
-[ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OverloadHack/overload_hack.tscn" id="13_a7qvd"]
+[ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/BlastHack/blast_hack.tscn" id="11_r8yyg"]
+[ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/AbsorbHack/absorb_hack.tscn" id="12_ryyjl"]
+[ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/OverloadHack/overload_hack.tscn" id="13_a7qvd"]
 
 [sub_resource type="Animation" id="Animation_e6aca"]
 resource_name = "HitLeft"

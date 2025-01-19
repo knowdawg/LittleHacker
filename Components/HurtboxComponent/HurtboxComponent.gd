@@ -29,6 +29,9 @@ func damage(attack: Attack):
 	if attack.isGrabAttack:
 		health_componnet.damage(attack)
 		return
+	if attack.isHackAttack:
+		stateMachine.enterHackMode()
+		return
 	
 	if parrying and attack.attackStrength <= parryStrength:
 		parryStuff(attack)

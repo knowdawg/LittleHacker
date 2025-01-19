@@ -48,9 +48,8 @@ func update(delta):
 	if movementPeriods.size() > 0:
 		for v in movementPeriods:
 			if t > v.x and t < v.y:
-				#movement.applyForce(Vector2(dir, 0), -v.z * 0.003)
 				var dif : float = abs(v.x - v.y)
-				movement.move(Vector2(dir, 0), v.z / dif, delta * 60)
+				movement.move(Vector2(dir, 0), v.z / dif, delta)
 	
 	if t >= attackLength:
 		trasitioned.emit(self, agroState.name)

@@ -12,17 +12,15 @@ class_name GenericEnemyHackedState
 @export var animationName : String
 @export var animationPlayer : AnimationPlayer
 
+@export_group("OptionalNodes")
+@export var spriteDirectorComponent : SpriteDirectorComponent 
+
 func _ready() -> void:
 	Game.exitHackMode.connect(exitHackMode)
 
 func exitHackMode():
 	if isCurrentState:
 		trasitioned.emit(self, nextState.name)
-
-func _process(_delta: float) -> void:
-	if Game.inHackMode and stateMachine.current_state != self:
-		if Game.hackedEnemy == parent: #make sure that your the enemy that is being hacked!
-			stateMachine.switchStates(self.name)
 
 var isCurrentState = false
 func enter(_prevState):
@@ -32,15 +30,17 @@ func enter(_prevState):
 		animationPlayer.play(animationName)
 	
 
+
+#@export var grabOffset : Vector2
 func update(_delta):
 	if Game.player:
 		var dir = Game.player.getSpriteDirection()
 		var offset = Vector2(3, 0)
 		if dir == -1:
 			offset *= -1
-			offset.x += leftGrabPos.position.x
+			offset += leftGrabPos.position * Vector2(0, -1.0)
 		else:
-			offset.x += rightGrabPos.position.x
+			offset += rightGrabPos.position * Vector2(0, -1.0)
 		
 		var targetPos = Game.player.global_position + offset
 		var pos = lerp(parent.global_position, targetPos, 0.5)
@@ -49,6 +49,9 @@ func update(_delta):
 	
 	if Game.hackedEnemy != parent:
 		trasitioned.emit(self, nextState.name)
+		
+	if spriteDirectorComponent:
+		spriteDirectorComponent.lookAtPlayer()
 
 
 func exit(_nextState):

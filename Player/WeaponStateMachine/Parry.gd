@@ -38,7 +38,7 @@ func update(delta):
 		enter(null)
 	
 	t += delta
-	if t <= 0.15:
+	if t <= 0.1:
 		playerHurtBox.setParry(true, 1)
 	else:
 		playerHurtBox.setParry(false)

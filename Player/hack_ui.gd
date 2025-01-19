@@ -1,62 +1,66 @@
 extends Node2D
 
 @export var player : Player
-@export var labels : Array[RichTextLabel] = []
+#@export var labels : Array[RichTextLabel] = []
+@export var curentLabels : Array[RichTextLabel] = []
 
+@onready var topLabel : RichTextLabel = $Top
+@onready var middleLabel : RichTextLabel = $Middle
+@onready var bottomLabel : RichTextLabel = $Bottom
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.speed_scale = 10
 	Game.enterHackMode.connect(animate)
 	Game.exitHackMode.connect(disapear)
 
-var activeHack = 1
-var prevActiveHack = -1
+
+var selectedHackIndex = 0
+var numOfHacks = 1 #Num of enemy's hacks
 func _process(_delta: float) -> void:
 	if Game.inHackMode == true:
-		if activeHack != prevActiveHack: #If the hack has changed
-			prevActiveHack = activeHack
-			var s = Game.hacks.size()
-			for i in range(s):
-				var n : String = Game.hacks[i].hackName
-				
-				if i <= 2:
-					labels[i].text = n
-				
-				if i == activeHack and labels[activeHack].isCrossed == false:
-					var shakeText = "[shake rate=100.0 level=1 connected=0]"
-					labels[activeHack].text = shakeText + labels[activeHack].text
+		curentLabels.clear()
+		var numOfHacks = HackCommandManager.hackCommands.size()
+		if numOfHacks >= 1:
+			curentLabels.append(middleLabel)
+		if numOfHacks >= 2:
+			curentLabels.append(topLabel)
+		if numOfHacks >= 3:
+			curentLabels.append(bottomLabel)
+		
+		for i in HackCommandManager.hackCommands.size():
+			var n : String = HackCommandManager.hackCommands[i].hackName
+			curentLabels[i].text = n
 			
 			
 		if Input.is_action_just_pressed("SwitchBar"):
-			activeHack += 1
-			if activeHack > Game.hacks.size() -1:
-				activeHack = 0
+			selectedHackIndex -= 1
+			if selectedHackIndex > curentLabels.size() -1:
+				selectedHackIndex = 0
+			if selectedHackIndex <  0:
+				selectedHackIndex = curentLabels.size() -1
 		
 		if Input.is_action_just_pressed("HackAttack"):
-			if Game.hacks[activeHack].isExecutable():
-				if labels[activeHack].isCrossed == false:
-					Game.hacks[activeHack].executeHack()
-					#Remove Shakyness of text
-					labels[activeHack].text = Game.hacks[activeHack].hackName
+			if HackCommandManager.hackCommands[selectedHackIndex].isExecutable():
+				if curentLabels[selectedHackIndex].isCrossed == false:
+					HackCommandManager.hackCommands[selectedHackIndex].executeHack()
 					#Animations
-					labels[activeHack].crossOut()
+					curentLabels[selectedHackIndex].crossOut()
 					$AnimationPlayer.play("SelectHack")
 					$SelectLineContainer/SelectParticles.restart()
 					$SelectLineContainer/SelectParticles.emitting = true
 			
 		var d = $SelectLineContainer.rotation_degrees
 		var mul = -player.getSpriteDirection() #Swap rotation when UI is in oposite direciton
-		if activeHack == 0:
-			$SelectLineContainer.rotation_degrees = lerp(d, 9.0 * mul, 0.5)
-		if activeHack == 1:
+		if selectedHackIndex == 0:
 			$SelectLineContainer.rotation_degrees = lerp(d, 0.0, 0.5)
-		if activeHack == 2:
+		if selectedHackIndex == 1:
+			$SelectLineContainer.rotation_degrees = lerp(d, 9.0 * mul, 0.5)
+		if selectedHackIndex == 2:
 			$SelectLineContainer.rotation_degrees = lerp(d, -9.0 * mul, 0.5)
-	else:
-		prevActiveHack = -1
+	
 
 func animate():
-	activeHack = 1
+	selectedHackIndex = 0
 	$AnimationPlayer.speed_scale = 10
 	if player.getSpriteDirection() == -1:
 		$AnimationPlayer.play("ShowLeft")
