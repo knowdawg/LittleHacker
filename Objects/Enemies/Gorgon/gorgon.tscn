@@ -1,8 +1,9 @@
-[gd_scene load_steps=53 format=3 uid="uid://bbwjfta6awigx"]
+[gd_scene load_steps=69 format=3 uid="uid://bbwjfta6awigx"]
 
 [ext_resource type="Texture2D" uid="uid://dr67te4uyu3wj" path="res://Assets/Sprites/Enemies/Gorgon.png" id="1_npu85"]
 [ext_resource type="Script" path="res://Objects/Enemies/Gorgon/gorgon.gd" id="1_t5vl1"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_278j0"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="2_ieyw1"]
 [ext_resource type="Script" path="res://Components/SpriteDirectorComponent/sprite_director_component.gd" id="3_dbe8p"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_f7vra"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/idle.gd" id="4_1ysoi"]
@@ -11,10 +12,12 @@
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericThrow.gd" id="7_koemt"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="7_u6q2g"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericAttackState.gd" id="8_5cqnh"]
+[ext_resource type="Script" path="res://Objects/Enemies/Gorgon/States/prep_spear_throw.gd" id="8_7nume"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="8_bhhhx"]
 [ext_resource type="PackedScene" uid="uid://buurypyfifpnl" path="res://Objects/Projectiles/GorgonSpearProjectile/gorgon_spear_projectile.tscn" id="8_vk48g"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/parried.gd" id="9_y4mtr"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/dead.gd" id="11_0n85e"]
+[ext_resource type="Script" path="res://Objects/Enemies/Gorgon/States/tail_swipe.gd" id="12_0nbqu"]
 [ext_resource type="Script" path="res://Objects/Enemies/Gorgon/tail_rip.gd" id="12_2m5s4"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="12_lspj2"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="14_058xi"]
@@ -23,9 +26,25 @@
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="17_e2wmr"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="18_07s5p"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="21_onjcr"]
+[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="24_1y4hm"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="24_cw5x6"]
+[ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="26_sgeag"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="26_x8uri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqv2b"]
 size = Vector2(2, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2f8s0"]
+resource_local_to_scene = true
+shader = ExtResource("2_ieyw1")
+shader_parameter/color = Color(1, 0, 0, 1)
+shader_parameter/width = 0.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = true
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c61rj"]
+polygon = PackedVector2Array(-1, 1, 1, 1, 1, 6, -1, 6)
 
 [sub_resource type="Animation" id="Animation_o2g2t"]
 resource_name = "Bite"
@@ -66,7 +85,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_vy1xw"]
 resource_name = "Decapitate"
-length = 0.6
+length = 0.7
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -75,10 +94,22 @@ tracks/0/path = NodePath("GorgonSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [34, 35, 36, 37, 38, 39]
+"values": [34, 35, 36, 37, 38, 39, 40]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GorgonSprite:material:shader_parameter/width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_jeswr"]
@@ -128,6 +159,18 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [43]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GorgonSprite:material:shader_parameter/width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
 }
 
 [sub_resource type="Animation" id="Animation_8h4bo"]
@@ -236,6 +279,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [41]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GorgonSprite:material:shader_parameter/width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_n3g3i"]
 resource_name = "StunSpear"
@@ -308,9 +363,9 @@ tracks/1/keys = {
 }]
 }
 
-[sub_resource type="Animation" id="Animation_o8xvc"]
-resource_name = "TailSwipe"
-length = 1.7
+[sub_resource type="Animation" id="Animation_111bt"]
+resource_name = "TailRipDeath"
+length = 0.7
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -319,79 +374,10 @@ tracks/0/path = NodePath("GorgonSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [90, 91, 92, 93, 94, 95, 94, 95, 94, 95, 96, 97, 98, 99, 100, 101, 88]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AttackComponents/TailSwipe")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"values": [{
-"args": [],
-"method": &"generateAttackID"
-}, {
-"args": [],
-"method": &"enable"
-}, {
-"args": [],
-"method": &"disable"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_d2xwt"]
-resource_name = "ThrowSpear"
-length = 1.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GorgonSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/ThrowSpear")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.5),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"throw"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_mvad4"]
-resource_name = "TailRipWalk"
-length = 2.2
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GorgonSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+"values": [115, 116, 117, 118, 119, 120, 121]
 }
 
 [sub_resource type="Animation" id="Animation_f4gsl"]
@@ -428,9 +414,10 @@ tracks/0/keys = {
 "values": [6, 7, 8]
 }
 
-[sub_resource type="Animation" id="Animation_111bt"]
-resource_name = "TailRipDeath"
-length = 0.7
+[sub_resource type="Animation" id="Animation_mvad4"]
+resource_name = "TailRipWalk"
+length = 2.2
+loop_mode = 1
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -439,10 +426,90 @@ tracks/0/path = NodePath("GorgonSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [115, 116, 117, 118, 119, 120, 121]
+"values": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22]
+}
+
+[sub_resource type="Animation" id="Animation_o8xvc"]
+resource_name = "TailSwipe"
+length = 1.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GorgonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [90, 91, 92, 93, 94, 95, 94, 95, 94, 95, 96, 97, 98, 99, 100, 101, 88]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponents/TailSwipe")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GorgonSprite:material:shader_parameter/width")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.3, 1.5, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 1.0, 0.1, 0.1, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_d2xwt"]
+resource_name = "ThrowSpear"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GorgonSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/ThrowSpear")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"throw"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_34can"]
@@ -478,7 +545,7 @@ radius = 29.0689
 radius = 52.0096
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_emwvk"]
-radius = 7.07107
+radius = 7.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7cloe"]
 size = Vector2(15, 1)
@@ -494,17 +561,54 @@ size = Vector2(11, 2)
 radius = 4.0
 height = 12.0
 
+[sub_resource type="Gradient" id="Gradient_rmox6"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.458824, 0.654902, 0.262745, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_khc54"]
+gradient = SubResource("Gradient_rmox6")
+width = 1
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_61cv3"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.635294, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_odq7n"]
+gradient = SubResource("Gradient_61cv3")
+width = 1
+height = 1
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5k1dr"]
+seed = 153
+frequency = 0.0041
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_5k1dr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ni3gg"]
+resource_local_to_scene = true
+shader = ExtResource("26_x8uri")
+shader_parameter/col = Color(0.654902, 0, 0, 1)
+shader_parameter/progress = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+
 [node name="Gorgon" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_t5vl1")
+spearProjectileScene = ExtResource("8_vk48g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_vqv2b")
 
 [node name="GorgonSprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2f8s0")
 texture = ExtResource("1_npu85")
 hframes = 122
 frame = 43
@@ -514,24 +618,39 @@ script = ExtResource("3_dbe8p")
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
+[node name="LightOccluder2D" type="LightOccluder2D" parent="GorgonSprite"]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_c61rj")
+occluder_light_mask = 0
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
 script = ExtResource("2_278j0")
 initial_state = NodePath("IdleSpear")
 hackedState = NodePath("Hacked")
 parent = NodePath("..")
 
-[node name="IdleSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "playerProximity")]
+[node name="IdleSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
 script = ExtResource("4_1ysoi")
-agroState = NodePath("../ChaseSpear")
+agroStates = [NodePath("../ChaseSpear"), NodePath("../PrepSpearThrow")]
 animator = NodePath("../../AnimationPlayer")
 animationName = "IdleSpear"
 playerProximity = NodePath("../../Proximities/AggroProximity")
+
+[node name="PrepSpearThrow" type="Node" parent="StateMachine" node_paths=PackedStringArray("movement", "spriteDirector", "nextState", "animator", "parent")]
+script = ExtResource("8_7nume")
+speed = 1200.0
+movement = NodePath("../../GenralComponents/MovementComponent")
+spriteDirector = NodePath("../../GorgonSprite/SpriteDirectorComponent")
+nextState = NodePath("../ThrowSpear")
+animator = NodePath("../../AnimationPlayer")
+animationName = "RunSpear"
+parent = NodePath("../..")
 
 [node name="ChaseSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement", "spriteDirector")]
 script = ExtResource("5_c7upf")
 speed = 1200.0
 idleState = NodePath("../IdleSpear")
-nextStates = [NodePath("../ThrowSpear"), NodePath("../ThrustSpear")]
+nextStates = [NodePath("../PrepSpearThrow"), NodePath("../ThrustSpear"), NodePath("../ThrustSpear"), NodePath("../ThrustSpear")]
 animator = NodePath("../../AnimationPlayer")
 animationName = "RunSpear"
 deAggroProximity = NodePath("../../Proximities/DeAgrroProximity")
@@ -539,7 +658,7 @@ attackProximity = NodePath("../../Proximities/AttackProximity")
 movement = NodePath("../../GenralComponents/MovementComponent")
 spriteDirector = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 
-[node name="ThrowSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "parent")]
+[node name="ThrowSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "parent", "spriteDirector")]
 script = ExtResource("7_koemt")
 agroState = NodePath("../Chase")
 animator = NodePath("../../AnimationPlayer")
@@ -547,14 +666,16 @@ animationName = "ThrowSpear"
 animationLength = 1.2
 projectileScene = ExtResource("8_vk48g")
 parent = NodePath("../..")
+spriteDirector = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 
-[node name="ThrustSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="ThrustSpear" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
 script = ExtResource("8_5cqnh")
 attackLength = 1.5
 animationName = "SpearThrust"
 agroState = NodePath("../ChaseSpear")
 parryState = NodePath("../StunSpear")
 animator = NodePath("../../AnimationPlayer")
+attackComponents = [NodePath("../../AttackComponents/SpearThrust")]
 nodeToFlip = NodePath("../../AttackComponents/SpearThrust")
 parent = NodePath("../..")
 movement = NodePath("../../GenralComponents/MovementComponent")
@@ -570,9 +691,9 @@ animator = NodePath("../../AnimationPlayer")
 movement = NodePath("../../GenralComponents/MovementComponent")
 kbCom = NodePath("../../GenralComponents/OmniDirectionalKnockbackComponent")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "playerProximity")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
 script = ExtResource("4_1ysoi")
-agroState = NodePath("../Chase")
+agroStates = [NodePath("../Chase")]
 animator = NodePath("../../AnimationPlayer")
 animationName = "Idle"
 playerProximity = NodePath("../../Proximities/AggroProximity")
@@ -589,29 +710,34 @@ attackProximity = NodePath("../../Proximities/AttackProximity")
 movement = NodePath("../../GenralComponents/MovementComponent")
 spriteDirector = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 
-[node name="Bite" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="Bite" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
 script = ExtResource("8_5cqnh")
 attackLength = 1.1
 animationName = "Bite"
 agroState = NodePath("../Chase")
 parryState = NodePath("../Stun")
 animator = NodePath("../../AnimationPlayer")
+attackComponents = [NodePath("../../AttackComponents/Bite")]
 nodeToFlip = NodePath("../../AttackComponents/Bite")
 parent = NodePath("../..")
 movement = NodePath("../../GenralComponents/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0.45, 0.55, 120)])
 
-[node name="TailSwipe" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
-script = ExtResource("8_5cqnh")
-attackLength = 1.3
+[node name="TailSwipe" type="Node" parent="StateMachine" node_paths=PackedStringArray("onPogoState", "healthComponent", "stateMachine", "agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+script = ExtResource("12_0nbqu")
+onPogoState = NodePath("../Stun")
+healthComponent = NodePath("../../GenralComponents/HealthComponent")
+stateMachine = NodePath("..")
+attackLength = 1.7
 animationName = "TailSwipe"
 agroState = NodePath("../Chase")
 parryState = NodePath("../Stun")
 animator = NodePath("../../AnimationPlayer")
+attackComponents = [NodePath("../../AttackComponents/TailSwipe")]
 nodeToFlip = NodePath("../../AttackComponents/TailSwipe")
 parent = NodePath("../..")
 movement = NodePath("../../GenralComponents/MovementComponent")
-movementPeriods = Array[Vector3]([Vector3(1, 1.1, 120), Vector3(1.1, 1.2, -120)])
+movementPeriods = Array[Vector3]([Vector3(1, 1.1, 240), Vector3(1.1, 1.2, -120)])
 
 [node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("9_y4mtr")
@@ -623,24 +749,31 @@ animator = NodePath("../../AnimationPlayer")
 movement = NodePath("../../GenralComponents/MovementComponent")
 kbCom = NodePath("../../GenralComponents/OmniDirectionalKnockbackComponent")
 
-[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable", "spriteDirectorComponent")]
 script = ExtResource("11_0n85e")
 animator = NodePath("../../AnimationPlayer")
 animationName = "Decapitate"
+hurtboxesToDisable = [NodePath("../../GenralComponents/HurtboxComponent")]
+spriteDirectorComponent = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 
-[node name="TailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("healthComponent", "newDeathState", "deathComponent", "nextState", "animator")]
+[node name="TailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("healthComponent", "newDeathState", "deathComponent", "movementComponent", "knockbackComponent", "parent", "hackedState", "stateAfterHack", "nextState", "animator")]
 script = ExtResource("12_2m5s4")
 healthComponent = NodePath("../../GenralComponents/HealthComponent")
 newDeathState = NodePath("../DeathTailRip")
 deathComponent = NodePath("../../GenralComponents/DeathComponent")
+movementComponent = NodePath("../../GenralComponents/MovementComponent")
+knockbackComponent = NodePath("../../GenralComponents/OmniDirectionalKnockbackComponent")
+parent = NodePath("../..")
+hackedState = NodePath("../Hacked")
+stateAfterHack = NodePath("../IdleTailRip")
 nextState = NodePath("../IdleTailRip")
 length = 0.5
 animator = NodePath("../../AnimationPlayer")
 animationName = "TailRip"
 
-[node name="IdleTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "playerProximity")]
+[node name="IdleTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
 script = ExtResource("4_1ysoi")
-agroState = NodePath("../ChaseTailRip")
+agroStates = [NodePath("../ChaseTailRip")]
 animator = NodePath("../../AnimationPlayer")
 animationName = "TailRipIdle"
 playerProximity = NodePath("../../Proximities/AggroProximity")
@@ -660,22 +793,24 @@ attackProximity = NodePath("../../Proximities/AttackProximity")
 movement = NodePath("../../GenralComponents/MovementComponent")
 spriteDirector = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 
-[node name="BiteTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="BiteTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
 script = ExtResource("8_5cqnh")
 attackLength = 1.3
 animationName = "TailRipBite"
 agroState = NodePath("../ChaseTailRip")
 parryState = NodePath("../StunTailRip")
 animator = NodePath("../../AnimationPlayer")
+attackComponents = [NodePath("../../AttackComponents/TailRipBite")]
 nodeToFlip = NodePath("../../AttackComponents/TailRipBite")
 parent = NodePath("../..")
 movement = NodePath("../../GenralComponents/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0.5, 0.6, 120), Vector3(0.6, 0.7, 60)])
 
-[node name="DeathTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+[node name="DeathTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
 script = ExtResource("11_0n85e")
 animator = NodePath("../../AnimationPlayer")
 animationName = "TailRipDeath"
+hurtboxesToDisable = [NodePath("../../GenralComponents/HurtboxComponent")]
 
 [node name="StunTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("9_y4mtr")
@@ -724,8 +859,9 @@ stateToSwitchTo = NodePath("../../StateMachine/Death")
 parent = NodePath("../..")
 gravity = 10.0
 
-[node name="OmniDirectionalKnockbackComponent" parent="GenralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("15_opa60")]
+[node name="OmniDirectionalKnockbackComponent" parent="GenralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("15_opa60")]
 parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
 
 [node name="HurtboxComponent" parent="GenralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("17_e2wmr")]
 collision_layer = 8
@@ -733,6 +869,7 @@ stateMachine = NodePath("../../StateMachine")
 health_componnet = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GenralComponents/HurtboxComponent"]
+visible = false
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_3fjj5")
 
@@ -743,9 +880,12 @@ healthComponent = NodePath("../HealthComponent")
 hackCommands = [NodePath("StateSwitchHack")]
 stateMachine = NodePath("../../StateMachine")
 
-[node name="StateSwitchHack" parent="GenralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "healthComponent") instance=ExtResource("21_onjcr")]
+[node name="StateSwitchHack" parent="GenralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("21_onjcr")]
 stateMachine = NodePath("../../../StateMachine")
 stateToSwitchTo = NodePath("../../../StateMachine/TailRip")
+removeAfterExecuted = true
+enemyHealthbar = NodePath("..")
+cost = 6.0
 hackName = "TailCut"
 healthComponent = NodePath("../../HealthComponent")
 
@@ -812,6 +952,7 @@ attackName = "GorgonSpearThrust"
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GenralComponents/HealthComponent")
 attack_damage = 1.0
+attackStrength = 3
 knockback_force = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/TailSwipe"]
@@ -832,3 +973,24 @@ visible = false
 position = Vector2(-1, 2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7nwu1")
+
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="OnHitComponent" parent="Effects" node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("24_cw5x6")]
+healthComponent = NodePath("../../GenralComponents/HealthComponent")
+hitEffects = [NodePath("DirectionalParticlesComponent"), NodePath("DirectionalParticlesComponent2"), NodePath("BloodEffect")]
+knockbackComponent = NodePath("../../GenralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="DirectionalParticlesComponent" parent="Effects/OnHitComponent" instance=ExtResource("24_1y4hm")]
+position = Vector2(0, 4)
+texture = SubResource("GradientTexture2D_khc54")
+
+[node name="DirectionalParticlesComponent2" parent="Effects/OnHitComponent" instance=ExtResource("24_1y4hm")]
+position = Vector2(0, 4)
+amount = 4
+texture = SubResource("GradientTexture2D_odq7n")
+
+[node name="BloodEffect" parent="Effects/OnHitComponent" instance=ExtResource("26_sgeag")]
+material = SubResource("ShaderMaterial_ni3gg")
+position = Vector2(0, 4)
+points = PackedVector2Array(40, 0, 0, 0)

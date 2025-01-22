@@ -9,22 +9,18 @@ signal terminalOn
 signal terminalOff
 
 var inHackMode = false
-var hackedEnemy
+var hackedEnemy = null
 signal enterHackMode
 signal exitHackMode
 
-var slowTimeTimer = 0.0
 func slowTime(duration : float, timeScale : float):
-	slowTimeTimer = duration  * timeScale
 	Engine.time_scale = timeScale
 
 func _process(delta: float) -> void:
-	slowTimeTimer -= delta
-	if inTerminal or inHackMode:
-		Engine.time_scale = 0.1
+	if inHackMode:
+		Engine.time_scale = move_toward(Engine.time_scale, 0.1, delta * 60.0)
 	else:
-		if slowTimeTimer < 0:
-			Engine.time_scale = 1.0
+		Engine.time_scale = move_toward(Engine.time_scale, 1.0, delta * 5.0)
 
 func setHackMode(on : bool):
 	if inHackMode != on:

@@ -16,7 +16,6 @@ extends State
 @export var animationName : String
 @export var deAggroProximity : ProximityAreaComponent
 @export var attackProximity : ProximityAreaComponent
-@export var longRangeProximity : ProximityAreaComponent
 @export var movement : MovementComponent
 
 @export_group("Optional Nodes")
@@ -48,12 +47,3 @@ func update(delta):
 		for i in movementIntervals:
 			if t > i.x and t < i.y:
 				movement.moveTowardsPlayerX(i.z, delta)
-
-func chanceForLongRangeAttack():
-	if longRangeProximity.is_player_inside():
-		if randf() < 0.2:
-			trasitioned.emit(self, "Thrust")
-
-func _ready() -> void:
-	if longRangeProximity:
-		longRangeProximity.onPlayerEnter.connect(chanceForLongRangeAttack)

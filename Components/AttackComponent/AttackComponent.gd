@@ -37,6 +37,7 @@ func _ready() -> void:
 
 var hurtboxSignal : Signal
 func _on_area_entered(area):
+	
 	if area is HurtboxComponent:
 		hurtboxSignal = area.parry
 		if !hurtboxSignal.is_connected(parried):
@@ -60,11 +61,6 @@ func _on_area_entered(area):
 			attack.healthComponent = healthComponent
 		
 		attack.knockback_vector = knockbackVector
-		
-		#if isHackAttack:
-			##if Game.hackedEnemy == null and hurtbox.enterHack(attack):
-				##Game.setHackMode(true)
-			#return
 		
 		if isGrabAttack:
 			attack.grabComponent = grabNode

@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=3 uid="uid://ciq13p31itcpw"]
+[gd_scene load_steps=86 format=3 uid="uid://ciq13p31itcpw"]
 
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
@@ -19,10 +19,7 @@
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/block.gd" id="11_osv0s"]
-[ext_resource type="PackedScene" uid="uid://d0lxs0ykh7kii" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/BlastHack/blast_hack.tscn" id="12_6fwhq"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/generic_grab_attack.gd" id="12_y1w8q"]
-[ext_resource type="PackedScene" uid="uid://b35cqyb8nutv1" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/AbsorbHack/absorb_hack.tscn" id="13_3ks4v"]
-[ext_resource type="PackedScene" uid="uid://bi8lrccq5xytc" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/OverloadHack/overload_hack.tscn" id="14_h1kpy"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="20_guqxo"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="20_lhe68"]
@@ -1146,14 +1143,13 @@ initial_state = NodePath("Idle")
 hackedState = NodePath("Hacked")
 parent = NodePath("..")
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "playerProximity")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "playerProximity")]
 script = ExtResource("2_4v4p0")
-agroState = NodePath("../Chase")
 animator = NodePath("../../AnimationPlayer")
 animationName = "Idle"
 playerProximity = NodePath("../../Components/AgroProximity")
 
-[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "longRangeProximity", "movement")]
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement")]
 script = ExtResource("3_p5on1")
 idleState = NodePath("../Idle")
 nextStates = [NodePath("../InRange")]
@@ -1161,7 +1157,6 @@ animator = NodePath("../../AnimationPlayer")
 animationName = "Chase"
 deAggroProximity = NodePath("../../Components/DeAgroProximity")
 attackProximity = NodePath("../../Components/AttackProximity")
-longRangeProximity = NodePath("../../Components/ThrustProximity")
 movement = NodePath("../../Components/MovementComponent")
 
 [node name="InRange" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "movementComponent", "proximity", "nextStates")]
@@ -1369,32 +1364,20 @@ healthComponent = NodePath("../HealthComponent")
 hackCommands = [NodePath("HackCommandComponent"), NodePath("HackCommandComponent2"), NodePath("HackCommandComponent3")]
 stateMachine = NodePath("../../StateMachine")
 
-[node name="HackCommandComponent" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
+[node name="HackCommandComponent" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("healthComponent") instance=ExtResource("11_oenx2")]
 cost = 5.0
 hackName = "Blast"
-hackExecuteScene = ExtResource("12_6fwhq")
-enemy = NodePath("../../..")
-commandSpawnPos = NodePath("../../../HealthbarPos")
 healthComponent = NodePath("../../HealthComponent")
-enemyHealthBar = NodePath("..")
 
-[node name="HackCommandComponent2" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
+[node name="HackCommandComponent2" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("healthComponent") instance=ExtResource("11_oenx2")]
 cost = 10.0
 hackName = "Absorb"
-hackExecuteScene = ExtResource("13_3ks4v")
-enemy = NodePath("../../..")
-commandSpawnPos = NodePath("../../../HealthbarPos")
 healthComponent = NodePath("../../HealthComponent")
-enemyHealthBar = NodePath("..")
 
-[node name="HackCommandComponent3" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("enemy", "commandSpawnPos", "healthComponent", "enemyHealthBar") instance=ExtResource("11_oenx2")]
+[node name="HackCommandComponent3" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("healthComponent") instance=ExtResource("11_oenx2")]
 cost = 15.0
 hackName = "Overload"
-hackExecuteScene = ExtResource("14_h1kpy")
-enemy = NodePath("../../..")
-commandSpawnPos = NodePath("../../../HealthbarPos")
 healthComponent = NodePath("../../HealthComponent")
-enemyHealthBar = NodePath("..")
 
 [node name="BidirectionalKnockbackComponent" parent="Components" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("20_lhe68")]
 parent = NodePath("../..")

@@ -1,0 +1,81 @@
+[gd_scene load_steps=12 format=3 uid="uid://b2m062xdfylkx"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="1_tv42b"]
+[ext_resource type="Script" path="res://Components/BloodEfectComponent/blood_effect.gd" id="2_5rgu6"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="3_7swta"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_5k1dr"]
+seed = 153
+frequency = 0.0041
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_5k1dr")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8x81a"]
+resource_local_to_scene = true
+shader = ExtResource("1_tv42b")
+shader_parameter/col = Color(0.654902, 0, 0, 1)
+shader_parameter/progress = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+
+[sub_resource type="Gradient" id="Gradient_eoqop"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_u83x6"]
+gradient = SubResource("Gradient_eoqop")
+
+[sub_resource type="Animation" id="Animation_avn4i"]
+resource_name = "BloodSplatter"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_fndmh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0wsx0"]
+_data = {
+"BloodSplatter": SubResource("Animation_avn4i"),
+"RESET": SubResource("Animation_fndmh")
+}
+
+[node name="BloodEffect" type="Line2D"]
+material = SubResource("ShaderMaterial_8x81a")
+points = PackedVector2Array(33, 0, 0, 0)
+texture = SubResource("GradientTexture2D_u83x6")
+texture_mode = 2
+script = ExtResource("2_5rgu6")
+
+[node name="OmniDirectionalKnockbackComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("3_7swta")]
+parent = NodePath("..")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_0wsx0")
+}

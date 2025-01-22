@@ -2,7 +2,7 @@ extends State
 class_name StationaryIdle
 
 @export_group("Next States")
-@export var agroState : State
+@export var agroStates : Array[State] = []
 
 @export_group("Necesary Nodes")
 @export var animator : AnimationPlayer
@@ -14,4 +14,5 @@ func enter(_prevState):
 
 func update(_delta):
 	if playerProximity.is_player_inside():
-		trasitioned.emit(self, agroState.name)
+		var r = randi_range(0, agroStates.size() - 1)
+		trasitioned.emit(self, agroStates[r].name)

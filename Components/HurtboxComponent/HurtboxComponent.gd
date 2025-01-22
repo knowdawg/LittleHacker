@@ -30,6 +30,8 @@ func damage(attack: Attack):
 		health_componnet.damage(attack)
 		return
 	if attack.isHackAttack:
+		if Game.hackedEnemy != null:
+			return
 		stateMachine.enterHackMode()
 		return
 	
@@ -91,19 +93,3 @@ func setParry(isParrying : bool, strength = 1):
 	else:
 		parrying = false
 		parryStrength = 0
-
-func enterHack(attack : Attack) -> bool:
-	for a in attackIDIveBeenHitBy:
-		if attack.attackID == a:
-			return false
-	attackIDIveBeenHitBy.append(attack.attackID)
-	if parrying:
-		parry.emit(attack)
-		return false
-	if !isHackable:
-		return false
-	if !stateMachine:
-		return false
-	
-	stateMachine.enterHackMode()
-	return true

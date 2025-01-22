@@ -5,6 +5,7 @@ class_name PlayerHackMode
 @export var scaleAnimator : AnimationPlayer
 @export var player : Player
 @export var hackEffects : Node2D
+@export var hurtboxComponent : HurtboxComponent
 
 @export var rollSpeedCurve : Curve
 @export var rollSpeedMultiplier : float = 6000
@@ -38,6 +39,8 @@ func update_physics(delta):
 func update(_delta):
 	if Input.is_action_just_pressed("Jump"):
 		Game.setHackMode(false)
+	if hurtboxComponent.parryForgivenesTimer.time_left > 0:
+		hurtboxComponent.damageStuff()
 
 func exit(_nextState):
 	hackEffects.endEffects()

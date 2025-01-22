@@ -1,30 +1,35 @@
-[gd_scene load_steps=20 format=3 uid="uid://buurypyfifpnl"]
+[gd_scene load_steps=34 format=3 uid="uid://buurypyfifpnl"]
 
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/gorgon_spear_projectile.gd" id="1_k1umi"]
+[ext_resource type="Texture2D" uid="uid://byp0cqgmq20ic" path="res://Assets/Sprites/Projectiles/GorgonSpearProjectile.png" id="2_3dava"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_qlklu"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_c6yfa"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/moving.gd" id="3_p543p"]
+[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="3_xqyx6"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_2kc2h"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/spinning.gd" id="4_11mdt"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/still.gd" id="5_sllst"]
 [ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="6_w8eb0"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dead.gd" id="7_5bd8c"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericThrow.gd" id="9_iv1n4"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="10_30dhu"]
+[ext_resource type="PackedScene" uid="uid://sd7x2ttcqgsv" path="res://Objects/Projectiles/SpearProjectile/spear_projectile.tscn" id="10_ue13k"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="11_pn5ks"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="12_fxcuo"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="13_5hquq"]
-[ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="14_kq4h4"]
+[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dropped.gd" id="13_crmw2"]
+[ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="16_rq5b0"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_fm810"]
-size = Vector2(8, 2)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7jnow"]
+size = Vector2(9, 1)
 
-[sub_resource type="Gradient" id="Gradient_8625g"]
+[sub_resource type="Gradient" id="Gradient_oxei1"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vkv86"]
-gradient = SubResource("Gradient_8625g")
-width = 10
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_xwx8x"]
+gradient = SubResource("Gradient_oxei1")
+width = 1
 height = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_74kjj"]
@@ -33,26 +38,245 @@ size = Vector2(10, 2)
 [sub_resource type="CircleShape2D" id="CircleShape2D_11cng"]
 radius = 5.0
 
+[sub_resource type="Animation" id="Animation_2xrd5"]
+resource_name = "Destroy"
+length = 0.1
+step = 0.01
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Components/HurtboxComponent")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("SpearSprite/DirectionalParticlesComponent:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SpearSprite:self_modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_glucn"]
+resource_name = "Land"
+length = 0.7
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [6, 7, 8, 9, 10, 11, 12]
+}
+
+[sub_resource type="Animation" id="Animation_apjkn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SpearSprite:self_modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wms0w"]
+resource_name = "Rise"
+length = 0.06
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.02, 0.03, 0.04, 0.05),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 0]
+}
+
+[sub_resource type="Animation" id="Animation_coljs"]
+resource_name = "Spin"
+length = 0.133
+loop_mode = 1
+step = 0.033
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_a70tj"]
+resource_name = "Still"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+
+[sub_resource type="Animation" id="Animation_7s46c"]
+resource_name = "Throw"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_450a8"]
+resource_name = "UnDestroy"
+length = 0.1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SpearSprite:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Components/HurtboxComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"enable"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_bjbav"]
+_data = {
+"Destroy": SubResource("Animation_2xrd5"),
+"Land": SubResource("Animation_glucn"),
+"RESET": SubResource("Animation_apjkn"),
+"Rise": SubResource("Animation_wms0w"),
+"Spin": SubResource("Animation_coljs"),
+"Still": SubResource("Animation_a70tj"),
+"Throw": SubResource("Animation_7s46c"),
+"UnDestroy": SubResource("Animation_450a8")
+}
+
 [node name="GorgonSpearProjectile" type="CharacterBody2D"]
+texture_filter = 1
 collision_layer = 8
 script = ExtResource("1_k1umi")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_fm810")
+shape = SubResource("RectangleShape2D_7jnow")
 
-[node name="SpearSprite" type="Sprite2D" parent="CollisionShape2D"]
-texture = SubResource("GradientTexture2D_vkv86")
+[node name="SpearSprite" type="Sprite2D" parent="."]
+texture = ExtResource("2_3dava")
+hframes = 18
 
-[node name="AttackComponent" parent="CollisionShape2D" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("12_fxcuo")]
+[node name="DirectionalParticlesComponent" parent="SpearSprite" instance=ExtResource("3_xqyx6")]
+texture = SubResource("GradientTexture2D_xwx8x")
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("12_fxcuo")]
 collision_mask = 4
 attackName = "GorgonSpearProjectile"
 collisionShape = NodePath("CollisionShape2D")
-healthComponent = NodePath("../../Components/HealthComponent")
+healthComponent = NodePath("../Components/HealthComponent")
 attack_damage = 1.0
 knockback_force = 50.0
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/AttackComponent"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
 shape = SubResource("RectangleShape2D_74kjj")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+target_position = Vector2(0, 5)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
 script = ExtResource("2_qlklu")
@@ -60,24 +284,33 @@ initial_state = NodePath("Moving")
 hackedState = NodePath("Hacked")
 parent = NodePath("..")
 
-[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "attackComponent", "parriedState", "collitionShape")]
+[node name="Moving" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "attackComponent", "parriedState", "collitionShape", "sprite", "animator")]
 script = ExtResource("3_p543p")
 parent = NodePath("../..")
-attackComponent = NodePath("../../CollisionShape2D/AttackComponent")
+attackComponent = NodePath("../../AttackComponent")
 parriedState = NodePath("../Spinning")
 collitionShape = NodePath("../../CollisionShape2D")
+sprite = NodePath("../../SpearSprite")
+animator = NodePath("../../AnimationPlayer")
 
-[node name="Spinning" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "collisionShape", "movement")]
+[node name="Spinning" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "collisionShape", "sprite", "movement", "animator", "raycast")]
 script = ExtResource("4_11mdt")
 parent = NodePath("../..")
 collisionShape = NodePath("../../CollisionShape2D")
+sprite = NodePath("../../SpearSprite")
 movement = NodePath("../../Components/MovementComponent")
+animator = NodePath("../../AnimationPlayer")
+raycast = NodePath("../../RayCast2D")
 
-[node name="Still" type="Node" parent="StateMachine" node_paths=PackedStringArray("parriedState")]
+[node name="Still" type="Node" parent="StateMachine" node_paths=PackedStringArray("parriedState", "animator", "healthbar", "sprite", "hurtbox")]
 script = ExtResource("5_sllst")
 parriedState = NodePath("../Spinning")
+animator = NodePath("../../AnimationPlayer")
+healthbar = NodePath("../../Components/EnemyHeathbar")
+sprite = NodePath("../../SpearSprite")
+hurtbox = NodePath("../../Components/HurtboxComponent")
 
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "leftGrabPos", "rightGrabPos")]
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "leftGrabPos", "rightGrabPos", "animationPlayer")]
 script = ExtResource("6_w8eb0")
 stateMachine = NodePath("..")
 parent = NodePath("../..")
@@ -85,13 +318,38 @@ movement = NodePath("../../Components/MovementComponent")
 nextState = NodePath("../Dead")
 leftGrabPos = NodePath("Left")
 rightGrabPos = NodePath("Right")
+animationName = "Rise"
+animationPlayer = NodePath("../../AnimationPlayer")
 
 [node name="Left" type="Marker2D" parent="StateMachine/Hacked"]
 
 [node name="Right" type="Marker2D" parent="StateMachine/Hacked"]
 
-[node name="Dead" type="Node" parent="StateMachine"]
+[node name="Throw" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "parent")]
+script = ExtResource("9_iv1n4")
+throwOnEnter = true
+agroState = NodePath("../Dead")
+animator = NodePath("../../AnimationPlayer")
+animationName = "RESET"
+projectileScene = ExtResource("10_ue13k")
+parent = NodePath("../..")
+targetPlayer = false
+projDir = Vector2(1, 0)
+
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "hurtBox", "healthbar")]
 script = ExtResource("7_5bd8c")
+sprite = NodePath("../../SpearSprite")
+hurtBox = NodePath("../../Components/HurtboxComponent")
+healthbar = NodePath("../../Components/EnemyHeathbar")
+
+[node name="Dropped" type="Node" parent="StateMachine" node_paths=PackedStringArray("collisionShape", "sprite", "movement", "attackComponent", "hurtboxComponent", "enemyHealthBar")]
+script = ExtResource("13_crmw2")
+collisionShape = NodePath("../../CollisionShape2D")
+sprite = NodePath("../../SpearSprite")
+movement = NodePath("../../Components/MovementComponent")
+attackComponent = NodePath("../../AttackComponent")
+hurtboxComponent = NodePath("../../Components/HurtboxComponent")
+enemyHealthBar = NodePath("../../Components/EnemyHeathbar")
 
 [node name="Components" type="Node2D" parent="."]
 
@@ -104,23 +362,30 @@ health_componnet = NodePath("../HealthComponent")
 shape = SubResource("CircleShape2D_11cng")
 
 [node name="HealthComponent" parent="Components" instance=ExtResource("4_2kc2h")]
-MAX_HEALTH = 1.0
-MAX_WEAKNESS = 1.0
+MAX_HEALTH = 0.0
+MAX_WEAKNESS = 0.0
 
 [node name="MovementComponent" parent="Components" node_paths=PackedStringArray("parent") instance=ExtResource("10_30dhu")]
 parent = NodePath("../..")
 
 [node name="EnemyParriedComponent" parent="Components" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("11_pn5ks")]
-attackComponents = [NodePath("../../CollisionShape2D/AttackComponent")]
+attackComponents = [NodePath("../../AttackComponent")]
 stateMachine = NodePath("../../StateMachine")
 
 [node name="EnemyHeathbar" parent="Components" node_paths=PackedStringArray("parent", "follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("13_5hquq")]
 parent = NodePath("../..")
 follow = NodePath("../..")
 healthComponent = NodePath("../HealthComponent")
-hackCommands = [NodePath("HackCommandComponent")]
+hackCommands = [NodePath("StateSwitchHack")]
 stateMachine = NodePath("../../StateMachine")
 
-[node name="HackCommandComponent" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("healthComponent") instance=ExtResource("14_kq4h4")]
+[node name="StateSwitchHack" parent="Components/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "healthComponent") instance=ExtResource("16_rq5b0")]
+stateMachine = NodePath("../../../StateMachine")
+stateToSwitchTo = NodePath("../../../StateMachine/Throw")
 hackName = "Launch"
 healthComponent = NodePath("../../HealthComponent")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_bjbav")
+}

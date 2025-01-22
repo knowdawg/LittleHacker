@@ -1,7 +1,6 @@
 extends Node2D
 
 @export var player : Player
-#@export var labels : Array[RichTextLabel] = []
 @export var curentLabels : Array[RichTextLabel] = []
 
 @onready var topLabel : RichTextLabel = $Top
@@ -19,6 +18,9 @@ var numOfHacks = 1 #Num of enemy's hacks
 func _process(_delta: float) -> void:
 	if Game.inHackMode == true:
 		curentLabels.clear()
+		topLabel.text = ""
+		middleLabel.text = ""
+		bottomLabel.text = ""
 		var numOfHacks = HackCommandManager.hackCommands.size()
 		if numOfHacks >= 1:
 			curentLabels.append(middleLabel)
@@ -48,6 +50,8 @@ func _process(_delta: float) -> void:
 					$AnimationPlayer.play("SelectHack")
 					$SelectLineContainer/SelectParticles.restart()
 					$SelectLineContainer/SelectParticles.emitting = true
+			Game.setHackMode(false)
+			return
 			
 		var d = $SelectLineContainer.rotation_degrees
 		var mul = -player.getSpriteDirection() #Swap rotation when UI is in oposite direciton
@@ -57,7 +61,6 @@ func _process(_delta: float) -> void:
 			$SelectLineContainer.rotation_degrees = lerp(d, 9.0 * mul, 0.5)
 		if selectedHackIndex == 2:
 			$SelectLineContainer.rotation_degrees = lerp(d, -9.0 * mul, 0.5)
-	
 
 func animate():
 	selectedHackIndex = 0
@@ -68,7 +71,7 @@ func animate():
 		$AnimationPlayer.play("ShowRight")
 
 func disapear():
-	$AnimationPlayer.speed_scale = 3
+	$AnimationPlayer.speed_scale = 10
 	if player.getSpriteDirection() == -1:
 		$AnimationPlayer.play("HideLeft")
 	else:

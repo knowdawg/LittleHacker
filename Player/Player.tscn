@@ -2400,10 +2400,11 @@ color = Color(0.137255, 0.137255, 0.137255, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ufcdm")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "attackComponentsThatCanBeParried")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "hurtboxComponent", "attackComponentsThatCanBeParried")]
 script = ExtResource("1_8slbu")
 initial_state = NodePath("Idle")
 parent = NodePath("..")
+hurtboxComponent = NodePath("../HurtboxComponent")
 attackComponentsThatCanBeParried = [NodePath("../WeaponDislocator/WeaponSprite/AttackLeft"), NodePath("../WeaponDislocator/WeaponSprite/AttackRight"), NodePath("../WeaponDislocator/WeaponSprite/AttackDown"), NodePath("../WeaponDislocator/WeaponSprite/AttackUp"), NodePath("../WeaponDislocator/WeaponSprite/HackAttackLeft"), NodePath("../WeaponDislocator/WeaponSprite/HackAttackRight")]
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "player", "playerStateMachine")]
@@ -2469,21 +2470,23 @@ scaleAnimtor = NodePath("../../ScaleAnimator")
 playerStateMachine = NodePath("..")
 slideSpeedCurve = SubResource("Curve_udogh")
 
-[node name="HackAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "player")]
+[node name="HackAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "player", "hurtboxComponent")]
 script = ExtResource("17_expy4")
 animator = NodePath("../../SpriteAnimator")
 scaleAnimator = NodePath("../../ScaleAnimator")
 player = NodePath("../..")
+hurtboxComponent = NodePath("../../HurtboxComponent")
 movementCurve = SubResource("Curve_uj4qe")
 stateLength = 1.1
 speedMultiplier = 14000.0
 
-[node name="HackMode" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "player", "hackEffects")]
+[node name="HackMode" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "player", "hackEffects", "hurtboxComponent")]
 script = ExtResource("18_1ulp4")
 animator = NodePath("../../SpriteAnimator")
 scaleAnimator = NodePath("../../ScaleAnimator")
 player = NodePath("../..")
 hackEffects = NodePath("../../HackEffects")
+hurtboxComponent = NodePath("../../HurtboxComponent")
 rollSpeedCurve = SubResource("Curve_6o701")
 rollSpeedMultiplier = 10000.0
 
@@ -2660,7 +2663,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionPolygon2D")
 attack_damage = 3.0
 weakness_damage = 1.0
-knockback_force = 80.0
+knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 hitEfect = ExtResource("19_0ng1i")
 
@@ -2672,7 +2675,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionPolygon2D")
 attack_damage = 3.0
 weakness_damage = 1.0
-knockback_force = 80.0
+knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
 
@@ -2698,7 +2701,7 @@ collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
 attack_damage = 3.0
 weakness_damage = 1.0
-knockback_force = 80.0
+knockback_force = 50.0
 knockbackVector = Vector2(0, -1)
 hitEfect = ExtResource("19_0ng1i")
 

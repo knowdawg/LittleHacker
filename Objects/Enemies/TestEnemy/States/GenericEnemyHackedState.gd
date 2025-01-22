@@ -28,10 +28,7 @@ func enter(_prevState):
 	movement.resetForces()
 	if animationPlayer:
 		animationPlayer.play(animationName)
-	
 
-
-#@export var grabOffset : Vector2
 func update(_delta):
 	if Game.player:
 		var dir = Game.player.getSpriteDirection()
@@ -52,7 +49,6 @@ func update(_delta):
 		
 	if spriteDirectorComponent:
 		spriteDirectorComponent.lookAtPlayer()
-
 
 func exit(_nextState):
 	isCurrentState = false

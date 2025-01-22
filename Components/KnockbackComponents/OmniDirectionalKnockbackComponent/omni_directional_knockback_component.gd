@@ -2,6 +2,7 @@ extends Node2D
 class_name OmniDirectionalKnockbackComponent
 
 @export var parent : Node
+@export var movement : MovementComponent
 
 func calculateKnockback(attack : Attack):
 	var kbVec = Vector2.ZERO
@@ -13,7 +14,7 @@ func calculateKnockback(attack : Attack):
 	if parent.has_method("hitFromDirection"):
 		parent.hitFromDirection(attack, kbVec)
 	else:
-		printerr("Parent Does Not Have Required Functions To Utilize Omni Directional Knockback")
+		movement.applyForce(kbVec, attack.knockback_force)
 
 
 func returnVec(attack : Attack):

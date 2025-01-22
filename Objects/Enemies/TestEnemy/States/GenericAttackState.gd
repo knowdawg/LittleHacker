@@ -10,6 +10,7 @@ class_name GenericAttackState
 
 @export_group("Necesary Nodes")
 @export var animator : AnimationPlayer
+@export var attackComponents : Array[AttackComponent] = []
 
 @export_group("Optional Nodes")
 @export var nodeToFlip : Node2D
@@ -63,3 +64,7 @@ func canParry():
 	
 func getParryState():
 	return parryState
+
+func exit(_nextState):
+	for a in attackComponents:
+		a.call_deferred("disable")

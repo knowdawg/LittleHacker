@@ -290,24 +290,6 @@ texture = SubResource("GradientTexture2D_nfx2l")
 
 [node name="Ropes" type="Node2D" parent="."]
 
-[node name="ProceduralRope" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
-ropeTexture = ExtResource("10_e5lt5")
-numOfRailings = 20
-conectRailins = true
-railingsOnlyOnFront = true
-railingRopeTexture = ExtResource("10_e5lt5")
-startPoint = NodePath("start")
-endPoint = NodePath("end")
-numOfSegments = 60.0
-ropeDis = 2.0
-isColidable = true
-
-[node name="start" type="Marker2D" parent="Ropes/ProceduralRope"]
-position = Vector2(-159, 52)
-
-[node name="end" type="Marker2D" parent="Ropes/ProceduralRope"]
-position = Vector2(32, 92)
-
 [node name="ProceduralRope2" parent="Ropes" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_52a1i")]
 ropeTexture = ExtResource("10_e5lt5")
 numOfRailings = 0
@@ -507,7 +489,19 @@ visible = false
 copy_mode = 2
 
 [node name="Gorgon" parent="." instance=ExtResource("26_3pugp")]
-position = Vector2(49, 86)
+position = Vector2(2, 108)
+
+[node name="Gorgon2" parent="." instance=ExtResource("26_3pugp")]
+position = Vector2(-123, 107)
+
+[node name="Gorgon3" parent="." instance=ExtResource("26_3pugp")]
+position = Vector2(-92, 109)
+
+[node name="Gorgon4" parent="." instance=ExtResource("26_3pugp")]
+position = Vector2(-155, 109)
+
+[node name="Gorgon5" parent="." instance=ExtResource("26_3pugp")]
+position = Vector2(55, 85)
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
 position = Vector2(99, 92)

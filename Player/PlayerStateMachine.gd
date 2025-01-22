@@ -3,6 +3,7 @@ class_name PlayerStateMachine
 
 @export var initial_state : State
 @export var parent : Player
+@export var hurtboxComponent : HurtboxComponent
 
 var current_state : State
 var states : Dictionary = {}
@@ -20,12 +21,16 @@ func enterParry():
 		current_state.trasitioned.emit(current_state, "GroundParry")
 
 func enterHackMode():
+	if hurtboxComponent.parryForgivenesTimer.time_left > 0:
+		hurtboxComponent.damageStuff()
+		return
 	switchStates("HackMode")
 
 
 @export var attackComponentsThatCanBeParried : Array[AttackComponent] = []
 func _ready():
 	Game.enterHackMode.connect(enterHackMode)
+	
 	
 	for child in get_children():
 		if child is State:

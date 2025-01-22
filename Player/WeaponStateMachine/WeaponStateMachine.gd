@@ -30,7 +30,7 @@ func _process(delta):
 	if t <= 0.0:
 		inputBuffer = ""
 	
-	if Game.inTerminal:
+	if Game.inHackMode:
 		inputBuffer = ""
 	
 	if current_state:

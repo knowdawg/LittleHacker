@@ -4,6 +4,7 @@ class_name PlayerHackAttack
 @export var animator : AnimationPlayer
 @export var scaleAnimator : AnimationPlayer
 @export var player : Player
+@export var hurtboxComponent : HurtboxComponent
 
 @export_group("Curve Arguments")
 @export var movementCurve : Curve
@@ -22,6 +23,9 @@ func update_physics(delta):
 	
 	if t >= stateLength:
 		trasitioned.emit(self, "Idle")
+	
+	if hurtboxComponent.parryForgivenesTimer.time_left > 0:
+		hurtboxComponent.damageStuff()
 
 func enter(_prevState):
 	t = 0.0;

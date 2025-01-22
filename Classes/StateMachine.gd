@@ -51,9 +51,9 @@ signal onHacked
 signal onHackFinished
 
 func enterHackMode():
-	switchStates(hackedState.name)
 	Game.hackedEnemy = parent
 	onHacked.emit()
+	switchStates(hackedState.name)
 
 func exitHackMode():
 	onHackFinished.emit()

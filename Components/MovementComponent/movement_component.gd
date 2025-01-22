@@ -93,6 +93,15 @@ func moveAwayFromPlayer(speed, delta):
 		v += -dirVec
 	velocities.append(v)
 
+func moveAwayFromPlayerX(speed, delta):
+	var v = Vector2.ZERO
+	if is_instance_valid(Game.player):
+		if Game.player.global_position.x > parent.global_position.x:
+			v.x = speed * delta
+		else:
+			v.x = -speed * delta
+	velocities.append(-v)
+
 func move(dir : Vector2, amplitude : float, delta):
 	var v = dir * amplitude * delta
 	velocities.append(v)
