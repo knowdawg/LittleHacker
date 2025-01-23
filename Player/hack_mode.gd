@@ -3,12 +3,16 @@ class_name PlayerHackMode
 
 @export var animator : AnimationPlayer
 @export var scaleAnimator : AnimationPlayer
+@export var hackUI : Node2D
 @export var player : Player
 @export var hackEffects : Node2D
 @export var hurtboxComponent : HurtboxComponent
 
 @export var rollSpeedCurve : Curve
 @export var rollSpeedMultiplier : float = 6000
+
+@export var detectionBox : Area2D
+var viableTargets : Array[Area2D] = []
 
 func _ready() -> void:
 	Game.exitHackMode.connect(exitHackMode)
@@ -25,6 +29,18 @@ func enter(_prevState):
 	player.v = Vector2.ZERO
 	animator.play("HackMode")
 	scaleAnimator.play("HackMode")
+	
+	
+	#get targets to switch between
+	curTargetIndex = 0
+	viableTargets = detectionBox.get_overlapping_areas()
+	viableTargets.sort_custom(sortTargets)
+
+func sortTargets(a : HurtboxComponent, b : HurtboxComponent):
+	var dis1 : float = (player.global_position - a.global_position).length()
+	var dis2 : float = (player.global_position - b.global_position).length()
+	
+	return dis1 < dis2
 
 var t = 0.0
 func update_physics(delta):
@@ -36,9 +52,20 @@ func update_physics(delta):
 		speed *= -1
 	player.dashV.x = -speed
 
+var curTargetIndex = 0
 func update(_delta):
-	if Input.is_action_just_pressed("Jump"):
-		Game.setHackMode(false)
+	if Input.is_action_just_pressed("Parry"):
+		if viableTargets.size() == 0 or viableTargets.size() == 1:
+			return
+		viableTargets[curTargetIndex].stateMachine.exitHackMode()
+		curTargetIndex += 1
+		if curTargetIndex >= viableTargets.size():
+			curTargetIndex -= viableTargets.size()
+		viableTargets[curTargetIndex].stateMachine.enterHackMode()
+		hackUI.animate()
+		$GlitchSwap.stop()
+		$GlitchSwap.play("GlitchSwap")
+		
 	if hurtboxComponent.parryForgivenesTimer.time_left > 0:
 		hurtboxComponent.damageStuff()
 

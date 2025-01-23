@@ -27,7 +27,10 @@ func update_physics(delta):
 	if hurtboxComponent.parryForgivenesTimer.time_left > 0:
 		hurtboxComponent.damageStuff()
 
-func enter(_prevState):
+func enter(prevState):
+	#if prevState is PlayerHackMode:
+		#t = 0.45
+	#else:
 	t = 0.0;
 	player.v.x = 0;
 	animator.play("HackAttack")

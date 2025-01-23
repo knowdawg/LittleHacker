@@ -322,8 +322,10 @@ animationName = "Rise"
 animationPlayer = NodePath("../../AnimationPlayer")
 
 [node name="Left" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(0, 2)
 
 [node name="Right" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(0, 2)
 
 [node name="Throw" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "animator", "parent")]
 script = ExtResource("9_iv1n4")

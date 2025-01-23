@@ -81,6 +81,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	move_and_slide()
 
 func _physics_process(delta):
+	$HackTargetDetectionBox.scale.x = -getSpriteDirection()
 	coyoteTime -= delta
 	if is_on_floor() or $StateMachine.current_state is PlayerWallCling:
 		coyoteTime = 0.1

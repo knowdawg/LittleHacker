@@ -834,10 +834,10 @@ animationPlayer = NodePath("../../AnimationPlayer")
 spriteDirectorComponent = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 
 [node name="Marker2D" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(-1, 5)
+position = Vector2(-1, 4)
 
 [node name="Marker2D2" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(1, 5)
+position = Vector2(1, 4)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

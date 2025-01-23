@@ -23,6 +23,7 @@ func _ready() -> void:
 	
 	if stateMachine:
 		stateMachine.onHacked.connect(enterHackMode)
+		stateMachine.onHackFinished.connect(exitHackMode)
 	
 	drawLines()
 
@@ -31,6 +32,11 @@ func enterHackMode():
 	Game.hackedEnemy = parent
 	Game.hackedHealthbar = self
 	Game.setHackMode(true)
+
+func exitHackMode():
+	Game.hackedEnemy = null
+	Game.hackedHealthbar = null
+	HackCommandManager.clearCommands()
 
 func addCommandsToGame():
 	for i in hackCommands:

@@ -23,10 +23,3 @@ func setActive(isActive : bool):
 
 func isExecutable():
 	return (healthComponent.get_weakness() >= cost)
-
-func executeHack():
-	pass
-	#var p = hackExecuteScene.instantiate()
-	#commandSpawnPos.add_child(p)
-	#p.initialize()
-	#healthComponent.set_weakness(healthComponent.get_weakness() - cost)

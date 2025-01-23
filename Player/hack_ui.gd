@@ -42,7 +42,7 @@ func _process(_delta: float) -> void:
 			if selectedHackIndex <  0:
 				selectedHackIndex = curentLabels.size() -1
 		
-		if Input.is_action_just_pressed("HackAttack"):
+		if Input.is_action_just_pressed("HackAttack") or Input.is_action_just_pressed("Attack"):
 			if HackCommandManager.hackCommands[selectedHackIndex].isExecutable():
 				if curentLabels[selectedHackIndex].isCrossed == false:
 					HackCommandManager.hackCommands[selectedHackIndex].executeHack()
@@ -70,6 +70,7 @@ func _process(_delta: float) -> void:
 		
 func animate():
 	selectedHackIndex = 0
+	$AnimationPlayer.stop()
 	$AnimationPlayer.speed_scale = 10
 	if player.getSpriteDirection() == -1:
 		$AnimationPlayer.play("ShowLeft")

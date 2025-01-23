@@ -1,4 +1,4 @@
-[gd_scene load_steps=176 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=182 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -52,6 +52,10 @@
 [ext_resource type="PackedScene" uid="uid://cifd12sk13prw" path="res://Player/HackUI/HackLabel.tscn" id="37_ss1gu"]
 [ext_resource type="Script" path="res://Player/HackUI/hack_label.gd" id="38_o42eg"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/GlitchEffect.gdshader" id="46_i2mat"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
+size = Vector2(31, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hsgsq"]
 size = Vector2(2, 4)
@@ -103,6 +107,43 @@ point_count = 6
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Animation" id="Animation_rofho"]
+resource_name = "GlitchSwap"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../PlayerVisual/PlayerSprite:material:shader_parameter/shake_power")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.03, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_odn4t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../PlayerVisual/PlayerSprite:material:shader_parameter/shake_power")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ygddn"]
+_data = {
+"GlitchSwap": SubResource("Animation_rofho"),
+"RESET": SubResource("Animation_odn4t")
+}
+
 [sub_resource type="Curve" id="Curve_pi37o"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -126,10 +167,10 @@ polygon = PackedVector2Array(-5, -4, -4, -4, -4, -5, -3, -5, -3, -6, -2, -6, -2,
 size = Vector2(8, 8)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0sr2h"]
-size = Vector2(7, 4)
+size = Vector2(12, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_panv4"]
-size = Vector2(7, 4)
+size = Vector2(12, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_umk1u"]
 size = Vector2(24, 5)
@@ -1282,6 +1323,15 @@ shader_parameter/noise = SubResource("NoiseTexture2D_wkiw3")
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cy6n2"]
+shader = ExtResource("46_i2mat")
+shader_parameter/shake_power = 0.0
+shader_parameter/shake_rate = 0.0
+shader_parameter/shake_speed = 1.0
+shader_parameter/shake_block_size = 10.0
+shader_parameter/shake_color_rate = 0.0
+shader_parameter/transparency = 1.0
+
 [sub_resource type="Animation" id="Animation_blsx0"]
 resource_name = "Blocked"
 tracks/0/type = "value"
@@ -2433,6 +2483,14 @@ stateMachine = NodePath("StateMachine")
 [node name="ColorRect" parent="." node_paths=PackedStringArray("thingToTrack") instance=ExtResource("2_mnd2b")]
 thingToTrack = NodePath("..")
 
+[node name="HackTargetDetectionBox" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HackTargetDetectionBox"]
+position = Vector2(-15.5, -2)
+shape = SubResource("RectangleShape2D_gvghi")
+
 [node name="Test" type="Area2D" parent="."]
 collision_layer = 0
 
@@ -2564,15 +2622,23 @@ movementCurve = SubResource("Curve_uj4qe")
 stateLength = 1.1
 speedMultiplier = 14000.0
 
-[node name="HackMode" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "player", "hackEffects", "hurtboxComponent")]
+[node name="HackMode" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "hackUI", "player", "hackEffects", "hurtboxComponent", "detectionBox")]
 script = ExtResource("18_1ulp4")
 animator = NodePath("../../SpriteAnimator")
 scaleAnimator = NodePath("../../ScaleAnimator")
+hackUI = NodePath("../../HackUI")
 player = NodePath("../..")
 hackEffects = NodePath("../../HackEffects")
 hurtboxComponent = NodePath("../../HurtboxComponent")
 rollSpeedCurve = SubResource("Curve_6o701")
 rollSpeedMultiplier = 10000.0
+detectionBox = NodePath("../../HackTargetDetectionBox")
+
+[node name="GlitchSwap" type="AnimationPlayer" parent="StateMachine/HackMode"]
+libraries = {
+"": SubResource("AnimationLibrary_ygddn")
+}
+speed_scale = 10.0
 
 [node name="Blocked" type="Node" parent="StateMachine" node_paths=PackedStringArray("spriteAnimator", "scaleAnimator", "playerSprite", "player", "weaponSprite")]
 script = ExtResource("20_hceas")
@@ -2804,7 +2870,7 @@ isHackAttack = true
 numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/HackAttackLeft"]
-position = Vector2(-2.5, -2)
+position = Vector2(-5, -2)
 shape = SubResource("RectangleShape2D_0sr2h")
 
 [node name="HackAttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
@@ -2815,7 +2881,7 @@ isHackAttack = true
 numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/HackAttackRight"]
-position = Vector2(2.5, -2)
+position = Vector2(5, -2)
 shape = SubResource("RectangleShape2D_panv4")
 
 [node name="DashAttackLeft" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
@@ -2881,10 +2947,10 @@ libraries = {
 }
 
 [node name="Top" type="RichTextLabel" parent="HackUI"]
-offset_left = 13.0
-offset_top = -8.5
-offset_right = 133.0
-offset_bottom = 14.5
+offset_left = -27.0
+offset_top = -9.5
+offset_right = 93.0
+offset_bottom = 13.5
 rotation = 0.0872665
 scale = Vector2(0.35, 0.35)
 theme_override_constants/outline_size = 3
@@ -2921,18 +2987,18 @@ trail_enabled = true
 trail_lifetime = 0.02
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
-offset_left = 13.0
-offset_top = -3.0
-offset_right = 88.0
-offset_bottom = 20.0
+offset_left = -27.0
+offset_top = -2.0
+offset_right = 48.0
+offset_bottom = 21.0
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
-offset_left = 10.0
+offset_left = -30.0
 offset_top = -7.0
-offset_right = 70.0
+offset_right = 30.0
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)
@@ -3014,6 +3080,7 @@ z_index = 1
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerVisual"]
 clip_children = 2
 texture_filter = 1
+material = SubResource("ShaderMaterial_cy6n2")
 position = Vector2(0, -4)
 texture = ExtResource("28_x4rxf")
 hframes = 67

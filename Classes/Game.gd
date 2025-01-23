@@ -17,6 +17,9 @@ signal exitHackMode
 func slowTime(duration : float, timeScale : float):
 	Engine.time_scale = timeScale
 
+func setTimeScale(timeScale : float):
+	Engine.time_scale = timeScale
+
 func _process(delta: float) -> void:
 	if inHackMode:
 		Engine.time_scale = move_toward(Engine.time_scale, 0.1, delta * 60.0)

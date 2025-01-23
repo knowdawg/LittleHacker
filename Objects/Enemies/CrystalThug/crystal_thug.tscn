@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=57 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Texture2D" uid="uid://b1h0biuscqvuk" path="res://Assets/Sprites/Enemies/CrystalThugEnemy.png" id="1_1mmkh"]
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_oie0v"]
 [ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="5_t2ije"]
 [ext_resource type="Texture2D" uid="uid://43ksgggchcci" path="res://Assets/Sprites/Effects/CrytalThugHeadShatter.png" id="5_upeyw"]
+[ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="6_0vvo8"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_fdldy"]
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="6_ym6rq"]
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/ResonateState.gd" id="7_320lq"]
@@ -30,9 +31,6 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id2w4"]
 size = Vector2(2, 6)
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e0n24"]
-polygon = PackedVector2Array(-1, 2, 1, 2, 1, 7, -1, 7)
 
 [sub_resource type="Animation" id="Animation_wqnno"]
 resource_name = "Shatter"
@@ -71,6 +69,19 @@ _data = {
 "RESET": SubResource("Animation_vnvpn"),
 "Shatter": SubResource("Animation_wqnno")
 }
+
+[sub_resource type="Gradient" id="Gradient_cmus3"]
+offsets = PackedFloat32Array(0, 0.99789)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0qmxs"]
+gradient = SubResource("Gradient_cmus3")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e0n24"]
+polygon = PackedVector2Array(-1, 2, 1, 2, 1, 7, -1, 7)
 
 [sub_resource type="Animation" id="Animation_6571p"]
 resource_name = "Attack"
@@ -142,7 +153,7 @@ tracks/0/keys = {
 tracks/1/type = "method"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/HeadShatter/HeadShatterAnimator")
+tracks/1/path = NodePath("HeadShatter/HeadShatterAnimator")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -152,6 +163,30 @@ tracks/1/keys = {
 "args": [&"Shatter", -1, 1.0, false],
 "method": &"play"
 }]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.3, 0.3)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0, -2), Vector2(0, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_kuq1r"]
@@ -185,6 +220,30 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PointLight2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
 }
 
 [sub_resource type="Animation" id="Animation_o30gf"]
@@ -349,7 +408,26 @@ projectile = ExtResource("8_3hch0")
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_id2w4")
 
+[node name="HeadShatter" type="Sprite2D" parent="."]
+position = Vector2(-0.5, -2.5)
+texture = ExtResource("5_upeyw")
+hframes = 4
+frame = 3
+
+[node name="HeadShatterAnimator" type="AnimationPlayer" parent="HeadShatter"]
+libraries = {
+"": SubResource("AnimationLibrary_qtsy3")
+}
+speed_scale = 2.0
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0, -2)
+color = Color(0.156863, 0.0784314, 0.156863, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_0qmxs")
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
 position = Vector2(0, -4)
 texture = ExtResource("1_1mmkh")
 hframes = 38
@@ -364,17 +442,7 @@ occluder_light_mask = 0
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
-[node name="HeadShatter" type="Sprite2D" parent="Sprite2D"]
-position = Vector2(-0.5, 1.5)
-texture = ExtResource("5_upeyw")
-hframes = 4
-frame = 3
-
-[node name="HeadShatterAnimator" type="AnimationPlayer" parent="Sprite2D/HeadShatter"]
-libraries = {
-"": SubResource("AnimationLibrary_qtsy3")
-}
-speed_scale = 2.0
+[node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("6_0vvo8")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
 script = ExtResource("2_ckk41")
@@ -459,8 +527,10 @@ animationPlayer = NodePath("../../Animator")
 spriteDirectorComponent = NodePath("../../Sprite2D/SpriteDirectorComponent")
 
 [node name="LeftGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(0, 1)
 
 [node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(0, 1)
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
 script = ExtResource("9_l147m")
@@ -520,7 +590,7 @@ stateMachine = NodePath("../../../StateMachine")
 stateToSwitchTo = NodePath("../../../StateMachine/Death")
 removeAfterExecuted = true
 enemyHealthbar = NodePath("..")
-cost = 3.0
+cost = 1.0
 hackName = "Shatter"
 healthComponent = NodePath("../../HealthComponent")
 
@@ -580,7 +650,7 @@ libraries = {
 
 [node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_88n8y")]
 healthComponent = NodePath("../GeneralComponents/HealthComponent")
-hitEffects = [NodePath("DirectionalParticlesComponent"), NodePath("DirectionalParticlesComponent2")]
+hitEffects = [NodePath("DirectionalParticlesComponent"), NodePath("DirectionalParticlesComponent2"), NodePath("../Sprite2D/HitFlashComponent")]
 knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComponent")
 
 [node name="DirectionalParticlesComponent" parent="OnHitComponent" instance=ExtResource("27_tgw8o")]

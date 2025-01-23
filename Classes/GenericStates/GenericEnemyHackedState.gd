@@ -35,15 +35,16 @@ func update(_delta):
 		var offset = Vector2(3, 0)
 		if dir == -1:
 			offset *= -1
-			offset += leftGrabPos.position * Vector2(0, -1.0)
+			offset += leftGrabPos.position * Vector2(0, 1.0) + Vector2(6, 2.5)
 		else:
-			offset += rightGrabPos.position * Vector2(0, -1.0)
+			offset += rightGrabPos.position * Vector2(0, 1.0) + Vector2(-6, 2.5)
 		
-		#Have the player go to the enemy not the enemy to the player
+		
 		var targetPos = Game.player.global_position + offset
 		var pos = lerp(parent.global_position, targetPos, 0.5)
 		
-		movement.setPosition(pos)
+		Game.player.position = pos
+		#movement.setPosition(pos)
 	
 	if Game.hackedEnemy != parent:
 		trasitioned.emit(self, nextState.name)
