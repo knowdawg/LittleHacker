@@ -10,6 +10,7 @@ signal terminalOff
 
 var inHackMode = false
 var hackedEnemy = null
+var hackedHealthbar : EnemyHealthBar = null
 signal enterHackMode
 signal exitHackMode
 

@@ -4,22 +4,22 @@
 [ext_resource type="Script" path="res://Objects/Enemies/Gorgon/gorgon.gd" id="1_t5vl1"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_278j0"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="2_ieyw1"]
-[ext_resource type="Script" path="res://Components/SpriteDirectorComponent/sprite_director_component.gd" id="3_dbe8p"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_f7vra"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/idle.gd" id="4_1ysoi"]
+[ext_resource type="Script" path="res://Classes/GenericStates/idle.gd" id="4_1ysoi"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_03phn"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/chase.gd" id="5_c7upf"]
+[ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="5_c7upf"]
+[ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="5_ymir3"]
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericThrow.gd" id="7_koemt"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="7_u6q2g"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericAttackState.gd" id="8_5cqnh"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="8_5cqnh"]
 [ext_resource type="Script" path="res://Objects/Enemies/Gorgon/States/prep_spear_throw.gd" id="8_7nume"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="8_bhhhx"]
 [ext_resource type="PackedScene" uid="uid://buurypyfifpnl" path="res://Objects/Projectiles/GorgonSpearProjectile/gorgon_spear_projectile.tscn" id="8_vk48g"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/parried.gd" id="9_y4mtr"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/dead.gd" id="11_0n85e"]
+[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="9_y4mtr"]
+[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="11_0n85e"]
 [ext_resource type="Script" path="res://Objects/Enemies/Gorgon/States/tail_swipe.gd" id="12_0nbqu"]
 [ext_resource type="Script" path="res://Objects/Enemies/Gorgon/tail_rip.gd" id="12_2m5s4"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="12_lspj2"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="12_lspj2"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="14_058xi"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="15_opa60"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="15_uhac8"]
@@ -613,8 +613,7 @@ texture = ExtResource("1_npu85")
 hframes = 122
 frame = 43
 
-[node name="SpriteDirectorComponent" type="Node" parent="GorgonSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck")]
-script = ExtResource("3_dbe8p")
+[node name="SpriteDirectorComponent" parent="GorgonSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("5_ymir3")]
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 

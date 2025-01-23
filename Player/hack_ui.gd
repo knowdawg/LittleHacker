@@ -30,7 +30,8 @@ func _process(_delta: float) -> void:
 			curentLabels.append(bottomLabel)
 		
 		for i in HackCommandManager.hackCommands.size():
-			var n : String = HackCommandManager.hackCommands[i].hackName
+			var h : HackCommandComponent = HackCommandManager.hackCommands[i]
+			var n : String = h.hackName
 			curentLabels[i].text = n
 			
 			
@@ -55,13 +56,18 @@ func _process(_delta: float) -> void:
 			
 		var d = $SelectLineContainer.rotation_degrees
 		var mul = -player.getSpriteDirection() #Swap rotation when UI is in oposite direciton
+		var weaknessDisplay : String = str("[center]", Game.hackedHealthbar.healthComponent.get_weakness(), "/")
 		if selectedHackIndex == 0:
 			$SelectLineContainer.rotation_degrees = lerp(d, 0.0, 0.5)
+			weaknessDisplay += str(HackCommandManager.hackCommands[0].cost)
 		if selectedHackIndex == 1:
 			$SelectLineContainer.rotation_degrees = lerp(d, 9.0 * mul, 0.5)
+			weaknessDisplay += str(HackCommandManager.hackCommands[1].cost)
 		if selectedHackIndex == 2:
 			$SelectLineContainer.rotation_degrees = lerp(d, -9.0 * mul, 0.5)
-
+			weaknessDisplay += str(HackCommandManager.hackCommands[2].cost)
+		$WeaknessDisplay.text = weaknessDisplay
+		
 func animate():
 	selectedHackIndex = 0
 	$AnimationPlayer.speed_scale = 10

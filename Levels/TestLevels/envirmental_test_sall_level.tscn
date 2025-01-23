@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=43 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -21,6 +21,7 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/ScreenMirroring.gdshader" id="13_mu6m5"]
 [ext_resource type="Texture2D" uid="uid://bpeh571apnjq2" path="res://Assets/Sprites/WorldObjects/StiltHouseTest.png" id="13_o8sn2"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="16_a5nql"]
+[ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="17_87pum"]
 [ext_resource type="Script" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
 [ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="18_rpvuy"]
 [ext_resource type="Texture2D" uid="uid://0y415e8nk50y" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="19_2fqmj"]
@@ -489,19 +490,22 @@ visible = false
 copy_mode = 2
 
 [node name="Gorgon" parent="." instance=ExtResource("26_3pugp")]
-position = Vector2(2, 108)
-
-[node name="Gorgon2" parent="." instance=ExtResource("26_3pugp")]
-position = Vector2(-123, 107)
-
-[node name="Gorgon3" parent="." instance=ExtResource("26_3pugp")]
-position = Vector2(-92, 109)
-
-[node name="Gorgon4" parent="." instance=ExtResource("26_3pugp")]
-position = Vector2(-155, 109)
+position = Vector2(-131, 110)
 
 [node name="Gorgon5" parent="." instance=ExtResource("26_3pugp")]
-position = Vector2(55, 85)
+position = Vector2(-20, 110)
+
+[node name="CrystalThug" parent="." instance=ExtResource("17_87pum")]
+position = Vector2(38, 85)
+
+[node name="CrystalThug2" parent="." instance=ExtResource("17_87pum")]
+position = Vector2(50, 85)
+
+[node name="CrystalThug3" parent="." instance=ExtResource("17_87pum")]
+position = Vector2(106, 85)
+
+[node name="CrystalThug4" parent="." instance=ExtResource("17_87pum")]
+position = Vector2(-12, 109)
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
 position = Vector2(99, 92)

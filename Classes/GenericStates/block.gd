@@ -1,4 +1,5 @@
 extends State
+class_name GenericBlockState
 
 @export var onBlockStartedEffects : Array[Node2D] = []
 @export var onBlockEffects : Array[Node2D] = []

@@ -9,7 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_2kc2h"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/spinning.gd" id="4_11mdt"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/still.gd" id="5_sllst"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/States/GenericEnemyHackedState.gd" id="6_w8eb0"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_w8eb0"]
 [ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dead.gd" id="7_5bd8c"]
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericThrow.gd" id="9_iv1n4"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="10_30dhu"]

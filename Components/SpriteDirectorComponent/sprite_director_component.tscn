@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0tqftq4kjpsh"]
+
+[ext_resource type="Script" path="res://Components/SpriteDirectorComponent/sprite_director_component.gd" id="1_8ha36"]
+
+[node name="SpriteDirectorComponent" type="Node" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck")]
+script = ExtResource("1_8ha36")
+spriteToFlip = NodePath("")
+velocityToCheck = NodePath("")

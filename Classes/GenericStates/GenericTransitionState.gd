@@ -23,3 +23,8 @@ func update(delta):
 	
 	if t > length:
 		trasitioned.emit(self, nextState.name)
+	
+	customUpdate(delta)
+
+func customUpdate(delta):
+	pass

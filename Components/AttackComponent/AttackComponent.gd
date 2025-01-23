@@ -57,6 +57,7 @@ func _on_area_entered(area):
 		attack.isPogo = isPogo
 		attack.isGrabAttack = isGrabAttack
 		attack.attackStrength = attackStrength
+		attack.attackName = attackName
 		if healthComponent:
 			attack.healthComponent = healthComponent
 		

@@ -39,6 +39,7 @@ func update(_delta):
 		else:
 			offset += rightGrabPos.position * Vector2(0, -1.0)
 		
+		#Have the player go to the enemy not the enemy to the player
 		var targetPos = Game.player.global_position + offset
 		var pos = lerp(parent.global_position, targetPos, 0.5)
 		

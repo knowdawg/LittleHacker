@@ -29,6 +29,7 @@ func _ready() -> void:
 func enterHackMode():
 	addCommandsToGame()
 	Game.hackedEnemy = parent
+	Game.hackedHealthbar = self
 	Game.setHackMode(true)
 
 func addCommandsToGame():

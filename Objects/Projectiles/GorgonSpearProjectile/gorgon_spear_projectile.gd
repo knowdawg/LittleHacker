@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var dirVector : Vector2 = Vector2.ZERO
-var speed : float = 100.0
+var speed : float = 150.0
 var t = 1.0
 
 func drop() -> void:
