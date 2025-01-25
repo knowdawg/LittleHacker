@@ -8,7 +8,7 @@ func drop() -> void:
 	$StateMachine.call_deferred("switchStates", "Dropped")
 	
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Game.player.global_position > global_position:
 		$StateMachine/Throw.projDir = Vector2(-1.0, 0.0)
 	else:

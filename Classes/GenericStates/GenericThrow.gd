@@ -39,7 +39,7 @@ func update(delta):
 func throw():
 	var dirVector
 	if targetPlayer:
-		target = Game.player.global_position + Vector2(10, 0)
+		target = Game.player.global_position + Vector2(0, -2)
 		dirVector = (target - parent.global_position).normalized()
 	else:
 		dirVector = projDir

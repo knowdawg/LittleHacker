@@ -84,7 +84,7 @@ func _process(delta: float) -> void:
 	
 	line.clear_points()
 	for s in ropeSegments:
-		var nearestWholePoint : Vector2 = round(s.global_position)
+		
 		line.add_point(s.global_position)
 	
 	#get collition Shapes

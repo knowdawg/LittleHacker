@@ -43,9 +43,9 @@ func _physics_process(delta: float) -> void:
 	
 	velocities.clear()
 
-func updateStatus(velocities : Array[Vector2]):
+func updateStatus(velocitiesInput : Array[Vector2]):
 	var summedVelocities = Vector2.ZERO
-	for v in velocities:
+	for v in velocitiesInput:
 		summedVelocities += v
 	
 	if summedVelocities.y < 0:

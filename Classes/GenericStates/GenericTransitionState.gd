@@ -26,5 +26,5 @@ func update(delta):
 	
 	customUpdate(delta)
 
-func customUpdate(delta):
+func customUpdate(_delta):
 	pass

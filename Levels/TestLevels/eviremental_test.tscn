@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dlfxfm3ebd5n7"]
 
-[ext_resource type="PackedScene" uid="uid://c8x60h4peckug" path="res://Levels/TestLevels/envirmental_test_sall_level.tscn" id="1_6d02k"]
 [ext_resource type="PackedScene" uid="uid://b5fa63t6v138o" path="res://Assets/Shaders/Filters/crt_shader.tscn" id="1_8qks8"]
+[ext_resource type="PackedScene" uid="uid://cb2mgf3vv8ptm" path="res://Levels/StarweepCrater/starweep_crater.tscn" id="1_t4cyd"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="2_f6ogn"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0qigq"]
@@ -26,7 +26,7 @@ sdf_scale = 2
 size = Vector2i(1280, 720)
 render_target_update_mode = 4
 
-[node name="EnvirmentalTestSallLevel" parent="SubViewportContainer/SmallEnvirementViewport" instance=ExtResource("1_6d02k")]
+[node name="StarweepCrater" parent="SubViewportContainer/SmallEnvirementViewport" instance=ExtResource("1_t4cyd")]
 
 [node name="CRTShader" parent="." node_paths=PackedStringArray("subScreen") instance=ExtResource("1_8qks8")]
 material = SubResource("ShaderMaterial_0qigq")

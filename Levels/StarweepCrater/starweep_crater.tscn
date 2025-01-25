@@ -1,0 +1,340 @@
+[gd_scene load_steps=46 format=3 uid="uid://cb2mgf3vv8ptm"]
+
+[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_j553s"]
+[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="2_c6c2p"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_ib4wr"]
+[ext_resource type="PackedScene" uid="uid://dqgol3yij81qs" path="res://Levels/StarweepCrater/sandstone_envirement.tscn" id="2_qqjur"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="3_1s7dr"]
+[ext_resource type="PackedScene" uid="uid://d3dlqrfslc2a0" path="res://Player/Player.tscn" id="3_egbe4"]
+[ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="3_eohir"]
+[ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="3_skjjs"]
+[ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="3_y7klw"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="4_xv7tr"]
+[ext_resource type="Texture2D" uid="uid://ca3w67yo21aaj" path="res://Assets/Sprites/EnvirmentTextures/Crystals/RedStar.png" id="5_36iue"]
+[ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="5_bt5o2"]
+[ext_resource type="PackedScene" uid="uid://6qnrok713h6h" path="res://Levels/StarweepCrater/sandstone_envirement_background.tscn" id="6_dugrx"]
+[ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="8_yiiek"]
+[ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="9_ddtfu"]
+[ext_resource type="Texture2D" uid="uid://dd0ug5to67ucu" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed1.png" id="9_ke04t"]
+[ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="10_8n2w8"]
+[ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="12_5462j"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_y4e7i"]
+seed = 5
+frequency = 0.0025
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xwp7k"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_y4e7i")
+
+[sub_resource type="Gradient" id="Gradient_i34np"]
+colors = PackedColorArray(0, 0.682353, 0.305882, 0.0980392, 0, 0.682353, 0.305882, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rlxx7"]
+gradient = SubResource("Gradient_i34np")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cflne"]
+shader = ExtResource("2_ib4wr")
+shader_parameter/speed = -25.0
+shader_parameter/noise = SubResource("NoiseTexture2D_xwp7k")
+shader_parameter/pallete = SubResource("GradientTexture1D_rlxx7")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7nq1o"]
+seed = 5
+frequency = 0.0009
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_25odj"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_7nq1o")
+
+[sub_resource type="Gradient" id="Gradient_yna1l"]
+offsets = PackedFloat32Array(0, 0.991124)
+colors = PackedColorArray(0.52549, 0, 0, 0.117647, 0.52549, 0, 0, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_17riw"]
+gradient = SubResource("Gradient_yna1l")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwutr"]
+shader = ExtResource("2_ib4wr")
+shader_parameter/speed = 100.0
+shader_parameter/noise = SubResource("NoiseTexture2D_25odj")
+shader_parameter/pallete = SubResource("GradientTexture1D_17riw")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndoim"]
+shader = ExtResource("3_1s7dr")
+shader_parameter/color = Color(0.364706, 0.227451, 0.0980392, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_5pb8y"]
+viewport_path = NodePath("back")
+
+[sub_resource type="Gradient" id="Gradient_axx6j"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tdagb"]
+gradient = SubResource("Gradient_axx6j")
+width = 256
+height = 256
+
+[sub_resource type="Gradient" id="Gradient_7nbmo"]
+offsets = PackedFloat32Array(0, 0.37574, 0.66568, 0.846154, 1)
+colors = PackedColorArray(0.203922, 0.109804, 0.152941, 1, 0.376471, 0.172549, 0.172549, 1, 0.533333, 0.294118, 0.168627, 1, 0.745098, 0.466667, 0.168627, 1, 0.870588, 0.619608, 0.254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ijd3i"]
+gradient = SubResource("Gradient_7nbmo")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uvsq2"]
+shader = ExtResource("2_c6c2p")
+shader_parameter/size = Vector2(64, 64)
+shader_parameter/noiseResolution = Vector2(64, 64)
+shader_parameter/noiseTex = ExtResource("3_skjjs")
+shader_parameter/palete = SubResource("GradientTexture1D_ijd3i")
+
+[sub_resource type="Gradient" id="Gradient_ut426"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.419608, 0.376471, 0.384314, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qktd4"]
+gradient = SubResource("Gradient_ut426")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cye0d"]
+polygon = PackedVector2Array(-143, 12, -40, 12, -39, 13, -33, 13, -32, 12, -9, 12, -33, 20, -33, 25, -41, 31, -34, 38, -19, 38, -19, 35, -12, 33, -5, 33, -5, 28, -11, 28, -11, 26, -6, 26, 1, 20, 9, 20, 9, 28, 15, 28, 15, 31, 8, 31, 8, 36, 15, 36, 19, 39, 16, 39, 16, 44, 48, 44, 48, 36, 497, 36, 364, 223, -144, 55, -144, -117, -77, -117, -38, -59, -38, -12, -56, -12, -56, -4, -142, -4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_221ap"]
+shader = ExtResource("3_1s7dr")
+shader_parameter/color = Color(0.870588, 0.619608, 0.254902, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = true
+shader_parameter/add_margins = true
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_7ac6w"]
+viewport_path = NodePath("Main")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qe5lo"]
+frequency = 0.0046
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8f5d"]
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = ExtResource("12_5462j")
+noise = SubResource("FastNoiseLite_qe5lo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xvwb"]
+frequency = 0.001
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1vl4"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_1xvwb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nva0"]
+resource_local_to_scene = true
+shader = ExtResource("4_xv7tr")
+shader_parameter/resolution = Vector2(30, 30)
+shader_parameter/textureScollSpeed = 2.0
+shader_parameter/warpScrollSpeed = 3.0
+shader_parameter/surgeFrequency = 2.0
+shader_parameter/surgeSpeed = 5.0
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+
+[node name="StarweepCrater" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_j553s")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="Sky" type="ColorRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.12549, 0.219608, 1)
+
+[node name="Sky3" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_cflne")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.12549, 0.219608, 1)
+
+[node name="Sky2" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_rwutr")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.0901961, 0.12549, 0.219608, 1)
+
+[node name="back" type="SubViewport" parent="."]
+transparent_bg = true
+sdf_oversize = 0
+sdf_scale = 0
+size = Vector2i(512, 216)
+
+[node name="SandstoneEnvirementBackground" parent="back" instance=ExtResource("6_dugrx")]
+
+[node name="Main" type="SubViewport" parent="."]
+transparent_bg = true
+sdf_oversize = 0
+sdf_scale = 0
+size = Vector2i(640, 432)
+
+[node name="SandstoneEnvirement" parent="Main" instance=ExtResource("2_qqjur")]
+
+[node name="Unmoveing" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.01, 0.01)
+
+[node name="StarfallShader2" parent="Unmoveing" instance=ExtResource("3_eohir")]
+material = null
+position = Vector2(581.5, 313)
+points = PackedVector2Array(52, 15, 52, 104)
+width = 1.0
+default_color = Color(0.811765, 0.341176, 0.239216, 1)
+
+[node name="RedStar" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(634, 325)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar2" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(642, 331)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar3" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(616, 342)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar4" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(598, 326)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar5" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(679, 339)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar6" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(655, 351)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar7" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(594, 362)
+texture = ExtResource("5_36iue")
+
+[node name="RedStar8" type="Sprite2D" parent="Unmoveing"]
+position = Vector2(638, 371)
+texture = ExtResource("5_36iue")
+
+[node name="Parallax2D" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.9, 1)
+
+[node name="BackgroundParalax" type="Sprite2D" parent="Parallax2D"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_ndoim")
+position = Vector2(184, -31)
+texture = SubResource("ViewportTexture_5pb8y")
+
+[node name="Background" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-80, 5)
+texture = SubResource("GradientTexture2D_tdagb")
+polygon = PackedVector2Array(-64, -43, 40, -34, 29, -30, 29, -7, 27, -3, 5, -3, -64, 23)
+
+[node name="Sprite2D" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_uvsq2")
+position = Vector2(20, -16)
+texture = SubResource("GradientTexture2D_qktd4")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Background"]
+material = SubResource("ShaderMaterial_uvsq2")
+position = Vector2(-43, -15)
+texture = SubResource("GradientTexture2D_qktd4")
+
+[node name="LightOccluder2D5" parent="." instance=ExtResource("3_y7klw")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -15)
+occluder = SubResource("OccluderPolygon2D_cye0d")
+
+[node name="Enviremnet" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_221ap")
+position = Vector2(176, 85)
+texture = SubResource("ViewportTexture_7ac6w")
+
+[node name="Crystals" type="Node2D" parent="."]
+
+[node name="GiantCrystalRed1" type="Sprite2D" parent="Crystals"]
+position = Vector2(80, 13)
+texture = ExtResource("9_ke04t")
+
+[node name="GiantCrystalRed5" type="Sprite2D" parent="Crystals"]
+position = Vector2(41, 21)
+texture = ExtResource("9_ke04t")
+
+[node name="GiantCrystalRed7" type="Sprite2D" parent="Crystals"]
+position = Vector2(24, 21)
+texture = ExtResource("10_8n2w8")
+
+[node name="GiantCrystalRed8" type="Sprite2D" parent="Crystals"]
+position = Vector2(-20, -11)
+texture = ExtResource("10_8n2w8")
+
+[node name="GiantCrystalRed9" type="Sprite2D" parent="Crystals"]
+position = Vector2(73, 22)
+texture = ExtResource("10_8n2w8")
+
+[node name="CrystalThug" parent="." instance=ExtResource("8_yiiek")]
+position = Vector2(56, 18)
+color = 1
+
+[node name="Player" parent="." instance=ExtResource("3_egbe4")]
+position = Vector2(-26, -11)
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+zoom = Vector2(10, 10)
+script = ExtResource("5_bt5o2")
+
+[node name="Crystals2" type="Node2D" parent="."]
+
+[node name="GiantCrystalRed2" type="Sprite2D" parent="Crystals2"]
+position = Vector2(64, 13)
+texture = ExtResource("9_ke04t")
+flip_h = true
+
+[node name="GiantCrystalRed3" type="Sprite2D" parent="Crystals2"]
+position = Vector2(-26, 15)
+texture = ExtResource("9_ke04t")
+flip_h = true
+
+[node name="GiantCrystalRed4" type="Sprite2D" parent="Crystals2"]
+position = Vector2(-49, -11)
+texture = ExtResource("9_ke04t")
+flip_h = true
+
+[node name="GiantCrystalRed6" type="Sprite2D" parent="Crystals2"]
+position = Vector2(105, 14)
+texture = ExtResource("10_8n2w8")
+
+[node name="StarfallShader" parent="." instance=ExtResource("3_eohir")]
+material = SubResource("ShaderMaterial_6nva0")
+position = Vector2(-19, 14)
+points = PackedVector2Array(52, 15, 52, 104)
+width = 30.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+z_index = 100
+copy_mode = 2
+
+[node name="SoftLighting" parent="." instance=ExtResource("9_ddtfu")]

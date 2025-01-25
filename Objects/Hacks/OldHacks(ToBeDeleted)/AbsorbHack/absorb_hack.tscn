@@ -190,8 +190,8 @@ preprocess = 0.2
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("3_ae78f")]
 collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
-hitEfect = ExtResource("3_v3lrv")
 attack_damage = 1.0
+hitEfect = ExtResource("3_v3lrv")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
 shape = SubResource("CircleShape2D_sje8b")

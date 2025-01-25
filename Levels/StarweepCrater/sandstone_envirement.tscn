@@ -1,0 +1,67 @@
+[gd_scene load_steps=13 format=3 uid="uid://dqgol3yij81qs"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_gi4nq"]
+[ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="2_upolj"]
+[ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="3_r16up"]
+
+[sub_resource type="Gradient" id="Gradient_7nbmo"]
+offsets = PackedFloat32Array(0, 0.37574, 0.66568, 0.846154, 1)
+colors = PackedColorArray(0.203922, 0.109804, 0.152941, 1, 0.376471, 0.172549, 0.172549, 1, 0.533333, 0.294118, 0.168627, 1, 0.745098, 0.466667, 0.168627, 1, 0.870588, 0.619608, 0.254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_tojnr"]
+gradient = SubResource("Gradient_7nbmo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_ty1jf"]
+noise_type = 0
+seed = 2
+frequency = 0.0057
+fractal_octaves = 10
+fractal_gain = 1.2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jxxyn"]
+width = 64
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_ty1jf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xjtfj"]
+shader = ExtResource("1_gi4nq")
+shader_parameter/paleteSize = 10.0
+shader_parameter/size = Vector2(1920, 1080)
+shader_parameter/noiseResolution = Vector2(64, 64)
+shader_parameter/shading = 0.03
+shader_parameter/warpBorder = true
+shader_parameter/noiseTex = ExtResource("2_upolj")
+shader_parameter/palete = SubResource("GradientTexture1D_tojnr")
+shader_parameter/warpBorderNoise = SubResource("NoiseTexture2D_jxxyn")
+
+[sub_resource type="Gradient" id="Gradient_f6hhi"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5dkga"]
+gradient = SubResource("Gradient_f6hhi")
+width = 1920
+height = 1080
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_5xt56"]
+polygon = PackedVector2Array(-160, -128, -64, -128, -64, -16, -128, -16, -128, 0, 8, 0, -16, 8, -24, 16, -24, 24, -8, 24, 16, 8, 24, 8, 24, 24, 32, 24, 32, 32, 64, 32, 64, 24, 512, 24, 504, 272, -160, 272)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_oebhq"]
+polygon = PackedVector2Array(136, 72, 152, 56, 168, 56, 176, 64, 184, 72, 192, 96, 168, 104, 152, 104, 136, 88)
+
+[node name="SandstoneEnvirement" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_xjtfj")
+texture = SubResource("GradientTexture2D_5dkga")
+
+[node name="LightOccluder2D5" parent="." instance=ExtResource("3_r16up")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(128, 128)
+occluder = SubResource("OccluderPolygon2D_5xt56")
+
+[node name="LightOccluder2D6" parent="." instance=ExtResource("3_r16up")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(-88, 8)
+occluder = SubResource("OccluderPolygon2D_oebhq")

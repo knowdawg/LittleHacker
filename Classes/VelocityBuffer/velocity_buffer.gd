@@ -9,7 +9,7 @@ var myShapes : Array[ColorRect] = []
 
 var prevCamPos : Vector2 = Vector2.ZERO
 var totalCameraPosChange : Vector2 = Vector2.ZERO
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	for i in shapeHolder.get_children():
 		i.queue_free()
 	myShapes.clear()

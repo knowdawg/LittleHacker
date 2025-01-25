@@ -1,8 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b8t05k375ws5w"]
+[gd_scene load_steps=10 format=3 uid="uid://b8t05k375ws5w"]
 
 [ext_resource type="Script" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.gd" id="1_nps07"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="1_sfeny"]
 [ext_resource type="Texture2D" uid="uid://s5bb8pkvfcva" path="res://Assets/Sprites/Effects/CrystalResonanceProjectile.png" id="2_6nsrd"]
+[ext_resource type="Texture2D" uid="uid://ccjgm7qpwf4tk" path="res://Assets/Sprites/Effects/CrystalResonanceProjectileGreen.png" id="2_k32ow"]
+[ext_resource type="Texture2D" uid="uid://di0huxem8xvsl" path="res://Assets/Sprites/Effects/CrystalResonanceProjectileRed.png" id="3_3lxiu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_enls5"]
 radius = 12.0
@@ -109,6 +111,8 @@ _data = {
 
 [node name="CrystalResonanceBlastProjectile" type="Node2D"]
 script = ExtResource("1_nps07")
+greenProjectile = ExtResource("2_k32ow")
+redProjectile = ExtResource("3_3lxiu")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1

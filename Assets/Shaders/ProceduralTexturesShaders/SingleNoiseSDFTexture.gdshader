@@ -7,6 +7,9 @@ uniform vec2 size;
 uniform vec2 noiseResolution;
 uniform float shading : hint_range(0.0, 0.1);
 
+uniform bool warpBorder = false;
+uniform sampler2D warpBorderNoise : repeat_enable;
+
 void fragment() {
 	vec2 quantizedUV = floor(UV * size) / size;
 	vec2 quatizedScreenUV = floor(SCREEN_UV * size) / size;
@@ -14,7 +17,14 @@ void fragment() {
 	//Sample the noise based on quantized UV
 	float val = texture(noiseTex, (quantizedUV * size * 2.0) * (1.0 / noiseResolution)).r;
 
-	float sdfVal = -texture_sdf(screen_uv_to_sdf(quatizedScreenUV));
+	vec2 o = vec2(0.0);
+	if(warpBorder){
+		float v = texture(warpBorderNoise, quantizedUV).r;
+		v = (v - 0.5) * 2.0 * 10.0;
+		o = vec2(v, v * 0.3);
+	}
+	float sdfVal = -texture_sdf(screen_uv_to_sdf(quatizedScreenUV) + o);
+
 	float alphaBuffer = step(0.0, sdfVal);
 
 	val += step(sdfVal, 1.0); //Outline

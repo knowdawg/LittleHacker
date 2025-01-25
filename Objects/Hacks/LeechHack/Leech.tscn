@@ -1,0 +1,54 @@
+[gd_scene load_steps=3 format=3 uid="uid://q1v00o43xu5d"]
+
+[ext_resource type="PackedScene" uid="uid://d2j3fqxswjbe0" path="res://Objects/Projectiles/HealingOrbs/healing_orb_projectile.tscn" id="1_0x8ye"]
+
+[sub_resource type="GDScript" id="GDScript_32opt"]
+script/source = "extends HackCommandComponent
+
+var enabled : bool = false
+@export var timeBetweenActivations : float = 0.5
+@export var damage : float = 1.0
+@export var projectile : PackedScene
+@export var projectileLocation : Node2D
+@export var hurtboxComponent : HurtboxComponent
+@export_group(\"Removal Nodes\")
+@export var removeAfterExecuted : bool = true
+@export var enemyHealthbar : EnemyHealthBar
+
+var t = 0.0
+
+func executeHack():
+	healthComponent.death.connect(stop)
+	enabled = true
+	leech()
+	if removeAfterExecuted:
+		var index : int = enemyHealthbar.hackCommands.find(self)
+		enemyHealthbar.hackCommands.remove_at(index)
+
+func stop(_attack):
+	enabled = false
+
+func _process(delta: float) -> void:
+	if enabled:
+		t += delta
+		
+		if t >= timeBetweenActivations:
+			t -= timeBetweenActivations
+			leech()
+
+func leech():
+	var a : Attack = Attack.new()
+	a.attackID = randf_range(0, 99999)
+	a.attackName = \"LeechHack\"
+	a.attack_damage = damage
+	a.isParryable = false
+	hurtboxComponent.damage(a)
+	
+	var p = projectile.instantiate()
+	Game.level.add_child(p)
+	p.position = projectileLocation.global_position
+"
+
+[node name="Leech" type="Line2D"]
+script = SubResource("GDScript_32opt")
+projectile = ExtResource("1_0x8ye")

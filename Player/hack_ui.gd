@@ -21,7 +21,7 @@ func _process(_delta: float) -> void:
 		topLabel.text = ""
 		middleLabel.text = ""
 		bottomLabel.text = ""
-		var numOfHacks = HackCommandManager.hackCommands.size()
+		numOfHacks = HackCommandManager.hackCommands.size()
 		if numOfHacks >= 1:
 			curentLabels.append(middleLabel)
 		if numOfHacks >= 2:

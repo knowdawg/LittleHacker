@@ -23,3 +23,6 @@ func setActive(isActive : bool):
 
 func isExecutable():
 	return (healthComponent.get_weakness() >= cost)
+
+func executeHack():
+	pass

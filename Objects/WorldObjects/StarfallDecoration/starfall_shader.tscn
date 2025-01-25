@@ -1,0 +1,42 @@
+[gd_scene load_steps=8 format=3 uid="uid://n2q3tqtenc73"]
+
+[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="1_kaycs"]
+
+[sub_resource type="Gradient" id="Gradient_hm83j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.228758, 0.464052, 0.722222)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0.643137, 1, 0, 0.545098, 0.643137, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qe5lo"]
+frequency = 0.0046
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8f5d"]
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = SubResource("Gradient_hm83j")
+noise = SubResource("FastNoiseLite_qe5lo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xvwb"]
+frequency = 0.001
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1vl4"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_1xvwb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4hbly"]
+resource_local_to_scene = true
+shader = ExtResource("1_kaycs")
+shader_parameter/resolution = Vector2(40, 40)
+shader_parameter/textureScollSpeed = 2.0
+shader_parameter/warpScrollSpeed = 3.0
+shader_parameter/surgeFrequency = 2.0
+shader_parameter/surgeSpeed = 5.0
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+
+[node name="StarfallShader" type="Line2D"]
+material = SubResource("ShaderMaterial_4hbly")
+width = 20.0
+texture_mode = 1

@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=50 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -25,8 +25,9 @@
 [ext_resource type="Script" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
 [ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="18_rpvuy"]
 [ext_resource type="Texture2D" uid="uid://0y415e8nk50y" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="19_2fqmj"]
-[ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="20_hfd02"]
 [ext_resource type="PackedScene" uid="uid://bbwjfta6awigx" path="res://Objects/Enemies/Gorgon/gorgon.tscn" id="26_3pugp"]
+[ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="27_4fuw3"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="28_k127t"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -91,6 +92,40 @@ fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5x6j7"]
 shader = ExtResource("13_mu6m5")
+
+[sub_resource type="Gradient" id="Gradient_hm83j"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.228758, 0.464052, 0.722222)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 1, 1, 0, 0, 0.643137, 1, 0, 0.545098, 0.643137, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_qe5lo"]
+frequency = 0.0046
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8f5d"]
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = SubResource("Gradient_hm83j")
+noise = SubResource("FastNoiseLite_qe5lo")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1xvwb"]
+frequency = 0.001
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1vl4"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_1xvwb")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bo34g"]
+resource_local_to_scene = true
+shader = ExtResource("28_k127t")
+shader_parameter/resolution = Vector2(40, 40)
+shader_parameter/textureScollSpeed = 2.0
+shader_parameter/warpScrollSpeed = 3.0
+shader_parameter/surgeFrequency = 2.0
+shader_parameter/surgeSpeed = 5.0
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
 
 [node name="EnvirmentalTestSallLevel" type="Node2D"]
 texture_filter = 1
@@ -497,12 +532,14 @@ position = Vector2(-20, 110)
 
 [node name="CrystalThug" parent="." instance=ExtResource("17_87pum")]
 position = Vector2(38, 85)
+color = 1
 
 [node name="CrystalThug2" parent="." instance=ExtResource("17_87pum")]
 position = Vector2(50, 85)
 
 [node name="CrystalThug3" parent="." instance=ExtResource("17_87pum")]
 position = Vector2(106, 85)
+color = 2
 
 [node name="CrystalThug4" parent="." instance=ExtResource("17_87pum")]
 position = Vector2(-12, 109)
@@ -583,9 +620,6 @@ texture = ExtResource("19_2fqmj")
 position = Vector2(676, 48)
 texture = ExtResource("19_2fqmj")
 
-[node name="PunchingBag" parent="Decorations2" instance=ExtResource("20_hfd02")]
-position = Vector2(695, 51)
-
 [node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
 z_index = 100
 copy_mode = 2
@@ -600,6 +634,7 @@ offset_bottom = 139.0
 [node name="Terminal" parent="." instance=ExtResource("10_e4m8l")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
 
 [node name="MirrorShader" type="ColorRect" parent="CanvasLayer"]
 visible = false
@@ -617,3 +652,9 @@ offset_bottom = 34.0
 theme_override_fonts/font = ExtResource("16_a5nql")
 theme_override_font_sizes/font_size = 50
 script = ExtResource("17_spwmn")
+
+[node name="StarfallShader" parent="." instance=ExtResource("27_4fuw3")]
+material = SubResource("ShaderMaterial_bo34g")
+position = Vector2(11, 0)
+points = PackedVector2Array(60, 92, 60, 188)
+width = 40.0
