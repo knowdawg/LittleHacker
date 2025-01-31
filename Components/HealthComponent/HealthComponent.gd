@@ -9,7 +9,7 @@ var weakness : float = 0.0
 
 @export var locked = false
 
-
+var dead : bool = false
 signal death(attack : Attack)
 signal hit(attack : Attack)
 signal grabbed(attack : Attack)
@@ -60,8 +60,8 @@ func damage(attack : Attack):
 	
 	hit.emit(attack)
 	
-	
 	if health <= 0:
+		dead = true
 		death.emit(attack)
 	
 	
@@ -70,3 +70,9 @@ func setHealthLock(lock : bool):
 
 func isHealthLocked():
 	return locked
+
+func kill():
+	dead = true
+	set_health(0)
+	var a : Attack;
+	death.emit(a)

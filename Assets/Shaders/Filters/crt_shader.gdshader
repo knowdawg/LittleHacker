@@ -20,14 +20,14 @@ void fragment() {
 	vec2 curvedUV = curve(UV);
 
 	//Calculate the corresponding r, g, b values for current UV based on a sin wave with frequency equal to the number of pixels
-	float r = texture(TEXTURE, curvedUV).r * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI))), 0.16);
-	float g = texture(TEXTURE, curvedUV).g * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (2.0 * PI)/3.0)), 0.16);
-	float b = texture(TEXTURE, curvedUV).b * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (4.0 * PI)/3.0)), 0.16);
+	float r = texture(TEXTURE, curvedUV).r * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI))), 0.08);
+	float g = texture(TEXTURE, curvedUV).g * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (2.0 * PI)/3.0)), 0.08);
+	float b = texture(TEXTURE, curvedUV).b * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI) + (4.0 * PI)/3.0)), 0.08);
 
 	//CRT electron gun 'scanner' effect
 	float scanner = 1.0 - fract(TIME * 0.3 - curvedUV.y);
 	scanner = smoothstep(0.7, 1.0, scanner);
-	scanner *= 0.0;
+	scanner *= 0.01;
 
 	//Verticle seperators
 	float seperator = abs(sin(1.5 + pixelsWidth * (curvedUV.x * PI)));

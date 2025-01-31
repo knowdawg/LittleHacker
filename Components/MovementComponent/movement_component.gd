@@ -121,11 +121,12 @@ func getVectorToPlayer(pos : Vector2, normalized : bool = true):
 		return v
 	return Vector2.ZERO
 
-func getVectorToPlayerX(pos : Vector2):
+func getVectorToPlayerX(pos : Vector2, normalized : bool = true):
 	if is_instance_valid(Game.player):
 		var v = pos - Game.player.global_position
 		v.y = 0.0
-		v = v.normalized()
+		if normalized:
+			v = v.normalized()
 		return v
 	return Vector2.ZERO
 

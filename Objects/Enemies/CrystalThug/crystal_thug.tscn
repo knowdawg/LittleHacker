@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=64 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Texture2D" uid="uid://b1h0biuscqvuk" path="res://Assets/Sprites/Enemies/CrystalThugEnemy.png" id="1_1mmkh"]
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
@@ -29,6 +29,7 @@
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/wait.gd" id="9_c0kbi"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_irfdu"]
 [ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="9_l147m"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="10_8sqji"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_tifpm"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_1ay4a"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_88n8y"]
@@ -38,6 +39,21 @@
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id2w4"]
 size = Vector2(2, 6)
+
+[sub_resource type="Animation" id="Animation_vnvpn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
 
 [sub_resource type="Animation" id="Animation_wqnno"]
 resource_name = "Shatter"
@@ -56,21 +72,6 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3]
 }
 
-[sub_resource type="Animation" id="Animation_vnvpn"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [3]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qtsy3"]
 _data = {
 "RESET": SubResource("Animation_vnvpn"),
@@ -86,6 +87,11 @@ gradient = SubResource("Gradient_cmus3")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tm7ga"]
+shader = ExtResource("10_8sqji")
+shader_parameter/width = 0.3
+shader_parameter/outlineAlpha = 0.3
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e0n24"]
 polygon = PackedVector2Array(-1, 2, 1, 2, 1, 7, -1, 7)
@@ -432,6 +438,7 @@ texture = SubResource("GradientTexture2D_0qmxs")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
+material = SubResource("ShaderMaterial_tm7ga")
 position = Vector2(0, -4)
 texture = ExtResource("1_1mmkh")
 hframes = 38
@@ -448,11 +455,12 @@ velocityToCheck = NodePath("../..")
 
 [node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("6_0vvo8")]
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
 script = ExtResource("2_ckk41")
 initial_state = NodePath("Idle")
 hackedState = NodePath("Hacked")
 parent = NodePath("..")
+animators = [NodePath("../Animator")]
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
 script = ExtResource("4_y8jj8")
@@ -492,7 +500,7 @@ attackComponents = [NodePath("../../AttackComponents/HeadSlam")]
 nodeToFlip = NodePath("../../AttackComponents/HeadSlam")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
-movementPeriods = Array[Vector3]([Vector3(0.7, 0.8, 240)])
+movementPeriods = Array[Vector3]([Vector3(0.6, 0.7, 240)])
 
 [node name="Resonate" type="Node" parent="StateMachine" node_paths=PackedStringArray("healthComponent", "parent", "nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("7_320lq")
@@ -529,6 +537,7 @@ rightGrabPos = NodePath("RightGrabPos")
 animationName = "Stun"
 animationPlayer = NodePath("../../Animator")
 spriteDirectorComponent = NodePath("../../Sprite2D/SpriteDirectorComponent")
+updateWhileHacked = true
 
 [node name="LeftGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
 position = Vector2(0, 1)
@@ -550,6 +559,7 @@ libraries = {
 [node name="GeneralComponents" type="Node2D" parent="."]
 
 [node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_75l8a")]
+MAX_WEAKNESS = 6.0
 
 [node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_vjnph")]
 healthComponent = NodePath("../HealthComponent")
@@ -581,6 +591,8 @@ hackCommands = [NodePath("Resonance"), NodePath("HeadShatter"), NodePath("Leech"
 stateMachine = NodePath("../../StateMachine")
 
 [node name="Resonance" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("17_jdngx")]
+visible = false
+width = 0.3
 stateMachine = NodePath("../../../StateMachine")
 stateToSwitchTo = NodePath("../../../StateMachine/Resonate")
 removeAfterExecuted = true
@@ -590,8 +602,11 @@ hackName = "Resonate"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="HeadShatter" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("17_jdngx")]
+visible = false
+width = 0.3
 stateMachine = NodePath("../../../StateMachine")
 stateToSwitchTo = NodePath("../../../StateMachine/Death")
+killsEnemy = true
 removeAfterExecuted = true
 enemyHealthbar = NodePath("..")
 cost = 1.0
@@ -599,6 +614,8 @@ hackName = "Shatter"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="Leech" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("projectileLocation", "hurtboxComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("29_t6cbv")]
+visible = false
+width = 0.3
 projectileLocation = NodePath("../../..")
 hurtboxComponent = NodePath("../../HurtboxComponent")
 enemyHealthbar = NodePath("..")
@@ -620,6 +637,7 @@ shape = SubResource("CircleShape2D_o4fvj")
 
 [node name="DeAgroProximity" parent="Proximities" instance=ExtResource("9_irfdu")]
 collision_mask = 4
+requireLineOfSight = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/DeAgroProximity"]
 visible = false
@@ -643,6 +661,7 @@ collision_mask = 4
 attackName = "CrystalThugHeadSlam"
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/HeadSlam"]
 visible = false

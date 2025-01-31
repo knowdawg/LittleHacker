@@ -20,7 +20,7 @@ void fragment() {
 	nTex.rgb += surge * 0.1;
 	nTex.a -= smoothstep(0.2, 0.5, abs(quantizedUV.y - 0.5));
 	float nTexAmplitude = (nTex.r + nTex.g + nTex.b) * 0.3 + surge;
-	nTex.a = step(0.5, nTex.a + nTexAmplitude * 0.2);
+	nTex.a = smoothstep(0.4, 0.5, nTex.a + nTexAmplitude * 0.2);
 
 	c = nTex;
 

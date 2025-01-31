@@ -3,6 +3,8 @@ class_name State
 
 signal trasitioned
 
+@export var updateWhileHacked : bool = false
+
 func enter(_prevState):
 	pass
 

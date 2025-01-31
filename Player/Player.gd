@@ -8,7 +8,7 @@ class_name Player
 @export var stateMachine : PlayerStateMachine
 
 const SPEED = 70.0 * 0.45
-const JUMP_VELOCITY = -140.0 * 0.5
+const JUMP_VELOCITY = -145.0 * 0.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = 500 * 0.5 #ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -37,8 +37,6 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	
 	if canMove:
 		var direction = Input.get_axis("Left", "Right")
-		if Game.inTerminal:
-			direction = 0
 		if direction:
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
 		else:
@@ -84,7 +82,7 @@ func _physics_process(delta):
 	$HackTargetDetectionBox.scale.x = -getSpriteDirection()
 	coyoteTime -= delta
 	if is_on_floor() or $StateMachine.current_state is PlayerWallCling:
-		coyoteTime = 0.1
+		coyoteTime = 0.15
 
 func _process(_delta: float) -> void:
 	Game.player = self

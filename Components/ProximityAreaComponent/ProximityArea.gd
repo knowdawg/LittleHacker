@@ -1,6 +1,8 @@
 extends Area2D
 class_name ProximityAreaComponent
 
+@export var requireLineOfSight : bool = true
+
 signal onPlayerEnter
 signal onPlayerExit
 
@@ -18,13 +20,20 @@ signal onPlayerExit
 			#return area.get_parent()
 	#return null
 
-
+@onready var ray : RayCast2D = $RayCast2D
 
 func is_player_inside():
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		if body is Player:
-			return(true)
+			if requireLineOfSight:
+				ray.rotation = (global_position - Game.player.global_position).angle()
+				ray.force_raycast_update()
+				var b = ray.get_collider()
+				if body == b:
+					return(true)
+			else:
+				return(true)
 	return(false)
 
 func get_player():

@@ -35,9 +35,9 @@ func update(_delta):
 		var offset = Vector2(3, 0)
 		if dir == -1:
 			offset *= -1
-			offset += leftGrabPos.position * Vector2(0, 1.0) + Vector2(6, 2.5)
+			offset += leftGrabPos.position * Vector2(0, 1.0) + Vector2(6, 0)
 		else:
-			offset += rightGrabPos.position * Vector2(0, 1.0) + Vector2(-6, 2.5)
+			offset += rightGrabPos.position * Vector2(0, 1.0) + Vector2(-6, 0)
 		
 		
 		var targetPos = Game.player.global_position + offset

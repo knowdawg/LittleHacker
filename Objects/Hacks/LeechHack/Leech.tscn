@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://q1v00o43xu5d"]
+[gd_scene load_steps=4 format=3 uid="uid://q1v00o43xu5d"]
 
 [ext_resource type="PackedScene" uid="uid://d2j3fqxswjbe0" path="res://Objects/Projectiles/HealingOrbs/healing_orb_projectile.tscn" id="1_0x8ye"]
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_axlk0"]
 
 [sub_resource type="GDScript" id="GDScript_32opt"]
 script/source = "extends HackCommandComponent
@@ -52,3 +53,18 @@ func leech():
 [node name="Leech" type="Line2D"]
 script = SubResource("GDScript_32opt")
 projectile = ExtResource("1_0x8ye")
+
+[node name="Label" type="Label" parent="."]
+clip_children = 2
+z_index = 1
+texture_filter = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 24.0
+offset_bottom = 11.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_axlk0")
+text = "TEST"
+horizontal_alignment = 1

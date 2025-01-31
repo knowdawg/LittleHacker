@@ -832,6 +832,7 @@ rightGrabPos = NodePath("Marker2D2")
 animationName = "Stun"
 animationPlayer = NodePath("../../AnimationPlayer")
 spriteDirectorComponent = NodePath("../../GorgonSprite/SpriteDirectorComponent")
+updateWhileHacked = true
 
 [node name="Marker2D" type="Marker2D" parent="StateMachine/Hacked"]
 position = Vector2(-1, 4)

@@ -545,7 +545,7 @@ color = 2
 position = Vector2(-12, 109)
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(99, 92)
+position = Vector2(558, 52)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(10, 10)

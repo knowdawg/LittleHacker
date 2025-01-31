@@ -7,5 +7,6 @@ occluder_light_mask = 0
 script = ExtResource("1_yemlt")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
+collision_mask = 0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="StaticBody2D"]

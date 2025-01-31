@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://c50x0ma4r25le"]
+[gd_scene load_steps=3 format=3 uid="uid://c50x0ma4r25le"]
 
 [ext_resource type="Script" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.gd" id="1_k0bch"]
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_k0llc"]
 
 [node name="StateSwitchHack" type="Line2D"]
 script = ExtResource("1_k0bch")
+
+[node name="Label" type="Label" parent="."]
+clip_children = 2
+z_index = 1
+texture_filter = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 24.0
+offset_bottom = 11.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_k0llc")
+text = "TEST"
+horizontal_alignment = 1

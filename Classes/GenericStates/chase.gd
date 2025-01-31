@@ -39,11 +39,17 @@ func update(delta):
 		return
 	
 	if !useIntervalMovement:
-		movement.moveTowardsPlayerX(speed, delta)
+		if abs(movement.getVectorToPlayerX(movement.parent.global_position, false).x) < 1.0:
+			pass
+		else:
+			movement.moveTowardsPlayerX(speed, delta)
 	else:
 		t += delta
 		if t > animationLength:
 			t -= animationLength
 		for i in movementIntervals:
 			if t > i.x and t < i.y:
-				movement.moveTowardsPlayerX(i.z, delta)
+				if abs(movement.getVectorToPlayerX(movement.parent.global_position, false).x) < 1.0:
+					pass
+				else:
+					movement.moveTowardsPlayerX(i.z, delta)

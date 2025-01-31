@@ -28,8 +28,10 @@ VelocityBuffer="*res://Classes/VelocityBuffer/velocity_buffer.tscn"
 
 [display]
 
-window/size/viewport_width=1920
-window/size/viewport_height=1080
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/window_width_override=1920
+window/size/window_height_override=1080
 window/stretch/mode="viewport"
 mouse_cursor/custom_image="res://Assets/Sprites/UI/Mouse.png"
 

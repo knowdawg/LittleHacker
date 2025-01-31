@@ -1,6 +1,22 @@
-[gd_scene load_steps=2 format=3 uid="uid://cjk2i4r7cpb5l"]
+[gd_scene load_steps=3 format=3 uid="uid://cjk2i4r7cpb5l"]
 
 [ext_resource type="Script" path="res://Objects/Hacks/ProjectileHack/projectile_hack.gd" id="1_6d0xg"]
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_mk3xb"]
 
 [node name="ProjectileHack" type="Line2D"]
 script = ExtResource("1_6d0xg")
+
+[node name="Label" type="Label" parent="."]
+clip_children = 2
+z_index = 1
+texture_filter = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_right = 24.0
+offset_bottom = 11.0
+grow_horizontal = 2
+scale = Vector2(0.25, 0.25)
+theme_override_constants/outline_size = 2
+theme_override_fonts/font = ExtResource("2_mk3xb")
+text = "TEST"
+horizontal_alignment = 1
