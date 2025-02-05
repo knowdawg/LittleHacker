@@ -630,6 +630,7 @@ position = Vector2(0, 1)
 
 [node name="AgroProximity" parent="Proximities" instance=ExtResource("9_irfdu")]
 collision_mask = 4
+requireLineOfSight = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/AgroProximity"]
 visible = false
@@ -637,7 +638,6 @@ shape = SubResource("CircleShape2D_o4fvj")
 
 [node name="DeAgroProximity" parent="Proximities" instance=ExtResource("9_irfdu")]
 collision_mask = 4
-requireLineOfSight = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/DeAgroProximity"]
 visible = false

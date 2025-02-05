@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c8x60h4peckug"]
+[gd_scene load_steps=52 format=3 uid="uid://c8x60h4peckug"]
 
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bbwjfta6awigx" path="res://Objects/Enemies/Gorgon/gorgon.tscn" id="26_3pugp"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="27_4fuw3"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="28_k127t"]
+[ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="29_dfolk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
@@ -126,6 +127,8 @@ shader_parameter/surgeFrequency = 2.0
 shader_parameter/surgeSpeed = 5.0
 shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
 shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ovxbe"]
 
 [node name="EnvirmentalTestSallLevel" type="Node2D"]
 texture_filter = 1
@@ -545,7 +548,7 @@ color = 2
 position = Vector2(-12, 109)
 
 [node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(558, 52)
+position = Vector2(603, 50)
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 zoom = Vector2(10, 10)
@@ -658,3 +661,10 @@ material = SubResource("ShaderMaterial_bo34g")
 position = Vector2(11, 0)
 points = PackedVector2Array(60, 92, 60, 188)
 width = 40.0
+
+[node name="LevelTransition" parent="." instance=ExtResource("29_dfolk")]
+scene = "res://Levels/StarweepCrater/Levels/starweep_crater.tscn"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+position = Vector2(618, 42)
+shape = SubResource("RectangleShape2D_ovxbe")

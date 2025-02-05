@@ -1,0 +1,123 @@
+[gd_scene load_steps=20 format=3 uid="uid://dl5wh4denx0f6"]
+
+[ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="1_nou7o"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="2_3drsp"]
+[ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="3_g1fet"]
+[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="4_k6hs5"]
+[ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="5_ap54m"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eiq13"]
+load_path = "res://.godot/imported/SandstoneTexture.png-5e1fb42ebd499e0e306c0faae8ae7c6e.ctex"
+
+[sub_resource type="Gradient" id="Gradient_vs3os"]
+offsets = PackedFloat32Array(0, 0.37574, 0.66568, 0.846154, 1)
+colors = PackedColorArray(0.203922, 0.109804, 0.152941, 1, 0.376471, 0.172549, 0.172549, 1, 0.533333, 0.294118, 0.168627, 1, 0.745098, 0.466667, 0.168627, 1, 0.870588, 0.619608, 0.254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_rmmf7"]
+gradient = SubResource("Gradient_vs3os")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_56jcn"]
+noise_type = 0
+seed = 2
+frequency = 0.0057
+fractal_octaves = 10
+fractal_gain = 1.2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ygqmd"]
+width = 64
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_56jcn")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lebn3"]
+shader = ExtResource("4_k6hs5")
+shader_parameter/paleteSize = 10.0
+shader_parameter/size = Vector2(1920, 1080)
+shader_parameter/noiseResolution = Vector2(32, 32)
+shader_parameter/shading = 0.1
+shader_parameter/warpBorder = true
+shader_parameter/noiseTex = SubResource("CompressedTexture2D_eiq13")
+shader_parameter/palete = SubResource("GradientTexture1D_rmmf7")
+shader_parameter/warpBorderNoise = SubResource("NoiseTexture2D_ygqmd")
+
+[sub_resource type="Gradient" id="Gradient_im4bl"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.207843, 0.156863, 0.160784, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8aj8p"]
+gradient = SubResource("Gradient_im4bl")
+width = 1920
+height = 1080
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xalpq"]
+polygon = PackedVector2Array(-56, -205, -16, -205, -14, -208, -8, -208, -6, -204, 2, -204, 4, -202, 10, -202, 12, -208, 20, -208, 20, -204, 30, -204, 30, -214, 40, -214, 46, -212, 48, -208, 54, -204, 60, -204, 60, -208, 64, -208, 64, -212, 74, -212, 74, -208, 80, -208, 80, -204, 86, -204, 86, -198, 92, -198, 94, -196, 102, -196, 102, -198, 106, -198, 106, -196, 110, -196, 110, -200, 114, -200, 114, -204, 120, -204, 120, -206, 130, -206, 130, -200, 134, -200, 136, -202, 138, -202, 140, -200, 146, -200, 146, -202, 148, -202, 148, -204, 152, -204, 156, -202, 160, -202, 160, -204, 164, -204, 164, -206, 168, -206, 172, -206, 172, -202, 174, -202, 174, -198, 178, -198, 178, -200, 182, -200, 182, -202, 186, -202, 186, -200, 192, -200, 192, -204, 200, -206, 200, -208, 204, -208, 204, -206, 208, -206, 208, -204, 216, -204, 216, -206, 222, -206, 222, -208, 226, -208, 240, -205, 264, -205, 288, -221, 304, -221, 320, -205, 336, -197, 344, -197, 352, -213, 368, -213, 392, -205, 392, 115, -130, 142)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_70fum"]
+frequency = 0.0046
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_usrtp"]
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = ExtResource("3_g1fet")
+noise = SubResource("FastNoiseLite_70fum")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_7ib6w"]
+frequency = 0.001
+fractal_octaves = 10
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_n8i2a"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_7ib6w")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kvayc"]
+resource_local_to_scene = true
+shader = ExtResource("2_3drsp")
+shader_parameter/resolution = Vector2(40, 40)
+shader_parameter/textureScollSpeed = 0.5
+shader_parameter/warpScrollSpeed = 1.0
+shader_parameter/surgeFrequency = 1.0
+shader_parameter/surgeSpeed = 2.0
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_usrtp")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_n8i2a")
+
+[node name="SandstoneEnvirementBackground" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_lebn3")
+texture = SubResource("GradientTexture2D_8aj8p")
+
+[node name="LightOccluder2D5" parent="." instance=ExtResource("5_ap54m")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(24, 256)
+occluder = SubResource("OccluderPolygon2D_xalpq")
+
+[node name="StarfallShader" parent="." instance=ExtResource("1_nou7o")]
+material = SubResource("ShaderMaterial_kvayc")
+position = Vector2(-132, -98)
+points = PackedVector2Array(333, 156, 333, 264)
+width = 3.0
+
+[node name="StarfallShader2" parent="." instance=ExtResource("1_nou7o")]
+material = SubResource("ShaderMaterial_kvayc")
+position = Vector2(-178, -100)
+points = PackedVector2Array(333, 156, 333, 264)
+width = 3.0
+
+[node name="StarfallShader3" parent="." instance=ExtResource("1_nou7o")]
+material = SubResource("ShaderMaterial_kvayc")
+position = Vector2(-200, -96)
+points = PackedVector2Array(333, 156, 333, 264)
+width = 3.0
+
+[node name="StarfallShader4" parent="." instance=ExtResource("1_nou7o")]
+material = SubResource("ShaderMaterial_kvayc")
+position = Vector2(-252, -104)
+points = PackedVector2Array(333, 156, 333, 264)
+width = 3.0
+
+[node name="StarfallShader5" parent="." instance=ExtResource("1_nou7o")]
+material = SubResource("ShaderMaterial_kvayc")
+position = Vector2(-302, -102)
+points = PackedVector2Array(333, 156, 333, 264)
+width = 3.0

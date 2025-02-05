@@ -4,7 +4,9 @@
 [ext_resource type="Script" path="res://Objects/ShaderObjects/soft_lighting.gd" id="2_8hpqc"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hks5v"]
+resource_local_to_scene = true
 shader = ExtResource("1_q13pf")
+shader_parameter/brightness = 1.0
 
 [node name="SoftLighting" type="ColorRect"]
 material = SubResource("ShaderMaterial_hks5v")

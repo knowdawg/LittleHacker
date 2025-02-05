@@ -16,8 +16,8 @@ void fragment() {
 	n -= abs(qUV.y - cloudPosition) * 0.2;
 	n *= cloudFullness * 2.0;
 	n = smoothstep(0.6, 0.8, n);
-	
+
 	c = vec4(n);
-	
+
 	COLOR *= c;
 }

@@ -15,9 +15,9 @@ vec2 curve(vec2 uv){
 }
 
 void fragment() {
-	vec4 ogScreen = texture(TEXTURE, UV);
 	//Simulate CRT screen curve
 	vec2 curvedUV = curve(UV);
+	vec4 ogScreen = texture(TEXTURE, curvedUV);
 
 	//Calculate the corresponding r, g, b values for current UV based on a sin wave with frequency equal to the number of pixels
 	float r = texture(TEXTURE, curvedUV).r * pow(abs(sin(1.0 + pixelsHight * (curvedUV.y * PI))), 0.08);
@@ -38,10 +38,10 @@ void fragment() {
 	float darkEdges = distance(vec2(0.5, 0.5), curvedUV);
 	darkEdges = 1.0 - smoothstep(0.3, 1.0, darkEdges);
 
-	vec4 c = vec4(r,g,b,1.0);
+	vec4 c = mix(vec4(r,g,b,1.0), ogScreen, 1.0 - distance(UV, vec2(0.5, 0.5)));
 	c.rgb += scanner;
 	c.rgb -= seperator;
 	c.rgb *= darkEdges;
 
-	COLOR = c;//ogScreen;//c;
+	COLOR = c;
 }

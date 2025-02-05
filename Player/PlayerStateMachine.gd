@@ -54,7 +54,7 @@ var t = 0.15
 func _process(delta):
 	t -= delta
 	
-	if Input.is_action_just_pressed("Jump"):
+	if Input.is_action_just_pressed("Jump") and !Input.is_action_pressed("Down"):
 		inputBuffer = "Jump"
 		t = 0.15
 	if Input.is_action_just_pressed("Roll"):

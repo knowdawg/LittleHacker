@@ -1,67 +1,111 @@
-[gd_scene load_steps=5 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=9 format=3 uid="uid://dlfxfm3ebd5n7"]
 
-[ext_resource type="PackedScene" uid="uid://b5fa63t6v138o" path="res://Assets/Shaders/Filters/crt_shader.tscn" id="1_8qks8"]
-[ext_resource type="PackedScene" uid="uid://cb2mgf3vv8ptm" path="res://Levels/StarweepCrater/starweep_crater.tscn" id="1_t4cyd"]
+[ext_resource type="Script" path="res://Classes/SceneTransitionManager.gd" id="1_qg0pi"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="2_f6ogn"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0qigq"]
-resource_local_to_scene = true
+[sub_resource type="Animation" id="Animation_ib7ep"]
+resource_name = "FadeIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_nn5c8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_unr0c"]
+resource_name = "FadeOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v21w5"]
+_data = {
+"FadeIn": SubResource("Animation_ib7ep"),
+"FadeOut": SubResource("Animation_unr0c"),
+"RESET": SubResource("Animation_nn5c8")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
 shader = ExtResource("2_f6ogn")
-shader_parameter/pixelsWidth = 256.0
-shader_parameter/pixelsHight = 144.0
+shader_parameter/pixelsWidth = 128.0
+shader_parameter/pixelsHight = 72.0
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_uup3d"]
+viewport_path = NodePath("LittleLevelViewport")
 
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
-offset_left = -640.0
-offset_top = -360.0
-offset_right = 640.0
-offset_bottom = 360.0
-
-[node name="SmallEnvirementViewport" type="SubViewport" parent="SubViewportContainer"]
-disable_3d = true
+[node name="LittleLevelViewport" type="SubViewport" parent="." node_paths=PackedStringArray("fadeAnimator")]
 handle_input_locally = false
+sdf_oversize = 2
 sdf_scale = 2
 size = Vector2i(1280, 720)
-render_target_update_mode = 4
+script = ExtResource("1_qg0pi")
+startingScene = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
+fadeAnimator = NodePath("AnimationPlayer")
 
-[node name="StarweepCrater" parent="SubViewportContainer/SmallEnvirementViewport" instance=ExtResource("1_t4cyd")]
+[node name="CanvasLayer" type="CanvasLayer" parent="LittleLevelViewport"]
+layer = 128
 
-[node name="CRTShader" parent="." node_paths=PackedStringArray("subScreen") instance=ExtResource("1_8qks8")]
-material = SubResource("ShaderMaterial_0qigq")
-subScreen = NodePath("../SubViewportContainer/SmallEnvirementViewport")
+[node name="FadeTransition" type="ColorRect" parent="LittleLevelViewport/CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="LittleLevelViewport"]
+libraries = {
+"": SubResource("AnimationLibrary_v21w5")
+}
 
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(0.9, 0.9)
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="Border" type="Line2D" parent="."]
 points = PackedVector2Array(0, -364, 640, -360, 644, 0, 640, 360, 0, 364, -640, 360, -644, 0, -640, -360)
 closed = true
 width = 12.0
 default_color = Color(0, 0, 0, 1)
 antialiased = true
 
-[node name="ProgressBar" type="ProgressBar" parent="."]
-visible = false
-offset_left = -684.0
-offset_top = 364.0
-offset_right = 44.0
-offset_bottom = 402.0
-rotation = -1.5708
-value = 50.0
+[node name="DisplaySprite" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_2ty4p")
+texture = SubResource("ViewportTexture_uup3d")
 
-[node name="ProgressBar2" type="ProgressBar" parent="."]
-visible = false
-offset_left = -632.0
-offset_top = -352.0
-offset_right = -448.0
-offset_bottom = -320.0
-value = 75.0
-
-[node name="ColorRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -672.0
-offset_top = -396.0
-offset_right = -384.0
-offset_bottom = -288.0
+[connection signal="animation_finished" from="LittleLevelViewport/AnimationPlayer" to="LittleLevelViewport" method="_on_animation_player_animation_finished"]

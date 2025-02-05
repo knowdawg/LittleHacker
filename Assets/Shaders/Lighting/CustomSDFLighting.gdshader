@@ -2,6 +2,7 @@ shader_type canvas_item;
 //render_mode light_only;
 
 uniform sampler2D screen : hint_screen_texture;
+uniform float brightness : hint_range(0.0, 1.0, 0.1);
 
 varying vec2 screenSize;
 varying vec4 screenVal;
@@ -10,7 +11,7 @@ void fragment(){
 	screenSize = SCREEN_PIXEL_SIZE;
 	vec4 c = texture(screen, SCREEN_UV);
 	screenVal = c;
-	//c.rgb *= vec3(0.0); //For darkness where no light
+	c.rgb *= vec3(brightness); //For darkness where no light
 	COLOR = c;
 }
 

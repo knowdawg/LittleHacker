@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsbpltyxlcy5f"]
+
+[ext_resource type="Texture2D" uid="uid://dt5qqqq2y8wbr" path="res://Assets/Sprites/WorldObjects/Lantern.png" id="1_2u0gk"]
+
+[sub_resource type="Gradient" id="Gradient_kp2bh"]
+offsets = PackedFloat32Array(0.00536193, 0.978552)
+colors = PackedColorArray(0.905882, 0.835294, 0.701961, 1, 0.905882, 0.835294, 0.701961, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i30jg"]
+gradient = SubResource("Gradient_kp2bh")
+width = 128
+height = 128
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[node name="LanternLIGHT" type="Node2D"]
+
+[node name="Lantern" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(0.5, 0.5)
+texture = ExtResource("1_2u0gk")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.196078, 0.196078, 0.196078, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i30jg")

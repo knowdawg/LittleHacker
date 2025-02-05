@@ -42,7 +42,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
 		
-		if Input.is_action_pressed("Down"):
+		if Input.is_action_pressed("Down") and Input.is_action_pressed("Jump"):
 			set_collision_mask_value(2, false)
 		else:
 			set_collision_mask_value(2, true)

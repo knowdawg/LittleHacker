@@ -74,5 +74,5 @@ func isHealthLocked():
 func kill():
 	dead = true
 	set_health(0)
-	var a : Attack;
+	var a : Attack = Attack.new();
 	death.emit(a)

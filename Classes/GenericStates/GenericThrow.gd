@@ -45,5 +45,5 @@ func throw():
 		dirVector = projDir
 	var p = projectileScene.instantiate()
 	p.dirVector = dirVector
-	Game.level.add_child(p)
+	Game.littleLevel.add_child(p)
 	p.position = parent.global_position

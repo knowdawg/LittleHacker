@@ -604,11 +604,12 @@ script = ExtResource("1_t5vl1")
 spearProjectileScene = ExtResource("8_vk48g")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, 3.5)
+position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_vqv2b")
 
 [node name="GorgonSprite" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_2f8s0")
+position = Vector2(0, -4)
 texture = ExtResource("1_npu85")
 hframes = 122
 frame = 43
@@ -835,10 +836,10 @@ spriteDirectorComponent = NodePath("../../GorgonSprite/SpriteDirectorComponent")
 updateWhileHacked = true
 
 [node name="Marker2D" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(-1, 4)
+position = Vector2(-1, 0)
 
 [node name="Marker2D2" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(1, 4)
+position = Vector2(1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -870,7 +871,7 @@ health_componnet = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GenralComponents/HurtboxComponent"]
 visible = false
-position = Vector2(0, 3.5)
+position = Vector2(0, -1)
 shape = SubResource("RectangleShape2D_3fjj5")
 
 [node name="EnemyHeathbar" parent="GenralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("18_07s5p")]
@@ -890,13 +891,13 @@ hackName = "TailCut"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GenralComponents"]
-position = Vector2(0, 4)
 
 [node name="Proximities" type="Node2D" parent="."]
 visible = false
 
 [node name="AggroProximity" parent="Proximities" instance=ExtResource("7_u6q2g")]
 collision_mask = 4
+requireLineOfSight = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/AggroProximity"]
 shape = SubResource("CircleShape2D_vb3ms")
@@ -929,7 +930,7 @@ knockback_force = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/SpearThrust"]
 visible = false
-position = Vector2(-5.5, 4.5)
+position = Vector2(-5.5, 0.5)
 shape = SubResource("RectangleShape2D_7cloe")
 
 [node name="Bite" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("15_uhac8")]
@@ -942,7 +943,7 @@ knockback_force = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Bite"]
 visible = false
-position = Vector2(-2, 0)
+position = Vector2(-2, -3)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_mtu4q")
 
@@ -957,7 +958,7 @@ knockback_force = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/TailSwipe"]
 visible = false
-position = Vector2(-4.5, 5)
+position = Vector2(-4, 1)
 shape = SubResource("RectangleShape2D_6fayf")
 
 [node name="TailRipBite" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("15_uhac8")]
@@ -970,7 +971,7 @@ knockback_force = 200.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/TailRipBite"]
 visible = false
-position = Vector2(-1, 2)
+position = Vector2(-1, -2)
 rotation = 1.5708
 shape = SubResource("CapsuleShape2D_7nwu1")
 
@@ -982,15 +983,12 @@ hitEffects = [NodePath("DirectionalParticlesComponent"), NodePath("DirectionalPa
 knockbackComponent = NodePath("../../GenralComponents/OmniDirectionalKnockbackComponent")
 
 [node name="DirectionalParticlesComponent" parent="Effects/OnHitComponent" instance=ExtResource("24_1y4hm")]
-position = Vector2(0, 4)
 texture = SubResource("GradientTexture2D_khc54")
 
 [node name="DirectionalParticlesComponent2" parent="Effects/OnHitComponent" instance=ExtResource("24_1y4hm")]
-position = Vector2(0, 4)
 amount = 4
 texture = SubResource("GradientTexture2D_odq7n")
 
 [node name="BloodEffect" parent="Effects/OnHitComponent" instance=ExtResource("26_sgeag")]
 material = SubResource("ShaderMaterial_ni3gg")
-position = Vector2(0, 4)
 points = PackedVector2Array(40, 0, 0, 0)

@@ -39,7 +39,7 @@ func checkResonanceHit(attack : Attack):
 func resonate():
 	var p = projectile.instantiate()
 	p.color = color
-	Game.level.add_child(p)
+	Game.littleLevel.add_child(p)
 	p.position = global_position
 
 func _on_resonance_timer_timeout() -> void:

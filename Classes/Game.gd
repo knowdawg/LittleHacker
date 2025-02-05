@@ -2,7 +2,8 @@ extends Node
 
 var player : Player
 var camera : Camera2D
-var level : Node2D
+var littleLevel : Node2D
+var littleViewport : LittleSceneTransitioner
 
 var inTerminal = false
 signal terminalOn
@@ -14,7 +15,7 @@ var hackedHealthbar : EnemyHealthBar = null
 signal enterHackMode
 signal exitHackMode
 
-func slowTime(duration : float, timeScale : float):
+func slowTime(timeScale : float):
 	Engine.time_scale = timeScale
 
 func setTimeScale(timeScale : float):
