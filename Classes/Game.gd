@@ -36,3 +36,8 @@ func setHackMode(on : bool):
 			inHackMode = false
 			exitHackMode.emit()
 			hackedEnemy = null
+
+var p = preload("res://Player/Player.tscn")
+func createPlayer() -> Player:
+	var newP : Player = p.instantiate()
+	return newP

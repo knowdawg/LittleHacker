@@ -1,0 +1,43 @@
+[gd_scene load_steps=7 format=3 uid="uid://bm0s7ek1l7gcu"]
+
+[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sahbk"]
+[ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_w4aep"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_qjk1c"]
+[ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_jvbrh"]
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_f40ai"]
+viewport_path = NodePath("Main")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bpdn"]
+resource_local_to_scene = true
+shader = ExtResource("3_qjk1c")
+shader_parameter/brightness = 1.0
+
+[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+script = ExtResource("1_sahbk")
+doorToSpawnPlayerOnFailure = NodePath("LevelTransition")
+doors = [NodePath("LevelTransition")]
+whereToAddPlayer = NodePath("PlayerParrent")
+lighting = NodePath("SoftLighting")
+
+[node name="Main" type="SubViewport" parent="."]
+transparent_bg = true
+sdf_oversize = 0
+sdf_scale = 0
+size = Vector2i(1000, 432)
+
+[node name="Collisions" type="Node2D" parent="."]
+
+[node name="Lights" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("ViewportTexture_f40ai")
+
+[node name="PlayerParrent" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="SoftLighting" parent="." instance=ExtResource("2_w4aep")]
+material = SubResource("ShaderMaterial_3bpdn")
+
+[node name="LevelTransition" parent="." instance=ExtResource("4_jvbrh")]

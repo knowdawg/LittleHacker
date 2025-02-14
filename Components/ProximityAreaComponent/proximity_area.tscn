@@ -9,7 +9,6 @@ script = ExtResource("1_dkwi5")
 requireLineOfSight = false
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
-visible = false
 target_position = Vector2(-200, 0)
 collision_mask = 5
 collide_with_areas = true

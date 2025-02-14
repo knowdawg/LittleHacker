@@ -13,6 +13,7 @@ var dead : bool = false
 signal death(attack : Attack)
 signal hit(attack : Attack)
 signal grabbed(attack : Attack)
+signal healed(amount : float)
 
 func _ready():
 	health = MAX_HEALTH
@@ -70,6 +71,10 @@ func setHealthLock(lock : bool):
 
 func isHealthLocked():
 	return locked
+
+func heal(amount : float):
+	set_health(get_health() + amount)
+	healed.emit(amount)
 
 func kill():
 	dead = true

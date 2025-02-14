@@ -20,8 +20,8 @@ signal onSceneExit
 var curScene : Node2D
 
 var sceneData : SceneSwitchData
-func switchScene(sceneData : SceneSwitchData) -> void:
-	self.sceneData = sceneData
+func switchScene(sd : SceneSwitchData) -> void:
+	self.sceneData = sd
 	fadeAnimator.play("FadeIn")
 	
 func onFadeInComplete():
@@ -45,10 +45,12 @@ func onFadeInComplete():
 	pathAndScene.clear()
 	addSceneMutex.unlock()
 	
-	var i = s.instantiate()
+	var i : GenericLevel = s.instantiate()
 	curScene = i
 	add_child(i)
 	Game.littleLevel = i
+	i.initializeLevel(sceneData)
+	
 	fadeAnimator.play("FadeOut")
 
 var threads : Array[Thread] = []

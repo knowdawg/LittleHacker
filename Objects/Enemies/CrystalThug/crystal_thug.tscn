@@ -28,12 +28,12 @@
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="8_heh2r"]
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/wait.gd" id="9_c0kbi"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_irfdu"]
-[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="9_l147m"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="10_8sqji"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_tifpm"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_1ay4a"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_88n8y"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="17_jdngx"]
+[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/death.gd" id="22_jr46o"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="27_tgw8o"]
 [ext_resource type="PackedScene" uid="uid://q1v00o43xu5d" path="res://Objects/Hacks/LeechHack/Leech.tscn" id="29_t6cbv"]
 
@@ -545,8 +545,12 @@ position = Vector2(0, 1)
 [node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
 position = Vector2(0, 1)
 
-[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
-script = ExtResource("9_l147m")
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("parrent", "kbCom", "movement", "animator", "hurtboxesToDisable")]
+script = ExtResource("22_jr46o")
+parrent = NodePath("../..")
+kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+knockback = 50.0
 animator = NodePath("../../Animator")
 animationName = "Death"
 hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
@@ -661,7 +665,7 @@ collision_mask = 4
 attackName = "CrystalThugHeadSlam"
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 1.0
+attack_damage = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/HeadSlam"]
 visible = false

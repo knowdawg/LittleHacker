@@ -1,4 +1,4 @@
-[gd_scene load_steps=181 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=187 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -54,6 +54,11 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/GlitchEffect.gdshader" id="46_i2mat"]
 [ext_resource type="Script" path="res://Player/HealthBar/progress_bar.gd" id="54_l53i3"]
+[ext_resource type="Script" path="res://Player/player_ui.gd" id="54_qkh22"]
+[ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="55_c7l4y"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/Glow.gdshader" id="55_dupvs"]
+[ext_resource type="Texture2D" uid="uid://dn4c6ix1gcrii" path="res://Assets/Sprites/UI/EnergyIcon.png" id="56_87gtb"]
+[ext_resource type="PackedScene" uid="uid://ctcag33a3qexi" path="res://Player/HealthBar/HealthNode.tscn" id="57_wjjph"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
 size = Vector2(31, 4)
@@ -2425,6 +2430,14 @@ _data = {
 "RESET": SubResource("Animation_ltc66")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_urh35"]
+shader = ExtResource("55_dupvs")
+shader_parameter/BLOOM_THRESHOLD = 0.7
+shader_parameter/BLOOM_INTENSITY = 3.0
+shader_parameter/BLUR_ITERATIONS = 3
+shader_parameter/BLUR_SIZE = 0.03
+shader_parameter/BLUR_SUBDIVISIONS = 32
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jal7f"]
 bg_color = Color(0.12549, 0.180392, 0.215686, 1)
 border_width_left = 4
@@ -2446,6 +2459,7 @@ corner_radius_top_right = 20
 texture_filter = 1
 collision_layer = 4
 collision_mask = 35
+safe_margin = 0.001
 script = ExtResource("1_lek16")
 sprite = NodePath("PlayerVisual/PlayerSprite")
 weaponSprite = NodePath("WeaponDislocator/WeaponSprite")
@@ -3169,20 +3183,88 @@ libraries = {
 wait_time = 0.07
 one_shot = true
 
-[node name="PlayerUI" type="CanvasLayer" parent="."]
-visible = false
+[node name="PlayerUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("healthComponent", "highlight", "backgroundLine", "middleLine")]
+script = ExtResource("54_qkh22")
+healthComponent = NodePath("../HealthComponent")
+highlight = NodePath("Lines/HealthHighlight")
+backgroundLine = NodePath("Lines/DarkBackground")
+middleLine = NodePath("Lines/MediumMiddleground")
+
+[node name="Lines" type="Node2D" parent="PlayerUI"]
+
+[node name="DarkBackground" type="Line2D" parent="PlayerUI/Lines"]
+position = Vector2(0, -11)
+points = PackedVector2Array(40, 56, 450, 56)
+width = 30.0
+default_color = Color(0.0980392, 0.2, 0.176471, 1)
+
+[node name="MediumMiddleground" type="Line2D" parent="PlayerUI/Lines"]
+position = Vector2(0, -6)
+points = PackedVector2Array(60, 56, 450, 56)
+width = 20.0
+default_color = Color(0.145098, 0.337255, 0.180392, 1)
+
+[node name="HealthHighlight" type="Line2D" parent="PlayerUI/Lines"]
+position = Vector2(0, -11)
+points = PackedVector2Array(40, 56, 450, 56)
+default_color = Color(1, 1, 0.568627, 1)
+texture_mode = 1
+
+[node name="EnergyIcon" type="Sprite2D" parent="PlayerUI"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_urh35")
+position = Vector2(50, 50)
+scale = Vector2(10, 10)
+texture = ExtResource("56_87gtb")
+
+[node name="HealthNodes" type="Node2D" parent="PlayerUI"]
+
+[node name="Health1" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(80, 50)
+
+[node name="Health2" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(120, 50)
+
+[node name="Health3" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(160, 50)
+
+[node name="Health4" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(200, 50)
+
+[node name="Health5" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(240, 50)
+
+[node name="Health6" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(280, 50)
+
+[node name="Health7" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(320, 50)
+
+[node name="Health8" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(360, 50)
+
+[node name="Health9" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(400, 50)
+
+[node name="Health10" parent="PlayerUI/HealthNodes" instance=ExtResource("57_wjjph")]
+position = Vector2(440, 50)
 
 [node name="ProgressBar" type="ProgressBar" parent="PlayerUI" node_paths=PackedStringArray("healthComponent")]
-offset_left = 16.0
-offset_top = 16.0
-offset_right = 376.0
-offset_bottom = 48.0
+visible = false
+offset_left = 85.0
+offset_top = 33.0
+offset_right = 445.0
+offset_bottom = 71.0
 theme_override_font_sizes/font_size = 21
 theme_override_styles/background = SubResource("StyleBoxFlat_jal7f")
 theme_override_styles/fill = SubResource("StyleBoxFlat_62h5m")
 value = 50.0
 script = ExtResource("54_l53i3")
 healthComponent = NodePath("../../HealthComponent")
+
+[node name="PlayerCamera" type="Camera2D" parent="."]
+zoom = Vector2(10, 10)
+script = ExtResource("55_c7l4y")
 
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]

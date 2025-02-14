@@ -28,7 +28,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 			v.y += gravity * delta
 		elif is_on_floor() and v.y > 0:
 			v.y = 0;
-		if is_on_ceiling():
+		if is_on_ceiling() and v.y < 0:
 			v.y = 0
 			v.y += gravity * delta
 			
@@ -164,3 +164,6 @@ func releaseGrab():
 func dealDirectDamage(attack : Attack):
 	$ScaleAnimator.play("Stun")
 	healthComponent.damage(attack)
+
+func heal(amount : float):
+	healthComponent.heal(amount)

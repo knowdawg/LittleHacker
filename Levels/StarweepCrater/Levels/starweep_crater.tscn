@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=121 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
@@ -26,8 +26,6 @@
 [ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="24_2aagl"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="25_ftex3"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="26_n2pso"]
-[ext_resource type="PackedScene" uid="uid://d3dlqrfslc2a0" path="res://Player/Player.tscn" id="27_58bcy"]
-[ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="28_nl7gd"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="29_4ghwm"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="30_yrukv"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
@@ -249,7 +247,7 @@ height = 28
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.882353, 0.882353, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ng4ah"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6656d"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -287,7 +285,7 @@ shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_unkma"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_nlr8i"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -376,8 +374,8 @@ polygon = PackedVector2Array(136, -13, 153, -13, 153, -11, 136, -11)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_exjq3"]
 polygon = PackedVector2Array(172, -28, 188, -28, 188, -26, 172, -26)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_f25cm"]
-polygon = PackedVector2Array(128, -10, 156, -10, 181, -6, 175, -6, 162, -8, 128, -8)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ea6eb"]
+polygon = PackedVector2Array(128, -10, 156, -10, 181, -6, 175, -6, 161, -9, 128, -9)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_vqbve"]
 polygon = PackedVector2Array(78, -21, 101, -21, 101, -19, 78, -19)
@@ -446,9 +444,12 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g51h"]
 
-[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("lighting")]
+[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
 texture_filter = 1
 script = ExtResource("1_4w4bf")
+doorToSpawnPlayerOnFailure = NodePath("CaveExit")
+doors = [NodePath("CaveExit")]
+whereToAddPlayer = NodePath("PlayerParent")
 lighting = NodePath("SoftLighting")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -859,12 +860,12 @@ visible = false
 
 [node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_ng4ah")
+texture = SubResource("GradientTexture2D_6656d")
 
 [node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_unkma")
+texture = SubResource("GradientTexture2D_nlr8i")
 
 [node name="FarDistance" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1053,7 +1054,7 @@ oneWay = true
 
 [node name="LightOccluder2D11" parent="Collitions" instance=ExtResource("20_30t6e")]
 position = Vector2(1, -9)
-occluder = SubResource("OccluderPolygon2D_f25cm")
+occluder = SubResource("OccluderPolygon2D_ea6eb")
 oneWay = true
 
 [node name="LightOccluder2D13" parent="Collitions" instance=ExtResource("20_30t6e")]
@@ -1139,6 +1140,8 @@ position = Vector2(273, 3)
 texture = ExtResource("24_2aagl")
 flip_h = true
 
+[node name="PlayerParent" type="Node2D" parent="."]
+
 [node name="CrystalThug" parent="." instance=ExtResource("25_ftex3")]
 material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(56, 18)
@@ -1153,13 +1156,6 @@ color = 1
 material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(200, 18)
 color = 1
-
-[node name="Player" parent="." instance=ExtResource("27_58bcy")]
-position = Vector2(-116, -7)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(10, 10)
-script = ExtResource("28_nl7gd")
 
 [node name="CursorFollower" parent="." instance=ExtResource("29_4ghwm")]
 visible = false
@@ -1209,9 +1205,15 @@ copy_mode = 2
 z_index = 100
 material = SubResource("ShaderMaterial_erh47")
 
-[node name="LevelTransition" parent="." instance=ExtResource("31_8agmq")]
+[node name="CaveExit" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
 scene = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
+doorName = "TutorialRoom1"
+enterPosition = NodePath("Marker2D")
+directionToFaceWhenEnteringTHISDoor = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveExit"]
 position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
+
+[node name="Marker2D" type="Marker2D" parent="CaveExit"]
+position = Vector2(-119, -6)

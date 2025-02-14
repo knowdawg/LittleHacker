@@ -3,7 +3,6 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
 [ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_morp2"]
-[ext_resource type="PackedScene" uid="uid://d3dlqrfslc2a0" path="res://Player/Player.tscn" id="2_cqdsx"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="2_jhjfi"]
 [ext_resource type="Texture2D" uid="uid://8yaj25wh5jum" path="res://Materials/BrokenBricks.png" id="4_kdadv"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="5_nf44p"]
@@ -23,8 +22,8 @@
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="16_a5nql"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="17_87pum"]
 [ext_resource type="Script" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
-[ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="18_rpvuy"]
 [ext_resource type="Texture2D" uid="uid://0y415e8nk50y" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="19_2fqmj"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="23_ilhlg"]
 [ext_resource type="PackedScene" uid="uid://bbwjfta6awigx" path="res://Objects/Enemies/Gorgon/gorgon.tscn" id="26_3pugp"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="27_4fuw3"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="28_k127t"]
@@ -91,6 +90,11 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjci7"]
+resource_local_to_scene = true
+shader = ExtResource("23_ilhlg")
+shader_parameter/brightness = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5x6j7"]
 shader = ExtResource("13_mu6m5")
 
@@ -130,9 +134,13 @@ shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovxbe"]
 
-[node name="EnvirmentalTestSallLevel" type="Node2D"]
+[node name="EnvirmentalTestSallLevel" type="Node2D" node_paths=PackedStringArray("doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
 texture_filter = 1
 script = ExtResource("1_morp2")
+doorToSpawnPlayerOnFailure = NodePath("TestLevel")
+doors = [NodePath("TestLevel")]
+whereToAddPlayer = NodePath("PlayerParrent")
+lighting = NodePath("SoftLighting")
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 visible = false
@@ -547,13 +555,7 @@ color = 2
 [node name="CrystalThug4" parent="." instance=ExtResource("17_87pum")]
 position = Vector2(-12, 109)
 
-[node name="Player" parent="." instance=ExtResource("2_cqdsx")]
-position = Vector2(603, 50)
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-zoom = Vector2(10, 10)
-position_smoothing_speed = 10.0
-script = ExtResource("18_rpvuy")
+[node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="Decorations2" type="Node2D" parent="."]
 position = Vector2(7, 0)
@@ -629,6 +631,7 @@ copy_mode = 2
 
 [node name="SoftLighting" parent="." instance=ExtResource("9_plpma")]
 z_index = 100
+material = SubResource("ShaderMaterial_cjci7")
 offset_left = 11.0
 offset_top = 31.0
 offset_right = 203.0
@@ -662,9 +665,15 @@ position = Vector2(11, 0)
 points = PackedVector2Array(60, 92, 60, 188)
 width = 40.0
 
-[node name="LevelTransition" parent="." instance=ExtResource("29_dfolk")]
-scene = "res://Levels/StarweepCrater/Levels/starweep_crater.tscn"
+[node name="TestLevel" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("29_dfolk")]
+position = Vector2(-415, 38)
+scene = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
+doorName = "TestLevel"
+enterPosition = NodePath("Marker2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LevelTransition"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevel"]
 position = Vector2(618, 42)
 shape = SubResource("RectangleShape2D_ovxbe")
+
+[node name="Marker2D" type="Marker2D" parent="TestLevel"]
+position = Vector2(603, 50)
