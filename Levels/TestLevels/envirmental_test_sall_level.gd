@@ -15,6 +15,7 @@ func initializeLevel(sceneData : SceneSwitchData) -> void:
 	if lighting:
 			lighting.material.set_shader_parameter("brightness", lightingBrightness)
 	var p = Game.createPlayer()
+	p.initialize(sceneData)
 	whereToAddPlayer.add_child(p)
 	var d : LevelTransition
 	for i in doors:

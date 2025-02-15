@@ -16,6 +16,6 @@ func onHacked():
 	for s in spearDropStates:
 		if $StateMachine.current_state.name == s:
 			var p = spearProjectileScene.instantiate()
-			Game.level.call_deferred("add_child", p)
+			Game.littleLevel.call_deferred("add_child", p)
 			p.position = global_position + Vector2(0, 4)
 			p.drop()

@@ -22,10 +22,6 @@ func _process(delta):
 			inputBuffer = "HackAttack"
 			t = 0.3
 	
-	#if inputBuffer == "":
-		#if Input.is_action_pressed("Attack"):
-			#inputBuffer = "Attack"
-			#t = 0.2
 	
 	if t <= 0.0:
 		inputBuffer = ""
@@ -35,3 +31,7 @@ func _process(delta):
 	
 	if current_state:
 		current_state.update(delta)
+
+
+func _on_health_component_hit(attack: Attack) -> void:
+	inputBuffer = ""

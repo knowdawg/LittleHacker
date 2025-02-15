@@ -17,13 +17,18 @@ func leaveState():
 	trasitioned.emit(self, "Idle")
 
 var t = 0.0
-func enter(_prevState):
-	playerStateMachine.switchStates("HackAttack")
-	weaponAnimator.play("HackAttack")
-	weaponSprite.flip_h = playerSprite.flip_h
-	t = 0.0
+func enter(prevState):
 	leftAttackComponent.generateAttackID()
 	rightAttackComponent.generateAttackID()
+	weaponSprite.flip_h = playerSprite.flip_h
+	weaponAnimator.play("HackAttack")
+	t = 0.0
+	if prevState is PlayerWeaponParry:
+		t = 0.1
+		weaponAnimator.seek(0.1)
+		playerStateMachine.switchStateWithParam("HackAttack", true)
+	else:
+		playerStateMachine.switchStates("HackAttack")
 
 func update(delta):
 	if playerStateMachine.current_state is PlayerHackMode:
@@ -40,11 +45,8 @@ func update(delta):
 		else:
 			rightAttackComponent.enable()
 		
-		#playerHurtBox.setParry(true, 1)
-		
 	else:
 		leftAttackComponent.disable()
-		playerHurtBox.setParry(false)
 	
 	t += delta
 	if t <= 0.1:
@@ -54,7 +56,6 @@ func update(delta):
 		trasitioned.emit(self, "Idle")
 
 func exit(_nextState):
-	playerHurtBox.setParry(false)
 	weaponSprite.visible = true
 	leftAttackComponent.call_deferred("disable")
 	rightAttackComponent.call_deferred("disable")

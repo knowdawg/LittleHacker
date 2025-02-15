@@ -5,6 +5,7 @@ class_name GenericEnemyHackedState
 @export var parent : Node2D
 @export var movement : MovementComponent
 @export var nextState : State
+@export var nextStateOnHack : State = nextState
 @export var leftGrabPos : Marker2D
 @export var rightGrabPos : Marker2D
 
@@ -20,7 +21,7 @@ func _ready() -> void:
 
 func exitHackMode():
 	if isCurrentState:
-		trasitioned.emit(self, nextState.name)
+		trasitioned.emit(self, nextStateOnHack.name)
 
 var isCurrentState = false
 func enter(_prevState):
@@ -44,7 +45,6 @@ func update(_delta):
 		var pos = lerp(parent.global_position, targetPos, 0.5)
 		
 		Game.player.position = pos
-		#movement.setPosition(pos)
 	
 	if Game.hackedEnemy != parent:
 		trasitioned.emit(self, nextState.name)

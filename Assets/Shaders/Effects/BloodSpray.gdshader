@@ -3,10 +3,11 @@ shader_type canvas_item;
 uniform sampler2D noise : repeat_enable;
 uniform vec4 col : source_color;
 uniform float progress : hint_range(0.0, 1.0);
+uniform float speed : hint_range(0.0, 10.0) = 1.0;
 
 void fragment() {
 	vec4 c = vec4(1.0);
-	float n = texture(noise, UV + vec2(progress * 0.4 - TIME, 0.0)).r;
+	float n = texture(noise, UV + vec2(progress * 0.4 - TIME * speed, 0.0)).r;
 	n += (1.0 - abs(UV.y - 0.5)) * 0.7;
 	n -= abs(UV.y - 0.5) * 2.0;
 

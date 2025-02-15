@@ -10,9 +10,6 @@ extends CanvasLayer
 
 @onready var healthNodes : Array[Node] = $HealthNodes.get_children()
 
-var fullTexture = preload("res://Assets/Sprites/UI/EnergyHeart.png")
-var emptyTexture = preload("res://Assets/Sprites/UI/EnergyHeartEmpry.png")
-
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	for i in healthNodes.size():

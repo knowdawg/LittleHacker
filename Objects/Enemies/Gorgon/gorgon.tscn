@@ -594,6 +594,7 @@ resource_local_to_scene = true
 shader = ExtResource("26_x8uri")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
 [node name="Gorgon" type="CharacterBody2D"]
@@ -822,12 +823,13 @@ animator = NodePath("../../AnimationPlayer")
 movement = NodePath("../../GenralComponents/MovementComponent")
 kbCom = NodePath("../../GenralComponents/OmniDirectionalKnockbackComponent")
 
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
 script = ExtResource("12_lspj2")
 stateMachine = NodePath("..")
 parent = NodePath("../..")
 movement = NodePath("../../GenralComponents/MovementComponent")
-nextState = NodePath("../Idle")
+nextState = NodePath("../Chase")
+nextStateOnHack = NodePath("../Stun")
 leftGrabPos = NodePath("Marker2D")
 rightGrabPos = NodePath("Marker2D2")
 animationName = "Stun"

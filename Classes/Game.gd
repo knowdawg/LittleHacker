@@ -1,7 +1,7 @@
 extends Node
 
 var player : Player
-var camera : Camera2D
+var camera : SmallPlayerCamera
 var littleLevel : Node2D
 var littleViewport : LittleSceneTransitioner
 
@@ -41,3 +41,8 @@ var p = preload("res://Player/Player.tscn")
 func createPlayer() -> Player:
 	var newP : Player = p.instantiate()
 	return newP
+
+func getPlayerData() -> SmallPlayerData:
+	var s : SmallPlayerData = SmallPlayerData.new()
+	s.health = player.healthComponent.get_health()
+	return s

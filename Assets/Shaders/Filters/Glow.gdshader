@@ -47,7 +47,7 @@ void fragment() {
 	vec4 final = bg;
 
 	final = bg + tx;
-	
-	
+
+
     COLOR = final;
 }

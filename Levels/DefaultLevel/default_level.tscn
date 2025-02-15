@@ -19,6 +19,7 @@ doorToSpawnPlayerOnFailure = NodePath("LevelTransition")
 doors = [NodePath("LevelTransition")]
 whereToAddPlayer = NodePath("PlayerParrent")
 lighting = NodePath("SoftLighting")
+lightingBrightness = null
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true

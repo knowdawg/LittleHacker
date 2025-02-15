@@ -247,7 +247,7 @@ height = 28
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.882353, 0.882353, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6656d"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gytif"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -285,7 +285,7 @@ shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_nlr8i"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vodpc"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -451,6 +451,7 @@ doorToSpawnPlayerOnFailure = NodePath("CaveExit")
 doors = [NodePath("CaveExit")]
 whereToAddPlayer = NodePath("PlayerParent")
 lighting = NodePath("SoftLighting")
+lightingBrightness = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -860,12 +861,12 @@ visible = false
 
 [node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_6656d")
+texture = SubResource("GradientTexture2D_gytif")
 
 [node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_nlr8i")
+texture = SubResource("GradientTexture2D_vodpc")
 
 [node name="FarDistance" type="SubViewport" parent="."]
 transparent_bg = true

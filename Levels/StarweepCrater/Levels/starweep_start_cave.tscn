@@ -323,12 +323,23 @@ occluder = SubResource("OccluderPolygon2D_dmc4q")
 position = Vector2(269, -14)
 color = 1
 
+[node name="CrystalThug4" parent="Enemies" instance=ExtResource("8_2y2tj")]
+position = Vector2(372, 10)
+color = 1
+
+[node name="CrystalThug5" parent="Enemies" instance=ExtResource("8_2y2tj")]
+position = Vector2(318, -17)
+color = 1
+
 [node name="CrystalThug2" parent="Enemies" instance=ExtResource("8_2y2tj")]
 position = Vector2(-95, 102)
 color = 1
 
 [node name="Gorgon" parent="Enemies" instance=ExtResource("9_a6eg2")]
 position = Vector2(-154, 123)
+
+[node name="Gorgon2" parent="Enemies" instance=ExtResource("9_a6eg2")]
+position = Vector2(173, -13)
 
 [node name="TutorialRoom1" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-276, -133)
@@ -369,7 +380,7 @@ shape = SubResource("RectangleShape2D_ihcvw")
 disabled = true
 
 [node name="Marker2D" type="Marker2D" parent="TestLevelStart"]
-position = Vector2(445, 126)
+position = Vector2(929, -24)
 
 [node name="SoftLighting" parent="." instance=ExtResource("8_28ct1")]
 material = SubResource("ShaderMaterial_xor2r")

@@ -16,10 +16,14 @@ func _on_body_entered(body: Node2D) -> void:
 			var s = SceneSwitchData.new()
 			s.scene = self.scene
 			s.doorName = doorName
+			s.faceRight = true if directionToFaceWhenEnteringTHISDoor == dir.RIGHT else false
+			s.playerData = Game.getPlayerData()
 			Game.littleViewport.call_deferred("switchScene", s)
+			
 			
 		else:
 			printerr("No Scene To Switch To!")
 
 func _ready() -> void:
-	Game.littleViewport.threadLoadScene(scene)
+	if Game.littleViewport:
+		Game.littleViewport.threadLoadScene(scene)

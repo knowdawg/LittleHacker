@@ -4,6 +4,7 @@ render_mode unshaded;
 uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
 uniform float progress : hint_range(0.0, 2.0);
 uniform float intensity : hint_range(-10.0, 10.0);
+uniform float width : hint_range(0.0, 1.0);
 
 void fragment() {
 	//Convert to Clip Space
@@ -12,7 +13,7 @@ void fragment() {
 	clipUV.x *= iResolution.x / iResolution.y;
 
 	float ring = 1.0 - abs(length(clipUV) - progress);
-	ring = smoothstep(0.9, 1.0, ring);
+	ring = smoothstep(1.0 - width, 1.0, ring);
 
 	vec2 offset = TEXTURE_PIXEL_SIZE * ring * normalize(clipUV);
 

@@ -1,4 +1,5 @@
 extends Node2D
+class_name SmallPLayerHackUI
 
 @export var player : Player
 @export var curentLabels : Array[RichTextLabel] = []
@@ -6,13 +7,15 @@ extends Node2D
 @onready var topLabel : RichTextLabel = $Top
 @onready var middleLabel : RichTextLabel = $Middle
 @onready var bottomLabel : RichTextLabel = $Bottom
+
+@export var blur : CanvasLayer
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.speed_scale = 10
 	Game.enterHackMode.connect(animate)
 	Game.exitHackMode.connect(disapear)
 
-
+signal executeHack
 var selectedHackIndex = 0
 var numOfHacks = 1 #Num of enemy's hacks
 func _process(_delta: float) -> void:
@@ -51,6 +54,10 @@ func _process(_delta: float) -> void:
 					$AnimationPlayer.play("SelectHack")
 					$SelectLineContainer/SelectParticles.restart()
 					$SelectLineContainer/SelectParticles.emitting = true
+					
+					blur.blur(Game.player.get_global_transform_with_canvas().origin)
+					Game.camera.set_shake(2.0)
+					executeHack.emit()
 			Game.setHackMode(false)
 			return
 			
@@ -69,6 +76,7 @@ func _process(_delta: float) -> void:
 		$WeaknessDisplay.text = weaknessDisplay
 		
 func animate():
+	blur.passiveBlur(Game.player.get_global_transform_with_canvas().origin)
 	selectedHackIndex = 0
 	$AnimationPlayer.stop()
 	$AnimationPlayer.speed_scale = 10
@@ -78,6 +86,7 @@ func animate():
 		$AnimationPlayer.play("ShowRight")
 
 func disapear():
+	blur.stopBlur()
 	$AnimationPlayer.speed_scale = 10
 	if player.getSpriteDirection() == -1:
 		$AnimationPlayer.play("HideLeft")

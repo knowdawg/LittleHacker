@@ -3,7 +3,7 @@ class_name PlayerHackMode
 
 @export var animator : AnimationPlayer
 @export var scaleAnimator : AnimationPlayer
-@export var hackUI : Node2D
+@export var hackUI : SmallPLayerHackUI
 @export var player : Player
 @export var hackEffects : Node2D
 @export var hurtboxComponent : HurtboxComponent
@@ -16,10 +16,18 @@ var viableTargets : Array[Area2D] = []
 
 func _ready() -> void:
 	Game.exitHackMode.connect(exitHackMode)
+	hackUI.connect("executeHack", hackExecuted)
 
-func exitHackMode():
+func hackExecuted():
+	exitHackMode(true)
+
+func exitHackMode(succesfull : bool = false):
 	if isCurrentState:
-		trasitioned.emit(self, "Idle")
+		if succesfull:
+			trasitioned.emit(self, "Idle")
+		else:
+			Game.setTimeScale(1.0)
+			trasitioned.emit(self, "Blocked")
 
 var isCurrentState = false
 func enter(_prevState):
@@ -74,3 +82,4 @@ func exit(_nextState):
 	isCurrentState = false
 	Game.setHackMode(false)
 	player.dashV = Vector2.ZERO
+	

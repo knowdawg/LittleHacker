@@ -10,7 +10,7 @@ var states : Dictionary = {}
 
 var statesThatCanGoIntoHackAttack = [SmallPlayerIdle, SmallPlayerRun]
 func canHackAttack() -> bool:
-	if current_state is SmallPlayerIdle or current_state is SmallPlayerRun:
+	if current_state is SmallPlayerIdle or current_state is SmallPlayerRun or current_state is PlayerGroundParry or current_state is SmallPlayerParryStun:
 		return true
 	return false
 
@@ -97,6 +97,18 @@ func switchStates(newState):
 		current_state.exit(n)
 	
 	n.enter(prevState)
+	
+	current_state = n
+
+func switchStateWithParam(newState, param : bool = false):
+	var n = states.get(newState.to_lower())
+	
+	var prevState : State = null
+	if current_state:
+		prevState = current_state
+		current_state.exit(n)
+	
+	n.enter(prevState, param)
 	
 	current_state = n
 

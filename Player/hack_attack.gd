@@ -26,12 +26,18 @@ func update_physics(delta):
 	
 	if hurtboxComponent.parryForgivenesTimer.time_left > 0:
 		hurtboxComponent.damageStuff()
+		hurtboxComponent.parryForgivenesTimer.stop()
 
-func enter(_prevState):
+func enter(_prevState, speedUp : bool = false):
 	t = 0.0;
 	player.v.x = 0;
 	animator.play("HackAttack")
 	scaleAnimator.play("HackAttack")
+	
+	if speedUp == true:
+		t = 0.1
+		animator.seek(0.1)
+		scaleAnimator.seek(0.1)
 	
 	if player.facingRight():
 		direction = 1

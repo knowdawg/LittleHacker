@@ -23,5 +23,8 @@ func update_physics(delta):
 		playerStateMachine.resetInputBuffer()
 		return
 
-func enter(_prevState):
-	animator.play("Idle")
+func enter(prevState):#if you are slightly off ground you imidialty go int of fall state and skip animation
+	if prevState is PlayerHackMode:
+		animator.play("ExecuteParry")
+	else:
+		animator.play("Idle")

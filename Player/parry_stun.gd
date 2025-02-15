@@ -1,4 +1,5 @@
 extends State
+class_name SmallPlayerParryStun
 
 @export var player : Player
 @export var rollSpeedCurve : Curve

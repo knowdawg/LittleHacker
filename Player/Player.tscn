@@ -1,4 +1,4 @@
-[gd_scene load_steps=187 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=189 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -59,6 +59,7 @@
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/Glow.gdshader" id="55_dupvs"]
 [ext_resource type="Texture2D" uid="uid://dn4c6ix1gcrii" path="res://Assets/Sprites/UI/EnergyIcon.png" id="56_87gtb"]
 [ext_resource type="PackedScene" uid="uid://ctcag33a3qexi" path="res://Player/HealthBar/HealthNode.tscn" id="57_wjjph"]
+[ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
 size = Vector2(31, 4)
@@ -1668,12 +1669,30 @@ tracks/0/keys = {
 "values": [47]
 }
 
+[sub_resource type="Animation" id="Animation_tcgww"]
+resource_name = "ExecuteParry"
+length = 0.34
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.01, 0.05, 0.09, 0.13, 0.17, 0.21, 0.25, 0.29),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [67, 68, 69, 70, 71, 72, 73, 74, 75]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2wqp"]
 _data = {
 "Blocked": SubResource("Animation_blsx0"),
 "Dash": SubResource("Animation_7ugr1"),
 "DashEnd": SubResource("Animation_vhpis"),
 "DashStart": SubResource("Animation_7botn"),
+"ExecuteParry": SubResource("Animation_tcgww"),
 "Fall": SubResource("Animation_f8rl4"),
 "GroundParry": SubResource("Animation_arads"),
 "HackAttack": SubResource("Animation_wkpki"),
@@ -2913,12 +2932,13 @@ libraries = {
 "": SubResource("AnimationLibrary_ax80n")
 }
 
-[node name="HackUI" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+[node name="HackUI" type="Node2D" parent="." node_paths=PackedStringArray("player", "blur")]
 visible = false
 z_index = 200
 position = Vector2(0, 2)
 script = ExtResource("35_4cxex")
 player = NodePath("..")
+blur = NodePath("../MotionBlur")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackUI"]
 libraries = {
@@ -2967,18 +2987,18 @@ trail_lifetime = 0.02
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
 offset_left = -27.0
-offset_top = -2.0
+offset_top = -4.0
 offset_right = 48.0
-offset_bottom = 21.0
+offset_bottom = 19.0
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
 offset_left = -30.0
-offset_top = -7.0
+offset_top = -8.0
 offset_right = 30.0
-offset_bottom = 16.0
+offset_bottom = 15.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)
 theme_override_constants/outline_size = 3
@@ -3065,7 +3085,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_cy6n2")
 position = Vector2(0, -4)
 texture = ExtResource("28_x4rxf")
-hframes = 67
+hframes = 76
 frame = 62
 
 [node name="HitFlashComponent" parent="PlayerVisual/PlayerSprite" instance=ExtResource("23_v12ij")]
@@ -3265,6 +3285,9 @@ healthComponent = NodePath("../../HealthComponent")
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(10, 10)
 script = ExtResource("55_c7l4y")
+
+[node name="MotionBlur" parent="." instance=ExtResource("60_mf4dy")]
+layer = 100
 
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]

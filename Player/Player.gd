@@ -167,3 +167,10 @@ func dealDirectDamage(attack : Attack):
 
 func heal(amount : float):
 	healthComponent.heal(amount)
+
+func initialize(data : SceneSwitchData):
+	var playerData = data.playerData
+	if playerData:
+		healthComponent.set_health(playerData.health)
+	sprite.flip_h = data.faceRight
+	

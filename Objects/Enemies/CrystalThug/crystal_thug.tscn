@@ -518,20 +518,22 @@ kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
 
 [node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("7_q3md7")
-parryLength = 0.3
+parryLength = 0.5
 animationName = "Stun"
+knockback = 50.0
 nextState = NodePath("../Chase")
 parrent = NodePath("../..")
 animator = NodePath("../../Animator")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
 
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
 script = ExtResource("8_heh2r")
 stateMachine = NodePath("..")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
-nextState = NodePath("../Chase")
+nextState = NodePath("../Idle")
+nextStateOnHack = NodePath("../Stun")
 leftGrabPos = NodePath("LeftGrabPos")
 rightGrabPos = NodePath("RightGrabPos")
 animationName = "Stun"
