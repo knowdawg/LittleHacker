@@ -3,7 +3,7 @@ class_name SmallPlayerJump
 
 @export var animated_player_sprite : AnimationPlayer
 @export var player : Player
-#@export var playerStateMachine : PlayerStateMachine
+@export var audios : Array[AudioStreamPlayer] = []
 
 var t : float = 0.0
 func update_physics(delta):
@@ -22,7 +22,11 @@ func update_physics(delta):
 
 func enter(_prevState):
 	player.jump();
-	#if !Input.is_action_pressed("Jump"):
-		#player.killJump()
+	makeSound()
 	animated_player_sprite.play("JumpStart")
 	t = 0
+
+func makeSound():
+	var i : int = randi_range(0, audios.size() -1)
+	audios[i].pitch_scale = 1.0 + randf_range(-0.1, 0.1)
+	audios[i].play()

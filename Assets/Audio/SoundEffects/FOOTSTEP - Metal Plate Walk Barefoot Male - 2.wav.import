@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://cstmu8boemegu"
+path="res://.godot/imported/FOOTSTEP - Metal Plate Walk Barefoot Male - 2.wav-964b4bf6cafe3c855bb1811000903cd8.sample"
+
+[deps]
+
+source_file="res://Assets/Audio/SoundEffects/FOOTSTEP - Metal Plate Walk Barefoot Male - 2.wav"
+dest_files=["res://.godot/imported/FOOTSTEP - Metal Plate Walk Barefoot Male - 2.wav-964b4bf6cafe3c855bb1811000903cd8.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

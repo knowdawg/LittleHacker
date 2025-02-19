@@ -5,7 +5,7 @@ class_name GenericEnemyHackedState
 @export var parent : Node2D
 @export var movement : MovementComponent
 @export var nextState : State
-@export var nextStateOnHack : State = nextState
+@export var nextStateOnHack : State
 @export var leftGrabPos : Marker2D
 @export var rightGrabPos : Marker2D
 
@@ -15,6 +15,7 @@ class_name GenericEnemyHackedState
 
 @export_group("OptionalNodes")
 @export var spriteDirectorComponent : SpriteDirectorComponent 
+
 
 func _ready() -> void:
 	Game.exitHackMode.connect(exitHackMode)

@@ -9,6 +9,9 @@ class_name SmallPlayerRoll
 @export var hurtboxForIframes : HurtboxComponent
 @export var weaponStateMachine : StateMachine
 
+@export var audios : Array[AudioStreamPlayer] = []
+
+
 var rollTime : float = 0.6;
 var t : float = 0.0;
 
@@ -74,3 +77,8 @@ func enter(_prevState):
 
 func exit(_newState):
 	player.dashV = Vector2.ZERO
+
+func makeSound():
+	var i : int = randi_range(0, audios.size() -1)
+	audios[i].pitch_scale = 1.3 + randf_range(-0.1, 0.1)
+	audios[i].play()

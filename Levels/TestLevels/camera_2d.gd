@@ -15,6 +15,9 @@ func _process(delta: float) -> void:
 		var yDis : float = randf_range(-shake, shake)
 		
 		offset = Vector2(xDis, yDis)
+	
+	if zoom != Vector2(10, 10):
+		zoom = lerp(zoom, Vector2(10, 10), 10.0 * delta)
 
 func set_shake(amount : float):
 	shake = amount

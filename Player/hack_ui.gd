@@ -9,6 +9,7 @@ class_name SmallPLayerHackUI
 @onready var bottomLabel : RichTextLabel = $Bottom
 
 @export var blur : CanvasLayer
+@export var camera : SmallPlayerCamera
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$AnimationPlayer.speed_scale = 10
@@ -57,7 +58,13 @@ func _process(_delta: float) -> void:
 					
 					blur.blur(Game.player.get_global_transform_with_canvas().origin)
 					Game.camera.set_shake(2.0)
+					$Audio/HackExecuted.play()
+					camera.zoom = Vector2(15, 15)
 					executeHack.emit()
+				else:
+					$Audio/HackFailed.play()
+			else:
+				$Audio/HackFailed.play()
 			Game.setHackMode(false)
 			return
 			
@@ -76,6 +83,9 @@ func _process(_delta: float) -> void:
 		$WeaknessDisplay.text = weaknessDisplay
 		
 func animate():
+	$Audio/HackAttackHit.play()
+	$Audio/Fire.play()
+	$Audio/HackModeAmbience.play()
 	blur.passiveBlur(Game.player.get_global_transform_with_canvas().origin)
 	selectedHackIndex = 0
 	$AnimationPlayer.stop()
@@ -87,6 +97,8 @@ func animate():
 
 func disapear():
 	blur.stopBlur()
+	$Audio/Fire.stop()
+	$Audio/HackModeAmbience.stop()
 	$AnimationPlayer.speed_scale = 10
 	if player.getSpriteDirection() == -1:
 		$AnimationPlayer.play("HideLeft")

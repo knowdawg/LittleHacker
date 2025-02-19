@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://d03i3jperca7o"]
+[gd_scene load_steps=18 format=3 uid="uid://d03i3jperca7o"]
 
 [ext_resource type="Texture2D" uid="uid://dumx1gfulor0p" path="res://Assets/Sprites/EnvirmentTextures/Sandstone/SandstoneBackground.png" id="1_eaain"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/MotionBlur.gdshader" id="1_fumwe"]
 [ext_resource type="Script" path="res://Objects/ShaderObjects/motion_blur.gd" id="1_qqnjj"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/ScreenGlitch.gdshader" id="4_y1as3"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4vfml"]
 seed = 3
@@ -22,6 +23,7 @@ shader = ExtResource("1_fumwe")
 shader_parameter/blurCenter = Vector2(0.5, 0.5)
 shader_parameter/blurIntensity = 0.0
 shader_parameter/disToCenter = 1.0
+shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/blurNoise = SubResource("NoiseTexture2D_m5gi0")
 
 [sub_resource type="Animation" id="Animation_bceem"]
@@ -30,7 +32,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/blurIntensity")
+tracks/0/path = NodePath("Hack:material:shader_parameter/blurIntensity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -42,7 +44,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:material:shader_parameter/disToCenter")
+tracks/1/path = NodePath("Hack:material:shader_parameter/disToCenter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -52,40 +54,13 @@ tracks/1/keys = {
 "values": [0.0, 1.0]
 }
 
-[sub_resource type="Animation" id="Animation_ouh34"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/blurIntensity")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:material:shader_parameter/disToCenter")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
 [sub_resource type="Animation" id="Animation_vmdhp"]
 resource_name = "PassiveBlur"
 length = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/blurIntensity")
+tracks/0/path = NodePath("Hack:material:shader_parameter/blurIntensity")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -97,7 +72,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("ColorRect:material:shader_parameter/disToCenter")
+tracks/1/path = NodePath("Hack:material:shader_parameter/disToCenter")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -107,11 +82,117 @@ tracks/1/keys = {
 "values": [0.8, 0.7]
 }
 
+[sub_resource type="Animation" id="Animation_ouh34"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hack:material:shader_parameter/blurIntensity")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Hack:material:shader_parameter/disToCenter")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_d3opw"]
 _data = {
 "Blur": SubResource("Animation_bceem"),
 "PassiveBlur": SubResource("Animation_vmdhp"),
 "RESET": SubResource("Animation_ouh34")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_1w0th"]
+frequency = 0.0256
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_l6liu"]
+width = 64
+noise = SubResource("FastNoiseLite_1w0th")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cvak1"]
+resource_local_to_scene = true
+shader = ExtResource("4_y1as3")
+shader_parameter/shake_power = 0.05
+shader_parameter/shake_rate = 0.1
+shader_parameter/shake_speed = 100.0
+shader_parameter/shake_block_size = 15.0
+shader_parameter/shake_color_rate = 0.05
+shader_parameter/progress = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_l6liu")
+
+[sub_resource type="Animation" id="Animation_xgtw0"]
+resource_name = "Glitch"
+length = 0.6
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.3, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glitch:material:shader_parameter/shake_power")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.133333, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.05, 0.05, 0.2]
+}
+
+[sub_resource type="Animation" id="Animation_1wyfh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Glitch:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Glitch:material:shader_parameter/shake_power")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.05]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_23m0a"]
+_data = {
+"Glitch": SubResource("Animation_xgtw0"),
+"RESET": SubResource("Animation_1wyfh")
 }
 
 [node name="MotionBlur" type="CanvasLayer"]
@@ -124,7 +205,7 @@ position = Vector2(640, 360)
 scale = Vector2(20, 11.25)
 texture = ExtResource("1_eaain")
 
-[node name="ColorRect" type="ColorRect" parent="."]
+[node name="Hack" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_e42lk")
 anchors_preset = 15
 anchor_right = 1.0
@@ -132,10 +213,26 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="HackAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_d3opw")
 }
 speed_scale = 3.0
 
-[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="Glitch" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_cvak1")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GlitchAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_23m0a")
+}
+
+[connection signal="animation_finished" from="HackAnimator" to="." method="_on_animation_player_animation_finished"]

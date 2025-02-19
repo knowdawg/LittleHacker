@@ -310,12 +310,13 @@ healthbar = NodePath("../../Components/EnemyHeathbar")
 sprite = NodePath("../../SpearSprite")
 hurtbox = NodePath("../../Components/HurtboxComponent")
 
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "leftGrabPos", "rightGrabPos", "animationPlayer")]
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer")]
 script = ExtResource("6_w8eb0")
 stateMachine = NodePath("..")
 parent = NodePath("../..")
 movement = NodePath("../../Components/MovementComponent")
 nextState = NodePath("../Still")
+nextStateOnHack = NodePath("../Still")
 leftGrabPos = NodePath("Left")
 rightGrabPos = NodePath("Right")
 animationName = "Rise"

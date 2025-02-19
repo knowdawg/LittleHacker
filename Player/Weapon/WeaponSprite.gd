@@ -1,6 +1,8 @@
 extends Sprite2D
 
 @export var parent : Player
+@export var audio : AudioStreamPlayer
+@export var audio2 : AudioStreamPlayer
 
 func _ready():
 	position = parent.global_position
@@ -26,3 +28,11 @@ func getDirection():
 		return -1.0
 	else:
 		return 1.0
+		
+func playSound(pitch : float = 1.0):
+	audio.pitch_scale = 2.0 + randf_range(-0.4, 0.4)
+	audio.play()
+	
+func playSpinSound(pitch : float = 1.0):
+	audio2.pitch_scale = pitch + randf_range(-pitch * 0.1, pitch * 0.1)
+	audio2.play()

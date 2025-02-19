@@ -22,6 +22,7 @@ func enter(prevState):
 	rightAttackComponent.generateAttackID()
 	weaponSprite.flip_h = playerSprite.flip_h
 	weaponAnimator.play("HackAttack")
+	$HackAttackSound.play()
 	t = 0.0
 	if prevState is PlayerWeaponParry:
 		t = 0.1

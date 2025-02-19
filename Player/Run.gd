@@ -4,6 +4,7 @@ class_name SmallPlayerRun
 @export var animator : AnimationPlayer
 @export var player : Player
 @export var playerStateMachine : PlayerStateMachine
+@export var audios : Array[AudioStreamPlayer] = []
 
 func update_physics(delta):
 	player.update_physics(delta, true, true)
@@ -25,3 +26,8 @@ func update_physics(delta):
 
 func enter(_prevState):
 	animator.play("Run")
+
+func makeSound():
+	var i : int = randi_range(0, audios.size() -1)
+	audios[i].pitch_scale = 1.0 + randf_range(-0.1, 0.1)
+	audios[i].play()

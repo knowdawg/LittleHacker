@@ -120,14 +120,20 @@ func hitFromLeft(_attack : Attack):
 	v.x = 0.0
 	if !stateMachine.current_state is PlayerGrabbed:
 		$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
-	#Game.slowTime(0.3, 0.01)
+	hitEffects()
 
 func hitFromRight(_attack : Attack):
 	knockbackVector.x = -100.0
 	v.x = 0.0
 	if !stateMachine.current_state is PlayerGrabbed:
 		$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
-	#Game.slowTime(0.3, 0.01)
+	hitEffects()
+
+func hitEffects():
+	$Sounds/PlayerHitMain.play()
+	$Sounds/PlayerHitSecoundary.play()
+	$MotionBlur.glitch()
+	Game.camera.set_shake(2.0)
 
 var parryStunTime = 0.3
 var parriedAttack : Attack
