@@ -1,11 +1,13 @@
-[gd_scene load_steps=205 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=208 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
 [ext_resource type="AudioStream" uid="uid://bkcmxwvkhmu4a" path="res://Assets/Audio/SoundEffects/SmallPlayerHitMain.wav" id="2_05a5k"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="2_67e55"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_hn6pj"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="2_l0uvv"]
 [ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="2_mnd2b"]
+[ext_resource type="Script" path="res://Player/interactable_manager.gd" id="2_rtdom"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="3_412y7"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="3_nr8gu"]
 [ext_resource type="AudioStream" uid="uid://dbcrjgsxk4a1x" path="res://Assets/Audio/SoundEffects/SmallPlayerHit.wav" id="3_t3i0y"]
@@ -76,6 +78,9 @@
 [ext_resource type="AudioStream" uid="uid://brm1d5tuxe1ab" path="res://Assets/Audio/SoundEffects/Fire.wav" id="58_o6fl6"]
 [ext_resource type="AudioStream" uid="uid://dk8gsdpbda3an" path="res://Assets/Audio/SoundEffects/HackModeAmbience.wav" id="59_ly53n"]
 [ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bundm"]
+size = Vector2(10, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
 size = Vector2(31, 4)
@@ -1019,7 +1024,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, 0, 0, 0, 0, 13, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 8, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/type = "bezier"
@@ -1041,7 +1046,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 13, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 8, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/3/type = "bezier"
@@ -1063,7 +1068,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 10, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 6, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/5/type = "bezier"
@@ -1691,7 +1696,7 @@ tracks/1/path = NodePath("StateMachine/Run")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.5),
+"times": PackedFloat32Array(0, 0.4),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -1963,10 +1968,10 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.35),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [2.0],
+"args": [],
 "method": &"playSpinSound"
 }, {
-"args": [2.0],
+"args": [],
 "method": &"playSound"
 }]
 }
@@ -1997,7 +2002,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [2.0],
+"args": [],
 "method": &"playSound"
 }]
 }
@@ -2028,7 +2033,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0.35),
 "transitions": PackedFloat32Array(1),
 "values": [{
-"args": [2.0],
+"args": [],
 "method": &"playSound"
 }]
 }
@@ -2578,6 +2583,16 @@ healthComponent = NodePath("HealthComponent")
 hurtboxComponent = NodePath("HurtboxComponent")
 stateMachine = NodePath("StateMachine")
 
+[node name="InteractableManager" type="Node2D" parent="." node_paths=PackedStringArray("prox")]
+script = ExtResource("2_rtdom")
+prox = NodePath("InteractableProximity")
+
+[node name="InteractableProximity" parent="InteractableManager" instance=ExtResource("2_67e55")]
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableManager/InteractableProximity"]
+shape = SubResource("RectangleShape2D_bundm")
+
 [node name="Sounds" type="Node" parent="."]
 
 [node name="PlayerHitMain" type="AudioStreamPlayer" parent="Sounds"]
@@ -2715,7 +2730,7 @@ sm = NodePath("..")
 
 [node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "parent")]
 script = ExtResource("14_a7jjx")
-stunTime = 0.5
+stunTime = 0.2
 animator = NodePath("../../SpriteAnimator")
 scaleAnimator = NodePath("../../ScaleAnimator")
 parent = NodePath("../..")
@@ -3145,7 +3160,7 @@ script = ExtResource("38_o42eg")
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
 offset_left = -30.0
 offset_top = -7.0
-offset_right = 30.0
+offset_right = 26.0
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)
@@ -3206,7 +3221,7 @@ trail_section_subdivisions = 2
 [node name="SelectLine" type="Line2D" parent="HackUI/SelectLineContainer"]
 z_index = 1
 material = SubResource("ShaderMaterial_t8n0i")
-points = PackedVector2Array(-4, -3, -49, -3)
+points = PackedVector2Array(0, -3, -49, -3)
 width = 6.0
 width_curve = SubResource("Curve_uwynt")
 texture_mode = 2
@@ -3375,13 +3390,11 @@ libraries = {
 
 [node name="ParrySound" type="AudioStreamPlayer" parent="ParryIntercepterComponent"]
 stream = ExtResource("56_qavs0")
-max_polyphony = 3
 bus = &"SoundEffects"
 
 [node name="ParrySound2" type="AudioStreamPlayer" parent="ParryIntercepterComponent"]
 stream = ExtResource("55_jnt5q")
 volume_db = 10.0
-max_polyphony = 3
 bus = &"SoundEffects"
 
 [node name="Timer" type="Timer" parent="."]
@@ -3474,6 +3487,8 @@ healthComponent = NodePath("../../HealthComponent")
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(10, 10)
 script = ExtResource("55_c7l4y")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]

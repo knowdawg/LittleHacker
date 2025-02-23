@@ -17,7 +17,7 @@ func _ready() -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var startPoint : Vector2
 	var endPoint : Vector2
 	startPoint = Vector2(60, 56)

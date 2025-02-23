@@ -33,5 +33,5 @@ func _process(delta):
 		current_state.update(delta)
 
 
-func _on_health_component_hit(attack: Attack) -> void:
+func _on_health_component_hit(_attack: Attack) -> void:
 	inputBuffer = ""

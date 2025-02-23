@@ -30,6 +30,7 @@ resource_local_to_scene = true
 shader = ExtResource("14_mduiy")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
 [node name="BaseEnemyTemplate" type="CharacterBody2D"]
@@ -103,3 +104,5 @@ knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComp
 
 [node name="BloodEffect" parent="OnHitComponent" instance=ExtResource("13_ln0a7")]
 material = SubResource("ShaderMaterial_87e45")
+
+[node name="Sounds" type="Node2D" parent="."]

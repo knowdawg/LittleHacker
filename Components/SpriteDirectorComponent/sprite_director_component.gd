@@ -25,3 +25,7 @@ func lookAtPlayer():
 		spriteToFlip.flip_h = false
 	else:
 		spriteToFlip.flip_h = true
+
+func flipXDir():
+	if flipX:
+		spriteToFlip.flip_h = !spriteToFlip.flip_h

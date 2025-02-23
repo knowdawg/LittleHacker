@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bkpqd3ei3e87s"]
+[gd_scene load_steps=35 format=3 uid="uid://bkpqd3ei3e87s"]
 
 [ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
 [ext_resource type="PackedScene" uid="uid://b4ugiyef56755" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_start_cave.tscn" id="2_kcft2"]
@@ -11,7 +11,10 @@
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="8_2y2tj"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="8_28ct1"]
 [ext_resource type="PackedScene" uid="uid://bbwjfta6awigx" path="res://Objects/Enemies/Gorgon/gorgon.tscn" id="9_a6eg2"]
+[ext_resource type="PackedScene" uid="uid://bae1ixxbndyw3" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.tscn" id="10_fmqj3"]
+[ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="11_6w1f1"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="11_xyrk5"]
+[ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="14_vf27f"]
 
 [sub_resource type="Gradient" id="Gradient_axx6j"]
 offsets = PackedFloat32Array(1)
@@ -81,8 +84,10 @@ shader = ExtResource("11_xyrk5")
 shader_parameter/brightness = 1.0
 shader_parameter/lightCurve = SubResource("CurveTexture_l2mhn")
 
-[node name="StarweepStartCave" type="Node2D" node_paths=PackedStringArray("doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="StarweepStartCave" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
 script = ExtResource("1_37lxr")
+projectileSpawnNode = NodePath("Projectiles")
+enemySpawnLocation = NodePath("Enemies")
 doorToSpawnPlayerOnFailure = NodePath("TestLevelStart")
 doors = [NodePath("TutorialRoom1"), NodePath("TestLevel")]
 whereToAddPlayer = NodePath("PlayerParent")
@@ -319,16 +324,12 @@ occluder = SubResource("OccluderPolygon2D_dmc4q")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="CrystalThug" parent="Enemies" instance=ExtResource("8_2y2tj")]
-position = Vector2(269, -14)
-color = 1
-
 [node name="CrystalThug4" parent="Enemies" instance=ExtResource("8_2y2tj")]
 position = Vector2(372, 10)
 color = 1
 
 [node name="CrystalThug5" parent="Enemies" instance=ExtResource("8_2y2tj")]
-position = Vector2(318, -17)
+position = Vector2(342, 24)
 color = 1
 
 [node name="CrystalThug2" parent="Enemies" instance=ExtResource("8_2y2tj")]
@@ -339,7 +340,25 @@ color = 1
 position = Vector2(-154, 123)
 
 [node name="Gorgon2" parent="Enemies" instance=ExtResource("9_a6eg2")]
-position = Vector2(173, -13)
+position = Vector2(298, 81)
+
+[node name="CrystalSwordsman" parent="Enemies" instance=ExtResource("10_fmqj3")]
+position = Vector2(244, -14)
+
+[node name="CrystalSwordsman2" parent="Enemies" instance=ExtResource("10_fmqj3")]
+position = Vector2(297, -14)
+
+[node name="CrystalSwordsman3" parent="Enemies" instance=ExtResource("10_fmqj3")]
+position = Vector2(178, -15)
+
+[node name="CrystalSwordsman4" parent="Enemies" instance=ExtResource("10_fmqj3")]
+position = Vector2(228, -20)
+
+[node name="HealthBuggy" parent="Enemies" instance=ExtResource("11_6w1f1")]
+position = Vector2(215, -48)
+
+[node name="HealthBuggy2" parent="Enemies" instance=ExtResource("11_6w1f1")]
+position = Vector2(232, -46)
 
 [node name="TutorialRoom1" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-276, -133)
@@ -362,6 +381,7 @@ doorName = "TestLevel"
 enterPosition = NodePath("Marker2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevel"]
+visible = false
 position = Vector2(422, 118)
 shape = SubResource("RectangleShape2D_ihcvw")
 
@@ -382,7 +402,12 @@ disabled = true
 [node name="Marker2D" type="Marker2D" parent="TestLevelStart"]
 position = Vector2(929, -24)
 
+[node name="Projectiles" type="Node2D" parent="."]
+
 [node name="SoftLighting" parent="." instance=ExtResource("8_28ct1")]
 material = SubResource("ShaderMaterial_xor2r")
 offset_left = 12.0
 offset_right = 204.0
+
+[node name="CursorFollower" parent="." instance=ExtResource("14_vf27f")]
+visible = false

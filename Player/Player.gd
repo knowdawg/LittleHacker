@@ -92,6 +92,7 @@ func _process(_delta: float) -> void:
 	var snapDis = (camPos - floor(camPos) - Vector2(0.0, 1.0)) / Vector2(128, 72)
 	RenderingServer.global_shader_parameter_set("CameraSnapDistance", snapDis)
 	
+
 func _ready():
 	$HealthComponent.grabbed.connect(grabbed)
 	Game.enterHackMode.connect(enterHackMode)

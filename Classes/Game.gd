@@ -2,7 +2,7 @@ extends Node
 
 var player : Player
 var camera : SmallPlayerCamera
-var littleLevel : Node2D
+var littleLevel : GenericLevel
 var littleViewport : LittleSceneTransitioner
 
 var inTerminal = false
@@ -46,3 +46,9 @@ func getPlayerData() -> SmallPlayerData:
 	var s : SmallPlayerData = SmallPlayerData.new()
 	s.health = player.healthComponent.get_health()
 	return s
+
+func addProjectile(projectile):
+	littleLevel.addProjectile(projectile)
+
+func addEnemy(enemy):
+	littleLevel.addEnemy(enemy)

@@ -31,4 +31,4 @@ func enter(_prevState):
 func makeSound():
 	var i : int = randi_range(0, audios.size() -1)
 	audios[i].pitch_scale = 1.0 + randf_range(-0.1, 0.1)
-	audios[i].play()
+	audios[i].play(0.1)

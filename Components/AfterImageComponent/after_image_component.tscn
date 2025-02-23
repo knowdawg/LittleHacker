@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://du8t0dwelcj4j"]
+
+[ext_resource type="Script" path="res://Components/AfterImageComponent/after_image_component.gd" id="1_1bfrg"]
+
+[node name="AfterImageComponent" type="Node"]
+script = ExtResource("1_1bfrg")

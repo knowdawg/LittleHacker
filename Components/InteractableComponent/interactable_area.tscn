@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqpjlvli0ayt1"]
+
+[ext_resource type="Script" path="res://Components/InteractableComponent/interactable_area.gd" id="1_3huk4"]
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_otowd"]
+
+[node name="InteractableArea" type="Area2D"]
+texture_filter = 1
+collision_layer = 128
+collision_mask = 0
+script = ExtResource("1_3huk4")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+offset_left = -50.0
+offset_top = -8.0
+offset_right = 50.0
+offset_bottom = 8.0
+scale = Vector2(0.5, 0.5)
+pivot_offset = Vector2(50, 8)
+theme_override_constants/outline_size = 2
+theme_override_fonts/normal_font = ExtResource("2_otowd")
+bbcode_enabled = true
+text = "[center]Testing"

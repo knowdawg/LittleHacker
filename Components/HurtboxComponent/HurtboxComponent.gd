@@ -29,7 +29,7 @@ func damage(attack: Attack):
 	if attack.isGrabAttack:
 		health_componnet.damage(attack)
 		return
-	if attack.isHackAttack:
+	if attack.isHackAttack and isHackable:
 		if Game.hackedEnemy != null:
 			return
 		stateMachine.enterHackMode()

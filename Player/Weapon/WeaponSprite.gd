@@ -29,7 +29,7 @@ func getDirection():
 	else:
 		return 1.0
 		
-func playSound(pitch : float = 1.0):
+func playSound():
 	audio.pitch_scale = 2.0 + randf_range(-0.4, 0.4)
 	audio.play()
 	

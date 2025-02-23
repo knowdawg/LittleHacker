@@ -49,7 +49,7 @@ func _process(_delta: float) -> void:
 		if Input.is_action_just_pressed("HackAttack") or Input.is_action_just_pressed("Attack"):
 			if HackCommandManager.hackCommands[selectedHackIndex].isExecutable():
 				if curentLabels[selectedHackIndex].isCrossed == false:
-					HackCommandManager.hackCommands[selectedHackIndex].executeHack()
+					HackCommandManager.hackCommands[selectedHackIndex].execute()
 					#Animations
 					curentLabels[selectedHackIndex].crossOut()
 					$AnimationPlayer.play("SelectHack")

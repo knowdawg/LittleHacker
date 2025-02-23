@@ -1,10 +1,11 @@
-[gd_scene load_steps=64 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=67 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Texture2D" uid="uid://b1h0biuscqvuk" path="res://Assets/Sprites/Enemies/CrystalThugEnemy.png" id="1_1mmkh"]
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_knvuj"]
 [ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_ckk41"]
 [ext_resource type="Texture2D" uid="uid://bxga5k3prfoi1" path="res://Assets/Sprites/Enemies/CrystalThugEnemyGreen.png" id="2_d1p4c"]
+[ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="2_ipifu"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_75l8a"]
 [ext_resource type="Texture2D" uid="uid://cl0ps3s3th5qa" path="res://Assets/Sprites/Effects/CystalThugSlamEffect.png" id="3_j8jhn"]
 [ext_resource type="Texture2D" uid="uid://bfhn7wpr7k3fl" path="res://Assets/Sprites/Enemies/CrystalThugEnemyRed.png" id="3_t8cw1"]
@@ -36,6 +37,8 @@
 [ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/death.gd" id="22_jr46o"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="27_tgw8o"]
 [ext_resource type="PackedScene" uid="uid://q1v00o43xu5d" path="res://Objects/Hacks/LeechHack/Leech.tscn" id="29_t6cbv"]
+[ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="37_yylqw"]
+[ext_resource type="Script" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="38_trsn2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id2w4"]
 size = Vector2(2, 6)
@@ -78,12 +81,12 @@ _data = {
 "Shatter": SubResource("Animation_wqnno")
 }
 
-[sub_resource type="Gradient" id="Gradient_cmus3"]
+[sub_resource type="Gradient" id="Gradient_u6nj4"]
 offsets = PackedFloat32Array(0, 0.99789)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0qmxs"]
-gradient = SubResource("Gradient_cmus3")
+gradient = SubResource("Gradient_u6nj4")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -294,6 +297,23 @@ tracks/0/keys = {
 "update": 1,
 "values": [24, 25, 26, 27, 28, 29]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Step")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_t37ew"]
 resource_name = "Stun"
@@ -407,6 +427,7 @@ texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_ablmd")
+buggy = ExtResource("2_ipifu")
 greenSprite = ExtResource("2_d1p4c")
 redSprite = ExtResource("3_t8cw1")
 greenSlam = ExtResource("4_ixndy")
@@ -472,6 +493,8 @@ playerProximity = NodePath("../../Proximities/AgroProximity")
 [node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement", "spriteDirector")]
 script = ExtResource("5_t2ije")
 speed = 800.0
+waitForAnimationToFinish = true
+animationLength = 0.6
 idleState = NodePath("../Idle")
 nextStates = [NodePath("../Wait")]
 animator = NodePath("../../Animator")
@@ -601,7 +624,6 @@ visible = false
 width = 0.3
 stateMachine = NodePath("../../../StateMachine")
 stateToSwitchTo = NodePath("../../../StateMachine/Resonate")
-removeAfterExecuted = true
 enemyHealthbar = NodePath("..")
 cost = 3.0
 hackName = "Resonate"
@@ -693,6 +715,14 @@ knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComp
 [node name="DirectionalParticlesComponent" parent="OnHitComponent" instance=ExtResource("27_tgw8o")]
 texture = SubResource("GradientTexture2D_spdlq")
 
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Step" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("37_yylqw")
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_trsn2")
+
 [node name="ResonanceTimer" type="Timer" parent="."]
 wait_time = 0.3
 one_shot = true
@@ -700,5 +730,6 @@ one_shot = true
 [node name="ResonanceCooldown" type="Timer" parent="."]
 one_shot = true
 
+[connection signal="executed" from="GeneralComponents/EnemyHeathbar/HeadShatter" to="." method="_on_head_shatter_executed"]
 [connection signal="timeout" from="ResonanceTimer" to="." method="_on_resonance_timer_timeout"]
 [connection signal="timeout" from="ResonanceCooldown" to="." method="_on_resonance_cooldown_timeout"]

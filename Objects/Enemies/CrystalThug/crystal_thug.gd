@@ -1,5 +1,6 @@
 extends CharacterBody2D
 
+@export var buggy : PackedScene
 enum colorChoices {PURPLE = 0, RED = 1, GREEN = 2}
 @export var color : colorChoices
 
@@ -39,7 +40,7 @@ func checkResonanceHit(attack : Attack):
 func resonate():
 	var p = projectile.instantiate()
 	p.color = color
-	Game.littleLevel.add_child(p)
+	Game.addProjectile(p)
 	p.position = global_position
 
 func _on_resonance_timer_timeout() -> void:
@@ -47,3 +48,11 @@ func _on_resonance_timer_timeout() -> void:
 
 func _on_resonance_cooldown_timeout() -> void:
 	canResonate = true
+
+
+func _on_head_shatter_executed() -> void:
+	for i in randi_range(1, 2):
+		var b : HealthBuggy = buggy.instantiate()
+		Game.addEnemy(b)
+		b.position = global_position
+		b.movement.applyForce(Vector2(randf_range(-0.3, 0.3), -1), 150)

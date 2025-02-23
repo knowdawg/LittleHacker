@@ -11,8 +11,9 @@ func _ready() -> void:
 		a.gotParried.connect(onEnemyParried)
 
 func onEnemyParried(_attack : Attack):
-	if stateMachine.current_state.has_method("canParry"):
-		if !stateMachine.current_state.canParry():
-			return
-	if stateMachine.current_state.has_method("getParryState"):
-		stateMachine.switchStates(stateMachine.current_state.getParryState().name)
+	if stateMachine:
+		if stateMachine.current_state.has_method("canParry"):
+			if !stateMachine.current_state.canParry():
+				return
+		if stateMachine.current_state.has_method("getParryState"):
+			stateMachine.switchStates(stateMachine.current_state.getParryState().name)

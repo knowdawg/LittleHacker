@@ -1,0 +1,139 @@
+[gd_scene load_steps=12 format=3 uid="uid://bkbus5a3gek53"]
+
+[ext_resource type="Script" path="res://Objects/Projectiles/CrystalSwordmanProjectile/crystal_swordsman_projectile.gd" id="1_mqysk"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_i2uub"]
+[ext_resource type="Texture2D" uid="uid://btldjoiclpn7f" path="res://Assets/Sprites/Projectiles/CrystalSwordsmanProjectile.png" id="3_5b8qu"]
+[ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="4_24x3a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0pl6"]
+size = Vector2(6, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6dlq"]
+size = Vector2(4, 4)
+
+[sub_resource type="Gradient" id="Gradient_u6nj4"]
+offsets = PackedFloat32Array(0, 0.99789)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o235i"]
+gradient = SubResource("Gradient_u6nj4")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Animation" id="Animation_8lbe2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transform:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.5, 0.5)]
+}
+
+[sub_resource type="Animation" id="Animation_b4uqn"]
+resource_name = "Shrink"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transform:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(0.329877, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.5, 0.5), Vector2(0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_niy4e"]
+_data = {
+"RESET": SubResource("Animation_8lbe2"),
+"Shrink": SubResource("Animation_b4uqn")
+}
+
+[node name="CrystalSwordsmanProjectile" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_mqysk")
+speed = 90.0
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("2_i2uub")]
+attackName = "CrystalSword"
+collisionShape = NodePath("CollisionShape2D")
+disabled = false
+attack_damage = 2.0
+weakness_damage = 3.0
+knockback_force = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+shape = SubResource("RectangleShape2D_e0pl6")
+
+[node name="EnvirementDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvirementDetector"]
+shape = SubResource("RectangleShape2D_v6dlq")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+scale = Vector2(0.5, 0.5)
+color = Color(0.0784314, 0, 0, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_o235i")
+
+[node name="Transform" type="Node2D" parent="."]
+position = Vector2(0, 3)
+
+[node name="Sprite2D" type="Sprite2D" parent="Transform"]
+position = Vector2(0, -3)
+texture = ExtResource("3_5b8qu")
+
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow") instance=ExtResource("4_24x3a")]
+follow = NodePath("..")
+texture = ExtResource("3_5b8qu")
+frequency = 0.05
+
+[node name="Grounded" type="RayCast2D" parent="."]
+position = Vector2(-3, 0)
+target_position = Vector2(0, 4)
+
+[node name="Grounded2" type="RayCast2D" parent="."]
+position = Vector2(3, 0)
+target_position = Vector2(0, 4)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_niy4e")
+}
+
+[connection signal="body_entered" from="EnvirementDetector" to="." method="_on_envirement_detector_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

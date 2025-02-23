@@ -22,9 +22,13 @@ func update(delta):
 	t += delta
 	
 	if t > length:
+		beforeTransition()
 		trasitioned.emit(self, nextState.name)
 	
 	customUpdate(delta)
 
 func customUpdate(_delta):
+	pass
+
+func beforeTransition():
 	pass

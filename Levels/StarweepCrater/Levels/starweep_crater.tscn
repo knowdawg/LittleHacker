@@ -247,7 +247,7 @@ height = 28
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.882353, 0.882353, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ukxix"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oqq6u"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -285,7 +285,7 @@ shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dixk1"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_k5hyg"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -444,14 +444,15 @@ shader_parameter/brightness = 1.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g51h"]
 
-[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
 texture_filter = 1
 script = ExtResource("1_4w4bf")
+projectileSpawnNode = NodePath("Projectiles")
+enemySpawnLocation = NodePath("Enemies")
 doorToSpawnPlayerOnFailure = NodePath("CaveExit")
 doors = [NodePath("CaveExit")]
 whereToAddPlayer = NodePath("PlayerParent")
 lighting = NodePath("SoftLighting")
-lightingBrightness = null
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -861,12 +862,12 @@ visible = false
 
 [node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_ukxix")
+texture = SubResource("GradientTexture2D_oqq6u")
 
 [node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_dixk1")
+texture = SubResource("GradientTexture2D_k5hyg")
 
 [node name="FarDistance" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1143,20 +1144,24 @@ flip_h = true
 
 [node name="PlayerParent" type="Node2D" parent="."]
 
-[node name="CrystalThug" parent="." instance=ExtResource("25_ftex3")]
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="CrystalThug" parent="Enemies" instance=ExtResource("25_ftex3")]
 material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(56, 18)
 color = 1
 
-[node name="CrystalThug2" parent="." instance=ExtResource("25_ftex3")]
+[node name="CrystalThug2" parent="Enemies" instance=ExtResource("25_ftex3")]
 material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(221, -10)
 color = 1
 
-[node name="CrystalThug3" parent="." instance=ExtResource("25_ftex3")]
+[node name="CrystalThug3" parent="Enemies" instance=ExtResource("25_ftex3")]
 material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(200, 18)
 color = 1
+
+[node name="Projectiles" type="Node2D" parent="."]
 
 [node name="CursorFollower" parent="." instance=ExtResource("29_4ghwm")]
 visible = false

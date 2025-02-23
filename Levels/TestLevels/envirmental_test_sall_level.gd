@@ -1,6 +1,9 @@
 extends Node2D
 class_name GenericLevel
 
+@export var projectileSpawnNode : Node2D
+@export var enemySpawnLocation : Node2D
+
 @export_group("PlayerSpawnDetails")
 @export var doorToSpawnPlayerOnFailure : LevelTransition
 @export var doors : Array[LevelTransition] = []
@@ -28,3 +31,9 @@ func initializeLevel(sceneData : SceneSwitchData) -> void:
 		d = doorToSpawnPlayerOnFailure
 	
 	p.position = d.enterPosition.global_position
+
+func addProjectile(projectile):
+	projectileSpawnNode.add_child(projectile)
+
+func addEnemy(enemy):
+	enemySpawnLocation.add_child(enemy)

@@ -1,0 +1,829 @@
+[gd_scene load_steps=57 format=3 uid="uid://bae1ixxbndyw3"]
+
+[ext_resource type="Script" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.gd" id="1_42bp5"]
+[ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_jv6iw"]
+[ext_resource type="Texture2D" uid="uid://d4fa0nurno2cb" path="res://Assets/Sprites/Enemies/CrystalSwordsman.png" id="1_qffc4"]
+[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_f778v"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="3_8ujxu"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_pgxil"]
+[ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="4_01b8v"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_pjn6l"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_wb0l7"]
+[ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="5_8yhaw"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_o6jpw"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_2u2j7"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_hkq3m"]
+[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="7_bqot1"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_f5i78"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_h8ghy"]
+[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="8_qy1tj"]
+[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/ResonateState.gd" id="9_am02e"]
+[ext_resource type="PackedScene" uid="uid://bkbus5a3gek53" path="res://Objects/Projectiles/CrystalSwordmanProjectile/CrystalSwordsmanProjectile.tscn" id="9_c0508"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_x5m13"]
+[ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_38fvy"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_132dl"]
+[ext_resource type="PackedScene" uid="uid://b8t05k375ws5w" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.tscn" id="11_6857g"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_k0sx1"]
+[ext_resource type="Script" path="res://Classes/GenericStates/ProjectileAttack.gd" id="13_qf0pg"]
+[ext_resource type="Script" path="res://Objects/Enemies/CrystalSwordsman/malfunction.gd" id="16_eiq7n"]
+[ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="18_gnyok"]
+[ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="18_julgj"]
+[ext_resource type="AudioStream" uid="uid://dev2lreooucr8" path="res://Assets/Audio/SoundEffects/CrystalSwordsmanSlam.wav" id="27_g21vd"]
+[ext_resource type="AudioStream" uid="uid://nyelt3dkq2q7" path="res://Assets/Audio/SoundEffects/RockScrape.wav" id="28_vcsbj"]
+[ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="29_6fkkr"]
+[ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="29_bcfdh"]
+[ext_resource type="Script" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="30_ffdyt"]
+[ext_resource type="Material" uid="uid://i6j2egx4otxu" path="res://Assets/Shaders/ParticleEffects/Sparks.tres" id="30_mwxko"]
+
+[sub_resource type="Gradient" id="Gradient_cmus3"]
+offsets = PackedFloat32Array(0, 0.99789)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kyiiy"]
+gradient = SubResource("Gradient_cmus3")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7t5l1"]
+size = Vector2(2, 5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ux68c"]
+shader = ExtResource("3_8ujxu")
+shader_parameter/width = 0.3
+shader_parameter/outlineAlpha = 0.3
+
+[sub_resource type="Animation" id="Animation_nqn66"]
+resource_name = "Attack"
+length = 2.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponents/AttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Attack")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"projectile"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/Slam")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Scrape")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ParticleEffects/Sparks:emitting")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.7, 0.8, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+
+[sub_resource type="Animation" id="Animation_swo1x"]
+resource_name = "Chase"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Step")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 0.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_xm447"]
+resource_name = "Death"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [32, 33, 34, 35, 36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MalfunctionLight:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_p1xec"]
+resource_name = "Malfunction"
+length = 1.11
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/HitFlashComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.5, 0.7, 0.8, 0.9, 0.95, 1, 1.05, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}, {
+"args": [null],
+"method": &"hitEfect"
+}]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MalfunctionLight:color")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0, 0, 0, 1), Color(0.588235, 0.117647, 0.117647, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("MalfunctionLight:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.25, 0.25)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ParticleEffects/Sparks:emitting")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.65, 0.7, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/Slam:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/Scrape:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_osl32"]
+resource_name = "Patroll"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sounds/Step")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.3, 1.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_ad0d5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MalfunctionLight:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MalfunctionLight:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ParticleEffects/Sparks:emitting")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/Slam:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/Scrape:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_n6v0f"]
+resource_name = "Resonate"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [37, 38, 39, 40]
+}
+
+[sub_resource type="Animation" id="Animation_bprxr"]
+resource_name = "Stun"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [32]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k56j0"]
+_data = {
+"Attack": SubResource("Animation_nqn66"),
+"Chase": SubResource("Animation_swo1x"),
+"Death": SubResource("Animation_xm447"),
+"Malfunction": SubResource("Animation_p1xec"),
+"Patroll": SubResource("Animation_osl32"),
+"RESET": SubResource("Animation_ad0d5"),
+"Resonate": SubResource("Animation_n6v0f"),
+"Stun": SubResource("Animation_bprxr")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_b5172"]
+size = Vector2(2, 4)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kuq6x"]
+radius = 61.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vomt8"]
+radius = 97.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c3q0x"]
+size = Vector2(50, 4)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_ypb1y"]
+radius = 3.0
+height = 8.0
+
+[sub_resource type="Gradient" id="Gradient_pks7v"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.811765, 0.341176, 0.239216, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tox8f"]
+gradient = SubResource("Gradient_pks7v")
+width = 1
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_kgjj1"]
+offsets = PackedFloat32Array(0.146993, 0.253898, 0.997773)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.474531, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cavd6"]
+gradient = SubResource("Gradient_kgjj1")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[node name="CrystalSwordsman" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+script = ExtResource("1_42bp5")
+projectile = ExtResource("11_6857g")
+buggy = ExtResource("18_gnyok")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.0980392, 0, 0, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_kyiiy")
+
+[node name="MalfunctionLight" type="PointLight2D" parent="."]
+scale = Vector2(1e-05, 1e-05)
+color = Color(0, 0, 0, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_kyiiy")
+
+[node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7t5l1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+clip_children = 2
+material = SubResource("ShaderMaterial_ux68c")
+position = Vector2(0, -2)
+texture = ExtResource("1_qffc4")
+hframes = 41
+frame = 2
+
+[node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_jv6iw")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("5_8yhaw")]
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+script = ExtResource("2_f778v")
+initial_state = NodePath("Patroll")
+hackedState = NodePath("Hacked")
+parent = NodePath("..")
+animators = [NodePath("../Animator")]
+
+[node name="Patroll" type="Node" parent="StateMachine" node_paths=PackedStringArray("aggroState", "animator", "aggroProximity", "movement", "spriteDirector")]
+script = ExtResource("4_pjn6l")
+animationLength = 1.6
+movementIntervals = Array[Vector3]([Vector3(0.1, 0.4, 480), Vector3(0.9, 1.2, 480)])
+numOfAnimationsBeforeDirectionChange = 3
+aggroState = NodePath("../Chase")
+animator = NodePath("../../Animator")
+animationName = "Patroll"
+aggroProximity = NodePath("../../Proximities/AgroProximity")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+spriteDirector = NodePath("../../Sprite2D/SpriteDirectorComponent")
+
+[node name="Chase" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement", "spriteDirector")]
+script = ExtResource("4_01b8v")
+waitForAnimationToFinish = true
+animationLength = 1.0
+useIntervalMovement = true
+movementIntervals = Array[Vector3]([Vector3(0, 0.4, 480), Vector3(0.5, 0.9, 480)])
+idleState = NodePath("../Patroll")
+nextStates = [NodePath("../Attack")]
+animator = NodePath("../../Animator")
+animationName = "Chase"
+deAggroProximity = NodePath("../../Proximities/DeagroProximity")
+attackProximity = NodePath("../../Proximities/AttackProximity")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+spriteDirector = NodePath("../../Sprite2D/SpriteDirectorComponent")
+
+[node name="Attack" type="Node" parent="StateMachine" node_paths=PackedStringArray("projectileDirectionNode", "agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+script = ExtResource("13_qf0pg")
+projectileScene = ExtResource("9_c0508")
+projectileDirectionNode = NodePath("../../AttackComponents/AttackComponent")
+reverseDirection = true
+distanceAwayFromParent = 4.0
+attackLength = 2.1
+animationName = "Attack"
+agroState = NodePath("../Chase")
+parryState = NodePath("../Stun")
+animator = NodePath("../../Animator")
+attackComponents = [NodePath("../../AttackComponents/AttackComponent")]
+nodeToFlip = NodePath("../../AttackComponents/AttackComponent")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(1.1, 1.3, 240)])
+
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
+script = ExtResource("6_hkq3m")
+stateMachine = NodePath("..")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+nextState = NodePath("../Chase")
+nextStateOnHack = NodePath("../Stun")
+leftGrabPos = NodePath("Left")
+rightGrabPos = NodePath("Right")
+animationName = "Stun"
+animationPlayer = NodePath("../../Animator")
+spriteDirectorComponent = NodePath("../../Sprite2D/SpriteDirectorComponent")
+updateWhileHacked = true
+
+[node name="Left" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(0, 0.5)
+
+[node name="Right" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(0, 0.5)
+
+[node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
+script = ExtResource("7_bqot1")
+parryLength = 0.5
+animationName = "Stun"
+knockback = 60.0
+nextState = NodePath("../Chase")
+parrent = NodePath("../..")
+animator = NodePath("../../Animator")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="Dead" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable", "spriteDirectorComponent")]
+script = ExtResource("8_qy1tj")
+animator = NodePath("../../Animator")
+animationName = "Death"
+hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
+spriteDirectorComponent = NodePath("../../Sprite2D/SpriteDirectorComponent")
+
+[node name="Resonate" type="Node" parent="StateMachine" node_paths=PackedStringArray("healthComponent", "parent", "nextState", "parrent", "animator", "movement", "kbCom")]
+script = ExtResource("9_am02e")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+projectileScene = ExtResource("11_6857g")
+parent = NodePath("../..")
+parryLength = 9999.9
+animationName = "Resonate"
+knockback = 100.0
+nextState = NodePath("../Stun")
+parrent = NodePath("../..")
+animator = NodePath("../../Animator")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="Malfunction" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "nextState", "animator")]
+script = ExtResource("16_eiq7n")
+parent = NodePath("../..")
+nextState = NodePath("../Dead")
+length = 1.2
+animator = NodePath("../../Animator")
+animationName = "Malfunction"
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_k56j0")
+}
+
+[node name="GeneralComponents" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_pgxil")]
+MAX_HEALTH = 6.0
+MAX_WEAKNESS = 3.0
+
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_wb0l7")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+stateToSwitchTo = NodePath("../../StateMachine/Dead")
+
+[node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_o6jpw")]
+parent = NodePath("../..")
+gravity = 10.0
+
+[node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_2u2j7")]
+parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="HurtboxComponent" parent="GeneralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_f5i78")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+shape = SubResource("RectangleShape2D_b5172")
+
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("8_h8ghy")]
+parent = NodePath("../..")
+follow = NodePath("../EnemyHealthbarMarker")
+healthComponent = NodePath("../HealthComponent")
+hackCommands = [NodePath("Resonance"), NodePath("Defect"), NodePath("Shatter")]
+stateMachine = NodePath("../../StateMachine")
+
+[node name="Resonance" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("18_julgj")]
+width = 0.1
+stateMachine = NodePath("../../../StateMachine")
+stateToSwitchTo = NodePath("../../../StateMachine/Resonate")
+enemyHealthbar = NodePath("..")
+cost = 3.0
+hackName = "Resonate"
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Defect" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("18_julgj")]
+width = 0.1
+stateMachine = NodePath("../../../StateMachine")
+stateToSwitchTo = NodePath("../../../StateMachine/Malfunction")
+enemyHealthbar = NodePath("..")
+cost = 3.0
+hackName = "Defect"
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Shatter" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("18_julgj")]
+width = 0.1
+stateMachine = NodePath("../../../StateMachine")
+stateToSwitchTo = NodePath("../../../StateMachine/Dead")
+killsEnemy = true
+removeAfterExecuted = true
+enemyHealthbar = NodePath("..")
+cost = 3.0
+hackName = "Shatter"
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+
+[node name="Proximities" type="Node2D" parent="."]
+
+[node name="AgroProximity" parent="Proximities" instance=ExtResource("9_x5m13")]
+collision_mask = 4
+requireLineOfSight = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/AgroProximity"]
+visible = false
+shape = SubResource("CircleShape2D_kuq6x")
+
+[node name="DeagroProximity" parent="Proximities" instance=ExtResource("9_x5m13")]
+collision_mask = 4
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="Proximities/DeagroProximity"]
+visible = false
+shape = SubResource("CircleShape2D_vomt8")
+
+[node name="AttackProximity" parent="Proximities" instance=ExtResource("9_x5m13")]
+collision_mask = 4
+
+[node name="CollisionShape2D3" type="CollisionShape2D" parent="Proximities/AttackProximity"]
+visible = false
+shape = SubResource("RectangleShape2D_c3q0x")
+
+[node name="AttackComponents" type="Node2D" parent="."]
+
+[node name="EnemyParriedComponent" parent="AttackComponents" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("10_38fvy")]
+attackComponents = [NodePath("../AttackComponent")]
+stateMachine = NodePath("../../StateMachine")
+
+[node name="AttackComponent" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_132dl")]
+collision_mask = 4
+attackName = "CrystalSwordsmanSwing"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/AttackComponent"]
+visible = false
+position = Vector2(-2, -2)
+shape = SubResource("CapsuleShape2D_ypb1y")
+
+[node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_k0sx1")]
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
+hitEffects = [NodePath("../Sprite2D/HitFlashComponent"), NodePath("DirectionalParticlesComponent")]
+knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="DirectionalParticlesComponent" parent="OnHitComponent" instance=ExtResource("29_6fkkr")]
+texture = SubResource("GradientTexture2D_tox8f")
+
+[node name="ParticleEffects" type="Node2D" parent="."]
+
+[node name="Sparks" type="GPUParticles2D" parent="ParticleEffects"]
+position = Vector2(0, 3)
+emitting = false
+amount = 32
+process_material = ExtResource("30_mwxko")
+texture = SubResource("GradientTexture2D_cavd6")
+lifetime = 0.4
+explosiveness = 0.2
+trail_enabled = true
+trail_lifetime = 0.1
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="Slam" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("27_g21vd")
+max_distance = 100.0
+bus = &"SoundEffects"
+
+[node name="Scrape" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("28_vcsbj")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+
+[node name="Step" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("29_bcfdh")
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("30_ffdyt")
+
+[node name="ResonanceTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[node name="ResonanceCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="executed" from="GeneralComponents/EnemyHeathbar/Shatter" to="." method="_on_shatter_executed"]
+[connection signal="timeout" from="ResonanceTimer" to="." method="_on_resonance_timer_timeout"]
+[connection signal="timeout" from="ResonanceCooldownTimer" to="." method="_on_resonance_cooldown_timer_timeout"]

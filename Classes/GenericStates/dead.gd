@@ -9,6 +9,7 @@ class_name GenericEnemyDeath
 @export_group("Optional Nodes")
 @export var spriteDirectorComponent : SpriteDirectorComponent
 
+
 func enter(prevState):
 	if spriteDirectorComponent:
 		spriteDirectorComponent.lookAtPlayer()

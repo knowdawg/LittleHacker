@@ -2,7 +2,7 @@ extends Node2D
 class_name HealthComponent
 
 @export var MAX_HEALTH := 10.0
-var health : float = MAX_HEALTH
+@onready var health : float = MAX_HEALTH
 
 @export var MAX_WEAKNESS := 20.0
 var weakness : float = 0.0

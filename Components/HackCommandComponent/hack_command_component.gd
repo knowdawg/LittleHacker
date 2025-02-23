@@ -7,6 +7,8 @@ class_name HackCommandComponent
 
 @onready var label : Label = $Label
 
+signal executed
+
 func setActive(isActive : bool):
 	label.text = hackName
 	label.position = points[points.size()-1] + Vector2(-5.0, 0.0)
@@ -19,6 +21,10 @@ func setActive(isActive : bool):
 
 func isExecutable():
 	return (healthComponent.get_weakness() >= cost)
+
+func execute():
+	executed.emit()
+	executeHack()
 
 func executeHack():
 	pass

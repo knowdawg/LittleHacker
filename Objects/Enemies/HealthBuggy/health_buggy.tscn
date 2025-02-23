@@ -1,0 +1,327 @@
+[gd_scene load_steps=37 format=3 uid="uid://b8hqt8qdycrjb"]
+
+[ext_resource type="Texture2D" uid="uid://ncp1s1h3i2qx" path="res://Assets/Sprites/Enemies/HealthBuggy.png" id="1_84xmk"]
+[ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_bij3q"]
+[ext_resource type="Script" path="res://Objects/Enemies/HealthBuggy/health_buggy.gd" id="1_wjrs8"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="2_4oyfi"]
+[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_d8emb"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_yg48p"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_ouy0x"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_wy52y"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericTransitionState.gd" id="5_5l7nj"]
+[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="5_knb2y"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_ndkwi"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_68mk1"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_2qus0"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_00x40"]
+[ext_resource type="Script" path="res://Objects/Enemies/HealthBuggy/BuggyFalling.gd" id="8_3262r"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_r0u0n"]
+[ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_1dpqc"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_ovrrl"]
+[ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="16_ld5dq"]
+[ext_resource type="AudioStream" uid="uid://uimyvn0lc2yq" path="res://Assets/Audio/SoundEffects/BugSquish.wav" id="17_2nbvx"]
+[ext_resource type="Script" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="17_kocyt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0lc8p"]
+size = Vector2(2, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1uxdp"]
+shader = ExtResource("2_4oyfi")
+shader_parameter/color = Color(0.2, 0.058, 0.058, 1)
+shader_parameter/width = 0.5
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/add_margins = false
+
+[sub_resource type="Animation" id="Animation_kvouj"]
+resource_name = "Crawl"
+length = 1.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_oyqtb"]
+resource_name = "Death"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_m1nen"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_yebp2"]
+resource_name = "Turn"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11, 12, 7]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/SpriteDirectorComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"flipXDir"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v2cha"]
+_data = {
+"Crawl": SubResource("Animation_kvouj"),
+"Death": SubResource("Animation_oyqtb"),
+"RESET": SubResource("Animation_m1nen"),
+"Turn": SubResource("Animation_yebp2")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8c8sv"]
+size = Vector2(4, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_np2k4"]
+seed = 153
+frequency = 0.0041
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_np2k4")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c03nl"]
+resource_local_to_scene = true
+shader = ExtResource("14_ovrrl")
+shader_parameter/col = Color(0.654902, 0, 0, 1)
+shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_npy40"]
+size = Vector2(4, 1)
+
+[sub_resource type="Curve" id="Curve_txxv6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_usuty"]
+curve = SubResource("Curve_txxv6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_aqnum"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(1.5, 0, 1)
+direction = Vector3(0, -1, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 20.0
+gravity = Vector3(0, 0, 0)
+scale_curve = SubResource("CurveTexture_usuty")
+color = Color(0.811765, 0.341176, 0.239216, 1)
+hue_variation_min = -0.05
+hue_variation_max = 0.05
+turbulence_noise_scale = 0.0
+
+[node name="HealthBuggy" type="CharacterBody2D" node_paths=PackedStringArray("movement")]
+texture_filter = 1
+collision_layer = 8
+script = ExtResource("1_wjrs8")
+movement = NodePath("GeneralComponents/MovementComponent")
+
+[node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+visible = false
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_0lc8p")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1uxdp")
+position = Vector2(0, -0.5)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_84xmk")
+flip_h = true
+hframes = 13
+
+[node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_bij3q")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+script = ExtResource("2_d8emb")
+initial_state = NodePath("Patroll")
+hackedState = NodePath("Patroll")
+parent = NodePath("..")
+animators = [NodePath("../Animator")]
+
+[node name="Patroll" type="Node" parent="StateMachine" node_paths=PackedStringArray("turnState", "animator", "movement", "spriteDirector")]
+script = ExtResource("4_ouy0x")
+animationLength = 1.4
+movementIntervals = Array[Vector3]([Vector3(0.6, 0.8, 120)])
+numOfAnimationsBeforeDirectionChange = 3
+turnState = NodePath("../Turn")
+animator = NodePath("../../Animator")
+animationName = "Crawl"
+movement = NodePath("../../GeneralComponents/MovementComponent")
+spriteDirector = NodePath("../../Sprite2D/SpriteDirectorComponent")
+
+[node name="Turn" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
+script = ExtResource("5_5l7nj")
+nextState = NodePath("../Patroll")
+length = 0.6
+animator = NodePath("../../Animator")
+animationName = "Turn"
+
+[node name="Falling" type="Node" parent="StateMachine" node_paths=PackedStringArray("sprite", "animator", "raycast", "nextState")]
+script = ExtResource("8_3262r")
+sprite = NodePath("../../Sprite2D")
+animator = NodePath("../../Animator")
+raycast = NodePath("../../IsOnFloor")
+nextState = [NodePath("../Patroll"), NodePath("../Turn")]
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
+script = ExtResource("5_knb2y")
+animator = NodePath("../../Animator")
+animationName = "Death"
+hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_v2cha")
+}
+
+[node name="GeneralComponents" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_yg48p")]
+MAX_HEALTH = 1.0
+MAX_WEAKNESS = 1.0
+
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_wy52y")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+stateToSwitchTo = NodePath("../../StateMachine/Death")
+
+[node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_ndkwi")]
+parent = NodePath("../..")
+gravity = 3.0
+
+[node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_68mk1")]
+parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="HurtboxComponent" parent="GeneralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_2qus0")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
+isHackable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+visible = false
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_8c8sv")
+disabled = true
+
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_00x40")]
+parent = NodePath("../..")
+follow = NodePath("../EnemyHealthbarMarker")
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+
+[node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_r0u0n")]
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
+hitEffects = [NodePath("BloodEffect")]
+knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="BloodEffect" parent="OnHitComponent" instance=ExtResource("13_1dpqc")]
+material = SubResource("ShaderMaterial_c03nl")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="RandomPitchAudio" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("17_2nbvx")
+script = ExtResource("17_kocyt")
+
+[node name="TextPos" type="Marker2D" parent="."]
+position = Vector2(0, -5)
+
+[node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("16_ld5dq")]
+text = "eat"
+textPos = NodePath("../TextPos")
+colShape = NodePath("CollisionShape2D")
+disableOnInteract = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
+visible = false
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_npy40")
+
+[node name="DeathParticles" type="GPUParticles2D" parent="."]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_aqnum")
+lifetime = 0.3
+one_shot = true
+preprocess = 0.1
+explosiveness = 0.8
+trail_enabled = true
+trail_lifetime = 0.15
+
+[node name="IsOnFloor" type="RayCast2D" parent="."]
+target_position = Vector2(0, 0.3)
+
+[connection signal="onInteract" from="InteractableArea" to="." method="_on_interactable_area_on_interact"]
