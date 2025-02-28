@@ -1,8 +1,10 @@
 extends Node2D
 class_name HealthComponent
 
+@export var isPlayerHealth : bool = false
+
 @export var MAX_HEALTH := 10.0
-@onready var health : float = MAX_HEALTH
+var health : float
 
 @export var MAX_WEAKNESS := 20.0
 var weakness : float = 0.0
@@ -14,6 +16,10 @@ signal death(attack : Attack)
 signal hit(attack : Attack)
 signal grabbed(attack : Attack)
 signal healed(amount : float)
+
+func _ready() -> void:
+	if !isPlayerHealth:
+		set_health(MAX_HEALTH)
 
 func get_health():
 	return health

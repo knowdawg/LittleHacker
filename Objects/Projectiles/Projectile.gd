@@ -13,5 +13,5 @@ var flipV : bool = false
 func move(dir : Vector2, s : float, delta):
 	position += dir * s * delta
 
-func setFriendly(f : bool):
+func setFriendly(_f : bool):
 	pass

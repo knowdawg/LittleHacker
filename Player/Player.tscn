@@ -835,7 +835,7 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-10, -0.25, 0, 0, 0, -27, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(-10, -0.25, 0, 0, 0, -43, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/2/type = "bezier"
@@ -846,7 +846,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-5, -0.25, 0, 0, 0, -9.5, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(-5, -0.25, 0, 0, 0, -11, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/3/type = "bezier"
@@ -857,7 +857,7 @@ tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-20, -0.25, 0, 0, 0, -30, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(-20, -0.25, 0, 0, 0, -37, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/4/type = "bezier"
@@ -891,7 +891,7 @@ tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-10, -0.25, 0, 0, 0, -27, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(-10, -0.25, 0, 0, 0, -43, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/7/type = "bezier"
@@ -902,7 +902,7 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(-5, -0.25, 0, 0, 0, -2, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(-5, -0.25, 0, 0, 0, 0, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/8/type = "value"
@@ -1024,7 +1024,7 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, 0, 0, 0, 0, 8, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, 9, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/1/type = "bezier"
@@ -1046,7 +1046,7 @@ tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 8, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 9, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/3/type = "bezier"
@@ -1068,7 +1068,7 @@ tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 6, -0.6, 0, 0.25, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0, 7, -0.6, 0, 0.25, 0),
 "times": PackedFloat32Array(0, 0.5)
 }
 tracks/5/type = "bezier"
@@ -2625,6 +2625,7 @@ shape = SubResource("RectangleShape2D_yskb1")
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_l0uvv")]
 rotation = 3.14159
+isPlayerHealth = true
 MAX_WEAKNESS = 0.0
 
 [node name="EnemyHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("3_nr8gu")]
@@ -3109,10 +3110,10 @@ libraries = {
 }
 
 [node name="Top" type="RichTextLabel" parent="HackUI"]
-offset_left = -27.0
-offset_top = -9.5
-offset_right = 93.0
-offset_bottom = 13.5
+offset_left = 2.84766
+offset_top = -6.10742
+offset_right = 102.848
+offset_bottom = 16.8926
 rotation = 0.0872665
 scale = Vector2(0.35, 0.35)
 theme_override_constants/outline_size = 3
@@ -3149,18 +3150,18 @@ trail_enabled = true
 trail_lifetime = 0.02
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
-offset_left = -27.0
-offset_top = -2.0
-offset_right = 48.0
-offset_bottom = 21.0
+offset_left = 2.84766
+offset_top = -4.36719
+offset_right = 102.848
+offset_bottom = 18.6328
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
-offset_left = -30.0
+offset_left = 2.21484
 offset_top = -7.0
-offset_right = 26.0
+offset_right = 62.2148
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)

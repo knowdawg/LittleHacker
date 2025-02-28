@@ -38,10 +38,18 @@ func checkResonanceHit(attack : Attack):
 			$ResonanceCooldownTimer.start()
 
 func resonate():
+	$Sounds/Resonate.play()
 	var p = projectile.instantiate()
 	#p.color = color
 	Game.addProjectile(p)
 	p.position = global_position
+
+func _process(_delta: float) -> void:
+	if $StateMachine.current_state.name == "Resonate":
+		if $Sounds/Resonating.playing == false:
+			$Sounds/Resonating.play()
+	else:
+		$Sounds/Resonating.stop()
 
 func _on_resonance_timer_timeout() -> void:
 	resonate()

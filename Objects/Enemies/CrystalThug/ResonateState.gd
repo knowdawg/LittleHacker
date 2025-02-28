@@ -10,8 +10,3 @@ func customEnter(_prevState):
 
 func onHit(_attack):
 	parent.call_deferred("resonate")
-
-#func realOnHit():
-	#var p = projectileScene.instantiate()
-	#Game.level.add_child(p)
-	#p.position = parent.global_position + Vector2(0, 7)

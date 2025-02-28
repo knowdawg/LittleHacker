@@ -179,5 +179,7 @@ func initialize(data : SceneSwitchData):
 	var playerData = data.playerData
 	if playerData:
 		healthComponent.set_health(playerData.health)
+	else:
+		healthComponent.set_health(healthComponent.MAX_HEALTH)
 	sprite.flip_h = data.faceRight
 	

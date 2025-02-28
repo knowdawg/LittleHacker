@@ -1,0 +1,622 @@
+[gd_scene load_steps=47 format=3 uid="uid://dcqwmsg54sjn4"]
+
+[ext_resource type="Texture2D" uid="uid://7jvgdu1xg7n3" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreation.png" id="1_cinor"]
+[ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_ey2r6"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_6hc4i"]
+[ext_resource type="Texture2D" uid="uid://cagipxwau2f6r" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreationBigHands.png" id="3_bcxbt"]
+[ext_resource type="Texture2D" uid="uid://bvdxwnwu4kul6" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreationLittleHands.png" id="4_6ljje"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_jma2g"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/StateMachine.gd" id="5_4wqwk"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_nclt3"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/Idle.gd" id="6_hk65s"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_vpvb8"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/run_towards_player.gd" id="7_eiov4"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_xgoub"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_ik1sq"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/run_away_from_player.gd" id="8_m0glk"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_cnexl"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="9_vpijg"]
+[ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_hx2da"]
+[ext_resource type="Script" path="res://Classes/GenericStates/generic_grab_attack.gd" id="10_l336j"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_72uol"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="11_wm0p2"]
+[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="12_4nq6f"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_nxe0c"]
+[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="12_w0pqd"]
+[ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_ua1ul"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_aor74"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fbxk7"]
+size = Vector2(2, 7)
+
+[sub_resource type="Animation" id="Animation_5drye"]
+resource_name = "Grab"
+length = 1.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.8, 0.9, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 100]
+}
+
+[sub_resource type="Animation" id="Animation_b0r33"]
+resource_name = "GroundSlide"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [82, 83, 84, 85, 86, 87]
+}
+
+[sub_resource type="Animation" id="Animation_0yyjr"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_q65u2"]
+resource_name = "Punch"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackComponents/Punch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_61j7s"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_u44pk"]
+resource_name = "Run"
+length = 0.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [76, 77, 78, 79, 80, 81]
+}
+
+[sub_resource type="Animation" id="Animation_xx0dx"]
+resource_name = "Scoop"
+length = 1.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 2]
+}
+
+[sub_resource type="Animation" id="Animation_amuoc"]
+resource_name = "Slide"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [90, 91, 92, 93, 94, 95]
+}
+
+[sub_resource type="Animation" id="Animation_51rol"]
+resource_name = "Smash"
+length = 2.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.8, 0.9, 1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.7, 2, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67]
+}
+
+[sub_resource type="Animation" id="Animation_hv4i0"]
+resource_name = "SmashFollowUp"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [68, 69, 70, 71, 72, 73, 74, 75]
+}
+
+[sub_resource type="Animation" id="Animation_s0lar"]
+resource_name = "StandUp"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_8bysu"]
+resource_name = "SlideAttack"
+length = 1.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [96, 97, 98, 99, 27, 28, 29, 30, 31, 32, 33, 34]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 2]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackComponents/Punch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_3dlop"]
+resource_name = "GroundSlideAttack"
+length = 1.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [82, 83, 84, 85, 45, 46, 47, 48, 49, 50, 51, 52]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [35, 36, 37, 38, 39, 40, 43, 44, 45, 46, 47, 48, 49, 50, 51, 2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_uvjcq"]
+_data = {
+"Grab": SubResource("Animation_5drye"),
+"GroundSlide": SubResource("Animation_b0r33"),
+"GroundSlideAttack": SubResource("Animation_3dlop"),
+"Idle": SubResource("Animation_0yyjr"),
+"Punch": SubResource("Animation_q65u2"),
+"RESET": SubResource("Animation_61j7s"),
+"Run": SubResource("Animation_u44pk"),
+"Scoop": SubResource("Animation_xx0dx"),
+"Slide": SubResource("Animation_amuoc"),
+"SlideAttack": SubResource("Animation_8bysu"),
+"Smash": SubResource("Animation_51rol"),
+"SmashFollowUp": SubResource("Animation_hv4i0"),
+"StandUp": SubResource("Animation_s0lar")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_q44m3"]
+size = Vector2(2, 7)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bpccg"]
+size = Vector2(45, 9)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8eyo7"]
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_taq5p"]
+seed = 153
+frequency = 0.0041
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_taq5p")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_brnhc"]
+resource_local_to_scene = true
+shader = ExtResource("14_aor74")
+shader_parameter/col = Color(0.654902, 0, 0, 1)
+shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+
+[node name="AspectOfCreation" type="CharacterBody2D"]
+texture_filter = 1
+collision_layer = 8
+
+[node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_fbxk7")
+
+[node name="HumanSprite" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("1_cinor")
+hframes = 110
+frame = 1
+
+[node name="SpriteDirectorComponent" parent="HumanSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_ey2r6")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="BigHands" type="Sprite2D" parent="."]
+position = Vector2(0, -10)
+texture = ExtResource("3_bcxbt")
+hframes = 106
+frame = 2
+
+[node name="SpriteDirectorComponent" parent="BigHands" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_ey2r6")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="SmallHands" type="Sprite2D" parent="."]
+visible = false
+position = Vector2(4, -3)
+texture = ExtResource("4_6ljje")
+hframes = 10
+
+[node name="SpriteDirectorComponent" parent="SmallHands" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_ey2r6")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
+script = ExtResource("5_4wqwk")
+initial_state = NodePath("Idle")
+hackedState = NodePath("Hacked")
+parent = NodePath("..")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "spriteDirector", "animator")]
+script = ExtResource("6_hk65s")
+sm = NodePath("..")
+spriteDirector = NodePath("../../HumanSprite/SpriteDirectorComponent")
+animator = NodePath("../../HumanAnimator")
+animationName = "Idle"
+
+[node name="RunTowardsPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "movement", "spriteDirector", "animator")]
+script = ExtResource("7_eiov4")
+sm = NodePath("..")
+lengthOfState = 3.6
+speed = 1440.0
+movement = NodePath("../../GeneralComponents/MovementComponent")
+spriteDirector = NodePath("../../HumanSprite/SpriteDirectorComponent")
+animator = NodePath("../../HumanAnimator")
+animationName = "Run"
+
+[node name="RunAwayFromPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "movement", "spriteDirector", "animator")]
+script = ExtResource("8_m0glk")
+sm = NodePath("..")
+speed = 1440.0
+movement = NodePath("../../GeneralComponents/MovementComponent")
+spriteDirector = NodePath("../../HumanSprite/SpriteDirectorComponent")
+animator = NodePath("../../HumanAnimator")
+animationName = "Run"
+
+[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent")]
+script = ExtResource("9_vpijg")
+attackLength = 1.4
+animationName = "Punch"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+nodeToFlip = NodePath("../../AttackComponents/Punch")
+parent = NodePath("../..")
+dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.4)])
+
+[node name="Scoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent")]
+script = ExtResource("9_vpijg")
+attackLength = 1.8
+animationName = "Scoop"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+nodeToFlip = NodePath("../../AttackComponents/Scoop")
+parent = NodePath("../..")
+dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.8)])
+
+[node name="SlideAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+script = ExtResource("9_vpijg")
+attackLength = 1.4
+animationName = "SlideAttack"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+attackComponents = [NodePath("../../AttackComponents/Punch")]
+nodeToFlip = NodePath("../../AttackComponents/Punch")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0, 0.15, 360), Vector3(0.15, 0.3, 180), Vector3(0.3, 0.4, 90), Vector3(0.4, 0.5, 30)])
+dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.4)])
+
+[node name="GroundSlideAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+script = ExtResource("9_vpijg")
+attackLength = 1.6
+animationName = "GroundSlideAttack"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+attackComponents = [NodePath("../../AttackComponents/Scoop")]
+nodeToFlip = NodePath("../../AttackComponents/Scoop")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0, 0.2, 360), Vector3(0.2, 0.4, 180), Vector3(0.4, 0.6, 90), Vector3(0.6, 0.8, 60)])
+dontReactToParryTimes = Array[Vector2]([Vector2(0, 2)])
+
+[node name="Grab" type="Node" parent="StateMachine" node_paths=PackedStringArray("onPogoState", "grabMissedState", "healthComponent", "stateMachine")]
+script = ExtResource("10_l336j")
+onPogoState = NodePath("../Stun")
+grabMissedState = NodePath("../Idle")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+stateMachine = NodePath("..")
+
+[node name="GrabSucessfull" type="Node" parent="StateMachine"]
+
+[node name="Slam" type="Node" parent="StateMachine"]
+
+[node name="SlamFollowUp" type="Node" parent="StateMachine"]
+
+[node name="Hacked" type="Node" parent="StateMachine"]
+script = ExtResource("11_wm0p2")
+
+[node name="Dead" type="Node" parent="StateMachine"]
+script = ExtResource("12_w0pqd")
+
+[node name="Stun" type="Node" parent="StateMachine"]
+script = ExtResource("12_4nq6f")
+
+[node name="HumanAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_uvjcq")
+}
+
+[node name="SmallHandAnimator" type="AnimationPlayer" parent="."]
+
+[node name="GeneralComponents" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_6hc4i")]
+MAX_HEALTH = 100.0
+
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_jma2g")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+stateToSwitchTo = NodePath("../../StateMachine/Dead")
+
+[node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_nclt3")]
+parent = NodePath("../..")
+gravity = 10.0
+
+[node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_vpvb8")]
+parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="HurtboxComponent" parent="GeneralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_xgoub")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+visible = false
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_q44m3")
+
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_ik1sq")]
+parent = NodePath("../..")
+follow = NodePath("../EnemyHealthbarMarker")
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+
+[node name="Proximities" type="Node2D" parent="."]
+
+[node name="ProximityArea" parent="Proximities" instance=ExtResource("9_cnexl")]
+collision_mask = 4
+
+[node name="AttackComponents" type="Node2D" parent="."]
+
+[node name="EnemyParriedComponent" parent="AttackComponents" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("10_hx2da")]
+attackComponents = [NodePath("../Punch")]
+stateMachine = NodePath("../../StateMachine")
+
+[node name="Punch" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_72uol")]
+collision_mask = 4
+attackName = "CreationPunch"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Punch"]
+visible = false
+position = Vector2(-5.5, -0.5)
+shape = SubResource("RectangleShape2D_bpccg")
+
+[node name="Scoop" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_72uol")]
+collision_mask = 4
+attackName = "CreationScoop"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 2.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Scoop"]
+visible = false
+position = Vector2(-5.5, -0.5)
+shape = SubResource("CircleShape2D_8eyo7")
+
+[node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_nxe0c")]
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
+hitEffects = [NodePath("BloodEffect")]
+knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="BloodEffect" parent="OnHitComponent" instance=ExtResource("13_ua1ul")]
+material = SubResource("ShaderMaterial_brnhc")
+
+[node name="Sounds" type="Node2D" parent="."]

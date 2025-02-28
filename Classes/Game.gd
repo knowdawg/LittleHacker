@@ -5,9 +5,6 @@ var camera : SmallPlayerCamera
 var littleLevel : GenericLevel
 var littleViewport : LittleSceneTransitioner
 
-var inTerminal = false
-signal terminalOn
-signal terminalOff
 
 var inHackMode = false
 var hackedEnemy = null

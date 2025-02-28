@@ -4,7 +4,7 @@ extends Node2D
 var areas : Array[Area2D]
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	areas = prox.getAreas()
 	areas.sort_custom(sortByDistance)
 	

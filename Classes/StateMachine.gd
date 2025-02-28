@@ -38,7 +38,11 @@ func _process(delta):
 				#stop the animators as well
 				for a in animators:
 					a.pause()
-
+	custumProcess(delta)
+	
+func custumProcess(_delta):
+	pass
+	
 func hackModeFinished():
 	#Resume the animators once hack mode is finished
 	for a in animators:

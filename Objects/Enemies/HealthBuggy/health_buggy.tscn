@@ -297,9 +297,6 @@ material = SubResource("ShaderMaterial_c03nl")
 stream = ExtResource("17_2nbvx")
 script = ExtResource("17_kocyt")
 
-[node name="TextPos" type="Marker2D" parent="."]
-position = Vector2(0, -5)
-
 [node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("16_ld5dq")]
 text = "eat"
 textPos = NodePath("../TextPos")
@@ -310,6 +307,9 @@ disableOnInteract = true
 visible = false
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_npy40")
+
+[node name="TextPos" type="Marker2D" parent="."]
+position = Vector2(0, 3)
 
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
 emitting = false

@@ -3,6 +3,7 @@ class_name SwitchStateHack
 
 @export var stateMachine : StateMachine
 @export var stateToSwitchTo : State
+@export var deathComponent : DeathComponent
 
 @export var killsEnemy : bool = false
 @export var removeAfterExecuted : bool = false
@@ -10,6 +11,9 @@ class_name SwitchStateHack
 @export var enemyHealthbar : EnemyHealthBar
 
 func executeHack():
+	if killsEnemy and stateToSwitchTo:
+		if deathComponent:
+			deathComponent.stateToSwitchTo = stateToSwitchTo
 	if killsEnemy:
 		healthComponent.kill()
 	else:

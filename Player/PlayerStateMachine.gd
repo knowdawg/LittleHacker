@@ -64,9 +64,6 @@ func _process(delta):
 	if t <= 0.0:
 		inputBuffer = ""
 	
-	if Game.inTerminal:
-		inputBuffer = ""
-	
 	if current_state:
 		current_state.update(delta)
 

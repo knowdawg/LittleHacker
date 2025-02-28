@@ -1,5 +1,6 @@
 shader_type canvas_item;
 
+
 uniform float width : hint_range(0.0, 1.0, 0.1);
 uniform float outlineAlpha : hint_range(0.0, 1.0, 0.1);
 
@@ -20,5 +21,7 @@ void fragment() {
 		c = vec4(avColor, clamp(alpha, 0.0, 1.0) * outlineAlpha);
 	}
 
-	COLOR = c;
+
+	COLOR.rgb = c.rgb;
+	COLOR.a *= c.a;
 }
