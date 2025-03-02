@@ -49,3 +49,7 @@ func addProjectile(projectile):
 
 func addEnemy(enemy):
 	littleLevel.addEnemy(enemy)
+
+func superParry(pos : Node2D):
+	if player:
+		player.screenEffects.superParry(pos)

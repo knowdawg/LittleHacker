@@ -6,19 +6,17 @@ class_name ProximityAreaComponent
 signal onPlayerEnter
 signal onPlayerExit
 
-#var a = null
-#func get_camera_bounds():
-	#var areas = get_overlapping_areas()
-	#if areas.size() > 1:
-		#return
-	#for area in areas:
-		#if area.get_parent() is CameraCoundriesComponent:
-			#if a != area.get_parent():
-				#a = area.get_parent()
-				#Game.cameraBoundsChanged()
-				#Game.currentCamera.position_smoothing_speed = 0.0
-			#return area.get_parent()
-	#return null
+var a = null
+func get_camera_bounds():
+	var areas = get_overlapping_areas()
+	if areas.size() > 1:
+		return
+	for area in areas:
+		if area.get_parent() is CameraCoundriesComponent:
+			if a != area.get_parent():
+				a = area.get_parent()
+			return area.get_parent()
+	return null
 
 @onready var ray : RayCast2D = $RayCast2D
 

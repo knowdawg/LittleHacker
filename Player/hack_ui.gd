@@ -59,7 +59,7 @@ func _process(_delta: float) -> void:
 					$SelectLineContainer/SelectParticles.restart()
 					$SelectLineContainer/SelectParticles.emitting = true
 					
-					blur.blur(Game.player.get_global_transform_with_canvas().origin)
+					blur.blur(Game.player)
 					Game.camera.set_shake(2.0)
 					$Audio/HackExecuted.play()
 					camera.zoom = Vector2(15, 15)
@@ -89,7 +89,7 @@ func animate():
 	$Audio/HackAttackHit.play()
 	$Audio/Fire.play()
 	$Audio/HackModeAmbience.play()
-	blur.passiveBlur(Game.player.get_global_transform_with_canvas().origin)
+	blur.passiveBlur(Game.player)
 	selectedHackIndex = 0
 	$AnimationPlayer.stop()
 	$AnimationPlayer.speed_scale = 10

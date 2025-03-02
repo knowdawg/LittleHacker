@@ -19,6 +19,7 @@ resource_local_to_scene = true
 shader = ExtResource("1_tv42b")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
 [sub_resource type="Gradient" id="Gradient_eoqop"]

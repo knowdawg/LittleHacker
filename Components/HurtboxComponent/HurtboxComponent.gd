@@ -46,11 +46,6 @@ func damage(attack: Attack):
 
 func parryStuff(attack : Attack):
 	parry.emit(attack)
-	if attack.healthComponent:
-		if parryStrength == 1:
-			attack.healthComponent.set_weakness(attack.healthComponent.get_weakness() + 3)
-		elif parryStrength == 2:
-			attack.healthComponent.set_weakness(attack.healthComponent.get_weakness() + 6)
 
 var attackBuffer : Attack
 func damageStuff():

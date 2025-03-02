@@ -20,7 +20,7 @@ class_name GenericAttackState
 @export var movementPeriods : Array[Vector3]
 
 @export_group("ParrySettings")
-@export var dontReactToParryTimes : Array[Vector2]
+@export var dontReactToParryTimes : Array[Vector2] = []
 
 var dir = 1.0
 var t = 0.0
@@ -56,10 +56,9 @@ func update(delta):
 		trasitioned.emit(self, agroState.name)
 
 func canParry():
-	if dontReactToParryTimes.size() > 0:
-		for v in dontReactToParryTimes:
-			if t > v.x and t < v.y:
-				return false
+	for v in dontReactToParryTimes:
+		if t >= v.x and t <= v.y:
+			return false
 	return true
 	
 func getParryState():

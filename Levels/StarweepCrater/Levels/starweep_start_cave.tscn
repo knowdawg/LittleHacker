@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://bkpqd3ei3e87s"]
+[gd_scene load_steps=35 format=3 uid="uid://bkpqd3ei3e87s"]
 
 [ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
 [ext_resource type="PackedScene" uid="uid://b4ugiyef56755" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_start_cave.tscn" id="2_kcft2"]
@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://bae1ixxbndyw3" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.tscn" id="10_fmqj3"]
 [ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="11_6w1f1"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="11_xyrk5"]
-[ext_resource type="PackedScene" uid="uid://dcqwmsg54sjn4" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.tscn" id="12_afpyq"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="14_vf27f"]
 
 [sub_resource type="Gradient" id="Gradient_axx6j"]
@@ -353,9 +352,6 @@ position = Vector2(215, -48)
 
 [node name="HealthBuggy2" parent="Enemies" instance=ExtResource("11_6w1f1")]
 position = Vector2(232, -46)
-
-[node name="AspectOfCreation" parent="Enemies" instance=ExtResource("12_afpyq")]
-position = Vector2(-164, 121)
 
 [node name="TutorialRoom1" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-276, -133)

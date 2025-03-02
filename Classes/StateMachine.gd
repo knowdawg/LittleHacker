@@ -9,6 +9,7 @@ class_name StateMachine
 
 var current_state : State
 var states : Dictionary = {}
+signal stateSwitched
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -20,6 +21,7 @@ func _ready():
 	if initial_state:
 		initial_state.enter(null)
 		current_state = initial_state
+		stateSwitched.emit(null, initial_state)
 	
 	Game.exitHackMode.connect(hackModeFinished)
 
@@ -70,8 +72,11 @@ func switchStates(newState : String):
 		prevState = current_state
 		current_state.exit(n)
 	
-	n.enter(prevState)
-	
+	if !n:
+		printerr(newState + ": Non-existant State")
+	else:
+		n.enter(prevState)
+	stateSwitched.emit(prevState, n)
 	current_state = n
 
 signal onHacked

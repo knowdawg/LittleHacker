@@ -1,9 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://d03i3jperca7o"]
+[gd_scene load_steps=25 format=3 uid="uid://d03i3jperca7o"]
 
 [ext_resource type="Texture2D" uid="uid://dumx1gfulor0p" path="res://Assets/Sprites/EnvirmentTextures/Sandstone/SandstoneBackground.png" id="1_eaain"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/MotionBlur.gdshader" id="1_fumwe"]
 [ext_resource type="Script" path="res://Objects/ShaderObjects/motion_blur.gd" id="1_qqnjj"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/ScreenGlitch.gdshader" id="4_y1as3"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/ImpactFrame.gdshader" id="5_oarrq"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4vfml"]
 seed = 3
@@ -195,6 +196,61 @@ _data = {
 "RESET": SubResource("Animation_1wyfh")
 }
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d283m"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_e6wvm"]
+width = 32
+seamless = true
+seamless_blend_skirt = 1.0
+noise = SubResource("FastNoiseLite_d283m")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_b8r3l"]
+resource_local_to_scene = true
+shader = ExtResource("5_oarrq")
+shader_parameter/blurCenter = Vector2(0.5, 0.5)
+shader_parameter/disToCenter = 1.0
+shader_parameter/color = Color(1, 1, 1, 1)
+shader_parameter/blackWhiteStepVal = 1.0
+shader_parameter/progress = 1.0
+shader_parameter/blurNoise = SubResource("NoiseTexture2D_e6wvm")
+
+[sub_resource type="Animation" id="Animation_i7vl7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SuperParry:material:shader_parameter/disToCenter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_hvify"]
+resource_name = "SuperParry"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SuperParry:material:shader_parameter/disToCenter")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_u3l1r"]
+_data = {
+"RESET": SubResource("Animation_i7vl7"),
+"SuperParry": SubResource("Animation_hvify")
+}
+
 [node name="MotionBlur" type="CanvasLayer"]
 script = ExtResource("1_qqnjj")
 
@@ -233,6 +289,22 @@ grow_vertical = 2
 [node name="GlitchAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_23m0a")
+}
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="."]
+copy_mode = 2
+
+[node name="SuperParry" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_b8r3l")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SuperParryAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_u3l1r")
 }
 
 [connection signal="animation_finished" from="HackAnimator" to="." method="_on_animation_player_animation_finished"]

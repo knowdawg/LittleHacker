@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=122 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
@@ -26,6 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="24_2aagl"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="25_ftex3"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="26_n2pso"]
+[ext_resource type="PackedScene" uid="uid://dcqwmsg54sjn4" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.tscn" id="27_tybnh"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="29_4ghwm"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="30_yrukv"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
@@ -247,7 +248,7 @@ height = 28
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.882353, 0.882353, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_oqq6u"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_th6oi"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -285,7 +286,7 @@ shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_k5hyg"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vr3ik"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -862,12 +863,12 @@ visible = false
 
 [node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_oqq6u")
+texture = SubResource("GradientTexture2D_th6oi")
 
 [node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_k5hyg")
+texture = SubResource("GradientTexture2D_vr3ik")
 
 [node name="FarDistance" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1161,6 +1162,9 @@ material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(200, 18)
 color = 1
 
+[node name="AspectOfCreation" parent="Enemies" instance=ExtResource("27_tybnh")]
+position = Vector2(427, 17)
+
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="CursorFollower" parent="." instance=ExtResource("29_4ghwm")]
@@ -1222,4 +1226,4 @@ position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
 
 [node name="Marker2D" type="Marker2D" parent="CaveExit"]
-position = Vector2(-119, -6)
+position = Vector2(397, 17)

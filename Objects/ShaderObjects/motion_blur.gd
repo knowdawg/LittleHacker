@@ -1,15 +1,16 @@
 extends CanvasLayer
+class_name ScreenEffects
 
 
-func blur(position : Vector2):
-	var p : Vector2 = position
+func blur(node : Node2D):
+	var p : Vector2 = node.get_global_transform_with_canvas().origin
 	p.x /= get_viewport().size.x
 	p.y /=  get_viewport().size.y
 	$Hack.material.set_shader_parameter("blurCenter", p)
 	$HackAnimator.play("Blur")
-
-func passiveBlur(position : Vector2):
-	var p : Vector2 = position
+	
+func passiveBlur(node : Node2D):
+	var p : Vector2 = node.get_global_transform_with_canvas().origin
 	p.x /= get_viewport().size.x
 	p.y /=  get_viewport().size.y
 	$Hack.material.set_shader_parameter("blurCenter", p)
@@ -24,6 +25,15 @@ func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Blur":
 		$HackAnimator.play("RESET")
 
-
 func glitch():
 	$GlitchAnimator.play("Glitch")
+
+func superParry(node : Node2D):
+	var p : Vector2 = node.get_global_transform_with_canvas().origin
+	p.x /= get_viewport().size.x
+	p.y /=  get_viewport().size.y
+	$SuperParry.material.set_shader_parameter("blurCenter", p)
+	$SuperParryAnimator.play("SuperParry")
+	Game.camera.set_shake(3.0)
+	Game.camera.zoom = Vector2(12.0, 12.0)
+	Game.setTimeScale(0.1)

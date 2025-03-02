@@ -10,5 +10,6 @@ func hitEfect(attack : Attack):
 	$OmniDirectionalKnockbackComponent.calculateKnockback(attack)
 
 func hitFromDirection(_attack : Attack, knockBack : Vector2):
+	$AnimationPlayer.stop()
 	$AnimationPlayer.play("BloodSplatter")
 	rotation = knockBack.angle()# + PI

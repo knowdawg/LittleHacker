@@ -1,37 +1,718 @@
-[gd_scene load_steps=47 format=3 uid="uid://dcqwmsg54sjn4"]
+[gd_scene load_steps=91 format=3 uid="uid://dcqwmsg54sjn4"]
 
 [ext_resource type="Texture2D" uid="uid://7jvgdu1xg7n3" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreation.png" id="1_cinor"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_ey2r6"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.gd" id="1_kgh35"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_6hc4i"]
 [ext_resource type="Texture2D" uid="uid://cagipxwau2f6r" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreationBigHands.png" id="3_bcxbt"]
 [ext_resource type="Texture2D" uid="uid://bvdxwnwu4kul6" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreationLittleHands.png" id="4_6ljje"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_jma2g"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/big_hands.gd" id="4_r6kx5"]
+[ext_resource type="Shader" path="res://Assets/Shaders/Filters/NoiseFade.gdshader" id="4_tg6g0"]
 [ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/StateMachine.gd" id="5_4wqwk"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/platform_hand.gd" id="5_drcs8"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_nclt3"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/follow.gd" id="6_4dtn0"]
 [ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/Idle.gd" id="6_hk65s"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_vpvb8"]
 [ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/run_towards_player.gd" id="7_eiov4"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_xgoub"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_ik1sq"]
 [ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/run_away_from_player.gd" id="8_m0glk"]
-[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_cnexl"]
+[ext_resource type="Script" path="res://Classes/GenericStates/GenericTransitionState.gd" id="8_tak1p"]
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="9_vpijg"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_hx2da"]
 [ext_resource type="Script" path="res://Classes/GenericStates/generic_grab_attack.gd" id="10_l336j"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/small_hands.gd" id="10_ld1ej"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_72uol"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/grab_sucessfull.gd" id="11_h6bdr"]
 [ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="11_wm0p2"]
 [ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="12_4nq6f"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_nxe0c"]
 [ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="12_w0pqd"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_ua1ul"]
 [ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_aor74"]
+[ext_resource type="Script" path="res://Objects/Enemies/AspectOfCreation/StateMachine/Slam.gd" id="15_pmvl8"]
+[ext_resource type="Script" path="res://Classes/GenericStates/ProjectileAttack.gd" id="17_xpeca"]
+[ext_resource type="PackedScene" uid="uid://da5t61nmf43up" path="res://Objects/Projectiles/StoneMonolith/StoneMonolith.tscn" id="18_bimxw"]
+[ext_resource type="PackedScene" uid="uid://dr8t41k422n1f" path="res://Components/GrabComponent/grab_component.tscn" id="24_u82q3"]
+[ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="28_l7t4h"]
+[ext_resource type="PackedScene" uid="uid://hwpgublexvag" path="res://Objects/Hacks/EvicerateHack/evicerate_hack.tscn" id="30_5ko11"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbxk7"]
-size = Vector2(2, 7)
+size = Vector2(6, 7)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_hytrv"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tsmcc"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_hytrv")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6nl4f"]
+resource_local_to_scene = true
+shader = ExtResource("4_tg6g0")
+shader_parameter/hFrames = 111.0
+shader_parameter/spriteRes = Vector2(64, 32)
+shader_parameter/progess = 0.0
+shader_parameter/noise = SubResource("NoiseTexture2D_tsmcc")
+
+[sub_resource type="Animation" id="Animation_m0xwk"]
+resource_name = "FadeIn"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_joy7q"]
+resource_name = "FadeOut"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_gv6hq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6xaxv"]
+_data = {
+"FadeIn": SubResource("Animation_m0xwk"),
+"FadeOut": SubResource("Animation_joy7q"),
+"RESET": SubResource("Animation_gv6hq")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_nqb42"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4rrjs"]
+noise = SubResource("FastNoiseLite_nqb42")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_i0k4h"]
+shader = ExtResource("4_tg6g0")
+shader_parameter/hFrames = 111.0
+shader_parameter/spriteRes = Vector2(64, 32)
+shader_parameter/progess = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_4rrjs")
+
+[sub_resource type="Animation" id="Animation_pr7a2"]
+resource_name = "FadeIn"
+length = 1.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 1, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.0, 0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_6avok"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cdsc7"]
+_data = {
+"FadeIn": SubResource("Animation_pr7a2"),
+"RESET": SubResource("Animation_6avok")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7agxp"]
+radius = 4.12311
+
+[sub_resource type="Animation" id="Animation_85hkd"]
+resource_name = "Clap"
+length = 2.0
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -14, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, -1, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 1.1, 1.7)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 1.1, 1.7)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../SmallHand2:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0, 14, -0.25, 0, 0.25, 0, 14, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 1.1, 1.7)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SmallHand2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 1.1, 1.7)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 1.1, 1.7)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../SmallHand2:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 1.5708, -0.25, 0, 0.25, 0, 1.5708, -0.25, 0, 0.25, 0, 1.5708, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.6, 0.7, 1.1, 1.7)
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 5, 4]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../SmallHand2:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 5, 4]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../HandsAttack")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6, 0.75, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_q3nf3"]
+resource_name = "DoubleSwipe"
+length = 2.5
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.5, 0, -4, -0.5, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1, 1.2, 2)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0, -8, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.5, 0, -3, -0.5, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.7, 1, 1.2, 2)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../SmallHand2:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0.25, 0, 7, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.5, 0, 4, -0.5, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1, 1.3, 1.5, 2.5)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SmallHand2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0, -3, -0.25, 0, 0.25, 0, -8, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.25, 0, 8, -0.25, 0, 0.5, 0, -3, -0.5, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3, 1, 1.3, 1.5, 2.5)
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../HandsAttack")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}, {
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath(".:modulate")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 0, 0, 1), Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../SmallHand2:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.784314, 0.705882, 0.627451, 1), Color(0.784314, 0, 0, 1), Color(0.784314, 0.705882, 0.627451, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath(".:frame")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("../SmallHand2:frame")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.3, 0.4, 0.5, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 0]
+}
+
+[sub_resource type="Animation" id="Animation_u5qcq"]
+resource_name = "Flip"
+length = 0.4
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0, 4, -0.25, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SmallHand2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SmallHand2:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_l66fx"]
+resource_name = "Flip2"
+length = 0.4
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(4, -0.2, 0, 0.2, 0, -4, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SmallHand2:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(-4, -0.2, 0, 0.2, 0, 4, -0.2, 0, 0.2, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:flip_h")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SmallHand2:flip_h")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_ckmgn"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SmallHand2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1.2, 1.3, 1.4, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 0, 0, 1, 2, 3, 4]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0, -3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SmallHand2:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0, -4, -0.25, 0, 0.25, 0, -3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0.3, 1.3, 2)
+}
+
+[sub_resource type="Animation" id="Animation_45mtx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../SmallHand2:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../SmallHand2:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(4, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:flip_h")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../SmallHand2:flip_h")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "bezier"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("../SmallHand2:position:y")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-3, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath(".:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("../SmallHand2:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.784314, 0.705882, 0.627451, 1)]
+}
+tracks/10/type = "bezier"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".:rotation")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/11/type = "bezier"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("../SmallHand2:rotation")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_aqhyd"]
+_data = {
+"Clap": SubResource("Animation_85hkd"),
+"DoubleSwipe": SubResource("Animation_q3nf3"),
+"Flip": SubResource("Animation_u5qcq"),
+"Flip2": SubResource("Animation_l66fx"),
+"Idle": SubResource("Animation_ckmgn"),
+"RESET": SubResource("Animation_45mtx")
+}
 
 [sub_resource type="Animation" id="Animation_5drye"]
 resource_name = "Grab"
-length = 1.8
+length = 1.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -40,10 +721,195 @@ tracks/0/path = NodePath("HumanSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.8, 0.9, 1.3, 1.4, 1.5, 1.6, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 100]
+"values": [100, 101, 102, 103, 104]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [100, 101, 102, 103, 104]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackComponents/Grab")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.7, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BigHands")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_mfyk5"]
+resource_name = "GrabHit"
+length = 2.0
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigHands:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-10, -0.25, 0, 0.25, 0, -20, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0, -30, -0.25, 0, 0.25, 0, -7, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.8, 1.2, 1.4)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponents/Grab/GrabMarker:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-20, -0.25, 0, 0.25, 0, -20, -0.25, 0, 0, 0, -30, -0.5, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.4, 1.9)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackComponents/Grab/GrabMarker:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, -10, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, -20, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0, 2, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 0.7, 0.8, 1.2, 1.4, 1.5)
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BigHands:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [105, 106, 107, 110]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackComponents/Grab/GrabComponent")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.7, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [1],
+"method": &"dealDamageToObject"
+}, {
+"args": [1],
+"method": &"dealDamageToObject"
+}, {
+"args": [false, null],
+"method": &"setActive"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("BigHands")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fadeOut"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("HumanSprite:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [105, 106, 107, 108, 109, 1]
+}
+
+[sub_resource type="Animation" id="Animation_2ck0o"]
+resource_name = "GrabMissed"
+length = 0.9
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigHands:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [105, 106, 107]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HumanSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [105, 106, 107, 108, 109, 100]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fadeOut"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_b0r33"]
@@ -61,6 +927,86 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [82, 83, 84, 85, 86, 87]
+}
+
+[sub_resource type="Animation" id="Animation_3dlop"]
+resource_name = "GroundSlideAttack"
+length = 1.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [82, 83, 84, 85, 45, 46, 47, 48, 49, 50, 51, 52]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [35, 36, 37, 38, 39, 40, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Scoop")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"projectile"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackComponents/Scoop")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.8, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_0yyjr"]
@@ -102,10 +1048,10 @@ tracks/1/path = NodePath("BigHands:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 2]
+"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -125,6 +1071,23 @@ tracks/2/keys = {
 }, {
 "args": [],
 "method": &"disable"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BigHands")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
 }]
 }
 
@@ -153,6 +1116,73 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [2]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands:position:y")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-10, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackComponents/Grab/GrabMarker:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-20, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackComponents/Grab/GrabMarker:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis:position:x")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/6/type = "bezier"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis:position:y")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("GeneralComponents/HealthComponent:locked")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_u44pk"]
@@ -196,10 +1226,179 @@ tracks/1/path = NodePath("BigHands:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 2]
+"values": [35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("StateMachine/Scoop")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"projectile"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("AttackComponents/Scoop")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_m07gs"]
+resource_name = "ShellHack"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BigHands:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("HumanSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_i21i4"]
+resource_name = "ShellIdle"
+length = 6.0
+step = 0.1
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SmallHands")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"doubleSwipe"
+}, {
+"args": [],
+"method": &"clap"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_8iu2m"]
+resource_name = "Shellify"
+length = 1.8
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(20, -0.25, 0, 0, 0, 3, 0, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.8)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(20, -0.25, 0, 0, 0, 4, 0, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.8)
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("SmallHands")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [true],
+"method": &"setPlayerFollow"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("GeneralComponents/HealthComponent:locked")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_amuoc"]
@@ -217,57 +1416,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [90, 91, 92, 93, 94, 95]
-}
-
-[sub_resource type="Animation" id="Animation_51rol"]
-resource_name = "Smash"
-length = 2.2
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HumanSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.8, 0.9, 1, 1.1, 1.2, 1.4, 1.5, 1.6, 1.7, 2, 2.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67]
-}
-
-[sub_resource type="Animation" id="Animation_hv4i0"]
-resource_name = "SmashFollowUp"
-length = 1.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HumanSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.4, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [68, 69, 70, 71, 72, 73, 74, 75]
-}
-
-[sub_resource type="Animation" id="Animation_s0lar"]
-resource_name = "StandUp"
-length = 0.8
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("HumanSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [13, 14, 15, 16, 17, 18, 19, 20]
 }
 
 [sub_resource type="Animation" id="Animation_8bysu"]
@@ -293,10 +1441,10 @@ tracks/1/path = NodePath("BigHands:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 2]
+"values": [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -318,10 +1466,27 @@ tracks/2/keys = {
 "method": &"disable"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BigHands")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
+}]
+}
 
-[sub_resource type="Animation" id="Animation_3dlop"]
-resource_name = "GroundSlideAttack"
-length = 1.6
+[sub_resource type="Animation" id="Animation_51rol"]
+resource_name = "Smash"
+length = 2.2
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -330,10 +1495,146 @@ tracks/0/path = NodePath("HumanSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.7, 0.8, 0.9, 1, 1.1, 1.3, 1.4, 1.5, 1.6, 1.9, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [82, 83, 84, 85, 45, 46, 47, 48, 49, 50, 51, 52]
+"values": [53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlatformHandDislocator/PlatformHand")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"setPosition"
+}]
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0, -12, 0, 0, 0.25, 0),
+"times": PackedFloat32Array(0.3, 0.7)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis:position:y")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, 0, 0, 0, 0, -17, -0.1, 0, 0.1, 0, -12, 0, 0, 0, 0, -12, -0.25, 0, 0, 0, -30, -0.4, 0, 1, 0, 0, 0, 0, 0, 0),
+"times": PackedFloat32Array(0.3, 0.5, 0.7, 1, 1.5, 1.9)
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis/Follow")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"setStartingPos"
+}, {
+"args": [true],
+"method": &"setActive"
+}, {
+"args": [false],
+"method": &"setActive"
+}]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("AttackComponents/Smash")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1.8, 2, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BigHands:frame")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1.3, 1.4, 1.5, 1.6, 1.9, 2, 2.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [54, 55, 56, 57, 58, 59, 60]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BigHands")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.3, 2.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
+}]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("PlatformHandDislocator/PlatformHand")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_hv4i0"]
+resource_name = "SmashFollowUp"
+length = 1.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [68, 69, 70, 71, 72, 73, 74, 75]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -342,15 +1643,158 @@ tracks/1/path = NodePath("BigHands:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0.4, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [35, 36, 37, 38, 39, 40, 43, 44, 45, 46, 47, 48, 49, 50, 51, 2]
+"values": [26, 28, 29, 30, 31]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackComponents/Punch")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.1, 1.2, 1.3),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"generateAttackID"
+}, {
+"args": [],
+"method": &"enable"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis:position:x")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0, 0, 10, -0.6, 0, 0.25, 0, 10, -0.25, 0, 0, 0, -20, -0.5, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 1, 1.1, 1.6)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis:position:y")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis/Follow")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"setStartingPos"
+}, {
+"args": [true],
+"method": &"setActive"
+}, {
+"args": [false],
+"method": &"setActive"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("BigHands")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.4, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_s0lar"]
+resource_name = "StandUp"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18, 19, 20]
+}
+
+[sub_resource type="Animation" id="Animation_s5vod"]
+resource_name = "Stun"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlatformHandDislocator/ModifyPositionOfThis/Follow")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [false],
+"method": &"setActive"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"fadeOut"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uvjcq"]
 _data = {
 "Grab": SubResource("Animation_5drye"),
+"GrabHit": SubResource("Animation_mfyk5"),
+"GrabMissed": SubResource("Animation_2ck0o"),
 "GroundSlide": SubResource("Animation_b0r33"),
 "GroundSlideAttack": SubResource("Animation_3dlop"),
 "Idle": SubResource("Animation_0yyjr"),
@@ -358,11 +1802,15 @@ _data = {
 "RESET": SubResource("Animation_61j7s"),
 "Run": SubResource("Animation_u44pk"),
 "Scoop": SubResource("Animation_xx0dx"),
+"ShellHack": SubResource("Animation_m07gs"),
+"ShellIdle": SubResource("Animation_i21i4"),
+"Shellify": SubResource("Animation_8iu2m"),
 "Slide": SubResource("Animation_amuoc"),
 "SlideAttack": SubResource("Animation_8bysu"),
 "Smash": SubResource("Animation_51rol"),
 "SmashFollowUp": SubResource("Animation_hv4i0"),
-"StandUp": SubResource("Animation_s0lar")
+"StandUp": SubResource("Animation_s0lar"),
+"Stun": SubResource("Animation_s5vod")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q44m3"]
@@ -372,6 +1820,13 @@ size = Vector2(2, 7)
 size = Vector2(45, 9)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8eyo7"]
+radius = 5.52268
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wyhx"]
+size = Vector2(42, 5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_siuaa"]
+radius = 23.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_taq5p"]
 seed = 153
@@ -391,11 +1846,23 @@ shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
 shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
+[sub_resource type="Gradient" id="Gradient_tnghu"]
+offsets = PackedFloat32Array(0.862069, 1)
+colors = PackedColorArray(0.392157, 0.392157, 0.392157, 0.584314, 0.392157, 0.392157, 0.392157, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_vouq4"]
+gradient = SubResource("Gradient_tnghu")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
 [node name="AspectOfCreation" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 8
+script = ExtResource("1_kgh35")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_fbxk7")
 
@@ -409,28 +1876,85 @@ frame = 1
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
-[node name="BigHands" type="Sprite2D" parent="."]
+[node name="BigHands" type="Sprite2D" parent="." node_paths=PackedStringArray("spriteToMirror")]
+texture_filter = 1
+material = SubResource("ShaderMaterial_6nl4f")
 position = Vector2(0, -10)
 texture = ExtResource("3_bcxbt")
-hframes = 106
+hframes = 111
 frame = 2
+script = ExtResource("4_r6kx5")
+spriteToMirror = NodePath("../HumanSprite")
 
-[node name="SpriteDirectorComponent" parent="BigHands" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_ey2r6")]
-spriteToFlip = NodePath("..")
-velocityToCheck = NodePath("../..")
+[node name="BigHandsAnimator" type="AnimationPlayer" parent="BigHands"]
+libraries = {
+"": SubResource("AnimationLibrary_6xaxv")
+}
+speed_scale = 2.0
 
-[node name="SmallHands" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(4, -3)
+[node name="PlatformHandDislocator" type="Node" parent="."]
+
+[node name="PlatformHand" type="Sprite2D" parent="PlatformHandDislocator" node_paths=PackedStringArray("spriteToMirror", "parrent")]
+texture_filter = 1
+material = SubResource("ShaderMaterial_i0k4h")
+position = Vector2(-21, -18)
+rotation = 1.5708
+scale = Vector2(1, -1)
+texture = ExtResource("3_bcxbt")
+hframes = 111
+frame = 35
+script = ExtResource("5_drcs8")
+spriteToMirror = NodePath("../../HumanSprite")
+parrent = NodePath("../..")
+
+[node name="PlatforHandAnimator" type="AnimationPlayer" parent="PlatformHandDislocator/PlatformHand"]
+libraries = {
+"": SubResource("AnimationLibrary_cdsc7")
+}
+
+[node name="ModifyPositionOfThis" type="Node2D" parent="PlatformHandDislocator"]
+
+[node name="Follow" type="Marker2D" parent="PlatformHandDislocator/ModifyPositionOfThis" node_paths=PackedStringArray("parent", "sprite")]
+script = ExtResource("6_4dtn0")
+parent = NodePath("../../..")
+sprite = NodePath("../../../HumanSprite")
+
+[node name="SmallHands" type="Node2D" parent="." node_paths=PackedStringArray("mirror")]
+script = ExtResource("10_ld1ej")
+mirror = NodePath("../HumanSprite")
+
+[node name="SmallHand1" type="Sprite2D" parent="SmallHands"]
+position = Vector2(-4, -3)
 texture = ExtResource("4_6ljje")
 hframes = 10
 
-[node name="SpriteDirectorComponent" parent="SmallHands" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_ey2r6")]
-spriteToFlip = NodePath("..")
-velocityToCheck = NodePath("../..")
+[node name="SmallHand2" type="Sprite2D" parent="SmallHands"]
+modulate = Color(0.784314, 0.705882, 0.627451, 1)
+position = Vector2(4, -3)
+texture = ExtResource("4_6ljje")
+flip_h = true
+hframes = 10
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent")]
+[node name="HandsAttack" parent="SmallHands" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_72uol")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SmallHands/HandsAttack"]
+visible = false
+shape = SubResource("CircleShape2D_7agxp")
+
+[node name="SmallHandAnimator" type="AnimationPlayer" parent="SmallHands"]
+root_node = NodePath("../SmallHand1")
+libraries = {
+"": SubResource("AnimationLibrary_aqhyd")
+}
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("leftBoundry", "rightBoundry", "initial_state", "hackedState", "parent")]
 script = ExtResource("5_4wqwk")
+leftBoundry = NodePath("../Raycasts/LeftBoundry")
+rightBoundry = NodePath("../Raycasts/RightBoundry")
 initial_state = NodePath("Idle")
 hackedState = NodePath("Hacked")
 parent = NodePath("..")
@@ -445,23 +1969,23 @@ animationName = "Idle"
 [node name="RunTowardsPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "movement", "spriteDirector", "animator")]
 script = ExtResource("7_eiov4")
 sm = NodePath("..")
-lengthOfState = 3.6
 speed = 1440.0
 movement = NodePath("../../GeneralComponents/MovementComponent")
 spriteDirector = NodePath("../../HumanSprite/SpriteDirectorComponent")
 animator = NodePath("../../HumanAnimator")
 animationName = "Run"
 
-[node name="RunAwayFromPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "movement", "spriteDirector", "animator")]
+[node name="RunAwayFromPlayer" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "raycast", "movement", "spriteDirector", "animator")]
 script = ExtResource("8_m0glk")
 sm = NodePath("..")
+raycast = NodePath("../../Raycasts/RunAwayRaycast")
 speed = 1440.0
 movement = NodePath("../../GeneralComponents/MovementComponent")
 spriteDirector = NodePath("../../HumanSprite/SpriteDirectorComponent")
 animator = NodePath("../../HumanAnimator")
 animationName = "Run"
 
-[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent")]
+[node name="Punch" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
 script = ExtResource("9_vpijg")
 attackLength = 1.4
 animationName = "Punch"
@@ -470,20 +1994,28 @@ parryState = NodePath("../Stun")
 animator = NodePath("../../HumanAnimator")
 nodeToFlip = NodePath("../../AttackComponents/Punch")
 parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0.7, 0.8, 240)])
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.4)])
 
-[node name="Scoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent")]
-script = ExtResource("9_vpijg")
+[node name="Scoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("projectileDirectionNode", "agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+script = ExtResource("17_xpeca")
+projectileScene = ExtResource("18_bimxw")
+projectileDirectionNode = NodePath("../../AttackComponents/Scoop")
+distanceAwayFromParent = 6.0
+offset = Vector2(0, 4)
 attackLength = 1.8
 animationName = "Scoop"
 agroState = NodePath("../Idle")
 parryState = NodePath("../Stun")
 animator = NodePath("../../HumanAnimator")
+attackComponents = [NodePath("../../AttackComponents/Scoop")]
 nodeToFlip = NodePath("../../AttackComponents/Scoop")
 parent = NodePath("../..")
-dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.8)])
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0, 0, 0)])
 
-[node name="SlideAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+[node name="RunningPunch" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
 script = ExtResource("9_vpijg")
 attackLength = 1.4
 animationName = "SlideAttack"
@@ -497,7 +2029,7 @@ movement = NodePath("../../GeneralComponents/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0, 0.15, 360), Vector3(0.15, 0.3, 180), Vector3(0.3, 0.4, 90), Vector3(0.4, 0.5, 30)])
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.4)])
 
-[node name="GroundSlideAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+[node name="RunningScoop" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
 script = ExtResource("9_vpijg")
 attackLength = 1.6
 animationName = "GroundSlideAttack"
@@ -509,41 +2041,137 @@ nodeToFlip = NodePath("../../AttackComponents/Scoop")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(0, 0.2, 360), Vector3(0.2, 0.4, 180), Vector3(0.4, 0.6, 90), Vector3(0.6, 0.8, 60)])
-dontReactToParryTimes = Array[Vector2]([Vector2(0, 2)])
 
-[node name="Grab" type="Node" parent="StateMachine" node_paths=PackedStringArray("onPogoState", "grabMissedState", "healthComponent", "stateMachine")]
+[node name="Grab" type="Node" parent="StateMachine" node_paths=PackedStringArray("onPogoState", "grabHitState", "grabMissedState", "attackComponent", "healthComponent", "stateMachine", "agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
 script = ExtResource("10_l336j")
 onPogoState = NodePath("../Stun")
-grabMissedState = NodePath("../Idle")
+grabHitState = NodePath("../GrabSucessfull")
+grabMissedState = NodePath("../GrabMissed")
+attackComponent = NodePath("../../AttackComponents/Grab")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 stateMachine = NodePath("..")
+attackLength = 1.3
+animationName = "Grab"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+attackComponents = [NodePath("../../AttackComponents/Grab")]
+nodeToFlip = NodePath("../../AttackComponents/Grab")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = Array[Vector3]([Vector3(0, 0.2, -120), Vector3(0.2, 0.8, -60), Vector3(1.2, 1.3, 240)])
 
-[node name="GrabSucessfull" type="Node" parent="StateMachine"]
+[node name="GrabSucessfull" type="Node" parent="StateMachine" node_paths=PackedStringArray("handSprite", "grabMarker", "animator")]
+script = ExtResource("11_h6bdr")
+handSprite = NodePath("../../BigHands")
+grabMarker = NodePath("../../AttackComponents/Grab/GrabMarker")
+animator = NodePath("../../HumanAnimator")
+animationName = "GrabHit"
+animationLength = 2.0
 
-[node name="Slam" type="Node" parent="StateMachine"]
+[node name="GrabMissed" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
+script = ExtResource("8_tak1p")
+nextState = NodePath("../Idle")
+length = 0.9
+animator = NodePath("../../HumanAnimator")
+animationName = "GrabMissed"
 
-[node name="SlamFollowUp" type="Node" parent="StateMachine"]
+[node name="Slam" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+script = ExtResource("15_pmvl8")
+attackLength = 2.2
+animationName = "Smash"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+nodeToFlip = NodePath("../../AttackComponents/Smash")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+movementPeriods = null
+dontReactToParryTimes = Array[Vector2]([Vector2(0, 2.2)])
+updateWhileHacked = null
 
-[node name="Hacked" type="Node" parent="StateMachine"]
+[node name="SlamFollowUp" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "nodeToFlip", "parent", "movement")]
+script = ExtResource("9_vpijg")
+attackLength = 1.8
+animationName = "SmashFollowUp"
+agroState = NodePath("../Idle")
+parryState = NodePath("../Stun")
+animator = NodePath("../../HumanAnimator")
+attackComponents = [NodePath("../../AttackComponents/Punch")]
+nodeToFlip = NodePath("../../AttackComponents/Punch")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+
+[node name="Shellify" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
+script = ExtResource("8_tak1p")
+nextState = NodePath("../Shell")
+length = 1.8
+animator = NodePath("../../HumanAnimator")
+animationName = "Shellify"
+
+[node name="Shell" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
+script = ExtResource("8_tak1p")
+nextState = NodePath(".")
+length = 2.0
+animator = NodePath("../../HumanAnimator")
+animationName = "ShellIdle"
+
+[node name="Evicerate" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "biDirectionalKbCom")]
+script = ExtResource("12_4nq6f")
+parryLength = 1.0
+animationName = "Stun"
+knockback = 150.0
+nextState = NodePath("../Idle")
+parrent = NodePath("../..")
+animator = NodePath("../../HumanAnimator")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+biDirectionalKbCom = NodePath("../../GeneralComponents/BidirectionalKnockbackComponent")
+
+[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
 script = ExtResource("11_wm0p2")
+stateMachine = NodePath("..")
+parent = NodePath("../..")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+nextState = NodePath("../Idle")
+nextStateOnHack = NodePath("../Idle")
+leftGrabPos = NodePath("Left")
+rightGrabPos = NodePath("Right")
+animationName = "Stun"
+animationPlayer = NodePath("../../HumanAnimator")
+spriteDirectorComponent = NodePath("../../HumanSprite/SpriteDirectorComponent")
+updateWhileHacked = true
+
+[node name="Left" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(-1, 2)
+
+[node name="Right" type="Marker2D" parent="StateMachine/Hacked"]
+position = Vector2(1, 2)
 
 [node name="Dead" type="Node" parent="StateMachine"]
 script = ExtResource("12_w0pqd")
 
-[node name="Stun" type="Node" parent="StateMachine"]
+[node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "biDirectionalKbCom", "sprite")]
 script = ExtResource("12_4nq6f")
+parryLength = 0.5
+animationName = "Stun"
+knockback = 150.0
+nextState = NodePath("../Idle")
+parrent = NodePath("../..")
+animator = NodePath("../../HumanAnimator")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+biDirectionalKbCom = NodePath("../../GeneralComponents/BidirectionalKnockbackComponent")
+knockbackBasedOnDir = true
+sprite = NodePath("../../HumanSprite")
 
 [node name="HumanAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_uvjcq")
 }
 
-[node name="SmallHandAnimator" type="AnimationPlayer" parent="."]
-
 [node name="GeneralComponents" type="Node2D" parent="."]
 
 [node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_6hc4i")]
-MAX_HEALTH = 100.0
+MAX_HEALTH = 10000.0
 
 [node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_jma2g")]
 healthComponent = NodePath("../HealthComponent")
@@ -552,9 +2180,13 @@ stateToSwitchTo = NodePath("../../StateMachine/Dead")
 
 [node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_nclt3")]
 parent = NodePath("../..")
-gravity = 10.0
+gravity = 3.0
 
 [node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_vpvb8")]
+parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="BidirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("28_l7t4h")]
 parent = NodePath("../..")
 movement = NodePath("../MovementComponent")
 
@@ -568,23 +2200,28 @@ visible = false
 position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_q44m3")
 
-[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_ik1sq")]
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("8_ik1sq")]
 parent = NodePath("../..")
 follow = NodePath("../EnemyHealthbarMarker")
 healthComponent = NodePath("../HealthComponent")
+hackCommands = [NodePath("EvicerateHack")]
 stateMachine = NodePath("../../StateMachine")
 
+[node name="EvicerateHack" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("parent", "stateMachine", "stateToSwitchTo", "deathComponent", "healthComponent") instance=ExtResource("30_5ko11")]
+parent = NodePath("../../..")
+stateMachine = NodePath("../../../StateMachine")
+stateToSwitchTo = NodePath("../../../StateMachine/Evicerate")
+deathComponent = NodePath("../../DeathComponent")
+cost = 9.0
+hackName = "eviscerate"
+healthComponent = NodePath("../../HealthComponent")
+
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
-
-[node name="Proximities" type="Node2D" parent="."]
-
-[node name="ProximityArea" parent="Proximities" instance=ExtResource("9_cnexl")]
-collision_mask = 4
 
 [node name="AttackComponents" type="Node2D" parent="."]
 
 [node name="EnemyParriedComponent" parent="AttackComponents" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("10_hx2da")]
-attackComponents = [NodePath("../Punch")]
+attackComponents = [NodePath("../Punch"), NodePath("../Scoop"), NodePath("../Grab"), NodePath("../Smash"), NodePath("../../SmallHands/HandsAttack")]
 stateMachine = NodePath("../../StateMachine")
 
 [node name="Punch" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_72uol")]
@@ -607,9 +2244,39 @@ healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 attack_damage = 2.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Scoop"]
-visible = false
-position = Vector2(-5.5, -0.5)
+position = Vector2(-10, 1)
 shape = SubResource("CircleShape2D_8eyo7")
+
+[node name="Grab" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent", "grabNode") instance=ExtResource("11_72uol")]
+collision_mask = 4
+attackName = "CreationScoop"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
+isGrabAttack = true
+grabNode = NodePath("GrabComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Grab"]
+visible = false
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_8wyhx")
+
+[node name="GrabComponent" parent="AttackComponents/Grab" node_paths=PackedStringArray("nodeToFollow") instance=ExtResource("24_u82q3")]
+nodeToFollow = NodePath("../GrabMarker")
+
+[node name="GrabMarker" type="Marker2D" parent="AttackComponents/Grab"]
+position = Vector2(-20, 0)
+
+[node name="Smash" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_72uol")]
+collision_mask = 4
+attackName = "CreationScoop"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Smash"]
+visible = false
+shape = SubResource("CircleShape2D_siuaa")
 
 [node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_nxe0c")]
 healthComponent = NodePath("../GeneralComponents/HealthComponent")
@@ -620,3 +2287,30 @@ knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComp
 material = SubResource("ShaderMaterial_brnhc")
 
 [node name="Sounds" type="Node2D" parent="."]
+
+[node name="VisualEffects" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="VisualEffects"]
+visible = false
+texture = SubResource("GradientTexture2D_vouq4")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="RunAwayRaycast" type="RayCast2D" parent="Raycasts"]
+visible = false
+target_position = Vector2(0, 0)
+
+[node name="LeftBoundry" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -2)
+target_position = Vector2(-22, 0)
+
+[node name="RightBoundry" type="RayCast2D" parent="Raycasts"]
+position = Vector2(0, -2)
+target_position = Vector2(22, 0)
+
+[connection signal="animation_finished" from="SmallHands/SmallHandAnimator" to="SmallHands" method="_on_small_hand_animator_animation_finished"]
+[connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]
+[connection signal="executed" from="GeneralComponents/EnemyHeathbar/EvicerateHack" to="." method="_on_evicerate_hack_executed"]
+[connection signal="executed" from="GeneralComponents/EnemyHeathbar/EvicerateHack" to="SmallHands" method="_on_evicerate_hack_executed"]
+[connection signal="gotParried" from="AttackComponents/Punch" to="." method="_on_punch_got_parried"]
+[connection signal="gotParried" from="AttackComponents/Smash" to="." method="_on_smash_got_parried"]

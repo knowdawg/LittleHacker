@@ -23,6 +23,7 @@ func isExecutable():
 	return (healthComponent.get_weakness() >= cost)
 
 func execute():
+	healthComponent.set_weakness(healthComponent.get_weakness() - cost)
 	executed.emit()
 	executeHack()
 

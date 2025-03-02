@@ -1,0 +1,212 @@
+[gd_scene load_steps=14 format=3 uid="uid://da5t61nmf43up"]
+
+[ext_resource type="Script" path="res://Objects/Projectiles/StoneMonolith/stone_monolith.gd" id="1_fmw80"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="1_oob1e"]
+[ext_resource type="Texture2D" uid="uid://sedpri7je1k5" path="res://Assets/Sprites/Projectiles/AspectOfCreationScoopProjectile.png" id="2_1gc8l"]
+[ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="3_agm55"]
+[ext_resource type="Material" uid="uid://i6j2egx4otxu" path="res://Assets/Shaders/ParticleEffects/Sparks.tres" id="4_1yiro"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_e0pl6"]
+size = Vector2(4, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v6dlq"]
+size = Vector2(4, 26)
+
+[sub_resource type="Animation" id="Animation_0r40c"]
+resource_name = "Delete"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [5, 6, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_8lbe2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_ts7sv"]
+resource_name = "Rise"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D2:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_niy4e"]
+_data = {
+"Delete": SubResource("Animation_0r40c"),
+"RESET": SubResource("Animation_8lbe2"),
+"Rise": SubResource("Animation_ts7sv")
+}
+
+[sub_resource type="Gradient" id="Gradient_4ffys"]
+offsets = PackedFloat32Array(0.178174, 0.242762, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.356347, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_wmns3"]
+gradient = SubResource("Gradient_4ffys")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[node name="StoneMonolith" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_fmw80")
+speed = 120.0
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("1_oob1e")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+disabled = false
+attack_damage = 2.0
+knockback_force = 50.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+position = Vector2(0, -15)
+shape = SubResource("RectangleShape2D_e0pl6")
+
+[node name="EnvirementDetector" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnvirementDetector"]
+position = Vector2(0, -14)
+shape = SubResource("RectangleShape2D_v6dlq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -15)
+texture = ExtResource("2_1gc8l")
+hframes = 8
+
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("3_agm55")]
+follow = NodePath("../Sprite2D")
+sprite = NodePath("../Sprite2D")
+modulate = Color(1, 1, 1, 0.462745)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_niy4e")
+}
+speed_scale = 0.5
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+position = Vector2(-2, 0)
+amount = 32
+process_material = ExtResource("4_1yiro")
+texture = SubResource("GradientTexture2D_wmns3")
+lifetime = 0.4
+explosiveness = 0.2
+trail_enabled = true
+
+[node name="GPUParticles2D2" type="GPUParticles2D" parent="."]
+position = Vector2(2, 0)
+amount = 32
+process_material = ExtResource("4_1yiro")
+texture = SubResource("GradientTexture2D_wmns3")
+lifetime = 0.4
+explosiveness = 0.2
+trail_enabled = true
+
+[connection signal="gotParried" from="AttackComponent" to="." method="_on_attack_component_got_parried"]
+[connection signal="body_entered" from="EnvirementDetector" to="." method="_on_envirement_detector_body_entered"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

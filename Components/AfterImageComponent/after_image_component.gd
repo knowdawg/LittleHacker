@@ -1,10 +1,10 @@
 extends Node
 
 @export var follow : Node2D
-@export var texture : Texture
+@export var sprite : Sprite2D
 @export var frequency : float = 0.01
 @export var fadeTime : float = 0.1
-@export var flipH : float = false
+@export var modulate : Color = Color(1.0, 1.0, 1.0, 1.0)
 
 var active = true
 
@@ -20,9 +20,15 @@ func _process(delta: float) -> void:
 		if t > frequency:
 			t -= frequency
 			var s : Sprite2D = Sprite2D.new()
-			s.texture = texture
+			s.texture = sprite.texture
 			s.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
-			s.flip_h = flipH
+			s.flip_h = sprite.flip_h
+			s.hframes = sprite.hframes
+			s.vframes = sprite.vframes
+			s.frame = sprite.frame
+			s.scale = sprite.scale
+			
+			s.modulate = modulate
 			add_child(s)
 			s.global_position = follow.global_position
 			var tw = create_tween()

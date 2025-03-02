@@ -23,5 +23,8 @@ func onPogo(attack : Attack):
 			healthComponent.set_weakness(healthComponent.get_weakness() + 3)
 			trasitioned.emit(self, onPogoState.name)
 
-func exit(_newState):
+func exit(newState : State):
 	attackComponent.call_deferred("disable")
+	if Game.player.stateMachine.current_state is PlayerGrabbed:
+		if newState.name != grabHitState.name:
+			attackComponent.grabNode.setActive(false)

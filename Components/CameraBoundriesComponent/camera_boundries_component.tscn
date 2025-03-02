@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0rw13dj3fjac"]
+
+[ext_resource type="Script" path="res://Components/CameraBoundriesComponent/camera_boundries_component.gd" id="1_ukfda"]
+
+[node name="CameraBoundriesComponent" type="Polygon2D"]
+color = Color(1, 1, 1, 0.196078)
+script = ExtResource("1_ukfda")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 256
+collision_mask = 0
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]

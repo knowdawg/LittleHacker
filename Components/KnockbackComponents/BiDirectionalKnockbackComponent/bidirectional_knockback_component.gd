@@ -42,3 +42,15 @@ func calculateKnockback(attack : Attack):
 			movement.applyForce(dirRight, attack.knockback_force)
 		else:
 			printerr("Parent Does Not Have Required Functions To Utilize Bi Directional Knockback")
+
+func returnVecFromTwoObjects(obj1, obj2):
+	var vec : Vector2 = obj1.global_position - obj2.global_position
+	vec = vec.normalized()
+	
+	var disLeft = vec.distance_to(dirLeft)
+	var disRight = vec.distance_to(dirRight)
+	
+	if disLeft < disRight:
+		return dirLeft
+	else:
+		return dirRight

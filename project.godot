@@ -37,7 +37,7 @@ mouse_cursor/custom_image="res://Assets/Sprites/UI/Mouse.png"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/parallax2d_preview/plugin.cfg")
+enabled=PackedStringArray("res://addons/parallax2d_preview/plugin.cfg", "res://addons/script-ide/plugin.cfg")
 
 [input]
 
@@ -128,6 +128,7 @@ Interact={
 2d_physics/layer_6="PreventPlayer"
 2d_physics/layer_7="LevelTransitions"
 2d_physics/layer_8="Interactables"
+2d_physics/layer_9="CameraBounds"
 
 [physics]
 

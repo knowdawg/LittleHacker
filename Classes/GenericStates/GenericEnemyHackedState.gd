@@ -37,14 +37,13 @@ func update(_delta):
 		var offset = Vector2(3, 0)
 		if dir == -1:
 			offset *= -1
-			offset += leftGrabPos.position * Vector2(0, 1.0) + Vector2(6, 0)
+			offset += leftGrabPos.position + Vector2(6, 0)
 		else:
-			offset += rightGrabPos.position * Vector2(0, 1.0) + Vector2(-6, 0)
+			offset += rightGrabPos.position + Vector2(-6, 0)
 		
 		
 		var targetPos = Game.player.global_position + offset
 		var pos = lerp(parent.global_position, targetPos, 0.5)
-		
 		Game.player.position = pos
 	
 	if Game.hackedEnemy != parent:

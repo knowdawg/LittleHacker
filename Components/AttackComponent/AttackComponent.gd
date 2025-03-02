@@ -88,6 +88,8 @@ func enable():
 func parried(attack : Attack):
 	if hurtboxSignal.is_connected(parried):
 		hurtboxSignal.disconnect(parried)
+	if healthComponent:
+		healthComponent.set_weakness(healthComponent.get_weakness() + 3)
 	call_deferred("disable")
 	gotParried.emit(attack)
 

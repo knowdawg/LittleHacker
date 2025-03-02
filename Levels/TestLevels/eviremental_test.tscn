@@ -75,7 +75,7 @@ sdf_oversize = 2
 sdf_scale = 2
 size = Vector2i(1280, 720)
 script = ExtResource("1_qg0pi")
-startingScene = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
+startingScene = "res://Levels/TestLevels/level_for_testing.tscn"
 fadeAnimator = NodePath("AnimationPlayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LittleLevelViewport"]

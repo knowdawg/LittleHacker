@@ -7,6 +7,8 @@ class_name Player
 @export var hurtboxComponent : HurtboxComponent
 @export var stateMachine : PlayerStateMachine
 
+@export var screenEffects : ScreenEffects
+
 const SPEED = 70.0 * 0.45
 const JUMP_VELOCITY = -145.0 * 0.5
 
@@ -92,6 +94,13 @@ func _process(_delta: float) -> void:
 	var snapDis = (camPos - floor(camPos) - Vector2(0.0, 1.0)) / Vector2(128, 72)
 	RenderingServer.global_shader_parameter_set("CameraSnapDistance", snapDis)
 	
+	var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
+	if p:
+		$PlayerCamera.limit_left = p.leftLimit
+		$PlayerCamera.limit_right = p.rightLimit
+		$PlayerCamera.limit_bottom = p.downLimit
+		$PlayerCamera.limit_top = p.upLimit
+		#print(p.downLimit)
 
 func _ready():
 	$HealthComponent.grabbed.connect(grabbed)
@@ -164,7 +173,7 @@ func grabbed(attack : Attack):
 	stateMachine.switchStates("Grabbed")
 
 func releaseGrab():
-	hurtboxComponent.enable()
+	hurtboxComponent.call_deferred("enable")
 	rotation = 0
 	stateMachine.switchStates("Idle")
 

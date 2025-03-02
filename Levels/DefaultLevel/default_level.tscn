@@ -13,8 +13,10 @@ resource_local_to_scene = true
 shader = ExtResource("3_qjk1c")
 shader_parameter/brightness = 1.0
 
-[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
 script = ExtResource("1_sahbk")
+projectileSpawnNode = NodePath("Proectiles")
+enemySpawnLocation = NodePath("Enemies")
 doorToSpawnPlayerOnFailure = NodePath("LevelTransition")
 doors = [NodePath("LevelTransition")]
 whereToAddPlayer = NodePath("PlayerParrent")
@@ -37,6 +39,8 @@ texture = SubResource("ViewportTexture_f40ai")
 [node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="Proectiles" type="Node2D" parent="."]
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_w4aep")]
 material = SubResource("ShaderMaterial_3bpdn")

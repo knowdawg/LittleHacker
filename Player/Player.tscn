@@ -1,4 +1,4 @@
-[gd_scene load_steps=208 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=209 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
@@ -2571,7 +2571,10 @@ border_width_bottom = 4
 border_color = Color(1, 1, 1, 1)
 corner_radius_top_right = 20
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite", "healthComponent", "hurtboxComponent", "stateMachine")]
+[sub_resource type="CircleShape2D" id="CircleShape2D_jfgjt"]
+radius = 3.0
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite", "healthComponent", "hurtboxComponent", "stateMachine", "screenEffects")]
 texture_filter = 1
 collision_layer = 4
 collision_mask = 35
@@ -2582,6 +2585,7 @@ weaponSprite = NodePath("WeaponDislocator/WeaponSprite")
 healthComponent = NodePath("HealthComponent")
 hurtboxComponent = NodePath("HurtboxComponent")
 stateMachine = NodePath("StateMachine")
+screenEffects = NodePath("MotionBlur")
 
 [node name="InteractableManager" type="Node2D" parent="." node_paths=PackedStringArray("prox")]
 script = ExtResource("2_rtdom")
@@ -3110,10 +3114,10 @@ libraries = {
 }
 
 [node name="Top" type="RichTextLabel" parent="HackUI"]
-offset_left = 2.84766
-offset_top = -6.10742
-offset_right = 102.848
-offset_bottom = 16.8926
+offset_left = 9.0
+offset_top = -8.5
+offset_right = 109.0
+offset_bottom = 14.5
 rotation = 0.0872665
 scale = Vector2(0.35, 0.35)
 theme_override_constants/outline_size = 3
@@ -3150,25 +3154,25 @@ trail_enabled = true
 trail_lifetime = 0.02
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
-offset_left = 2.84766
-offset_top = -4.36719
-offset_right = 102.848
-offset_bottom = 18.6328
+offset_left = 9.0
+offset_top = -3.0
+offset_right = 109.0
+offset_bottom = 20.0
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
-offset_left = 2.21484
+offset_left = 7.0
 offset_top = -7.0
-offset_right = 62.2148
+offset_right = 68.0
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)
 theme_override_constants/outline_size = 3
 theme_override_fonts/normal_font = ExtResource("35_4vsvx")
 bbcode_enabled = true
-text = "Testing"
+text = "eviscerate"
 fit_content = true
 scroll_active = false
 script = ExtResource("38_o42eg")
@@ -3484,6 +3488,12 @@ theme_override_styles/fill = SubResource("StyleBoxFlat_62h5m")
 value = 50.0
 script = ExtResource("54_l53i3")
 healthComponent = NodePath("../../HealthComponent")
+
+[node name="CameraBounds" parent="." instance=ExtResource("2_67e55")]
+collision_mask = 256
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds"]
+shape = SubResource("CircleShape2D_jfgjt")
 
 [node name="PlayerCamera" type="Camera2D" parent="."]
 zoom = Vector2(10, 10)
