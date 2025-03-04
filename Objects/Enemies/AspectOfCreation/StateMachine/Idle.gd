@@ -23,7 +23,7 @@ func update(_delta):
 	spriteDirector.lookAtPlayer()
 	
 	#nextStates.append("RunningScoop")
-	
+
 	if nextStates.size() != 0:
 		var nextState = nextStates.pop_front()
 		if sm.isLeftBoundryColliding() and sm.dirToPlayer == sm.DIRECTION.LEFT:

@@ -1,7 +1,8 @@
-[gd_scene load_steps=13 format=3 uid="uid://hwpgublexvag"]
+[gd_scene load_steps=14 format=3 uid="uid://hwpgublexvag"]
 
 [ext_resource type="Script" path="res://Objects/Hacks/EvicerateHack/evicerate_hack.gd" id="1_83agq"]
 [ext_resource type="Texture2D" uid="uid://c6vqsoi2ht3xn" path="res://Assets/Sprites/Effects/EvicerateEffect.png" id="2_a825p"]
+[ext_resource type="AudioStream" uid="uid://b1ma6vt5jmfsr" path="res://Assets/Audio/SoundEffects/Evicerate.wav" id="3_j7pwk"]
 
 [sub_resource type="Gradient" id="Gradient_wob85"]
 offsets = PackedFloat32Array(0, 0.524946, 1)
@@ -101,6 +102,18 @@ tracks/2/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_nu45r"]
 length = 0.001
@@ -123,6 +136,18 @@ tracks/1/path = NodePath("Node/Sprite2D/GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AudioStreamPlayer2D:playing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -163,3 +188,8 @@ trail_lifetime = 0.1
 libraries = {
 "": SubResource("AnimationLibrary_7uh3a")
 }
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_j7pwk")
+volume_db = 10.0
+bus = &"SoundEffects"

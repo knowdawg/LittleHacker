@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbeevbd4i8wgi"]
+
+[ext_resource type="Script" path="res://Components/GlobalPositionSetter/global_position_setter_component.gd" id="1_l2gss"]
+
+[node name="GlobalPositionSetterComponent" type="Node"]
+script = ExtResource("1_l2gss")
