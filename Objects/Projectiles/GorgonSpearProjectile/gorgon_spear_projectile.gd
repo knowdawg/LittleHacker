@@ -9,7 +9,8 @@ func drop() -> void:
 	
 
 func _process(_delta: float) -> void:
-	if Game.player.global_position > global_position:
-		$StateMachine/Throw.projDir = Vector2(-1.0, 0.0)
-	else:
-		$StateMachine/Throw.projDir = Vector2(1.0, 0.0)
+	if Game.player:
+		if Game.player.global_position > global_position:
+			$StateMachine/Throw.projDir = Vector2(-1.0, 0.0)
+		else:
+			$StateMachine/Throw.projDir = Vector2(1.0, 0.0)

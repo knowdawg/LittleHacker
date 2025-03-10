@@ -18,7 +18,8 @@ func _on_state_machine_state_switched(_prevState, newState : State) -> void:
 		hackedState.animationName = "ShellHack"
 		hackedState.nextState = $StateMachine/Shell
 		hackedState.nextStateOnHack = $StateMachine/Shell
-
+		
+		$GeneralComponents/EnemyHeathbar/LifeDrainHeal.disable()
 
 func _on_evicerate_hack_executed() -> void:
 	var hackedState : GenericEnemyHackedState = $StateMachine/Hacked
@@ -26,3 +27,8 @@ func _on_evicerate_hack_executed() -> void:
 	hackedState.nextState = $StateMachine/Idle
 	hackedState.nextStateOnHack = $StateMachine/Idle
 	$GeneralComponents/HealthComponent.locked = false
+	
+	$GeneralComponents/EnemyHeathbar/LifeDrainHeal.enable()
+
+func _on_health_component_on_lock_hit(_lockName : String) -> void:
+	$StateMachine.switchStates("Shellify")

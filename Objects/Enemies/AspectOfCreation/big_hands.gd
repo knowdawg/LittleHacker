@@ -7,8 +7,7 @@ func _process(_delta: float) -> void:
 
 
 func fadeIn():
-	if material.get_shader_parameter("progess") >= 0.01:
-		$BigHandsAnimator.play("FadeIn")
+	$BigHandsAnimator.play("FadeIn")
 
 func fadeOut():
 	if material.get_shader_parameter("progess") <= 0.99:

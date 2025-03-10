@@ -1,12 +1,12 @@
 [gd_scene load_steps=17 format=3 uid="uid://b35cqyb8nutv1"]
 
-[ext_resource type="Script" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/AbsorbHack/absorb_hack.gd" id="1_4digu"]
+[ext_resource type="Script" uid="uid://dhra7oog7mtao" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/AbsorbHack/absorb_hack.gd" id="1_4digu"]
 [ext_resource type="PackedScene" uid="uid://chkylrbd78k57" path="res://Components/VisualEffectComponents/trailComponent/trail_component.tscn" id="2_15web"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="3_ae78f"]
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="3_v3lrv"]
 
 [sub_resource type="Curve" id="Curve_c0bvo"]
-max_value = 2.0
+_limits = [0.0, 2.0, 0.0, 1.0]
 _data = [Vector2(0, 0.594723), 0.0, -2.80103, 0, 0, Vector2(0.502164, 0.0950227), 0.0, 0.0, 0, 0, Vector2(1, 2), 12.0203, 0.0, 0, 0]
 point_count = 3
 
@@ -82,8 +82,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bga8s"]
 _data = {
-"Hack": SubResource("Animation_u7koq"),
-"RESET": SubResource("Animation_oi7ji")
+&"Hack": SubResource("Animation_u7koq"),
+&"RESET": SubResource("Animation_oi7ji")
 }
 
 [sub_resource type="Gradient" id="Gradient_3il7m"]
@@ -93,7 +93,7 @@ colors = PackedColorArray(0.607843, 0, 1, 1, 0, 1, 0, 0)
 gradient = SubResource("Gradient_3il7m")
 
 [sub_resource type="Curve" id="Curve_00t63"]
-max_value = 3.0
+_limits = [0.0, 3.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
 point_count = 2
 

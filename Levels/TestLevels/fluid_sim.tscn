@@ -1,7 +1,7 @@
 [gd_scene load_steps=10 format=3 uid="uid://duuow1rs2d810"]
 
-[ext_resource type="Shader" path="res://Levels/TestLevels/SDFListenerFluidSim.gdshader" id="1_a5oeb"]
-[ext_resource type="Shader" path="res://Levels/TestLevels/fluid_sim_translator.gdshader" id="2_hyw44"]
+[ext_resource type="Shader" uid="uid://cnht8qb7mefa4" path="res://Levels/TestLevels/SDFListenerFluidSim.gdshader" id="1_a5oeb"]
+[ext_resource type="Shader" uid="uid://cptxcqjd6xobj" path="res://Levels/TestLevels/fluid_sim_translator.gdshader" id="2_hyw44"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_u6ktg"]
 viewport_path = NodePath("SubViewport")
@@ -135,11 +135,11 @@ viewport_path = NodePath("SDFListener")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_p8ird"]
 resource_local_to_scene = true
 shader = SubResource("Shader_eylr8")
+shader_parameter/prevFrame = SubResource("ViewportTexture_dbwyw")
 shader_parameter/resolution = Vector2(256, 256)
 shader_parameter/gravity = Vector2(0, 0)
 shader_parameter/ballX = 0.39
 shader_parameter/ballY = 0.39
-shader_parameter/prevFrame = SubResource("ViewportTexture_dbwyw")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sm4on"]
 shader = ExtResource("2_hyw44")

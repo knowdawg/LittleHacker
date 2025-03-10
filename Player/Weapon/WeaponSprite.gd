@@ -5,7 +5,6 @@ extends Sprite2D
 @export var audio2 : AudioStreamPlayer
 
 func _ready():
-	position = parent.global_position
 	Game.enterHackMode.connect(hide)
 	Game.exitHackMode.connect(show)
 
@@ -14,7 +13,6 @@ func _process(_delta: float) -> void:
 	
 	if Game.inHackMode == true:
 		visible = false
-	
 
 func moveTowardsPlayerNormal(delta):
 	position.x = lerp(position.x, parent.global_position.x, delta * 10)

@@ -2,25 +2,25 @@
 
 [ext_resource type="Texture2D" uid="uid://ncp1s1h3i2qx" path="res://Assets/Sprites/Enemies/HealthBuggy.png" id="1_84xmk"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_bij3q"]
-[ext_resource type="Script" path="res://Objects/Enemies/HealthBuggy/health_buggy.gd" id="1_wjrs8"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="2_4oyfi"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_d8emb"]
+[ext_resource type="Script" uid="uid://ddlpa5f642pq6" path="res://Objects/Enemies/HealthBuggy/health_buggy.gd" id="1_wjrs8"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="2_4oyfi"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_d8emb"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_yg48p"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_ouy0x"]
+[ext_resource type="Script" uid="uid://dls3iicgcrjht" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_ouy0x"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_wy52y"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericTransitionState.gd" id="5_5l7nj"]
-[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="5_knb2y"]
+[ext_resource type="Script" uid="uid://coulc1y5li7rb" path="res://Classes/GenericStates/GenericTransitionState.gd" id="5_5l7nj"]
+[ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="5_knb2y"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_ndkwi"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_68mk1"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_2qus0"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_00x40"]
-[ext_resource type="Script" path="res://Objects/Enemies/HealthBuggy/BuggyFalling.gd" id="8_3262r"]
+[ext_resource type="Script" uid="uid://b3rqfw8jd62fq" path="res://Objects/Enemies/HealthBuggy/BuggyFalling.gd" id="8_3262r"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_r0u0n"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_1dpqc"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_ovrrl"]
+[ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_ovrrl"]
 [ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="16_ld5dq"]
 [ext_resource type="AudioStream" uid="uid://uimyvn0lc2yq" path="res://Assets/Audio/SoundEffects/BugSquish.wav" id="17_2nbvx"]
-[ext_resource type="Script" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="17_kocyt"]
+[ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="17_kocyt"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0lc8p"]
 size = Vector2(2, 1)
@@ -127,10 +127,10 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v2cha"]
 _data = {
-"Crawl": SubResource("Animation_kvouj"),
-"Death": SubResource("Animation_oyqtb"),
-"RESET": SubResource("Animation_m1nen"),
-"Turn": SubResource("Animation_yebp2")
+&"Crawl": SubResource("Animation_kvouj"),
+&"Death": SubResource("Animation_oyqtb"),
+&"RESET": SubResource("Animation_m1nen"),
+&"Turn": SubResource("Animation_yebp2")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8c8sv"]
@@ -149,10 +149,10 @@ noise = SubResource("FastNoiseLite_np2k4")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c03nl"]
 resource_local_to_scene = true
 shader = ExtResource("14_ovrrl")
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_npy40"]
 size = Vector2(4, 1)

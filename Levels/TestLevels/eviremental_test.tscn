@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://dlfxfm3ebd5n7"]
 
-[ext_resource type="Script" path="res://Classes/SceneTransitionManager.gd" id="1_qg0pi"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="2_f6ogn"]
+[ext_resource type="Script" uid="uid://bbwat6b3fi8ft" path="res://Classes/SceneTransitionManager.gd" id="1_qg0pi"]
+[ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="2_f6ogn"]
 
 [sub_resource type="Animation" id="Animation_ib7ep"]
 resource_name = "FadeIn"
@@ -52,9 +52,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_v21w5"]
 _data = {
-"FadeIn": SubResource("Animation_ib7ep"),
-"FadeOut": SubResource("Animation_unr0c"),
-"RESET": SubResource("Animation_nn5c8")
+&"FadeIn": SubResource("Animation_ib7ep"),
+&"FadeOut": SubResource("Animation_unr0c"),
+&"RESET": SubResource("Animation_nn5c8")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
@@ -75,7 +75,6 @@ sdf_oversize = 2
 sdf_scale = 2
 size = Vector2i(1280, 720)
 script = ExtResource("1_qg0pi")
-startingScene = "res://Levels/TestLevels/level_for_testing.tscn"
 fadeAnimator = NodePath("AnimationPlayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="LittleLevelViewport"]
@@ -92,7 +91,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="LittleLevelViewport"]
 libraries = {
-"": SubResource("AnimationLibrary_v21w5")
+&"": SubResource("AnimationLibrary_v21w5")
 }
 
 [node name="DisplaySprite" type="Sprite2D" parent="."]

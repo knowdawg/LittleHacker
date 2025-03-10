@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=3 uid="uid://bi8lrccq5xytc"]
 
-[ext_resource type="Script" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/OverloadHack/overload_hack.gd" id="1_a33un"]
+[ext_resource type="Script" uid="uid://bkdnnbxl7nvic" path="res://Objects/Hacks/OldHacks(ToBeDeleted)/OverloadHack/overload_hack.gd" id="1_a33un"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_w4f8o"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="3_ea7u7"]
+[ext_resource type="Shader" uid="uid://0tvivqlcrpgl" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="3_ea7u7"]
 
 [sub_resource type="Gradient" id="Gradient_eo3u2"]
 interpolation_mode = 2
@@ -455,8 +455,8 @@ tracks/16/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_8xdik"]
 _data = {
-"Hack": SubResource("Animation_8gxmg"),
-"RESET": SubResource("Animation_rb5gk")
+&"Hack": SubResource("Animation_8gxmg"),
+&"RESET": SubResource("Animation_rb5gk")
 }
 
 [sub_resource type="Curve" id="Curve_13jpl"]
@@ -512,6 +512,7 @@ resource_local_to_scene = true
 shader = ExtResource("3_ea7u7")
 shader_parameter/progress = 0.0
 shader_parameter/intensity = 4.0
+shader_parameter/width = 0.0
 
 [sub_resource type="Gradient" id="Gradient_68lyi"]
 offsets = PackedFloat32Array(1)

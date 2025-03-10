@@ -19,11 +19,21 @@ func enter(_prevState):
 	animator.play(animationName)
 	randomize()
 
+var cornerAttack : int = 0
 func update(_delta):
 	spriteDirector.lookAtPlayer()
 	
 	#nextStates.append("RunningScoop")
-
+	
+	if nextStates.size() == 0:
+		if sm.isLeftBoundryColliding() or sm.isRightBoundryColliding():
+			cornerAttack += 1
+			if cornerAttack >= 2:
+				trasitioned.emit(self, "GoToCenter")
+				return
+		else:
+			cornerAttack = 0
+	
 	if nextStates.size() != 0:
 		var nextState = nextStates.pop_front()
 		if sm.isLeftBoundryColliding() and sm.dirToPlayer == sm.DIRECTION.LEFT:
@@ -52,7 +62,6 @@ func update(_delta):
 	
 	if rand == ATTACKS.PUNCH:
 		prevAttack = ATTACKS.PUNCH
-		print("punch")
 		if disToPlayer == DIS.FAR:
 			nextStates.append("RunningPunch")
 			return
@@ -65,7 +74,6 @@ func update(_delta):
 	
 	if rand == ATTACKS.SCOOP:
 		prevAttack = ATTACKS.SCOOP
-		print("Scoop")
 		if disToPlayer == DIS.FAR or disToPlayer == DIS.MEDIUM:
 			nextStates.append("Scoop")
 			return
@@ -78,7 +86,6 @@ func update(_delta):
 		
 	if rand == ATTACKS.SLAM:
 		prevAttack = ATTACKS.SLAM
-		print("slam")
 		if disToPlayer == DIS.FAR or disToPlayer == DIS.FARFAR:
 			nextStates.append("RunTowardsPlayer")
 			nextStates.append("Slam")
@@ -89,7 +96,6 @@ func update(_delta):
 		
 	if rand == ATTACKS.GRAB:
 		prevAttack = ATTACKS.GRAB
-		print("grab")
 		if disToPlayer == DIS.FAR or disToPlayer == DIS.FARFAR:
 			nextStates.append("RunTowardsPlayer")
 			nextStates.append("Grab")

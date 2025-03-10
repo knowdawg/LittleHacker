@@ -1,9 +1,9 @@
 [gd_scene load_steps=71 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Texture2D" uid="uid://b1h0biuscqvuk" path="res://Assets/Sprites/Enemies/CrystalThugEnemy.png" id="1_1mmkh"]
-[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
+[ext_resource type="Script" uid="uid://dxlohk1v41qh3" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_knvuj"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_ckk41"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_ckk41"]
 [ext_resource type="Texture2D" uid="uid://bxga5k3prfoi1" path="res://Assets/Sprites/Enemies/CrystalThugEnemyGreen.png" id="2_d1p4c"]
 [ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="2_ipifu"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_75l8a"]
@@ -11,38 +11,38 @@
 [ext_resource type="Texture2D" uid="uid://bfhn7wpr7k3fl" path="res://Assets/Sprites/Enemies/CrystalThugEnemyRed.png" id="3_t8cw1"]
 [ext_resource type="Texture2D" uid="uid://c6s3hu08egyrc" path="res://Assets/Sprites/Effects/CystalThugSlamEffecGreen.png" id="4_ixndy"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_vjnph"]
-[ext_resource type="Script" path="res://Classes/GenericStates/idle.gd" id="4_y8jj8"]
+[ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="4_y8jj8"]
 [ext_resource type="Texture2D" uid="uid://c74lqc64mi3hg" path="res://Assets/Sprites/Effects/CystalThugSlamEffectRed.png" id="5_120fj"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_oie0v"]
-[ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="5_t2ije"]
+[ext_resource type="Script" uid="uid://bedvqa6rx0ack" path="res://Classes/GenericStates/chase.gd" id="5_t2ije"]
 [ext_resource type="Texture2D" uid="uid://43ksgggchcci" path="res://Assets/Sprites/Effects/CrytalThugHeadShatter.png" id="5_upeyw"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="6_0vvo8"]
 [ext_resource type="Texture2D" uid="uid://2yy38h8kslvk" path="res://Assets/Sprites/Effects/CrytalThugHeadShatterGreen.png" id="6_2v0kd"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_fdldy"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="6_ym6rq"]
-[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/ResonateState.gd" id="7_320lq"]
-[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="7_q3md7"]
+[ext_resource type="Script" uid="uid://bkbvcn61p04ge" path="res://Classes/GenericStates/GenericAttackState.gd" id="6_ym6rq"]
+[ext_resource type="Script" uid="uid://buamad4r47m5o" path="res://Objects/Enemies/CrystalThug/ResonateState.gd" id="7_320lq"]
+[ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="7_q3md7"]
 [ext_resource type="Texture2D" uid="uid://dirbu52umahs5" path="res://Assets/Sprites/Effects/CrytalThugHeadShatterRed.png" id="7_tqy6o"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_ur35e"]
 [ext_resource type="PackedScene" uid="uid://b8t05k375ws5w" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.tscn" id="8_3hch0"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_dugy3"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="8_heh2r"]
-[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/wait.gd" id="9_c0kbi"]
+[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="8_heh2r"]
+[ext_resource type="Script" uid="uid://bp1fofedd0cas" path="res://Objects/Enemies/CrystalThug/wait.gd" id="9_c0kbi"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_irfdu"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="10_8sqji"]
+[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="10_8sqji"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_tifpm"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_1ay4a"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_88n8y"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="17_jdngx"]
-[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/death.gd" id="22_jr46o"]
+[ext_resource type="Script" uid="uid://dx8h1xyy21sy7" path="res://Objects/Enemies/CrystalThug/death.gd" id="22_jr46o"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="27_tgw8o"]
-[ext_resource type="PackedScene" uid="uid://q1v00o43xu5d" path="res://Objects/Hacks/LeechHack/Leech.tscn" id="29_t6cbv"]
+[ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="31_0jdrv"]
 [ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="37_yylqw"]
-[ext_resource type="Script" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="38_trsn2"]
+[ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="38_trsn2"]
 [ext_resource type="AudioStream" uid="uid://dlgdsvxfmuean" path="res://Assets/Audio/SoundEffects/ResonateExecuted.wav" id="40_1ueg4"]
 [ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="40_n5g6f"]
 [ext_resource type="AudioStream" uid="uid://jv4mcug84bxn" path="res://Assets/Audio/SoundEffects/RockHit.wav" id="42_ntu01"]
-[ext_resource type="Script" path="res://Classes/AudioScripts/onEventAudio.gd" id="43_x7ehq"]
+[ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="43_x7ehq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id2w4"]
 size = Vector2(2, 6)
@@ -81,8 +81,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qtsy3"]
 _data = {
-"RESET": SubResource("Animation_vnvpn"),
-"Shatter": SubResource("Animation_wqnno")
+&"RESET": SubResource("Animation_vnvpn"),
+&"Shatter": SubResource("Animation_wqnno")
 }
 
 [sub_resource type="Gradient" id="Gradient_u6nj4"]
@@ -378,14 +378,14 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j3vrm"]
 _data = {
-"Attack": SubResource("Animation_6571p"),
-"Death": SubResource("Animation_lo1io"),
-"Idle": SubResource("Animation_kuq1r"),
-"RESET": SubResource("Animation_v86cl"),
-"Resonate": SubResource("Animation_o30gf"),
-"Run": SubResource("Animation_yoliv"),
-"Stun": SubResource("Animation_t37ew"),
-"Wait": SubResource("Animation_dx0so")
+&"Attack": SubResource("Animation_6571p"),
+&"Death": SubResource("Animation_lo1io"),
+&"Idle": SubResource("Animation_kuq1r"),
+&"RESET": SubResource("Animation_v86cl"),
+&"Resonate": SubResource("Animation_o30gf"),
+&"Run": SubResource("Animation_yoliv"),
+&"Stun": SubResource("Animation_t37ew"),
+&"Wait": SubResource("Animation_dx0so")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xgyyc"]
@@ -437,8 +437,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o5otb"]
 _data = {
-"CrystalExplotion": SubResource("Animation_qinqg"),
-"RESET": SubResource("Animation_6ax11")
+&"CrystalExplotion": SubResource("Animation_qinqg"),
+&"RESET": SubResource("Animation_6ax11")
 }
 
 [sub_resource type="Gradient" id="Gradient_18u5e"]
@@ -475,7 +475,7 @@ frame = 3
 
 [node name="HeadShatterAnimator" type="AnimationPlayer" parent="HeadShatter"]
 libraries = {
-"": SubResource("AnimationLibrary_qtsy3")
+&"": SubResource("AnimationLibrary_qtsy3")
 }
 speed_scale = 2.0
 
@@ -610,7 +610,7 @@ hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_j3vrm")
+&"": SubResource("AnimationLibrary_j3vrm")
 }
 
 [node name="GeneralComponents" type="Node2D" parent="."]
@@ -644,7 +644,7 @@ shape = SubResource("RectangleShape2D_xgyyc")
 parent = NodePath("../..")
 follow = NodePath("../EnemyHealthbarMarker")
 healthComponent = NodePath("../HealthComponent")
-hackCommands = [NodePath("Resonance"), NodePath("HeadShatter"), NodePath("Leech")]
+hackCommands = [NodePath("Resonance"), NodePath("HeadShatter"), NodePath("LifeDrainHeal")]
 stateMachine = NodePath("../../StateMachine")
 
 [node name="Resonance" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("17_jdngx")]
@@ -669,14 +669,12 @@ cost = 1.0
 hackName = "Shatter"
 healthComponent = NodePath("../../HealthComponent")
 
-[node name="Leech" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("projectileLocation", "hurtboxComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("29_t6cbv")]
+[node name="LifeDrainHeal" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("parent", "healthComponent") instance=ExtResource("31_0jdrv")]
 visible = false
-width = 0.3
-projectileLocation = NodePath("../../..")
-hurtboxComponent = NodePath("../../HurtboxComponent")
-enemyHealthbar = NodePath("..")
+parent = NodePath("../../..")
+healthTick = 0.5
 cost = 6.0
-hackName = "Consume"
+hackName = "Lifedrain"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
@@ -732,7 +730,7 @@ frame = 3
 
 [node name="CrystalAnimator" type="AnimationPlayer" parent="AttackComponents/HeadSlam/CrystalExsplotionEffect"]
 libraries = {
-"": SubResource("AnimationLibrary_o5otb")
+&"": SubResource("AnimationLibrary_o5otb")
 }
 
 [node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_88n8y")]

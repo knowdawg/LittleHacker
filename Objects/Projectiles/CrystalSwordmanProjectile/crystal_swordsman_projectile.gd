@@ -3,7 +3,7 @@ extends Projectile
 
 func _ready() -> void:
 	$AttackComponent.gotParried.connect(parried)
-	$AfterImageComponent.flipH = flipH
+	#$AfterImageComponent.flipH = flipH
 	$Transform/Sprite2D.flip_h = flipH
 	
 	setFriendly(friendly)
@@ -28,7 +28,7 @@ func parried(_attack : Attack):
 	
 	dirVector *= -1
 	flipH = !flipH
-	$AfterImageComponent.flipH = flipH
+	#$AfterImageComponent.flipH = flipH
 	$Transform/Sprite2D.flip_h = flipH
 	$AttackComponent.knockbackVector = dirVector
 	$AnimationPlayer.play("RESET")

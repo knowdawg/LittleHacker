@@ -1,43 +1,43 @@
 [gd_scene load_steps=61 format=3 uid="uid://bae1ixxbndyw3"]
 
-[ext_resource type="Script" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.gd" id="1_42bp5"]
+[ext_resource type="Script" uid="uid://bgf5im1hmu456" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.gd" id="1_42bp5"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_jv6iw"]
 [ext_resource type="Texture2D" uid="uid://d4fa0nurno2cb" path="res://Assets/Sprites/Enemies/CrystalSwordsman.png" id="1_qffc4"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_f778v"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="3_8ujxu"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_f778v"]
+[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="3_8ujxu"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_pgxil"]
-[ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="4_01b8v"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_pjn6l"]
+[ext_resource type="Script" uid="uid://bedvqa6rx0ack" path="res://Classes/GenericStates/chase.gd" id="4_01b8v"]
+[ext_resource type="Script" uid="uid://dls3iicgcrjht" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_pjn6l"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_wb0l7"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="5_8yhaw"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_o6jpw"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_2u2j7"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_hkq3m"]
-[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="7_bqot1"]
+[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_hkq3m"]
+[ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="7_bqot1"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_f5i78"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_h8ghy"]
-[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="8_qy1tj"]
-[ext_resource type="Script" path="res://Objects/Enemies/CrystalThug/ResonateState.gd" id="9_am02e"]
+[ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="8_qy1tj"]
+[ext_resource type="Script" uid="uid://buamad4r47m5o" path="res://Objects/Enemies/CrystalThug/ResonateState.gd" id="9_am02e"]
 [ext_resource type="PackedScene" uid="uid://bkbus5a3gek53" path="res://Objects/Projectiles/CrystalSwordmanProjectile/CrystalSwordsmanProjectile.tscn" id="9_c0508"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_x5m13"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_38fvy"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_132dl"]
 [ext_resource type="PackedScene" uid="uid://b8t05k375ws5w" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.tscn" id="11_6857g"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_k0sx1"]
-[ext_resource type="Script" path="res://Classes/GenericStates/ProjectileAttack.gd" id="13_qf0pg"]
+[ext_resource type="Script" uid="uid://7hlrre6yed58" path="res://Classes/GenericStates/ProjectileAttack.gd" id="13_qf0pg"]
 [ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="18_gnyok"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="18_julgj"]
 [ext_resource type="AudioStream" uid="uid://dev2lreooucr8" path="res://Assets/Audio/SoundEffects/CrystalSwordsmanSlam.wav" id="27_g21vd"]
 [ext_resource type="AudioStream" uid="uid://nyelt3dkq2q7" path="res://Assets/Audio/SoundEffects/RockScrape.wav" id="28_vcsbj"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="29_6fkkr"]
 [ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="29_bcfdh"]
-[ext_resource type="Script" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="30_ffdyt"]
+[ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="30_ffdyt"]
 [ext_resource type="Material" uid="uid://i6j2egx4otxu" path="res://Assets/Shaders/ParticleEffects/Sparks.tres" id="30_mwxko"]
 [ext_resource type="AudioStream" uid="uid://jv4mcug84bxn" path="res://Assets/Audio/SoundEffects/RockHit.wav" id="35_47lyt"]
 [ext_resource type="AudioStream" uid="uid://dlgdsvxfmuean" path="res://Assets/Audio/SoundEffects/ResonateExecuted.wav" id="35_glcv1"]
 [ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="35_vwc5n"]
 [ext_resource type="AudioStream" uid="uid://c6anld0mwuprt" path="res://Assets/Audio/SoundEffects/GoreExsplosion.wav" id="36_54lns"]
-[ext_resource type="Script" path="res://Classes/AudioScripts/onEventAudio.gd" id="36_i0g28"]
+[ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="36_i0g28"]
 
 [sub_resource type="Gradient" id="Gradient_cmus3"]
 offsets = PackedFloat32Array(0, 0.99789)
@@ -462,14 +462,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_k56j0"]
 _data = {
-"Attack": SubResource("Animation_nqn66"),
-"Chase": SubResource("Animation_swo1x"),
-"Death": SubResource("Animation_xm447"),
-"Malfunction": SubResource("Animation_p1xec"),
-"Patroll": SubResource("Animation_osl32"),
-"RESET": SubResource("Animation_ad0d5"),
-"Resonate": SubResource("Animation_n6v0f"),
-"Stun": SubResource("Animation_bprxr")
+&"Attack": SubResource("Animation_nqn66"),
+&"Chase": SubResource("Animation_swo1x"),
+&"Death": SubResource("Animation_xm447"),
+&"Malfunction": SubResource("Animation_p1xec"),
+&"Patroll": SubResource("Animation_osl32"),
+&"RESET": SubResource("Animation_ad0d5"),
+&"Resonate": SubResource("Animation_n6v0f"),
+&"Stun": SubResource("Animation_bprxr")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_b5172"]

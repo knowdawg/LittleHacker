@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bqpjlvli0ayt1"]
 
-[ext_resource type="Script" path="res://Components/InteractableComponent/interactable_area.gd" id="1_3huk4"]
+[ext_resource type="Script" uid="uid://mxnyjh6s8lm" path="res://Components/InteractableComponent/interactable_area.gd" id="1_3huk4"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_otowd"]
 
 [node name="InteractableArea" type="Area2D"]

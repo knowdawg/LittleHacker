@@ -9,6 +9,8 @@ class_name HackCommandComponent
 
 signal executed
 
+var enabled : bool = true
+
 func setActive(isActive : bool):
 	label.text = hackName
 	label.position = points[points.size()-1] + Vector2(-5.0, 0.0)
@@ -20,12 +22,19 @@ func setActive(isActive : bool):
 		label.add_theme_color_override("font_color", "ffffff")
 
 func isExecutable():
-	return (healthComponent.get_weakness() >= cost)
+	return (healthComponent.get_weakness() >= cost and enabled)
 
 func execute():
-	healthComponent.set_weakness(healthComponent.get_weakness() - cost)
 	executed.emit()
+	healthComponent.set_weakness(healthComponent.get_weakness() - cost)
 	executeHack()
+
+#Used for manualy setting if a hack can be used
+func disable():
+	enabled = false
+
+func enable():
+	enabled = true
 
 func executeHack():
 	pass

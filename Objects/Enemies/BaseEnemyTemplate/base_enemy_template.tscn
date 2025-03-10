@@ -1,7 +1,7 @@
 [gd_scene load_steps=18 format=3 uid="uid://d2xajggy7rp0g"]
 
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_3vgge"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_shmk6"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_shmk6"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_0wnax"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_gdnil"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_n4pm4"]
@@ -13,7 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_5qsjw"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_ailv0"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_ln0a7"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_mduiy"]
+[ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_mduiy"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_5k1dr"]
 seed = 153
@@ -28,10 +28,10 @@ noise = SubResource("FastNoiseLite_5k1dr")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_87e45"]
 resource_local_to_scene = true
 shader = ExtResource("14_mduiy")
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
 [node name="BaseEnemyTemplate" type="CharacterBody2D"]
 texture_filter = 1

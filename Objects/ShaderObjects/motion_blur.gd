@@ -37,3 +37,11 @@ func superParry(node : Node2D):
 	Game.camera.set_shake(3.0)
 	Game.camera.zoom = Vector2(12.0, 12.0)
 	Game.setTimeScale(0.1)
+
+func showStatic():
+	%StaticNoiseTimer.start()
+	$StaticAnimator.play("FadeIn")
+
+func _on_timer_timeout() -> void:
+	%StaticNoise.visible = true
+	%StaticNoiseSound.play()

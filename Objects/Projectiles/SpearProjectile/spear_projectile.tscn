@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://sd7x2ttcqgsv"]
 
-[ext_resource type="Script" path="res://Objects/Projectiles/SpearProjectile/GenericProjectile.gd" id="1_hs6qt"]
+[ext_resource type="Script" uid="uid://ddy5ii6v6mflw" path="res://Objects/Projectiles/SpearProjectile/GenericProjectile.gd" id="1_hs6qt"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="3_uog4u"]
 
 [sub_resource type="SeparationRayShape2D" id="SeparationRayShape2D_wmwbi"]
@@ -59,8 +59,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_s8c2n"]
 _data = {
-"Go": SubResource("Animation_f31j0"),
-"RESET": SubResource("Animation_tps3w")
+&"Go": SubResource("Animation_f31j0"),
+&"RESET": SubResource("Animation_tps3w")
 }
 
 [node name="SpearProjectile" type="Node2D"]

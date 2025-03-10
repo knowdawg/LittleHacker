@@ -1,9 +1,9 @@
 [gd_scene load_steps=21 format=3 uid="uid://swwctd1dmj2l"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_shgxf"]
+[ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_shgxf"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="2_2648w"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="3_3y1xa"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="4_ksdhc"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="4_ksdhc"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="5_m8ai8"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_1i2kj"]
@@ -27,13 +27,13 @@ noise = SubResource("FastNoiseLite_k876m")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6o3d0"]
 resource_local_to_scene = true
 shader = ExtResource("4_ksdhc")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_usrtp")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_n8i2a")
 shader_parameter/resolution = Vector2(40, 40)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = 1.0
 shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 2.0
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_usrtp")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_n8i2a")
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_eiq13"]
 load_path = "res://.godot/imported/SandstoneTexture.png-5e1fb42ebd499e0e306c0faae8ae7c6e.ctex"
@@ -60,13 +60,14 @@ noise = SubResource("FastNoiseLite_56jcn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lebn3"]
 shader = ExtResource("1_shgxf")
+shader_parameter/noiseTex = SubResource("CompressedTexture2D_eiq13")
+shader_parameter/palete = SubResource("GradientTexture1D_rmmf7")
 shader_parameter/paleteSize = 10.0
 shader_parameter/size = Vector2(1920, 1080)
 shader_parameter/noiseResolution = Vector2(32, 32)
 shader_parameter/shading = 0.1
+shader_parameter/invert = -1.0
 shader_parameter/warpBorder = true
-shader_parameter/noiseTex = SubResource("CompressedTexture2D_eiq13")
-shader_parameter/palete = SubResource("GradientTexture1D_rmmf7")
 shader_parameter/warpBorderNoise = SubResource("NoiseTexture2D_ygqmd")
 
 [sub_resource type="Gradient" id="Gradient_xakbh"]
@@ -84,13 +85,13 @@ polygon = PackedVector2Array(-56, 64, -55, -138, 56, -126, 79, -27, 89, 4, 108, 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_plk1k"]
 resource_local_to_scene = true
 shader = ExtResource("4_ksdhc")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_usrtp")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_n8i2a")
 shader_parameter/resolution = Vector2(40, 40)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = 1.0
 shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 2.0
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_usrtp")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_n8i2a")
 
 [node name="SandstoneEnvirementBackground" type="Node2D"]
 

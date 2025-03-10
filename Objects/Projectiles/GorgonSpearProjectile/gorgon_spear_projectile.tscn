@@ -1,23 +1,23 @@
 [gd_scene load_steps=34 format=3 uid="uid://buurypyfifpnl"]
 
-[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/gorgon_spear_projectile.gd" id="1_k1umi"]
+[ext_resource type="Script" uid="uid://bl33m1m3fhf5d" path="res://Objects/Projectiles/GorgonSpearProjectile/gorgon_spear_projectile.gd" id="1_k1umi"]
 [ext_resource type="Texture2D" uid="uid://byp0cqgmq20ic" path="res://Assets/Sprites/Projectiles/GorgonSpearProjectile.png" id="2_3dava"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_qlklu"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_qlklu"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_c6yfa"]
-[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/moving.gd" id="3_p543p"]
+[ext_resource type="Script" uid="uid://bj1sbs1s2ilst" path="res://Objects/Projectiles/GorgonSpearProjectile/States/moving.gd" id="3_p543p"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="3_xqyx6"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_2kc2h"]
-[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/spinning.gd" id="4_11mdt"]
-[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/still.gd" id="5_sllst"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_w8eb0"]
-[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dead.gd" id="7_5bd8c"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericThrow.gd" id="9_iv1n4"]
+[ext_resource type="Script" uid="uid://d4nck2pqmevqh" path="res://Objects/Projectiles/GorgonSpearProjectile/States/spinning.gd" id="4_11mdt"]
+[ext_resource type="Script" uid="uid://c4b17hrjwo64q" path="res://Objects/Projectiles/GorgonSpearProjectile/States/still.gd" id="5_sllst"]
+[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_w8eb0"]
+[ext_resource type="Script" uid="uid://bdn5j06nmhxy6" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dead.gd" id="7_5bd8c"]
+[ext_resource type="Script" uid="uid://b8ofx46eh64tx" path="res://Classes/GenericStates/GenericThrow.gd" id="9_iv1n4"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="10_30dhu"]
 [ext_resource type="PackedScene" uid="uid://sd7x2ttcqgsv" path="res://Objects/Projectiles/SpearProjectile/spear_projectile.tscn" id="10_ue13k"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="11_pn5ks"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="12_fxcuo"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="13_5hquq"]
-[ext_resource type="Script" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dropped.gd" id="13_crmw2"]
+[ext_resource type="Script" uid="uid://c64u7e4obf72i" path="res://Objects/Projectiles/GorgonSpearProjectile/States/dropped.gd" id="13_crmw2"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="16_rq5b0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_7jnow"]
@@ -239,14 +239,14 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_bjbav"]
 _data = {
-"Destroy": SubResource("Animation_2xrd5"),
-"Land": SubResource("Animation_glucn"),
-"RESET": SubResource("Animation_apjkn"),
-"Rise": SubResource("Animation_wms0w"),
-"Spin": SubResource("Animation_coljs"),
-"Still": SubResource("Animation_a70tj"),
-"Throw": SubResource("Animation_7s46c"),
-"UnDestroy": SubResource("Animation_450a8")
+&"Destroy": SubResource("Animation_2xrd5"),
+&"Land": SubResource("Animation_glucn"),
+&"RESET": SubResource("Animation_apjkn"),
+&"Rise": SubResource("Animation_wms0w"),
+&"Spin": SubResource("Animation_coljs"),
+&"Still": SubResource("Animation_a70tj"),
+&"Throw": SubResource("Animation_7s46c"),
+&"UnDestroy": SubResource("Animation_450a8")
 }
 
 [node name="GorgonSpearProjectile" type="CharacterBody2D"]

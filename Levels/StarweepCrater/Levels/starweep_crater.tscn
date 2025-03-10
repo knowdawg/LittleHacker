@@ -1,23 +1,22 @@
-[gd_scene load_steps=122 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=120 format=3 uid="uid://cb2mgf3vv8ptm"]
 
-[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
+[ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
+[ext_resource type="Shader" uid="uid://cnc8we1jbjatc" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
 [ext_resource type="PackedScene" uid="uid://jtwmin0vsvdo" path="res://Objects/WorldObjects/StarfallDecoration/star.tscn" id="3_7c2lr"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="5_1x65e"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="5_1x65e"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
-[ext_resource type="PackedScene" uid="uid://btep0f1wqxbl3" path="res://Objects/WorldObjects/SDFVisuals/sdf_canyon.tscn" id="7_0gcx7"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="8_3qqdn"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/clouds.gdshader" id="9_oo6lu"]
+[ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="9_oo6lu"]
 [ext_resource type="PackedScene" uid="uid://cevekfaep4e77" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement_Far_background.tscn" id="10_k02rq"]
 [ext_resource type="PackedScene" uid="uid://dl5wh4denx0f6" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement_background_Middle.tscn" id="11_tbcth"]
 [ext_resource type="PackedScene" uid="uid://swwctd1dmj2l" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement_background2.tscn" id="12_r5tmq"]
 [ext_resource type="PackedScene" uid="uid://6qnrok713h6h" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement_background.tscn" id="13_y4uok"]
 [ext_resource type="PackedScene" uid="uid://dqgol3yij81qs" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement.tscn" id="14_arq7e"]
 [ext_resource type="PackedScene" uid="uid://cck7kymtxfylc" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_mound.tscn" id="15_jnj5e"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="16_fkucj"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="16_fkucj"]
 [ext_resource type="Texture2D" uid="uid://ctjut0hyxqlds" path="res://Assets/Sprites/EnvirmentTextures/Crystals/MassiveCrystals.png" id="17_qn2tg"]
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="18_87r4n"]
+[ext_resource type="Shader" uid="uid://bqj4py375klxx" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="18_87r4n"]
 [ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="19_otf3c"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="20_30t6e"]
 [ext_resource type="PackedScene" uid="uid://rr8whno8lay3" path="res://Objects/WorldObjects/Tilemaps/wooden_mine.tscn" id="21_ya4vw"]
@@ -25,12 +24,11 @@
 [ext_resource type="Texture2D" uid="uid://dd0ug5to67ucu" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed1.png" id="23_gsbpc"]
 [ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="24_2aagl"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="25_ftex3"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="26_n2pso"]
-[ext_resource type="PackedScene" uid="uid://dcqwmsg54sjn4" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.tscn" id="27_tybnh"]
+[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="26_n2pso"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="29_4ghwm"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="30_yrukv"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="31_htj2c"]
+[ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="31_htj2c"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_y4e7i"]
 seed = 5
@@ -49,9 +47,9 @@ gradient = SubResource("Gradient_i34np")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cflne"]
 shader = ExtResource("2_dsaho")
-shader_parameter/speed = -25.0
 shader_parameter/noise = SubResource("NoiseTexture2D_xwp7k")
 shader_parameter/pallete = SubResource("GradientTexture1D_rlxx7")
+shader_parameter/speed = -25.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_7nq1o"]
 seed = 5
@@ -71,9 +69,9 @@ gradient = SubResource("Gradient_yna1l")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwutr"]
 shader = ExtResource("2_dsaho")
-shader_parameter/speed = 100.0
 shader_parameter/noise = SubResource("NoiseTexture2D_25odj")
 shader_parameter/pallete = SubResource("GradientTexture1D_17riw")
+shader_parameter/speed = 100.0
 
 [sub_resource type="Gradient" id="Gradient_j1u7n"]
 offsets = PackedFloat32Array(1)
@@ -143,13 +141,13 @@ noise = SubResource("FastNoiseLite_kadbf")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2fice"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_8u4wj")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_tti0n")
 shader_parameter/resolution = Vector2(10, 10)
 shader_parameter/textureScollSpeed = 1.5
 shader_parameter/warpScrollSpeed = 2.0
 shader_parameter/surgeFrequency = 0.3
 shader_parameter/surgeSpeed = 0.6
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_8u4wj")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_tti0n")
 
 [sub_resource type="Gradient" id="Gradient_uuxd1"]
 offsets = PackedFloat32Array(0.99005)
@@ -185,13 +183,13 @@ noise = SubResource("FastNoiseLite_dj61o")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q5im8"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_lu3xg")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_j1d03")
 shader_parameter/resolution = Vector2(10, 10)
 shader_parameter/textureScollSpeed = 1.5
 shader_parameter/warpScrollSpeed = 2.0
 shader_parameter/surgeFrequency = 0.3
 shader_parameter/surgeSpeed = 0.6
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_lu3xg")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_j1d03")
 
 [sub_resource type="Gradient" id="Gradient_iutvt"]
 offsets = PackedFloat32Array(0.99005)
@@ -227,13 +225,13 @@ noise = SubResource("FastNoiseLite_xviye")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ycgkv"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_exu6i")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_p8108")
 shader_parameter/resolution = Vector2(10, 10)
 shader_parameter/textureScollSpeed = 1.5
 shader_parameter/warpScrollSpeed = 2.0
 shader_parameter/surgeFrequency = 0.3
 shader_parameter/surgeSpeed = 0.6
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_exu6i")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_p8108")
 
 [sub_resource type="Gradient" id="Gradient_xqqud"]
 offsets = PackedFloat32Array(0.99005)
@@ -248,7 +246,7 @@ height = 28
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.882353, 0.882353, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_th6oi"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qakqs"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -274,19 +272,19 @@ noise = SubResource("FastNoiseLite_xf300")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_40nsd"]
 shader = ExtResource("9_oo6lu")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_o84sx")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
 shader_parameter/resolution = Vector2(128, 72)
 shader_parameter/speed = 0.5
 shader_parameter/cloudFullness = 0.544
 shader_parameter/cloudPosition = 0.568
 shader_parameter/xDisplacment = 0.4
-shader_parameter/cloudNoise = SubResource("NoiseTexture2D_o84sx")
-shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
 
 [sub_resource type="Gradient" id="Gradient_kqt26"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_vr3ik"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dgwi3"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -342,10 +340,10 @@ gradient = SubResource("Gradient_7nbmo")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uvsq2"]
 shader = ExtResource("18_87r4n")
-shader_parameter/size = Vector2(64, 64)
-shader_parameter/noiseResolution = Vector2(64, 64)
 shader_parameter/noiseTex = ExtResource("19_otf3c")
 shader_parameter/palete = SubResource("GradientTexture1D_v1ucn")
+shader_parameter/size = Vector2(64, 64)
+shader_parameter/noiseResolution = Vector2(64, 64)
 
 [sub_resource type="Gradient" id="Gradient_14y8i"]
 offsets = PackedFloat32Array(1)
@@ -407,7 +405,7 @@ viewport_path = NodePath("Main")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fu82q"]
 shader = ExtResource("26_n2pso")
 shader_parameter/width = 1.0
-shader_parameter/outlineAlpha = null
+shader_parameter/outlineAlpha = 0.0
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qe5lo"]
 frequency = 0.0111
@@ -430,29 +428,31 @@ noise = SubResource("FastNoiseLite_1xvwb")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6nva0"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.0
 shader_parameter/surgeFrequency = 2.0
 shader_parameter/surgeSpeed = 1.0
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_erh47"]
 resource_local_to_scene = true
 shader = ExtResource("31_htj2c")
 shader_parameter/brightness = 1.0
+shader_parameter/shadowIntensitiy = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g51h"]
 
-[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 texture_filter = 1
 script = ExtResource("1_4w4bf")
 projectileSpawnNode = NodePath("Projectiles")
 enemySpawnLocation = NodePath("Enemies")
-doorToSpawnPlayerOnFailure = NodePath("CaveExit")
-doors = [NodePath("CaveExit")]
+doorToSpawnPlayerOnFailure = NodePath("Doors/CaveExit")
+doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParent")
+respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
@@ -858,17 +858,14 @@ texture = SubResource("GradientTexture2D_kcrqd")
 [node name="CanvasLayer2" type="CanvasLayer" parent="."]
 layer = -1
 
-[node name="SDFCanyon" parent="CanvasLayer2" instance=ExtResource("7_0gcx7")]
-visible = false
-
 [node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_th6oi")
+texture = SubResource("GradientTexture2D_qakqs")
 
 [node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_vr3ik")
+texture = SubResource("GradientTexture2D_dgwi3")
 
 [node name="FarDistance" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1143,6 +1140,8 @@ position = Vector2(273, 3)
 texture = ExtResource("24_2aagl")
 flip_h = true
 
+[node name="RespawnPoints" type="Node2D" parent="."]
+
 [node name="PlayerParent" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -1161,9 +1160,6 @@ color = 1
 material = SubResource("ShaderMaterial_fu82q")
 position = Vector2(200, 18)
 color = 1
-
-[node name="AspectOfCreation" parent="Enemies" instance=ExtResource("27_tybnh")]
-position = Vector2(427, 17)
 
 [node name="Projectiles" type="Node2D" parent="."]
 
@@ -1215,15 +1211,17 @@ copy_mode = 2
 z_index = 100
 material = SubResource("ShaderMaterial_erh47")
 
-[node name="CaveExit" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="CaveExit" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
 scene = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
 doorName = "TutorialRoom1"
 enterPosition = NodePath("Marker2D")
 directionToFaceWhenEnteringTHISDoor = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="CaveExit"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/CaveExit"]
 position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
 
-[node name="Marker2D" type="Marker2D" parent="CaveExit"]
-position = Vector2(397, 17)
+[node name="Marker2D" type="Marker2D" parent="Doors/CaveExit"]
+position = Vector2(-118, -6)

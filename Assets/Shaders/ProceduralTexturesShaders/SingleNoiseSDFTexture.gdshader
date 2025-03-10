@@ -6,6 +6,7 @@ uniform float paleteSize : hint_range(1.0, 10.0, 1.0);
 uniform vec2 size;
 uniform vec2 noiseResolution;
 uniform float shading : hint_range(0.0, 0.1);
+uniform float invert : hint_range(-1.0, 1.0, 2.0);
 
 uniform bool warpBorder = false;
 uniform sampler2D warpBorderNoise : repeat_enable;
@@ -23,7 +24,7 @@ void fragment() {
 		v = (v - 0.5) * 2.0 * 10.0;
 		o = vec2(v, v * 0.3);
 	}
-	float sdfVal = -texture_sdf(screen_uv_to_sdf(quatizedScreenUV) + o);
+	float sdfVal = invert * texture_sdf(screen_uv_to_sdf(quatizedScreenUV) + o);
 
 	float alphaBuffer = step(0.0, sdfVal);
 

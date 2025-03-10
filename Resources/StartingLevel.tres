@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="StartingLevelResourceScript" load_steps=2 format=3 uid="uid://byhqpp6gc4xnd"]
+
+[ext_resource type="Script" uid="uid://cseckmsy0oxu1" path="res://Classes/StartingLevelResourceScript.gd" id="1_bdg6p"]
+
+[resource]
+script = ExtResource("1_bdg6p")
+levelPath = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
+metadata/_custom_type_script = "uid://cseckmsy0oxu1"

@@ -1,74 +1,78 @@
-[gd_scene load_steps=209 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=216 format=3 uid="uid://d3dlqrfslc2a0"]
 
-[ext_resource type="Script" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
-[ext_resource type="Script" path="res://Player/Player.gd" id="1_lek16"]
+[ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
+[ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
 [ext_resource type="AudioStream" uid="uid://bkcmxwvkhmu4a" path="res://Assets/Audio/SoundEffects/SmallPlayerHitMain.wav" id="2_05a5k"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="2_67e55"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_hn6pj"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="2_l0uvv"]
 [ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="2_mnd2b"]
-[ext_resource type="Script" path="res://Player/interactable_manager.gd" id="2_rtdom"]
+[ext_resource type="Script" uid="uid://b6pm0hnfe8v8n" path="res://Player/interactable_manager.gd" id="2_rtdom"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="3_412y7"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="3_nr8gu"]
 [ext_resource type="AudioStream" uid="uid://dbcrjgsxk4a1x" path="res://Assets/Audio/SoundEffects/SmallPlayerHit.wav" id="3_t3i0y"]
-[ext_resource type="Script" path="res://Player/Idle.gd" id="3_y4nyp"]
-[ext_resource type="Script" path="res://Player/Run.gd" id="4_jsdmc"]
+[ext_resource type="Script" uid="uid://caw2s1ctfyn21" path="res://Player/Idle.gd" id="3_y4nyp"]
+[ext_resource type="Script" uid="uid://dfe6cgg0ys780" path="res://Player/Run.gd" id="4_jsdmc"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="4_xxukg"]
-[ext_resource type="Script" path="res://Player/Jump.gd" id="5_8j04r"]
+[ext_resource type="Script" uid="uid://dlyxus8gbvgpg" path="res://Player/Jump.gd" id="5_8j04r"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="5_38mkd"]
-[ext_resource type="Script" path="res://Player/Fall.gd" id="6_yew1w"]
-[ext_resource type="Script" path="res://Player/Roll.gd" id="7_5l01g"]
-[ext_resource type="Script" path="res://Player/Parry.gd" id="8_oxv8y"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/AttackHorizontal.gd" id="10_d677x"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/Idle.gd" id="11_45rs4"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/SwapSides.gd" id="11_s4bm2"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/WeaponStateMachine.gd" id="11_v7ndi"]
+[ext_resource type="Script" uid="uid://biiby66878j3i" path="res://Player/Fall.gd" id="6_yew1w"]
+[ext_resource type="Script" uid="uid://b1hv4d0vfdvam" path="res://Player/Roll.gd" id="7_5l01g"]
+[ext_resource type="Script" uid="uid://niqkbox7hwx4" path="res://Player/Parry.gd" id="8_oxv8y"]
+[ext_resource type="Script" uid="uid://crybyms0fhukm" path="res://Player/WeaponStateMachine/AttackHorizontal.gd" id="10_d677x"]
+[ext_resource type="Script" uid="uid://d0qbbvxv85blt" path="res://Player/WeaponStateMachine/Idle.gd" id="11_45rs4"]
+[ext_resource type="Script" uid="uid://b2p2d331vibg" path="res://Player/WeaponStateMachine/SwapSides.gd" id="11_s4bm2"]
+[ext_resource type="Script" uid="uid://cjn8woar8dtdq" path="res://Player/WeaponStateMachine/WeaponStateMachine.gd" id="11_v7ndi"]
 [ext_resource type="AudioStream" uid="uid://2j3g4asvnuje" path="res://Assets/Audio/SoundEffects/SmallPlayerFootstep.wav" id="12_hmt06"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/AttackVerticle.gd" id="13_dq04x"]
-[ext_resource type="Script" path="res://Player/stun.gd" id="14_a7jjx"]
-[ext_resource type="Script" path="res://Player/Weapon/WeaponSprite.gd" id="14_bw1kr"]
+[ext_resource type="Script" uid="uid://bat2noo33cscl" path="res://Player/WeaponStateMachine/AttackVerticle.gd" id="13_dq04x"]
+[ext_resource type="Texture2D" uid="uid://dn6wux5ev0vbu" path="res://Assets/Sprites/Effects/ParticleEffects/DustSplash_17x17.png" id="13_lr4jq"]
+[ext_resource type="Script" uid="uid://cjlm6maksxxy7" path="res://Player/stun.gd" id="14_a7jjx"]
+[ext_resource type="Script" uid="uid://cnfhfrrtqc12e" path="res://Player/Weapon/WeaponSprite.gd" id="14_bw1kr"]
+[ext_resource type="Texture2D" uid="uid://htwwmofcxtdj" path="res://Assets/Sprites/Effects/ParticleEffects/DustSplash2.png" id="14_gr648"]
 [ext_resource type="AudioStream" uid="uid://cvab4x7ejftrf" path="res://Assets/Audio/SoundEffects/SmallPlayerJump.wav" id="14_kaha2"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/AttackDown.gd" id="14_lcqka"]
-[ext_resource type="Script" path="res://Player/parry_stun.gd" id="15_8fvrf"]
+[ext_resource type="Script" uid="uid://c442l6rafulm7" path="res://Player/WeaponStateMachine/AttackDown.gd" id="14_lcqka"]
+[ext_resource type="Script" uid="uid://0yumwmeeb10u" path="res://Player/parry_stun.gd" id="15_8fvrf"]
 [ext_resource type="AudioStream" uid="uid://cgxm3etxcujjw" path="res://Assets/Audio/SoundEffects/SmallPlayerLand.wav" id="16_5blxq"]
-[ext_resource type="Script" path="res://Player/wall_cling.gd" id="16_i10sr"]
-[ext_resource type="Script" path="res://Player/hack_attack.gd" id="17_expy4"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/Parry.gd" id="17_rv26y"]
-[ext_resource type="Script" path="res://Player/hack_mode.gd" id="18_1ulp4"]
+[ext_resource type="Script" uid="uid://8ytq3l1xxi7k" path="res://Player/wall_cling.gd" id="16_i10sr"]
+[ext_resource type="Script" uid="uid://dp0tsmr83dgtk" path="res://Player/hack_attack.gd" id="17_expy4"]
+[ext_resource type="Script" uid="uid://c73080rfeo0ch" path="res://Player/WeaponStateMachine/Parry.gd" id="17_rv26y"]
+[ext_resource type="Script" uid="uid://cs1vp1sqw3gsh" path="res://Player/hack_mode.gd" id="18_1ulp4"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="18_3hvnj"]
 [ext_resource type="AudioStream" uid="uid://b6l6jb2tr4863" path="res://Assets/Audio/SoundEffects/Roll.wav" id="18_l7j6t"]
 [ext_resource type="PackedScene" uid="uid://emx7qis5mriy" path="res://Player/Weapon/player_sword_hit_effect.tscn" id="19_0ng1i"]
-[ext_resource type="Script" path="res://Player/blocked.gd" id="20_hceas"]
-[ext_resource type="Script" path="res://Player/grabbed.gd" id="21_njjf0"]
+[ext_resource type="Script" uid="uid://b8qsayd7qlmk1" path="res://Player/blocked.gd" id="20_hceas"]
+[ext_resource type="Script" uid="uid://t8ynhbk5cew3" path="res://Player/grabbed.gd" id="21_njjf0"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="23_v12ij"]
 [ext_resource type="Texture2D" uid="uid://b5hhs6r2kw0ox" path="res://Player/SmallPlayerSprite/PlayerWeapon.png" id="24_6qj5u"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/dash_parry.gd" id="24_vbp78"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/HackAttack.gd" id="25_s8s64"]
+[ext_resource type="Script" uid="uid://t5th1xwka632" path="res://Player/WeaponStateMachine/dash_parry.gd" id="24_vbp78"]
+[ext_resource type="Script" uid="uid://cm2frrhq87k13" path="res://Player/WeaponStateMachine/HackAttack.gd" id="25_s8s64"]
 [ext_resource type="PackedScene" uid="uid://cwfrw5n1nbnws" path="res://Components/ParryIntercenpterComponent/parry_intercepter_component.tscn" id="28_7xl6g"]
 [ext_resource type="Texture2D" uid="uid://b52jfkhcgjsnc" path="res://Player/SmallPlayerSprite/SmallCharectar.png" id="28_x4rxf"]
-[ext_resource type="Script" path="res://Player/WeaponStateMachine/dash_attack.gd" id="29_mnusl"]
-[ext_resource type="Script" path="res://Player/parry_particles.gd" id="29_tbcwx"]
-[ext_resource type="Script" path="res://Player/ParryLight.gd" id="30_t8rxg"]
+[ext_resource type="Script" uid="uid://c1udkfq432l3x" path="res://Player/WeaponStateMachine/dash_attack.gd" id="29_mnusl"]
+[ext_resource type="Script" uid="uid://dgmrbcq3rq2vo" path="res://Player/parry_particles.gd" id="29_tbcwx"]
+[ext_resource type="Script" uid="uid://cxnl53uy77of3" path="res://Player/ParryLight.gd" id="30_t8rxg"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="32_3xbax"]
-[ext_resource type="Script" path="res://Player/Effects/parry_explotion.gd" id="33_ntv7t"]
+[ext_resource type="Script" uid="uid://dxevrx0vqg8kl" path="res://Player/Effects/parry_explotion.gd" id="33_ntv7t"]
 [ext_resource type="Texture2D" uid="uid://dlf83870nvaoi" path="res://Assets/Sprites/Effects/ParryExplotion.png" id="33_nxmct"]
-[ext_resource type="Script" path="res://Player/hack_effects.gd" id="33_r5rn0"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="33_rdnj2"]
-[ext_resource type="Script" path="res://Player/hack_ui.gd" id="35_4cxex"]
+[ext_resource type="Script" uid="uid://e1q6b6nss1em" path="res://Player/hack_effects.gd" id="33_r5rn0"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="33_rdnj2"]
+[ext_resource type="Script" uid="uid://bya576rnm0nvx" path="res://Player/death.gd" id="34_4ht5j"]
+[ext_resource type="Script" uid="uid://cmhe2vbu72vh0" path="res://Player/hack_ui.gd" id="35_4cxex"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="35_4vsvx"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/HackUISelector.gdshader" id="36_64sh3"]
+[ext_resource type="Script" uid="uid://dr2l8jm38sn1y" path="res://Player/WeaponStateMachine/spawn.gd" id="35_e2bo2"]
+[ext_resource type="Shader" uid="uid://cql03lbod6j78" path="res://Assets/Shaders/Effects/HackUISelector.gdshader" id="36_64sh3"]
 [ext_resource type="PackedScene" uid="uid://cifd12sk13prw" path="res://Player/HackUI/HackLabel.tscn" id="37_ss1gu"]
-[ext_resource type="Script" path="res://Player/HackUI/hack_label.gd" id="38_o42eg"]
+[ext_resource type="Script" uid="uid://dtb3gceireby5" path="res://Player/HackUI/hack_label.gd" id="38_o42eg"]
 [ext_resource type="AudioStream" uid="uid://drfr6me01j2nd" path="res://Assets/Audio/SoundEffects/HackAttack.wav" id="39_llbap"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
+[ext_resource type="Shader" uid="uid://b3brnbukfnfmc" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
 [ext_resource type="AudioStream" uid="uid://dd7ed3cdwvi81" path="res://Assets/Audio/SoundEffects/Whoosh.wav" id="43_1cl5h"]
 [ext_resource type="AudioStream" uid="uid://3bpb1qrv4tya" path="res://Assets/Audio/SoundEffects/PlayerSwing.wav" id="43_ho0pg"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/GlitchEffect.gdshader" id="46_i2mat"]
+[ext_resource type="Shader" uid="uid://dbhns56y7xhhn" path="res://Assets/Shaders/Filters/GlitchEffect.gdshader" id="46_i2mat"]
 [ext_resource type="AudioStream" uid="uid://bqthecipgxswv" path="res://Assets/Audio/SoundEffects/HackExecuted.wav" id="46_xfg1q"]
-[ext_resource type="Script" path="res://Player/HealthBar/progress_bar.gd" id="54_l53i3"]
-[ext_resource type="Script" path="res://Player/player_ui.gd" id="54_qkh22"]
-[ext_resource type="Script" path="res://Levels/TestLevels/camera_2d.gd" id="55_c7l4y"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/Glow.gdshader" id="55_dupvs"]
+[ext_resource type="Script" uid="uid://32ttvp2eqk7k" path="res://Player/HealthBar/progress_bar.gd" id="54_l53i3"]
+[ext_resource type="Script" uid="uid://cqdgehuqqaexl" path="res://Player/player_ui.gd" id="54_qkh22"]
+[ext_resource type="Script" uid="uid://bttd2vrppvy4q" path="res://Levels/TestLevels/camera_2d.gd" id="55_c7l4y"]
+[ext_resource type="Shader" uid="uid://dc8grws7obxps" path="res://Assets/Shaders/Filters/Glow.gdshader" id="55_dupvs"]
 [ext_resource type="AudioStream" uid="uid://bm05kcv4rbj60" path="res://Assets/Audio/SoundEffects/Parry2.wav" id="55_jnt5q"]
 [ext_resource type="AudioStream" uid="uid://c6ssp032sru3x" path="res://Assets/Audio/SoundEffects/HackAttackHit.wav" id="56_2fx77"]
 [ext_resource type="Texture2D" uid="uid://dn4c6ix1gcrii" path="res://Assets/Sprites/UI/EnergyIcon.png" id="56_87gtb"]
@@ -100,13 +104,33 @@ height = 1
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dxj8g"]
 size = Vector2(2, 4)
 
-[sub_resource type="Gradient" id="Gradient_huiik"]
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_efsdk"]
+particles_animation = true
+particles_anim_h_frames = 6
+particles_anim_v_frames = 6
+particles_anim_loop = false
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_efsdk"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 0, 0)
+scale_min = 0.5
+scale_max = 0.5
+anim_speed_min = 0.5
+anim_speed_max = 0.5
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_gr648"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 8
+particles_anim_loop = false
+
+[sub_resource type="Gradient" id="Gradient_efsdk"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0.200811, 0.600406, 1)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.170203, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ufcdm"]
-gradient = SubResource("Gradient_huiik")
+gradient = SubResource("Gradient_efsdk")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -124,7 +148,7 @@ _data = [Vector2(0, 0.00440526), 0.0, -0.0640265, 0, 0, Vector2(0.380762, 0.2753
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_uj4qe"]
-min_value = -1.0
+_limits = [-1.0, 1.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.204, -0.0617708), 0.0, 0.0, 0, 0, Vector2(0.448, 0.000686288), 0.0, 0.0, 0, 0, Vector2(0.5, 1), 0.0, 0.0, 0, 0, Vector2(0.6, 0.114928), -0.95075, -0.95075, 0, 0, Vector2(1, 0.000686288), 0.0, 0.0, 0, 0]
 point_count = 6
 
@@ -165,8 +189,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ygddn"]
 _data = {
-"GlitchSwap": SubResource("Animation_rofho"),
-"RESET": SubResource("Animation_odn4t")
+&"GlitchSwap": SubResource("Animation_rofho"),
+&"RESET": SubResource("Animation_odn4t")
 }
 
 [sub_resource type="Curve" id="Curve_pi37o"]
@@ -210,8 +234,8 @@ noise = SubResource("FastNoiseLite_oyo1t")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cxkyr"]
 shader = ExtResource("40_cslm4")
 shader_parameter/color = Color(0.647059, 0.188235, 0.188235, 1)
-shader_parameter/progress = 0.0
 shader_parameter/noise = SubResource("NoiseTexture2D_atljg")
+shader_parameter/progress = 0.0
 
 [sub_resource type="Curve" id="Curve_pxddw"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.257732, 1), 0.0, 0.0, 0, 0, Vector2(0.797357, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -339,8 +363,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ax80n"]
 _data = {
-"RESET": SubResource("Animation_84agm"),
-"StartEffects": SubResource("Animation_g7efb")
+&"RESET": SubResource("Animation_84agm"),
+&"StartEffects": SubResource("Animation_g7efb")
 }
 
 [sub_resource type="Animation" id="Animation_swbuy"]
@@ -1216,12 +1240,12 @@ tracks/16/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y6rxl"]
 _data = {
-"HideLeft": SubResource("Animation_swbuy"),
-"HideRight": SubResource("Animation_6u5iv"),
-"RESET": SubResource("Animation_crs5b"),
-"SelectHack": SubResource("Animation_vpyff"),
-"ShowLeft": SubResource("Animation_e8oe4"),
-"ShowRight": SubResource("Animation_c2y1x")
+&"HideLeft": SubResource("Animation_swbuy"),
+&"HideRight": SubResource("Animation_6u5iv"),
+&"RESET": SubResource("Animation_crs5b"),
+&"SelectHack": SubResource("Animation_vpyff"),
+&"ShowLeft": SubResource("Animation_e8oe4"),
+&"ShowRight": SubResource("Animation_c2y1x")
 }
 
 [sub_resource type="Animation" id="Animation_8do35"]
@@ -1276,8 +1300,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_fjv40"]
 _data = {
-"CrossOut": SubResource("Animation_8do35"),
-"RESET": SubResource("Animation_p50rw")
+&"CrossOut": SubResource("Animation_8do35"),
+&"RESET": SubResource("Animation_p50rw")
 }
 
 [sub_resource type="Curve" id="Curve_aj6e4"]
@@ -1337,9 +1361,9 @@ noise = SubResource("FastNoiseLite_h72yy")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t8n0i"]
 shader = ExtResource("36_64sh3")
-shader_parameter/color = null
-shader_parameter/progress = 0.0
 shader_parameter/noise = SubResource("NoiseTexture2D_wkiw3")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/progress = 0.0
 
 [sub_resource type="Curve" id="Curve_uwynt"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
@@ -1706,6 +1730,17 @@ tracks/1/keys = {
 "method": &"makeSound"
 }]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("EnemyHitComponent/HitParticles")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
 
 [sub_resource type="Animation" id="Animation_t7nm8"]
 resource_name = "Stun"
@@ -1740,25 +1775,25 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2wqp"]
 _data = {
-"Blocked": SubResource("Animation_blsx0"),
-"Dash": SubResource("Animation_7ugr1"),
-"DashEnd": SubResource("Animation_vhpis"),
-"DashStart": SubResource("Animation_7botn"),
-"ExecuteParry": SubResource("Animation_tcgww"),
-"Fall": SubResource("Animation_f8rl4"),
-"GroundParry": SubResource("Animation_arads"),
-"HackAttack": SubResource("Animation_wkpki"),
-"HackMode": SubResource("Animation_rm11h"),
-"Idle": SubResource("Animation_q5dwu"),
-"Jump": SubResource("Animation_ecuml"),
-"JumpStart": SubResource("Animation_jsb05"),
-"ParryStun": SubResource("Animation_dhifp"),
-"PeakOfJump": SubResource("Animation_b82ui"),
-"RESET": SubResource("Animation_edsbw"),
-"Roll": SubResource("Animation_p5rim"),
-"Run": SubResource("Animation_43kgi"),
-"Stun": SubResource("Animation_t7nm8"),
-"WallCling": SubResource("Animation_5ypfg")
+&"Blocked": SubResource("Animation_blsx0"),
+&"Dash": SubResource("Animation_7ugr1"),
+&"DashEnd": SubResource("Animation_vhpis"),
+&"DashStart": SubResource("Animation_7botn"),
+&"ExecuteParry": SubResource("Animation_tcgww"),
+&"Fall": SubResource("Animation_f8rl4"),
+&"GroundParry": SubResource("Animation_arads"),
+&"HackAttack": SubResource("Animation_wkpki"),
+&"HackMode": SubResource("Animation_rm11h"),
+&"Idle": SubResource("Animation_q5dwu"),
+&"Jump": SubResource("Animation_ecuml"),
+&"JumpStart": SubResource("Animation_jsb05"),
+&"ParryStun": SubResource("Animation_dhifp"),
+&"PeakOfJump": SubResource("Animation_b82ui"),
+&"RESET": SubResource("Animation_edsbw"),
+&"Roll": SubResource("Animation_p5rim"),
+&"Run": SubResource("Animation_43kgi"),
+&"Stun": SubResource("Animation_t7nm8"),
+&"WallCling": SubResource("Animation_5ypfg")
 }
 
 [sub_resource type="Animation" id="Animation_0fvf1"]
@@ -1914,15 +1949,15 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0xm6f"]
 _data = {
-"Blocked": SubResource("Animation_0fvf1"),
-"HackAttack": SubResource("Animation_e6d8l"),
-"HackMode": SubResource("Animation_qegnx"),
-"HitGround": SubResource("Animation_gl1a5"),
-"Jump": SubResource("Animation_fgfhu"),
-"RESET": SubResource("Animation_uuh13"),
-"Roll": SubResource("Animation_0y4ng"),
-"Stun": SubResource("Animation_v5xkb"),
-"WallCling": SubResource("Animation_unlac")
+&"Blocked": SubResource("Animation_0fvf1"),
+&"HackAttack": SubResource("Animation_e6d8l"),
+&"HackMode": SubResource("Animation_qegnx"),
+&"HitGround": SubResource("Animation_gl1a5"),
+&"Jump": SubResource("Animation_fgfhu"),
+&"RESET": SubResource("Animation_uuh13"),
+&"Roll": SubResource("Animation_0y4ng"),
+&"Stun": SubResource("Animation_v5xkb"),
+&"WallCling": SubResource("Animation_unlac")
 }
 
 [sub_resource type="Animation" id="Animation_uga6c"]
@@ -2246,21 +2281,21 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lwd5y"]
 _data = {
-"AttackDown": SubResource("Animation_uga6c"),
-"AttackHorizontal": SubResource("Animation_72lbq"),
-"AttackHorizontal2": SubResource("Animation_5cnkt"),
-"AttackHorizontal3": SubResource("Animation_r0plt"),
-"AttackVerticle": SubResource("Animation_d4l8w"),
-"DashAttack": SubResource("Animation_asndm"),
-"DashParry": SubResource("Animation_hwemm"),
-"HackAttack": SubResource("Animation_gsee6"),
-"Idle": SubResource("Animation_cxjel"),
-"Parry": SubResource("Animation_stc87"),
-"RESET": SubResource("Animation_rek6a"),
-"Recovery1": SubResource("Animation_2he4t"),
-"Recovery2": SubResource("Animation_7xsnh"),
-"Swap": SubResource("Animation_i5x64"),
-"SwordReform": SubResource("Animation_6x1h6")
+&"AttackDown": SubResource("Animation_uga6c"),
+&"AttackHorizontal": SubResource("Animation_72lbq"),
+&"AttackHorizontal2": SubResource("Animation_5cnkt"),
+&"AttackHorizontal3": SubResource("Animation_r0plt"),
+&"AttackVerticle": SubResource("Animation_d4l8w"),
+&"DashAttack": SubResource("Animation_asndm"),
+&"DashParry": SubResource("Animation_hwemm"),
+&"HackAttack": SubResource("Animation_gsee6"),
+&"Idle": SubResource("Animation_cxjel"),
+&"Parry": SubResource("Animation_stc87"),
+&"RESET": SubResource("Animation_rek6a"),
+&"Recovery1": SubResource("Animation_2he4t"),
+&"Recovery2": SubResource("Animation_7xsnh"),
+&"Swap": SubResource("Animation_i5x64"),
+&"SwordReform": SubResource("Animation_6x1h6")
 }
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_61ywy"]
@@ -2272,6 +2307,15 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_gs043"]
 gradient = SubResource("Gradient_8x3gg")
+width = 1
+height = 1
+
+[sub_resource type="Gradient" id="Gradient_m6aax"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_e4ue5"]
+gradient = SubResource("Gradient_m6aax")
 width = 1
 height = 1
 
@@ -2289,19 +2333,11 @@ emission_ring_axis = Vector3(0, 0, 1)
 emission_ring_height = 50.0
 emission_ring_radius = 50.0
 emission_ring_inner_radius = 0.0
+emission_ring_cone_angle = 90.0
 radial_velocity_min = 200.0
 radial_velocity_max = 300.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_r1nl1")
-
-[sub_resource type="Gradient" id="Gradient_m6aax"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_e4ue5"]
-gradient = SubResource("Gradient_m6aax")
-width = 1
-height = 1
 
 [sub_resource type="Gradient" id="Gradient_nx3im"]
 offsets = PackedFloat32Array(0, 0.998258)
@@ -2442,9 +2478,18 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_drnmj"]
 _data = {
-"Flash": SubResource("Animation_3sevd"),
-"RESET": SubResource("Animation_3waij")
+&"Flash": SubResource("Animation_3sevd"),
+&"RESET": SubResource("Animation_3waij")
 }
+
+[sub_resource type="Gradient" id="Gradient_pt0gi"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_a51en"]
+gradient = SubResource("Gradient_pt0gi")
+width = 1
+height = 1
 
 [sub_resource type="Curve" id="Curve_ck15e"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -2461,15 +2506,6 @@ initial_velocity_min = 150.0
 initial_velocity_max = 200.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_awjaw")
-
-[sub_resource type="Gradient" id="Gradient_pt0gi"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_a51en"]
-gradient = SubResource("Gradient_pt0gi")
-width = 1
-height = 1
 
 [sub_resource type="Gradient" id="Gradient_u7rv6"]
 interpolation_mode = 1
@@ -2542,8 +2578,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_w7p1b"]
 _data = {
-"Animate": SubResource("Animation_dlc11"),
-"RESET": SubResource("Animation_ltc66")
+&"Animate": SubResource("Animation_dlc11"),
+&"RESET": SubResource("Animation_ltc66")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_urh35"]
@@ -2578,6 +2614,7 @@ radius = 3.0
 texture_filter = 1
 collision_layer = 4
 collision_mask = 35
+floor_constant_speed = true
 safe_margin = 0.001
 script = ExtResource("1_lek16")
 sprite = NodePath("PlayerVisual/PlayerSprite")
@@ -2658,10 +2695,35 @@ IFRAMETIMER = 0.5
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 shape = SubResource("RectangleShape2D_dxj8g")
 
+[node name="Effects" type="Node2D" parent="."]
+
+[node name="Jump" type="GPUParticles2D" parent="Effects"]
+material = SubResource("CanvasItemMaterial_efsdk")
+position = Vector2(1, -1)
+emitting = false
+amount = 1
+texture = ExtResource("13_lr4jq")
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_efsdk")
+
+[node name="Land" type="GPUParticles2D" parent="Effects"]
+modulate = Color(1, 1, 1, 0.509804)
+material = SubResource("CanvasItemMaterial_gr648")
+position = Vector2(0, 0.5)
+emitting = false
+amount = 1
+texture = ExtResource("14_gr648")
+lifetime = 0.5
+one_shot = true
+process_material = SubResource("ParticleProcessMaterial_efsdk")
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
+unique_name_in_owner = true
 color = Color(0.137255, 0.137255, 0.137255, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ufcdm")
+texture_scale = 0.01
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "hurtboxComponent", "attackComponentsThatCanBeParried")]
 script = ExtResource("1_8slbu")
@@ -2688,24 +2750,26 @@ stream = ExtResource("12_hmt06")
 max_polyphony = 3
 bus = &"SoundEffects"
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "player", "audios")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "player", "audios", "particles")]
 script = ExtResource("5_8j04r")
 animated_player_sprite = NodePath("../../SpriteAnimator")
 player = NodePath("../..")
 audios = [NodePath("AudioStreamPlayer")]
+particles = NodePath("../../Effects/Jump")
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StateMachine/Jump"]
 stream = ExtResource("14_kaha2")
 volume_db = 5.0
 bus = &"SoundEffects"
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "animated_scale", "player", "playerStateMachine", "audios")]
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "animated_scale", "player", "playerStateMachine", "audios", "dustEffect")]
 script = ExtResource("6_yew1w")
 animated_player_sprite = NodePath("../../SpriteAnimator")
 animated_scale = NodePath("../../ScaleAnimator")
 player = NodePath("../..")
 playerStateMachine = NodePath("..")
 audios = [NodePath("LandSound")]
+dustEffect = NodePath("../../Effects/Land")
 
 [node name="LandSound" type="AudioStreamPlayer" parent="StateMachine/Fall"]
 stream = ExtResource("16_5blxq")
@@ -2780,7 +2844,7 @@ detectionBox = NodePath("../../HackTargetDetectionBox")
 
 [node name="GlitchSwap" type="AnimationPlayer" parent="StateMachine/HackMode"]
 libraries = {
-"": SubResource("AnimationLibrary_ygddn")
+&"": SubResource("AnimationLibrary_ygddn")
 }
 speed_scale = 10.0
 
@@ -2798,10 +2862,19 @@ weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 script = ExtResource("21_njjf0")
 spriteAnimator = NodePath("../../SpriteAnimator")
 
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("hurtboxToDisable")]
+script = ExtResource("34_4ht5j")
+hurtboxToDisable = NodePath("../../HurtboxComponent")
+
 [node name="WeaponStateMachine" type="Node" parent="." node_paths=PackedStringArray("pStateMachine", "initial_state")]
 script = ExtResource("11_v7ndi")
 pStateMachine = NodePath("../StateMachine")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Spawn")
+
+[node name="Spawn" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("animator", "weaponSprite")]
+script = ExtResource("35_e2bo2")
+animator = NodePath("../../WeaponAnimator")
+weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 
 [node name="AttackHorizontal" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("nextChainAttackState", "weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "leftAttackComponent", "rightAttackComponent")]
 script = ExtResource("10_d677x")
@@ -3073,18 +3146,17 @@ texture_mode = 2
 position = Vector2(-3, -2.5)
 emitting = false
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_j7tth")
 lifetime = 0.3
 fixed_fps = 300
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.04
+process_material = SubResource("ParticleProcessMaterial_j7tth")
 
 [node name="RedParticles2" type="GPUParticles2D" parent="HackEffects"]
 position = Vector2(-3, -2.5)
 emitting = false
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_brlsd")
 lifetime = 0.3
 one_shot = true
 preprocess = 0.05
@@ -3093,10 +3165,11 @@ fixed_fps = 300
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.04
+process_material = SubResource("ParticleProcessMaterial_brlsd")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackEffects"]
 libraries = {
-"": SubResource("AnimationLibrary_ax80n")
+&"": SubResource("AnimationLibrary_ax80n")
 }
 
 [node name="HackUI" type="Node2D" parent="." node_paths=PackedStringArray("player", "blur", "camera")]
@@ -3110,27 +3183,27 @@ camera = NodePath("../PlayerCamera")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackUI"]
 libraries = {
-"": SubResource("AnimationLibrary_y6rxl")
+&"": SubResource("AnimationLibrary_y6rxl")
 }
 
 [node name="Top" type="RichTextLabel" parent="HackUI"]
-offset_left = 9.0
-offset_top = -8.5
-offset_right = 109.0
-offset_bottom = 14.5
+offset_left = -27.0
+offset_top = -9.5
+offset_right = 73.0
+offset_bottom = 13.5
 rotation = 0.0872665
 scale = Vector2(0.35, 0.35)
 theme_override_constants/outline_size = 3
 theme_override_fonts/normal_font = ExtResource("35_4vsvx")
 bbcode_enabled = true
-text = "Testing"
+text = "[right][color=black]Testing"
 fit_content = true
 scroll_active = false
 script = ExtResource("38_o42eg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackUI/Top"]
 libraries = {
-"": SubResource("AnimationLibrary_fjv40")
+&"": SubResource("AnimationLibrary_fjv40")
 }
 
 [node name="Line2D" type="Line2D" parent="HackUI/Top"]
@@ -3144,7 +3217,6 @@ default_color = Color(0, 0, 0, 1)
 [node name="CrossOutParticles" type="GPUParticles2D" parent="HackUI/Top"]
 position = Vector2(0, 9)
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_3ysx1")
 lifetime = 0.03
 one_shot = true
 explosiveness = 1.0
@@ -3152,20 +3224,21 @@ fixed_fps = 300
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.02
+process_material = SubResource("ParticleProcessMaterial_3ysx1")
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
-offset_left = 9.0
-offset_top = -3.0
-offset_right = 109.0
-offset_bottom = 20.0
+offset_left = -27.0
+offset_top = -2.0
+offset_right = 73.0
+offset_bottom = 21.0
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
-offset_left = 7.0
+offset_left = -30.0
 offset_top = -7.0
-offset_right = 68.0
+offset_right = 31.0
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)
@@ -3179,7 +3252,7 @@ script = ExtResource("38_o42eg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackUI/Middle"]
 libraries = {
-"": SubResource("AnimationLibrary_fjv40")
+&"": SubResource("AnimationLibrary_fjv40")
 }
 
 [node name="Line2D" type="Line2D" parent="HackUI/Middle"]
@@ -3193,7 +3266,6 @@ default_color = Color(0, 0, 0, 1)
 [node name="CrossOutParticles" type="GPUParticles2D" parent="HackUI/Middle"]
 position = Vector2(0, 9)
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_3ysx1")
 lifetime = 0.03
 one_shot = true
 explosiveness = 1.0
@@ -3201,6 +3273,7 @@ fixed_fps = 300
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.02
+process_material = SubResource("ParticleProcessMaterial_3ysx1")
 
 [node name="SelectLineContainer" type="Node2D" parent="HackUI"]
 
@@ -3211,7 +3284,6 @@ copy_mode = 2
 position = Vector2(-9.53674e-07, -3)
 emitting = false
 amount = 32
-process_material = SubResource("ParticleProcessMaterial_ltqy2")
 lifetime = 0.1
 one_shot = true
 preprocess = 0.05
@@ -3222,6 +3294,7 @@ trail_enabled = true
 trail_lifetime = 0.02
 trail_sections = 4
 trail_section_subdivisions = 2
+process_material = SubResource("ParticleProcessMaterial_ltqy2")
 
 [node name="SelectLine" type="Line2D" parent="HackUI/SelectLineContainer"]
 z_index = 1
@@ -3285,18 +3358,18 @@ frame = 62
 
 [node name="SpriteAnimator" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_n2wqp")
+&"": SubResource("AnimationLibrary_n2wqp")
 }
 
 [node name="ScaleAnimator" type="AnimationPlayer" parent="."]
 root_node = NodePath("../SpriteAnimator")
 libraries = {
-"": SubResource("AnimationLibrary_0xm6f")
+&"": SubResource("AnimationLibrary_0xm6f")
 }
 
 [node name="WeaponAnimator" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_lwd5y")
+&"": SubResource("AnimationLibrary_lwd5y")
 }
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="."]
@@ -3320,7 +3393,6 @@ texture = SubResource("GradientTexture2D_gs043")
 [node name="ParryParticles" type="GPUParticles2D" parent="ParryIntercepterComponent"]
 emitting = false
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_3xn0i")
 texture = SubResource("GradientTexture2D_e4ue5")
 lifetime = 0.3
 one_shot = true
@@ -3330,6 +3402,7 @@ fixed_fps = 60
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_3xn0i")
 script = ExtResource("29_tbcwx")
 
 [node name="PointLight2D" type="PointLight2D" parent="ParryIntercepterComponent"]
@@ -3340,13 +3413,12 @@ script = ExtResource("30_t8rxg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParryIntercepterComponent/PointLight2D"]
 libraries = {
-"": SubResource("AnimationLibrary_drnmj")
+&"": SubResource("AnimationLibrary_drnmj")
 }
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParryIntercepterComponent/PointLight2D"]
 emitting = false
 amount = 3
-process_material = SubResource("ParticleProcessMaterial_4qdl4")
 texture = SubResource("GradientTexture2D_a51en")
 lifetime = 0.25
 one_shot = true
@@ -3356,11 +3428,11 @@ fixed_fps = 60
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_4qdl4")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParryIntercepterComponent/PointLight2D"]
 emitting = false
 amount = 3
-process_material = SubResource("ParticleProcessMaterial_4qdl4")
 texture = SubResource("GradientTexture2D_a51en")
 lifetime = 0.25
 one_shot = true
@@ -3370,6 +3442,7 @@ fixed_fps = 60
 interpolate = false
 trail_enabled = true
 trail_lifetime = 0.05
+process_material = SubResource("ParticleProcessMaterial_4qdl4")
 
 [node name="OmniDirectionalKnockbackComponent" parent="ParryIntercepterComponent/PointLight2D" instance=ExtResource("32_3xbax")]
 
@@ -3390,7 +3463,7 @@ script = ExtResource("33_ntv7t")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParryIntercepterComponent/ParryExplotion"]
 libraries = {
-"": SubResource("AnimationLibrary_w7p1b")
+&"": SubResource("AnimationLibrary_w7p1b")
 }
 
 [node name="ParrySound" type="AudioStreamPlayer" parent="ParryIntercepterComponent"]
@@ -3501,5 +3574,15 @@ script = ExtResource("55_c7l4y")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 
+[node name="RespawnTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 5.6
+one_shot = true
+
+[connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="death" from="HealthComponent" to="StateMachine" method="_on_health_component_death"]
+[connection signal="death" from="HealthComponent" to="WeaponStateMachine" method="_on_health_component_death"]
+[connection signal="death" from="HealthComponent" to="PlayerUI" method="_on_health_component_death"]
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]
+[connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

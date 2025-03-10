@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://c50x0ma4r25le"]
 
-[ext_resource type="Script" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.gd" id="1_k0bch"]
+[ext_resource type="Script" uid="uid://cw6am3p4shxft" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.gd" id="1_k0bch"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_k0llc"]
 
 [node name="StateSwitchHack" type="Line2D"]

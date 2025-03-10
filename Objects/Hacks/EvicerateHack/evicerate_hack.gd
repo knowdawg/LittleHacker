@@ -7,7 +7,7 @@ func customExecute():
 	$EvicerateAnimator.stop()
 	$EvicerateAnimator.play("Evicerate")
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$Node/Sprite2D.global_position = parent.global_position
 
 func damageParent():

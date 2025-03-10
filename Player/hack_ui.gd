@@ -37,10 +37,16 @@ func _process(_delta: float) -> void:
 			var h : HackCommandComponent = HackCommandManager.hackCommands[i]
 			var n : String = h.hackName
 			
-			if player.getSpriteDirection() == -1:
-				curentLabels[i].text = "[right]" + n
-			else:
+			if HackCommandManager.hackCommands[i].isExecutable():
 				curentLabels[i].text = n
+			else:
+				curentLabels[i].text = "[color=black]" + n
+			
+			if player.getSpriteDirection() == -1:
+				curentLabels[i].text = "[right]" + curentLabels[i].text
+			else:
+				pass
+			
 			
 		if Input.is_action_just_pressed("SwitchBar"):
 			selectedHackIndex -= 1

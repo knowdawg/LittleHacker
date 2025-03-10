@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://cujb85tywigwh"]
 
-[ext_resource type="Script" path="res://Components/HackCommandComponent/hack_command_component.gd" id="1_xdsa1"]
+[ext_resource type="Script" uid="uid://bxtgmy1u3as4b" path="res://Components/HackCommandComponent/hack_command_component.gd" id="1_xdsa1"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="2_y458k"]
 
 [node name="HackCommandComponent" type="Line2D"]

@@ -3,7 +3,7 @@ shader_type canvas_item;
 
 uniform sampler2D screen : hint_screen_texture;
 uniform float brightness : hint_range(0.0, 1.0, 0.1);
-uniform sampler2D lightCurve;
+uniform float shadowIntensitiy : hint_range(-1.0, 1.0, 0.1);
 
 varying vec2 screenSize;
 varying vec4 screenVal;
@@ -30,7 +30,7 @@ void light() {
 
 	float finished = 0.0;
 	//Marching Algorithm
-	for(int i = 0; i < 300; i++){
+	for(int i = 0; i < 100; i++){
 		if((disTraveled + 0.0) > distanceNeededToTravel){
 			finished = 1.0;
 			break;
@@ -43,15 +43,14 @@ void light() {
 		intensity += falloff * min(sdfVal, 0.0); //If sdfVal in negative, it is subtracted. If it is positive, nothing happens because of the min function
 		disTraveled += screenSize.x * abs(sdfVal);
 
-		disTraveled += 0.001;//0.001//Bump the distance traveled to speed up the algorithm and to prevent the raymarching from moving zero every loop.
-		intensity += 0.001;
+		disTraveled += 0.005;//0.001//Bump the distance traveled to speed up the algorithm and to prevent the raymarching from moving zero every loop.
+		//intensity += 0.001;
 	}
 	intensity *= finished;
 
 	intensity = clamp(intensity, 0.0, 1.0);
 
-	float lVal = texture(lightCurve, vec2(1.0 - intensity, 0.0)).r;
-	intensity += lVal * 0.2;
+	intensity = smoothstep(shadowIntensitiy, 1.0, intensity);
 
 	LIGHT = vec4(LIGHT_COLOR.rgb * screenVal.rgb * intensity * 8.0, LIGHT_COLOR.a);
 }

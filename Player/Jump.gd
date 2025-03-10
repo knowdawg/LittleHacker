@@ -4,6 +4,7 @@ class_name SmallPlayerJump
 @export var animated_player_sprite : AnimationPlayer
 @export var player : Player
 @export var audios : Array[AudioStreamPlayer] = []
+@export var particles : GPUParticles2D
 
 var t : float = 0.0
 func update_physics(delta):
@@ -25,6 +26,8 @@ func enter(_prevState):
 	makeSound()
 	animated_player_sprite.play("JumpStart")
 	t = 0
+	particles.restart()
+	particles.emitting = true
 
 func makeSound():
 	var i : int = randi_range(0, audios.size() -1)

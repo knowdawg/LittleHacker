@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://baqyhnw0fd6r0"]
 
-[ext_resource type="Script" path="res://Components/VelocityBufferComponent/VelocityBufferComponent.gd" id="1_q2n6g"]
+[ext_resource type="Script" uid="uid://bava88l3n4f0q" path="res://Components/VelocityBufferComponent/VelocityBufferComponent.gd" id="1_q2n6g"]
 
 [node name="VelocityBufferComponent" type="ColorRect"]
 visible = false

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b30hfek6xr8i1"]
 
-[ext_resource type="Script" path="res://Components/VisualEffectComponents/LightFlashComponent/light_effect_component.gd" id="1_y3s2v"]
+[ext_resource type="Script" uid="uid://1j75383fj4tx" path="res://Components/VisualEffectComponents/LightFlashComponent/light_effect_component.gd" id="1_y3s2v"]
 
 [sub_resource type="Gradient" id="Gradient_1cdh3"]
 offsets = PackedFloat32Array(0, 0.975)
@@ -69,8 +69,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_6pnf6"]
 _data = {
-"Flash": SubResource("Animation_aeoe3"),
-"RESET": SubResource("Animation_8ls35")
+&"Flash": SubResource("Animation_aeoe3"),
+&"RESET": SubResource("Animation_8ls35")
 }
 
 [node name="LightEffectComponent" type="PointLight2D"]

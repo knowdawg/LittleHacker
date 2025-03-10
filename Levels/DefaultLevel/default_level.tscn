@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://bm0s7ek1l7gcu"]
 
-[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sahbk"]
+[ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sahbk"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_w4aep"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_qjk1c"]
+[ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_qjk1c"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_jvbrh"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f40ai"]
@@ -13,15 +13,15 @@ resource_local_to_scene = true
 shader = ExtResource("3_qjk1c")
 shader_parameter/brightness = 1.0
 
-[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_sahbk")
 projectileSpawnNode = NodePath("Proectiles")
 enemySpawnLocation = NodePath("Enemies")
 doorToSpawnPlayerOnFailure = NodePath("LevelTransition")
-doors = [NodePath("LevelTransition")]
+doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParrent")
+respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
-lightingBrightness = null
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -35,6 +35,10 @@ size = Vector2i(1000, 432)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_f40ai")
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="RespawnPoints" type="Node2D" parent="."]
 
 [node name="PlayerParrent" type="Node2D" parent="."]
 

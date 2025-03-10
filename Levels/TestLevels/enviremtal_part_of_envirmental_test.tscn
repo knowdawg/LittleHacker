@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://doimwfp7cb8h"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_rxxlu"]
+[ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_rxxlu"]
 [ext_resource type="Texture2D" uid="uid://8yaj25wh5jum" path="res://Materials/BrokenBricks.png" id="2_8lfym"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="3_clohi"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="4_hk0n4"]
@@ -8,12 +8,13 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rxmyq"]
 resource_local_to_scene = true
 shader = ExtResource("1_rxxlu")
+shader_parameter/noiseTex = ExtResource("2_8lfym")
+shader_parameter/palete = ExtResource("3_clohi")
 shader_parameter/paleteSize = 4.0
 shader_parameter/size = Vector2(768, 432)
 shader_parameter/noiseResolution = Vector2(96, 96)
 shader_parameter/shading = 0.04
-shader_parameter/noiseTex = ExtResource("2_8lfym")
-shader_parameter/palete = ExtResource("3_clohi")
+shader_parameter/warpBorder = false
 
 [sub_resource type="Gradient" id="Gradient_u2xu1"]
 offsets = PackedFloat32Array(1)

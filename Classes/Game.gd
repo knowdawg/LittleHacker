@@ -5,12 +5,14 @@ var camera : SmallPlayerCamera
 var littleLevel : GenericLevel
 var littleViewport : LittleSceneTransitioner
 
+var respawnData : RespawnData
 
 var inHackMode = false
 var hackedEnemy = null
 var hackedHealthbar : EnemyHealthBar = null
 signal enterHackMode
 signal exitHackMode
+
 
 func slowTime(timeScale : float):
 	Engine.time_scale = timeScale
@@ -53,3 +55,19 @@ func addEnemy(enemy):
 func superParry(pos : Node2D):
 	if player:
 		player.screenEffects.superParry(pos)
+
+func respawnPlayer():
+	if !respawnData:
+		littleViewport.switchScene(littleLevel.doors[0].getSceneSwitchData())
+		return
+	
+	var d = SceneSwitchData.new()
+	d.respawnPlayer = true
+	d.respawnData = respawnData
+	d.scene = respawnData.scene
+	
+	littleViewport.switchScene(d)
+
+func deletePlayer():
+	player.queue_free()
+	player = null

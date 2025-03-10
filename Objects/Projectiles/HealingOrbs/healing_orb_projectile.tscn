@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d2j3fqxswjbe0"]
 
-[ext_resource type="Script" path="res://Objects/Projectiles/HealingOrbs/healing_orb_projectile.gd" id="1_lqcsg"]
+[ext_resource type="Script" uid="uid://6sxafyb4upuc" path="res://Objects/Projectiles/HealingOrbs/healing_orb_projectile.gd" id="1_lqcsg"]
 [ext_resource type="PackedScene" uid="uid://chkylrbd78k57" path="res://Components/VisualEffectComponents/trailComponent/trail_component.tscn" id="1_ys4gb"]
 
 [node name="HealingOrbProjectile" type="Node2D"]

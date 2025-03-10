@@ -14,9 +14,11 @@ extends State
 var dirVec : Vector2
 var moveSpeed
 var end : bool = false
+var t = 0.0
 func enter(_prevState):
 	end = false
 	moveSpeed = speed
+	t = 0.0
 	
 	animator.play(animationName)
 	
@@ -41,3 +43,8 @@ func update(delta):
 	
 	if end == true:
 		moveSpeed = move_toward(moveSpeed, 0.0, delta * 3000.0)
+	
+	t += delta
+	if t >= 1.0:
+		trasitioned.emit(self, "Idle")
+		return

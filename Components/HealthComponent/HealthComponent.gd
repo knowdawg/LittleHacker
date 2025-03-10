@@ -59,7 +59,7 @@ func damage(attack : Attack):
 		return
 	
 	
-	health -= attack.attack_damage
+	set_health(health - attack.attack_damage)
 	set_weakness(weakness + attack.weakness_damage)
 	
 	hit.emit(attack)

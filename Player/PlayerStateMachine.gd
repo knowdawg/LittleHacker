@@ -85,7 +85,7 @@ func onChildTransition(state : State, new_state_name):
 	switchStates(new_state_name)
 
 #Call for manualy overwriting State
-func switchStates(newState):
+func switchStates(newState : String):
 	var n = states.get(newState.to_lower())
 	
 	var prevState : State = null
@@ -113,3 +113,7 @@ func noWeaponInputs():
 	if current_state is PlayerBlocked or current_state is PlayerGrabbed:
 		return true
 	return false
+
+
+func _on_health_component_death(_attack: Attack) -> void:
+	switchStates("Death")

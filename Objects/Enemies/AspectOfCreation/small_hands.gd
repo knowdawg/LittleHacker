@@ -9,7 +9,7 @@ func _ready() -> void:
 	$SmallHandAnimator.play("Idle")
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	if followPlayer:
+	if followPlayer and Game.player:
 		global_position = lerp(global_position, Game.player.global_position, delta * 8.0)
 		return
 	else:
@@ -31,6 +31,8 @@ func clap():
 
 func setPlayerFollow(f : bool):
 	followPlayer = f
+	if !f:
+		$SmallHandAnimator.play("Idle")
 	if f:
 		if flip == true:
 			$SmallHandAnimator.play("Flip2")

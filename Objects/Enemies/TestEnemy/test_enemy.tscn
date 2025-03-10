@@ -1,25 +1,25 @@
 [gd_scene load_steps=86 format=3 uid="uid://ciq13p31itcpw"]
 
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
-[ext_resource type="Script" path="res://Classes/GenericStates/idle.gd" id="2_4v4p0"]
-[ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="3_p5on1"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="4_l276g"]
-[ext_resource type="Script" path="res://Classes/GenericStates/in_range.gd" id="5_f3wn7"]
-[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="5_wdh1o"]
+[ext_resource type="Script" uid="uid://1lc30hu2s0q0" path="res://Objects/Enemies/TestEnemy/test_enemy.gd" id="1_tas1o"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="1_ysl6l"]
+[ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="2_4v4p0"]
+[ext_resource type="Script" uid="uid://bedvqa6rx0ack" path="res://Classes/GenericStates/chase.gd" id="3_p5on1"]
+[ext_resource type="Script" uid="uid://bkbvcn61p04ge" path="res://Classes/GenericStates/GenericAttackState.gd" id="4_l276g"]
+[ext_resource type="Script" uid="uid://dnu6q3ticfrxa" path="res://Classes/GenericStates/in_range.gd" id="5_f3wn7"]
+[ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="5_wdh1o"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="6_n62ka"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="6_qbqsc"]
-[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="7_82gm8"]
+[ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="7_82gm8"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="8_xodr3"]
-[ext_resource type="Script" path="res://Objects/Enemies/TestEnemy/parried_big.gd" id="9_crb1k"]
+[ext_resource type="Script" uid="uid://dmtgss4gktopo" path="res://Objects/Enemies/TestEnemy/parried_big.gd" id="9_crb1k"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="9_t230s"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="10_30k11"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="10_53r62"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="10_ehbhi"]
+[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="10_ehbhi"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="11_b30xt"]
 [ext_resource type="PackedScene" uid="uid://cujb85tywigwh" path="res://Components/HackCommandComponent/hack_command_component.tscn" id="11_oenx2"]
-[ext_resource type="Script" path="res://Classes/GenericStates/block.gd" id="11_osv0s"]
-[ext_resource type="Script" path="res://Classes/GenericStates/generic_grab_attack.gd" id="12_y1w8q"]
+[ext_resource type="Script" uid="uid://buaj8ke0ugmir" path="res://Classes/GenericStates/block.gd" id="11_osv0s"]
+[ext_resource type="Script" uid="uid://dfmn8ernn7qjt" path="res://Classes/GenericStates/generic_grab_attack.gd" id="12_y1w8q"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="15_eo6el"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="20_guqxo"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="20_lhe68"]
@@ -27,10 +27,10 @@
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="24_r225t"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="25_bky6c"]
 [ext_resource type="PackedScene" uid="uid://b2livsf15r2fv" path="res://Components/VisualEffectComponents/FlareComponent/flare_effect_component.tscn" id="27_gou6c"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BlockEffect.gdshader" id="28_jr6e5"]
+[ext_resource type="Shader" uid="uid://blj332mb33a16" path="res://Assets/Shaders/Effects/BlockEffect.gdshader" id="28_jr6e5"]
 [ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="28_n6epm"]
 [ext_resource type="PackedScene" uid="uid://b30hfek6xr8i1" path="res://Components/VisualEffectComponents/LightFlashComponent/light_effect_component.tscn" id="28_wtubw"]
-[ext_resource type="Script" path="res://Components/VisualEffectComponents/BlockEffect/block_effect.gd" id="29_5g1vb"]
+[ext_resource type="Script" uid="uid://c4dy7v06bkg8m" path="res://Components/VisualEffectComponents/BlockEffect/block_effect.gd" id="29_5g1vb"]
 [ext_resource type="PackedScene" uid="uid://dr8t41k422n1f" path="res://Components/GrabComponent/grab_component.tscn" id="31_273nn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fn2c5"]
@@ -69,7 +69,7 @@ height = 1
 polygon = PackedVector2Array(-1, -6, 1, -6, 1, 0, -1, 0)
 
 [sub_resource type="Curve" id="Curve_04yu7"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.578529, 100), 324.68, 0.0, 0, 0]
 point_count = 2
 
@@ -109,7 +109,7 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="Curve" id="Curve_o2mvo"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 324.68, 0.0, 0, 0]
 point_count = 2
 
@@ -181,8 +181,8 @@ noise = SubResource("FastNoiseLite_7ar86")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_641qy"]
 shader = ExtResource("28_jr6e5")
-shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_g8lmn")
+shader_parameter/color = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_wddfg"]
 resource_name = "Attack1"
@@ -1092,21 +1092,21 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_5f5r3"]
 _data = {
-"Attack1": SubResource("Animation_wddfg"),
-"Block": SubResource("Animation_65dm6"),
-"BlockAttack": SubResource("Animation_ff2vx"),
-"Chase": SubResource("Animation_m3v1i"),
-"Death": SubResource("Animation_tmal0"),
-"GrabAttack": SubResource("Animation_o1kyx"),
-"GrabHit": SubResource("Animation_53ukd"),
-"GrabMissed": SubResource("Animation_rieex"),
-"Hacked": SubResource("Animation_axw0y"),
-"Idle": SubResource("Animation_nkupm"),
-"Parried": SubResource("Animation_h0g38"),
-"ParriedBig": SubResource("Animation_8mrrs"),
-"RESET": SubResource("Animation_wx3py"),
-"Thrust": SubResource("Animation_a4xb8"),
-"TrippleAttack": SubResource("Animation_fkh4v")
+&"Attack1": SubResource("Animation_wddfg"),
+&"Block": SubResource("Animation_65dm6"),
+&"BlockAttack": SubResource("Animation_ff2vx"),
+&"Chase": SubResource("Animation_m3v1i"),
+&"Death": SubResource("Animation_tmal0"),
+&"GrabAttack": SubResource("Animation_o1kyx"),
+&"GrabHit": SubResource("Animation_53ukd"),
+&"GrabMissed": SubResource("Animation_rieex"),
+&"Hacked": SubResource("Animation_axw0y"),
+&"Idle": SubResource("Animation_nkupm"),
+&"Parried": SubResource("Animation_h0g38"),
+&"ParriedBig": SubResource("Animation_8mrrs"),
+&"RESET": SubResource("Animation_wx3py"),
+&"Thrust": SubResource("Animation_a4xb8"),
+&"TrippleAttack": SubResource("Animation_fkh4v")
 }
 
 [sub_resource type="Curve" id="Curve_4gx10"]

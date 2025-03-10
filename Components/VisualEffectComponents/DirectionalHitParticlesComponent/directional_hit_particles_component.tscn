@@ -1,11 +1,11 @@
 [gd_scene load_steps=11 format=3 uid="uid://boaqnrhkb5ukt"]
 
-[ext_resource type="Script" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.gd" id="1_mogjx"]
+[ext_resource type="Script" uid="uid://drpikp3gbchh2" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.gd" id="1_mogjx"]
 [ext_resource type="PackedScene" uid="uid://crcxcymm072ik" path="res://Components/KnockbackComponents/FourDirectionalKnockbackComponent/four_directional_knockback_component.tscn" id="2_vh5yb"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="3_axet3"]
 
 [sub_resource type="Curve" id="Curve_7s2s7"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 324.68, 0.0, 0, 0]
 point_count = 2
 

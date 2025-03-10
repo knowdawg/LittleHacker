@@ -52,3 +52,7 @@ func _process(_delta: float) -> void:
 		energyIcon.material.set_shader_parameter("BLOOM_THRESHOLD", 0.7)
 	else:
 		energyIcon.material.set_shader_parameter("BLOOM_THRESHOLD", 1.0)
+
+
+func _on_health_component_death(_attack: Attack) -> void:
+	hide()

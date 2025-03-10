@@ -1,8 +1,8 @@
 [gd_scene load_steps=52 format=3 uid="uid://c8x60h4peckug"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
+[ext_resource type="Shader" uid="uid://bqj4py375klxx" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_3d7l1"]
 [ext_resource type="PackedScene" uid="uid://doimwfp7cb8h" path="res://Levels/TestLevels/enviremtal_part_of_envirmental_test.tscn" id="1_b6j48"]
-[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_morp2"]
+[ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_morp2"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="2_jhjfi"]
 [ext_resource type="Texture2D" uid="uid://8yaj25wh5jum" path="res://Materials/BrokenBricks.png" id="4_kdadv"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="5_nf44p"]
@@ -17,24 +17,24 @@
 [ext_resource type="Texture2D" uid="uid://bc6o3t40m07u2" path="res://Assets/Sprites/WorldObjects/Rope.png" id="10_e5lt5"]
 [ext_resource type="Texture2D" uid="uid://kcukaxi6a868" path="res://Assets/Sprites/WorldObjects/Vine.png" id="11_nqees"]
 [ext_resource type="Texture2D" uid="uid://kqco5cyic76w" path="res://Assets/Sprites/WorldObjects/Leaf.png" id="12_foyy8"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/ScreenMirroring.gdshader" id="13_mu6m5"]
+[ext_resource type="Shader" uid="uid://bara07dsa3lsl" path="res://Assets/Shaders/Filters/ScreenMirroring.gdshader" id="13_mu6m5"]
 [ext_resource type="Texture2D" uid="uid://bpeh571apnjq2" path="res://Assets/Sprites/WorldObjects/StiltHouseTest.png" id="13_o8sn2"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="16_a5nql"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="17_87pum"]
-[ext_resource type="Script" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
+[ext_resource type="Script" uid="uid://cpl0eb6ld6egy" path="res://UI/FPSDisplay.gd" id="17_spwmn"]
 [ext_resource type="Texture2D" uid="uid://0y415e8nk50y" path="res://Assets/Sprites/WorldObjects/Grass2.png" id="19_2fqmj"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="23_ilhlg"]
+[ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="23_ilhlg"]
 [ext_resource type="PackedScene" uid="uid://bbwjfta6awigx" path="res://Objects/Enemies/Gorgon/gorgon.tscn" id="26_3pugp"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="27_4fuw3"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="28_k127t"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="28_k127t"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="29_dfolk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_x6hkg"]
 shader = ExtResource("1_3d7l1")
-shader_parameter/size = Vector2(192, 108)
-shader_parameter/noiseResolution = Vector2(64, 64)
 shader_parameter/noiseTex = ExtResource("4_kdadv")
 shader_parameter/palete = ExtResource("2_jhjfi")
+shader_parameter/size = Vector2(192, 108)
+shader_parameter/noiseResolution = Vector2(64, 64)
 
 [sub_resource type="Gradient" id="Gradient_8u10m"]
 offsets = PackedFloat32Array(1)
@@ -124,13 +124,13 @@ noise = SubResource("FastNoiseLite_1xvwb")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bo34g"]
 resource_local_to_scene = true
 shader = ExtResource("28_k127t")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
 shader_parameter/resolution = Vector2(40, 40)
 shader_parameter/textureScollSpeed = 2.0
 shader_parameter/warpScrollSpeed = 3.0
 shader_parameter/surgeFrequency = 2.0
 shader_parameter/surgeSpeed = 5.0
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ovxbe"]
 

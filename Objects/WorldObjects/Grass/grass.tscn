@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bk47m1sonbns4"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/grass.gdshader" id="1_nvcqt"]
+[ext_resource type="Shader" uid="uid://bewl2hf2t6yw" path="res://Assets/Shaders/ProceduralTexturesShaders/grass.gdshader" id="1_nvcqt"]
 [ext_resource type="Texture2D" uid="uid://dl0l4bmb7sjas" path="res://Assets/Sprites/WorldObjects/Grass.png" id="2_b1j6c"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ccrx2"]

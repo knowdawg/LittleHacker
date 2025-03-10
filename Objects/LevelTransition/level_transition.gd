@@ -13,17 +13,21 @@ enum dir{LEFT, RIGHT} #Left is 0, Right is 1
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		if scene:
-			var s = SceneSwitchData.new()
-			s.scene = self.scene
-			s.doorName = doorName
-			s.faceRight = true if directionToFaceWhenEnteringTHISDoor == dir.RIGHT else false
-			s.playerData = Game.getPlayerData()
+			var s = getSceneSwitchData()
 			Game.littleViewport.call_deferred("switchScene", s)
-			
 			
 		else:
 			printerr("No Scene To Switch To!")
 
-func _ready() -> void:
-	if Game.littleViewport:
-		Game.littleViewport.threadLoadScene(scene)
+#func _ready() -> void:
+	#if Game.littleViewport:
+		#Game.littleViewport.threadLoadScene(scene)
+
+func getSceneSwitchData() -> SceneSwitchData:
+	var s = SceneSwitchData.new()
+	s.scene = self.scene
+	s.doorName = doorName
+	s.faceRight = true if directionToFaceWhenEnteringTHISDoor == dir.RIGHT else false
+	s.playerData = Game.getPlayerData()
+	
+	return s

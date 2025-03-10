@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://b0rw13dj3fjac"]
 
-[ext_resource type="Script" path="res://Components/CameraBoundriesComponent/camera_boundries_component.gd" id="1_ukfda"]
+[ext_resource type="Script" uid="uid://3cvhnpe7jc6j" path="res://Components/CameraBoundriesComponent/camera_boundries_component.gd" id="1_ukfda"]
 
 [node name="CameraBoundriesComponent" type="Polygon2D"]
 color = Color(1, 1, 1, 0.196078)

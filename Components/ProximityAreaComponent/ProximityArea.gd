@@ -25,7 +25,7 @@ func is_player_inside():
 	for body in bodies:
 		if body is Player:
 			if requireLineOfSight:
-				ray.rotation = (global_position - Game.player.global_position).angle()
+				ray.rotation = (global_position - body.global_position).angle()
 				ray.force_raycast_update()
 				var b = ray.get_collider()
 				if body == b:

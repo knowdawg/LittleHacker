@@ -23,5 +23,5 @@ void fragment() {
 
 
 	COLOR.rgb = c.rgb;
-	COLOR.a *= c.a;
+	COLOR.a = c.a;
 }

@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://btep0f1wqxbl3"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/sdf_canyon.gdshader" id="1_i3kvn"]
+[ext_resource type="Shader" uid="uid://dg0w8ed6i6p3f" path="res://Assets/Shaders/Textures/sdf_canyon.gdshader" id="1_i3kvn"]
 [ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="2_c2d2y"]
 [ext_resource type="Texture2D" uid="uid://b8akensfj4e61" path="res://Palletes/sandstone_envirement_Pallete.tres" id="2_vc0ex"]
-[ext_resource type="Script" path="res://Objects/WorldObjects/SDFVisuals/sdf_canyon.gd" id="4_2rgx1"]
+[ext_resource type="Script" uid="uid://bmj2r8g2usid" path="res://Objects/WorldObjects/SDFVisuals/sdf_canyon.gd" id="4_2rgx1"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_t2381"]
 shader = ExtResource("1_i3kvn")
@@ -26,8 +26,8 @@ loop_mode = 1
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_lup35"]
 _data = {
-"RESET": SubResource("Animation_63ehk"),
-"animate": SubResource("Animation_w4noc")
+&"RESET": SubResource("Animation_63ehk"),
+&"animate": SubResource("Animation_w4noc")
 }
 
 [node name="SDFCanyon" type="ColorRect"]

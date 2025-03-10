@@ -8,8 +8,9 @@ var objectToControll : Node2D
 
 func setActive(active : bool, object = null):
 	if active == false:
-		if objectToControll.has_method("releaseGrab"):
-			objectToControll.releaseGrab()
+		if is_instance_valid(objectToControll):
+			if objectToControll.has_method("releaseGrab"):
+				objectToControll.releaseGrab()
 	isActive = active
 	objectToControll = object
 

@@ -1,17 +1,18 @@
 [gd_scene load_steps=8 format=3 uid="uid://cepxb5yr5odxp"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_l0tc7"]
+[ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_l0tc7"]
 [ext_resource type="Texture2D" uid="uid://cghau4k15fon" path="res://Assets/Sprites/EnvirmentTextures/DirtTexture.tres" id="2_52876"]
 [ext_resource type="Texture2D" uid="uid://4bq0tk5udirq" path="res://Assets/Sprites/EnvirmentTextures/MossyPallete.tres" id="3_ualfo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbh1h"]
 shader = ExtResource("1_l0tc7")
+shader_parameter/noiseTex = ExtResource("2_52876")
+shader_parameter/palete = ExtResource("3_ualfo")
 shader_parameter/paleteSize = 7.0
 shader_parameter/size = Vector2(384, 216)
 shader_parameter/noiseResolution = Vector2(512, 512)
 shader_parameter/shading = 0.03
-shader_parameter/noiseTex = ExtResource("2_52876")
-shader_parameter/palete = ExtResource("3_ualfo")
+shader_parameter/warpBorder = false
 
 [sub_resource type="Gradient" id="Gradient_2npmr"]
 offsets = PackedFloat32Array(1)

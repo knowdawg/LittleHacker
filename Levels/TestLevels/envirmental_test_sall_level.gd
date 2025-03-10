@@ -1,13 +1,27 @@
-extends Node2D
+@tool extends Node2D
 class_name GenericLevel
+
+#StartingLevelResourceScript must be open for this to work
+@export_tool_button("Set as Starting Level", "Callable") var set_level_action = setSelfAsStartingLevel
+func setSelfAsStartingLevel():
+	var startSceneResource : StartingLevelResourceScript = load("uid://byhqpp6gc4xnd")
+	startSceneResource.levelPath = self.scene_file_path
+	
+	print("Starting scene set as : " + self.scene_file_path)
 
 @export var projectileSpawnNode : Node2D
 @export var enemySpawnLocation : Node2D
 
 @export_group("PlayerSpawnDetails")
 @export var doorToSpawnPlayerOnFailure : LevelTransition
-@export var doors : Array[LevelTransition] = []
+@export var doorContainerNode : Node2D
+@onready var doors = doorContainerNode.get_children()
 @export var whereToAddPlayer : Node2D
+
+@export_group("PlayerRespawnDetails")
+@export var respawnPointNode : Node2D
+@onready var respawnPoints = respawnPointNode.get_children()
+
 
 @export_group("Lighting")
 @export var lighting : ColorRect
@@ -17,20 +31,35 @@ class_name GenericLevel
 func initializeLevel(sceneData : SceneSwitchData) -> void:
 	if lighting:
 			lighting.material.set_shader_parameter("brightness", lightingBrightness)
-	var p = Game.createPlayer()
-	p.initialize(sceneData)
-	whereToAddPlayer.add_child(p)
-	var d : LevelTransition
-	for i in doors:
-		if !sceneData.doorName:
-			break
-		if sceneData.doorName.to_lower() == i.name.to_lower():
-			d = i
-			break
-	if d == null:
-		d = doorToSpawnPlayerOnFailure
 	
-	p.position = d.enterPosition.global_position
+	if !sceneData.respawnPlayer:
+		var p = Game.createPlayer()
+		p.initialize(sceneData)
+		whereToAddPlayer.add_child(p)
+		var d : LevelTransition
+		for i in doors:
+			if !sceneData.doorName:
+				break
+			if sceneData.doorName.to_lower() == i.name.to_lower():
+				d = i
+				break
+		if d == null:
+			d = doorToSpawnPlayerOnFailure
+		p.position = d.enterPosition.global_position
+	else:
+		var r : RespawnPoint
+		var respawnPointName : String = sceneData.respawnData.respawnPointName
+		for i in respawnPoints:
+			if i.respawnPointName == respawnPointName:
+				r = i
+				break
+		if r == null:
+			var p = Game.createPlayer()
+			p.initialize(sceneData)
+			whereToAddPlayer.add_child(p)
+			p.position = doorToSpawnPlayerOnFailure.enterPosition.global_position
+			return
+		r.spawnPlayer(sceneData)
 
 func addProjectile(projectile):
 	projectileSpawnNode.add_child(projectile)

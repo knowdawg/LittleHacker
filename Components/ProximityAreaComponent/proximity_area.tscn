@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://brujq4dkn34nd"]
 
-[ext_resource type="Script" path="res://Components/ProximityAreaComponent/ProximityArea.gd" id="1_dkwi5"]
+[ext_resource type="Script" uid="uid://bgv1lc5v0suo5" path="res://Components/ProximityAreaComponent/ProximityArea.gd" id="1_dkwi5"]
 
 [node name="ProximityArea" type="Area2D"]
 collision_layer = 0

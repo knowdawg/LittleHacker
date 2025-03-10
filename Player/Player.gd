@@ -105,6 +105,9 @@ func _process(_delta: float) -> void:
 func _ready():
 	$HealthComponent.grabbed.connect(grabbed)
 	Game.enterHackMode.connect(enterHackMode)
+	var t : Tween = create_tween()
+	t.tween_property(%PointLight2D, "texture_scale", 1.0, 0.3)
+	
 
 func canCoyoteJump():
 	return coyoteTime > 0.0
@@ -192,3 +195,14 @@ func initialize(data : SceneSwitchData):
 		healthComponent.set_health(healthComponent.MAX_HEALTH)
 	sprite.flip_h = data.faceRight
 	
+	
+
+func _on_health_component_death(_attack: Attack) -> void:
+	screenEffects.showStatic()
+	healthComponent.locked = true
+	%RespawnTimer.start()
+	Game.player = null
+
+
+func _on_respawn_timer_timeout() -> void:
+	Game.respawnPlayer()

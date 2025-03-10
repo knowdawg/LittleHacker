@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://ds57nknaqm0s"]
 
-[ext_resource type="Script" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.gd" id="1_1hrwe"]
+[ext_resource type="Script" uid="uid://dnqj70o03sqh3" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.gd" id="1_1hrwe"]
 
 [sub_resource type="Animation" id="Animation_4mrf8"]
 resource_name = "Animate"
@@ -35,8 +35,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7fr1b"]
 _data = {
-"Animate": SubResource("Animation_4mrf8"),
-"RESET": SubResource("Animation_ekhee")
+&"Animate": SubResource("Animation_4mrf8"),
+&"RESET": SubResource("Animation_ekhee")
 }
 
 [node name="HitFlashComponent" type="Node2D"]

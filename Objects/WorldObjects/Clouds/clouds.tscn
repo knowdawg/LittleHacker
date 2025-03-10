@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://dd8erj16sujy"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/clouds.gdshader" id="1_mbgmh"]
+[ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="1_mbgmh"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_wc3rv"]
 seed = 1
@@ -25,13 +25,13 @@ noise = SubResource("FastNoiseLite_g7bsa")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_17jw2"]
 shader = ExtResource("1_mbgmh")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_3rg01")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_jshoa")
 shader_parameter/resolution = Vector2(128, 72)
 shader_parameter/speed = 1.0
 shader_parameter/cloudFullness = 0.5
 shader_parameter/cloudPosition = 0.0
 shader_parameter/xDisplacment = 0.0
-shader_parameter/cloudNoise = SubResource("NoiseTexture2D_3rg01")
-shader_parameter/cloudWarp = SubResource("NoiseTexture2D_jshoa")
 
 [sub_resource type="Gradient" id="Gradient_k66g4"]
 offsets = PackedFloat32Array(1)

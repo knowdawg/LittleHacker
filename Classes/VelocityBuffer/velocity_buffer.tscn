@@ -1,10 +1,10 @@
 [gd_scene load_steps=15 format=3 uid="uid://dpgqff80ka4bq"]
 
-[ext_resource type="Shader" path="res://Classes/VelocityBuffer/prev_velocity_buffer.gdshader" id="1_dtqy0"]
-[ext_resource type="Shader" path="res://Classes/VelocityBuffer/velocity_buffer.gdshader" id="1_idome"]
-[ext_resource type="Script" path="res://Classes/VelocityBuffer/velocity_buffer.gd" id="1_ntehb"]
-[ext_resource type="Shader" path="res://Classes/VelocityBuffer/FinalOutputInterpreter.gdshader" id="4_i4k6e"]
-[ext_resource type="Shader" path="res://Classes/VelocityBuffer/testing.gdshader" id="5_3wqeg"]
+[ext_resource type="Shader" uid="uid://dsl1tkehevtqg" path="res://Classes/VelocityBuffer/prev_velocity_buffer.gdshader" id="1_dtqy0"]
+[ext_resource type="Shader" uid="uid://d207yhae7a464" path="res://Classes/VelocityBuffer/velocity_buffer.gdshader" id="1_idome"]
+[ext_resource type="Script" uid="uid://l5eblang21k6" path="res://Classes/VelocityBuffer/velocity_buffer.gd" id="1_ntehb"]
+[ext_resource type="Shader" uid="uid://ls6jwlq7chqx" path="res://Classes/VelocityBuffer/FinalOutputInterpreter.gdshader" id="4_i4k6e"]
+[ext_resource type="Shader" uid="uid://b2afx8yr4bkuo" path="res://Classes/VelocityBuffer/testing.gdshader" id="5_3wqeg"]
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q5mp6"]
 viewport_path = NodePath("CurFrame")
@@ -12,9 +12,9 @@ viewport_path = NodePath("CurFrame")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q3ln5"]
 resource_local_to_scene = true
 shader = ExtResource("1_dtqy0")
+shader_parameter/otherVierport = SubResource("ViewportTexture_q5mp6")
 shader_parameter/cameraMovementOffset = Vector2(0.004, 0)
 shader_parameter/wind = Vector2(0, 0)
-shader_parameter/otherVierport = SubResource("ViewportTexture_q5mp6")
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_q3of3"]
 viewport_path = NodePath("PrevFrame")
@@ -30,8 +30,8 @@ viewport_path = NodePath("CurFrame")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_03af5"]
 resource_local_to_scene = true
 shader = ExtResource("4_i4k6e")
-shader_parameter/size = Vector2(128, 72)
 shader_parameter/curFrame = SubResource("ViewportTexture_p1skq")
+shader_parameter/size = Vector2(128, 72)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qfjsj"]
 viewport_path = NodePath("Interpreter")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=11 format=3 uid="uid://bnj1t3t7sac5h"]
 
-[ext_resource type="Script" path="res://Test/goathead_cutscene.gd" id="1_elbk3"]
+[ext_resource type="Script" uid="uid://bo6iqobb6r6o8" path="res://Test/goathead_cutscene.gd" id="1_elbk3"]
 [ext_resource type="Texture2D" uid="uid://ckwkkflkboe5k" path="res://Assets/Sprites/Cutscenes/GoatSkull.png" id="1_gt0q4"]
 [ext_resource type="Texture2D" uid="uid://dqoms8316yios" path="res://Assets/Sprites/Cutscenes/GoatSkullSplatter1.png" id="2_am001"]
 [ext_resource type="Texture2D" uid="uid://b5ac4yae8vm8a" path="res://Assets/Sprites/Cutscenes/GoatSkullSplatter2.png" id="3_e42j4"]
@@ -265,8 +265,8 @@ tracks/9/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n3ogf"]
 _data = {
-"Animate": SubResource("Animation_yxiw6"),
-"RESET": SubResource("Animation_w8wm0")
+&"Animate": SubResource("Animation_yxiw6"),
+&"RESET": SubResource("Animation_w8wm0")
 }
 
 [node name="GoatheadCutscene" type="Node2D"]

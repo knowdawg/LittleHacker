@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b2livsf15r2fv"]
 
-[ext_resource type="Script" path="res://Components/VisualEffectComponents/FlareComponent/flare_effect_component.gd" id="1_nklsu"]
+[ext_resource type="Script" uid="uid://l5flwbw10dy5" path="res://Components/VisualEffectComponents/FlareComponent/flare_effect_component.gd" id="1_nklsu"]
 
 [sub_resource type="Gradient" id="Gradient_fadvv"]
 interpolation_mode = 1
@@ -72,8 +72,8 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xt680"]
 _data = {
-"Flare": SubResource("Animation_xvbyn"),
-"RESET": SubResource("Animation_3w8j6")
+&"Flare": SubResource("Animation_xvbyn"),
+&"RESET": SubResource("Animation_3w8j6")
 }
 
 [node name="FlareEffectComponent" type="Sprite2D"]

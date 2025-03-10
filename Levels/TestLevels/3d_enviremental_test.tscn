@@ -1,7 +1,7 @@
 [gd_scene load_steps=12 format=3 uid="uid://dwdcwogte48ui"]
 
 [ext_resource type="PackedScene" uid="uid://c8x60h4peckug" path="res://Levels/TestLevels/envirmental_test_sall_level.tscn" id="1_g3qik"]
-[ext_resource type="Script" path="res://Levels/TestLevels/character_body_3d.gd" id="2_cj6wj"]
+[ext_resource type="Script" uid="uid://cuvqj3fwmn28r" path="res://Levels/TestLevels/character_body_3d.gd" id="2_cj6wj"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0g1bq"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)

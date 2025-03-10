@@ -1,19 +1,20 @@
-[gd_scene load_steps=35 format=3 uid="uid://bkpqd3ei3e87s"]
+[gd_scene load_steps=34 format=3 uid="uid://bkpqd3ei3e87s"]
 
-[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
+[ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
 [ext_resource type="PackedScene" uid="uid://b4ugiyef56755" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_start_cave.tscn" id="2_kcft2"]
 [ext_resource type="PackedScene" uid="uid://dw4f7rxc2fd23" path="res://Objects/WorldObjects/Tilemaps/background_tilemap.tscn" id="3_kv423"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="3_mmnmb"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="3_mmnmb"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="4_o0ky0"]
 [ext_resource type="PackedScene" uid="uid://rr8whno8lay3" path="res://Objects/WorldObjects/Tilemaps/wooden_mine.tscn" id="5_uaspu"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="6_sw6q4"]
 [ext_resource type="PackedScene" uid="uid://bsbpltyxlcy5f" path="res://Objects/WorldObjects/Lantern/lantern_light.tscn" id="7_lr2gp"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="8_2y2tj"]
+[ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="8_8jv7p"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="8_28ct1"]
 [ext_resource type="PackedScene" uid="uid://bbwjfta6awigx" path="res://Objects/Enemies/Gorgon/gorgon.tscn" id="9_a6eg2"]
 [ext_resource type="PackedScene" uid="uid://bae1ixxbndyw3" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.tscn" id="10_fmqj3"]
 [ext_resource type="PackedScene" uid="uid://b8hqt8qdycrjb" path="res://Objects/Enemies/HealthBuggy/health_buggy.tscn" id="11_6w1f1"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="11_xyrk5"]
+[ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="11_xyrk5"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="14_vf27f"]
 
 [sub_resource type="Gradient" id="Gradient_axx6j"]
@@ -71,28 +72,22 @@ polygon = PackedVector2Array(429, -39, 433, -27, 440, -18, 457, -18, 457, -19, 4
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ihcvw"]
 
-[sub_resource type="Curve" id="Curve_mffwy"]
-_data = [Vector2(0, 0.969893), 0.0, 0.0, 0, 0, Vector2(0.013624, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_l2mhn"]
-curve = SubResource("Curve_mffwy")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xor2r"]
 resource_local_to_scene = true
 shader = ExtResource("11_xyrk5")
 shader_parameter/brightness = 1.0
-shader_parameter/lightCurve = SubResource("CurveTexture_l2mhn")
+shader_parameter/shadowIntensitiy = -0.4
 
-[node name="StarweepStartCave" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="StarweepStartCave" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_37lxr")
 projectileSpawnNode = NodePath("Projectiles")
 enemySpawnLocation = NodePath("Enemies")
-doorToSpawnPlayerOnFailure = NodePath("TestLevelStart")
-doors = [NodePath("TutorialRoom1"), NodePath("TestLevel")]
+doorToSpawnPlayerOnFailure = NodePath("Doors/TestLevelStart")
+doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParent")
+respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
-lightingBrightness = 0.5
+lightingBrightness = 0.0
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -320,6 +315,18 @@ modulate = Color(1, 1, 1, 0)
 position = Vector2(-180, 0)
 occluder = SubResource("OccluderPolygon2D_dmc4q")
 
+[node name="RespawnPoints" type="Node2D" parent="."]
+
+[node name="RespawnPoint" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("8_8jv7p")]
+position = Vector2(196, 92)
+level = NodePath("../..")
+respawnPointName = "StartCave"
+
+[node name="RespawnPoint2" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("8_8jv7p")]
+position = Vector2(363, 11)
+level = NodePath("../..")
+respawnPointName = "StartCave2"
+
 [node name="PlayerParent" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -353,47 +360,50 @@ position = Vector2(215, -48)
 [node name="HealthBuggy2" parent="Enemies" instance=ExtResource("11_6w1f1")]
 position = Vector2(232, -46)
 
-[node name="TutorialRoom1" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="TutorialRoom1" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-276, -133)
 scene = "res://Levels/StarweepCrater/Levels/starweep_crater.tscn"
 doorName = "CaveExit"
 enterPosition = NodePath("Marker2D")
 directionToFaceWhenEnteringTHISDoor = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TutorialRoom1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/TutorialRoom1"]
 position = Vector2(422, 118)
 shape = SubResource("RectangleShape2D_ihcvw")
 
-[node name="Marker2D" type="Marker2D" parent="TutorialRoom1"]
+[node name="Marker2D" type="Marker2D" parent="Doors/TutorialRoom1"]
 position = Vector2(438, 120)
 
-[node name="TestLevel" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
+[node name="TestLevel" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-18, -113)
 scene = "res://Levels/TestLevels/envirmental_test_sall_level.tscn"
 doorName = "TestLevel"
 enterPosition = NodePath("Marker2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevel"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/TestLevel"]
 visible = false
 position = Vector2(422, 118)
 shape = SubResource("RectangleShape2D_ihcvw")
+disabled = true
 
-[node name="Marker2D" type="Marker2D" parent="TestLevel"]
+[node name="Marker2D" type="Marker2D" parent="Doors/TestLevel"]
 position = Vector2(406, 124)
 
-[node name="TestLevelStart" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
+[node name="TestLevelStart" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-700, -3)
 scene = "res://Levels/TestLevels/envirmental_test_sall_level.tscn"
 doorName = "TestLevel"
 enterPosition = NodePath("Marker2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="TestLevelStart"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/TestLevelStart"]
 position = Vector2(422, 118)
 shape = SubResource("RectangleShape2D_ihcvw")
 disabled = true
 
-[node name="Marker2D" type="Marker2D" parent="TestLevelStart"]
-position = Vector2(476, 123)
+[node name="Marker2D" type="Marker2D" parent="Doors/TestLevelStart"]
+position = Vector2(751, 87)
 
 [node name="Projectiles" type="Node2D" parent="."]
 

@@ -16,7 +16,7 @@ warnings/check_invalid_track_paths=false
 
 config/name="LittleHacker"
 run/main_scene="res://Levels/TestLevels/eviremental_test.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
@@ -133,10 +133,6 @@ Interact={
 [physics]
 
 2d/default_gravity=500.0
-
-[rendering]
-
-driver/threads/thread_model=2
 
 [shader_globals]
 

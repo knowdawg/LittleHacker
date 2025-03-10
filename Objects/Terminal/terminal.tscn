@@ -1,8 +1,8 @@
 [gd_scene load_steps=18 format=3 uid="uid://cqfxmyyowlul4"]
 
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="1_gwhp1"]
-[ext_resource type="Script" path="res://Objects/Terminal/Terminal.gd" id="1_rmm1k"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Textures/GridLines.gdshader" id="1_xrjgr"]
+[ext_resource type="Script" uid="uid://bukbukeympnqm" path="res://Objects/Terminal/Terminal.gd" id="1_rmm1k"]
+[ext_resource type="Shader" uid="uid://dx4rb6pyuthvc" path="res://Assets/Shaders/Textures/GridLines.gdshader" id="1_xrjgr"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mc7xu"]
 shader = ExtResource("1_xrjgr")
@@ -232,9 +232,9 @@ tracks/4/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ffwbk"]
 _data = {
-"Hide": SubResource("Animation_ojpji"),
-"RESET": SubResource("Animation_v1idu"),
-"Show": SubResource("Animation_p5m22")
+&"Hide": SubResource("Animation_ojpji"),
+&"RESET": SubResource("Animation_v1idu"),
+&"Show": SubResource("Animation_p5m22")
 }
 
 [node name="Terminal" type="CanvasLayer"]

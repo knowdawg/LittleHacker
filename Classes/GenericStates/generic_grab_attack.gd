@@ -25,6 +25,7 @@ func onPogo(attack : Attack):
 
 func exit(newState : State):
 	attackComponent.call_deferred("disable")
-	if Game.player.stateMachine.current_state is PlayerGrabbed:
-		if newState.name != grabHitState.name:
-			attackComponent.grabNode.setActive(false)
+	if Game.player:
+		if Game.player.stateMachine.current_state is PlayerGrabbed:
+			if newState.name != grabHitState.name:
+				attackComponent.grabNode.setActive(false)

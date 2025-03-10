@@ -21,10 +21,11 @@ func updateDirection():
 			spriteToFlip.flip_h = false
 
 func lookAtPlayer():
-	if velocityToCheck.global_position.x > Game.player.global_position.x:
-		spriteToFlip.flip_h = false
-	else:
-		spriteToFlip.flip_h = true
+	if Game.player:
+		if velocityToCheck.global_position.x > Game.player.global_position.x:
+			spriteToFlip.flip_h = false
+		else:
+			spriteToFlip.flip_h = true
 
 func flipXDir():
 	if flipX:

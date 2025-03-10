@@ -6,6 +6,8 @@ class_name PlayerWeaponStateMachine
 var inputBuffer = ""
 
 var t = 0.2
+
+var dead = false
 func _process(delta):
 	t -= delta
 	
@@ -29,9 +31,16 @@ func _process(delta):
 	if Game.inHackMode:
 		inputBuffer = ""
 	
+	if dead:
+		inputBuffer = ""
+	
 	if current_state:
 		current_state.update(delta)
 
 
 func _on_health_component_hit(_attack: Attack) -> void:
 	inputBuffer = ""
+
+
+func _on_health_component_death(_attack: Attack) -> void:
+	dead = true

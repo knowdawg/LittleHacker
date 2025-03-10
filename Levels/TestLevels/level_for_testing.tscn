@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=17 format=3 uid="uid://dmv3cbnk3ejby"]
 
-[ext_resource type="Script" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
+[ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
 [ext_resource type="PackedScene" uid="uid://dcqwmsg54sjn4" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.tscn" id="2_kquoi"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_p32do"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_4mm16"]
+[ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_4mm16"]
+[ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="3_kj1k5"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="6_4kmjg"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_n4nu2"]
@@ -12,6 +13,9 @@
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xt0cq"]
 noise = SubResource("FastNoiseLite_2b6ii")
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mn1fc"]
+polygon = PackedVector2Array(-49.9994, 163, 15.0006, 163, 15.0002, 55.9999, -50.9998, 55.0002, -49.9999, 15.0002, 55.0001, 14.9998, 56.0007, 203, -52.9993, 203)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bv8ak"]
 size = Vector2(729, 20)
@@ -31,15 +35,15 @@ resource_local_to_scene = true
 shader = ExtResource("3_4mm16")
 shader_parameter/brightness = 1.0
 
-[node name="LevelForTesting" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doors", "whereToAddPlayer", "lighting")]
+[node name="LevelForTesting" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_x8kok")
 projectileSpawnNode = NodePath("Proectiles")
 enemySpawnLocation = NodePath("Enemies")
-doorToSpawnPlayerOnFailure = NodePath("LevelTransition")
-doors = [NodePath("LevelTransition")]
+doorToSpawnPlayerOnFailure = NodePath("Doors/LevelTransition")
+doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParrent")
+respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
-lightingBrightness = null
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -52,6 +56,11 @@ modulate = Color(0.392157, 0.392157, 0.392157, 1)
 texture_filter = 1
 position = Vector2(0, 25)
 texture = SubResource("NoiseTexture2D_xt0cq")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+position = Vector2(109, 0)
+rotation = 1.5708
+occluder = SubResource("OccluderPolygon2D_mn1fc")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -71,7 +80,7 @@ position = Vector2(0, 35)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-41, 0)
+position = Vector2(-39, -1)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
@@ -90,7 +99,7 @@ position = Vector2(0, 35)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(110, 0)
+position = Vector2(109, 0)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
@@ -115,6 +124,13 @@ texture = SubResource("NoiseTexture2D_uh3go")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_f40ai")
 
+[node name="RespawnPoints" type="Node2D" parent="."]
+
+[node name="RespawnPoint" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("3_kj1k5")]
+position = Vector2(-22, 13)
+level = NodePath("../..")
+respawnPointName = "BossRespawn"
+
 [node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
@@ -127,13 +143,15 @@ position = Vector2(15, 11)
 [node name="SoftLighting" parent="." instance=ExtResource("2_p32do")]
 material = SubResource("ShaderMaterial_3bpdn")
 
-[node name="LevelTransition" parent="." node_paths=PackedStringArray("enterPosition") instance=ExtResource("4_45odj")]
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="LevelTransition" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("4_45odj")]
 scene = "res://Levels/StarweepCrater/Levels/starweep_crater.tscn"
 doorName = "asdf"
 enterPosition = NodePath("Marker2D")
 directionToFaceWhenEnteringTHISDoor = 1
 
-[node name="Marker2D" type="Marker2D" parent="LevelTransition"]
+[node name="Marker2D" type="Marker2D" parent="Doors/LevelTransition"]
 position = Vector2(-34, 12)
 
 [node name="CursorFollower" parent="." instance=ExtResource("6_4kmjg")]

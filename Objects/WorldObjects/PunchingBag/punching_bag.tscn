@@ -1,6 +1,6 @@
 [gd_scene load_steps=23 format=3 uid="uid://q5240bomkjnk"]
 
-[ext_resource type="Script" path="res://Objects/WorldObjects/PunchingBag/punching_bag.gd" id="1_r7mwc"]
+[ext_resource type="Script" uid="uid://cr7h2a71hsu10" path="res://Objects/WorldObjects/PunchingBag/punching_bag.gd" id="1_r7mwc"]
 [ext_resource type="Texture2D" uid="uid://c0g0on4gr8gcx" path="res://Assets/Sprites/WorldObjects/PunchingBag.png" id="2_8c1gs"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="3_k8r6e"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_uqtpl"]
@@ -102,9 +102,9 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0k4ry"]
 _data = {
-"HitLeft": SubResource("Animation_e6aca"),
-"HitRight": SubResource("Animation_sd6ws"),
-"RESET": SubResource("Animation_yeci2")
+&"HitLeft": SubResource("Animation_e6aca"),
+&"HitRight": SubResource("Animation_sd6ws"),
+&"RESET": SubResource("Animation_yeci2")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fi2kx"]

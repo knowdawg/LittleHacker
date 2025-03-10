@@ -1,9 +1,9 @@
 [gd_scene load_steps=22 format=3 uid="uid://ctcag33a3qexi"]
 
-[ext_resource type="Script" path="res://Player/HealthBar/health_node.gd" id="1_271fo"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/Glow.gdshader" id="1_ugmlu"]
+[ext_resource type="Script" uid="uid://rtrvvcdwjw57" path="res://Player/HealthBar/health_node.gd" id="1_271fo"]
+[ext_resource type="Shader" uid="uid://dc8grws7obxps" path="res://Assets/Shaders/Filters/Glow.gdshader" id="1_ugmlu"]
 [ext_resource type="Texture2D" uid="uid://d4gv14semie18" path="res://Assets/Sprites/UI/EnergyHeart.png" id="2_6pynx"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/DualSinWaveLiquid.gdshader" id="4_exslp"]
+[ext_resource type="Shader" uid="uid://c8gl7j5w2i132" path="res://Assets/Shaders/Effects/DualSinWaveLiquid.gdshader" id="4_exslp"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qvqkd"]
 resource_local_to_scene = true
@@ -262,9 +262,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dgb0e"]
 _data = {
-"RESET": SubResource("Animation_454fg"),
-"TurnOff": SubResource("Animation_l0yvv"),
-"TurnOn": SubResource("Animation_b5681")
+&"RESET": SubResource("Animation_454fg"),
+&"TurnOff": SubResource("Animation_l0yvv"),
+&"TurnOn": SubResource("Animation_b5681")
 }
 
 [sub_resource type="Gradient" id="Gradient_44cqe"]

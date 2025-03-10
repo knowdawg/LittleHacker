@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b5u4m4y4r72tk"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/envirmentMix.gdshader" id="1_vlhbu"]
+[ext_resource type="Shader" uid="uid://b3rhuaq4xe0mr" path="res://Assets/Shaders/ProceduralTexturesShaders/envirmentMix.gdshader" id="1_vlhbu"]
 [ext_resource type="Texture2D" uid="uid://8yaj25wh5jum" path="res://Materials/BrokenBricks.png" id="2_mqsw5"]
 [ext_resource type="Texture2D" uid="uid://vv648kcobpoj" path="res://Assets/Sprites/EnvirmentTextures/StonePallete.tres" id="3_c738h"]
 [ext_resource type="Texture2D" uid="uid://cghau4k15fon" path="res://Assets/Sprites/EnvirmentTextures/DirtTexture.tres" id="3_odf4b"]
@@ -15,14 +15,14 @@ shader_parameter/advantage = -0.7
 shader_parameter/paleteSize1 = 4.0
 shader_parameter/noiseResolution1 = Vector2(96, 96)
 shader_parameter/shading1 = 0.04
+shader_parameter/noiseTex1 = ExtResource("2_mqsw5")
+shader_parameter/palete1 = ExtResource("3_c738h")
 shader_parameter/paleteSize2 = 6.0
 shader_parameter/noiseResolution2 = Vector2(512, 512)
 shader_parameter/shading2 = 0.03
-shader_parameter/blendOffsetMultiplier = 3.0
-shader_parameter/noiseTex1 = ExtResource("2_mqsw5")
-shader_parameter/palete1 = ExtResource("3_c738h")
 shader_parameter/noiseTex2 = ExtResource("3_odf4b")
 shader_parameter/palete2 = ExtResource("5_oybdm")
+shader_parameter/blendOffsetMultiplier = 3.0
 
 [sub_resource type="Gradient" id="Gradient_fvto2"]
 offsets = PackedFloat32Array(1)

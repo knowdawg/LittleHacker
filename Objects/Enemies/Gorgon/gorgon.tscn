@@ -1,25 +1,25 @@
 [gd_scene load_steps=69 format=3 uid="uid://bbwjfta6awigx"]
 
 [ext_resource type="Texture2D" uid="uid://dr67te4uyu3wj" path="res://Assets/Sprites/Enemies/Gorgon.png" id="1_npu85"]
-[ext_resource type="Script" path="res://Objects/Enemies/Gorgon/gorgon.gd" id="1_t5vl1"]
-[ext_resource type="Script" path="res://Classes/StateMachine.gd" id="2_278j0"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Outline.gdshader" id="2_ieyw1"]
+[ext_resource type="Script" uid="uid://csl5bj2h7ylah" path="res://Objects/Enemies/Gorgon/gorgon.gd" id="1_t5vl1"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_278j0"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="2_ieyw1"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_f7vra"]
-[ext_resource type="Script" path="res://Classes/GenericStates/idle.gd" id="4_1ysoi"]
+[ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="4_1ysoi"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_03phn"]
-[ext_resource type="Script" path="res://Classes/GenericStates/chase.gd" id="5_c7upf"]
+[ext_resource type="Script" uid="uid://bedvqa6rx0ack" path="res://Classes/GenericStates/chase.gd" id="5_c7upf"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="5_ymir3"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericThrow.gd" id="7_koemt"]
+[ext_resource type="Script" uid="uid://b8ofx46eh64tx" path="res://Classes/GenericStates/GenericThrow.gd" id="7_koemt"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="7_u6q2g"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericAttackState.gd" id="8_5cqnh"]
-[ext_resource type="Script" path="res://Objects/Enemies/Gorgon/States/prep_spear_throw.gd" id="8_7nume"]
+[ext_resource type="Script" uid="uid://bkbvcn61p04ge" path="res://Classes/GenericStates/GenericAttackState.gd" id="8_5cqnh"]
+[ext_resource type="Script" uid="uid://b72s8gkkdvtqw" path="res://Objects/Enemies/Gorgon/States/prep_spear_throw.gd" id="8_7nume"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="8_bhhhx"]
 [ext_resource type="PackedScene" uid="uid://buurypyfifpnl" path="res://Objects/Projectiles/GorgonSpearProjectile/gorgon_spear_projectile.tscn" id="8_vk48g"]
-[ext_resource type="Script" path="res://Classes/GenericStates/parried.gd" id="9_y4mtr"]
-[ext_resource type="Script" path="res://Classes/GenericStates/dead.gd" id="11_0n85e"]
-[ext_resource type="Script" path="res://Objects/Enemies/Gorgon/States/tail_swipe.gd" id="12_0nbqu"]
-[ext_resource type="Script" path="res://Objects/Enemies/Gorgon/tail_rip.gd" id="12_2m5s4"]
-[ext_resource type="Script" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="12_lspj2"]
+[ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="9_y4mtr"]
+[ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="11_0n85e"]
+[ext_resource type="Script" uid="uid://dmy8rkurrptlm" path="res://Objects/Enemies/Gorgon/States/tail_swipe.gd" id="12_0nbqu"]
+[ext_resource type="Script" uid="uid://cx40lbhpesddf" path="res://Objects/Enemies/Gorgon/tail_rip.gd" id="12_2m5s4"]
+[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="12_lspj2"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="14_058xi"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="15_opa60"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="15_uhac8"]
@@ -29,7 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="24_1y4hm"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="24_cw5x6"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="26_sgeag"]
-[ext_resource type="Shader" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="26_x8uri"]
+[ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="26_x8uri"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_vqv2b"]
 size = Vector2(2, 5)
@@ -514,25 +514,25 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_34can"]
 _data = {
-"Bite": SubResource("Animation_o2g2t"),
-"Decapitate": SubResource("Animation_vy1xw"),
-"Idle": SubResource("Animation_jeswr"),
-"IdleSpear": SubResource("Animation_b0ja4"),
-"RESET": SubResource("Animation_5pkgv"),
-"Run": SubResource("Animation_8h4bo"),
-"RunSpear": SubResource("Animation_qfwag"),
-"SpearThrust": SubResource("Animation_kcwfl"),
-"SpearThrustRun": SubResource("Animation_yua1i"),
-"Stun": SubResource("Animation_f88lw"),
-"StunSpear": SubResource("Animation_n3g3i"),
-"TailRip": SubResource("Animation_2uq1i"),
-"TailRipBite": SubResource("Animation_yqyen"),
-"TailRipDeath": SubResource("Animation_111bt"),
-"TailRipIdle": SubResource("Animation_f4gsl"),
-"TailRipStun": SubResource("Animation_xgdrj"),
-"TailRipWalk": SubResource("Animation_mvad4"),
-"TailSwipe": SubResource("Animation_o8xvc"),
-"ThrowSpear": SubResource("Animation_d2xwt")
+&"Bite": SubResource("Animation_o2g2t"),
+&"Decapitate": SubResource("Animation_vy1xw"),
+&"Idle": SubResource("Animation_jeswr"),
+&"IdleSpear": SubResource("Animation_b0ja4"),
+&"RESET": SubResource("Animation_5pkgv"),
+&"Run": SubResource("Animation_8h4bo"),
+&"RunSpear": SubResource("Animation_qfwag"),
+&"SpearThrust": SubResource("Animation_kcwfl"),
+&"SpearThrustRun": SubResource("Animation_yua1i"),
+&"Stun": SubResource("Animation_f88lw"),
+&"StunSpear": SubResource("Animation_n3g3i"),
+&"TailRip": SubResource("Animation_2uq1i"),
+&"TailRipBite": SubResource("Animation_yqyen"),
+&"TailRipDeath": SubResource("Animation_111bt"),
+&"TailRipIdle": SubResource("Animation_f4gsl"),
+&"TailRipStun": SubResource("Animation_xgdrj"),
+&"TailRipWalk": SubResource("Animation_mvad4"),
+&"TailSwipe": SubResource("Animation_o8xvc"),
+&"ThrowSpear": SubResource("Animation_d2xwt")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3fjj5"]
@@ -592,10 +592,10 @@ noise = SubResource("FastNoiseLite_5k1dr")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ni3gg"]
 resource_local_to_scene = true
 shader = ExtResource("26_x8uri")
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 
 [node name="Gorgon" type="CharacterBody2D"]
 texture_filter = 1

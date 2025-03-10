@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=3 uid="uid://dqgol3yij81qs"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_gi4nq"]
+[ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_gi4nq"]
 [ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="2_upolj"]
 [ext_resource type="Texture2D" uid="uid://b8akensfj4e61" path="res://Palletes/sandstone_envirement_Pallete.tres" id="3_5sffl"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="3_r16up"]
@@ -20,13 +20,14 @@ noise = SubResource("FastNoiseLite_ty1jf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xjtfj"]
 shader = ExtResource("1_gi4nq")
+shader_parameter/noiseTex = ExtResource("2_upolj")
+shader_parameter/palete = ExtResource("3_5sffl")
 shader_parameter/paleteSize = 10.0
 shader_parameter/size = Vector2(1920, 1080)
 shader_parameter/noiseResolution = Vector2(64, 64)
 shader_parameter/shading = 0.03
+shader_parameter/invert = -1.0
 shader_parameter/warpBorder = true
-shader_parameter/noiseTex = ExtResource("2_upolj")
-shader_parameter/palete = ExtResource("3_5sffl")
 shader_parameter/warpBorderNoise = SubResource("NoiseTexture2D_jxxyn")
 
 [sub_resource type="Gradient" id="Gradient_f6hhi"]

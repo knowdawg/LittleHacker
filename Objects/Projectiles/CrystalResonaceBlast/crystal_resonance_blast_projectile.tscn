@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b8t05k375ws5w"]
 
-[ext_resource type="Script" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.gd" id="1_nps07"]
+[ext_resource type="Script" uid="uid://4l8d2dhvjyam" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.gd" id="1_nps07"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="1_sfeny"]
 [ext_resource type="Texture2D" uid="uid://s5bb8pkvfcva" path="res://Assets/Sprites/Effects/CrystalResonanceProjectile.png" id="2_6nsrd"]
 [ext_resource type="Texture2D" uid="uid://ccjgm7qpwf4tk" path="res://Assets/Sprites/Effects/CrystalResonanceProjectileGreen.png" id="2_k32ow"]
@@ -105,8 +105,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oacfl"]
 _data = {
-"RESET": SubResource("Animation_gjh1r"),
-"Resonate": SubResource("Animation_vvgh3")
+&"RESET": SubResource("Animation_gjh1r"),
+&"Resonate": SubResource("Animation_vvgh3")
 }
 
 [node name="CrystalResonanceBlastProjectile" type="Node2D"]

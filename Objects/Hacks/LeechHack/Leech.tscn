@@ -6,7 +6,7 @@
 [sub_resource type="GDScript" id="GDScript_32opt"]
 script/source = "extends HackCommandComponent
 
-var enabled : bool = false
+var executing : bool = false
 @export var timeBetweenActivations : float = 0.5
 @export var damage : float = 1.0
 @export var projectile : PackedScene
@@ -20,17 +20,17 @@ var t = 0.0
 
 func executeHack():
 	healthComponent.death.connect(stop)
-	enabled = true
+	executing = true
 	leech()
 	if removeAfterExecuted:
 		var index : int = enemyHealthbar.hackCommands.find(self)
 		enemyHealthbar.hackCommands.remove_at(index)
 
 func stop(_attack):
-	enabled = false
+	executing = false
 
 func _process(delta: float) -> void:
-	if enabled:
+	if executing:
 		t += delta
 		
 		if t >= timeBetweenActivations:

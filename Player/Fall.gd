@@ -7,6 +7,8 @@ class_name SmallPlayerFall
 @export var playerStateMachine : PlayerStateMachine
 @export var audios : Array[AudioStreamPlayer] = []
 
+@export var dustEffect : GPUParticles2D
+
 func update_physics(delta):
 	player.update_physics(delta, true, true)
 	
@@ -14,6 +16,8 @@ func update_physics(delta):
 		trasitioned.emit(self, "Idle")
 		animated_scale.play("HitGround")
 		makeSound()
+		dustEffect.restart()
+		dustEffect.emitting = true
 		return
 	
 	if playerStateMachine.inputBuffer == "Jump":

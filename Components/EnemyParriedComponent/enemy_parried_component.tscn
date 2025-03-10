@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://o7pe5pdtqa66"]
 
-[ext_resource type="Script" path="res://Components/EnemyParriedComponent/enemy_parried_component.gd" id="1_5pepi"]
+[ext_resource type="Script" uid="uid://c5gyolkiaq6fq" path="res://Components/EnemyParriedComponent/enemy_parried_component.gd" id="1_5pepi"]
 
 [node name="EnemyParriedComponent" type="Node2D"]
 script = ExtResource("1_5pepi")

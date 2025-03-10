@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://b5fa63t6v138o"]
 
-[ext_resource type="Shader" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_mxqt6"]
-[ext_resource type="Script" path="res://Assets/Shaders/Filters/crt_shader.gd" id="2_cdaoo"]
+[ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_mxqt6"]
+[ext_resource type="Script" uid="uid://b6bbb6c64r3hk" path="res://Assets/Shaders/Filters/crt_shader.gd" id="2_cdaoo"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_vv0ic"]
 resource_local_to_scene = true
@@ -58,9 +58,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jx25t"]
 _data = {
-"BloomOff": SubResource("Animation_tewqn"),
-"BloomOn": SubResource("Animation_k6v3h"),
-"RESET": SubResource("Animation_34i7r")
+&"BloomOff": SubResource("Animation_tewqn"),
+&"BloomOn": SubResource("Animation_k6v3h"),
+&"RESET": SubResource("Animation_34i7r")
 }
 
 [node name="CRTShader" type="Sprite2D"]
