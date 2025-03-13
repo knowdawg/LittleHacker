@@ -86,7 +86,8 @@ func _physics_process(delta):
 	if is_on_floor() or $StateMachine.current_state is PlayerWallCling:
 		coyoteTime = 0.15
 
-func _process(_delta: float) -> void:
+var lerpT : float = 0.0
+func _process(delta: float) -> void:
 	Game.player = self
 		
 	var c : Camera2D = Game.camera
@@ -96,11 +97,28 @@ func _process(_delta: float) -> void:
 	
 	var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
 	if p:
-		$PlayerCamera.limit_left = p.leftLimit
-		$PlayerCamera.limit_right = p.rightLimit
-		$PlayerCamera.limit_bottom = p.downLimit
-		$PlayerCamera.limit_top = p.upLimit
-		#print(p.downLimit)
+		#%PlayerCamera.limit_left = p.leftLimit
+		#%PlayerCamera.limit_right = p.rightLimit
+		#%PlayerCamera.limit_bottom = p.downLimit
+		#%PlayerCamera.limit_top = p.upLimit
+		%PlayerCamera.zoom = p.zoom
+		
+		
+		lerpT -= delta
+		var targetPos = p.closest_rectangle_position(128.0, 72.0, global_position)
+		if lerpT == -delta: #Lock onto player when spawn in
+			%PlayerCamera.global_position = targetPos
+			return
+		if targetPos.distance_to(%PlayerCamera.global_position) > 5.0:
+			lerpT = 0.3
+			%PlayerCamera.global_position = lerp(%PlayerCamera.global_position, targetPos, delta * 10.0)
+		elif lerpT > 0.0:
+			%PlayerCamera.global_position = lerp(%PlayerCamera.global_position, targetPos, delta * 10.0)
+		elif lerpT <= 0.0:
+			%PlayerCamera.global_position = targetPos#lerp(%PlayerCamera.global_position, targetPos, delta * 10.0)
+		
+		
+		
 
 func _ready():
 	$HealthComponent.grabbed.connect(grabbed)

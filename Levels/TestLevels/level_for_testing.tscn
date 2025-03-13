@@ -34,6 +34,7 @@ viewport_path = NodePath("Main")
 resource_local_to_scene = true
 shader = ExtResource("3_4mm16")
 shader_parameter/brightness = 1.0
+shader_parameter/shadowIntensitiy = 0.0
 
 [node name="LevelForTesting" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_x8kok")
@@ -158,9 +159,8 @@ position = Vector2(-34, 12)
 visible = false
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("6_n4nu2")]
-position = Vector2(-4.76837e-07, -37)
-scale = Vector2(0.148148, 1)
-polygon = PackedVector2Array(-432, 72, 432, 72, 432, 0, -432, 0)
+position = Vector2(61, 26)
+polygon = PackedVector2Array(-128, 0, 0, 0, 0, -72, -128, -72)
 exstendUp = false
 exstendDown = false
 exstendLeft = false

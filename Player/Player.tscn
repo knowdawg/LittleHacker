@@ -3179,7 +3179,7 @@ position = Vector2(0, 2)
 script = ExtResource("35_4cxex")
 player = NodePath("..")
 blur = NodePath("../MotionBlur")
-camera = NodePath("../PlayerCamera")
+camera = NodePath("../Node/PlayerCamera")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackUI"]
 libraries = {
@@ -3568,7 +3568,10 @@ collision_mask = 256
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds"]
 shape = SubResource("CircleShape2D_jfgjt")
 
-[node name="PlayerCamera" type="Camera2D" parent="."]
+[node name="Node" type="Node" parent="."]
+
+[node name="PlayerCamera" type="Camera2D" parent="Node"]
+unique_name_in_owner = true
 zoom = Vector2(10, 10)
 script = ExtResource("55_c7l4y")
 

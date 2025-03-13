@@ -7,6 +7,7 @@
 resource_local_to_scene = true
 shader = ExtResource("1_q13pf")
 shader_parameter/brightness = 1.0
+shader_parameter/shadowIntensitiy = 0.0
 
 [node name="SoftLighting" type="ColorRect"]
 material = SubResource("ShaderMaterial_hks5v")

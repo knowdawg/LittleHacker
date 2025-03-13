@@ -9,7 +9,7 @@ class_name StateMachine
 
 var current_state : State
 var states : Dictionary = {}
-signal stateSwitched
+signal stateSwitched(prevState : State, newState : State)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
