@@ -24,7 +24,7 @@ class_name ProceduralRope
 
 @export var isColidable : bool = false
 
-@onready var line = $Line2D
+@onready var line = %Line2D
 @onready var ropeSegments : Array[RopeSegment]
 var railings : Array[RopeRailing]
 
@@ -47,6 +47,7 @@ func _ready() -> void:
 		r.parent = self
 		r.flexibility = flexibility
 		r.global_position = startPoint.global_position + ((i / numOfSegments) * (endPoint.global_position - startPoint.global_position))
+		
 		ropeSegments.append(r)
 		$RopeSegments.add_child(r)
 		
@@ -76,16 +77,25 @@ func _ready() -> void:
 			ropeSegments[ropeIndex].add_child(s)
 		
 	#Precalculate the rope a bit so its not flying everywhere at the start
-	for i in range(100):
-		solveRope(1.0 / 60.0)
+	#for i in range(100):
+		#solveRope(1.0 / 60.0)
 
+var t : float = 0.0
 func _process(delta: float) -> void:
-	solveRope(delta)
+	t += delta
+	if t >= 0.033:
+		solveRope(0.033)
+		t -= 0.033
 	
 	line.clear_points()
 	for s in ropeSegments:
 		
-		line.add_point(s.global_position)
+		line.add_point(s.global_position + Vector2(0.5, 0.0))
+	
+	var posChange : Vector2 = Vector2.ZERO
+	posChange = Vector2(64.0, 64.0) - startPoint.global_position
+	%Line2D.position = posChange
+	%Sprite2D.global_position = startPoint.global_position + Vector2(-64.0, -64.0)
 	
 	#get collition Shapes
 	if isColidable:

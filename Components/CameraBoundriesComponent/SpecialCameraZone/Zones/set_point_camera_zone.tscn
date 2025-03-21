@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://bnarclf1ceswr"]
+
+[ext_resource type="Script" uid="uid://dxbh0so24j0v0" path="res://Components/CameraBoundriesComponent/SpecialCameraZone/Zones/set_point_camera_zone.gd" id="1_lvo1r"]
+
+[node name="SetPointCameraZone" type="Polygon2D"]
+color = Color(1, 1, 1, 0.196078)
+script = ExtResource("1_lvo1r")

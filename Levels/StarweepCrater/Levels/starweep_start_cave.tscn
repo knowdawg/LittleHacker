@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bkpqd3ei3e87s"]
+[gd_scene load_steps=34 format=3 uid="uid://bkpqd3ei3e87s"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
 [ext_resource type="PackedScene" uid="uid://b4ugiyef56755" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_start_cave.tscn" id="2_kcft2"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="8_28ct1"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="11_xyrk5"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="12_qllgf"]
+[ext_resource type="PackedScene" uid="uid://bnarclf1ceswr" path="res://Components/CameraBoundriesComponent/SpecialCameraZone/Zones/set_point_camera_zone.tscn" id="13_8jv7p"]
 [ext_resource type="PackedScene" uid="uid://bvdxkosvo3rdd" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.tscn" id="13_nsbrd"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="14_vf27f"]
 
@@ -86,7 +87,7 @@ doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParent")
 respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
-lightingBrightness = 0.5
+lightingBrightness = 0.2
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -340,18 +341,18 @@ facingLeft = false
 
 [node name="Doors" type="Node2D" parent="."]
 
-[node name="TutorialRoom1" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
+[node name="Top" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
 position = Vector2(-276, -133)
-scene = "res://Levels/StarweepCrater/Levels/starweep_crater.tscn"
-doorName = "CaveExit"
+scene = "uid://c80acag1837nm"
+doorName = "BottomRight"
 enterPosition = NodePath("Marker2D")
 directionToFaceWhenEnteringTHISDoor = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/TutorialRoom1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Top"]
 position = Vector2(404, 114)
 shape = SubResource("RectangleShape2D_ihcvw")
 
-[node name="Marker2D" type="Marker2D" parent="Doors/TutorialRoom1"]
+[node name="Marker2D" type="Marker2D" parent="Doors/Top"]
 position = Vector2(421, 120)
 
 [node name="TestLevelStart" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("6_sw6q4")]
@@ -366,18 +367,30 @@ shape = SubResource("RectangleShape2D_ihcvw")
 disabled = true
 
 [node name="Marker2D" type="Marker2D" parent="Doors/TestLevelStart"]
-position = Vector2(550, 113)
+position = Vector2(600, 113)
 
 [node name="Projectiles" type="Node2D" parent="."]
 
-[node name="CameraBounds" type="Node2D" parent="."]
+[node name="CameraBoundriesComponent" parent="." instance=ExtResource("12_qllgf")]
+polygon = PackedVector2Array(530, 180, 530, -100, 140, -100, 140, 20, -320, 20, -320, 180)
 
-[node name="CameraBoundriesComponent" parent="CameraBounds" instance=ExtResource("12_qllgf")]
-polygon = PackedVector2Array(430, 130, 430, -60, 140, -60, 140, 20, -300, 20, -300, 180, 0, 180, 0, 130)
-exstendUp = false
-exstendDown = false
-exstendLeft = false
-exstendRight = false
+[node name="CircleJumping" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("13_8jv7p")]
+position = Vector2(-89.2307, -163.333)
+scale = Vector2(1.15385, 2.33333)
+polygon = PackedVector2Array(320, 70, 320, 130, 536.667, 130, 536.667, 70)
+cameraPos = NodePath("Marker2D")
+smoothness = 2.0
+
+[node name="Marker2D" type="Marker2D" parent="CameraBoundriesComponent/CircleJumping"]
+position = Vector2(380, 100)
+
+[node name="Pit" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("13_8jv7p")]
+polygon = PackedVector2Array(10, 80, -100, 80, -100, 190, 10, 190)
+cameraPos = NodePath("Marker2D")
+smoothness = 1.0
+
+[node name="Marker2D" type="Marker2D" parent="CameraBoundriesComponent/Pit"]
+position = Vector2(-45, 112)
 
 [node name="SoftLighting" parent="." instance=ExtResource("8_28ct1")]
 material = SubResource("ShaderMaterial_xor2r")

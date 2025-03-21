@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cd3lanjy8wai5"]
+
+[ext_resource type="Script" uid="uid://b7k3bxs5bv6rt" path="res://Components/CameraBoundriesComponent/SpecialCameraZone/special_camera_zone.gd" id="1_rtmso"]
+
+[node name="SpecialCameraZone" type="Polygon2D"]
+script = ExtResource("1_rtmso")

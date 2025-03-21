@@ -28,7 +28,7 @@ void fragment() {
 
 	float alphaBuffer = step(0.0, sdfVal);
 
-	val += step(sdfVal, 1.0); //Outline
+	val += step(sdfVal - 0.5, 1.0); //Outline
 	val -= smoothstep(0.0, 1.0, sdfVal * (shading)); //Creates the Gradiant
 
 	//Sample the palete based on Noise and SDF

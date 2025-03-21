@@ -1,9 +1,25 @@
-[gd_scene load_steps=11 format=3 uid="uid://b4ugiyef56755"]
+[gd_scene load_steps=15 format=3 uid="uid://b4ugiyef56755"]
 
 [ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="1_11rx6"]
+[ext_resource type="Texture2D" uid="uid://2walhwk5v32k" path="res://Assets/Sprites/UI/BlackSquare.png" id="1_o44cy"]
 [ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="2_wks24"]
 [ext_resource type="Texture2D" uid="uid://b8akensfj4e61" path="res://Palletes/sandstone_envirement_Pallete.tres" id="3_hanvi"]
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="4_geym0"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_htpwi"]
+polygon = PackedVector2Array(-2, -2, 2, -2, 2, 2, -2, 2)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aogji"]
+texture = ExtResource("1_o44cy")
+texture_region_size = Vector2i(4, 4)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_htpwi")
+
+[sub_resource type="TileSet" id="TileSet_y1c7p"]
+tile_size = Vector2i(4, 4)
+occlusion_layer_0/light_mask = 1
+occlusion_layer_0/sdf_collision = true
+sources/1 = SubResource("TileSetAtlasSource_aogji")
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_ty1jf"]
 noise_type = 0
@@ -43,6 +59,10 @@ height = 1080
 polygon = PackedVector2Array(-254, -205, 7, -197, 464, -136, 480, -24, 472, -24, 472, -15, 456, -15, 448, -24, 440, -40, 432, -48, 408, -48, 392, -40, 384, -24, 304, -24, 304, -8, 400, -8, 400, -16, 432, -16, 432, -8, 512, -8, 512, 16, 488, 24, 480, 32, 480, 56, 488, 64, 448, 64, 424, 72, 400, 72, 392, 64, 328, 64, 305, 56, 281, 54, 252, 56, 224, 72, 208, 88, 208, 96, 160, 96, 152, 112, 120, 103, 108, 92, 84, 87, 56, 88, 32, 96, 24, 112, 24, 120, 8, 120, 0, 112, -16, 104, -64, 104, -64, 128, 56, 128, 56, 124, 72, 124, 72, 128, 80, 128, 94, 128, 89, 119, 78, 119, 78, 115, 135, 115, 135, 160, 168, 160, 168, 112, 232, 112, 232, 96, 256, 96, 256, 128, 336, 128, 344, 120, 336, 104, 328, 96, 312, 96, 312, 80, 376, 80, 376, 96, 424, 99, 424, 104, 432, 112, 448, 120, 464, 120, 480, 112, 488, 104, 488, 96, 480, 96, 472, 88, 504, 88, 496, 96, 504, 112, 536, 120, 568, 112, 584, 104, 600, 80, 592, 48, 576, 32, 552, 24, 544, 16, 608, 16, 600, 0, 592, -8, 576, -16, 552, -16, 544, -24, 480, -24, 464, -136, 816, -144, 816, 128, 984, 504, 448, 512, -1, 517, -244, 488)
 
 [node name="SandstoneStartCave" type="Node2D"]
+
+[node name="SDFTilemap" type="TileMap" parent="."]
+tile_set = SubResource("TileSet_y1c7p")
+format = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_xjtfj")

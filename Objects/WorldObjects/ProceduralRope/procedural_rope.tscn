@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://dow45nohhanl5"]
+[gd_scene load_steps=7 format=3 uid="uid://dow45nohhanl5"]
 
 [ext_resource type="Script" uid="uid://d20xavf6mn1ty" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.gd" id="1_ql1l5"]
 [ext_resource type="Texture2D" uid="uid://kdjg3lbm285l" path="res://Assets/Sprites/WorldObjects/RopeRailing.png" id="2_ghpcp"]
@@ -12,6 +12,9 @@ shader_parameter/text = ExtResource("3_yy2di")
 shader_parameter/widthOfRope = 1.0
 shader_parameter/widthOfTexture = 16.0
 
+[sub_resource type="ViewportTexture" id="ViewportTexture_8gxos"]
+viewport_path = NodePath("SubViewport")
+
 [node name="ProceduralRope" type="Node"]
 script = ExtResource("1_ql1l5")
 railingTexture = ExtResource("2_ghpcp")
@@ -20,11 +23,23 @@ numOfSegments = 20.0
 
 [node name="RopeSegments" type="Node2D" parent="."]
 
-[node name="Line2D" type="Line2D" parent="."]
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(128, 128)
+
+[node name="Line2D" type="Line2D" parent="SubViewport"]
+unique_name_in_owner = true
 material = SubResource("ShaderMaterial_wbcct")
 points = PackedVector2Array(-44, 34, 115, 3)
 width = 1.0
 texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+z_index = -1
+texture_filter = 1
+texture = SubResource("ViewportTexture_8gxos")
+centered = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 visible = false

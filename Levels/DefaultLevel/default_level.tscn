@@ -12,6 +12,7 @@ viewport_path = NodePath("Main")
 resource_local_to_scene = true
 shader = ExtResource("3_qjk1c")
 shader_parameter/brightness = 1.0
+shader_parameter/shadowIntensitiy = 0.0
 
 [node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_sahbk")
@@ -35,6 +36,7 @@ size = Vector2i(1000, 432)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("ViewportTexture_f40ai")
+centered = false
 
 [node name="Doors" type="Node2D" parent="."]
 

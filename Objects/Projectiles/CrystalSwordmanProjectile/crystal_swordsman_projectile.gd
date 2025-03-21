@@ -22,6 +22,11 @@ func _process(delta: float) -> void:
 	move(dirVector, speed, delta)
 	if !$Grounded.is_colliding() or !$Grounded2.is_colliding():
 		delete()
+	else:
+		if $Grounded.is_colliding():
+			var p : Vector2 = $Grounded.get_collision_point()
+			
+			position.y = p.y - 3.0
 
 func parried(_attack : Attack):
 	call_deferred("setFriendly", !friendly)

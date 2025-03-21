@@ -1,4 +1,4 @@
-[gd_scene load_steps=120 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=121 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Shader" uid="uid://cnc8we1jbjatc" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
@@ -26,6 +26,7 @@
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="25_ftex3"]
 [ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="26_n2pso"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="29_4ghwm"]
+[ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="30_dgwi3"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="30_yrukv"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="31_htj2c"]
@@ -148,6 +149,7 @@ shader_parameter/textureScollSpeed = 1.5
 shader_parameter/warpScrollSpeed = 2.0
 shader_parameter/surgeFrequency = 0.3
 shader_parameter/surgeSpeed = 0.6
+shader_parameter/surgeSize = 1.0
 
 [sub_resource type="Gradient" id="Gradient_uuxd1"]
 offsets = PackedFloat32Array(0.99005)
@@ -190,6 +192,7 @@ shader_parameter/textureScollSpeed = 1.5
 shader_parameter/warpScrollSpeed = 2.0
 shader_parameter/surgeFrequency = 0.3
 shader_parameter/surgeSpeed = 0.6
+shader_parameter/surgeSize = 1.0
 
 [sub_resource type="Gradient" id="Gradient_iutvt"]
 offsets = PackedFloat32Array(0.99005)
@@ -232,6 +235,7 @@ shader_parameter/textureScollSpeed = 1.5
 shader_parameter/warpScrollSpeed = 2.0
 shader_parameter/surgeFrequency = 0.3
 shader_parameter/surgeSpeed = 0.6
+shader_parameter/surgeSize = 1.0
 
 [sub_resource type="Gradient" id="Gradient_xqqud"]
 offsets = PackedFloat32Array(0.99005)
@@ -246,7 +250,7 @@ height = 28
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.882353, 0.882353, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qakqs"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_dgwi3"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -284,7 +288,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dgwi3"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ut7a1"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -353,7 +357,7 @@ colors = PackedColorArray(0.419608, 0.376471, 0.384314, 1)
 gradient = SubResource("Gradient_14y8i")
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cye0d"]
-polygon = PackedVector2Array(-143, 12, -44, 12, -39, 13, -33, 13, -28, 12, -9, 12, -20, 18, -33, 20, -33, 25, -41, 31, -34, 38, -19, 38, -19, 35, -12, 33, -5, 33, -5, 28, -11, 28, -11, 26, -6, 26, 1, 20, 9, 20, 9, 28, 15, 28, 15, 31, 8, 31, 8, 36, 19, 36, 23, 39, 25, 39, 21, 41, 21, 44, 43, 44, 43, 41, 47, 41, 44, 36, 98, 36, 111, 37, 123, 37, 130, 38, 166, 38, 187, 36, 204, 36, 214, 37, 239, 37, 248, 36, 255, 36, 255, 34, 261, 34, 261, 28, 269, 26, 281, 26, 281, 22, 283, 22, 283, 12, 279, 12, 279, 5, 266, -8, 227, -16, 183, -16, 183, -20, 189, -20, 189, -24, 187, -27, 187, -33, 183, -33, 183, -35, 187, -35, 186, -39, 191, -41, 187, -43, 194, -46, 202, -52, 203, -56, 218, -56, 220, -54, 223, -54, 223, -50, 224, -50, 228, -45, 228, -42, 236, -40, 237, -39, 257, -39, 266, -40, 291, -40, 291, -38, 295, -35, 295, -32, 303, -27, 303, -24, 306, -24, 306, -20, 314, -15, 316, -15, 319, -10, 324, -2, 346, 18, 364, 36, 423, 36, 429, 37, 453, 37, 459, 36, 497, 36, 364, 223, -144, 55, -144, -117, -77, -117, -79, -71, -79, -52, -63, -52, -63, -50, -59, -50, -59, -46, -57, -46, -57, -45, -56, -45, -56, -42, -54, -42, -54, -38, -45, -36, -45, -29, -44, -29, -44, -28, -43, -28, -43, -27, -41, -27, -41, -25, -43, -25, -43, -18, -42, -18, -42, -15, -38, -14, -36, -14, -36, -12, -56, -12, -56, -4, -142, -4)
+polygon = PackedVector2Array(-162, 12, -44, 12, -39, 13, -33, 13, -28, 12, -9, 12, -20, 18, -33, 20, -33, 25, -41, 31, -34, 38, -19, 38, -19, 35, -12, 33, -5, 33, -5, 28, -11, 28, -11, 26, -6, 26, 1, 20, 9, 20, 9, 28, 15, 28, 15, 31, 8, 31, 8, 36, 19, 36, 23, 39, 25, 39, 21, 41, 21, 44, 43, 44, 43, 41, 47, 41, 44, 36, 98, 36, 111, 37, 123, 37, 130, 38, 166, 38, 187, 36, 204, 36, 214, 37, 239, 37, 248, 36, 255, 36, 255, 34, 261, 34, 261, 28, 269, 26, 281, 26, 281, 22, 283, 22, 283, 12, 279, 12, 279, 5, 266, -8, 227, -16, 183, -16, 183, -20, 189, -20, 189, -24, 187, -27, 187, -33, 183, -33, 183, -35, 187, -35, 186, -39, 191, -41, 187, -43, 194, -46, 202, -52, 203, -56, 218, -56, 220, -54, 223, -54, 223, -50, 224, -50, 228, -45, 228, -42, 236, -40, 237, -39, 257, -39, 266, -40, 291, -40, 291, -38, 295, -35, 295, -32, 303, -27, 303, -24, 306, -24, 306, -20, 314, -15, 316, -15, 319, -10, 324, -2, 346, 18, 364, 36, 423, 36, 429, 37, 453, 37, 459, 36, 497, 36, 364, 223, -144, 55, -168, 23, -168, -9, -144, -117, -77, -117, -79, -71, -79, -52, -63, -52, -63, -50, -59, -50, -59, -46, -57, -46, -57, -45, -56, -45, -56, -42, -54, -42, -54, -38, -45, -36, -45, -29, -44, -29, -44, -28, -43, -28, -43, -27, -41, -27, -41, -25, -43, -25, -43, -18, -42, -18, -42, -15, -38, -14, -36, -14, -36, -12, -56, -12, -56, -4, -163, -4)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7jlbx"]
 polygon = PackedVector2Array(55, 33, 55, 37, 40, 37, -2, 19, -31, 28, -46, 18, -46, 15, -38, 11, -13, 11, 16, 11, 16, 19, 33, 19, 36, 22, 36, 31, 40, 32, 49, 33)
@@ -435,6 +439,7 @@ shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.0
 shader_parameter/surgeFrequency = 2.0
 shader_parameter/surgeSpeed = 1.0
+shader_parameter/surgeSize = 1.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_erh47"]
 resource_local_to_scene = true
@@ -860,12 +865,12 @@ layer = -1
 
 [node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_qakqs")
+texture = SubResource("GradientTexture2D_dgwi3")
 
 [node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_dgwi3")
+texture = SubResource("GradientTexture2D_ut7a1")
 
 [node name="FarDistance" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1214,6 +1219,7 @@ material = SubResource("ShaderMaterial_erh47")
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="CaveExit" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
+position = Vector2(-21, 1)
 scene = "res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn"
 doorName = "TutorialRoom1"
 enterPosition = NodePath("Marker2D")
@@ -1225,3 +1231,6 @@ shape = SubResource("RectangleShape2D_6g51h")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/CaveExit"]
 position = Vector2(-118, -6)
+
+[node name="CameraBoundriesComponent" parent="." instance=ExtResource("30_dgwi3")]
+polygon = PackedVector2Array(-143, -192, -143, 64, 0, 64, 0, 48, 512, 48, 512, -192)

@@ -26,6 +26,9 @@ func damage(attack: Attack):
 			return
 	attackIDIveBeenHitBy.append(attack.attackID)
 	
+	if attack.isHazard:
+		health_componnet.damage(attack)
+		return
 	if attack.isGrabAttack:
 		health_componnet.damage(attack)
 		return

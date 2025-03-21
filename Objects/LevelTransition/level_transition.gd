@@ -2,7 +2,7 @@ extends Area2D
 class_name LevelTransition
 
 @export_group("Scene Switch Data")
-@export var scene : String
+@export_file("*.tscn") var scene : String
 @export var doorName : String
 
 enum dir{LEFT, RIGHT} #Left is 0, Right is 1

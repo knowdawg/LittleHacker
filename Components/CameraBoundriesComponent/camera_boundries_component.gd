@@ -1,56 +1,10 @@
 extends Polygon2D
 class_name CameraCoundriesComponent
 
-@export var zoom : Vector2 = Vector2(10.0, 10.0)
 
-@export var exstendUp : bool = true
-@export var exstendDown : bool = true
-@export var exstendLeft : bool = true
-@export var exstendRight : bool = true
-
-var leftLimit : float = PI #set to PI when nothing else has been met
-var rightLimit : float = PI
-var upLimit : float = PI
-var downLimit : float = PI
-
-func set_bounds():
-	var points = polygon
-	for p in points:
-		var curX = (p.x * scale.x) + global_position.x
-		var curY = (p.y * scale.y) + global_position.y
-		if leftLimit == PI:
-			leftLimit = curX
-		if rightLimit == PI:
-			rightLimit = curX
-		if upLimit == PI:
-			upLimit = curY
-		if downLimit == PI:
-			downLimit = curY
-		
-		if curX < leftLimit:
-			leftLimit = curX
-		if curX > rightLimit:
-			rightLimit = curX
-		if curY > downLimit:
-			downLimit = curY
-		if curY < upLimit:
-			upLimit = curY
-	
-	if exstendLeft == true:
-		leftLimit -= 1000
-	if exstendRight == true:
-		rightLimit += 1000
-	if exstendDown == true:
-		downLimit += 1000
-	if exstendUp == true:
-		upLimit -= 1000
-
-
-
-
-
-
-
+var polygonTransorm : PackedVector2Array = []
+@export var cameraSize : Vector2 = Vector2(128.0, 72.0)
+var shrunkenPolygon : PackedVector2Array = []
 
 # Current position of the rectangle's center
 var current_position: Vector2
@@ -97,16 +51,22 @@ func shrink_polygon(polygon_points: PackedVector2Array, shrink_x: float, shrink_
 	return shrunken_polygon
 
 # Function to find the closest rectangle center position inside the polygon
-func closest_rectangle_position(rect_width: float, rect_height: float, target_position: Vector2) -> Vector2:
+func closest_rectangle_position(target_position: Vector2) -> Vector2:
 	# Compute the valid region for the rectangle's center
-	var valid_region = shrink_polygon(polygon, rect_width / 2, rect_height / 2)
+	var valid_region = shrunkenPolygon
+	var modifiedTarget : Vector2 = target_position
+	
+	for z in specialZones:
+		if is_point_in_polygon(target_position, z.getGlobalPolygon()):
+			var closestPoint = closest_point_on_polygon(target_position, z.getGlobalPolygon())
+			modifiedTarget = z.getCameraPostion(target_position, closestPoint)
 	
 	# Check if the target position is inside the valid region
-	if is_point_in_polygon(target_position, valid_region):
-		return target_position
+	if is_point_in_polygon(modifiedTarget, valid_region):
+		return modifiedTarget
 	
 	# Find the closest point on the valid region's boundary to the target position
-	return closest_point_on_polygon(target_position, valid_region)
+	return closest_point_on_polygon(modifiedTarget, valid_region)
 
 # Function to check if a point is inside a polygon
 func is_point_in_polygon(point: Vector2, polygon_points: PackedVector2Array) -> bool:
@@ -145,10 +105,19 @@ func closest_point_on_polygon(target: Vector2, polygon_points: PackedVector2Arra
 	return closest_point
 
 
+var specialZones : Array[SpecialCameraZone] = []
 
 func _ready():
-	set_bounds()
+	for c in get_children():
+		if c is SpecialCameraZone:
+			specialZones.append(c)
+	
+	for p in polygon:
+		var newP : Vector2 = p * scale + position
+		polygonTransorm.append(newP)
+	shrunkenPolygon = shrink_polygon(polygonTransorm, cameraSize.x / 2.0, cameraSize.y / 2.0)
+	
 	#generateLineSegments()
-	#visible = false
+	visible = false
 	$Area2D/CollisionPolygon2D.polygon = polygon
 	

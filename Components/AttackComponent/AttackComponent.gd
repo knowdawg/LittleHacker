@@ -58,6 +58,7 @@ func _on_area_entered(area):
 		attack.isGrabAttack = isGrabAttack
 		attack.attackStrength = attackStrength
 		attack.attackName = attackName
+		attack.isHazard = isSpikes
 		if healthComponent:
 			attack.healthComponent = healthComponent
 		
@@ -68,6 +69,8 @@ func _on_area_entered(area):
 			grabSucessful.emit(attack)
 		hurtbox.damage(attack)
 		
+		if isSpikes:
+			generateAttackID()
 		
 		if hitEfect:
 			for num in numberOfHitEffect:
@@ -75,7 +78,7 @@ func _on_area_entered(area):
 				area.add_child(e)
 				e.initialize(area.global_position)
 		
-		
+
 func generateAttackID():
 	attackID = randf_range(0.0, 10000.0)
 

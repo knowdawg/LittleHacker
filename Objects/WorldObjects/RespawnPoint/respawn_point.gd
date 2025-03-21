@@ -29,10 +29,8 @@ func getRespawnData() -> RespawnData:
 func _process(delta: float) -> void:
 	var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
 	if p:
-		$Camera2D.limit_left = p.leftLimit
-		$Camera2D.limit_right = p.rightLimit
-		$Camera2D.limit_bottom = p.downLimit
-		$Camera2D.limit_top = p.upLimit
+		var targetPos = p.closest_rectangle_position(global_position)
+		%Camera2D.global_position = targetPos
 
 
 func _on_interactable_area_on_interact() -> void:
