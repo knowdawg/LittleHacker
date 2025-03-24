@@ -44,7 +44,7 @@ void light() {
 		disTraveled += screenSize.x * abs(sdfVal);
 
 		disTraveled += 0.005;//0.001//Bump the distance traveled to speed up the algorithm and to prevent the raymarching from moving zero every loop.
-		//intensity += 0.001;
+		//intensity += 0.005;
 	}
 	intensity *= finished;
 

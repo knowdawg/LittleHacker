@@ -536,7 +536,7 @@ texture = ExtResource("4_sv81g")
 
 [node name="Bridge2" type="Sprite2D" parent="."]
 texture_filter = 1
-position = Vector2(740, 140)
+position = Vector2(745, 140)
 texture = ExtResource("4_sv81g")
 
 [node name="WoodenMine" parent="." instance=ExtResource("4_ue6xp")]

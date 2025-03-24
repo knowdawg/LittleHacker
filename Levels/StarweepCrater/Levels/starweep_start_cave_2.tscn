@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://c80acag1837nm"]
+[gd_scene load_steps=38 format=3 uid="uid://c80acag1837nm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_us2g6"]
 [ext_resource type="PackedScene" uid="uid://bo8tvedjow02d" path="res://Levels/StarweepCrater/EnvirementScenes/starweep_start_cave_2.tscn" id="2_aolvh"]
@@ -15,10 +15,10 @@
 [ext_resource type="PackedScene" uid="uid://dow45nohhanl5" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.tscn" id="10_wejjc"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l67sm"]
-polygon = PackedVector2Array(0, 244, 134, 244, 134, 250, 158, 250, 162, 254, 162, 307, 167, 307, 167, 250, 180, 250, 180, 244, 295, 244, 295, 234, 264, 234, 264, 235, 226, 235, 226, 231, 224, 229, 194, 229, 194, 194, 226, 194, 226, 165, 254, 165, 261, 164, 286, 164, 292, 165, 307, 165, 313, 164, 355, 164, 355, 134, 405, 134, 411, 135, 422, 135, 428, 134, 443, 134, 443, 139, 450, 139, 450, 144, 453, 144, 453, 149, 457, 149, 457, 153, 462, 153, 462, 155, 467, 155, 467, 159, 480, 159, 480, 162, 482, 162, 482, 164, 503, 164, 503, 187, 507, 187, 507, 213, 522, 213, 522, 217, 523, 217, 523, 218, 525, 218, 525, 219, 530, 219, 530, 224, 578, 224, 584, 223, 603, 223, 609, 224, 619, 224, 625, 225, 635, 225, 641, 224, 674, 224, 680, 225, 691, 225, 691, 219, 704, 219, 707, 214, 714, 214, 722, 210, 720, 204, 725, 198, 721, 191, 728, 187, 732, 184, 729, 179, 733, 179, 733, 170, 735, 170, 735, 164, 735, 153, 736, 153, 736, 145, 733, 142, 733, 139, 735, 139, 774, 139, 774, 225, 770, 252, 435, 409, 0, 356)
+polygon = PackedVector2Array(0, 244, 134, 244, 134, 250, 158, 250, 162, 254, 162, 307, 167, 307, 167, 250, 180, 250, 180, 244, 295, 244, 295, 234, 264, 234, 264, 235, 226, 235, 226, 231, 224, 229, 194, 229, 194, 194, 226, 194, 226, 165, 254, 165, 261, 164, 286, 164, 292, 165, 307, 165, 313, 164, 355, 164, 355, 134, 443, 134, 443, 139, 450, 139, 450, 144, 453, 144, 453, 149, 457, 149, 457, 153, 462, 153, 462, 155, 467, 155, 467, 159, 480, 159, 480, 162, 482, 162, 482, 164, 503, 164, 503, 187, 507, 187, 507, 213, 522, 213, 522, 217, 523, 217, 523, 218, 525, 218, 525, 219, 530, 219, 530, 224, 578, 224, 584, 223, 603, 223, 609, 224, 691, 224, 691, 219, 704, 219, 707, 214, 714, 214, 722, 210, 720, 204, 725, 198, 721, 191, 728, 187, 732, 184, 729, 179, 733, 179, 733, 170, 735, 170, 735, 164, 735, 153, 736, 153, 736, 145, 733, 142, 733, 139, 735, 139, 774, 139, 774, 225, 770, 252, 435, 409, 0, 356)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ufx3"]
-polygon = PackedVector2Array(79, 140, 186, 140, 182, 134, 203, 134, 207, 140, 215, 140, 215, 144, 235, 144, 235, 149, 246, 150, 246, 155, 283, 154, 284, 150, 285, 131, 308, 114, 324, 109, 355, 109, 361, 115, 370, 115, 372, 124, 414, 124, 414, 119, 440, 119, 440, 114, 479, 114, 479, 109, 503, 109, 507, 103, 525, 103, 536, 115, 552, 115, 550, 119, 571, 120, 571, 115, 591, 115, 589, 119, 600, 119, 596, 123, 601, 125, 774, 125, 682, 91, 80, 79)
+polygon = PackedVector2Array(79, 140, 147, 140, 153, 128, 161, 128, 164, 140, 186, 140, 182, 134, 203, 134, 207, 140, 215, 140, 215, 144, 235, 144, 235, 149, 246, 150, 246, 155, 283, 154, 284, 150, 285, 131, 308, 114, 324, 109, 355, 109, 361, 115, 370, 115, 372, 124, 414, 124, 414, 119, 440, 119, 440, 114, 479, 114, 479, 109, 503, 109, 507, 103, 525, 103, 536, 115, 552, 115, 550, 119, 571, 120, 571, 115, 591, 115, 589, 119, 600, 119, 596, 123, 601, 125, 774, 125, 682, 91, 80, 79)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ewvef"]
 polygon = PackedVector2Array(489, 149, 489, 153, 491, 155, 500, 155, 514, 158, 514, 167, 516, 169, 516, 172, 523, 187, 521, 189, 525, 194, 527, 199, 532, 199, 536, 203, 543, 208, 557, 208, 559, 204, 547, 204, 540, 198, 553, 198, 569, 199, 567, 203, 575, 205, 573, 209, 590, 209, 586, 213, 619, 213, 619, 214, 643, 214, 647, 210, 645, 210, 645, 200, 647, 198, 644, 194, 648, 194, 650, 190, 650, 180, 663, 180, 663, 175, 666, 175, 666, 169, 680, 169, 680, 155, 688, 155, 689, 150, 691, 150, 690, 146, 686, 144, 693, 137, 693, 135, 606, 135, 600, 134, 589, 134, 591, 136, 591, 139, 586, 140, 584, 140, 584, 144, 580, 145, 579, 145, 579, 150, 577, 150, 577, 151, 575, 151, 575, 154, 569, 154, 563, 159, 558, 160, 552, 160, 558, 164, 552, 181, 553, 197, 547, 197, 546, 164, 531, 164, 529, 160, 517, 145, 513, 145, 513, 147, 508, 149)
@@ -89,6 +89,12 @@ viewport_path = NodePath("Main")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ye30b"]
 size = Vector2(47, 5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ewvef"]
+size = Vector2(12, 97)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_uhfbk"]
+size = Vector2(30, 23)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l67sm"]
 resource_local_to_scene = true
 shader = ExtResource("3_aolvh")
@@ -107,10 +113,11 @@ lighting = NodePath("SoftLighting")
 lightingBrightness = 0.2
 
 [node name="Main" type="SubViewport" parent="."]
+disable_3d = true
 transparent_bg = true
 sdf_oversize = 0
 sdf_scale = 0
-size = Vector2i(1000, 500)
+size = Vector2i(1500, 400)
 
 [node name="StarweepStartCave2" parent="Main" instance=ExtResource("2_aolvh")]
 
@@ -143,12 +150,12 @@ occluder = SubResource("OccluderPolygon2D_dtsy0")
 oneWay = true
 
 [node name="LightOccluder2D12" parent="Collisions" instance=ExtResource("3_01fwu")]
-position = Vector2(394, -102)
+position = Vector2(399, -102)
 occluder = SubResource("OccluderPolygon2D_dtsy0")
 oneWay = true
 
 [node name="LightOccluder2D11" parent="Collisions" instance=ExtResource("3_01fwu")]
-position = Vector2(1086, -102)
+position = Vector2(1091, -102)
 scale = Vector2(-1, 1)
 occluder = SubResource("OccluderPolygon2D_dtsy0")
 oneWay = true
@@ -245,16 +252,9 @@ color = Color(0.184314, 0.105882, 0.0666667, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_dtsy0")
 
-[node name="Lava3" type="PointLight2D" parent="Lights"]
-position = Vector2(382, 144)
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
-
 [node name="Lava4" type="PointLight2D" parent="Lights"]
-position = Vector2(381, 188)
-scale = Vector2(2, 2)
+position = Vector2(381, 169)
+scale = Vector2(2, 2.59375)
 color = Color(0.184314, 0.105882, 0.0666667, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_dtsy0")
@@ -381,38 +381,6 @@ color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_lpd6t")
 
-[node name="Crystals6" type="PointLight2D" parent="Lights"]
-position = Vector2(396, 148)
-rotation = -1.57355
-scale = Vector2(0.5, 0.513)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals7" type="PointLight2D" parent="Lights"]
-position = Vector2(364, 157)
-rotation = -1.57355
-scale = Vector2(0.5, 0.513)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals8" type="PointLight2D" parent="Lights"]
-position = Vector2(349, 147)
-rotation = -1.57355
-scale = Vector2(0.5, 0.513)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals9" type="PointLight2D" parent="Lights"]
-position = Vector2(351, 248)
-rotation = -1.57355
-scale = Vector2(0.5, 0.513)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
 [node name="Decorations" type="Node2D" parent="."]
 
 [node name="ProceduralRope" parent="Decorations" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_wejjc")]
@@ -452,10 +420,10 @@ numOfSegments = 5.0
 ropeDis = 1.0
 
 [node name="start" type="Marker2D" parent="Decorations/ProceduralRope3"]
-position = Vector2(751, 149)
+position = Vector2(756, 149)
 
 [node name="end" type="Marker2D" parent="Decorations/ProceduralRope3"]
-position = Vector2(751, 154)
+position = Vector2(756, 154)
 
 [node name="ProceduralRope4" parent="Decorations" node_paths=PackedStringArray("startPoint", "endPoint") instance=ExtResource("10_wejjc")]
 numOfRailings = 0
@@ -466,10 +434,10 @@ numOfSegments = 5.0
 ropeDis = 1.0
 
 [node name="start" type="Marker2D" parent="Decorations/ProceduralRope4"]
-position = Vector2(728, 149)
+position = Vector2(733, 149)
 
 [node name="end" type="Marker2D" parent="Decorations/ProceduralRope4"]
-position = Vector2(728, 154)
+position = Vector2(733, 154)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -490,7 +458,7 @@ position = Vector2(528, 246)
 shape = SubResource("RectangleShape2D_aolvh")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/BottomRight"]
-position = Vector2(748, 215)
+position = Vector2(515, 248)
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
@@ -521,6 +489,67 @@ isSpikes = true
 position = Vector2(4.5, 11.5)
 shape = SubResource("RectangleShape2D_ye30b")
 
+[node name="Hazard2" parent="Enemies" node_paths=PackedStringArray("collisionShape") instance=ExtResource("10_ewvef")]
+position = Vector2(379, 242)
+collision_mask = 4
+attackName = "Lava"
+collisionShape = NodePath("CollisionShape2D")
+disabled = false
+attack_damage = 1.0
+isSpikes = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Hazard2"]
+position = Vector2(1, -59.5)
+shape = SubResource("RectangleShape2D_ewvef")
+
+[node name="Hazard3" parent="Enemies" node_paths=PackedStringArray("collisionShape") instance=ExtResource("10_ewvef")]
+position = Vector2(379, 242)
+collision_mask = 4
+attackName = "Lava"
+collisionShape = NodePath("CollisionShape2D")
+disabled = false
+attack_damage = 1.0
+isSpikes = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/Hazard3"]
+position = Vector2(0, -2.5)
+shape = SubResource("RectangleShape2D_uhfbk")
+
+[node name="Hazard6" parent="Enemies" instance=ExtResource("10_ewvef")]
+position = Vector2(749, 145)
+collision_mask = 4
+attackName = "Lava"
+disabled = false
+attack_damage = 1.0
+isSpikes = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Hazard6"]
+polygon = PackedVector2Array(-11, -25, -11, 8, 7, 25, 25, 26, 25, 65, 34, 65, 29, 63, 29, 22, 12, 22, 3, 9, 3, -35)
+
+[node name="Hazard4" parent="Enemies" node_paths=PackedStringArray("collisionShape") instance=ExtResource("10_ewvef")]
+position = Vector2(379, 242)
+collision_mask = 4
+attackName = "Lava"
+collisionShape = NodePath("CollisionPolygon2D")
+disabled = false
+attack_damage = 1.0
+isSpikes = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Hazard4"]
+polygon = PackedVector2Array(133, -93, 143, -88, 143, -97, 167, -84, 157, -103, 166, -101, 174, -89, 175, -112, 183, -104, 179, -127, 147, -118)
+
+[node name="Hazard5" parent="Enemies" node_paths=PackedStringArray("collisionShape") instance=ExtResource("10_ewvef")]
+position = Vector2(915, 207)
+collision_mask = 4
+attackName = "Lava"
+collisionShape = NodePath("CollisionPolygon2D")
+disabled = false
+attack_damage = 1.0
+isSpikes = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Hazard5"]
+polygon = PackedVector2Array(-5, 21, -10, 17, 1, 20, -6, 13, 9, 17, -3, 5, 8, 7, -5, -12, 20, -2, 17, -15, 26, -10, 23, -32, 39, -14, 35, 9, 3, 25)
+
 [node name="Proectiles" type="Node2D" parent="."]
 
 [node name="CameraBoundries" type="Node2D" parent="."]
@@ -531,7 +560,7 @@ polygon = PackedVector2Array(0, -4, 0, 288, 516, 288, 516, 208, 656, 208, 656, 2
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_hxm8j")]
 material = SubResource("ShaderMaterial_l67sm")
-offset_left = 431.0
-offset_top = 103.0
-offset_right = 623.0
-offset_bottom = 211.0
+offset_left = 662.0
+offset_top = 107.0
+offset_right = 854.0
+offset_bottom = 215.0

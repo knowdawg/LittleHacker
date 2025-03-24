@@ -54,6 +54,7 @@ func levelSwiched(_sceneData : SceneSwitchData):
 	clear()
 
 func _process(_delta: float) -> void:
-	var s = Game.littleViewport.onSceneExit
-	if !s.is_connected(levelSwiched):
-		s.connect(levelSwiched)
+	if Game.littleViewport:
+		var s = Game.littleViewport.onSceneExit
+		if !s.is_connected(levelSwiched):
+			s.connect(levelSwiched)

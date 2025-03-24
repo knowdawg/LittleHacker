@@ -1,4 +1,4 @@
-[gd_scene load_steps=164 format=3 uid="uid://dcqwmsg54sjn4"]
+[gd_scene load_steps=166 format=3 uid="uid://dcqwmsg54sjn4"]
 
 [ext_resource type="Texture2D" uid="uid://7jvgdu1xg7n3" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreation.png" id="1_cinor"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_ey2r6"]
@@ -52,6 +52,7 @@
 [ext_resource type="Texture2D" uid="uid://bw4xb02ywc25l" path="res://Assets/Sprites/UI/AspectOfCreationWeaknessbar.png" id="45_67x27"]
 [ext_resource type="Texture2D" uid="uid://bt5ng4ut18p1u" path="res://Assets/Sprites/Effects/ParticleEffects/ExplosionSmoke.png" id="45_hs17a"]
 [ext_resource type="Texture2D" uid="uid://dxk7ue4kllpcl" path="res://Assets/Sprites/UI/AspectOfCreationWeaknessbarHealth.png" id="46_4mohx"]
+[ext_resource type="PackedScene" uid="uid://cc28hgwabw7gw" path="res://Objects/ShaderObjects/BossIntro.tscn" id="53_dur7j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbxk7"]
 size = Vector2(6, 7)
@@ -1967,6 +1968,65 @@ tracks/2/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_msev5"]
+resource_name = "Threaten"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("HumanSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 2.1, 2.20247, 2.30247, 2.40247, 2.50247),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [115, 116, 117, 118, 119, 120, 121, 121, 122, 123, 124, 125]
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("BigHands:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(115, -0.25, 0, 0, 0, 131, 0, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.3)
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("BigHands")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"fadeIn"
+}, {
+"args": [],
+"method": &"fadeOut"
+}]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("BossIntro")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uvjcq"]
 _data = {
 &"Dead": SubResource("Animation_i6gcm"),
@@ -1989,7 +2049,8 @@ _data = {
 &"Smash": SubResource("Animation_51rol"),
 &"SmashFollowUp": SubResource("Animation_hv4i0"),
 &"StandUp": SubResource("Animation_s0lar"),
-&"Stun": SubResource("Animation_s5vod")
+&"Stun": SubResource("Animation_s5vod"),
+&"Threaten": SubResource("Animation_msev5")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q44m3"]
@@ -2457,7 +2518,7 @@ shape = SubResource("RectangleShape2D_fbxk7")
 [node name="HumanSprite" type="Sprite2D" parent="."]
 position = Vector2(0, -10)
 texture = ExtResource("1_cinor")
-hframes = 115
+hframes = 132
 frame = 1
 
 [node name="SpriteDirectorComponent" parent="HumanSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_ey2r6")]
@@ -2469,7 +2530,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_6nl4f")
 position = Vector2(0, -10)
 texture = ExtResource("3_bcxbt")
-hframes = 115
+hframes = 132
 frame = 2
 script = ExtResource("4_r6kx5")
 spriteToMirror = NodePath("../HumanSprite")
@@ -2489,7 +2550,7 @@ position = Vector2(-21, -18)
 rotation = 1.5708
 scale = Vector2(1, -1)
 texture = ExtResource("3_bcxbt")
-hframes = 115
+hframes = 132
 frame = 35
 script = ExtResource("5_drcs8")
 spriteToMirror = NodePath("../../HumanSprite")
@@ -2543,9 +2604,16 @@ libraries = {
 script = ExtResource("5_4wqwk")
 leftBoundry = NodePath("../Raycasts/LeftBoundry")
 rightBoundry = NodePath("../Raycasts/RightBoundry")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Threaten")
 hackedState = NodePath("Hacked")
 parent = NodePath("..")
+
+[node name="Threaten" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
+script = ExtResource("8_tak1p")
+nextState = NodePath("../Idle")
+length = 3.0
+animator = NodePath("../../HumanAnimator")
+animationName = "Threaten"
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "spriteDirector", "animator")]
 script = ExtResource("6_hk65s")
@@ -2920,6 +2988,7 @@ animation = &"Hide"
 frame_progress = 1.0
 
 [node name="Raycasts" type="Node2D" parent="."]
+visible = false
 
 [node name="RunAwayRaycast" type="RayCast2D" parent="Raycasts"]
 visible = false
@@ -2979,6 +3048,10 @@ value = 25.0
 texture_under = ExtResource("44_04xq5")
 texture_over = ExtResource("45_67x27")
 texture_progress = ExtResource("46_4mohx")
+
+[node name="BossIntro" parent="." instance=ExtResource("53_dur7j")]
+title = "Aspect of Talent"
+bossName = "Talen"
 
 [connection signal="animation_finished" from="SmallHands/SmallHandAnimator" to="SmallHands" method="_on_small_hand_animator_animation_finished"]
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]

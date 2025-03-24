@@ -6,9 +6,10 @@ func _ready():
 	Game.exitHackMode.connect(clearCommands)
 
 func _process(_delta: float) -> void:
-	var s = Game.littleViewport.onSceneExit
-	if !s.is_connected(levelSwiched):
-		s.connect(levelSwiched)
+	if Game.littleViewport:
+		var s = Game.littleViewport.onSceneExit
+		if !s.is_connected(levelSwiched):
+			s.connect(levelSwiched)
 
 func levelSwiched(_sceneData):
 	clearCommands()
