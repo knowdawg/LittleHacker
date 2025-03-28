@@ -763,12 +763,12 @@ texture = SubResource("ViewportTexture_l5xpt")
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
-[node name="PlayerParent" type="Node2D" parent="."]
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="RemnantCrab" parent="Enemies" instance=ExtResource("13_4clin")]
-position = Vector2(69, 71)
+position = Vector2(-28, 51)
+
+[node name="PlayerParent" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
 

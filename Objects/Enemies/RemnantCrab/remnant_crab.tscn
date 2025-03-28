@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=51 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://bmjxhaulcaflc" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSkullNeclace.png" id="2_5j67f"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://boj1mqlr1sbg8" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandPresser.png" id="9_8od5u"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_qmox6"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_rt31b"]
+[ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="12_jvtmt"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_jvtmt"]
 [ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_i7s33"]
@@ -337,8 +338,11 @@ texture = ExtResource("2_rt31b")
 hframes = 6
 
 [node name="Cloak" type="Sprite2D" parent="Sprites"]
+visible = false
 texture = ExtResource("3_vx8lb")
 hframes = 6
+
+[node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 
 [node name="Arms" type="Node2D" parent="Sprites"]
 
