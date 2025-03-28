@@ -18,5 +18,5 @@ void fragment() {
 	val = ceil(val * 4.0) / 4.0;
 	vec4 c = texture(palete, vec2(val, 1.0));
 
-	COLOR = c * texture(TEXTURE, UV);
+	COLOR *= c * texture(TEXTURE, UV);
 }

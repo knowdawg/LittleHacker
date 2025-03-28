@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://cfy3aart4poj3"]
+
+[ext_resource type="Texture2D" uid="uid://2walhwk5v32k" path="res://Assets/Sprites/UI/BlackSquare.png" id="1_gx16v"]
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qg468"]
+polygon = PackedVector2Array(-2.5, -2.5, 2.5, -2.5, 2.5, 2.5, -2.5, 2.5)
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_ue6xp"]
+texture = ExtResource("1_gx16v")
+texture_region_size = Vector2i(5, 5)
+0:0/0 = 0
+0:0/0/occlusion_layer_0/polygon_0/polygon = SubResource("OccluderPolygon2D_qg468")
+
+[sub_resource type="TileSet" id="TileSet_ugkb1"]
+tile_size = Vector2i(5, 5)
+occlusion_layer_0/light_mask = 1
+occlusion_layer_0/sdf_collision = true
+sources/0 = SubResource("TileSetAtlasSource_ue6xp")
+
+[node name="SDFTilemap" type="TileMap"]
+texture_filter = 1
+tile_set = SubResource("TileSet_ugkb1")
+format = 2

@@ -10,10 +10,10 @@ func _ready() -> void:
 
 var timeLeft : float = 0.0
 func play() -> void:
-	timeLeft = 2.0
+	timeLeft = 3.0
 	$AnimationPlayer.play("Intro")
 
 func _process(delta: float) -> void:
 	timeLeft -= delta;
-	if timeLeft > 0.2 and timeLeft < 1.8:
+	if timeLeft > 0.2 and timeLeft < 2.8:
 		Game.camera.set_shake(shake)

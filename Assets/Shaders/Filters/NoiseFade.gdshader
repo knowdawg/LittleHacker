@@ -10,8 +10,9 @@ void fragment() {
 	float n = texture(noise, qUV).r;
 
 	vec4 c = texture(TEXTURE, UV);
-	c.a *= n - progess;
-	c.a = step(0.1, c.a);
+	float nVal = n - progess;
+
+	c.a *= step(0.1, nVal);
 
 	COLOR = c;
 }

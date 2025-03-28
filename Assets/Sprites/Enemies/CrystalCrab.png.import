@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://nrnphgswqnev"
-path="res://.godot/imported/CanyonBackground.png-fe2242f41ce94b0cb6068643dffa4231.ctex"
+uid="uid://bj3o12ssla6w5"
+path="res://.godot/imported/CrystalCrab.png-a2828db20252a9dd1855d75fa5dea470.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/EnvirmentTextures/Sandstone/CanyonBackground.png"
-dest_files=["res://.godot/imported/CanyonBackground.png-fe2242f41ce94b0cb6068643dffa4231.ctex"]
+source_file="res://Assets/Sprites/Enemies/CrystalCrab.png"
+dest_files=["res://.godot/imported/CrystalCrab.png-a2828db20252a9dd1855d75fa5dea470.ctex"]
 
 [params]
 

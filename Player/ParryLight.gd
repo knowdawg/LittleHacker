@@ -7,4 +7,6 @@ func hitEfect(attack : Attack):
 	$GPUParticles2D.rotation = angle.angle()
 	$GPUParticles2D2.rotation = angle.angle() + PI
 	$Flare.rotation = angle.angle() + (PI / 12.0)
+	$GPUParticles2D.emitting = true
+	$GPUParticles2D2.emitting = true
 	$AnimationPlayer.play("Flash")

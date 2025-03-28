@@ -25,7 +25,6 @@ numOfSegments = 20.0
 
 [node name="SubViewport" type="SubViewport" parent="."]
 transparent_bg = true
-size = Vector2i(128, 128)
 
 [node name="Line2D" type="Line2D" parent="SubViewport"]
 unique_name_in_owner = true
@@ -36,7 +35,6 @@ texture_mode = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-z_index = -1
 texture_filter = 1
 texture = SubResource("ViewportTexture_8gxos")
 centered = false

@@ -1,0 +1,475 @@
+[gd_scene load_steps=50 format=3 uid="uid://dxc6glqrf4hu8"]
+
+[ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
+[ext_resource type="Texture2D" uid="uid://bmjxhaulcaflc" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSkullNeclace.png" id="2_5j67f"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_7hw05"]
+[ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_1hgma"]
+[ext_resource type="Texture2D" uid="uid://coyovi3cgllo8" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLeftSkull.png" id="3_qmox6"]
+[ext_resource type="Texture2D" uid="uid://dvpdxv53woykw" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabCloak.png" id="3_vx8lb"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_mijbp"]
+[ext_resource type="Texture2D" uid="uid://bipxnlqap2nw3" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabRightSkull.png" id="4_rt31b"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_7y5mw"]
+[ext_resource type="Texture2D" uid="uid://r74bsxam8t50" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabCenterSkull.png" id="5_vx8lb"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_1ai65"]
+[ext_resource type="Texture2D" uid="uid://dmoyu4yyocim7" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandLeft.png" id="6_jvtmt"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_2ujic"]
+[ext_resource type="Texture2D" uid="uid://lij4hq561e2o" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandRight.png" id="7_i7s33"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_cbi2v"]
+[ext_resource type="Texture2D" uid="uid://bbno5b5jf3r0d" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandReacher.png" id="8_fp8yd"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_5j67f"]
+[ext_resource type="Texture2D" uid="uid://boj1mqlr1sbg8" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandPresser.png" id="9_8od5u"]
+[ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_qmox6"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_rt31b"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_vx8lb"]
+[ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_jvtmt"]
+[ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_i7s33"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
+size = Vector2(47, 19)
+
+[sub_resource type="Animation" id="Animation_fp8yd"]
+resource_name = "Idle"
+length = 1.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.803289, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_8od5u"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8od5u"]
+_data = {
+&"Idle": SubResource("Animation_fp8yd"),
+&"RESET": SubResource("Animation_8od5u")
+}
+
+[sub_resource type="Animation" id="Animation_1qnwx"]
+resource_name = "Idle"
+length = 1.6
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.600624, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_v3dep"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_oeqg8"]
+_data = {
+&"Idle": SubResource("Animation_1qnwx"),
+&"RESET": SubResource("Animation_v3dep")
+}
+
+[sub_resource type="Animation" id="Animation_p2dj1"]
+resource_name = "Idle"
+length = 2.2
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reacher:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 2, 3, 2, 3, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_k1yg2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Reacher:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hhtw5"]
+_data = {
+&"Idle": SubResource("Animation_p2dj1"),
+&"RESET": SubResource("Animation_k1yg2")
+}
+
+[sub_resource type="Animation" id="Animation_oeqg8"]
+resource_name = "Idle"
+length = 1.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Presser:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 1, 2, 3, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_hhtw5"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Presser:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_d6it3"]
+_data = {
+&"Idle": SubResource("Animation_oeqg8"),
+&"RESET": SubResource("Animation_hhtw5")
+}
+
+[sub_resource type="Animation" id="Animation_rt31b"]
+resource_name = "Idle"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_i7s33"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_fp8yd"]
+_data = {
+&"Idle": SubResource("Animation_rt31b"),
+&"RESET": SubResource("Animation_i7s33")
+}
+
+[sub_resource type="Animation" id="Animation_5j67f"]
+resource_name = "Idle"
+length = 0.7
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_qmox6"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Right:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rt31b"]
+_data = {
+&"Idle": SubResource("Animation_5j67f"),
+&"RESET": SubResource("Animation_qmox6")
+}
+
+[sub_resource type="Animation" id="Animation_vx8lb"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Center:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.802819, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0]
+}
+
+[sub_resource type="Animation" id="Animation_jvtmt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Center:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_i7s33"]
+_data = {
+&"Idle": SubResource("Animation_vx8lb"),
+&"RESET": SubResource("Animation_jvtmt")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fp8yd"]
+seed = 153
+frequency = 0.0041
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_fp8yd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8od5u"]
+resource_local_to_scene = true
+shader = ExtResource("14_i7s33")
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/col = Color(0.654902, 0, 0, 1)
+shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
+
+[node name="RemnantCrab" type="CharacterBody2D" node_paths=PackedStringArray("spriteAnimators")]
+texture_filter = 1
+collision_layer = 8
+collision_mask = 3
+script = ExtResource("1_7hw05")
+spriteAnimators = [NodePath("Sprites/Arms/LeftAnimator"), NodePath("Sprites/Arms/RightAnimator"), NodePath("Sprites/Arms/ReacherAnimator"), NodePath("Sprites/Arms/PresserAnimator"), NodePath("Sprites/Skulls/LeftAnimator"), NodePath("Sprites/Skulls/RightAnimator"), NodePath("Sprites/Skulls/CenterAnimator")]
+
+[node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 13.5)
+shape = SubResource("RectangleShape2D_rt31b")
+
+[node name="Sprites" type="Node2D" parent="."]
+
+[node name="Legs" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("2_rt31b")
+hframes = 6
+
+[node name="Cloak" type="Sprite2D" parent="Sprites"]
+texture = ExtResource("3_vx8lb")
+hframes = 6
+
+[node name="Arms" type="Node2D" parent="Sprites"]
+
+[node name="Left" type="Sprite2D" parent="Sprites/Arms"]
+texture = ExtResource("6_jvtmt")
+hframes = 6
+
+[node name="LeftAnimator" type="AnimationPlayer" parent="Sprites/Arms"]
+libraries = {
+&"": SubResource("AnimationLibrary_8od5u")
+}
+
+[node name="Right" type="Sprite2D" parent="Sprites/Arms"]
+texture = ExtResource("7_i7s33")
+hframes = 6
+
+[node name="RightAnimator" type="AnimationPlayer" parent="Sprites/Arms"]
+libraries = {
+&"": SubResource("AnimationLibrary_oeqg8")
+}
+
+[node name="Reacher" type="Sprite2D" parent="Sprites/Arms"]
+texture = ExtResource("8_fp8yd")
+hframes = 6
+
+[node name="ReacherAnimator" type="AnimationPlayer" parent="Sprites/Arms"]
+libraries = {
+&"": SubResource("AnimationLibrary_hhtw5")
+}
+
+[node name="Presser" type="Sprite2D" parent="Sprites/Arms"]
+texture = ExtResource("9_8od5u")
+hframes = 6
+
+[node name="PresserAnimator" type="AnimationPlayer" parent="Sprites/Arms"]
+libraries = {
+&"": SubResource("AnimationLibrary_d6it3")
+}
+
+[node name="Skulls" type="Node2D" parent="Sprites"]
+
+[node name="Neclace" type="Sprite2D" parent="Sprites/Skulls"]
+texture = ExtResource("2_5j67f")
+hframes = 6
+
+[node name="Left" type="Sprite2D" parent="Sprites/Skulls"]
+texture = ExtResource("3_qmox6")
+hframes = 6
+
+[node name="LeftAnimator" type="AnimationPlayer" parent="Sprites/Skulls"]
+libraries = {
+&"": SubResource("AnimationLibrary_fp8yd")
+}
+
+[node name="Right" type="Sprite2D" parent="Sprites/Skulls"]
+texture = ExtResource("4_rt31b")
+hframes = 6
+
+[node name="RightAnimator" type="AnimationPlayer" parent="Sprites/Skulls"]
+libraries = {
+&"": SubResource("AnimationLibrary_rt31b")
+}
+
+[node name="Center" type="Sprite2D" parent="Sprites/Skulls"]
+texture = ExtResource("5_vx8lb")
+hframes = 6
+
+[node name="CenterAnimator" type="AnimationPlayer" parent="Sprites/Skulls"]
+libraries = {
+&"": SubResource("AnimationLibrary_i7s33")
+}
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_7hw05")
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+
+[node name="GeneralComponents" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_1hgma")]
+
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine") instance=ExtResource("4_mijbp")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_7y5mw")]
+parent = NodePath("../..")
+gravity = 10.0
+
+[node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_1ai65")]
+parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="HurtboxComponent" parent="GeneralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_2ujic")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_cbi2v")]
+parent = NodePath("../..")
+follow = NodePath("../EnemyHealthbarMarker")
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+
+[node name="Proximities" type="Node2D" parent="."]
+
+[node name="ProximityArea" parent="Proximities" instance=ExtResource("9_5j67f")]
+collision_mask = 4
+
+[node name="AttackComponents" type="Node2D" parent="."]
+
+[node name="EnemyParriedComponent" parent="AttackComponents" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("10_qmox6")]
+attackComponents = [NodePath("../AttackComponent")]
+stateMachine = NodePath("../../StateMachine")
+
+[node name="AttackComponent" parent="AttackComponents" node_paths=PackedStringArray("collisionShape") instance=ExtResource("11_rt31b")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/AttackComponent"]
+
+[node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_vx8lb")]
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
+hitEffects = [NodePath("BloodEffect")]
+knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="BloodEffect" parent="OnHitComponent" instance=ExtResource("13_jvtmt")]
+material = SubResource("ShaderMaterial_8od5u")
+
+[node name="Sounds" type="Node2D" parent="."]

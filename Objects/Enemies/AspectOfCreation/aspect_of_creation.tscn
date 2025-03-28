@@ -68,7 +68,7 @@ noise = SubResource("FastNoiseLite_hytrv")
 resource_local_to_scene = true
 shader = ExtResource("4_tg6g0")
 shader_parameter/noise = SubResource("NoiseTexture2D_tsmcc")
-shader_parameter/hFrames = 115.0
+shader_parameter/hFrames = 132.0
 shader_parameter/spriteRes = Vector2(64, 32)
 shader_parameter/progess = 0.0
 
@@ -134,7 +134,7 @@ noise = SubResource("FastNoiseLite_nqb42")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i0k4h"]
 shader = ExtResource("4_tg6g0")
 shader_parameter/noise = SubResource("NoiseTexture2D_4rrjs")
-shader_parameter/hFrames = 115.0
+shader_parameter/hFrames = 132.0
 shader_parameter/spriteRes = Vector2(64, 32)
 shader_parameter/progess = 1.0
 
@@ -1970,7 +1970,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_msev5"]
 resource_name = "Threaten"
-length = 3.0
+length = 4.0
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1979,7 +1979,7 @@ tracks/0/path = NodePath("HumanSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 2.1, 2.20247, 2.30247, 2.40247, 2.50247),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.6, 0.7, 2.9, 3.00247, 3.10247, 3.20247, 3.30247),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [115, 116, 117, 118, 119, 120, 121, 121, 122, 123, 124, 125]
@@ -1991,9 +1991,9 @@ tracks/1/path = NodePath("BigHands:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(115, -0.25, 0, 0, 0, 131, 0, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 1.3)
+"handle_modes": PackedInt32Array(0, 0, 0, 0),
+"points": PackedFloat32Array(115, -0.25, 0, 0, 0, 131, 0, 0, 0.25, 0, 131, 0, 0, 0, 0, 122, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1.3, 3, 3.7)
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -2002,7 +2002,7 @@ tracks/2/path = NodePath("BigHands")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2.2),
+"times": PackedFloat32Array(0, 3.5),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -2611,7 +2611,7 @@ parent = NodePath("..")
 [node name="Threaten" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
 script = ExtResource("8_tak1p")
 nextState = NodePath("../Idle")
-length = 3.0
+length = 4.0
 animator = NodePath("../../HumanAnimator")
 animationName = "Threaten"
 
@@ -3050,8 +3050,8 @@ texture_over = ExtResource("45_67x27")
 texture_progress = ExtResource("46_4mohx")
 
 [node name="BossIntro" parent="." instance=ExtResource("53_dur7j")]
-title = "Aspect of Talent"
-bossName = "Talen"
+title = "Bloodcrazed Artist"
+bossName = "Aspect of Talent"
 
 [connection signal="animation_finished" from="SmallHands/SmallHandAnimator" to="SmallHands" method="_on_small_hand_animator_animation_finished"]
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]

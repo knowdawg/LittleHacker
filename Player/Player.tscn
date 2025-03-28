@@ -2316,8 +2316,8 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_e4ue5"]
 gradient = SubResource("Gradient_m6aax")
-width = 1
-height = 1
+width = 2
+height = 2
 
 [sub_resource type="Curve" id="Curve_5o4o2"]
 _data = [Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -2367,47 +2367,23 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/path = NodePath("Flare:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
+"times": PackedFloat32Array(0, 0.0666667, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.3, 0), Vector2(0.3, 5), Vector2(0.1, 6)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/path = NodePath("Flare:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Flare:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.1, 1e-05), Vector2(0.1, 3), Vector2(0.1, 4)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Flare:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.1),
+"times": PackedFloat32Array(0, 0.0666667, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -2430,46 +2406,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/path = NodePath("Flare:scale")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [Vector2(0.1, 1e-05)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("GPUParticles2D2:emitting")
+tracks/2/path = NodePath("Flare:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Flare:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0.1, 1e-05)]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Flare:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -2488,8 +2440,8 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_a51en"]
 gradient = SubResource("Gradient_pt0gi")
-width = 1
-height = 1
+width = 5
+height = 5
 
 [sub_resource type="Curve" id="Curve_ck15e"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -2502,8 +2454,8 @@ curve = SubResource("Curve_ck15e")
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
 spread = 5.0
-initial_velocity_min = 150.0
-initial_velocity_max = 200.0
+initial_velocity_min = 250.0
+initial_velocity_max = 300.0
 gravity = Vector3(0, 0, 0)
 scale_curve = SubResource("CurveTexture_awjaw")
 
@@ -3417,7 +3369,7 @@ libraries = {
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="ParryIntercepterComponent/PointLight2D"]
 emitting = false
-amount = 3
+amount = 5
 texture = SubResource("GradientTexture2D_a51en")
 lifetime = 0.25
 one_shot = true
@@ -3431,7 +3383,7 @@ process_material = SubResource("ParticleProcessMaterial_4qdl4")
 
 [node name="GPUParticles2D2" type="GPUParticles2D" parent="ParryIntercepterComponent/PointLight2D"]
 emitting = false
-amount = 3
+amount = 5
 texture = SubResource("GradientTexture2D_a51en")
 lifetime = 0.25
 one_shot = true
@@ -3475,7 +3427,7 @@ volume_db = 10.0
 bus = &"SoundEffects"
 
 [node name="Timer" type="Timer" parent="."]
-wait_time = 0.07
+wait_time = 0.1
 one_shot = true
 
 [node name="MotionBlur" parent="." instance=ExtResource("60_mf4dy")]
