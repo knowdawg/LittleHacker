@@ -8,7 +8,7 @@
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="8_3qqdn"]
 [ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="9_oo6lu"]
-[ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="13_4clin"]
+[ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="13_4clin"]
 [ext_resource type="PackedScene" uid="uid://dqgol3yij81qs" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement.tscn" id="14_arq7e"]
 [ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="16_fkucj"]
 [ext_resource type="PackedScene" uid="uid://bnarclf1ceswr" path="res://Components/CameraBoundriesComponent/SpecialCameraZone/Zones/set_point_camera_zone.tscn" id="19_4clin"]
@@ -295,7 +295,7 @@ shader_parameter/color = Color(0.870588, 0.619608, 0.254902, 1)
 shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = true
-shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_l5xpt"]
 viewport_path = NodePath("Main")
@@ -765,8 +765,10 @@ texture = SubResource("ViewportTexture_l5xpt")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="RemnantCrab" parent="Enemies" instance=ExtResource("13_4clin")]
-position = Vector2(-28, 51)
+[node name="ClothSim" parent="Enemies" instance=ExtResource("13_4clin")]
+position = Vector2(-22, 45)
+outlineColor = Color(1, 1, 1, 1)
+clothAngle = 0.0
 
 [node name="PlayerParent" type="Node2D" parent="."]
 

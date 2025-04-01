@@ -1,0 +1,135 @@
+[gd_scene load_steps=11 format=3 uid="uid://bc7hwfvln63ng"]
+
+[ext_resource type="Texture2D" uid="uid://b05m36i554op" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemantCrabLegs3.png" id="1_ey6me"]
+[ext_resource type="Texture2D" uid="uid://7ca3x7solw2u" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemantCrabLegs2.png" id="1_oycq5"]
+[ext_resource type="Script" uid="uid://df0fcsvg0077l" path="res://Objects/Enemies/RemnantCrab/remant_crab_legs.gd" id="1_rwird"]
+[ext_resource type="Texture2D" uid="uid://bswskcgx5o66x" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemantCrabLegs1.png" id="2_ey6me"]
+[ext_resource type="Shader" uid="uid://sxnal3ftc2ij" path="res://Objects/Enemies/RemnantCrab/CrabOutline.gdshader" id="4_m80d6"]
+
+[sub_resource type="SkeletonModification2DFABRIK" id="SkeletonModification2DFABRIK_rwird"]
+target_nodepath = NodePath("../../IKTargets/LeftLegTarget")
+fabrik_data_chain_length = 2
+joint_data/0/bone_index = 0
+joint_data/0/bone2d_node = NodePath("Hip")
+joint_data/1/bone_index = 1
+joint_data/1/bone2d_node = NodePath("Hip/ThighLeft")
+joint_data/1/magnet_position = Vector2(0, 0)
+joint_data/1/use_target_rotation = false
+
+[sub_resource type="SkeletonModification2DLookAt" id="SkeletonModification2DLookAt_ey6me"]
+bone_index = 3
+bone2d_node = NodePath("Hip/ThighLeft/LegLeft/FootLeft")
+target_nodepath = NodePath("../../IKTargets/LeftLegTarget/LeftFootLookAt")
+
+[sub_resource type="SkeletonModificationStack2D" id="SkeletonModificationStack2D_ey6me"]
+enabled = true
+modification_count = 2
+modifications/0 = SubResource("SkeletonModification2DFABRIK_rwird")
+modifications/1 = SubResource("SkeletonModification2DLookAt_ey6me")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwird"]
+shader = ExtResource("4_m80d6")
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_ey6me"]
+viewport_path = NodePath("SubViewport")
+
+[node name="RemantCrabLegs" type="Node"]
+script = ExtResource("1_rwird")
+spriteOffset = Vector2(10, 8)
+leftLegMaxDistatance = 20.0
+leftLegStartPos = Vector2(40, 55)
+
+[node name="Bones" type="Node2D" parent="."]
+unique_name_in_owner = true
+visible = false
+position = Vector2(40, 46)
+
+[node name="Skeleton2D" type="Skeleton2D" parent="Bones"]
+modification_stack = SubResource("SkeletonModificationStack2D_ey6me")
+
+[node name="Hip" type="Bone2D" parent="Bones/Skeleton2D"]
+position = Vector2(100, -10)
+rest = Transform2D(1, 0, 0, 1, 100, -10)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="ThighLeft" type="Bone2D" parent="Bones/Skeleton2D/Hip"]
+position = Vector2(-100, 0)
+scale = Vector2(0.999975, 0.999975)
+rest = Transform2D(0.999975, 4.82389e-06, -4.82389e-06, 0.999975, -100, 0)
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Bones/Skeleton2D/Hip/ThighLeft"]
+remote_path = NodePath("../../../../../SubViewport/Body/LeftLeg/ThighLeft")
+
+[node name="LegLeft" type="Bone2D" parent="Bones/Skeleton2D/Hip/ThighLeft"]
+position = Vector2(-9.0004, 3.00014)
+rotation = -1.31766e-05
+rest = Transform2D(1, -1.31766e-05, 1.31766e-05, 1, -9.0004, 3.00014)
+
+[node name="RemoteTransform2D2" type="RemoteTransform2D" parent="Bones/Skeleton2D/Hip/ThighLeft/LegLeft"]
+position = Vector2(9.53674e-07, -1.19209e-07)
+remote_path = NodePath("../../../../../../SubViewport/Body/LeftLeg/LegLeft")
+
+[node name="FootLeft" type="Bone2D" parent="Bones/Skeleton2D/Hip/ThighLeft/LegLeft"]
+position = Vector2(6.00025, 12.0003)
+scale = Vector2(0.99997, 0.99997)
+rest = Transform2D(0.99997, 8.59075e-06, -8.59075e-06, 0.99997, 6.00025, 12.0003)
+auto_calculate_length_and_angle = false
+length = 5.0
+bone_angle = -180.0
+metadata/_local_pose_override_enabled_ = true
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Bones/Skeleton2D/Hip/ThighLeft/LegLeft/FootLeft"]
+remote_path = NodePath("../../../../../../../SubViewport/Body/LeftLeg/FootLeft")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+disable_3d = true
+transparent_bg = true
+size = Vector2i(128, 72)
+
+[node name="Body" type="Node2D" parent="SubViewport"]
+unique_name_in_owner = true
+scale = Vector2(10, 10)
+
+[node name="LeftLeg" type="Node2D" parent="SubViewport/Body"]
+
+[node name="FootLeft" type="Sprite2D" parent="SubViewport/Body/LeftLeg"]
+position = Vector2(5.33582, 5.37428)
+rotation = -0.0722984
+scale = Vector2(0.099998, 0.099998)
+texture = ExtResource("1_ey6me")
+offset = Vector2(-3, -6)
+
+[node name="LegLeft" type="Sprite2D" parent="SubViewport/Body/LeftLeg"]
+position = Vector2(4, 5.5)
+rotation = -1.20098
+scale = Vector2(0.0999978, 0.0999978)
+texture = ExtResource("1_oycq5")
+offset = Vector2(3, 6)
+
+[node name="ThighLeft" type="Sprite2D" parent="SubViewport/Body/LeftLeg"]
+position = Vector2(4.0456, 4.55239)
+rotation = -1.20096
+scale = Vector2(0.0999978, 0.0999978)
+texture = ExtResource("2_ey6me")
+offset = Vector2(-4, 2)
+
+[node name="IKTargets" type="Node2D" parent="."]
+
+[node name="LeftLegTarget" type="Marker2D" parent="IKTargets"]
+unique_name_in_owner = true
+position = Vector2(40, 55)
+
+[node name="LeftFootLookAt" type="Marker2D" parent="IKTargets/LeftLegTarget"]
+position = Vector2(-4, 0)
+
+[node name="NextLeftLegTarget" type="Marker2D" parent="IKTargets"]
+unique_name_in_owner = true
+position = Vector2(40, 50)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+material = SubResource("ShaderMaterial_rwird")
+position = Vector2(11, 8)
+texture = SubResource("ViewportTexture_ey6me")

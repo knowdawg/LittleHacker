@@ -129,6 +129,7 @@ Interact={
 2d_physics/layer_7="LevelTransitions"
 2d_physics/layer_8="Interactables"
 2d_physics/layer_9="CameraBounds"
+2d_physics/layer_10="ClothPhysics"
 
 [physics]
 
