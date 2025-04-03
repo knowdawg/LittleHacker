@@ -42,7 +42,7 @@ _surfaces = [{
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wbxr8"]
 resource_local_to_scene = true
 shader = ExtResource("4_175tj")
-shader_parameter/color = Color(0.141176, 0.0862745, 0.152941, 1)
+shader_parameter/color = Color(0.141176, 0.0823529, 0.152941, 1)
 shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
@@ -52,11 +52,9 @@ shader_parameter/modulate = Color(1, 1, 1, 1)
 viewport_path = NodePath("SubViewport")
 
 [node name="ClothSim" type="Node2D"]
-position = Vector2(13, 12)
 script = ExtResource("1_igt71")
 texture = ExtResource("2_175tj")
-outlineColor = null
-clothAngle = null
+outlineColor = Color(0.141176, 0.0823529, 0.152941, 1)
 offset = Vector2(-48, -48)
 particle_count_x = 16
 movementForceMultiplier = 0.0

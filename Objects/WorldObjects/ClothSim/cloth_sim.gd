@@ -3,8 +3,8 @@ extends Node2D
 
 @export_tool_button("GenerateMesh", "Callable") var genMesh = generateMesh
 @export var texture : Texture2D
-@export var outlineColor : Color = Color.WHITE #Not Implemented
-@export var clothAngle : float #Not Implemented
+@export var outlineColor : Color = Color.WHITE
+@export var clothAngle : float
 @export var offset : Vector2 = Vector2.ZERO
 # Cloth settings
 @export_group("Cloth Settings")
@@ -113,6 +113,9 @@ func _physics_process(delta_time):
 	%MeshInstance2D.material.set_shader_parameter("windAmplitude", windAmplitude)
 	%MeshInstance2D.material.set_shader_parameter("windSpeed", windSpeed)
 	%MeshInstance2D.material.set_shader_parameter("noiseScale", windNoiseScale)
+	%Sprite2D.material.set_shader_parameter("color", outlineColor)
+	
+	%MeshInstance2D.rotation_degrees = clothAngle
 
 func simulate(delta_time):
 	# Apply Verlet integration (gravity + inertia)
@@ -122,9 +125,6 @@ func simulate(delta_time):
 		var temp = p["pos"]
 		var dif = (p["pos"] - p["prev_pos"])
 		
-		#var yMul : float = (1.0 - (particle_count_y - p["coordinate"].y) / particle_count_y)
-		#dif.y *= yMul;
-		#dif.x *= 0.7
 		dif *= 0.7;
 		p["pos"] += dif + gravity * delta_time * 60.0 + outsideForces # Scale by delta
 		p["prev_pos"] = temp
@@ -189,9 +189,7 @@ func _draw():
 	# Draw particles
 	for p in particles:
 		draw_circle(p["pos"], 0.5, Color(1, 1, 1))
-
-	# Draw collision circle (for debugging)
-	draw_circle(circle_pos, circle_radius, Color(1, 0, 0, 0.5), false)
+		
 
 func generateMesh():
 	%MeshInstance2D.texture = texture
@@ -200,14 +198,14 @@ func generateMesh():
 	var arrays := []
 	arrays.resize(ArrayMesh.ARRAY_MAX)
 	
-	# Vertices
+	
 	var vertices := PackedVector2Array()
 	for y in range(particle_count_y):
 		for x in range(particle_count_x):
 			vertices.append(Vector2(x * particle_spacing, y * particle_spacing))
 	arrays[ArrayMesh.ARRAY_VERTEX] = vertices
 	
-	# UVs
+	
 	var uvs := PackedVector2Array()
 	for y in range(particle_count_y):
 		for x in range(particle_count_x):
@@ -217,7 +215,7 @@ func generateMesh():
 			))
 	arrays[ArrayMesh.ARRAY_TEX_UV] = uvs
 	
-	# Indices (triangles)
+	
 	var indices := PackedInt32Array()
 	for y in range(particle_count_y - 1):
 		for x in range(particle_count_x - 1):

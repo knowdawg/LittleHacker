@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=55 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://bmjxhaulcaflc" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSkullNeclace.png" id="2_5j67f"]
@@ -8,6 +8,7 @@
 [ext_resource type="Texture2D" uid="uid://coyovi3cgllo8" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLeftSkull.png" id="3_qmox6"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_mijbp"]
 [ext_resource type="Texture2D" uid="uid://bipxnlqap2nw3" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabRightSkull.png" id="4_rt31b"]
+[ext_resource type="Texture2D" uid="uid://bp427dx8l64ns" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabCloakSingle.png" id="4_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_7y5mw"]
 [ext_resource type="Texture2D" uid="uid://r74bsxam8t50" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabCenterSkull.png" id="5_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_1ai65"]
@@ -595,6 +596,16 @@ disabled = true
 
 [node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 z_index = 1
+texture = ExtResource("4_vx8lb")
+particle_count_x = 24
+particle_count_y = 10
+movementForceMultiplier = 0.3
+gravity = Vector2(0, 0.2)
+windAmplitude = 2.0
+windSpeed = 2.0
+windNoiseScale = 0.3
+lockRight = true
+lockTop = true
 
 [node name="Arms" type="Node2D" parent="Sprites"]
 z_index = 1

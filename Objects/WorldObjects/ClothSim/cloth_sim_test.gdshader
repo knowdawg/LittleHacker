@@ -14,7 +14,6 @@ void vertex() {
 	VERTEX = mesh[VERTEX_ID];
 	bool pin = pinned[VERTEX_ID];
 
-	// Get original vertex position (from cloth simulation)
 	noiseUV = UV + vec2(-TIME * windSpeed, TIME * windSpeed * 0.5);
 	noiseUV *= noiseScale;
 	float n = texture(noise, noiseUV).r - 0.5;
@@ -31,7 +30,7 @@ void fragment() {
 	c = texture(TEXTURE, UV);
 
 	float t = texture(noise, noiseUV).r - 0.5;
-	c.rgb -= t * 0.1;
+	c.rgb -= c.rgb * t * clamp(windAmplitude * 0.1, 0.0, 0.5);
 
 	COLOR = c;
 }
