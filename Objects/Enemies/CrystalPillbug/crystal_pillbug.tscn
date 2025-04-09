@@ -304,7 +304,6 @@ deathComponent = NodePath("../../DeathComponent")
 killsEnemy = true
 removeAfterExecuted = true
 enemyHealthbar = NodePath("..")
-cost = 1.0
 hackName = "Shock"
 healthComponent = NodePath("../../HealthComponent")
 

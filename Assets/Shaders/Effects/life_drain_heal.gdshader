@@ -18,4 +18,3 @@ void fragment() {
 
 	COLOR = c;
 }
-

@@ -76,8 +76,9 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="Gradient" id="Gradient_ye30b"]
-offsets = PackedFloat32Array(0.40942, 0.996377)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.177143, 0.531429, 0.996377)
+colors = PackedColorArray(1, 1, 1, 1, 0.811765, 0.341176, 0.235294, 1, 0.811765, 0.341176, 0.235294, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_uhfbk"]
 gradient = SubResource("Gradient_ye30b")
@@ -91,7 +92,7 @@ shader_parameter/color = Color(0.866667, 0.619608, 0.25098, 1)
 shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = true
-shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_hxm8j"]
 viewport_path = NodePath("Main")
@@ -402,7 +403,7 @@ texture = SubResource("GradientTexture2D_uhfbk")
 
 [node name="BackgroundTilemap" parent="." instance=ExtResource("5_uhfbk")]
 modulate = Color(0.784314, 0.784314, 0.784314, 1)
-layer_0/tile_data = PackedInt32Array(196615, 0, 0, 196614, 0, 0, 196613, 0, 0, 196612, 0, 0, 131076, 0, 0, 131077, 0, 0, 131078, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 131082, 0, 0, 65547, 0, 0, 131083, 0, 0, 131084, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 131085, 0, 0, 65549, 0, 0, 65548, 0, 0, 131086, 0, 0, 196622, 0, 0, 131087, 0, 0, 196623, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 196616, 0, 0)
+layer_0/tile_data = PackedInt32Array(196615, 0, 0, 196612, 0, 0, 131076, 0, 0, 131079, 0, 0, 131080, 0, 0, 131081, 0, 0, 65544, 0, 0, 65545, 0, 0, 65546, 0, 0, 131082, 0, 0, 65547, 0, 0, 131083, 0, 0, 131084, 0, 0, 196619, 0, 0, 196620, 0, 0, 196621, 0, 0, 131085, 0, 0, 65549, 0, 0, 65548, 0, 0, 131086, 0, 0, 196622, 0, 0, 131087, 0, 0, 196623, 0, 0, 65550, 0, 0, 65551, 0, 0, 65552, 0, 0, 65553, 0, 0, 65554, 0, 0, 196616, 0, 0, 196613, 0, 0, 196614, 0, 0, 131078, 0, 0, 131077, 0, 0)
 
 [node name="Decorations" type="Node2D" parent="."]
 

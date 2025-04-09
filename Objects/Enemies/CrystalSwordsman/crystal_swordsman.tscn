@@ -56,7 +56,7 @@ size = Vector2(2, 5)
 resource_local_to_scene = true
 shader = ExtResource("3_8ujxu")
 shader_parameter/width = 0.3
-shader_parameter/outlineAlpha = 0.3
+shader_parameter/outlineAlpha = 1.0
 
 [sub_resource type="Animation" id="Animation_nqn66"]
 resource_name = "Attack"
@@ -512,11 +512,13 @@ fill_to = Vector2(0.8, 0.8)
 [node name="CrystalSwordsman" type="CharacterBody2D"]
 texture_filter = 1
 collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_42bp5")
 projectile = ExtResource("11_6857g")
 buggy = ExtResource("18_gnyok")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
+visible = false
 color = Color(0.0980392, 0, 0, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_kyiiy")
@@ -576,7 +578,6 @@ spriteDirector = NodePath("../../Sprite2D/SpriteDirectorComponent")
 script = ExtResource("13_qf0pg")
 projectileScene = ExtResource("9_c0508")
 projectileDirectionNode = NodePath("../../AttackComponents/AttackComponent")
-reverseDirection = true
 distanceAwayFromParent = 4.0
 attackLength = 2.1
 animationName = "Attack"
@@ -649,7 +650,7 @@ hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_k56j0")
+&"": SubResource("AnimationLibrary_k56j0")
 }
 
 [node name="GeneralComponents" type="Node2D" parent="."]
@@ -775,12 +776,12 @@ texture = SubResource("GradientTexture2D_tox8f")
 position = Vector2(0, 3)
 emitting = false
 amount = 32
-process_material = ExtResource("30_mwxko")
 texture = SubResource("GradientTexture2D_cavd6")
 lifetime = 0.4
 explosiveness = 0.2
 trail_enabled = true
 trail_lifetime = 0.1
+process_material = ExtResource("30_mwxko")
 
 [node name="Sounds" type="Node2D" parent="."]
 

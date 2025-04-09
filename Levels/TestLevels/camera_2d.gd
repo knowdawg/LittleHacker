@@ -16,8 +16,8 @@ func _process(delta: float) -> void:
 		
 		offset = Vector2(xDis, yDis)
 	
-	if zoom != Vector2(10, 10):
-		zoom = lerp(zoom, Vector2(10, 10), 10.0 * delta)
+	if zoom != Vector2(12, 12):
+		zoom = lerp(zoom, Vector2(12, 12), 10.0 * delta)
 
 func set_shake(amount : float):
 	shake = amount

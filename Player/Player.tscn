@@ -1,4 +1,4 @@
-[gd_scene load_steps=217 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=216 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -67,7 +67,6 @@
 [ext_resource type="Shader" uid="uid://b3brnbukfnfmc" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
 [ext_resource type="AudioStream" uid="uid://dd7ed3cdwvi81" path="res://Assets/Audio/SoundEffects/Whoosh.wav" id="43_1cl5h"]
 [ext_resource type="AudioStream" uid="uid://3bpb1qrv4tya" path="res://Assets/Audio/SoundEffects/PlayerSwing.wav" id="43_ho0pg"]
-[ext_resource type="Shader" uid="uid://dbhns56y7xhhn" path="res://Assets/Shaders/Filters/GlitchEffect.gdshader" id="46_i2mat"]
 [ext_resource type="AudioStream" uid="uid://bqthecipgxswv" path="res://Assets/Audio/SoundEffects/HackExecuted.wav" id="46_xfg1q"]
 [ext_resource type="Script" uid="uid://32ttvp2eqk7k" path="res://Player/HealthBar/progress_bar.gd" id="54_l53i3"]
 [ext_resource type="Script" uid="uid://cqdgehuqqaexl" path="res://Player/player_ui.gd" id="54_qkh22"]
@@ -93,7 +92,7 @@ radius = 5.0
 size = Vector2(10, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
-size = Vector2(31, 4)
+size = Vector2(31, 12)
 
 [sub_resource type="Gradient" id="Gradient_0ye2q"]
 offsets = PackedFloat32Array(1)
@@ -129,8 +128,7 @@ particles_anim_loop = false
 
 [sub_resource type="Gradient" id="Gradient_efsdk"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0.200811, 0.600406, 1)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0.170203, 1, 1, 1, 0)
+colors = PackedColorArray(1, 1, 1, 0.541176, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ufcdm"]
 gradient = SubResource("Gradient_efsdk")
@@ -206,8 +204,8 @@ point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1pltk"]
 shader = ExtResource("33_rdnj2")
-shader_parameter/color = Color(0.647059, 0.188235, 0.188235, 1)
-shader_parameter/width = 0.1
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 0.3
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/modulate = Color(1, 1, 1, 1)
@@ -1373,13 +1371,12 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cy6n2"]
-shader = ExtResource("46_i2mat")
-shader_parameter/shake_power = 0.0
-shader_parameter/shake_rate = 0.0
-shader_parameter/shake_speed = 1.0
-shader_parameter/shake_block_size = 10.0
-shader_parameter/shake_color_rate = 0.0
-shader_parameter/transparency = 1.0
+shader = ExtResource("33_rdnj2")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 0.3
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_blsx0"]
 resource_name = "Blocked"
@@ -1982,7 +1979,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_72lbq"]
 resource_name = "AttackHorizontal"
-length = 0.75
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1991,10 +1988,10 @@ tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [9, 10, 11, 12, 13, 14, 15, 16, 17]
+"values": [13, 14, 15, 16, 17]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -2003,12 +2000,9 @@ tracks/1/path = NodePath("WeaponDislocator/WeaponSprite")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.35),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
 "values": [{
-"args": [],
-"method": &"playSpinSound"
-}, {
 "args": [],
 "method": &"playSound"
 }]
@@ -2016,7 +2010,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_5cnkt"]
 resource_name = "AttackHorizontal2"
-length = 0.75
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2025,10 +2019,10 @@ tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [18, 19, 20, 21, 22, 23, 24, 25, 26]
+"values": [21, 23, 24, 25, 26]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -2037,7 +2031,7 @@ tracks/1/path = NodePath("WeaponDislocator/WeaponSprite")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.35),
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -2047,7 +2041,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_r0plt"]
 resource_name = "AttackHorizontal3"
-length = 0.75
+length = 0.45
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2056,10 +2050,10 @@ tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
-"values": [27, 28, 29, 13, 14, 15, 16, 17]
+"values": [27, 14, 15, 16, 17]
 }
 tracks/1/type = "method"
 tracks/1/imported = false
@@ -2068,7 +2062,7 @@ tracks/1/path = NodePath("WeaponDislocator/WeaponSprite")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.35),
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -2333,8 +2327,8 @@ curve = SubResource("Curve_5o4o2")
 particle_flag_disable_z = true
 emission_shape = 6
 emission_ring_axis = Vector3(0, 0, 1)
-emission_ring_height = 50.0
-emission_ring_radius = 50.0
+emission_ring_height = 20.0
+emission_ring_radius = 20.0
 emission_ring_inner_radius = 0.0
 emission_ring_cone_angle = 90.0
 radial_velocity_min = 200.0
@@ -2587,6 +2581,7 @@ collision_layer = 512
 collision_mask = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ClothArea"]
+visible = false
 shape = SubResource("CircleShape2D_e2bo2")
 
 [node name="InteractableManager" type="Node2D" parent="." node_paths=PackedStringArray("prox")]
@@ -2597,6 +2592,7 @@ prox = NodePath("InteractableProximity")
 collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableManager/InteractableProximity"]
+visible = false
 shape = SubResource("RectangleShape2D_bundm")
 
 [node name="Sounds" type="Node" parent="."]
@@ -2622,6 +2618,7 @@ collision_layer = 0
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HackTargetDetectionBox"]
+visible = false
 position = Vector2(-15.5, -2)
 shape = SubResource("RectangleShape2D_gvghi")
 
@@ -2654,6 +2651,7 @@ health_componnet = NodePath("../HealthComponent")
 IFRAMETIMER = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visible = false
 shape = SubResource("RectangleShape2D_dxj8g")
 
 [node name="Effects" type="Node2D" parent="."]
@@ -2684,7 +2682,6 @@ unique_name_in_owner = true
 color = Color(0.137255, 0.137255, 0.137255, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ufcdm")
-texture_scale = 0.01
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "hurtboxComponent", "attackComponentsThatCanBeParried")]
 script = ExtResource("1_8slbu")
@@ -2841,9 +2838,9 @@ weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
 script = ExtResource("10_d677x")
 animationName = "AttackHorizontal"
 recoveryAnimationName = "Recovery1"
-attackTime = 0.75
+attackTime = 0.45
 attackOverTime = 0.45
-hitboxActiveTime = Array[Vector2]([Vector2(0.35, 0.45)])
+hitboxActiveTime = Array[Vector2]([Vector2(0.05, 0.15)])
 nextChainAttackState = NodePath("../AttackHorizontal2")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
@@ -2859,9 +2856,9 @@ playerMovementCurve = SubResource("Curve_afej6")
 script = ExtResource("10_d677x")
 animationName = "AttackHorizontal2"
 recoveryAnimationName = "Recovery2"
-attackTime = 0.75
+attackTime = 0.45
 attackOverTime = 0.45
-hitboxActiveTime = Array[Vector2]([Vector2(0.35, 0.45)])
+hitboxActiveTime = Array[Vector2]([Vector2(0.05, 0.15)])
 nextChainAttackState = NodePath("../AttackHorizontal3")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
@@ -2877,9 +2874,9 @@ playerMovementCurve = SubResource("Curve_afej6")
 script = ExtResource("10_d677x")
 animationName = "AttackHorizontal3"
 recoveryAnimationName = "Recovery1"
-attackTime = 0.75
+attackTime = 0.45
 attackOverTime = 0.45
-hitboxActiveTime = Array[Vector2]([Vector2(0.35, 0.45)])
+hitboxActiveTime = Array[Vector2]([Vector2(0.05, 0.15)])
 nextChainAttackState = NodePath("../AttackHorizontal2")
 weaponAnimator = NodePath("../../WeaponAnimator")
 weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
@@ -2982,7 +2979,6 @@ bus = &"SoundEffects"
 clip_children = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_1pltk")
-position = Vector2(0, 2)
 texture = ExtResource("24_6qj5u")
 hframes = 94
 script = ExtResource("14_bw1kr")
@@ -3001,6 +2997,7 @@ knockbackVector = Vector2(-1, 0)
 hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackLeft"]
+visible = false
 polygon = PackedVector2Array(-5, 0, 1, 0, 1, -7, 1, -12, -2, -12, -8, -6, -8, -2)
 
 [node name="AttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
@@ -3013,6 +3010,7 @@ knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackRight"]
+visible = false
 polygon = PackedVector2Array(8, -2, 8, -6, 2, -12, -1, -12, -1, 0, 5, 0)
 
 [node name="AttackDown" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
@@ -3026,6 +3024,7 @@ isPogo = true
 hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackDown"]
+visible = false
 position = Vector2(0, 3)
 shape = SubResource("RectangleShape2D_dq4fh")
 
@@ -3039,6 +3038,7 @@ knockbackVector = Vector2(0, -1)
 hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackUp"]
+visible = false
 position = Vector2(0, -9)
 polygon = PackedVector2Array(-6, 0, -1, -8, 1, -8, 6, 0, 7, 8, -7, 8)
 
@@ -3052,6 +3052,7 @@ isHackAttack = true
 numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/HackAttackLeft"]
+visible = false
 position = Vector2(-5, -2)
 shape = SubResource("RectangleShape2D_0sr2h")
 
@@ -3063,6 +3064,7 @@ isHackAttack = true
 numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/HackAttackRight"]
+visible = false
 position = Vector2(5, -2)
 shape = SubResource("RectangleShape2D_panv4")
 
@@ -3075,6 +3077,7 @@ attackStrength = 2
 knockback_force = 120.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/DashAttackLeft"]
+visible = false
 position = Vector2(0, -1.5)
 shape = SubResource("RectangleShape2D_umk1u")
 
@@ -3308,6 +3311,7 @@ position = Vector2(0, 2)
 
 [node name="PlayerSprite" type="Sprite2D" parent="PlayerVisual"]
 clip_children = 2
+z_index = 1
 texture_filter = 1
 material = SubResource("ShaderMaterial_cy6n2")
 position = Vector2(0, -4)
@@ -3370,6 +3374,7 @@ script = ExtResource("29_tbcwx")
 color = Color(0, 0, 0, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_b4yi8")
+texture_scale = 0.01
 script = ExtResource("30_t8rxg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="ParryIntercepterComponent/PointLight2D"]
@@ -3537,13 +3542,14 @@ offset_bottom = 23.0
 collision_mask = 256
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CameraBounds"]
+visible = false
 shape = SubResource("CircleShape2D_jfgjt")
 
 [node name="Node" type="Node" parent="."]
 
 [node name="PlayerCamera" type="Camera2D" parent="Node"]
 unique_name_in_owner = true
-zoom = Vector2(10, 10)
+zoom = Vector2(12, 12)
 position_smoothing_speed = 10.0
 script = ExtResource("55_c7l4y")
 

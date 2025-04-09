@@ -25,5 +25,8 @@ void fragment() {
 
 	c = nTex;
 
+	c *= 2.0;
+	c.rgb = pow(c.rgb, vec3(3.0));
+
 	COLOR *= c;
 }
