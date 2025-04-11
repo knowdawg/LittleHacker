@@ -11,6 +11,6 @@ func _on_interactable_area_on_interact() -> void:
 
 func _process(_delta: float) -> void:
 	if !is_on_floor():
-		if !$StateMachine.current_state is BuggyFalling:
+		if !$StateMachine.current_state is BuggyFalling and !$StateMachine.current_state is GenericEnemyDeath:
 			$StateMachine.switchStates("Falling")
 	$StateMachine/Patroll.numOfAnimationsBeforeDirectionChange = randi_range(1, 4)

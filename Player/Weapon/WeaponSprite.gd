@@ -15,7 +15,7 @@ func _process(_delta: float) -> void:
 		visible = false
 
 func moveTowardsPlayerNormal(delta):
-	position.x = lerp(position.x, parent.global_position.x, delta * 10)
+	position.x = lerp(position.x, parent.global_position.x - 2.0 * parent.getSpriteDirection(), delta * 10)
 	position.y = lerp(position.y, parent.global_position.y + 2.0, delta * 10)
 
 func moveTowardsPlayerFast(_delta):

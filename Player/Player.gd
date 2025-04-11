@@ -18,6 +18,7 @@ var gravity = 500 * 0.5 #ProjectSettings.get_setting("physics/2d/default_gravity
 var v : Vector2 = Vector2.ZERO #substitute for velocity so that the charectar will freze if canMove / canFall is false
 var knockbackVector : Vector2 = Vector2.ZERO
 var slideVector : Vector2 = Vector2.ZERO
+var boostVector : Vector2 = Vector2.ZERO #used for all forms of outside boost
 var rollJumpBoost : Vector2 = Vector2.ZERO
 var dashV : Vector2 = Vector2.ZERO
 var coyoteTime : float = 0.0
@@ -59,6 +60,11 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	
 	#Slide
 	velocity += slideVector
+	
+	#boost
+	velocity += boostVector
+	boostVector.x = move_toward(boostVector.x, 0, delta * 100.0)
+	boostVector.y = move_toward(boostVector.y, 0, delta * 200.0)
 	
 	#rollJumpBoost.x = clamp(rollJumpBoost.x, -SPEED - v.x, SPEED - v.x)
 	velocity += rollJumpBoost
@@ -209,7 +215,14 @@ func initialize(data : SceneSwitchData):
 		healthComponent.set_health(healthComponent.MAX_HEALTH)
 	sprite.flip_h = !data.faceRight
 	
-	
+
+signal forceExitZipline
+func ziplineActivated():
+	v = Vector2.ZERO
+	stateMachine.switchStates("Zipline")
+
+func exitZipline():
+	forceExitZipline.emit()
 
 func _on_health_component_death(_attack: Attack) -> void:
 	screenEffects.showStatic()

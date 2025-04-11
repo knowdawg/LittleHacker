@@ -31,7 +31,7 @@ shader_parameter/color = Color(0.2, 0.058, 0.058, 1)
 shader_parameter/width = 0.5
 shader_parameter/pattern = 0
 shader_parameter/inside = false
-shader_parameter/add_margins = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_kvouj"]
 resource_name = "Crawl"
@@ -181,6 +181,7 @@ turbulence_noise_scale = 0.0
 [node name="HealthBuggy" type="CharacterBody2D" node_paths=PackedStringArray("movement")]
 texture_filter = 1
 collision_layer = 8
+collision_mask = 3
 script = ExtResource("1_wjrs8")
 movement = NodePath("GeneralComponents/MovementComponent")
 
@@ -241,7 +242,7 @@ hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_v2cha")
+&"": SubResource("AnimationLibrary_v2cha")
 }
 
 [node name="GeneralComponents" type="Node2D" parent="."]
@@ -313,13 +314,13 @@ position = Vector2(0, 3)
 
 [node name="DeathParticles" type="GPUParticles2D" parent="."]
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_aqnum")
 lifetime = 0.3
 one_shot = true
 preprocess = 0.1
 explosiveness = 0.8
 trail_enabled = true
 trail_lifetime = 0.15
+process_material = SubResource("ParticleProcessMaterial_aqnum")
 
 [node name="IsOnFloor" type="RayCast2D" parent="."]
 target_position = Vector2(0, 0.3)

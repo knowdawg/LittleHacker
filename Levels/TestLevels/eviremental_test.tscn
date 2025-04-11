@@ -59,8 +59,8 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
 shader = ExtResource("2_f6ogn")
-shader_parameter/pixelsWidth = 128.0
-shader_parameter/pixelsHight = 72.0
+shader_parameter/pixelsWidth = 106.667
+shader_parameter/pixelsHight = 60.0
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_uup3d"]
 viewport_path = NodePath("LittleLevelViewport")

@@ -1,8 +1,8 @@
 shader_type canvas_item;
 render_mode unshaded;
 
-uniform float pixelsWidth : hint_range(1, 2000, 1);
-uniform float pixelsHight : hint_range(1, 2000, 1);
+uniform float pixelsWidth : hint_range(1, 2000);
+uniform float pixelsHight : hint_range(1, 2000);
 
 vec2 curve(vec2 uv){
 	uv = (uv - 0.5) * 2.0;
@@ -30,7 +30,7 @@ void fragment() {
 	scanner *= 0.01;
 
 	//Verticle seperators
-	float seperator = abs(sin(1.5 + pixelsWidth * (curvedUV.x * PI)));
+	float seperator = abs(sin(0.667 + pixelsWidth * (curvedUV.x * PI)));
 	seperator = smoothstep(0.95, 1.0, seperator);
 	seperator *= 0.03;
 

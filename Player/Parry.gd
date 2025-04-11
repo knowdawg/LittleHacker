@@ -26,4 +26,5 @@ func update(delta):
 		trasitioned.emit(self, "Idle")
 
 func update_physics(delta):
-	player.update_physics(delta, true, false)
+	#player.update_physics(delta, true, false)
+	player.update_physics(delta, true, true)

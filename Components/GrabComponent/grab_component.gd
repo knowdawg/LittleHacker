@@ -6,11 +6,12 @@ class_name GrabComponent
 var isActive = false
 var objectToControll : Node2D
 
-func setActive(active : bool, object = null):
+func setActive(active : bool, object = null, releaseGrab : bool = true):
 	if active == false:
 		if is_instance_valid(objectToControll):
-			if objectToControll.has_method("releaseGrab"):
-				objectToControll.releaseGrab()
+			if releaseGrab:
+				if objectToControll.has_method("releaseGrab"):
+					objectToControll.releaseGrab()
 	isActive = active
 	objectToControll = object
 
