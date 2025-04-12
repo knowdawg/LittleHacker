@@ -1,4 +1,4 @@
-[gd_scene load_steps=182 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=186 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Shader" uid="uid://cnc8we1jbjatc" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://bvdxkosvo3rdd" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.tscn" id="21_wxdan"]
 [ext_resource type="PackedScene" uid="uid://rr8whno8lay3" path="res://Objects/WorldObjects/Tilemaps/wooden_mine.tscn" id="21_ya4vw"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="24_dgwi3"]
+[ext_resource type="PackedScene" uid="uid://c6eflefpmo32h" path="res://Objects/Enemies/CrystalLauncher/Crystal_Launcher.tscn" id="25_ut7a1"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="29_4ghwm"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="30_dgwi3"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="30_yrukv"]
@@ -909,12 +910,20 @@ radius = 3.0
 
 [sub_resource type="Curve" id="Curve_w31va"]
 resource_local_to_scene = true
-_limits = [-1.0, 1.0, 0.0, 1.0]
-_data = [Vector2(0, -0.156925), 0.0, 0.0, 0, 0, Vector2(0.348765, -0.273302), 0.0, 0.0, 0, 0, Vector2(0.808642, 0.7604), 3.63981, 3.63981, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 4
+_data = [Vector2(0, 0), 0.0, -0.0262488, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_igtls"]
-polygon = PackedVector2Array(-166, 89, -7, 89, -4, 90, -1, 93, -3, 95, -13, 95, -13, 100, -23, 100, -23, 104, -9, 104, -9, 99, -4, 99, -4, 102, -3, 102, -3, 112, 1, 112, 1, 104, 6, 104, 6, 112, 15, 114, 15, 104, 20, 104, 20, 106, 22, 106, 22, 109, 24, 109, 29, 112, 29, 119, 42, 119, 42, 114, 45, 114, 49, 115, 49, 122, 55, 122, 55, 113, 64, 116, 64, 121, 98, 120, 109, 112, 149, 110, 140, 89, 271, 89, 271, 87, 273, 87, 275, 85, 281, 85, 281, 80, 280, 79, 286, 79, 292, 75, 292, 70, 298, 70, 298, 64, 295, 60, 297, 59, 297, 55, 289, 55, 284, 49, 284, 45, 278, 45, 278, 40, 236, 40, 236, 44, 225, 44, 225, 40, 218, 40, 211, 34, 222, 34, 225, 30, 241, 30, 241, 24, 251, 24, 257, 23, 270, 23, 276, 24, 351, 24, 351, 14, 347, 14, 341, 5, 338, 5, 338, 0, 303, 0, 303, 5, 286, 5, 283, 8, 273, 8, 275, 14, 196, 14, 196, 9, 215, 9, 215, 5, 217, 5, 217, 4, 237, 4, 253, -6, 252, -21, 264, -31, 326, -31, 373, -20, 501, 141, 103, 214, -167, 219)
+polygon = PackedVector2Array(-166, 89, -7, 89, -4, 90, -1, 93, -3, 95, -13, 95, -13, 100, -23, 100, -23, 104, -9, 104, -9, 99, -4, 99, -4, 102, -3, 102, -3, 112, 1, 112, 1, 104, 6, 104, 6, 112, 15, 114, 15, 104, 20, 104, 20, 106, 22, 106, 22, 109, 24, 109, 29, 112, 29, 119, 42, 119, 42, 114, 45, 114, 49, 115, 49, 122, 55, 122, 55, 113, 64, 116, 64, 121, 98, 120, 109, 112, 149, 110, 140, 89, 271, 89, 271, 87, 273, 87, 275, 85, 281, 85, 281, 80, 280, 79, 286, 79, 292, 75, 292, 70, 298, 70, 298, 64, 295, 60, 297, 59, 297, 55, 289, 55, 284, 49, 284, 45, 278, 45, 278, 40, 236, 40, 236, 44, 225, 44, 225, 40, 218, 40, 211, 34, 222, 34, 225, 30, 241, 30, 241, 24, 251, 24, 257, 23, 270, 23, 276, 24, 351, 24, 351, 14, 347, 14, 341, 5, 338, 5, 338, 0, 303, 0, 303, 5, 286, 5, 283, 8, 273, 8, 275, 14, 196, 14, 196, 9, 215, 9, 215, 5, 217, 5, 217, 4, 237, 4, 253, -6, 252, -21, 264, -31, 307, -31, 307, -26, 350, -26, 350, -32, 357, -32, 364, -31, 420, -31, 420, -41, 392, -41, 392, -40, 378, -40, 378, -46, 387, -46, 387, -52, 385, -55, 378, -55, 377, -61, 365, -61, 365, -76, 334, -76, 334, -80, 302, -80, 284, -85, 242, -86, 238, -95, 218, -95, 201, -116, 350, -100, 463, -95, 501, 141, 103, 214, -167, 219)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_qksy1"]
+polygon = PackedVector2Array(305, -46, 305, -41, 321, -41, 322, -46)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_hjomt"]
+polygon = PackedVector2Array(334, -43, 339, -45, 352, -45, 347, -41, 335, -41)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_arxf6"]
+polygon = PackedVector2Array(316, -61, 318, -55, 337, -55, 344, -59, 339, -61)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_arwe5"]
 polygon = PackedVector2Array(-144, 80, -68, 80, -71, 74, -54, 74, -54, 69, -39, 69, -39, 65, -23, 65, -23, 59, 8, 59, 6, 58, 6, 54, -19, 54, -19, 49, -35, 49, -35, 21, -134, 56)
@@ -1806,12 +1815,12 @@ position = Vector2(-298, -64)
 clothAngle = -10.0
 
 [node name="ClothSim2" parent="Enviremnet" instance=ExtResource("13_4clin")]
-visible = false
-position = Vector2(-309, -74)
+position = Vector2(-195, -197)
+scale = Vector2(-1, 1)
 texture = ExtResource("14_an8tg")
 clothAngle = -15.0
-particle_count_x = 24
-particle_count_y = 4
+particle_count_x = 12
+particle_count_y = 3
 windAmplitude = 10.0
 
 [node name="ZiplineAnchor" parent="Enviremnet" node_paths=PackedStringArray("interactableComponent", "startingPos", "destination") instance=ExtResource("17_arwe5")]
@@ -1819,7 +1828,7 @@ position = Vector2(-173, -137)
 interactableComponent = NodePath("InteractableArea")
 startingPos = NodePath("StartingPos")
 destination = NodePath("Destination")
-duration = 1.0
+duration = 0.7
 curve = SubResource("Curve_hyfn1")
 
 [node name="StartingPos" type="Marker2D" parent="Enviremnet/ZiplineAnchor"]
@@ -1847,7 +1856,7 @@ flipH = true
 interactableComponent = NodePath("InteractableArea")
 startingPos = NodePath("StartingPos")
 destination = NodePath("Destination")
-duration = 1.0
+duration = 0.5
 curve = SubResource("Curve_w31va")
 
 [node name="StartingPos" type="Marker2D" parent="Enviremnet/ZiplineAnchor2"]
@@ -1875,6 +1884,21 @@ position = Vector2(-3, 16)
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -15)
 occluder = SubResource("OccluderPolygon2D_igtls")
+
+[node name="RockPlatform1" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -15)
+occluder = SubResource("OccluderPolygon2D_qksy1")
+
+[node name="RockPlatform2" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -15)
+occluder = SubResource("OccluderPolygon2D_hjomt")
+
+[node name="RockPlatform3" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -15)
+occluder = SubResource("OccluderPolygon2D_arxf6")
 
 [node name="LeftCliff" parent="Collitions" instance=ExtResource("20_30t6e")]
 modulate = Color(1, 1, 1, 0)
@@ -2003,11 +2027,14 @@ color = 1
 [node name="CrystalPillbug" parent="Enemies" instance=ExtResource("21_wxdan")]
 position = Vector2(175, 71)
 
+[node name="CrystalLauncher" parent="Enemies" instance=ExtResource("25_ut7a1")]
+position = Vector2(329, -78)
+
 [node name="Hazards" type="Node2D" parent="Enemies"]
 
 [node name="Hazard1" parent="Enemies/Hazards" node_paths=PackedStringArray("collisionShape") instance=ExtResource("24_dgwi3")]
 position = Vector2(276, 141)
-collision_mask = 4
+collision_mask = 12
 attackName = "Lava"
 collisionShape = NodePath("CollisionShape2D")
 disabled = false
@@ -2059,16 +2086,16 @@ position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/Left"]
-position = Vector2(-117, -7)
+position = Vector2(310, -126)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("30_dgwi3")]
 visible = false
 position = Vector2(0, 179)
-polygon = PackedVector2Array(-143, -323, -143, 48, 512, 48, 512, -323)
+polygon = PackedVector2Array(-143, -323, -143, 45, 408, 45, 408, -323)
 cameraSize = Vector2(107, 60)
 
 [node name="SetPointCameraZone" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("19_4clin")]
-position = Vector2(-89, 259)
+position = Vector2(-120, 253)
 polygon = PackedVector2Array(-5, -37, 141, -37, 141, -179, -5, -179)
 cameraPos = NodePath("Marker2D")
 

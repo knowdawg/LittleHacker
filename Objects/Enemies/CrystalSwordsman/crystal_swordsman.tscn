@@ -684,7 +684,7 @@ shape = SubResource("RectangleShape2D_b5172")
 parent = NodePath("../..")
 follow = NodePath("../EnemyHealthbarMarker")
 healthComponent = NodePath("../HealthComponent")
-hackCommands = [NodePath("Resonance"), NodePath("Swell"), NodePath("Shatter")]
+hackCommands = [NodePath("Resonance"), NodePath("Swell")]
 stateMachine = NodePath("../../StateMachine")
 
 [node name="Resonance" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("18_julgj")]
@@ -705,17 +705,6 @@ killsEnemy = true
 removeAfterExecuted = true
 enemyHealthbar = NodePath("..")
 hackName = "Swell"
-healthComponent = NodePath("../../HealthComponent")
-
-[node name="Shatter" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "enemyHealthbar", "healthComponent") instance=ExtResource("18_julgj")]
-width = 0.1
-stateMachine = NodePath("../../../StateMachine")
-stateToSwitchTo = NodePath("../../../StateMachine/Dead")
-killsEnemy = true
-removeAfterExecuted = true
-enemyHealthbar = NodePath("..")
-cost = 1.0
-hackName = "Shatter"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
@@ -841,6 +830,5 @@ one_shot = true
 [node name="ResonanceCooldownTimer" type="Timer" parent="."]
 one_shot = true
 
-[connection signal="executed" from="GeneralComponents/EnemyHeathbar/Shatter" to="." method="_on_shatter_executed"]
 [connection signal="timeout" from="ResonanceTimer" to="." method="_on_resonance_timer_timeout"]
 [connection signal="timeout" from="ResonanceCooldownTimer" to="." method="_on_resonance_cooldown_timer_timeout"]

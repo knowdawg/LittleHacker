@@ -116,7 +116,6 @@ func _ready():
 		var newP : Vector2 = p * scale + position
 		polygonTransorm.append(newP)
 		
-	var s = get_viewport_rect().size
 	shrunkenPolygon = shrink_polygon(polygonTransorm, cameraSize.x / 2.0, cameraSize.y / 2.0)
 	
 	#generateLineSegments()

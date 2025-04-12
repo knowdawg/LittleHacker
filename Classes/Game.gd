@@ -71,3 +71,10 @@ func respawnPlayer():
 func deletePlayer():
 	player.queue_free()
 	player = null
+
+func doesPlayerExist() -> bool:
+	if player:
+		if is_instance_valid(player):
+			return true
+	
+	return false

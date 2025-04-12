@@ -26,7 +26,7 @@ func getRespawnData() -> RespawnData:
 	return rd
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
 	if p:
 		var targetPos = p.closest_rectangle_position(global_position)

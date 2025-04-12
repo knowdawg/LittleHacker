@@ -80,5 +80,5 @@ func _physics_process(delta: float) -> void:
 		if t >= duration:
 			ziplineFinished(false)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	$ZiplineAnchorSprite.flip_h = flipH

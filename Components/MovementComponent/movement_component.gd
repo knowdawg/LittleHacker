@@ -3,6 +3,7 @@ class_name MovementComponent
 
 @export var parent : Node2D
 @export var gravity : float = 0.0
+@export var forceDecayRate : Vector2 = Vector2(10.0, 10.0)
 var g = Vector2.ZERO
 
 var falling : bool = false
@@ -21,7 +22,8 @@ func _physics_process(delta: float) -> void:
 	velocities.append(g)
 	
 	#Force Vector
-	force = lerp(force, Vector2.ZERO, delta * 10.0)
+	force.x = lerp(force.x, 0.0, delta * forceDecayRate.x)
+	force.y = lerp(force.y, 0.0, delta * forceDecayRate.y)
 	velocities.append(force)
 	
 	var totalForce : Vector2 = Vector2.ZERO

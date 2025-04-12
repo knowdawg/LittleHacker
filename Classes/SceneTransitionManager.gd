@@ -66,8 +66,9 @@ func onFadeInComplete():
 	#t.start(loadScene.bind(path))
 
 func loadScene(path : String):
+	pass
 	#Hopefully freeze is fixed
-	var s = load(path)
+	#var s = load(path)
 	
 	#addSceneMutex.lock()
 	#pathAndScene[path] = s
