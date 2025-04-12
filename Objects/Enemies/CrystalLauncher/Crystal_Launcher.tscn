@@ -172,36 +172,48 @@ tracks/1/path = NodePath("CrystalSpike:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [13, 14, 15, 16, 17, 22]
+"values": [13, 14, 15, 16, 17, 18, 19, 20, 22]
 }
-tracks/2/type = "value"
+tracks/2/type = "method"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CrystalSpike:scale")
+tracks/2/path = NodePath("AfterImageComponent")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.3, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.5, 2)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AfterImageComponent")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0.8),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [true],
 "method": &"setActive"
 }]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CrystalSpike/CrystalSpike2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [13, 14, 15]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("CrystalSpike/CrystalSpike3:frame")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [13, 14, 15]
 }
 
 [sub_resource type="Animation" id="Animation_wnjpt"]
@@ -233,14 +245,26 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("CrystalSpike:scale")
+tracks/2/path = NodePath("CrystalSpike/CrystalSpike2:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
+"update": 1,
+"values": [13]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CrystalSpike/CrystalSpike3:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
 }
 
 [sub_resource type="Animation" id="Animation_bbh6r"]
@@ -271,6 +295,30 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [22]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CrystalSpike/CrystalSpike3:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CrystalSpike/CrystalSpike2:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [13]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_jy6hu"]
@@ -338,8 +386,26 @@ flipX = false
 [node name="CrystalSpike" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_bbh6r")
 texture = ExtResource("4_jy6hu")
+offset = Vector2(0.5, -4)
+hframes = 38
+frame = 13
+
+[node name="CrystalSpike2" type="Sprite2D" parent="CrystalSpike"]
+material = SubResource("ShaderMaterial_bbh6r")
+position = Vector2(0, 3)
+rotation = 0.785398
+texture = ExtResource("4_jy6hu")
 offset = Vector2(0.5, -6)
-hframes = 34
+hframes = 38
+frame = 13
+
+[node name="CrystalSpike3" type="Sprite2D" parent="CrystalSpike"]
+material = SubResource("ShaderMaterial_bbh6r")
+position = Vector2(0, 3)
+rotation = -0.785398
+texture = ExtResource("4_jy6hu")
+offset = Vector2(0.5, -6)
+hframes = 38
 frame = 13
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
@@ -361,6 +427,7 @@ script = ExtResource("5_1fgvd")
 parent = NodePath("../..")
 sprite = NodePath("../../Sprite2D")
 animator = NodePath("../../Animator")
+timeInState = 1.0
 rayCast = NodePath("../../PlayerVision")
 
 [node name="Launch" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "animator", "crystalSprite", "movement", "attackComponent")]
@@ -480,11 +547,12 @@ healthComponent = NodePath("../../HealthComponent")
 [node name="Proximities" type="Node2D" parent="."]
 
 [node name="PlayerProximity" parent="Proximities" instance=ExtResource("9_1fgvd")]
+unique_name_in_owner = true
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/PlayerProximity"]
-visible = false
 shape = SubResource("CircleShape2D_ku13d")
+debug_color = Color(0, 0.6, 0.701961, 0.117647)
 
 [node name="AttackComponents" type="Node2D" parent="."]
 
@@ -513,7 +581,7 @@ material = SubResource("ShaderMaterial_hsbah")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="AfterImmageMarker" type="Marker2D" parent="."]
-position = Vector2(0, -3)
+position = Vector2(0, -4)
 
 [node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("26_8foh4")]
 follow = NodePath("../AfterImmageMarker")
@@ -522,8 +590,17 @@ fadeTime = 0.2
 modulate = Color(1, 1, 1, 0.686275)
 
 [node name="PlayerVision" type="RayCast2D" parent="."]
-target_position = Vector2(30, 0)
+unique_name_in_owner = true
+visible = false
+target_position = Vector2(35, 0)
 collision_mask = 7
+
+[node name="CeilingVision" type="RayCast2D" parent="."]
+unique_name_in_owner = true
+self_modulate = Color(1, 1, 1, 0.352941)
+target_position = Vector2(0, -40)
+collision_mask = 3
+collide_with_areas = true
 
 [node name="BounceRayCasts" type="Node2D" parent="."]
 position = Vector2(0, -1)

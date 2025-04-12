@@ -14,7 +14,10 @@ var t = 0.0
 var spinTimer : float = 0.0
 var spinning = false
 func enter(_prevState):
-	crystalSprite.rotation = parent.dirToPlayer - (PI / 2.0)
+	if parent.launchToPlayer:
+		crystalSprite.rotation = parent.dirToPlayer - (PI / 2.0)
+	else:
+		crystalSprite.rotation = 0.0
 	
 	attackComponent.generateAttackID()
 	
@@ -35,13 +38,8 @@ func update(delta):
 	if spinning:
 		spinTimer += delta
 		if spinTimer > spinDuration:
-			if parent.stickToTerrarian():
-				spinning = false
-				attackComponent.call_deferred("disable")
-				animator.play("Land")
-				movement.gravity = 0.0
-				movement.g = Vector2.ZERO
-				movement.resetForces()
+			if parent.stickToGround():
+				land()
 		
 		if %Left.is_colliding() and movement.force.x < 0.0:
 			movement.force.x *= -1.0
@@ -52,16 +50,35 @@ func update(delta):
 		if %Down.is_colliding() and (movement.force.y + movement.g.y) > 0.0:
 			movement.force.y *= -1.0
 			movement.g.y *= -0.5
+		
+		if parent.curRotation != PI:
+			if parent.stickToCeiling():
+				%Sprite2D.position.y = -2.0
+				land()
 
+
+func land():
+	spinning = false
+	attackComponent.call_deferred("disable")
+	animator.play("Land")
+	movement.gravity = 0.0
+	movement.g = Vector2.ZERO
+	movement.resetForces()
 
 var hasLaunched : bool = false
 func launch():
+	%Sprite2D.position.y = 0.0 #reset because of diplacement for ceiling landings
+	
 	attackComponent.enable()
 	
 	hasLaunched = true
 	
+	var f : float = 200.0
+	if !parent.launchToPlayer:
+		f = 300.0
+	
 	movement.resetForces()
-	movement.applyForce(Vector2.from_angle(crystalSprite.rotation - (PI / 2.0)), 150.0)
+	movement.applyForce(Vector2.from_angle(crystalSprite.rotation - (PI / 2.0)), f)
 	movement.gravity = 3.0
 	
 	animator.play("Spin")
@@ -76,8 +93,9 @@ func _on_animator_animation_finished(anim_name: StringName) -> void:
 		trasitioned.emit(self, "Agro")
 
 
-func _on_attack_component_got_parried(_attack) -> void:
+func _on_attack_component_got_parried(attack : Attack) -> void:
 	if stateMachine.current_state is CrystalLauncherLaunch:
+		parent.global_position = attack.attack_position
 		movement.resetForces()
 		movement.applyForce(Vector2(0.0, -1.0), 100.0)
 		spinTimer += spinDuration

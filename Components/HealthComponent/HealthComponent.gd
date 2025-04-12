@@ -58,8 +58,10 @@ func damage(attack : Attack):
 		#can put in a resource / class that can be changed / created as I wish
 		return
 	
-	
-	set_health(health - attack.attack_damage)
+	if attack.isHazard and !isPlayerHealth:
+		set_health(0)
+	else:
+		set_health(health - attack.attack_damage)
 	set_weakness(weakness + attack.weakness_damage)
 	
 	hit.emit(attack)

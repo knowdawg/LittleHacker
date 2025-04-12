@@ -17,6 +17,7 @@ func enter(_prevState):
 	animator.play("Agro")
 	curDirection = getClosestAngle(parent.dirToPlayer)
 	t = 0.0
+	launchDelay = 0.0
 
 var nextFrameTimer : float = 0.0
 var curDirection = lookDir.R
@@ -41,17 +42,31 @@ func update(delta):
 	
 	t += delta
 	if Game.doesPlayerExist():
+		
 		rayCast.look_at(Game.player.global_position)
 		if rayCast.is_colliding():
-			if t >= timeInState and rayCast.get_collider() is Player:
-				launchDelay = 0.2
-				t = 0.0
-				return
+			if t >= timeInState:
+				if rayCast.get_collider() is Player:
+					launchDelay = 0.2
+					t = 0.0
+					parent.launchToPlayer = true
+					return
+				else:
+					if %CeilingVision.is_colliding() and parent.curRotation != PI:
+						launchDelay = 0.2
+						t = 0.0
+						parent.launchToPlayer = false
+						return
 	
 	if launchDelay > 0.0:
 		if t > launchDelay:
 			launchDelay = 0.0
 			trasitioned.emit(self, "Launch")
+			return
+	else:
+		if !%PlayerProximity.is_player_inside():
+			trasitioned.emit(self, "Idle")
+			return
 
 
 func getClosestAngle(angle) -> lookDir:

@@ -5,6 +5,8 @@ class_name CrystalLauncher
 var curRotation : float = 0.0
 var dirToPlayer : float = 0.0
 
+var launchToPlayer : bool = true
+
 func _ready() -> void:
 	$AfterImageComponent.setActive(false)
 
@@ -27,15 +29,16 @@ func _process(_delta: float) -> void:
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
-func stickToTerrarian() -> bool:
-	move_and_slide()
+func stickToGround() -> bool:
 	if %Down.is_colliding():
 		curRotation = 0.0
 		global_position.y += 1
 		return true
+	return false
+
+func stickToCeiling() -> bool:
 	if %Up.is_colliding():
 		curRotation = PI
 		global_position.y -= 1
 		return true
-	curRotation = 0.0
 	return false

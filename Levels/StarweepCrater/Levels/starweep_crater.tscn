@@ -1,4 +1,4 @@
-[gd_scene load_steps=186 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=188 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Shader" uid="uid://cnc8we1jbjatc" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
@@ -978,6 +978,12 @@ size = Vector2(20, 7)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tpsgt"]
 size = Vector2(13.1538, 3.1538)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hyfn1"]
+size = Vector2(44, 4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_53ke4"]
+size = Vector2(8, 17)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_erh47"]
 resource_local_to_scene = true
@@ -2028,7 +2034,7 @@ color = 1
 position = Vector2(175, 71)
 
 [node name="CrystalLauncher" parent="Enemies" instance=ExtResource("25_ut7a1")]
-position = Vector2(329, -78)
+position = Vector2(322, -78)
 
 [node name="Hazards" type="Node2D" parent="Enemies"]
 
@@ -2059,6 +2065,14 @@ shape = SubResource("RectangleShape2D_tpsgt")
 position = Vector2(-17, -186)
 rotation = -1.9287
 shape = SubResource("RectangleShape2D_tpsgt")
+
+[node name="CollisionShape2D5" type="CollisionShape2D" parent="Enemies/Hazards/Hazard1"]
+position = Vector2(53, -183)
+shape = SubResource("RectangleShape2D_hyfn1")
+
+[node name="CollisionShape2D6" type="CollisionShape2D" parent="Enemies/Hazards/Hazard1"]
+position = Vector2(51, -189.5)
+shape = SubResource("RectangleShape2D_53ke4")
 
 [node name="PlayerParent" type="Node2D" parent="."]
 
