@@ -16,6 +16,7 @@ signal death(attack : Attack)
 signal hit(attack : Attack)
 signal grabbed(attack : Attack)
 signal healed(amount : float)
+signal hazard(attack : Attack)
 
 func _ready() -> void:
 	if !isPlayerHealth:
@@ -65,6 +66,9 @@ func damage(attack : Attack):
 	set_weakness(weakness + attack.weakness_damage)
 	
 	hit.emit(attack)
+	
+	if attack.isHazard:
+		hazard.emit(attack)
 	
 	if health <= 0:
 		dead = true

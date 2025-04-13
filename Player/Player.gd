@@ -233,3 +233,9 @@ func _on_health_component_death(_attack: Attack) -> void:
 
 func _on_respawn_timer_timeout() -> void:
 	Game.respawnPlayer()
+
+
+func _on_health_component_hazard(_attack: Attack) -> void:
+	knockbackVector = Vector2.ZERO
+	
+	global_position = Game.platformingRespawnPos

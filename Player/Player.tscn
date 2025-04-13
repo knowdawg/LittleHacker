@@ -3571,6 +3571,7 @@ one_shot = true
 [connection signal="death" from="HealthComponent" to="StateMachine" method="_on_health_component_death"]
 [connection signal="death" from="HealthComponent" to="WeaponStateMachine" method="_on_health_component_death"]
 [connection signal="death" from="HealthComponent" to="PlayerUI" method="_on_health_component_death"]
+[connection signal="hazard" from="HealthComponent" to="." method="_on_health_component_hazard"]
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

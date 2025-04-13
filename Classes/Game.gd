@@ -7,6 +7,8 @@ var littleViewport : LittleSceneTransitioner
 
 var respawnData : RespawnData
 
+var platformingRespawnPos : Vector2 = Vector2.ZERO
+
 var inHackMode = false
 var hackedEnemy = null
 var hackedHealthbar : EnemyHealthBar = null
