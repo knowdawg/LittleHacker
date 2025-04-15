@@ -4,11 +4,11 @@
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_jv6iw"]
 [ext_resource type="Texture2D" uid="uid://d4fa0nurno2cb" path="res://Assets/Sprites/Enemies/CrystalSwordsman.png" id="1_qffc4"]
 [ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_f778v"]
-[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="3_8ujxu"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_pgxil"]
 [ext_resource type="Script" uid="uid://bedvqa6rx0ack" path="res://Classes/GenericStates/chase.gd" id="4_01b8v"]
 [ext_resource type="Script" uid="uid://dls3iicgcrjht" path="res://Classes/GenericStates/GenericPatroll.gd" id="4_pjn6l"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_wb0l7"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="4_y6j1l"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="5_8yhaw"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_o6jpw"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_2u2j7"]
@@ -54,9 +54,12 @@ size = Vector2(2, 5)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ux68c"]
 resource_local_to_scene = true
-shader = ExtResource("3_8ujxu")
+shader = ExtResource("4_y6j1l")
+shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
-shader_parameter/outlineAlpha = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_nqn66"]
 resource_name = "Attack"
@@ -539,6 +542,7 @@ spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
 [node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("5_8yhaw")]
+metadata/_edit_lock_ = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
 script = ExtResource("2_f778v")
@@ -678,7 +682,9 @@ stateMachine = NodePath("../../StateMachine")
 health_componnet = NodePath("../HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+visible = false
 shape = SubResource("RectangleShape2D_b5172")
+metadata/_edit_lock_ = true
 
 [node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("8_h8ghy")]
 parent = NodePath("../..")
@@ -695,6 +701,7 @@ enemyHealthbar = NodePath("..")
 cost = 3.0
 hackName = "Resonate"
 healthComponent = NodePath("../../HealthComponent")
+metadata/_edit_lock_ = true
 
 [node name="Swell" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "deathComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("18_julgj")]
 width = 0.1
@@ -706,8 +713,10 @@ removeAfterExecuted = true
 enemyHealthbar = NodePath("..")
 hackName = "Swell"
 healthComponent = NodePath("../../HealthComponent")
+metadata/_edit_lock_ = true
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+position = Vector2(0, 4.5)
 
 [node name="Proximities" type="Node2D" parent="."]
 
@@ -778,18 +787,21 @@ process_material = ExtResource("30_mwxko")
 stream = ExtResource("27_g21vd")
 max_distance = 100.0
 bus = &"SoundEffects"
+metadata/_edit_lock_ = true
 
 [node name="Scrape" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("28_vcsbj")
 volume_db = 10.0
 max_distance = 100.0
 bus = &"SoundEffects"
+metadata/_edit_lock_ = true
 
 [node name="Step" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("29_bcfdh")
 max_distance = 100.0
 bus = &"SoundEffects"
 script = ExtResource("30_ffdyt")
+metadata/_edit_lock_ = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("healthComponent")]
 stream = ExtResource("35_47lyt")
@@ -800,6 +812,7 @@ script = ExtResource("36_i0g28")
 onHit = true
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 pitchRange = Vector2(0.8, 1.2)
+metadata/_edit_lock_ = true
 
 [node name="MalfunctionGore" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("36_54lns")
@@ -808,6 +821,7 @@ bus = &"SoundEffects"
 script = ExtResource("36_i0g28")
 randomizePitch = false
 pitchRange = Vector2(0.8, 1.2)
+metadata/_edit_lock_ = true
 
 [node name="Resonate" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("35_glcv1")
@@ -815,6 +829,7 @@ volume_db = -10.0
 max_distance = 100.0
 bus = &"SoundEffects"
 script = ExtResource("30_ffdyt")
+metadata/_edit_lock_ = true
 
 [node name="Resonating" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("35_vwc5n")
@@ -822,6 +837,7 @@ volume_db = -25.0
 max_distance = 50.0
 bus = &"SoundEffects"
 script = ExtResource("30_ffdyt")
+metadata/_edit_lock_ = true
 
 [node name="ResonanceTimer" type="Timer" parent="."]
 wait_time = 0.3

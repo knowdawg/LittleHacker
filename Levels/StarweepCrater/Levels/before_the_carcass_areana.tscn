@@ -1,0 +1,359 @@
+[gd_scene load_steps=24 format=3 uid="uid://d4aqafxdibln2"]
+
+[ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sny8n"]
+[ext_resource type="PackedScene" uid="uid://eg5mvs75ckl2" path="res://Levels/StarweepCrater/EnvirementScenes/before_the_carcass_areana_envirement.tscn" id="2_lrg3a"]
+[ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_vknbe"]
+[ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="3_i1pr0"]
+[ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_lrg3a"]
+[ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_i1pr0"]
+[ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="5_p5xht"]
+
+[sub_resource type="Shader" id="Shader_73joc"]
+code = "shader_type canvas_item;
+
+uniform sampler2D fog;
+uniform float depth : hint_range(0.0, 1.0);
+
+void fragment() {
+	vec4 s = texture(TEXTURE, UV);
+	vec4 fogColor = texture(fog, vec2(depth, 0.0));
+	vec4 c = vec4(1.0);
+
+	c.rgb = mix(vec3(dot(s.rgb, vec3(0.299, 0.587, 0.114))), s.rgb, 1.0 - depth);
+
+	//c.rgb /= 0.5;
+	//c.rgb = pow(c.rgb, vec3(5.0));
+
+	c = mix(c, fogColor, depth);
+
+	COLOR.rgb = c.rgb;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjsib"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmg0s"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yegh"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_evqcy"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjry8"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4a3ey"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.1
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_lrg3a"]
+polygon = PackedVector2Array(108, 296, 108, 305, 144, 305, 150, 306, 182, 306, 182, 310, 184, 310, 180, 312, 179, 318, 179, 343, 186, 343, 186, 318, 187, 313, 185, 310, 199, 310, 199, 307, 202, 307, 202, 305, 216, 305, 216, 300, 251, 300, 251, 305, 255, 306, 258, 306, 264, 305, 266, 305, 266, 310, 275, 310, 281, 309, 287, 309, 284, 310, 284, 342, 290, 342, 290, 310, 288, 309, 289, 309, 291, 308, 291, 305, 298, 305, 304, 306, 376, 306, 376, 294, 400, 294, 400, 344, 104, 344, 104, 296, 119, 266, 162, 225, 263, 209, 322, 233, 375, 253, 387, 293, 376, 293, 375, 295, 309, 295, 309, 290, 283, 290, 281, 289, 284, 285, 271, 285, 275, 284, 278, 271, 265, 271, 265, 284, 270, 285, 254, 285, 254, 270, 290, 270, 290, 265, 301, 265, 305, 261, 307, 261, 307, 256, 301, 256, 301, 246, 292, 246, 292, 240, 186, 240, 186, 245, 176, 245, 176, 250, 177, 250, 177, 255, 210, 255, 210, 260, 201, 260, 201, 264, 203, 266, 198, 269, 198, 271, 196, 267, 200, 266, 197, 261, 200, 258, 191, 258, 190, 270, 191, 282, 195, 281, 199, 285, 196, 276, 198, 272, 198, 274, 200, 275, 200, 279, 202, 280, 216, 280, 216, 286, 167, 286, 167, 291, 157, 291, 157, 295, 112, 295)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_i1pr0"]
+polygon = PackedVector2Array(222, 290, 243, 290, 243, 291, 222, 291)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_p5xht"]
+polygon = PackedVector2Array(239, 297, 256, 297, 256, 298, 239, 298)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_or7w8"]
+polygon = PackedVector2Array(210, 282, 226, 282, 226, 283, 210, 283)
+
+[sub_resource type="Gradient" id="Gradient_lrg3a"]
+offsets = PackedFloat32Array(0, 0.976812)
+colors = PackedColorArray(0.909804, 0.756863, 0.439216, 1, 0.909804, 0.756863, 0.439216, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i1pr0"]
+gradient = SubResource("Gradient_lrg3a")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_i1pr0"]
+viewport_path = NodePath("Main")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3bpdn"]
+resource_local_to_scene = true
+shader = ExtResource("3_lrg3a")
+shader_parameter/brightness = 0.2
+shader_parameter/shadowIntensitiy = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lrg3a"]
+
+[node name="BeforeTheCarcassAreana" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
+script = ExtResource("1_sny8n")
+projectileSpawnNode = NodePath("Proectiles")
+enemySpawnLocation = NodePath("Enemies")
+doorToSpawnPlayerOnFailure = NodePath("Doors/Left")
+doorContainerNode = NodePath("Doors")
+whereToAddPlayer = NodePath("PlayerParrent")
+respawnPointNode = NodePath("RespawnPoints")
+lighting = NodePath("SoftLighting")
+lightingBrightness = 0.2
+backgroundContainers = [NodePath("Paralax/VeryFar/SubViewportContainer"), NodePath("Paralax/Far/SubViewportContainer"), NodePath("Paralax/MediumFar/SubViewportContainer"), NodePath("Paralax/Medium/SubViewportContainer"), NodePath("Paralax/MeduimClose/SubViewportContainer"), NodePath("Paralax/Close/SubViewportContainer"), NodePath("Paralax/VeryClose/SubViewportContainer")]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Paralax" type="Node2D" parent="."]
+
+[node name="VeryFar" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryFar"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_cjsib")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/VeryFar/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Far" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.2, 0.2)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Far"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bmg0s")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/Far/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="MediumFar" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.5, 0.5)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MediumFar"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bmg0s")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/MediumFar/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Medium" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.8, 0.8)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Medium"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5yegh")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/Medium/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="MeduimClose" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.85, 0.85)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MeduimClose"]
+material = SubResource("ShaderMaterial_evqcy")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/MeduimClose/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Close" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.9, 0.9)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Close"]
+material = SubResource("ShaderMaterial_tjry8")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/Close/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="VeryClose" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.95, 0.95)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryClose"]
+material = SubResource("ShaderMaterial_4a3ey")
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="Main2" type="SubViewport" parent="Paralax/VeryClose/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Main" type="SubViewport" parent="."]
+transparent_bg = true
+sdf_oversize = 0
+sdf_scale = 0
+size = Vector2i(1000, 432)
+
+[node name="BeforeTheCarcassAreanaEnvirement" parent="Main" instance=ExtResource("2_lrg3a")]
+
+[node name="Collisions" type="Node2D" parent="."]
+
+[node name="Cave" parent="Collisions" instance=ExtResource("3_i1pr0")]
+occluder = SubResource("OccluderPolygon2D_lrg3a")
+
+[node name="Platform1" parent="Collisions" instance=ExtResource("3_i1pr0")]
+occluder = SubResource("OccluderPolygon2D_i1pr0")
+oneWay = true
+
+[node name="Platform2" parent="Collisions" instance=ExtResource("3_i1pr0")]
+position = Vector2(0, -27)
+occluder = SubResource("OccluderPolygon2D_i1pr0")
+oneWay = true
+
+[node name="Platform3" parent="Collisions" instance=ExtResource("3_i1pr0")]
+position = Vector2(0, -27)
+occluder = SubResource("OccluderPolygon2D_p5xht")
+oneWay = true
+
+[node name="Platform4" parent="Collisions" instance=ExtResource("3_i1pr0")]
+position = Vector2(0, -27)
+occluder = SubResource("OccluderPolygon2D_or7w8")
+oneWay = true
+
+[node name="Lights" type="Node2D" parent="."]
+visible = false
+
+[node name="Lavalight1" type="PointLight2D" parent="Lights"]
+position = Vector2(192, 252)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight2" type="PointLight2D" parent="Lights"]
+position = Vector2(272, 256)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight3" type="PointLight2D" parent="Lights"]
+position = Vector2(276, 300)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight4" type="PointLight2D" parent="Lights"]
+position = Vector2(192, 300)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight5" type="PointLight2D" parent="Lights"]
+position = Vector2(208, 272)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight6" type="PointLight2D" parent="Lights"]
+position = Vector2(183, 323)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight7" type="PointLight2D" parent="Lights"]
+position = Vector2(271, 276)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Lavalight8" type="PointLight2D" parent="Lights"]
+position = Vector2(288, 319)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
+[node name="Envirement" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("ViewportTexture_i1pr0")
+centered = false
+
+[node name="RespawnPoints" type="Node2D" parent="."]
+
+[node name="Enemies" type="Node2D" parent="."]
+
+[node name="PlayerParrent" type="Node2D" parent="."]
+
+[node name="Proectiles" type="Node2D" parent="."]
+
+[node name="SoftLighting" parent="." instance=ExtResource("2_vknbe")]
+material = SubResource("ShaderMaterial_3bpdn")
+offset_left = 35.0
+offset_top = 204.0
+offset_right = 143.0
+offset_bottom = 266.0
+metadata/_edit_use_anchors_ = true
+
+[node name="PlatformRespawnPoints" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="Left" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("4_i1pr0")]
+scene = "uid://cb2mgf3vv8ptm"
+doorName = "Right"
+enterPosition = NodePath("Marker2D")
+directionToFaceWhenEnteringTHISDoor = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Left"]
+position = Vector2(104, 300)
+shape = SubResource("RectangleShape2D_lrg3a")
+
+[node name="Marker2D" type="Marker2D" parent="Doors/Left"]
+position = Vector2(121, 303)
+
+[node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_p5xht")]
+visible = false
+polygon = PackedVector2Array(116, 196, 116, 352, 416, 352, 416, 196)

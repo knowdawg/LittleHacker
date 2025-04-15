@@ -7,6 +7,7 @@
 script = ExtResource("1_k0bch")
 
 [node name="Label" type="Label" parent="."]
+visible = false
 clip_children = 2
 z_index = 1
 texture_filter = 1

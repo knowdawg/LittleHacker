@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=16 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
 [ext_resource type="PackedScene" uid="uid://dcqwmsg54sjn4" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.tscn" id="2_kquoi"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="6_4kmjg"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_n4nu2"]
-[ext_resource type="PackedScene" uid="uid://bnarclf1ceswr" path="res://Components/CameraBoundriesComponent/SpecialCameraZone/Zones/set_point_camera_zone.tscn" id="9_bgy7s"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2b6ii"]
 
@@ -148,21 +147,12 @@ enterPosition = NodePath("Marker2D")
 directionToFaceWhenEnteringTHISDoor = 1
 
 [node name="Marker2D" type="Marker2D" parent="Doors/LevelTransition"]
-position = Vector2(-34, 12)
+position = Vector2(-16, 13)
 
 [node name="CursorFollower" parent="." instance=ExtResource("6_4kmjg")]
 visible = false
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("6_n4nu2")]
 position = Vector2(61, 36)
-polygon = PackedVector2Array(-189, -4, 67, -4, 67, -100, -189, -100)
+polygon = PackedVector2Array(-133, 4, 11, 4, 11, -56, -133, -56)
 cameraSize = Vector2(107, 60)
-
-[node name="SetPointCameraZone" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("9_bgy7s")]
-position = Vector2(-5, 108)
-polygon = PackedVector2Array(-125, 4, 3, 4, 3, -68, -125, -68)
-cameraPos = NodePath("Marker2D")
-smoothness = 0.0
-
-[node name="Marker2D" type="Marker2D" parent="CameraBoundriesComponent/SetPointCameraZone"]
-position = Vector2(-61, -36)

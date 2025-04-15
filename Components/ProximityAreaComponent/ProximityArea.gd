@@ -2,9 +2,13 @@ extends Area2D
 class_name ProximityAreaComponent
 
 @export var requireLineOfSight : bool = true
+@export var LOSOffset : Vector2 = Vector2.ZERO
 
 signal onPlayerEnter
 signal onPlayerExit
+
+func _ready() -> void:
+	%RayCast2D.position = LOSOffset
 
 var a = null
 func get_camera_bounds():
@@ -28,7 +32,7 @@ func is_player_inside():
 				ray.rotation = (global_position - body.global_position).angle()
 				ray.force_raycast_update()
 				var b = ray.get_collider()
-				if body == b:
+				if b is Player:
 					return(true)
 			else:
 				return(true)

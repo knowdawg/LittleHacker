@@ -29,8 +29,8 @@
 [ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="8_heh2r"]
 [ext_resource type="Script" uid="uid://bp1fofedd0cas" path="res://Objects/Enemies/CrystalThug/wait.gd" id="9_c0kbi"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_irfdu"]
-[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="10_8sqji"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_tifpm"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="11_0jdrv"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_1ay4a"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_88n8y"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="17_jdngx"]
@@ -96,9 +96,12 @@ fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tm7ga"]
-shader = ExtResource("10_8sqji")
+shader = ExtResource("11_0jdrv")
+shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
-shader_parameter/outlineAlpha = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_e0n24"]
 polygon = PackedVector2Array(-1, 2, 1, 2, 1, 7, -1, 7)
@@ -679,7 +682,7 @@ hackName = "Lifedrain"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
-position = Vector2(0, 1)
+position = Vector2(0, 5)
 
 [node name="Proximities" type="Node2D" parent="."]
 

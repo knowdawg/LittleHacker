@@ -26,11 +26,16 @@ func setSelfAsStartingLevel():
 @export_group("Lighting")
 @export var lighting : ColorRect
 @export var lightingBrightness : float = 1.0
+@export var backgroundGradient : GradientTexture2D
+@export var backgroundContainers : Array[SubViewportContainer] = []
+@export_tool_button("Set Backround Gradients", "Callable") var setGradientFog = setFog
 
 #Called by SceneTransitionManager When the level is ready
 func initializeLevel(sceneData : SceneSwitchData) -> void:
 	if lighting:
 			lighting.material.set_shader_parameter("brightness", lightingBrightness)
+	
+	setFog()
 	
 	if !sceneData.respawnPlayer:
 		var p = Game.createPlayer()
@@ -60,6 +65,11 @@ func initializeLevel(sceneData : SceneSwitchData) -> void:
 			p.position = doorToSpawnPlayerOnFailure.enterPosition.global_position
 			return
 		r.spawnPlayer(sceneData)
+
+func setFog():
+	for b in backgroundContainers:
+		b.material.set_shader_parameter("fog", backgroundGradient)
+	
 
 func addProjectile(projectile):
 	projectileSpawnNode.add_child(projectile)

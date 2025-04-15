@@ -220,10 +220,10 @@ func generateMesh():
 	for y in range(particle_count_y - 1):
 		for x in range(particle_count_x - 1):
 			var tl = y * particle_count_x + x
-			var tr = tl + 1
+			var tri = tl + 1
 			var bl = tl + particle_count_x
 			var br = bl + 1
-			indices.append_array([tl, bl, tr, tr, bl, br])
+			indices.append_array([tl, bl, tri, tri, bl, br])
 	arrays[ArrayMesh.ARRAY_INDEX] = indices
 	
 	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)

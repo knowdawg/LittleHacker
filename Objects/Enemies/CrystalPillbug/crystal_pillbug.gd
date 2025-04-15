@@ -8,6 +8,6 @@ func _ready() -> void:
 		%SpriteDirectorComponent.flipXDir()
 
 
-func _on_state_machine_state_switched(prevState: State, newState: State) -> void:
+func _on_state_machine_state_switched(_prevState: State, newState: State) -> void:
 	if newState.name.to_lower() == "death":
 		%BlockerShape.set_deferred("disabled", true)

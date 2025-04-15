@@ -1,12 +1,62 @@
-[gd_scene load_steps=7 format=3 uid="uid://bm0s7ek1l7gcu"]
+[gd_scene load_steps=14 format=3 uid="uid://bm0s7ek1l7gcu"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sahbk"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_w4aep"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_qjk1c"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_jvbrh"]
+[ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="5_cjsib"]
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_f40ai"]
-viewport_path = NodePath("Main")
+[sub_resource type="Shader" id="Shader_73joc"]
+code = "shader_type canvas_item;
+
+uniform sampler2D fog;
+uniform float depth : hint_range(0.0, 1.0);
+
+void fragment() {
+	vec4 s = texture(TEXTURE, UV);
+	vec4 fogColor = texture(fog, vec2(depth, 0.0));
+	vec4 c = vec4(1.0);
+
+	c.rgb = mix(vec3(dot(s.rgb, vec3(0.299, 0.587, 0.114))), s.rgb, 1.0 - depth);
+
+	//c.rgb /= 0.5;
+	//c.rgb = pow(c.rgb, vec3(5.0));
+
+	c = mix(c, fogColor, depth);
+
+	COLOR.rgb = c.rgb;
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_cjsib"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bmg0s"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.7
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5yegh"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.4
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_evqcy"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tjry8"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4a3ey"]
+resource_local_to_scene = true
+shader = SubResource("Shader_73joc")
+shader_parameter/depth = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bpdn"]
 resource_local_to_scene = true
@@ -14,15 +64,144 @@ shader = ExtResource("3_qjk1c")
 shader_parameter/brightness = 1.0
 shader_parameter/shadowIntensitiy = 0.0
 
-[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
+[node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 script = ExtResource("1_sahbk")
 projectileSpawnNode = NodePath("Proectiles")
 enemySpawnLocation = NodePath("Enemies")
-doorToSpawnPlayerOnFailure = NodePath("LevelTransition")
+doorToSpawnPlayerOnFailure = NodePath("Doors/LevelTransition")
 doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParrent")
 respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
+backgroundContainers = [NodePath("Paralax/VeryFar/SubViewportContainer"), NodePath("Paralax/Far/SubViewportContainer"), NodePath("Paralax/MediumFar/SubViewportContainer"), NodePath("Paralax/Medium/SubViewportContainer"), NodePath("Paralax/MeduimClose/SubViewportContainer"), NodePath("Paralax/Close/SubViewportContainer"), NodePath("Paralax/VeryClose/SubViewportContainer")]
+
+[node name="Background" type="CanvasLayer" parent="."]
+layer = -1
+
+[node name="ColorRect" type="ColorRect" parent="Background"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Paralax" type="Node2D" parent="."]
+
+[node name="VeryFar" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.1, 0.1)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryFar"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_cjsib")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/VeryFar/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Far" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.2, 0.2)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Far"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bmg0s")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/Far/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="MediumFar" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.5, 0.5)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MediumFar"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_bmg0s")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/MediumFar/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Medium" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.8, 0.8)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Medium"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_5yegh")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/Medium/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="MeduimClose" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.85, 0.85)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MeduimClose"]
+material = SubResource("ShaderMaterial_evqcy")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/MeduimClose/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="Close" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.9, 0.9)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Close"]
+material = SubResource("ShaderMaterial_tjry8")
+offset_right = 512.0
+offset_bottom = 512.0
+metadata/_edit_use_anchors_ = true
+
+[node name="Main2" type="SubViewport" parent="Paralax/Close/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
+
+[node name="VeryClose" type="Parallax2D" parent="Paralax"]
+scroll_scale = Vector2(0.95, 0.95)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryClose"]
+material = SubResource("ShaderMaterial_4a3ey")
+offset_right = 512.0
+offset_bottom = 512.0
+
+[node name="Main2" type="SubViewport" parent="Paralax/VeryClose/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -34,21 +213,30 @@ size = Vector2i(1000, 432)
 
 [node name="Lights" type="Node2D" parent="."]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("ViewportTexture_f40ai")
+[node name="Envirement" type="Sprite2D" parent="."]
+texture_filter = 1
 centered = false
-
-[node name="Doors" type="Node2D" parent="."]
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
-[node name="PlayerParrent" type="Node2D" parent="."]
-
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="Proectiles" type="Node2D" parent="."]
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_w4aep")]
 material = SubResource("ShaderMaterial_3bpdn")
 
-[node name="LevelTransition" parent="." instance=ExtResource("4_jvbrh")]
+[node name="PlatformRespawnPoints" type="Node2D" parent="."]
+
+[node name="Doors" type="Node2D" parent="."]
+
+[node name="LevelTransition" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("4_jvbrh")]
+enterPosition = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/LevelTransition"]
+
+[node name="Marker2D" type="Marker2D" parent="Doors/LevelTransition"]
+
+[node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_cjsib")]

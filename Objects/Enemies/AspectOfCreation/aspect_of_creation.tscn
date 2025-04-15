@@ -2885,6 +2885,7 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_q44m3")
 
 [node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "hackCommands", "stateMachine") instance=ExtResource("8_ik1sq")]
+showBars = false
 parent = NodePath("../..")
 follow = NodePath("../EnemyHealthbarMarker")
 healthComponent = NodePath("../HealthComponent")

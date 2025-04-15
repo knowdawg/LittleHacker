@@ -1,5 +1,8 @@
+@tool
 extends Node
 class_name EnemyHealthBar
+
+@export var showBars : bool = true
 
 @export var parent : CharacterBody2D
 @export var follow : Node2D
@@ -16,16 +19,19 @@ class_name EnemyHealthBar
 
 
 func _ready() -> void:
-	$Sprite2D.visible = false
-	curBar = "neither"
-	EnemyHealthBarPositionManager.addHealthbar(self)
-	healthComponent.death.connect(delete)
-	
-	if stateMachine:
-		stateMachine.onHacked.connect(enterHackMode)
-		stateMachine.onHackFinished.connect(exitHackMode)
-	
-	drawLines()
+	if !Engine.is_editor_hint():
+		#$Sprite2D.visible = false
+		#curBar = "neither"
+		EnemyHealthBarPositionManager.addHealthbar(self)
+		if healthComponent:
+			healthComponent.death.connect(delete)
+		
+		if stateMachine:
+			stateMachine.onHacked.connect(enterHackMode)
+			stateMachine.onHackFinished.connect(exitHackMode)
+		
+		hackCommands.sort_custom(sortHacks)
+		#drawLines()
 
 func enterHackMode():
 	addCommandsToGame()
@@ -46,6 +52,7 @@ func delete(_attack):
 	if active:
 		deactivate()
 	EnemyHealthBarPositionManager.removeHealbar(self)
+	%Healthbars.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	
 
 func drawLines():
@@ -77,38 +84,50 @@ func sortHacks(a : HackCommandComponent, b : HackCommandComponent):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	drawLines()
+	#drawLines()
+	if follow:
+		%Healthbars.global_position = follow.global_position
 	
-	var healthPercentage : float = healthComponent.get_health() / healthComponent.get_max_health()
-	var weaknessPercentage : float = healthComponent.get_weakness() / healthComponent.get_max_weakness()
+	if showBars:
+		%Healthbars.visible = true
+	else:
+		%Healthbars.visible = false
 	
-	for a in healthBars:
-		a.value = healthPercentage * 100.0
-	for a in weaknessBars:
-		a.value = weaknessPercentage * 100.0
+	if !Engine.is_editor_hint():
+		if healthComponent:
+			var healthPercentage : float = healthComponent.get_health() / healthComponent.get_max_health()
+			var weaknessPercentage : float = healthComponent.get_weakness() / healthComponent.get_max_weakness()
+			
+			%Health.value = healthPercentage * 100.0
+			%Weakness.value = weaknessPercentage * 100.0
 	
-	$Sprite2D.position = follow.global_position
+	#for a in healthBars:
+		#a.value = healthPercentage * 100.0
+	#for a in weaknessBars:
+		#a.value = weaknessPercentage * 100.0
 	
-	$Sprite2D/HealthLabel.text = str(healthComponent.get_health()) + "/" + str(healthComponent.get_max_health())
-	$Sprite2D/WeaknessLabel.text = str(healthComponent.get_weakness())
-	$Sprite2D/HealthLabel.visible = curBar == "health"
-	$Sprite2D/WeaknessLabel.visible = curBar == "weakness"
+	#$Sprite2D.position = follow.global_position
 	
-	for a in hackCommands:
-		a.visible = curBar == "weakness"
+	#$Sprite2D/HealthLabel.text = str(healthComponent.get_health()) + "/" + str(healthComponent.get_max_health())
+	#$Sprite2D/WeaknessLabel.text = str(healthComponent.get_weakness())
+	#$Sprite2D/HealthLabel.visible = curBar == "health"
+	#$Sprite2D/WeaknessLabel.visible = curBar == "weakness"
 	
-	for a in hackCommands:
-		if a.cost <= healthComponent.get_weakness():
-			a.setActive(true)
-		else:
-			a.setActive(false)
+	#for a in hackCommands:
+		#a.visible = curBar == "weakness"
 	
-	for a in nuetralActiveBars:
-		a.visible = curBar == "neither"
-	for a in healthActiveBars:
-		a.visible = curBar == "health"
-	for a in weaknessActiveBars:
-		a.visible = curBar == "weakness"
+	#for a in hackCommands:
+		#if a.cost <= healthComponent.get_weakness():
+			#a.setActive(true)
+		#else:
+			#a.setActive(false)
+	
+	#for a in nuetralActiveBars:
+		#a.visible = curBar == "neither"
+	#for a in healthActiveBars:
+		#a.visible = curBar == "health"
+	#for a in weaknessActiveBars:
+		#a.visible = curBar == "weakness"
 
 var active = false
 func activate():
@@ -118,22 +137,22 @@ func activate():
 
 func deactivate():
 	active = false
-	curBar = "neither"
+	#curBar = "neither"
 	$AnimationPlayer.play("Deactivate")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Deactivate":
 		$Sprite2D.visible = false
 
-var curBar = "neither"
-func nextBar():
-	$AnimationPlayer.play("Glitch")
-	if curBar == "neither":
-		curBar = "health"
-		$Sprite2D.frame = 1
-	elif curBar == "health":
-		curBar = "weakness"
-		$Sprite2D.frame = 2
-	elif curBar == "weakness":
-		curBar = "health"
-		$Sprite2D.frame = 1
+#var curBar = "neither"
+#func nextBar():
+	#$AnimationPlayer.play("Glitch")
+	#if curBar == "neither":
+		#curBar = "health"
+		#$Sprite2D.frame = 1
+	#elif curBar == "health":
+		#curBar = "weakness"
+		#$Sprite2D.frame = 2
+	#elif curBar == "weakness":
+		#curBar = "health"
+		#$Sprite2D.frame = 1

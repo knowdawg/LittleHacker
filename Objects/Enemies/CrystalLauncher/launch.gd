@@ -68,6 +68,10 @@ func land():
 var hasLaunched : bool = false
 func launch():
 	%Sprite2D.position.y = 0.0 #reset because of diplacement for ceiling landings
+	if parent.curRotation == PI:
+		%AfterImmageMarker.position.y = -2.0
+	else:
+		%AfterImmageMarker.position.y = -4.0
 	
 	attackComponent.enable()
 	
@@ -97,5 +101,6 @@ func _on_attack_component_got_parried(attack : Attack) -> void:
 	if stateMachine.current_state is CrystalLauncherLaunch:
 		parent.global_position = attack.attack_position
 		movement.resetForces()
+		movement.g = Vector2.ZERO
 		movement.applyForce(Vector2(0.0, -1.0), 100.0)
 		spinTimer += spinDuration

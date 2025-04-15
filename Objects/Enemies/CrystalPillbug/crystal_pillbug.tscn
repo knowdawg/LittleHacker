@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dnfqhyu1gc5m4" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.gd" id="1_c87lh"]
 [ext_resource type="Texture2D" uid="uid://clhukrq4eumls" path="res://Assets/Sprites/Enemies/CrystalPillbug.png" id="1_g6wqo"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_o6h05"]
-[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="1_pb840"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="2_3lsv3"]
 [ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_g6wqo"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_pb840"]
 [ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_lydea"]
@@ -28,9 +28,12 @@
 size = Vector2(5, 2)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_lydea"]
-shader = ExtResource("1_pb840")
+shader = ExtResource("2_3lsv3")
+shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
-shader_parameter/outlineAlpha = 0.3
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_wm562"]
 resource_name = "Attack"
@@ -308,6 +311,7 @@ hackName = "Shock"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+position = Vector2(0, 5)
 
 [node name="Proximities" type="Node2D" parent="."]
 

@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://mt8sh1m67s4b" path="res://Objects/Enemies/CrystalLauncher/crystal_launcher.gd" id="1_1fgvd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_5ylyd"]
 [ext_resource type="Texture2D" uid="uid://bb7qi2e1cwn5y" path="res://Assets/Sprites/Enemies/CrystalLauncher.png" id="1_wnjpt"]
-[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="2_gbjp8"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="2_2ph5j"]
 [ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_wnjpt"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_qjbo4"]
 [ext_resource type="Texture2D" uid="uid://brtfm275sdkcl" path="res://Assets/Sprites/Enemies/CrystalLauncherCrystalSpike.png" id="4_jy6hu"]
@@ -30,10 +30,13 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_8foh4"]
 radius = 3.0
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_bbh6r"]
-shader = ExtResource("2_gbjp8")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_akog8"]
+shader = ExtResource("2_2ph5j")
+shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
-shader_parameter/outlineAlpha = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_ule8h"]
 resource_name = "Agro"
@@ -373,7 +376,7 @@ shape = SubResource("CircleShape2D_8foh4")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
-material = SubResource("ShaderMaterial_bbh6r")
+material = SubResource("ShaderMaterial_akog8")
 texture = ExtResource("1_wnjpt")
 offset = Vector2(0, -4)
 hframes = 38
@@ -384,14 +387,14 @@ velocityToCheck = NodePath("../..")
 flipX = false
 
 [node name="CrystalSpike" type="Sprite2D" parent="."]
-material = SubResource("ShaderMaterial_bbh6r")
+material = SubResource("ShaderMaterial_akog8")
 texture = ExtResource("4_jy6hu")
 offset = Vector2(0.5, -4)
 hframes = 38
 frame = 13
 
 [node name="CrystalSpike2" type="Sprite2D" parent="CrystalSpike"]
-material = SubResource("ShaderMaterial_bbh6r")
+use_parent_material = true
 position = Vector2(0, 3)
 rotation = 0.785398
 texture = ExtResource("4_jy6hu")
@@ -400,7 +403,7 @@ hframes = 38
 frame = 13
 
 [node name="CrystalSpike3" type="Sprite2D" parent="CrystalSpike"]
-material = SubResource("ShaderMaterial_bbh6r")
+use_parent_material = true
 position = Vector2(0, 3)
 rotation = -0.785398
 texture = ExtResource("4_jy6hu")
@@ -543,6 +546,7 @@ hackName = "Detonate"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+position = Vector2(0, 4)
 
 [node name="Proximities" type="Node2D" parent="."]
 
@@ -581,6 +585,7 @@ material = SubResource("ShaderMaterial_hsbah")
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="AfterImmageMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(0, -4)
 
 [node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("26_8foh4")]
@@ -600,7 +605,6 @@ unique_name_in_owner = true
 self_modulate = Color(1, 1, 1, 0.352941)
 target_position = Vector2(0, -40)
 collision_mask = 3
-collide_with_areas = true
 
 [node name="BounceRayCasts" type="Node2D" parent="."]
 position = Vector2(0, -1)
@@ -609,25 +613,22 @@ position = Vector2(0, -1)
 unique_name_in_owner = true
 target_position = Vector2(-4, 0)
 collision_mask = 3
-collide_with_areas = true
 
 [node name="Right" type="RayCast2D" parent="BounceRayCasts"]
 unique_name_in_owner = true
 target_position = Vector2(4, 0)
 collision_mask = 3
-collide_with_areas = true
 
 [node name="Up" type="RayCast2D" parent="BounceRayCasts"]
 unique_name_in_owner = true
 target_position = Vector2(0, -4)
 collision_mask = 3
-collide_with_areas = true
 
 [node name="Down" type="RayCast2D" parent="BounceRayCasts"]
 unique_name_in_owner = true
 target_position = Vector2(0, 4)
 collision_mask = 3
-collide_with_areas = true
 
 [connection signal="animation_finished" from="Animator" to="StateMachine/Launch" method="_on_animator_animation_finished"]
+[connection signal="death" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="gotParried" from="AttackComponents/AttackComponent" to="StateMachine/Launch" method="_on_attack_component_got_parried"]

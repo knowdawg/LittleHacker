@@ -1,8 +1,6 @@
-[gd_scene load_steps=184 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=140 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
-[ext_resource type="Shader" uid="uid://cnc8we1jbjatc" path="res://Assets/Shaders/Textures/Stars.gdshader" id="2_dsaho"]
-[ext_resource type="PackedScene" uid="uid://jtwmin0vsvdo" path="res://Objects/WorldObjects/StarfallDecoration/star.tscn" id="3_7c2lr"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
 [ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="5_1x65e"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
@@ -35,6 +33,12 @@
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="31_htj2c"]
 
+[sub_resource type="Gradient" id="Gradient_sy7vn"]
+colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hyfn1"]
+gradient = SubResource("Gradient_sy7vn")
+
 [sub_resource type="Gradient" id="Gradient_tpsgt"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.417143, 0.702857, 1)
@@ -46,233 +50,11 @@ width = 106
 height = 60
 fill_from = Vector2(1, 1)
 
-[sub_resource type="Gradient" id="Gradient_86ljy"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.0901961, 0.12549, 0.219608, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
-gradient = SubResource("Gradient_86ljy")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_y4e7i"]
-seed = 5
-frequency = 0.0025
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xwp7k"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_y4e7i")
-
-[sub_resource type="Gradient" id="Gradient_i34np"]
-colors = PackedColorArray(0, 0.682353, 0.305882, 0.196078, 0, 0.682353, 0.305882, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_rlxx7"]
-gradient = SubResource("Gradient_i34np")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_cflne"]
-shader = ExtResource("2_dsaho")
-shader_parameter/noise = SubResource("NoiseTexture2D_xwp7k")
-shader_parameter/pallete = SubResource("GradientTexture1D_rlxx7")
-shader_parameter/speed = -25.0
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_7nq1o"]
-seed = 5
-frequency = 0.0009
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_25odj"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_7nq1o")
-
-[sub_resource type="Gradient" id="Gradient_yna1l"]
-offsets = PackedFloat32Array(0, 0.991124)
-colors = PackedColorArray(0.52549, 0, 0, 0.27451, 0.52549, 0, 0, 0)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_17riw"]
-gradient = SubResource("Gradient_yna1l")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_rwutr"]
-shader = ExtResource("2_dsaho")
-shader_parameter/noise = SubResource("NoiseTexture2D_25odj")
-shader_parameter/pallete = SubResource("GradientTexture1D_17riw")
-shader_parameter/speed = 100.0
-
-[sub_resource type="Gradient" id="Gradient_j1u7n"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1g2wt"]
-gradient = SubResource("Gradient_j1u7n")
-width = 4
-height = 4
-
-[sub_resource type="Gradient" id="Gradient_qpf0b"]
-colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0.811765, 0.341176, 0.235294, 0)
-
-[sub_resource type="Gradient" id="Gradient_lqxiv"]
-offsets = PackedFloat32Array(0.99005)
-colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ynt26"]
-gradient = SubResource("Gradient_lqxiv")
-width = 12
-height = 12
-
-[sub_resource type="Gradient" id="Gradient_72y01"]
-offsets = PackedFloat32Array(0.00761421, 1)
-colors = PackedColorArray(0.815686, 0.854902, 0.568627, 1, 0.815686, 0.854902, 0.568627, 0)
-
-[sub_resource type="Gradient" id="Gradient_lt622"]
-offsets = PackedFloat32Array(0.99005)
-colors = PackedColorArray(0.458824, 0.654902, 0.262745, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ywtny"]
-gradient = SubResource("Gradient_lt622")
-width = 12
-height = 12
-
-[sub_resource type="Gradient" id="Gradient_fwbsn"]
-offsets = PackedFloat32Array(0.0203046, 1)
-colors = PackedColorArray(0.87451, 0.517647, 0.647059, 1, 0.87451, 0.517647, 0.647059, 0)
-
-[sub_resource type="Gradient" id="Gradient_x8ri2"]
-offsets = PackedFloat32Array(0.99005)
-colors = PackedColorArray(0.776471, 0.317647, 0.592157, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sngkc"]
-gradient = SubResource("Gradient_x8ri2")
-width = 10
-height = 10
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_tcuss"]
-frequency = 0.0046
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_8u4wj"]
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = ExtResource("6_53fi3")
-noise = SubResource("FastNoiseLite_tcuss")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kadbf"]
-frequency = 0.001
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tti0n"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_kadbf")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_2fice"]
-resource_local_to_scene = true
-shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_8u4wj")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_tti0n")
-shader_parameter/resolution = Vector2(10, 10)
-shader_parameter/textureScollSpeed = 1.5
-shader_parameter/warpScrollSpeed = 2.0
-shader_parameter/surgeFrequency = 0.3
-shader_parameter/surgeSpeed = 0.6
-shader_parameter/surgeSize = 1.0
-
-[sub_resource type="Gradient" id="Gradient_uuxd1"]
-offsets = PackedFloat32Array(0.99005)
-colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_gvljp"]
-gradient = SubResource("Gradient_uuxd1")
-width = 32
-height = 32
-
-[sub_resource type="Gradient" id="Gradient_y5630"]
-offsets = PackedFloat32Array(0, 0.304734, 0.571006, 0.813609)
-colors = PackedColorArray(0.145098, 0.337255, 0.180392, 1, 0.27451, 0.509804, 0.196078, 1, 0.458824, 0.654902, 0.262745, 1, 0.815686, 0.854902, 0.568627, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2f8qv"]
-frequency = 0.0046
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_lu3xg"]
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = SubResource("Gradient_y5630")
-noise = SubResource("FastNoiseLite_2f8qv")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_dj61o"]
-frequency = 0.001
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_j1d03"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_dj61o")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_q5im8"]
-resource_local_to_scene = true
-shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_lu3xg")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_j1d03")
-shader_parameter/resolution = Vector2(10, 10)
-shader_parameter/textureScollSpeed = 1.5
-shader_parameter/warpScrollSpeed = 2.0
-shader_parameter/surgeFrequency = 0.3
-shader_parameter/surgeSpeed = 0.6
-shader_parameter/surgeSize = 1.0
-
-[sub_resource type="Gradient" id="Gradient_iutvt"]
-offsets = PackedFloat32Array(0.99005)
-colors = PackedColorArray(0.458824, 0.654902, 0.262745, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_y1c6k"]
-gradient = SubResource("Gradient_iutvt")
-width = 24
-height = 24
-
-[sub_resource type="Gradient" id="Gradient_b53p8"]
-offsets = PackedFloat32Array(0, 0.233728, 0.588757, 0.89645)
-colors = PackedColorArray(0.478431, 0.211765, 0.482353, 1, 0.635294, 0.243137, 0.54902, 1, 0.776471, 0.317647, 0.592157, 1, 0.87451, 0.517647, 0.647059, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_olqdc"]
-frequency = 0.0046
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_exu6i"]
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = SubResource("Gradient_b53p8")
-noise = SubResource("FastNoiseLite_olqdc")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_xviye"]
-frequency = 0.001
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_p8108"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_xviye")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_ycgkv"]
-resource_local_to_scene = true
-shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_exu6i")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_p8108")
-shader_parameter/resolution = Vector2(10, 10)
-shader_parameter/textureScollSpeed = 1.5
-shader_parameter/warpScrollSpeed = 2.0
-shader_parameter/surgeFrequency = 0.3
-shader_parameter/surgeSpeed = 0.6
-shader_parameter/surgeSize = 1.0
-
-[sub_resource type="Gradient" id="Gradient_xqqud"]
-offsets = PackedFloat32Array(0.99005)
-colors = PackedColorArray(0.776471, 0.317647, 0.592157, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_kcrqd"]
-gradient = SubResource("Gradient_xqqud")
-width = 28
-height = 28
-
 [sub_resource type="Gradient" id="Gradient_53ke4"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpsgt"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -282,7 +64,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixek2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -320,13 +102,13 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mbqal"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
 height = 720
 
-[sub_resource type="Shader" id="Shader_73joc"]
+[sub_resource type="Shader" id="Shader_86ljy"]
 code = "shader_type canvas_item;
 
 uniform sampler2D fog;
@@ -348,37 +130,28 @@ void fragment() {
 }
 "
 
-[sub_resource type="Gradient" id="Gradient_sy7vn"]
-colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_qakqs"]
-gradient = SubResource("Gradient_sy7vn")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j2jwg"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
-shader_parameter/fog = SubResource("GradientTexture2D_qakqs")
+shader = SubResource("Shader_86ljy")
+shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4685e"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
-shader_parameter/fog = SubResource("GradientTexture2D_qakqs")
+shader = SubResource("Shader_86ljy")
+shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.7
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hyfn1"]
-gradient = SubResource("Gradient_sy7vn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l0yav"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.4
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qakqs"]
 frequency = 0.0111
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_g8f5d"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_4685e"]
 width = 50
 height = 50
 invert = true
@@ -391,7 +164,7 @@ noise = SubResource("FastNoiseLite_qakqs")
 frequency = 0.001
 fractal_octaves = 10
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_w1vl4"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5fck5"]
 seamless = true
 seamless_blend_skirt = 0.3
 noise = SubResource("FastNoiseLite_dgwi3")
@@ -399,8 +172,8 @@ noise = SubResource("FastNoiseLite_dgwi3")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hmac1"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -415,7 +188,7 @@ colors = PackedColorArray(0.854902, 0.52549, 0.243137, 1, 0.811765, 0.341176, 0.
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_j2jwg"]
 frequency = 0.0111
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k4efd"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_cg64b"]
 width = 128
 height = 128
 seamless = true
@@ -427,7 +200,7 @@ noise = SubResource("FastNoiseLite_j2jwg")
 frequency = 0.001
 fractal_octaves = 10
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5qilq"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_qksy1"]
 seamless = true
 seamless_blend_skirt = 0.3
 noise = SubResource("FastNoiseLite_xrcj4")
@@ -435,8 +208,8 @@ noise = SubResource("FastNoiseLite_xrcj4")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6y74p"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_k4efd")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5qilq")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_cg64b")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_qksy1")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = -0.5
@@ -451,7 +224,7 @@ frequency = 0.0057
 fractal_octaves = 10
 fractal_gain = 1.2
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hplpw"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hjomt"]
 width = 64
 seamless = true
 seamless_blend_skirt = 1.0
@@ -467,22 +240,22 @@ shader_parameter/noiseResolution = Vector2(64, 64)
 shader_parameter/shading = 0.1
 shader_parameter/invert = -1.0
 shader_parameter/warpBorder = true
-shader_parameter/warpBorderNoise = SubResource("NoiseTexture2D_hplpw")
+shader_parameter/warpBorderNoise = SubResource("NoiseTexture2D_hjomt")
 
-[sub_resource type="Gradient" id="Gradient_j2jwg"]
+[sub_resource type="Gradient" id="Gradient_arxf6"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xrcj4"]
-gradient = SubResource("Gradient_j2jwg")
+gradient = SubResource("Gradient_arxf6")
 width = 1920
 height = 1080
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8wad2"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -493,8 +266,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_15735"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -505,8 +278,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c4g1q"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -517,8 +290,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ckl1w"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -529,8 +302,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_u0iil"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -541,8 +314,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_fs5a5"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -550,32 +323,29 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 2.0
 shader_parameter/surgeSize = 3.0
 
-[sub_resource type="Gradient" id="Gradient_ut7a1"]
+[sub_resource type="Gradient" id="Gradient_tn0e6"]
 offsets = PackedFloat32Array(0, 0.988571)
 colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_53ke4"]
-gradient = SubResource("Gradient_ut7a1")
+gradient = SubResource("Gradient_tn0e6")
 width = 128
 height = 128
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ut7a1"]
-gradient = SubResource("Gradient_sy7vn")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_i5gi5"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
-shader_parameter/fog = SubResource("GradientTexture2D_ut7a1")
+shader = SubResource("Shader_86ljy")
+shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5fck5"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_k4efd")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5qilq")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_cg64b")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_qksy1")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = -0.5
@@ -583,20 +353,20 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 0.0
 shader_parameter/surgeSize = 3.0
 
-[sub_resource type="Gradient" id="Gradient_wxdan"]
+[sub_resource type="Gradient" id="Gradient_i5gi5"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_arwe5"]
-gradient = SubResource("Gradient_wxdan")
+gradient = SubResource("Gradient_i5gi5")
 width = 1920
 height = 1080
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cg64b"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -607,8 +377,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qksy1"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -619,8 +389,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hjomt"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -631,8 +401,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_arxf6"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -643,8 +413,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tn0e6"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -655,8 +425,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6omup"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -667,8 +437,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uwpgy"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_k4efd")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5qilq")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_cg64b")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_qksy1")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = -0.5
@@ -679,8 +449,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ixek2"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -691,8 +461,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mbqal"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -703,8 +473,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_hyfn1"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -715,8 +485,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_w31va"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -727,8 +497,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qic8f"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -739,8 +509,8 @@ shader_parameter/surgeSize = 3.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_kne4f"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_g8f5d")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_w1vl4")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -748,13 +518,58 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 2.0
 shader_parameter/surgeSize = 3.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dgwi3"]
-gradient = SubResource("Gradient_sy7vn")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_rjurs"]
+resource_local_to_scene = true
+shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
+shader_parameter/resolution = Vector2(30, 30)
+shader_parameter/textureScollSpeed = 1.0
+shader_parameter/warpScrollSpeed = 1.3
+shader_parameter/surgeFrequency = 1.0
+shader_parameter/surgeSpeed = 2.0
+shader_parameter/surgeSize = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v2t5m"]
+resource_local_to_scene = true
+shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
+shader_parameter/resolution = Vector2(30, 30)
+shader_parameter/textureScollSpeed = 1.0
+shader_parameter/warpScrollSpeed = 1.3
+shader_parameter/surgeFrequency = 1.0
+shader_parameter/surgeSpeed = 2.0
+shader_parameter/surgeSize = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1n6ok"]
+resource_local_to_scene = true
+shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
+shader_parameter/resolution = Vector2(30, 30)
+shader_parameter/textureScollSpeed = 1.0
+shader_parameter/warpScrollSpeed = 1.3
+shader_parameter/surgeFrequency = 1.0
+shader_parameter/surgeSpeed = 2.0
+shader_parameter/surgeSize = 3.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xenpi"]
+resource_local_to_scene = true
+shader = ExtResource("5_1x65e")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_4685e")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5fck5")
+shader_parameter/resolution = Vector2(30, 30)
+shader_parameter/textureScollSpeed = 1.0
+shader_parameter/warpScrollSpeed = 1.3
+shader_parameter/surgeFrequency = 1.0
+shader_parameter/surgeSpeed = 2.0
+shader_parameter/surgeSize = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_86ljy"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
-shader_parameter/fog = SubResource("GradientTexture2D_dgwi3")
+shader = SubResource("Shader_86ljy")
+shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.2
 
 [sub_resource type="Gradient" id="Gradient_ixek2"]
@@ -764,7 +579,7 @@ colors = PackedColorArray(0.854902, 0.52549, 0.243137, 1, 0.811765, 0.341176, 0.
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_mbqal"]
 frequency = 0.0111
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_hyfn1"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kne4f"]
 width = 128
 height = 128
 seamless = true
@@ -776,7 +591,7 @@ noise = SubResource("FastNoiseLite_mbqal")
 frequency = 0.001
 fractal_octaves = 10
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_7fesy"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_eclom"]
 seamless = true
 seamless_blend_skirt = 0.3
 noise = SubResource("FastNoiseLite_w31va")
@@ -784,8 +599,8 @@ noise = SubResource("FastNoiseLite_w31va")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eclom"]
 resource_local_to_scene = true
 shader = ExtResource("5_1x65e")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_hyfn1")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_7fesy")
+shader_parameter/noiseTex = SubResource("NoiseTexture2D_kne4f")
+shader_parameter/noiseWarp = SubResource("NoiseTexture2D_eclom")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = -0.5
@@ -793,13 +608,10 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 0.0
 shader_parameter/surgeSize = 3.0
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpsgt"]
-gradient = SubResource("Gradient_sy7vn")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sy7vn"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
-shader_parameter/fog = SubResource("GradientTexture2D_tpsgt")
+shader = SubResource("Shader_86ljy")
+shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.1
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_221ap"]
@@ -826,6 +638,11 @@ resource_local_to_scene = true
 _data = [Vector2(0, 0), 0.0, -0.0262488, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_4685e"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, -0.0262488, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_igtls"]
 polygon = PackedVector2Array(-166, 89, -7, 89, -4, 90, -1, 93, -3, 95, -13, 95, -13, 100, -23, 100, -23, 104, -9, 104, -9, 99, -4, 99, -4, 102, -3, 102, -3, 112, 1, 112, 1, 104, 6, 104, 6, 112, 15, 114, 15, 104, 20, 104, 20, 106, 22, 106, 22, 109, 24, 109, 29, 112, 29, 119, 42, 119, 42, 114, 45, 114, 49, 115, 49, 122, 55, 122, 55, 113, 64, 116, 64, 121, 98, 120, 109, 112, 149, 110, 140, 89, 271, 89, 271, 87, 273, 87, 275, 85, 281, 85, 281, 80, 280, 79, 286, 79, 292, 75, 292, 70, 298, 70, 298, 64, 295, 60, 297, 59, 297, 55, 289, 55, 284, 49, 284, 45, 278, 45, 278, 40, 236, 40, 236, 44, 225, 44, 225, 40, 218, 40, 211, 34, 222, 34, 225, 30, 241, 30, 241, 24, 251, 24, 257, 23, 270, 23, 276, 24, 351, 24, 351, 14, 347, 14, 341, 5, 338, 5, 338, 0, 303, 0, 303, 5, 286, 5, 283, 8, 273, 8, 275, 14, 196, 14, 196, 9, 215, 9, 215, 5, 217, 5, 217, 4, 237, 4, 253, -6, 252, -21, 264, -31, 307, -31, 307, -26, 350, -26, 350, -32, 357, -32, 364, -31, 420, -31, 420, -41, 392, -41, 392, -40, 378, -40, 378, -46, 387, -46, 387, -52, 385, -55, 378, -55, 377, -61, 365, -61, 365, -76, 334, -76, 334, -80, 302, -80, 284, -85, 242, -86, 238, -95, 218, -95, 201, -116, 350, -100, 463, -95, 501, 141, 103, 214, -167, 219)
 
@@ -839,7 +656,16 @@ polygon = PackedVector2Array(334, -43, 339, -45, 352, -45, 347, -41, 335, -41)
 polygon = PackedVector2Array(316, -61, 318, -55, 337, -55, 344, -59, 339, -61)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_arwe5"]
-polygon = PackedVector2Array(-144, 80, -68, 80, -71, 74, -54, 74, -54, 69, -39, 69, -39, 65, -23, 65, -23, 59, 8, 59, 6, 58, 6, 54, -19, 54, -19, 49, -35, 49, -35, 21, -134, 56)
+polygon = PackedVector2Array(-144, 80, -68, 80, -71, 74, -54, 74, -54, 69, -39, 69, -39, 65, -23, 65, -23, 59, 8, 59, 6, 58, 6, 54, -19, 54, -19, 49, -33, 49, -33, 44, -68, 44, -68, 39, -89, 39, -89, 34, -99, 34, -105, 33, -109, 33, -109, 4, -113, 4, -113, -15, -107, -25, -93, -25, -93, -31, -103, -31, -103, -35, -110, -35, -110, -59, -113, -59, -113, -70, -109, -70, -108, -78, -108, -86, -102, -90, -93, -95, -67, -95, -67, -96, -56, -96, -56, -116, -144, -116)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ixek2"]
+polygon = PackedVector2Array(-166, -84, -148, -84, -148, -83, -166, -83)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tn0e6"]
+polygon = PackedVector2Array(-149, -113, -141, -113, -141, -112, -149, -112)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uwpgy"]
+polygon = PackedVector2Array(-48, 30, -8, 30, -8, 27, -17, 19, -28, 19, -28, 9, -15, 9, -15, 4, -23, 4, -23, 0, -15, 0, -1, -16, -13, -21, -19, -32, -19, -41, -4, -41, -4, -45, 12, -45, 6, -61, 21, -65, 46, -66, 46, -71, 61, -71, 61, -76, 57, -76, 57, -81, 37, -81, 37, -86, 49, -100, 59, -100, 61, -110, 82, -110, 84, -116, -38, -116, -38, -109, -40, -109, -39, -108, -39, -107, -37, -105, -37, -100, -39, -100, -39, -98, -40, -98, -40, -96, -45, -96, -45, -86, -50, -86, -50, -81, -59, -81, -59, -76, -100, -76, -100, -51, -79, -51, -78, -35, -77, -30, -53, -30, -53, -25, -45, -25, -45, -21, -41, -21, -39, -19, -39, -15, -72, -15, -72, 14, -81, 14, -81, 17, -77, 20, -64, 20, -64, 24, -51, 24)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wxdan"]
 polygon = PackedVector2Array(161, 75, 192, 75, 193, 69, 207, 69, 207, 64, 235, 64, 237, 68, 237, 75, 242, 75, 243, 80, 253, 80, 253, 75, 256, 75, 258, 74, 258, 70, 278, 70, 279, 68, 275, 64, 266, 64, 266, 60, 267, 59, 253, 59, 253, 55, 229, 55, 223, 54, 185, 54, 185, 64, 166, 64, 166, 69, 161, 70)
@@ -906,7 +732,7 @@ shader_parameter/shadowIntensitiy = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g51h"]
 
-[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
+[node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 texture_filter = 1
 script = ExtResource("1_4w4bf")
 projectileSpawnNode = NodePath("Projectiles")
@@ -916,6 +742,8 @@ doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParent")
 respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
+backgroundGradient = SubResource("GradientTexture2D_hyfn1")
+backgroundContainers = [NodePath("VeryFar/SubViewportContainer"), NodePath("Far/SubViewportContainer"), NodePath("MediumFar/SubViewportContainer"), NodePath("Medium/SubViewportContainer"), NodePath("MeduimClose/SubViewportContainer"), NodePath("MeduimClose/SubViewportContainer2"), NodePath("MeduimClose/SubViewportContainer3"), NodePath("Close/SubViewportContainer"), NodePath("VeryClose/SubViewportContainer")]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -926,421 +754,18 @@ position = Vector2(640, 360)
 scale = Vector2(12.0755, 12)
 texture = SubResource("GradientTexture2D_86ljy")
 
-[node name="Sky4" type="Sprite2D" parent="CanvasLayer"]
-visible = false
-position = Vector2(640, 360)
-scale = Vector2(20, 11.25)
+[node name="Clouds3" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
+position = Vector2(641, 355)
+texture = SubResource("GradientTexture2D_tpsgt")
+
+[node name="Clouds" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
+position = Vector2(641, 345)
 texture = SubResource("GradientTexture2D_sy7vn")
 
-[node name="Sky3" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = SubResource("ShaderMaterial_cflne")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0901961, 0.12549, 0.219608, 1)
-
-[node name="Sky2" type="ColorRect" parent="CanvasLayer"]
-visible = false
-material = SubResource("ShaderMaterial_rwutr")
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-color = Color(0.0901961, 0.12549, 0.219608, 1)
-
-[node name="BasicStars" type="Node2D" parent="CanvasLayer"]
-
-[node name="Star" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(652, 198)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star2" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(157, 276)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star3" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(238, 158)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star4" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(147, 56)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star5" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(589, 345)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star6" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(483, 249)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star7" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1030, 123)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star8" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(904, 239)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star9" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1176, 245)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star10" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(881, 419)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star11" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1236, 393)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star12" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1336, 217)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star13" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1194, 159)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star14" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1131, 64)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star15" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1422, 64)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star16" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1435, 300)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star17" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1301, 452)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star18" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(801, 468)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star19" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(617, 469)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star20" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(407, 387)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star21" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(206, 384)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star22" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(274, 246)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star23" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(305, 48)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star24" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(514, 69)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star25" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(804, 51)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star26" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(57, 370)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star27" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(804, 328)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star28" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1085, 332)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star29" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1115, 143)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star30" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1279, 67)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star31" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(956, 130)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star32" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1009, 86)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star33" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1051, 75)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star34" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1067, 89)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star35" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(882, 228)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star36" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(784, 220)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star37" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(774, 172)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star38" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(789, 125)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star39" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(814, 107)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star40" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(597, 193)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star41" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(542, 206)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star42" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(240, 244)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star43" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(211, 233)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star44" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(236, 217)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star45" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(265, 225)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star46" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(265, 225)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star47" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(80, 260)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star48" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(30, 119)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star49" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(490, 268)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star50" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(493, 283)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star51" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(512, 298)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star52" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(528, 303)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star53" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1063, 407)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star54" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(1436, 179)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="Star55" parent="CanvasLayer/BasicStars" instance=ExtResource("3_7c2lr")]
-position = Vector2(922, 319)
-texture = SubResource("GradientTexture2D_1g2wt")
-
-[node name="RedStarts" type="Node2D" parent="CanvasLayer"]
-
-[node name="Line2D" type="Line2D" parent="CanvasLayer/RedStarts"]
-points = PackedVector2Array(853, 282, 853, 392)
-width = 1.0
-default_color = Color(0.811765, 0.341176, 0.235294, 1)
-gradient = SubResource("Gradient_qpf0b")
-
-[node name="Star10" parent="CanvasLayer/RedStarts/Line2D" instance=ExtResource("3_7c2lr")]
-position = Vector2(853, 282)
-texture = SubResource("GradientTexture2D_ynt26")
-
-[node name="Line2D4" type="Line2D" parent="CanvasLayer/RedStarts"]
-position = Vector2(-384, 61)
-points = PackedVector2Array(853, 282, 853, 392)
-width = 1.0
-default_color = Color(0.811765, 0.341176, 0.235294, 1)
-gradient = SubResource("Gradient_qpf0b")
-
-[node name="Star10" parent="CanvasLayer/RedStarts/Line2D4" instance=ExtResource("3_7c2lr")]
-position = Vector2(853, 282)
-texture = SubResource("GradientTexture2D_ynt26")
-
-[node name="Line2D2" type="Line2D" parent="CanvasLayer/RedStarts"]
-position = Vector2(-451, -248)
-points = PackedVector2Array(853, 282, 853, 392)
-width = 1.0
-default_color = Color(0.811765, 0.341176, 0.235294, 1)
-gradient = SubResource("Gradient_qpf0b")
-
-[node name="Star10" parent="CanvasLayer/RedStarts/Line2D2" instance=ExtResource("3_7c2lr")]
-position = Vector2(853, 282)
-texture = SubResource("GradientTexture2D_ynt26")
-
-[node name="Line2D3" type="Line2D" parent="CanvasLayer/RedStarts"]
-position = Vector2(-742, -176)
-points = PackedVector2Array(853, 282, 853, 392)
-width = 1.0
-default_color = Color(0.811765, 0.341176, 0.235294, 1)
-gradient = SubResource("Gradient_qpf0b")
-
-[node name="Star10" parent="CanvasLayer/RedStarts/Line2D3" instance=ExtResource("3_7c2lr")]
-position = Vector2(853, 282)
-texture = SubResource("GradientTexture2D_ynt26")
-
-[node name="GreenStart" type="Node2D" parent="CanvasLayer"]
-
-[node name="Line2D" type="Line2D" parent="CanvasLayer/GreenStart"]
-points = PackedVector2Array(852, 124, 852, 217)
-width = 1.0
-gradient = SubResource("Gradient_72y01")
-
-[node name="Star2" parent="CanvasLayer/GreenStart/Line2D" instance=ExtResource("3_7c2lr")]
-position = Vector2(852, 125)
-texture = SubResource("GradientTexture2D_ywtny")
-
-[node name="Line2D2" type="Line2D" parent="CanvasLayer/GreenStart"]
-position = Vector2(-286, -59)
-points = PackedVector2Array(852, 124, 852, 217)
-width = 1.0
-gradient = SubResource("Gradient_72y01")
-
-[node name="Star2" parent="CanvasLayer/GreenStart/Line2D2" instance=ExtResource("3_7c2lr")]
-position = Vector2(852, 125)
-texture = SubResource("GradientTexture2D_ywtny")
-
-[node name="Line2D3" type="Line2D" parent="CanvasLayer/GreenStart"]
-position = Vector2(440, 171)
-points = PackedVector2Array(852, 124, 852, 217)
-width = 1.0
-gradient = SubResource("Gradient_72y01")
-
-[node name="Star2" parent="CanvasLayer/GreenStart/Line2D3" instance=ExtResource("3_7c2lr")]
-position = Vector2(852, 125)
-texture = SubResource("GradientTexture2D_ywtny")
-
-[node name="Line2D4" type="Line2D" parent="CanvasLayer/GreenStart"]
-position = Vector2(-231, 141)
-points = PackedVector2Array(852, 124, 852, 217)
-width = 1.0
-gradient = SubResource("Gradient_72y01")
-
-[node name="Star2" parent="CanvasLayer/GreenStart/Line2D4" instance=ExtResource("3_7c2lr")]
-position = Vector2(852, 125)
-texture = SubResource("GradientTexture2D_ywtny")
-
-[node name="PurpleStart" type="Node2D" parent="CanvasLayer"]
-
-[node name="Line2D" type="Line2D" parent="CanvasLayer/PurpleStart"]
-position = Vector2(20, 80)
-points = PackedVector2Array(1152, 178, 1152, 261)
-width = 1.0
-gradient = SubResource("Gradient_fwbsn")
-
-[node name="Star2" parent="CanvasLayer/PurpleStart/Line2D" instance=ExtResource("3_7c2lr")]
-position = Vector2(1152, 178)
-texture = SubResource("GradientTexture2D_sngkc")
-
-[node name="Line2D2" type="Line2D" parent="CanvasLayer/PurpleStart"]
-position = Vector2(-216, -151)
-points = PackedVector2Array(1152, 178, 1152, 261)
-width = 1.0
-gradient = SubResource("Gradient_fwbsn")
-
-[node name="Star2" parent="CanvasLayer/PurpleStart/Line2D2" instance=ExtResource("3_7c2lr")]
-position = Vector2(1152, 178)
-texture = SubResource("GradientTexture2D_sngkc")
-
-[node name="Line2D3" type="Line2D" parent="CanvasLayer/PurpleStart"]
-position = Vector2(-54, 305)
-points = PackedVector2Array(1152, 178, 1152, 261)
-width = 1.0
-gradient = SubResource("Gradient_fwbsn")
-
-[node name="Star2" parent="CanvasLayer/PurpleStart/Line2D3" instance=ExtResource("3_7c2lr")]
-position = Vector2(1152, 178)
-texture = SubResource("GradientTexture2D_sngkc")
-
-[node name="StarfallShader" parent="CanvasLayer" instance=ExtResource("4_qqksi")]
-visible = false
-material = SubResource("ShaderMaterial_2fice")
-position = Vector2(-208, -99)
-points = PackedVector2Array(547, 238, 543, 1095)
-width = 10.0
-default_color = Color(0.811765, 0.341176, 0.235294, 1)
-
-[node name="Star" parent="CanvasLayer/StarfallShader" instance=ExtResource("3_7c2lr")]
-position = Vector2(547, 238)
-texture = SubResource("GradientTexture2D_gvljp")
-
-[node name="StarfallShader2" parent="CanvasLayer" instance=ExtResource("4_qqksi")]
-visible = false
-material = SubResource("ShaderMaterial_q5im8")
-position = Vector2(170, -194)
-points = PackedVector2Array(547, 238, 543, 1095)
-width = 7.0
-
-[node name="Star" parent="CanvasLayer/StarfallShader2" instance=ExtResource("3_7c2lr")]
-position = Vector2(547, 238)
-texture = SubResource("GradientTexture2D_y1c6k")
-
-[node name="StarfallShader3" parent="CanvasLayer" instance=ExtResource("4_qqksi")]
-visible = false
-material = SubResource("ShaderMaterial_ycgkv")
-position = Vector2(468, 12)
-points = PackedVector2Array(547, 238, 543, 1095)
-width = 10.0
-
-[node name="Star" parent="CanvasLayer/StarfallShader3" instance=ExtResource("3_7c2lr")]
-position = Vector2(547, 238)
-texture = SubResource("GradientTexture2D_kcrqd")
-
-[node name="CanvasLayer2" type="CanvasLayer" parent="."]
-layer = -1
-
-[node name="Clouds3" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
-position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_uwpgy")
-
-[node name="Clouds" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
-position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_ixek2")
-
-[node name="Clouds2" parent="CanvasLayer2" instance=ExtResource("8_3qqdn")]
+[node name="Clouds2" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_mbqal")
+texture = SubResource("GradientTexture2D_uwpgy")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1379,10 +804,10 @@ scroll_scale = Vector2(0.2, 0.2)
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Far"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_4685e")
-offset_left = 419.217
-offset_top = 221.61
-offset_right = 931.217
-offset_bottom = 733.61
+offset_left = 413.2
+offset_top = 224.4
+offset_right = 925.2
+offset_bottom = 736.4
 
 [node name="Main2" type="SubViewport" parent="Far/SubViewportContainer"]
 transparent_bg = true
@@ -1395,6 +820,24 @@ render_target_update_mode = 4
 texture_filter = 1
 position = Vector2(162, 81)
 texture = ExtResource("15_86ljy")
+
+[node name="MediumFar" type="Parallax2D" parent="."]
+scroll_scale = Vector2(0.5, 0.5)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="MediumFar"]
+texture_filter = 1
+material = SubResource("ShaderMaterial_4685e")
+offset_left = 413.2
+offset_top = 224.4
+offset_right = 925.2
+offset_bottom = 736.4
+
+[node name="Main2" type="SubViewport" parent="MediumFar/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+render_target_update_mode = 4
 
 [node name="Medium" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.8, 0.8)
@@ -1617,6 +1060,45 @@ position = Vector2(39, 64)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 3.0
 
+[node name="SubViewportContainer3" type="SubViewportContainer" parent="MeduimClose"]
+material = SubResource("ShaderMaterial_i5gi5")
+offset_left = 305.757
+offset_top = -44.3854
+offset_right = 817.757
+offset_bottom = 467.615
+
+[node name="Main2" type="SubViewport" parent="MeduimClose/SubViewportContainer3"]
+transparent_bg = true
+handle_input_locally = false
+sdf_oversize = 0
+sdf_scale = 0
+size = Vector2i(128, 128)
+render_target_update_mode = 4
+
+[node name="StarfallShader" parent="MeduimClose/SubViewportContainer3/Main2" instance=ExtResource("4_qqksi")]
+material = SubResource("ShaderMaterial_rjurs")
+position = Vector2(-22.4887, -23.9463)
+points = PackedVector2Array(52, 15, 52, 104)
+width = 7.0
+
+[node name="StarfallShader2" parent="MeduimClose/SubViewportContainer3/Main2" instance=ExtResource("4_qqksi")]
+material = SubResource("ShaderMaterial_v2t5m")
+position = Vector2(-1.52609, -24.8676)
+points = PackedVector2Array(52, 15, 52, 104)
+width = 5.0
+
+[node name="StarfallShader3" parent="MeduimClose/SubViewportContainer3/Main2" instance=ExtResource("4_qqksi")]
+material = SubResource("ShaderMaterial_1n6ok")
+position = Vector2(48.6497, -23.9081)
+points = PackedVector2Array(52, 15, 52, 104)
+width = 5.0
+
+[node name="StarfallShader4" parent="MeduimClose/SubViewportContainer3/Main2" instance=ExtResource("4_qqksi")]
+material = SubResource("ShaderMaterial_xenpi")
+position = Vector2(12.5078, -26.6176)
+points = PackedVector2Array(52, 15, 52, 104)
+width = 5.0
+
 [node name="Close" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.9, 0.9)
 
@@ -1683,13 +1165,8 @@ position = Vector2(368, 125)
 texture = SubResource("ViewportTexture_l5xpt")
 metadata/_edit_lock_ = true
 
-[node name="ClothSim" parent="Enviremnet" instance=ExtResource("13_4clin")]
-visible = false
-position = Vector2(-298, -64)
-clothAngle = -10.0
-
 [node name="ClothSim2" parent="Enviremnet" instance=ExtResource("13_4clin")]
-position = Vector2(-195, -197)
+position = Vector2(-288, -113)
 scale = Vector2(-1, 1)
 texture = ExtResource("14_an8tg")
 clothAngle = -15.0
@@ -1752,6 +1229,34 @@ shape = SubResource("CircleShape2D_dgwi3")
 [node name="Marker2D" type="Marker2D" parent="Enviremnet/ZiplineAnchor2/InteractableArea"]
 position = Vector2(-3, 16)
 
+[node name="ZiplineAnchor3" parent="Enviremnet" node_paths=PackedStringArray("interactableComponent", "startingPos", "destination") instance=ExtResource("17_arwe5")]
+position = Vector2(-461, -177)
+flipH = true
+interactableComponent = NodePath("InteractableArea")
+startingPos = NodePath("StartingPos")
+destination = NodePath("Destination")
+duration = 0.5
+curve = SubResource("Curve_4685e")
+
+[node name="StartingPos" type="Marker2D" parent="Enviremnet/ZiplineAnchor3"]
+position = Vector2(3.5, 17)
+
+[node name="Destination" type="Marker2D" parent="Enviremnet/ZiplineAnchor3"]
+position = Vector2(3.5, -2)
+
+[node name="InteractableArea" parent="Enviremnet/ZiplineAnchor3" node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("18_qakqs")]
+position = Vector2(6.5, 7)
+text = "Attach"
+textPos = NodePath("Marker2D")
+colShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enviremnet/ZiplineAnchor3/InteractableArea"]
+position = Vector2(-3, 10)
+shape = SubResource("CircleShape2D_dgwi3")
+
+[node name="Marker2D" type="Marker2D" parent="Enviremnet/ZiplineAnchor3/InteractableArea"]
+position = Vector2(-3, 16)
+
 [node name="Collitions" type="Node2D" parent="."]
 
 [node name="BottomEnvierment" parent="Collitions" instance=ExtResource("20_30t6e")]
@@ -1778,6 +1283,29 @@ occluder = SubResource("OccluderPolygon2D_arxf6")
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -15)
 occluder = SubResource("OccluderPolygon2D_arwe5")
+
+[node name="LeftCliffPlatform1" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(69, 83)
+occluder = SubResource("OccluderPolygon2D_ixek2")
+oneWay = true
+
+[node name="LeftCliffPlatform2" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(69, 83)
+occluder = SubResource("OccluderPolygon2D_tn0e6")
+oneWay = true
+
+[node name="LeftCliffPlatform3" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(55, 67)
+occluder = SubResource("OccluderPolygon2D_tn0e6")
+oneWay = true
+
+[node name="LeftCliff2" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(0, -15)
+occluder = SubResource("OccluderPolygon2D_uwpgy")
 
 [node name="CaveSegment" parent="Collitions" instance=ExtResource("20_30t6e")]
 modulate = Color(1, 1, 1, 0)
@@ -1877,10 +1405,13 @@ position = Vector2(176, 85)
 position = Vector2(89, 79)
 
 [node name="CrystalSwordsman2" parent="Enemies" instance=ExtResource("19_j2jwg")]
-position = Vector2(168, 36)
+position = Vector2(177, 36)
 
 [node name="CrystalSwordsman3" parent="Enemies" instance=ExtResource("19_j2jwg")]
 position = Vector2(329, 5)
+
+[node name="CrystalSwordsman4" parent="Enemies" instance=ExtResource("19_j2jwg")]
+position = Vector2(-47, -33)
 
 [node name="CrystalThug" parent="Enemies" instance=ExtResource("20_xrcj4")]
 position = Vector2(84, 79)
@@ -1898,11 +1429,22 @@ color = 1
 position = Vector2(165, -60)
 color = 1
 
+[node name="CrystalThug5" parent="Enemies" instance=ExtResource("20_xrcj4")]
+position = Vector2(-103, 15)
+color = 1
+
+[node name="CrystalThug6" parent="Enemies" instance=ExtResource("20_xrcj4")]
+position = Vector2(-62, -94)
+color = 1
+
 [node name="CrystalPillbug" parent="Enemies" instance=ExtResource("21_wxdan")]
 position = Vector2(175, 71)
 
 [node name="CrystalLauncher" parent="Enemies" instance=ExtResource("25_ut7a1")]
 position = Vector2(322, -78)
+
+[node name="CrystalLauncher2" parent="Enemies" instance=ExtResource("25_ut7a1")]
+position = Vector2(-69, -93)
 
 [node name="Hazards" type="Node2D" parent="Enemies"]
 
@@ -1942,6 +1484,25 @@ shape = SubResource("RectangleShape2D_hyfn1")
 position = Vector2(51, -189.5)
 shape = SubResource("RectangleShape2D_53ke4")
 
+[node name="Polygon2D" type="CollisionPolygon2D" parent="Enemies/Hazards/Hazard1"]
+modulate = Color(1, 1, 1, 0.305882)
+polygon = PackedVector2Array(-301, -56, -220, -37, -185, -37, -149, -50, -119, -52, -120, -29, -300, -27)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/Hazards/Hazard1"]
+polygon = PackedVector2Array(-284, -128, -277, -128, -283, -137, -254, -133, -269, -147, -260, -150, -278, -164, -265, -162, -273, -174, -245, -176, -264, -187, -255, -191, -267, -199, -231, -196, -245, -213, -233, -213, -244, -223, -271, -218, -296, -198, -289, -178, -305, -139)
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Enemies/Hazards/Hazard1"]
+polygon = PackedVector2Array(-388, -154, -382, -154, -379, -171, -369, -181, -388, -180)
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="Enemies/Hazards/Hazard1"]
+polygon = PackedVector2Array(-366, -207, -369, -199, -361, -201, -357, -192, -354, -192, -354, -207)
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="Enemies/Hazards/Hazard1"]
+polygon = PackedVector2Array(-389, -217, -385, -217, -388, -223, -382, -221, -386, -226, -391, -226)
+
+[node name="CollisionPolygon2D5" type="CollisionPolygon2D" parent="Enemies/Hazards/Hazard1"]
+polygon = PackedVector2Array(-377, -245, -373, -244, -374, -246, -370, -246, -365, -244, -369, -249, -364, -251, -359, -246, -361, -252, -370, -253, -380, -247)
+
 [node name="PlayerParent" type="Node2D" parent="."]
 
 [node name="Projectiles" type="Node2D" parent="."]
@@ -1955,6 +1516,7 @@ z_index = 100
 material = SubResource("ShaderMaterial_erh47")
 
 [node name="PlatformingRespawnPoints" type="Node2D" parent="."]
+visible = false
 
 [node name="PlatformRespawnArea" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
 
@@ -1988,6 +1550,102 @@ polygon = PackedVector2Array(349, -31, 436, -31, 431, -108, 362, -103, 363, -55,
 [node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea4"]
 position = Vector2(362, -49)
 
+[node name="PlatformRespawnArea5" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea5"]
+polygon = PackedVector2Array(-76, 41, -76, 87, -7, 78, -7, 41)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea5"]
+position = Vector2(-14, 72)
+
+[node name="PlatformRespawnArea6" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea6"]
+polygon = PackedVector2Array(144, 77, 172, 92, 198, 93, 193, 51, 144, 59)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea6"]
+position = Vector2(149, 72)
+
+[node name="PlatformRespawnArea7" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea7"]
+polygon = PackedVector2Array(35, 96, 63, 96, 63, 61, 77, 38, 74, 33, -3, 42, -3, 48, 35, 61)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea7"]
+position = Vector2(49, 80)
+
+[node name="PlatformRespawnArea8" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(55, -2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea8"]
+polygon = PackedVector2Array(35, 96, 63, 96, 63, 61, 135, 53, 135, 44, 53, 45, 28, 41, 35, 61)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea8"]
+position = Vector2(49, 80)
+
+[node name="PlatformRespawnArea9" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(55, -2)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea9"]
+polygon = PackedVector2Array(-101, 14, -101, 39, -74, 37, -62, 37, -64, 16)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea9"]
+position = Vector2(-75, 34)
+
+[node name="PlatformRespawnArea10" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(141, -11)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea10"]
+polygon = PackedVector2Array(-85, 20, -85, 40, -73, 40, -73, 20)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea10"]
+position = Vector2(-81, 38)
+
+[node name="PlatformRespawnArea11" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(-3, -18)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea11"]
+polygon = PackedVector2Array(-119, 38, -73, 44, -68, 20, -112, 20)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea11"]
+position = Vector2(-90, 35)
+
+[node name="PlatformRespawnArea12" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(9, -46)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea12"]
+polygon = PackedVector2Array(-88, 45, -76, 45, -73, 19, -88, 19)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea12"]
+position = Vector2(-86, 43)
+
+[node name="PlatformRespawnArea13" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(5, -75)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea13"]
+polygon = PackedVector2Array(-85, 45, -39, 45, -35, 26, -82, 30)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea13"]
+position = Vector2(-78, 43)
+
+[node name="PlatformRespawnArea14" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(-48, -100)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea14"]
+polygon = PackedVector2Array(-67, 50, -57, 50, -50, 32, -66, 41)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea14"]
+position = Vector2(-58, 48)
+
+[node name="PlatformRespawnArea15" parent="PlatformingRespawnPoints" instance=ExtResource("29_tpsgt")]
+position = Vector2(-15, -134)
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="PlatformingRespawnPoints/PlatformRespawnArea15"]
+polygon = PackedVector2Array(-79, 44, -35, 44, -13, 27, -14, 3, -50, 3, -79, 19)
+
+[node name="Marker2D" type="Marker2D" parent="PlatformingRespawnPoints/PlatformRespawnArea15"]
+position = Vector2(-72, 41)
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="Left" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
@@ -2002,12 +1660,39 @@ position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/Left"]
-position = Vector2(310, -126)
+position = Vector2(37, -46)
+
+[node name="Top" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
+position = Vector2(87, -131)
+scene = "uid://c80acag1837nm"
+doorName = "Down"
+enterPosition = NodePath("Marker2D")
+directionToFaceWhenEnteringTHISDoor = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Top"]
+position = Vector2(-134, -11)
+shape = SubResource("RectangleShape2D_6g51h")
+
+[node name="Marker2D" type="Marker2D" parent="Doors/Top"]
+position = Vector2(-130, 18)
+
+[node name="Right" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
+position = Vector2(554, -38)
+scene = "uid://d4aqafxdibln2"
+doorName = "Left"
+enterPosition = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Right"]
+position = Vector2(-134, -11)
+shape = SubResource("RectangleShape2D_6g51h")
+
+[node name="Marker2D" type="Marker2D" parent="Doors/Right"]
+position = Vector2(-151, -10)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("30_dgwi3")]
 visible = false
 position = Vector2(0, 179)
-polygon = PackedVector2Array(-143, -323, -143, 45, 408, 45, 408, -323)
+polygon = PackedVector2Array(-143, -310, -143, 45, 408, 45, 408, -310)
 cameraSize = Vector2(107, 60)
 
 [node name="SetPointCameraZone" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("19_4clin")]

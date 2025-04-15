@@ -3,7 +3,7 @@ class_name CameraCoundriesComponent
 
 
 var polygonTransorm : PackedVector2Array = []
-@export var cameraSize : Vector2 = Vector2(128.0, 72.0)
+@export var cameraSize : Vector2 = Vector2(106.0, 60.0)
 var shrunkenPolygon : PackedVector2Array = []
 
 # Current position of the rectangle's center

@@ -277,6 +277,7 @@ shape = SubResource("RectangleShape2D_8c8sv")
 disabled = true
 
 [node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_00x40")]
+showBars = false
 parent = NodePath("../..")
 follow = NodePath("../EnemyHealthbarMarker")
 healthComponent = NodePath("../HealthComponent")

@@ -14,17 +14,6 @@ func _process(_delta: float) -> void:
 	if Game.doesPlayerExist():
 		dirToPlayer = (global_position - (Game.player.global_position - Vector2(0.0, 3.0))).angle()
 	%Sprite2D.rotation = curRotation
-	
-	#if curRotation == 0.0:
-		#%MovementComponent.gravity = 10.0
-	#if curRotation == PI:
-		#%MovementComponent.gravity = -10.0
-	#if curRotation == PI / 2.0:
-		#%MovementComponent.gravity = 0
-		#%MovementComponent.g = Vector2.ZERO
-	#if curRotation == 3.0 * PI / 2.0:
-		#%MovementComponent.gravity = 0
-		#%MovementComponent.g = Vector2.ZERO
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
@@ -42,3 +31,10 @@ func stickToCeiling() -> bool:
 		global_position.y -= 1
 		return true
 	return false
+
+
+func _on_health_component_death(_attack: Attack) -> void:
+	$AfterImageComponent.setActive(false)
+	curRotation = 0.0
+	%Sprite2D.rotation = 0.0
+	%Sprite2D.position = Vector2.ZERO
