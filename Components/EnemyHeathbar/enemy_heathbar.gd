@@ -20,8 +20,6 @@ class_name EnemyHealthBar
 
 func _ready() -> void:
 	if !Engine.is_editor_hint():
-		#$Sprite2D.visible = false
-		#curBar = "neither"
 		EnemyHealthBarPositionManager.addHealthbar(self)
 		if healthComponent:
 			healthComponent.death.connect(delete)
@@ -31,7 +29,6 @@ func _ready() -> void:
 			stateMachine.onHackFinished.connect(exitHackMode)
 		
 		hackCommands.sort_custom(sortHacks)
-		#drawLines()
 
 func enterHackMode():
 	addCommandsToGame()
@@ -55,27 +52,6 @@ func delete(_attack):
 	%Healthbars.modulate = Color(1.0, 1.0, 1.0, 0.0)
 	
 
-func drawLines():
-	if is_instance_valid(Game.player):
-		if Game.player.global_position.x > follow.global_position.x:
-			pass
-		else:
-			pass
-	
-	hackCommands.sort_custom(sortHacks)
-	var endPositions : Array = $Sprite2D/HackCoponentPosition.get_children()
-	
-	var yPos = 13.0 / 4.0
-	var xOffeset = 14.0 / 4.0
-	for i in hackCommands.size():
-		var startPos = hackCommands[i].cost / healthComponent.get_max_weakness()
-		startPos *= 11.0 #num of pixels
-		hackCommands[i].clear_points()
-		hackCommands[i].add_point(Vector2(startPos + xOffeset, yPos) + follow.global_position)
-		hackCommands[i].add_point(Vector2(startPos + xOffeset, yPos + 2.5) + follow.global_position)
-		hackCommands[i].add_point(endPositions[i].position * 0.25 + follow.global_position)
-
-
 func sortHacks(a : HackCommandComponent, b : HackCommandComponent):
 	if a.cost < b.cost:
 		return true
@@ -84,7 +60,6 @@ func sortHacks(a : HackCommandComponent, b : HackCommandComponent):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
-	#drawLines()
 	if follow:
 		%Healthbars.global_position = follow.global_position
 	
@@ -100,34 +75,6 @@ func _process(_delta: float) -> void:
 			
 			%Health.value = healthPercentage * 100.0
 			%Weakness.value = weaknessPercentage * 100.0
-	
-	#for a in healthBars:
-		#a.value = healthPercentage * 100.0
-	#for a in weaknessBars:
-		#a.value = weaknessPercentage * 100.0
-	
-	#$Sprite2D.position = follow.global_position
-	
-	#$Sprite2D/HealthLabel.text = str(healthComponent.get_health()) + "/" + str(healthComponent.get_max_health())
-	#$Sprite2D/WeaknessLabel.text = str(healthComponent.get_weakness())
-	#$Sprite2D/HealthLabel.visible = curBar == "health"
-	#$Sprite2D/WeaknessLabel.visible = curBar == "weakness"
-	
-	#for a in hackCommands:
-		#a.visible = curBar == "weakness"
-	
-	#for a in hackCommands:
-		#if a.cost <= healthComponent.get_weakness():
-			#a.setActive(true)
-		#else:
-			#a.setActive(false)
-	
-	#for a in nuetralActiveBars:
-		#a.visible = curBar == "neither"
-	#for a in healthActiveBars:
-		#a.visible = curBar == "health"
-	#for a in weaknessActiveBars:
-		#a.visible = curBar == "weakness"
 
 var active = false
 func activate():
@@ -143,16 +90,3 @@ func deactivate():
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "Deactivate":
 		$Sprite2D.visible = false
-
-#var curBar = "neither"
-#func nextBar():
-	#$AnimationPlayer.play("Glitch")
-	#if curBar == "neither":
-		#curBar = "health"
-		#$Sprite2D.frame = 1
-	#elif curBar == "health":
-		#curBar = "weakness"
-		#$Sprite2D.frame = 2
-	#elif curBar == "weakness":
-		#curBar = "health"
-		#$Sprite2D.frame = 1

@@ -174,11 +174,12 @@ shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
 
-[node name="CrystalPillbug" type="CharacterBody2D"]
+[node name="CrystalPillbug" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 0
 script = ExtResource("1_c87lh")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 visible = false

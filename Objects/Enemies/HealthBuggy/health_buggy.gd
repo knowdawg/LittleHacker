@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Enemy
 class_name HealthBuggy
 
 @export var movement : MovementComponent

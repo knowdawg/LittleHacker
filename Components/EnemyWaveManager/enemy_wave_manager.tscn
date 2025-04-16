@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://divadnci3ck4s"]
+
+[ext_resource type="Script" uid="uid://c5mwmb6l8i6cx" path="res://Components/EnemyWaveManager/enemy_wave_manager.gd" id="1_hrno8"]
+
+[node name="EnemyWaveManager" type="Node2D"]
+script = ExtResource("1_hrno8")
+
+[node name="StartDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[node name="WaveDelay" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="StartDelay" to="." method="_on_start_delay_timeout"]
+[connection signal="timeout" from="WaveDelay" to="." method="_on_wave_delay_timeout"]

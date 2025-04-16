@@ -1,6 +1,5 @@
-[gd_scene load_steps=71 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=74 format=3 uid="uid://cl5qeeqx66i6e"]
 
-[ext_resource type="Texture2D" uid="uid://b1h0biuscqvuk" path="res://Assets/Sprites/Enemies/CrystalThugEnemy.png" id="1_1mmkh"]
 [ext_resource type="Script" uid="uid://dxlohk1v41qh3" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_knvuj"]
 [ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_ckk41"]
@@ -35,6 +34,8 @@
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_88n8y"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="17_jdngx"]
 [ext_resource type="Script" uid="uid://dx8h1xyy21sy7" path="res://Objects/Enemies/CrystalThug/death.gd" id="22_jr46o"]
+[ext_resource type="Script" uid="uid://byq5t13up4nds" path="res://Classes/GenericStates/GenericSleep.gd" id="24_ieetj"]
+[ext_resource type="Script" uid="uid://coulc1y5li7rb" path="res://Classes/GenericStates/GenericTransitionState.gd" id="25_3fdjg"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="27_tgw8o"]
 [ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="31_0jdrv"]
 [ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="37_yylqw"]
@@ -346,6 +347,23 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_ieetj"]
+resource_name = "Sleep"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [38]
+}
+
 [sub_resource type="Animation" id="Animation_t37ew"]
 resource_name = "Stun"
 length = 0.1
@@ -379,6 +397,23 @@ tracks/0/keys = {
 "values": [9]
 }
 
+[sub_resource type="Animation" id="Animation_3fdjg"]
+resource_name = "Wake"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [39, 40, 41, 42, 43, 44]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_j3vrm"]
 _data = {
 &"Attack": SubResource("Animation_6571p"),
@@ -387,8 +422,10 @@ _data = {
 &"RESET": SubResource("Animation_v86cl"),
 &"Resonate": SubResource("Animation_o30gf"),
 &"Run": SubResource("Animation_yoliv"),
+&"Sleep": SubResource("Animation_ieetj"),
 &"Stun": SubResource("Animation_t37ew"),
-&"Wait": SubResource("Animation_dx0so")
+&"Wait": SubResource("Animation_dx0so"),
+&"Wake": SubResource("Animation_3fdjg")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xgyyc"]
@@ -453,7 +490,7 @@ gradient = SubResource("Gradient_18u5e")
 width = 1
 height = 1
 
-[node name="CrystalThug" type="CharacterBody2D"]
+[node name="CrystalThug" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 3
@@ -466,6 +503,7 @@ redSlam = ExtResource("5_120fj")
 greenShater = ExtResource("6_2v0kd")
 redShater = ExtResource("7_tqy6o")
 projectile = ExtResource("8_3hch0")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_id2w4")
@@ -493,8 +531,8 @@ texture = SubResource("GradientTexture2D_0qmxs")
 clip_children = 2
 material = SubResource("ShaderMaterial_tm7ga")
 position = Vector2(0, -4)
-texture = ExtResource("1_1mmkh")
-hframes = 38
+texture = ExtResource("3_t8cw1")
+hframes = 45
 frame = 1
 
 [node name="LightOccluder2D" type="LightOccluder2D" parent="Sprite2D"]
@@ -509,6 +547,7 @@ velocityToCheck = NodePath("../..")
 [node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("6_0vvo8")]
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+unique_name_in_owner = true
 script = ExtResource("2_ckk41")
 initial_state = NodePath("Idle")
 hackedState = NodePath("Hacked")
@@ -611,6 +650,20 @@ knockback = 50.0
 animator = NodePath("../../Animator")
 animationName = "Death"
 hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
+
+[node name="Sleep" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxes", "healthBar")]
+script = ExtResource("24_ieetj")
+animator = NodePath("../../Animator")
+sleepAnimationName = "Sleep"
+hurtboxes = [NodePath("../../GeneralComponents/HurtboxComponent")]
+healthBar = NodePath("../../GeneralComponents/EnemyHeathbar")
+
+[node name="Wake" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
+script = ExtResource("25_3fdjg")
+nextState = NodePath("../Idle")
+length = 0.6
+animator = NodePath("../../Animator")
+animationName = "Wake"
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {

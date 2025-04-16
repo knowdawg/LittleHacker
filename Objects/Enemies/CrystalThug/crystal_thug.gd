@@ -1,8 +1,9 @@
-extends CharacterBody2D
+extends Enemy
 
 @export var buggy : PackedScene
 enum colorChoices {PURPLE = 0, RED = 1, GREEN = 2}
 @export var color : colorChoices
+@export var sleeping : bool = false #enable if the enemy is to be woken up in the furture
 
 @export_group("Sprite Sheets")
 @export var greenSprite : Resource
@@ -13,9 +14,15 @@ enum colorChoices {PURPLE = 0, RED = 1, GREEN = 2}
 @export var redShater : Resource
 @export var projectile : PackedScene
 
+func wake():
+	%StateMachine.switchStates("Wake")
+
 var canResonate : bool = true
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func customReady() -> void:
+	if sleeping:
+		%StateMachine.switchStates("Sleep")
+	
 	$GeneralComponents/HealthComponent.hit.connect(checkResonanceHit)
 	if color == 0:
 		pass
@@ -50,6 +57,12 @@ func _process(_delta: float) -> void:
 			$Sounds/Resonating.play()
 	else:
 		$Sounds/Resonating.stop()
+	
+	#if Game.doesPlayerExist():
+		#if Game.player.global_position.y > global_position.y:
+			#set_collision_mask_value(2, false)
+		#else:
+			#set_collision_mask_value(2, true)
 
 func _on_resonance_timer_timeout() -> void:
 	resonate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://d4aqafxdibln2"]
+[gd_scene load_steps=35 format=3 uid="uid://d4aqafxdibln2"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sny8n"]
 [ext_resource type="PackedScene" uid="uid://eg5mvs75ckl2" path="res://Levels/StarweepCrater/EnvirementScenes/before_the_carcass_areana_envirement.tscn" id="2_lrg3a"]
@@ -6,7 +6,15 @@
 [ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="3_i1pr0"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_lrg3a"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_i1pr0"]
+[ext_resource type="Script" uid="uid://dkk0dhpeuu2dm" path="res://Levels/StarweepCrater/Levels/EnableLightsOnAreana.gd" id="4_or7w8"]
+[ext_resource type="PackedScene" uid="uid://divadnci3ck4s" path="res://Components/EnemyWaveManager/enemy_wave_manager.tscn" id="4_p5xht"]
+[ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="5_or7w8"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="5_p5xht"]
+[ext_resource type="PackedScene" uid="uid://2lrg2gqrriqm" path="res://Components/AreanaDoor/areana_door.tscn" id="6_bc6qf"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="8_txfoh"]
+[ext_resource type="PackedScene" uid="uid://c6eflefpmo32h" path="res://Objects/Enemies/CrystalLauncher/Crystal_Launcher.tscn" id="8_un2ar"]
+[ext_resource type="PackedScene" uid="uid://xssqw5n2yax2" path="res://Components/PlatformRespawnArea/platform_respawn_area.tscn" id="11_04rwt"]
+[ext_resource type="PackedScene" uid="uid://bsbpltyxlcy5f" path="res://Objects/WorldObjects/Lantern/lantern_light.tscn" id="15_23ouk"]
 
 [sub_resource type="Shader" id="Shader_73joc"]
 code = "shader_type canvas_item;
@@ -72,12 +80,12 @@ polygon = PackedVector2Array(239, 297, 256, 297, 256, 298, 239, 298)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_or7w8"]
 polygon = PackedVector2Array(210, 282, 226, 282, 226, 283, 210, 283)
 
-[sub_resource type="Gradient" id="Gradient_lrg3a"]
+[sub_resource type="Gradient" id="Gradient_23ouk"]
 offsets = PackedFloat32Array(0, 0.976812)
 colors = PackedColorArray(0.909804, 0.756863, 0.439216, 1, 0.909804, 0.756863, 0.439216, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_i1pr0"]
-gradient = SubResource("Gradient_lrg3a")
+gradient = SubResource("Gradient_23ouk")
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -85,11 +93,18 @@ fill_to = Vector2(0.8, 0.8)
 [sub_resource type="ViewportTexture" id="ViewportTexture_i1pr0"]
 viewport_path = NodePath("Main")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_or7w8"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_txfoh"]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bpdn"]
 resource_local_to_scene = true
 shader = ExtResource("3_lrg3a")
 shader_parameter/brightness = 0.2
 shader_parameter/shadowIntensitiy = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_un2ar"]
+size = Vector2(175, 102)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lrg3a"]
 
@@ -117,6 +132,7 @@ grow_vertical = 2
 color = Color(0, 0, 0, 1)
 
 [node name="Paralax" type="Node2D" parent="."]
+visible = false
 
 [node name="VeryFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.1, 0.1)
@@ -129,11 +145,12 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryFar/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Far" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.2, 0.2)
@@ -146,11 +163,12 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Far/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MediumFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.5, 0.5)
@@ -163,11 +181,12 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/MediumFar/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Medium" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.8, 0.8)
@@ -180,11 +199,12 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Medium/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="MeduimClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.85, 0.85)
@@ -196,11 +216,12 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/MeduimClose/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Close" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.9, 0.9)
@@ -212,11 +233,12 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Close/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="VeryClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.95, 0.95)
@@ -227,11 +249,12 @@ offset_right = 512.0
 offset_bottom = 512.0
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryClose/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -239,7 +262,9 @@ sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(1000, 432)
 
-[node name="BeforeTheCarcassAreanaEnvirement" parent="Main" instance=ExtResource("2_lrg3a")]
+[node name="BeforeTheCarcassAreanaEnvirement" parent="Main" node_paths=PackedStringArray("enemyWaveManager", "colShapes") instance=ExtResource("2_lrg3a")]
+enemyWaveManager = NodePath("../../Enemies/EnemyWaveManager")
+colShapes = [NodePath("../../Enemies/AttackComponent/CollisionPolygon2D"), NodePath("../../Enemies/AttackComponent/CollisionPolygon2D2")]
 
 [node name="Collisions" type="Node2D" parent="."]
 
@@ -266,7 +291,7 @@ occluder = SubResource("OccluderPolygon2D_or7w8")
 oneWay = true
 
 [node name="Lights" type="Node2D" parent="."]
-visible = false
+script = ExtResource("4_or7w8")
 
 [node name="Lavalight1" type="PointLight2D" parent="Lights"]
 position = Vector2(192, 252)
@@ -323,7 +348,91 @@ centered = false
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
+[node name="LanternLIGHT" parent="." instance=ExtResource("15_23ouk")]
+position = Vector2(233, 242)
+
+[node name="LanternLIGHT2" parent="." instance=ExtResource("15_23ouk")]
+position = Vector2(233, 295)
+
+[node name="OutsideLight" type="PointLight2D" parent="."]
+position = Vector2(111, 301)
+scale = Vector2(1.59375, 1)
+color = Color(0.235294, 0.235294, 0.235294, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_i1pr0")
+
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="EnemyWaveManager" parent="Enemies" node_paths=PackedStringArray("triggerArea", "wave0", "wave1", "wave2") instance=ExtResource("4_p5xht")]
+unique_name_in_owner = true
+saveFileName = "beforeTheCarcassArena"
+triggerArea = NodePath("Area2D")
+startDelay = 3.5
+finalWave = 2
+wave0 = [NodePath("../CrystalThug")]
+wave1 = [NodePath("../CrystalLauncher")]
+wave2 = [NodePath("../CrystalThug2"), NodePath("../CrystalLauncher2")]
+
+[node name="Area2D" type="Area2D" parent="Enemies/EnemyWaveManager"]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/EnemyWaveManager/Area2D"]
+position = Vector2(233, 295)
+shape = SubResource("RectangleShape2D_or7w8")
+
+[node name="ArenaDoor" parent="Enemies/EnemyWaveManager" node_paths=PackedStringArray("enemyWaveManager") instance=ExtResource("6_bc6qf")]
+visible = false
+position = Vector2(296, 299)
+collision_layer = 0
+enemyWaveManager = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/EnemyWaveManager/ArenaDoor"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_txfoh")
+
+[node name="ArenaDoor2" parent="Enemies/EnemyWaveManager" node_paths=PackedStringArray("enemyWaveManager") instance=ExtResource("6_bc6qf")]
+visible = false
+position = Vector2(169, 296)
+collision_layer = 0
+enemyWaveManager = NodePath("..")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemies/EnemyWaveManager/ArenaDoor2"]
+position = Vector2(3, 0)
+shape = SubResource("RectangleShape2D_txfoh")
+
+[node name="CrystalThug" parent="Enemies" instance=ExtResource("5_or7w8")]
+position = Vector2(247, 297)
+color = 1
+sleeping = true
+
+[node name="CrystalThug2" parent="Enemies" instance=ExtResource("5_or7w8")]
+position = Vector2(261, 268)
+color = 1
+sleeping = true
+
+[node name="CrystalLauncher" parent="Enemies" instance=ExtResource("8_un2ar")]
+position = Vector2(233, 288)
+sleeping = true
+
+[node name="CrystalLauncher2" parent="Enemies" instance=ExtResource("8_un2ar")]
+position = Vector2(233, 261)
+sleeping = true
+
+[node name="AttackComponent" parent="Enemies" node_paths=PackedStringArray("collisionShape") instance=ExtResource("8_txfoh")]
+collision_mask = 12
+attackName = "lava"
+collisionShape = NodePath("CollisionPolygon2D")
+attack_damage = 1.0
+isSpikes = true
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Enemies/AttackComponent"]
+polygon = PackedVector2Array(182, 310, 201, 310, 201, 255, 196, 252, 196, 235, 161, 242)
+disabled = true
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Enemies/AttackComponent"]
+polygon = PackedVector2Array(267, 314, 317, 318, 324, 219, 270, 224, 270, 267, 267, 270)
+disabled = true
 
 [node name="PlayerParrent" type="Node2D" parent="."]
 
@@ -331,13 +440,23 @@ centered = false
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_vknbe")]
 material = SubResource("ShaderMaterial_3bpdn")
-offset_left = 35.0
-offset_top = 204.0
-offset_right = 143.0
-offset_bottom = 266.0
+offset_left = 180.0
+offset_top = 253.0
+offset_right = 288.0
+offset_bottom = 315.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlatformRespawnPoints" type="Node2D" parent="."]
+visible = false
+
+[node name="PlatformRespawnArea" parent="PlatformRespawnPoints" instance=ExtResource("11_04rwt")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformRespawnPoints/PlatformRespawnArea"]
+position = Vector2(234.5, 269)
+shape = SubResource("RectangleShape2D_un2ar")
+
+[node name="Marker2D" type="Marker2D" parent="PlatformRespawnPoints/PlatformRespawnArea"]
+position = Vector2(233, 288)
 
 [node name="Doors" type="Node2D" parent="."]
 
@@ -356,4 +475,4 @@ position = Vector2(121, 303)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_p5xht")]
 visible = false
-polygon = PackedVector2Array(116, 196, 116, 352, 416, 352, 416, 196)
+polygon = PackedVector2Array(116, 196, 116, 352, 352, 352, 352, 196)

@@ -1,14 +1,21 @@
-extends CharacterBody2D
+extends Enemy
 class_name CrystalLauncher
 
+@export var sleeping : bool = false
 
 var curRotation : float = 0.0
 var dirToPlayer : float = 0.0
 
 var launchToPlayer : bool = true
 
-func _ready() -> void:
+func wake():
+	%StateMachine.switchStates("Wake")
+
+func customReady() -> void:
 	$AfterImageComponent.setActive(false)
+	
+	if sleeping:
+		%StateMachine.switchStates("Sleep")
 
 func _process(_delta: float) -> void:
 	if Game.doesPlayerExist():

@@ -1,25 +1,24 @@
-extends Node
+extends CharacterBody2D
 class_name Enemy
 
-@export var sprite : Node2D
+signal death
 
-func stun(_duration : float):
+@export var healthComponent : HealthComponent
+
+func wake(): #method called usauly by an enemyWaveManager to wave up enemy
 	pass
 
-func hit(_attack : Attack):
+func _ready() -> void:
+	if healthComponent:
+		healthComponent.death.connect(die)
+	customReady()
+
+func customReady():
 	pass
 
-func hitFromLeft(_attack : Attack):
-	pass
+func die(attack : Attack):
+	death.emit()
+	customDeath(attack)
 
-func hitFromRight(_attack : Attack):
-	pass
-
-func hitFromUp(_attack : Attack):
-	pass
-
-func hitFromDown(_attack : Attack):
-	pass
-
-func hitFromDirection(_attack : Attack):
+func customDeath(_attack : Attack):
 	pass

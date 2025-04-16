@@ -1511,9 +1511,12 @@ polygon = PackedVector2Array(-377, -245, -373, -244, -374, -246, -370, -246, -36
 visible = false
 
 [node name="SoftLighting" parent="." instance=ExtResource("30_yrukv")]
-visible = false
 z_index = 100
 material = SubResource("ShaderMaterial_erh47")
+offset_left = 0.0
+offset_top = 0.0
+offset_right = 108.0
+offset_bottom = 62.0
 
 [node name="PlatformingRespawnPoints" type="Node2D" parent="."]
 visible = false

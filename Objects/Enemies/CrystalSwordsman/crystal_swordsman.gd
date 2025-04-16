@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Enemy
 
 #enum colorChoices {PURPLE = 0, RED = 1, GREEN = 2}
 #@export var color : colorChoices
@@ -15,7 +15,7 @@ extends CharacterBody2D
 
 var canResonate : bool = true
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
+func customReady() -> void:
 	$GeneralComponents/HealthComponent.hit.connect(checkResonanceHit)
 	#if color == 0:
 		#pass

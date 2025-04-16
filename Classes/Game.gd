@@ -15,7 +15,6 @@ var hackedHealthbar : EnemyHealthBar = null
 signal enterHackMode
 signal exitHackMode
 
-
 func slowTime(timeScale : float):
 	Engine.time_scale = timeScale
 

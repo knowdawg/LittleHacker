@@ -178,12 +178,13 @@ hue_variation_min = -0.05
 hue_variation_max = 0.05
 turbulence_noise_scale = 0.0
 
-[node name="HealthBuggy" type="CharacterBody2D" node_paths=PackedStringArray("movement")]
+[node name="HealthBuggy" type="CharacterBody2D" node_paths=PackedStringArray("movement", "healthComponent")]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_wjrs8")
 movement = NodePath("GeneralComponents/MovementComponent")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 visible = false

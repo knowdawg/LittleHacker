@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Enemy
 
 
 func _on_smash_got_parried(_attack) -> void:

@@ -1,10 +1,10 @@
-extends CharacterBody2D
+extends Enemy
 
 @export var hasSpear : bool = true
 @export var spearProjectileScene : PackedScene
 @onready var sprite : Sprite2D = $GorgonSprite
 
-func _ready() -> void:
+func customReady() -> void:
 	$StateMachine.onHacked.connect(onHacked)
 
 func _process(_delta: float) -> void:

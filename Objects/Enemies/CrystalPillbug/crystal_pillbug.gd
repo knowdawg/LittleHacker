@@ -1,8 +1,8 @@
-extends CharacterBody2D
+extends Enemy
 
 @export var facingLeft = true
 
-func _ready() -> void:
+func customReady() -> void:
 	if !facingLeft:
 		%ProximityArea.scale = Vector2(-1.0, 1.0)
 		%SpriteDirectorComponent.flipXDir()

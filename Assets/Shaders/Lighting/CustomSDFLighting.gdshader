@@ -29,8 +29,12 @@ void light() {
 	float falloff = 0.03; //0.01
 
 	float finished = 0.0;
+
 	//Marching Algorithm
 	for(int i = 0; i < 100; i++){
+		if(distanceNeededToTravel > 0.4){
+			break;
+		}
 		if((disTraveled + 0.0) > distanceNeededToTravel){
 			finished = 1.0;
 			break;

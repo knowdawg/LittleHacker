@@ -512,13 +512,14 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
-[node name="CrystalSwordsman" type="CharacterBody2D"]
+[node name="CrystalSwordsman" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_42bp5")
 projectile = ExtResource("11_6857g")
 buggy = ExtResource("18_gnyok")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 visible = false

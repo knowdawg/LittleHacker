@@ -41,7 +41,7 @@ shader_parameter/color = Color(1, 0, 0, 1)
 shader_parameter/width = 0.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
-shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c61rj"]
 polygon = PackedVector2Array(-1, 1, 1, 1, 1, 6, -1, 6)
@@ -597,12 +597,13 @@ shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
 
-[node name="Gorgon" type="CharacterBody2D"]
+[node name="Gorgon" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_t5vl1")
 spearProjectileScene = ExtResource("8_vk48g")
+healthComponent = NodePath("GenralComponents/HealthComponent")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -0.5)
@@ -782,8 +783,8 @@ playerProximity = NodePath("../../Proximities/AggroProximity")
 [node name="ChaseTailRip" type="Node" parent="StateMachine" node_paths=PackedStringArray("idleState", "nextStates", "animator", "deAggroProximity", "attackProximity", "movement", "spriteDirector")]
 script = ExtResource("5_c7upf")
 speed = 0.0
-useIntervalMovement = true
 animationLength = 2.2
+useIntervalMovement = true
 movementIntervals = Array[Vector3]([Vector3(0.2, 0.6, 200), Vector3(1.2, 1.5, 200)])
 idleState = NodePath("../IdleTailRip")
 nextStates = [NodePath("../BiteTailRip")]
@@ -845,7 +846,7 @@ position = Vector2(1, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_34can")
+&"": SubResource("AnimationLibrary_34can")
 }
 
 [node name="GenralComponents" type="Node2D" parent="."]

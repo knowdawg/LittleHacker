@@ -2505,10 +2505,11 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="AspectOfCreation" type="CharacterBody2D"]
+[node name="AspectOfCreation" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 script = ExtResource("1_kgh35")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 visible = false
