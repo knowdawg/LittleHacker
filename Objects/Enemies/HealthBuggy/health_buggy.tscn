@@ -185,6 +185,7 @@ collision_mask = 3
 script = ExtResource("1_wjrs8")
 movement = NodePath("GeneralComponents/MovementComponent")
 healthComponent = NodePath("GeneralComponents/HealthComponent")
+canBeGrappled = false
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 visible = false

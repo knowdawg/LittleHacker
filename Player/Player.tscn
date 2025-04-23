@@ -1,4 +1,4 @@
-[gd_scene load_steps=217 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=231 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -58,10 +58,15 @@
 [ext_resource type="Script" uid="uid://e1q6b6nss1em" path="res://Player/hack_effects.gd" id="33_r5rn0"]
 [ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="33_rdnj2"]
 [ext_resource type="Script" uid="uid://bya576rnm0nvx" path="res://Player/death.gd" id="34_4ht5j"]
+[ext_resource type="Script" uid="uid://dmebcx77y4xyv" path="res://Player/grapple.gd" id="34_jbnee"]
 [ext_resource type="Script" uid="uid://cmhe2vbu72vh0" path="res://Player/hack_ui.gd" id="35_4cxex"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="35_4vsvx"]
 [ext_resource type="Script" uid="uid://dr2l8jm38sn1y" path="res://Player/WeaponStateMachine/spawn.gd" id="35_e2bo2"]
+[ext_resource type="Script" uid="uid://ccyuagx36r1he" path="res://Player/grapple_float.gd" id="35_fycm6"]
+[ext_resource type="Shader" uid="uid://pqmec7uhpt2j" path="res://Assets/Shaders/Effects/GrapplingRope.gdshader" id="35_xt36k"]
 [ext_resource type="Shader" uid="uid://cql03lbod6j78" path="res://Assets/Shaders/Effects/HackUISelector.gdshader" id="36_64sh3"]
+[ext_resource type="Script" uid="uid://byt1ky2yvx6tl" path="res://Player/grapple_jump.gd" id="36_c5st5"]
+[ext_resource type="Script" uid="uid://blx8crmp1a8dk" path="res://Player/grapple_attack.gd" id="36_l6x1a"]
 [ext_resource type="PackedScene" uid="uid://cifd12sk13prw" path="res://Player/HackUI/HackLabel.tscn" id="37_ss1gu"]
 [ext_resource type="Script" uid="uid://dtb3gceireby5" path="res://Player/HackUI/hack_label.gd" id="38_o42eg"]
 [ext_resource type="AudioStream" uid="uid://drfr6me01j2nd" path="res://Assets/Audio/SoundEffects/HackAttack.wav" id="39_llbap"]
@@ -69,6 +74,7 @@
 [ext_resource type="AudioStream" uid="uid://dd7ed3cdwvi81" path="res://Assets/Audio/SoundEffects/Whoosh.wav" id="43_1cl5h"]
 [ext_resource type="AudioStream" uid="uid://3bpb1qrv4tya" path="res://Assets/Audio/SoundEffects/PlayerSwing.wav" id="43_ho0pg"]
 [ext_resource type="AudioStream" uid="uid://bqthecipgxswv" path="res://Assets/Audio/SoundEffects/HackExecuted.wav" id="46_xfg1q"]
+[ext_resource type="Script" uid="uid://y88tutcu5qop" path="res://Player/WeaponStateMachine/grapple.gd" id="47_4ht5j"]
 [ext_resource type="Script" uid="uid://32ttvp2eqk7k" path="res://Player/HealthBar/progress_bar.gd" id="54_l53i3"]
 [ext_resource type="Script" uid="uid://cqdgehuqqaexl" path="res://Player/player_ui.gd" id="54_qkh22"]
 [ext_resource type="Script" uid="uid://bttd2vrppvy4q" path="res://Levels/TestLevels/camera_2d.gd" id="55_c7l4y"]
@@ -199,6 +205,14 @@ _data = {
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
+[sub_resource type="Curve" id="Curve_fycm6"]
+_data = [Vector2(0, 0), 0.0, 2.83665, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyul"]
+shader = ExtResource("35_xt36k")
+shader_parameter/progress = 0.0
+
 [sub_resource type="Curve" id="Curve_afej6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
@@ -210,6 +224,9 @@ shader_parameter/width = 0.3
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_l6x1a"]
+radius = 14.1421
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_dq4fh"]
 size = Vector2(8, 8)
@@ -1774,6 +1791,58 @@ tracks/0/keys = {
 "values": [47]
 }
 
+[sub_resource type="Animation" id="Animation_fycm6"]
+resource_name = "Spin"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [76, 77, 78, 79]
+}
+
+[sub_resource type="Animation" id="Animation_c5st5"]
+resource_name = "GrappleLand"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [80]
+}
+
+[sub_resource type="Animation" id="Animation_xt36k"]
+resource_name = "GrappleFlip"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [81, 82, 83, 84, 86]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2wqp"]
 _data = {
 &"Blocked": SubResource("Animation_blsx0"),
@@ -1782,6 +1851,8 @@ _data = {
 &"DashStart": SubResource("Animation_7botn"),
 &"ExecuteParry": SubResource("Animation_tcgww"),
 &"Fall": SubResource("Animation_f8rl4"),
+&"GrappleFlip": SubResource("Animation_xt36k"),
+&"GrappleLand": SubResource("Animation_c5st5"),
 &"GroundParry": SubResource("Animation_arads"),
 &"HackAttack": SubResource("Animation_wkpki"),
 &"HackMode": SubResource("Animation_rm11h"),
@@ -1793,6 +1864,7 @@ _data = {
 &"RESET": SubResource("Animation_edsbw"),
 &"Roll": SubResource("Animation_p5rim"),
 &"Run": SubResource("Animation_43kgi"),
+&"Spin": SubResource("Animation_fycm6"),
 &"Stun": SubResource("Animation_t7nm8"),
 &"WallCling": SubResource("Animation_5ypfg")
 }
@@ -2122,6 +2194,52 @@ tracks/0/keys = {
 "values": [42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57]
 }
 
+[sub_resource type="Animation" id="Animation_l6x1a"]
+resource_name = "GrappleAttack"
+length = 0.65
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.35, 0.45, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [96, 97, 98, 99, 100, 101, 102, 103, 104]
+}
+
+[sub_resource type="Animation" id="Animation_4ht5j"]
+resource_name = "GrappleStart"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("WeaponDislocator/WeaponSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [94, 95]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Grapple/Line2D:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
 [sub_resource type="Animation" id="Animation_gsee6"]
 resource_name = "HackAttack"
 step = 0.1
@@ -2209,6 +2327,18 @@ tracks/1/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Grapple/Line2D:material:shader_parameter/progress")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
 
 [sub_resource type="Animation" id="Animation_2he4t"]
 resource_name = "Recovery1"
@@ -2286,6 +2416,8 @@ _data = {
 &"AttackVerticle": SubResource("Animation_d4l8w"),
 &"DashAttack": SubResource("Animation_asndm"),
 &"DashParry": SubResource("Animation_hwemm"),
+&"GrappleAttack": SubResource("Animation_l6x1a"),
+&"GrappleStart": SubResource("Animation_4ht5j"),
 &"HackAttack": SubResource("Animation_gsee6"),
 &"Idle": SubResource("Animation_cxjel"),
 &"Parry": SubResource("Animation_stc87"),
@@ -2827,6 +2959,46 @@ spriteAnimator = NodePath("../../SpriteAnimator")
 playerStateMachine = NodePath("..")
 player = NodePath("../..")
 
+[node name="Grapple" type="Node" parent="StateMachine" node_paths=PackedStringArray("playerStateMachine", "weaponStateMachine", "animator", "player", "playerSprite", "grappleStickState", "line")]
+script = ExtResource("34_jbnee")
+playerStateMachine = NodePath("..")
+weaponStateMachine = NodePath("../../WeaponStateMachine")
+animationName = "Spin"
+animator = NodePath("../../SpriteAnimator")
+player = NodePath("../..")
+playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
+velocityCurve = SubResource("Curve_fycm6")
+grappleStickState = NodePath("../GrappleStick")
+line = NodePath("Line2D")
+
+[node name="Line2D" type="Line2D" parent="StateMachine/Grapple"]
+material = SubResource("ShaderMaterial_xqyul")
+points = PackedVector2Array(-41, -16, 30, -16)
+texture_mode = 1
+
+[node name="GrappleStick" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "playerStateMachine", "weaponStateMachine", "animator")]
+script = ExtResource("35_fycm6")
+player = NodePath("../..")
+playerStateMachine = NodePath("..")
+weaponStateMachine = NodePath("../../WeaponStateMachine")
+animator = NodePath("../../SpriteAnimator")
+animationName = "GrappleLand"
+
+[node name="GrappleAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "nextState", "animator")]
+script = ExtResource("36_l6x1a")
+player = NodePath("../..")
+nextState = NodePath("../Idle")
+length = 0.5
+animator = NodePath("../../SpriteAnimator")
+animationName = "GrappleFlip"
+
+[node name="GrappleJump" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "player", "audios", "particles")]
+script = ExtResource("36_c5st5")
+animated_player_sprite = NodePath("../../SpriteAnimator")
+player = NodePath("../..")
+audios = [NodePath("../Jump/AudioStreamPlayer")]
+particles = NodePath("../../Effects/Jump")
+
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("hurtboxToDisable")]
 script = ExtResource("34_4ht5j")
 hurtboxToDisable = NodePath("../../HurtboxComponent")
@@ -2846,7 +3018,7 @@ script = ExtResource("10_d677x")
 animationName = "AttackHorizontal"
 recoveryAnimationName = "Recovery1"
 attackTime = 0.45
-attackOverTime = 0.45
+attackOverTime = 0.3
 hitboxActiveTime = Array[Vector2]([Vector2(0.05, 0.15)])
 nextChainAttackState = NodePath("../AttackHorizontal2")
 weaponAnimator = NodePath("../../WeaponAnimator")
@@ -2857,14 +3029,13 @@ weaponStateMachine = NodePath("..")
 playerStateMachine = NodePath("../../StateMachine")
 leftAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/AttackLeft")
 rightAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/AttackRight")
-playerMovementCurve = SubResource("Curve_afej6")
 
 [node name="AttackHorizontal2" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("nextChainAttackState", "weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "leftAttackComponent", "rightAttackComponent")]
 script = ExtResource("10_d677x")
 animationName = "AttackHorizontal2"
 recoveryAnimationName = "Recovery2"
 attackTime = 0.45
-attackOverTime = 0.45
+attackOverTime = 0.3
 hitboxActiveTime = Array[Vector2]([Vector2(0.05, 0.15)])
 nextChainAttackState = NodePath("../AttackHorizontal3")
 weaponAnimator = NodePath("../../WeaponAnimator")
@@ -2882,7 +3053,7 @@ script = ExtResource("10_d677x")
 animationName = "AttackHorizontal3"
 recoveryAnimationName = "Recovery1"
 attackTime = 0.45
-attackOverTime = 0.45
+attackOverTime = 0.3
 hitboxActiveTime = Array[Vector2]([Vector2(0.05, 0.15)])
 nextChainAttackState = NodePath("../AttackHorizontal2")
 weaponAnimator = NodePath("../../WeaponAnimator")
@@ -2980,6 +3151,34 @@ stream = ExtResource("39_llbap")
 max_polyphony = 2
 bus = &"SoundEffects"
 
+[node name="Grapple" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("weaponStateMachine", "playerStateMachine", "weaponAnimator", "weaponSprite", "player", "grappleState")]
+script = ExtResource("47_4ht5j")
+weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
+weaponAnimator = NodePath("../../WeaponAnimator")
+animationNameSucess = "GrappleStart"
+animationNameFail = "GrappleStart"
+weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
+player = NodePath("../..")
+grappleState = NodePath("../../StateMachine/Grapple")
+
+[node name="GrappleAttack" type="Node" parent="WeaponStateMachine" node_paths=PackedStringArray("nextChainAttackState", "weaponAnimator", "weaponSprite", "playerSprite", "player", "weaponStateMachine", "playerStateMachine", "leftAttackComponent", "rightAttackComponent")]
+script = ExtResource("10_d677x")
+animationName = "GrappleAttack"
+recoveryAnimationName = "Recovery1"
+attackTime = 0.65
+attackOverTime = 0.45
+hitboxActiveTime = Array[Vector2]([Vector2(0.25, 0.35)])
+nextChainAttackState = NodePath("../AttackHorizontal2")
+weaponAnimator = NodePath("../../WeaponAnimator")
+weaponSprite = NodePath("../../WeaponDislocator/WeaponSprite")
+playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
+player = NodePath("../..")
+weaponStateMachine = NodePath("..")
+playerStateMachine = NodePath("../../StateMachine")
+leftAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/GrappleAttackLeft")
+rightAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/GrappleAttackRight")
+
 [node name="WeaponDislocator" type="Node" parent="."]
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponDislocator" node_paths=PackedStringArray("parent", "audio", "audio2")]
@@ -2987,11 +3186,46 @@ clip_children = 2
 texture_filter = 1
 material = SubResource("ShaderMaterial_1pltk")
 texture = ExtResource("24_6qj5u")
-hframes = 94
+flip_h = true
+hframes = 105
 script = ExtResource("14_bw1kr")
 parent = NodePath("../..")
 audio = NodePath("../WhooshSound")
 audio2 = NodePath("../WhooshSound2")
+
+[node name="GrappleAttackLeft" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("18_3hvnj")]
+collision_mask = 8
+attackName = "PlayerGrappleAttackLeft"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../../HealthComponent")
+attack_damage = 6.0
+weakness_damage = 3.0
+attackStrength = 2
+knockback_force = 50.0
+knockbackVector = Vector2(-1, 0)
+hitEfect = ExtResource("19_0ng1i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackLeft"]
+visible = false
+position = Vector2(-1, -5)
+shape = SubResource("CircleShape2D_l6x1a")
+
+[node name="GrappleAttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("18_3hvnj")]
+collision_mask = 8
+attackName = "PlayerGrappleAttackRight"
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../../HealthComponent")
+attack_damage = 6.0
+weakness_damage = 3.0
+attackStrength = 2
+knockback_force = 50.0
+knockbackVector = Vector2(-1, 0)
+hitEfect = ExtResource("19_0ng1i")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackRight"]
+visible = false
+position = Vector2(1, -5)
+shape = SubResource("CircleShape2D_l6x1a")
 
 [node name="AttackLeft" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
@@ -3323,7 +3557,7 @@ texture_filter = 1
 material = SubResource("ShaderMaterial_cy6n2")
 position = Vector2(0, -4)
 texture = ExtResource("28_x4rxf")
-hframes = 76
+hframes = 87
 frame = 62
 
 [node name="HitFlashComponent" parent="PlayerVisual/PlayerSprite" instance=ExtResource("23_v12ij")]

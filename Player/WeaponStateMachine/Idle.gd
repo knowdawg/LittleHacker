@@ -50,6 +50,10 @@ func update(delta):
 		trasitioned.emit(self, "SwapSides")
 		return
 	
+	if weaponStateMachine.inputBuffer == "Grapple":
+		trasitioned.emit(self, "Grapple")
+		return
+	
 
 func exit(_newState):
 	pass

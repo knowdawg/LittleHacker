@@ -23,3 +23,11 @@ func endLava():
 func _process(delta: float) -> void:
 	if Game.camera:
 		Game.camera.set_shake(shakeAmount)
+	
+	#Temp, find a better way to enable
+	if $LavafallFront/Front1.width == 10.0:
+		for c in colShapes:
+			c.set_deferred("disabled", false)
+	else:
+		for c in colShapes:
+			c.set_deferred("disabled", true)

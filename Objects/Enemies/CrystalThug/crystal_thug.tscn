@@ -660,7 +660,7 @@ healthBar = NodePath("../../GeneralComponents/EnemyHeathbar")
 
 [node name="Wake" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "animator")]
 script = ExtResource("25_3fdjg")
-nextState = NodePath("../Idle")
+nextState = NodePath("../Chase")
 length = 0.6
 animator = NodePath("../../Animator")
 animationName = "Wake"

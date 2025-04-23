@@ -19,6 +19,7 @@ var v : Vector2 = Vector2.ZERO #substitute for velocity so that the charectar wi
 var knockbackVector : Vector2 = Vector2.ZERO
 var slideVector : Vector2 = Vector2.ZERO
 var boostVector : Vector2 = Vector2.ZERO #used for all forms of outside boost
+var grappleBoost : Vector2 = Vector2.ZERO
 var rollJumpBoost : Vector2 = Vector2.ZERO
 var dashV : Vector2 = Vector2.ZERO
 var coyoteTime : float = 0.0
@@ -65,6 +66,10 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	velocity += boostVector
 	boostVector.x = move_toward(boostVector.x, 0, delta * 100.0)
 	boostVector.y = move_toward(boostVector.y, 0, delta * 200.0)
+	
+	velocity += grappleBoost
+	grappleBoost.x = move_toward(grappleBoost.x, 0, delta * 200.0)
+	grappleBoost.y = move_toward(grappleBoost.y, 0, delta * 50.0)
 	
 	#rollJumpBoost.x = clamp(rollJumpBoost.x, -SPEED - v.x, SPEED - v.x)
 	velocity += rollJumpBoost

@@ -17,14 +17,15 @@ func leaveState():
 	trasitioned.emit(self, "Idle")
 
 var t = 0.0
-func enter(prevState):
+func enter(prevState : State):
 	leftAttackComponent.generateAttackID()
 	rightAttackComponent.generateAttackID()
 	weaponSprite.flip_h = playerSprite.flip_h
 	weaponAnimator.play("HackAttack")
 	$HackAttackSound.play()
 	t = 0.0
-	if prevState is PlayerWeaponParry:
+	
+	if prevState is PlayerWeaponParry or prevState.name == "GrappleAttack":
 		t = 0.1
 		weaponAnimator.seek(0.1)
 		playerStateMachine.switchStateWithParam("HackAttack", true)

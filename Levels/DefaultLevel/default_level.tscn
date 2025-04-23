@@ -99,6 +99,7 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryFar/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
@@ -116,6 +117,7 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Far/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
@@ -133,6 +135,7 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/MediumFar/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
@@ -150,6 +153,7 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Medium/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
@@ -166,6 +170,7 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/MeduimClose/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
@@ -182,6 +187,7 @@ offset_bottom = 512.0
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Close/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
@@ -197,6 +203,7 @@ offset_right = 512.0
 offset_bottom = 512.0
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryClose/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0

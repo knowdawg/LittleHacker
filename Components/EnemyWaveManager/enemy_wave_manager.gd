@@ -56,7 +56,7 @@ func nextWave():
 	
 	%WaveDelay.start(waveDelay)
 
-func enemyDead():
+func enemyDead(_e):
 	numOfEnemiesLeft -= 1
 	if numOfEnemiesLeft <= 0:
 		nextWave()

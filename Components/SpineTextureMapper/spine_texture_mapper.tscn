@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://ob6rkkv311c5"]
+
+[ext_resource type="Script" uid="uid://djqee5bx77whe" path="res://Components/SpineTextureMapper/spine_texture_mapper.gd" id="1_x8fgb"]
+[ext_resource type="Texture2D" uid="uid://dsylmsa2odgc2" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpseWheel.png" id="2_gixee"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8hfj"]
+atlas = ExtResource("2_gixee")
+region = Rect2(0, 0, 200, 200)
+
+[node name="SpineTextureMapper" type="Line2D"]
+points = PackedVector2Array(74, 25, 161, -76, 332, -113, 418, -99, 459, -25, 454, 62, 347, 111, 264, 43)
+script = ExtResource("1_x8fgb")
+tex = SubResource("AtlasTexture_p8hfj")
+frameWidth = 200
+numberOfFrames = 10
+spacing = 10.0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = SubResource("AtlasTexture_p8hfj")

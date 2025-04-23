@@ -1,0 +1,140 @@
+[gd_scene load_steps=24 format=3 uid="uid://ci8j3oe6fdx3u"]
+
+[ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_2gffe"]
+[ext_resource type="Script" uid="uid://donl2ewa7e6jb" path="res://Objects/Enemies/GrappleBug/grapple_bug.gd" id="1_f34wf"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_nfoqy"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_f34wf"]
+[ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="3_nfoqy"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_dis75"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_2k2cb"]
+[ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_jqgkp"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_w2jn6"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_t0dvg"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_r05lu"]
+[ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_tfo3q"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_lyyc2"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_8cid4"]
+[ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_y2j68"]
+[ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_yknut"]
+
+[sub_resource type="Gradient" id="Gradient_nfoqy"]
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_f34wf"]
+gradient = SubResource("Gradient_nfoqy")
+width = 2
+height = 2
+
+[sub_resource type="Animation" id="Animation_f34wf"]
+resource_name = "Idle"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dis75"]
+_data = {
+&"Idle": SubResource("Animation_f34wf")
+}
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_fqfk8"]
+seed = 153
+frequency = 0.0041
+fractal_octaves = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_fqfk8")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gbsnn"]
+resource_local_to_scene = true
+shader = ExtResource("14_yknut")
+shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/col = Color(0.654902, 0, 0, 1)
+shader_parameter/progress = 1.0
+shader_parameter/speed = 1.0
+
+[node name="GrappleBug" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
+texture_filter = 1
+collision_layer = 8
+script = ExtResource("1_f34wf")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
+
+[node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("GradientTexture2D_f34wf")
+
+[node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_2gffe")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("2_nfoqy")
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+script = ExtResource("3_nfoqy")
+animator = NodePath("../../Animator")
+animationName = "Idle"
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_dis75")
+}
+
+[node name="GeneralComponents" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_f34wf")]
+MAX_HEALTH = 1.0
+MAX_WEAKNESS = 1.0
+locked = true
+
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine") instance=ExtResource("4_dis75")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_2k2cb")]
+parent = NodePath("../..")
+
+[node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_jqgkp")]
+parent = NodePath("../..")
+movement = NodePath("../MovementComponent")
+
+[node name="HurtboxComponent" parent="GeneralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_w2jn6")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_t0dvg")]
+showBars = false
+parent = NodePath("../..")
+follow = NodePath("../EnemyHealthbarMarker")
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+
+[node name="Proximities" type="Node2D" parent="."]
+
+[node name="ProximityArea" parent="Proximities" instance=ExtResource("9_r05lu")]
+collision_mask = 4
+
+[node name="AttackComponents" type="Node2D" parent="."]
+
+[node name="EnemyParriedComponent" parent="AttackComponents" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("10_tfo3q")]
+attackComponents = [NodePath("../AttackComponent")]
+stateMachine = NodePath("../../StateMachine")
+
+[node name="AttackComponent" parent="AttackComponents" node_paths=PackedStringArray("collisionShape") instance=ExtResource("11_lyyc2")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/AttackComponent"]
+
+[node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_8cid4")]
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
+hitEffects = [NodePath("BloodEffect")]
+knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComponent")
+
+[node name="BloodEffect" parent="OnHitComponent" instance=ExtResource("13_y2j68")]
+material = SubResource("ShaderMaterial_gbsnn")
+
+[node name="Sounds" type="Node2D" parent="."]

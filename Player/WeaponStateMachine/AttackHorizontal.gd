@@ -29,7 +29,7 @@ func enter(_prevState):
 
 
 func update(delta):
-	if t < attackTime:
+	if t < attackOverTime:
 		weaponSprite.moveTowardsPlayerFast(delta)
 	else:
 		weaponSprite.moveTowardsPlayerNormal(delta)
@@ -57,9 +57,14 @@ func update(delta):
 	if t > attackOverTime:
 		if weaponStateMachine.inputBuffer == "Attack" and Input.is_action_pressed("Down"):
 			trasitioned.emit(self, "AttackDown")
+			return
 		if weaponStateMachine.inputBuffer == "HackAttack" and playerStateMachine.canHackAttack():
 			trasitioned.emit(self, "HackAttack")
 			return
+		if weaponStateMachine.inputBuffer == "Grapple":
+			trasitioned.emit(self, "Grapple")
+			return
+		
 	
 	if t > attackTime:
 		if weaponStateMachine.inputBuffer == "Attack":

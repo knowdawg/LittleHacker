@@ -22,7 +22,7 @@ func hasHealthbar(h : EnemyHealthBar) -> bool:
 
 func getActualGlobalMousePosition():
 	var mp = get_global_mouse_position()
-	mp /= 10.0 #getResolutionRatio()
+	mp /= 12.0 #getResolutionRatio()
 	if is_instance_valid(Game.player):
 		mp += Game.player.global_position
 	return mp

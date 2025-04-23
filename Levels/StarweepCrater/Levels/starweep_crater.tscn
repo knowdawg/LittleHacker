@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=139 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://beycbrvpuf3g0" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse.png" id="14_53ke4"]
 [ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="14_an8tg"]
 [ext_resource type="PackedScene" uid="uid://dqgol3yij81qs" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement.tscn" id="14_arq7e"]
-[ext_resource type="Texture2D" uid="uid://cdv6us5lootnk" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse2.png" id="15_86ljy"]
 [ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="16_fkucj"]
 [ext_resource type="PackedScene" uid="uid://b73rjyjkc6438" path="res://Objects/WorldObjects/Zipline/zipline_anchor.tscn" id="17_arwe5"]
 [ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="18_qakqs"]
@@ -815,11 +814,6 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
-
-[node name="Wrym" type="Sprite2D" parent="Far/SubViewportContainer/Main2"]
-texture_filter = 1
-position = Vector2(162, 81)
-texture = ExtResource("15_86ljy")
 
 [node name="MediumFar" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 0.5)
@@ -1663,7 +1657,7 @@ position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/Left"]
-position = Vector2(37, -46)
+position = Vector2(-118, -6)
 
 [node name="Top" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
 position = Vector2(87, -131)

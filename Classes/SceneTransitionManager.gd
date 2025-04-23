@@ -32,6 +32,7 @@ func onFadeInComplete():
 	#paths = []
 	
 	onSceneExit.emit(sceneData)
+	Game.onLevelSwitch.emit(sceneData)
 	if curScene:
 		curScene.queue_free()
 	

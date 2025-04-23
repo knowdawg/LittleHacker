@@ -420,6 +420,7 @@ position = Vector2(233, 261)
 sleeping = true
 
 [node name="AttackComponent" parent="Enemies" node_paths=PackedStringArray("collisionShape") instance=ExtResource("8_txfoh")]
+visible = false
 collision_mask = 12
 attackName = "lava"
 collisionShape = NodePath("CollisionPolygon2D")
@@ -440,10 +441,10 @@ disabled = true
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_vknbe")]
 material = SubResource("ShaderMaterial_3bpdn")
-offset_left = 180.0
-offset_top = 253.0
-offset_right = 288.0
-offset_bottom = 315.0
+offset_left = -42.0
+offset_top = 158.0
+offset_right = 66.0
+offset_bottom = 220.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlatformRespawnPoints" type="Node2D" parent="."]
@@ -471,7 +472,20 @@ position = Vector2(104, 300)
 shape = SubResource("RectangleShape2D_lrg3a")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/Left"]
-position = Vector2(121, 303)
+position = Vector2(119, 303)
+
+[node name="Right" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("4_i1pr0")]
+position = Vector2(260, 1)
+scene = "uid://3qsk7wseq25g"
+doorName = "Left"
+enterPosition = NodePath("Marker2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Right"]
+position = Vector2(104, 300)
+shape = SubResource("RectangleShape2D_lrg3a")
+
+[node name="Marker2D" type="Marker2D" parent="Doors/Right"]
+position = Vector2(89, 303)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_p5xht")]
 visible = false
