@@ -45,6 +45,13 @@ func findGrappleTarget(startingPos : Vector2, ang : float, maxAngDis : float, ma
 				continue
 		if !e.canBeGrappledTo():
 			continue
+		if lineOfSight:
+			var space_state = e.get_world_2d().direct_space_state
+			var query = PhysicsRayQueryParameters2D.create(startingPos, e.global_position, 1)
+			var result = space_state.intersect_ray(query)
+			
+			if !result.is_empty():
+				continue
 		
 		#if fist valid target
 		if !target:

@@ -1,4 +1,4 @@
-[gd_scene load_steps=140 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=143 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
@@ -54,7 +54,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpsgt"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -64,7 +64,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -102,7 +102,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixek2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -732,6 +732,24 @@ shader_parameter/shadowIntensitiy = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g51h"]
 
+[sub_resource type="Gradient" id="Gradient_mbqal"]
+colors = PackedColorArray(0, 0, 0.0392157, 1, 1, 0.941176, 0.901961, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_n0e0i"]
+gradient = SubResource("Gradient_mbqal")
+
+[sub_resource type="Environment" id="Environment_hyfn1"]
+background_mode = 3
+tonemap_mode = 1
+tonemap_exposure = 0.7
+tonemap_white = 0.7
+glow_intensity = 0.08
+glow_blend_mode = 0
+glow_hdr_threshold = 0.8
+glow_hdr_scale = 0.0
+glow_map_strength = 1.0
+adjustment_color_correction = SubResource("GradientTexture1D_n0e0i")
+
 [node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 texture_filter = 1
 script = ExtResource("1_4w4bf")
@@ -756,16 +774,16 @@ texture = SubResource("GradientTexture2D_86ljy")
 
 [node name="Clouds3" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_sy7vn")
+texture = SubResource("GradientTexture2D_tpsgt")
 
 [node name="Clouds" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_uwpgy")
+texture = SubResource("GradientTexture2D_sy7vn")
 
 [node name="Clouds2" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_ixek2")
+texture = SubResource("GradientTexture2D_uwpgy")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1705,3 +1723,6 @@ cameraPos = NodePath("Marker2D")
 
 [node name="Marker2D" type="Marker2D" parent="CameraBoundriesComponent/SetPointCameraZone"]
 position = Vector2(69, -115)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_hyfn1")

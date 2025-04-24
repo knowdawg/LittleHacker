@@ -1,13 +1,87 @@
-[gd_scene load_steps=4 format=3 uid="uid://ob6rkkv311c5"]
+[gd_scene load_steps=16 format=3 uid="uid://ob6rkkv311c5"]
 
 [ext_resource type="Script" uid="uid://djqee5bx77whe" path="res://Components/SpineTextureMapper/spine_texture_mapper.gd" id="1_x8fgb"]
 [ext_resource type="Texture2D" uid="uid://dsylmsa2odgc2" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpseWheel.png" id="2_gixee"]
+[ext_resource type="Script" uid="uid://1v8m7tt37ev5" path="res://addons/rmsmartshape/shapes/shape.gd" id="3_ewiqs"]
+[ext_resource type="Script" uid="uid://dp8aqc2sy3i5u" path="res://addons/rmsmartshape/shapes/point_array.gd" id="4_i3ian"]
+[ext_resource type="Script" uid="uid://b0ck1d0f7t25a" path="res://addons/rmsmartshape/materials/edge_material_metadata.gd" id="5_qpbik"]
+[ext_resource type="Script" uid="uid://dnqru6miow434" path="res://addons/rmsmartshape/materials/shape_material.gd" id="6_m7y8d"]
+[ext_resource type="Script" uid="uid://df12jg4s3wmlm" path="res://addons/rmsmartshape/materials/edge_material.gd" id="6_we6ar"]
+[ext_resource type="Texture2D" uid="uid://c728ne03y2r4p" path="res://Assets/Sprites/WorldObjects/WyrmSpinePiece.png" id="7_5qt8c"]
+[ext_resource type="Script" uid="uid://b8ycc67ll7d6r" path="res://addons/rmsmartshape/normal_range.gd" id="8_kyhcc"]
+
+[sub_resource type="Resource" id="Resource_erobh"]
+script = ExtResource("4_i3ian")
+_points = {}
+_point_order = PackedInt32Array()
+_constraints = {}
+_next_key = 21
+_material_overrides = {}
+tessellation_stages = 3
+tessellation_tolerance = 6.0
+curve_bake_interval = 20.0
+
+[sub_resource type="Resource" id="Resource_h5pmc"]
+script = ExtResource("6_we6ar")
+textures = Array[Texture2D]([ExtResource("7_5qt8c")])
+textures_corner_outer = Array[Texture2D]([])
+textures_corner_inner = Array[Texture2D]([])
+textures_taper_left = Array[Texture2D]([])
+textures_taper_right = Array[Texture2D]([])
+textures_taper_corner_left = Array[Texture2D]([])
+textures_taper_corner_right = Array[Texture2D]([])
+randomize_texture = false
+use_corner_texture = true
+use_taper_texture = true
+fit_mode = 0
+metadata/_custom_type_script = "uid://df12jg4s3wmlm"
+
+[sub_resource type="Resource" id="Resource_r403s"]
+script = ExtResource("8_kyhcc")
+begin = 0.0
+distance = 360.0
+edgeRendering = Vector2(0, 0)
+
+[sub_resource type="Resource" id="Resource_uut4a"]
+script = ExtResource("5_qpbik")
+edge_material = SubResource("Resource_h5pmc")
+normal_range = SubResource("Resource_r403s")
+weld = true
+taper_sharp_corners = false
+render = true
+z_index = 0
+z_as_relative = true
+offset = 0.0
+metadata/_custom_type_script = "uid://b0ck1d0f7t25a"
+
+[sub_resource type="Resource" id="Resource_we6ar"]
+script = ExtResource("6_m7y8d")
+_edge_meta_materials = Array[ExtResource("5_qpbik")]([SubResource("Resource_uut4a")])
+fill_textures = Array[Texture2D]([])
+fill_texture_z_index = -10
+fill_texture_show_behind_parent = false
+fill_texture_scale = 1.0
+fill_texture_absolute_position = false
+fill_texture_absolute_rotation = false
+fill_texture_offset = Vector2(0, 0)
+fill_texture_angle_offset = 0.0
+fill_mesh_offset = 0.0
+render_offset = 0.0
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p8hfj"]
 atlas = ExtResource("2_gixee")
 region = Rect2(0, 0, 200, 200)
 
-[node name="SpineTextureMapper" type="Line2D"]
+[node name="WyrmSpine" type="Node2D"]
+texture_filter = 1
+texture_repeat = 2
+script = ExtResource("3_ewiqs")
+_points = SubResource("Resource_erobh")
+shape_material = SubResource("Resource_we6ar")
+metadata/_custom_type_script = "uid://1v8m7tt37ev5"
+
+[node name="SpineTextureMapper" type="Line2D" parent="."]
+visible = false
 points = PackedVector2Array(74, 25, 161, -76, 332, -113, 418, -99, 459, -25, 454, 62, 347, 111, 264, 43)
 script = ExtResource("1_x8fgb")
 tex = SubResource("AtlasTexture_p8hfj")
@@ -15,6 +89,7 @@ frameWidth = 200
 numberOfFrames = 10
 spacing = 10.0
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="SpineTextureMapper"]
+visible = false
 texture_filter = 1
 texture = SubResource("AtlasTexture_p8hfj")

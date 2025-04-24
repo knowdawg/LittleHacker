@@ -4,6 +4,15 @@
 [ext_resource type="PackedScene" uid="uid://crcxcymm072ik" path="res://Components/KnockbackComponents/FourDirectionalKnockbackComponent/four_directional_knockback_component.tscn" id="2_vh5yb"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="3_axet3"]
 
+[sub_resource type="Gradient" id="Gradient_pks7v"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_b5x3j"]
+gradient = SubResource("Gradient_pks7v")
+width = 1
+height = 1
+
 [sub_resource type="Curve" id="Curve_7s2s7"]
 _limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 100), 324.68, 0.0, 0, 0]
@@ -13,7 +22,7 @@ point_count = 2
 curve = SubResource("Curve_7s2s7")
 
 [sub_resource type="Curve" id="Curve_io107"]
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.976821, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_psay2"]
@@ -23,26 +32,17 @@ curve = SubResource("Curve_io107")
 lifetime_randomness = 0.5
 particle_flag_disable_z = true
 spread = 25.0
-initial_velocity_min = 150.0
-initial_velocity_max = 200.0
+initial_velocity_min = 75.0
+initial_velocity_max = 500.0
 gravity = Vector3(0, 0, 0)
 damping_min = 100.0
 damping_max = 100.0
 damping_curve = SubResource("CurveTexture_tk3kp")
 scale_curve = SubResource("CurveTexture_psay2")
 
-[sub_resource type="Gradient" id="Gradient_pks7v"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(1, 1, 1, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_b5x3j"]
-gradient = SubResource("Gradient_pks7v")
-width = 4
-height = 4
-
 [node name="DirectionalParticlesComponent" type="GPUParticles2D"]
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_j45vx")
+amount = 12
 texture = SubResource("GradientTexture2D_b5x3j")
 lifetime = 0.2
 one_shot = true
@@ -50,6 +50,7 @@ preprocess = 0.05
 explosiveness = 1.0
 trail_enabled = true
 trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_j45vx")
 script = ExtResource("1_mogjx")
 
 [node name="FourDirectionalKnockbackComponent" parent="." node_paths=PackedStringArray("parent") instance=ExtResource("2_vh5yb")]
