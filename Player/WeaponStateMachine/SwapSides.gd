@@ -14,7 +14,7 @@ func update(delta):
 	weaponSprite.moveTowardsPlayerNormal(delta)
 	
 	if weaponStateMachine.inputBuffer == "Parry":
-		if playerStateMachine.current_state is SmallPlayerRoll:
+		if false:#playerStateMachine.current_state is SmallPlayerRoll:
 			trasitioned.emit(self, "DashParry")
 		else:
 			trasitioned.emit(self, "Parry")
@@ -27,9 +27,9 @@ func update(delta):
 		elif Input.is_action_pressed("Up"):
 			trasitioned.emit(self, "AttackVerticle")
 			return
-		elif playerStateMachine.current_state is SmallPlayerRoll:
-			trasitioned.emit(self, "DashAttack")
-			return
+		#elif playerStateMachine.current_state is SmallPlayerRoll:
+			#trasitioned.emit(self, "DashAttack")
+			#return
 		else:
 			trasitioned.emit(self, "AttackHorizontal")
 			return

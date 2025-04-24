@@ -43,11 +43,11 @@ func update_physics(delta):
 		return
 	
 	if player.global_position.distance_to(target.global_position) < 2:
-		if Input.is_action_pressed("Grapple"):#If grapple is held, launch them
-			player.v += -posDir * f * Vector2(0.0, 0.7)
-			player.grappleBoost += -posDir * f * Vector2(0.7, 0.0)
-			weaponStateMachine.switchStates("Idle")
-			trasitioned.emit(self, "Fall")
+		#if Input.is_action_pressed("Grapple"):#If grapple is held, launch them
+			#player.v += -posDir * f * Vector2(0.0, 0.7)
+			#player.grappleBoost += -posDir * f * Vector2(0.7, 0.0)
+			#weaponStateMachine.switchStates("Idle")
+			#trasitioned.emit(self, "Fall")
 		
 		player.global_position = target.global_position
 		grappleStickState.grappleTarget = target

@@ -17,12 +17,14 @@ func addEnemy(e : Enemy):
 		canBeGrabbed.append(e)
 
 func removeEnemy(e : Enemy):
-	currentEnemies.remove_at(currentEnemies.find(e))
+	if currentEnemies.has(e):
+		currentEnemies.remove_at(currentEnemies.find(e))
 	if e.canBeGrappled:
-		canBeGrabbed.remove_at(canBeGrabbed.find(e))
+		if canBeGrabbed.has(e):
+			canBeGrabbed.remove_at(canBeGrabbed.find(e))
 
 
-func findLockonTarget(startingPos : Vector2, ang : float, maxAngDis : float, maxDistance : float, lineOfSight : bool = true, mustBeOnScreen : bool = false) -> Enemy:
+func findGrappleTarget(startingPos : Vector2, ang : float, maxAngDis : float, maxDistance : float, lineOfSight : bool = true, mustBeOnScreen : bool = false) -> Enemy:
 	var target : Enemy
 	
 	for e in canBeGrabbed:
@@ -41,6 +43,8 @@ func findLockonTarget(startingPos : Vector2, ang : float, maxAngDis : float, max
 				continue
 			if abs(ePos.y - startingPos.y) > 30:
 				continue
+		if !e.canBeGrappledTo():
+			continue
 		
 		#if fist valid target
 		if !target:
@@ -49,7 +53,12 @@ func findLockonTarget(startingPos : Vector2, ang : float, maxAngDis : float, max
 		
 		#swap if an enemy is found with a better angle
 		var targetAngleDif = abs(startingPos.angle_to(target.global_position) - ang)
-		if targetAngleDif < angleDif:
+		var targetDisDif = abs(startingPos.distance_to(target.global_position))
+		
+		#var tWieght = 1 / (targetAngleDif * targetDisDif)
+		#var eWieght = 1 / (angleDif * dist)
+		
+		if dist < targetDisDif:#targetAngleDif < angleDif:#eWieght > tWieght:
 			target = e
 	
 	return target

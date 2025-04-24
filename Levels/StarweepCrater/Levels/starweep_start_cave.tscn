@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://bkpqd3ei3e87s"]
+[gd_scene load_steps=33 format=3 uid="uid://bkpqd3ei3e87s"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
 [ext_resource type="PackedScene" uid="uid://b4ugiyef56755" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_start_cave.tscn" id="2_kcft2"]
@@ -9,7 +9,6 @@
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="6_sw6q4"]
 [ext_resource type="PackedScene" uid="uid://bsbpltyxlcy5f" path="res://Objects/WorldObjects/Lantern/lantern_light.tscn" id="7_lr2gp"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="8_2y2tj"]
-[ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="8_8jv7p"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="8_28ct1"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="11_xyrk5"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="12_qllgf"]
@@ -59,7 +58,7 @@ shader_parameter/color = Color(0.870588, 0.619608, 0.254902, 1)
 shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = true
-shader_parameter/add_margins = true
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_qmkbj"]
 viewport_path = NodePath("Main")
@@ -284,6 +283,9 @@ oneWay = true
 [node name="LanternLIGHT" parent="." instance=ExtResource("7_lr2gp")]
 position = Vector2(102, 98)
 
+[node name="LanternLIGHT7" parent="." instance=ExtResource("7_lr2gp")]
+position = Vector2(174, -24)
+
 [node name="LanternLIGHT6" parent="." instance=ExtResource("7_lr2gp")]
 position = Vector2(-45, 111)
 
@@ -316,16 +318,6 @@ position = Vector2(-180, 0)
 occluder = SubResource("OccluderPolygon2D_dmc4q")
 
 [node name="RespawnPoints" type="Node2D" parent="."]
-
-[node name="RespawnPoint" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("8_8jv7p")]
-position = Vector2(196, 92)
-level = NodePath("../..")
-respawnPointName = "StartCave"
-
-[node name="RespawnPoint2" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("8_8jv7p")]
-position = Vector2(363, 11)
-level = NodePath("../..")
-respawnPointName = "StartCave2"
 
 [node name="PlayerParent" type="Node2D" parent="."]
 
@@ -367,11 +359,12 @@ shape = SubResource("RectangleShape2D_ihcvw")
 disabled = true
 
 [node name="Marker2D" type="Marker2D" parent="Doors/TestLevelStart"]
-position = Vector2(600, 113)
+position = Vector2(449, 126)
 
 [node name="Projectiles" type="Node2D" parent="."]
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("12_qllgf")]
+visible = false
 polygon = PackedVector2Array(530, 180, 530, -100, 140, -100, 140, 20, -320, 20, -320, 180)
 
 [node name="CircleJumping" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("13_8jv7p")]
@@ -395,7 +388,9 @@ position = Vector2(-45, 112)
 [node name="SoftLighting" parent="." instance=ExtResource("8_28ct1")]
 material = SubResource("ShaderMaterial_xor2r")
 offset_left = 12.0
-offset_right = 204.0
+offset_top = -297.0
+offset_right = 120.0
+offset_bottom = -235.0
 
 [node name="CursorFollower" parent="." instance=ExtResource("14_vf27f")]
 visible = false

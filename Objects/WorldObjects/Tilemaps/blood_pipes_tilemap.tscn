@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://dabx5or51d1jv"]
+
+[ext_resource type="Texture2D" uid="uid://c8d4wvpfsn87x" path="res://Assets/Sprites/WorldObjects/BloodPipeTiles.png" id="1_y8mm8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_g8w7x"]
+texture = ExtResource("1_y8mm8")
+texture_region_size = Vector2i(8, 8)
+0:0/0 = 0
+1:0/0 = 0
+1:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_43cec"]
+tile_size = Vector2i(8, 8)
+sources/0 = SubResource("TileSetAtlasSource_g8w7x")
+
+[node name="BloodPipesTilemap" type="TileMap"]
+texture_filter = 1
+tile_set = SubResource("TileSet_43cec")
+format = 2

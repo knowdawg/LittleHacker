@@ -29,7 +29,7 @@ func getRespawnData() -> RespawnData:
 func _process(_delta: float) -> void:
 	var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
 	if p:
-		var targetPos = p.closest_rectangle_position(global_position)
+		var targetPos = p.closest_rectangle_position(global_position + Vector2(-0.5, -4.0))
 		%Camera2D.global_position = targetPos
 
 
@@ -42,6 +42,7 @@ func _on_interactable_area_on_interact() -> void:
 		created = true
 		$AnimationPlayer.play("CreateRespawn")
 	else:
+		$AnimationPlayer.seek(0.0)
 		$AnimationPlayer.play("NewDroid")
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:

@@ -25,9 +25,9 @@ func _ready():
 	playerHurtBox.parry.connect(onParry)
 
 func update(delta):
-	if t < 0.1 and playerStateMachine.current_state is SmallPlayerRoll:
-		trasitioned.emit(self, "DashParry")
-		return
+	#if t < 0.1 and playerStateMachine.current_state is SmallPlayerRoll:
+		#trasitioned.emit(self, "DashParry")
+		#return
 	
 	if t < 0.35:
 		weaponSprite.moveTowardsPlayerFast(delta)

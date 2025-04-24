@@ -70,10 +70,22 @@ func _on_resonance_timer_timeout() -> void:
 func _on_resonance_cooldown_timeout() -> void:
 	canResonate = true
 
-
 func _on_head_shatter_executed() -> void:
 	for i in randi_range(1, 2):
 		var b : HealthBuggy = buggy.instantiate()
 		Game.addEnemy(b)
 		b.position = global_position
 		b.movement.applyForce(Vector2(randf_range(-0.3, 0.3), -1), 150)
+
+func onPlayerStuckToMeWithGrapple():
+	%SpriteDirectorComponent.lookAtPlayer()
+	%StateMachine.switchStates("Grappled")
+
+func onPlayerJumpOffMe():
+	%StateMachine.switchStates("Stun")
+
+func canBeGrappledTo() -> bool:
+	if %StateMachine.current_state.name == "Sleep":
+		return false
+	else:
+		return true

@@ -5,7 +5,7 @@ class_name PlayerGrappleAttack
 
 
 func customEnter(_prevState):
-	player.grappleBoost = Vector2(1.5, -1.0) * 50.0
+	player.grappleBoost = Vector2(1.3, -1.0) * 50.0
 	player.grappleBoost.x *= -player.getSpriteDirection()
 
 func customUpdate(delta):

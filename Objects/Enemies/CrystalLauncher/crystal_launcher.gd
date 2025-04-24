@@ -45,3 +45,8 @@ func _on_health_component_death(_attack: Attack) -> void:
 	curRotation = 0.0
 	%Sprite2D.rotation = 0.0
 	%Sprite2D.position = Vector2.ZERO
+
+func canBeGrappledTo() -> bool:
+	if %StateMachine.current_state.name == "Sleep":
+		return false
+	return true

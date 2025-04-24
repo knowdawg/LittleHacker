@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=75 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Script" uid="uid://dxlohk1v41qh3" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_knvuj"]
@@ -36,6 +36,7 @@
 [ext_resource type="Script" uid="uid://dx8h1xyy21sy7" path="res://Objects/Enemies/CrystalThug/death.gd" id="22_jr46o"]
 [ext_resource type="Script" uid="uid://byq5t13up4nds" path="res://Classes/GenericStates/GenericSleep.gd" id="24_ieetj"]
 [ext_resource type="Script" uid="uid://coulc1y5li7rb" path="res://Classes/GenericStates/GenericTransitionState.gd" id="25_3fdjg"]
+[ext_resource type="Script" uid="uid://bctvx26d30wgs" path="res://Classes/GenericStates/GenericPassiveState.gd" id="25_pi7n5"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="27_tgw8o"]
 [ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="31_0jdrv"]
 [ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="37_yylqw"]
@@ -541,6 +542,7 @@ occluder = SubResource("OccluderPolygon2D_e0n24")
 occluder_light_mask = 0
 
 [node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_knvuj")]
+unique_name_in_owner = true
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
@@ -664,6 +666,11 @@ nextState = NodePath("../Chase")
 length = 0.6
 animator = NodePath("../../Animator")
 animationName = "Wake"
+
+[node name="Grappled" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+script = ExtResource("25_pi7n5")
+animator = NodePath("../../Animator")
+animationName = "Stun"
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {

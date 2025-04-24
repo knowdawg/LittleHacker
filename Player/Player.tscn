@@ -1,4 +1,4 @@
-[gd_scene load_steps=231 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=232 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -212,6 +212,10 @@ point_count = 2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyul"]
 shader = ExtResource("35_xt36k")
 shader_parameter/progress = 0.0
+
+[sub_resource type="Gradient" id="Gradient_xt36k"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.117647, 0.113725, 0.223529, 1)
 
 [sub_resource type="Curve" id="Curve_afej6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -1494,6 +1498,40 @@ tracks/0/keys = {
 "values": [30, 31, 32, 33]
 }
 
+[sub_resource type="Animation" id="Animation_xt36k"]
+resource_name = "GrappleFlip"
+length = 0.5
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [81, 82, 83, 84, 86]
+}
+
+[sub_resource type="Animation" id="Animation_c5st5"]
+resource_name = "GrappleLand"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [80]
+}
+
 [sub_resource type="Animation" id="Animation_arads"]
 resource_name = "GroundParry"
 length = 0.4
@@ -1760,6 +1798,24 @@ tracks/2/keys = {
 "values": []
 }
 
+[sub_resource type="Animation" id="Animation_fycm6"]
+resource_name = "Spin"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [76, 77, 78, 79]
+}
+
 [sub_resource type="Animation" id="Animation_t7nm8"]
 resource_name = "Stun"
 tracks/0/type = "value"
@@ -1789,58 +1845,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [47]
-}
-
-[sub_resource type="Animation" id="Animation_fycm6"]
-resource_name = "Spin"
-length = 0.4
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [76, 77, 78, 79]
-}
-
-[sub_resource type="Animation" id="Animation_c5st5"]
-resource_name = "GrappleLand"
-length = 0.1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [80]
-}
-
-[sub_resource type="Animation" id="Animation_xt36k"]
-resource_name = "GrappleFlip"
-length = 0.5
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 1,
-"values": [81, 82, 83, 84, 86]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_n2wqp"]
@@ -2974,6 +2978,8 @@ line = NodePath("Line2D")
 [node name="Line2D" type="Line2D" parent="StateMachine/Grapple"]
 material = SubResource("ShaderMaterial_xqyul")
 points = PackedVector2Array(-41, -16, 30, -16)
+default_color = Color(0.117647, 0.113725, 0.223529, 1)
+gradient = SubResource("Gradient_xt36k")
 texture_mode = 1
 
 [node name="GrappleStick" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "playerStateMachine", "weaponStateMachine", "animator")]
@@ -3219,7 +3225,7 @@ attack_damage = 6.0
 weakness_damage = 3.0
 attackStrength = 2
 knockback_force = 50.0
-knockbackVector = Vector2(-1, 0)
+knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackRight"]

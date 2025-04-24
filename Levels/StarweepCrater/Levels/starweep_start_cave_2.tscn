@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://c80acag1837nm"]
+[gd_scene load_steps=43 format=3 uid="uid://c80acag1837nm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_us2g6"]
 [ext_resource type="PackedScene" uid="uid://bo8tvedjow02d" path="res://Levels/StarweepCrater/EnvirementScenes/starweep_start_cave_2.tscn" id="2_aolvh"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="4_l67sm"]
 [ext_resource type="PackedScene" uid="uid://bvdxkosvo3rdd" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.tscn" id="5_dtsy0"]
 [ext_resource type="PackedScene" uid="uid://dw4f7rxc2fd23" path="res://Objects/WorldObjects/Tilemaps/background_tilemap.tscn" id="5_uhfbk"]
+[ext_resource type="PackedScene" uid="uid://dabx5or51d1jv" path="res://Objects/WorldObjects/Tilemaps/blood_pipes_tilemap.tscn" id="7_4l5i2"]
 [ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="7_ye30b"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="8_3ufx3"]
 [ext_resource type="PackedScene" uid="uid://bae1ixxbndyw3" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.tscn" id="9_ewvef"]
@@ -17,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dow45nohhanl5" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.tscn" id="10_wejjc"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l67sm"]
-polygon = PackedVector2Array(0, 244, 134, 244, 134, 250, 158, 250, 162, 254, 162, 307, 167, 307, 167, 250, 180, 250, 179, 244, 295, 244, 295, 234, 258, 234, 258, 235, 226, 235, 226, 231, 224, 229, 194, 229, 194, 194, 226, 194, 226, 165, 254, 165, 261, 164, 286, 164, 292, 165, 306, 165, 312, 164, 355, 164, 355, 134, 444, 134, 444, 139, 446, 140, 451, 140, 451, 144, 453, 144, 453, 148, 458, 148, 458, 153, 462, 153, 462, 155, 466, 155, 466, 159, 479, 159, 479, 161, 481, 161, 481, 164, 503, 164, 503, 187, 507, 187, 507, 213, 522, 213, 522, 217, 523, 217, 523, 218, 525, 218, 525, 219, 530, 219, 530, 224, 576, 224, 582, 223, 604, 223, 610, 224, 649, 224, 649, 227, 651, 227, 651, 230, 666, 230, 666, 225, 669, 225, 669, 224, 691, 224, 691, 219, 704, 219, 707, 214, 714, 214, 722, 210, 720, 204, 725, 198, 721, 191, 728, 187, 732, 184, 729, 179, 733, 179, 733, 170, 735, 170, 735, 164, 735, 153, 736, 153, 736, 145, 733, 142, 733, 139, 738, 139, 744, 140, 760, 140, 760, 101, 767, 101, 773, 100, 941, 100, 996, 100, 972, 256, 435, 409, 0, 356)
+polygon = PackedVector2Array(0, 244, 134, 244, 134, 250, 158, 250, 162, 254, 162, 307, 167, 307, 167, 250, 180, 250, 179, 244, 295, 244, 295, 234, 258, 234, 258, 235, 226, 235, 226, 231, 224, 229, 194, 229, 194, 194, 226, 194, 226, 165, 254, 165, 261, 164, 286, 164, 292, 165, 306, 165, 312, 164, 355, 164, 355, 134, 444, 134, 444, 139, 446, 140, 451, 140, 451, 144, 453, 144, 453, 148, 458, 148, 458, 153, 462, 153, 462, 155, 466, 155, 466, 159, 479, 159, 479, 161, 481, 161, 481, 164, 503, 164, 503, 187, 507, 187, 507, 213, 522, 213, 522, 217, 523, 217, 523, 218, 525, 218, 525, 219, 530, 219, 530, 224, 576, 224, 582, 223, 604, 223, 610, 224, 649, 224, 649, 227, 651, 227, 651, 230, 666, 230, 666, 225, 669, 225, 669, 224, 691, 224, 691, 219, 704, 219, 707, 214, 714, 214, 722, 210, 720, 204, 725, 198, 721, 191, 728, 187, 732, 184, 729, 179, 733, 179, 733, 170, 735, 170, 735, 164, 735, 153, 736, 153, 736, 145, 733, 142, 733, 139, 738, 139, 744, 140, 760, 140, 760, 101, 767, 101, 773, 100, 792, 100, 792, 104, 816, 104, 816, 100, 941, 100, 996, 100, 972, 256, 435, 409, 0, 356)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3ufx3"]
 polygon = PackedVector2Array(79, 140, 147, 140, 153, 128, 161, 128, 164, 140, 186, 140, 182, 134, 203, 134, 207, 140, 215, 140, 215, 144, 235, 144, 235, 149, 246, 150, 246, 155, 283, 154, 284, 150, 285, 131, 308, 114, 324, 109, 355, 109, 361, 115, 370, 115, 372, 124, 414, 124, 414, 119, 440, 119, 440, 114, 479, 114, 479, 109, 503, 109, 507, 103, 525, 103, 536, 115, 552, 115, 550, 119, 571, 120, 571, 115, 591, 115, 589, 119, 600, 119, 596, 123, 601, 125, 638, 125, 638, 124, 695, 124, 695, 125, 748, 125, 752, 113, 750, 112, 747, 112, 748, 103, 752, 101, 752, 95, 758, 95, 753, 94, 753, 89, 759, 88, 760, 85, 770, 85, 770, 79, 785, 79, 786, 75, 804, 75, 804, 79, 823, 79, 823, 84, 866, 84, 848, 14, 80, 79)
@@ -470,6 +471,10 @@ texture = SubResource("ViewportTexture_hxm8j")
 centered = false
 metadata/_edit_lock_ = true
 
+[node name="BloodPipesTilemap" parent="Envirement" instance=ExtResource("7_4l5i2")]
+position = Vector2(2, 0)
+layer_0/tile_data = PackedInt32Array(852098, 65536, 0, 852094, 65536, 268435456, 917630, 65536, 1, 917634, 0, 1342177280, 983170, 65536, 1)
+
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="BottomRight" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("4_01fwu")]
@@ -499,7 +504,7 @@ position = Vector2(-14, 3)
 [node name="RespawnPoints" type="Node2D" parent="."]
 
 [node name="RespawnPoint" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("7_ye30b")]
-position = Vector2(1021, 104)
+position = Vector2(1030, 108)
 level = NodePath("../..")
 respawnPointName = "TutorialRespawnPoint"
 

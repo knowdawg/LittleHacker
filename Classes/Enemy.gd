@@ -24,3 +24,15 @@ func die(attack : Attack):
 
 func customDeath(_attack : Attack):
 	pass
+
+func onSelectedForGrappleTarget():
+	pass
+
+func onPlayerStuckToMeWithGrapple():
+	pass
+
+func onPlayerJumpOffMe():
+	pass
+	
+func canBeGrappledTo() -> bool:
+	return true

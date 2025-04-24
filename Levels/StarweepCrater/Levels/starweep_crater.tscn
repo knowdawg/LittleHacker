@@ -1,9 +1,10 @@
-[gd_scene load_steps=139 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=140 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
 [ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="5_1x65e"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
+[ext_resource type="Texture2D" uid="uid://cdv6us5lootnk" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse2.png" id="6_tpsgt"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="8_3qqdn"]
 [ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="9_oo6lu"]
 [ext_resource type="PackedScene" uid="uid://cfy3aart4poj3" path="res://Objects/WorldObjects/Tilemaps/sdf_tilemap.tscn" id="10_73joc"]
@@ -53,7 +54,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpsgt"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -63,7 +64,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -101,7 +102,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixek2"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -755,16 +756,16 @@ texture = SubResource("GradientTexture2D_86ljy")
 
 [node name="Clouds3" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_tpsgt")
+texture = SubResource("GradientTexture2D_sy7vn")
 
 [node name="Clouds" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_sy7vn")
+texture = SubResource("GradientTexture2D_uwpgy")
 
 [node name="Clouds2" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_uwpgy")
+texture = SubResource("GradientTexture2D_ixek2")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -814,6 +815,11 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+
+[node name="Wrym2" type="Sprite2D" parent="Far/SubViewportContainer/Main2"]
+texture_filter = 1
+position = Vector2(158.873, 84.709)
+texture = ExtResource("6_tpsgt")
 
 [node name="MediumFar" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.5, 0.5)

@@ -114,6 +114,10 @@ func noWeaponInputs():
 		return true
 	return false
 
+func inGrappleState() -> bool:
+	if current_state is PlayerGrapple or current_state is PlayerGrappleStick:
+		return true
+	return false
 
 func _on_health_component_death(_attack: Attack) -> void:
 	switchStates("Death")
