@@ -5,6 +5,7 @@
 [node name="CameraBoundriesComponent" type="Polygon2D"]
 color = Color(1, 1, 1, 0.196078)
 script = ExtResource("1_ukfda")
+cameraSize = Vector2(128, 72)
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 256

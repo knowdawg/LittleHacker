@@ -1,7 +1,9 @@
-[gd_scene load_steps=24 format=3 uid="uid://ci8j3oe6fdx3u"]
+[gd_scene load_steps=26 format=3 uid="uid://ci8j3oe6fdx3u"]
 
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_2gffe"]
 [ext_resource type="Script" uid="uid://donl2ewa7e6jb" path="res://Objects/Enemies/GrappleBug/grapple_bug.gd" id="1_f34wf"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="2_2k2cb"]
+[ext_resource type="Texture2D" uid="uid://dg1rtkytiwycx" path="res://Assets/Sprites/Enemies/VoidButterfly.png" id="2_dis75"]
 [ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_nfoqy"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_f34wf"]
 [ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="3_nfoqy"]
@@ -17,19 +19,51 @@
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_y2j68"]
 [ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_yknut"]
 
-[sub_resource type="Gradient" id="Gradient_nfoqy"]
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_f34wf"]
-gradient = SubResource("Gradient_nfoqy")
-width = 2
-height = 2
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jqgkp"]
+shader = ExtResource("2_2k2cb")
+shader_parameter/color = Color(1, 0.498039, 0.717647, 1)
+shader_parameter/width = 0.3
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="Animation" id="Animation_f34wf"]
 resource_name = "Idle"
+length = 0.5
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.15, 0.2, 0.25, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7]
+}
+
+[sub_resource type="Animation" id="Animation_dis75"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dis75"]
 _data = {
-&"Idle": SubResource("Animation_f34wf")
+&"Idle": SubResource("Animation_f34wf"),
+&"RESET": SubResource("Animation_dis75")
 }
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fqfk8"]
@@ -50,7 +84,7 @@ shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
 
-[node name="GrappleBug" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
+[node name="VoidButterfly" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 script = ExtResource("1_f34wf")
@@ -59,14 +93,20 @@ healthComponent = NodePath("GeneralComponents/HealthComponent")
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_f34wf")
+material = SubResource("ShaderMaterial_jqgkp")
+position = Vector2(0, -1)
+texture = ExtResource("2_dis75")
+hframes = 8
 
 [node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_2gffe")]
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators")]
 script = ExtResource("2_nfoqy")
+initial_state = NodePath("Idle")
+parent = NodePath("..")
+animators = [NodePath("../Animator")]
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("3_nfoqy")

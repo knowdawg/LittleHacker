@@ -1,0 +1,65 @@
+[gd_scene load_steps=11 format=3 uid="uid://cjxxnykthpufg"]
+
+[ext_resource type="Script" uid="uid://cywve8ncn4pa0" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.gd" id="1_lp31i"]
+
+[sub_resource type="Gradient" id="Gradient_1k6sk"]
+offsets = PackedFloat32Array(0, 0.983923)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_73on7"]
+gradient = SubResource("Gradient_1k6sk")
+width = 4
+height = 4
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Curve" id="Curve_n0e0i"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498947, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_1k6sk"]
+curve = SubResource("Curve_n0e0i")
+
+[sub_resource type="Curve" id="Curve_fhqyc"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.0758123, -1), 0.0, 0.0, 0, 0, Vector2(0.115523, 1), 0.0, 0.0, 0, 0, Vector2(0.187726, -1), 0.0, 0.0, 0, 0, Vector2(0.238267, 1), 0.0, 0.0, 0, 0, Vector2(0.270758, -1), 0.0, 0.0, 0, 0, Vector2(0.33935, 1), 0.0, 0.0, 0, 0, Vector2(0.425993, -1), 0.0, 0.0, 0, 0, Vector2(0.490975, 1), 0.0, 0.0, 0, 0, Vector2(0.566787, -1), 0.0, 0.0, 0, 0, Vector2(0.620939, 1), 0.0, 0.0, 0, 0, Vector2(0.693141, -1), 0.0, 0.0, 0, 0, Vector2(0.779783, 1), 0.0, 0.0, 0, 0, Vector2(0.808664, -1), 0.0, 0.0, 0, 0, Vector2(0.888087, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 16
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_n0e0i"]
+curve_y = SubResource("Curve_fhqyc")
+
+[sub_resource type="Curve" id="Curve_1k6sk"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.144404, 1), 0.0, 0.0, 0, 0, Vector2(0.862816, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_cbcc5"]
+curve = SubResource("Curve_1k6sk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_fhqyc"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(200, 0, 0)
+emission_shape = 3
+emission_box_extents = Vector3(20, 100, 1)
+direction = Vector3(-1, 0, 0)
+spread = 10.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+directional_velocity_min = 4.99998
+directional_velocity_max = 20.0
+directional_velocity_curve = SubResource("CurveXYZTexture_n0e0i")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.1
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_cbcc5")
+alpha_curve = SubResource("CurveTexture_1k6sk")
+
+[node name="Wind" type="GPUParticles2D"]
+amount = 128
+texture = SubResource("GradientTexture2D_73on7")
+lifetime = 5.0
+preprocess = 5.0
+trail_enabled = true
+process_material = SubResource("ParticleProcessMaterial_fhqyc")
+script = ExtResource("1_lp31i")

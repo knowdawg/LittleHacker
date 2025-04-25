@@ -65,17 +65,16 @@ _data = {
 }
 
 [node name="PlayerSwordHitEffect" type="Node2D"]
-scale = Vector2(3, 1)
+scale = Vector2(6, 1.5)
 script = ExtResource("1_wqyyl")
 
 [node name="Line2D" type="Line2D" parent="."]
 points = PackedVector2Array(-2, 0, 2, 0)
 width = 1.0
-default_color = Color(0.647059, 0.188235, 0.188235, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_xrtyg")
+&"": SubResource("AnimationLibrary_xrtyg")
 }
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

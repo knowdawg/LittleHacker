@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=231 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -212,10 +212,6 @@ point_count = 2
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyul"]
 shader = ExtResource("35_xt36k")
 shader_parameter/progress = 0.0
-
-[sub_resource type="Gradient" id="Gradient_xt36k"]
-offsets = PackedFloat32Array(1)
-colors = PackedColorArray(0.117647, 0.113725, 0.223529, 1)
 
 [sub_resource type="Curve" id="Curve_afej6"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
@@ -2234,7 +2230,7 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/Grapple/Line2D:material:shader_parameter/progress")
+tracks/1/path = NodePath("StateMachine/Grapple/GrappleLine:material:shader_parameter/progress")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
@@ -2334,7 +2330,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("StateMachine/Grapple/Line2D:material:shader_parameter/progress")
+tracks/2/path = NodePath("StateMachine/Grapple/GrappleLine:material:shader_parameter/progress")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -2973,13 +2969,12 @@ player = NodePath("../..")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 velocityCurve = SubResource("Curve_fycm6")
 grappleStickState = NodePath("../GrappleStick")
-line = NodePath("Line2D")
+line = NodePath("GrappleLine")
 
-[node name="Line2D" type="Line2D" parent="StateMachine/Grapple"]
+[node name="GrappleLine" type="Line2D" parent="StateMachine/Grapple"]
 material = SubResource("ShaderMaterial_xqyul")
 points = PackedVector2Array(-41, -16, 30, -16)
-default_color = Color(0.117647, 0.113725, 0.223529, 1)
-gradient = SubResource("Gradient_xt36k")
+default_color = Color(0.478431, 0.211765, 0.482353, 1)
 texture_mode = 1
 
 [node name="GrappleStick" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "playerStateMachine", "weaponStateMachine", "animator")]
@@ -3796,7 +3791,7 @@ shape = SubResource("CircleShape2D_jfgjt")
 
 [node name="PlayerCamera" type="Camera2D" parent="Node"]
 unique_name_in_owner = true
-zoom = Vector2(12, 12)
+zoom = Vector2(10, 10)
 position_smoothing_speed = 20.0
 script = ExtResource("55_c7l4y")
 

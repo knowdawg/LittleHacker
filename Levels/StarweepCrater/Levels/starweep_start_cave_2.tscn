@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://c80acag1837nm"]
+[gd_scene load_steps=44 format=3 uid="uid://c80acag1837nm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_us2g6"]
 [ext_resource type="PackedScene" uid="uid://bo8tvedjow02d" path="res://Levels/StarweepCrater/EnvirementScenes/starweep_start_cave_2.tscn" id="2_aolvh"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://bae1ixxbndyw3" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.tscn" id="9_ewvef"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="10_ewvef"]
 [ext_resource type="PackedScene" uid="uid://dow45nohhanl5" path="res://Objects/WorldObjects/ProceduralRope/procedural_rope.tscn" id="10_wejjc"]
+[ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="17_qhcp3"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l67sm"]
 polygon = PackedVector2Array(0, 244, 134, 244, 134, 250, 158, 250, 162, 254, 162, 307, 167, 307, 167, 250, 180, 250, 179, 244, 295, 244, 295, 234, 258, 234, 258, 235, 226, 235, 226, 231, 224, 229, 194, 229, 194, 194, 226, 194, 226, 165, 254, 165, 261, 164, 286, 164, 292, 165, 306, 165, 312, 164, 355, 164, 355, 134, 444, 134, 444, 139, 446, 140, 451, 140, 451, 144, 453, 144, 453, 148, 458, 148, 458, 153, 462, 153, 462, 155, 466, 155, 466, 159, 479, 159, 479, 161, 481, 161, 481, 164, 503, 164, 503, 187, 507, 187, 507, 213, 522, 213, 522, 217, 523, 217, 523, 218, 525, 218, 525, 219, 530, 219, 530, 224, 576, 224, 582, 223, 604, 223, 610, 224, 649, 224, 649, 227, 651, 227, 651, 230, 666, 230, 666, 225, 669, 225, 669, 224, 691, 224, 691, 219, 704, 219, 707, 214, 714, 214, 722, 210, 720, 204, 725, 198, 721, 191, 728, 187, 732, 184, 729, 179, 733, 179, 733, 170, 735, 170, 735, 164, 735, 153, 736, 153, 736, 145, 733, 142, 733, 139, 738, 139, 744, 140, 760, 140, 760, 101, 767, 101, 773, 100, 792, 100, 792, 104, 816, 104, 816, 100, 941, 100, 996, 100, 972, 256, 435, 409, 0, 356)
@@ -621,3 +622,5 @@ offset_left = 969.0
 offset_top = 56.0
 offset_right = 1161.0
 offset_bottom = 164.0
+
+[node name="StarweepWorldEnvierment" parent="." instance=ExtResource("17_qhcp3")]

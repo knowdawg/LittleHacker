@@ -13,6 +13,7 @@ func enter(_prevState):
 	animator.play(animationName)
 
 func update(_delta):
-	if playerProximity.is_player_inside():
-		var r = randi_range(0, agroStates.size() - 1)
-		trasitioned.emit(self, agroStates[r].name)
+	if playerProximity:
+		if playerProximity.is_player_inside():
+			var r = randi_range(0, agroStates.size() - 1)
+			trasitioned.emit(self, agroStates[r].name)

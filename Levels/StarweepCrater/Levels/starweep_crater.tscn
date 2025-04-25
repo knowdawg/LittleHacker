@@ -1,4 +1,4 @@
-[gd_scene load_steps=143 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=142 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="13_4clin"]
 [ext_resource type="Texture2D" uid="uid://b8akensfj4e61" path="res://Palletes/sandstone_envirement_Pallete.tres" id="13_wxdan"]
 [ext_resource type="Texture2D" uid="uid://beycbrvpuf3g0" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse.png" id="14_53ke4"]
+[ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="14_86ljy"]
 [ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="14_an8tg"]
 [ext_resource type="PackedScene" uid="uid://dqgol3yij81qs" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_envirement.tscn" id="14_arq7e"]
 [ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="16_fkucj"]
@@ -32,6 +33,7 @@
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="30_yrukv"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="31_htj2c"]
+[ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="34_86ljy"]
 
 [sub_resource type="Gradient" id="Gradient_sy7vn"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
@@ -54,7 +56,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_tpsgt"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -64,7 +66,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_sy7vn"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -102,7 +104,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uwpgy"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixek2"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -732,24 +734,6 @@ shader_parameter/shadowIntensitiy = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6g51h"]
 
-[sub_resource type="Gradient" id="Gradient_mbqal"]
-colors = PackedColorArray(0, 0, 0.0392157, 1, 1, 0.941176, 0.901961, 1)
-
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_n0e0i"]
-gradient = SubResource("Gradient_mbqal")
-
-[sub_resource type="Environment" id="Environment_hyfn1"]
-background_mode = 3
-tonemap_mode = 1
-tonemap_exposure = 0.7
-tonemap_white = 0.7
-glow_intensity = 0.08
-glow_blend_mode = 0
-glow_hdr_threshold = 0.8
-glow_hdr_scale = 0.0
-glow_map_strength = 1.0
-adjustment_color_correction = SubResource("GradientTexture1D_n0e0i")
-
 [node name="StarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 texture_filter = 1
 script = ExtResource("1_4w4bf")
@@ -774,16 +758,16 @@ texture = SubResource("GradientTexture2D_86ljy")
 
 [node name="Clouds3" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_tpsgt")
+texture = SubResource("GradientTexture2D_sy7vn")
 
 [node name="Clouds" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_sy7vn")
+texture = SubResource("GradientTexture2D_uwpgy")
 
 [node name="Clouds2" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_uwpgy")
+texture = SubResource("GradientTexture2D_ixek2")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -1175,6 +1159,8 @@ layer_0/tile_data = PackedInt32Array(1572787, 0, 0, 2031543, 0, 0, 2097080, 0, 0
 material = SubResource("ShaderMaterial_qakqs")
 texture = SubResource("GradientTexture2D_arwe5")
 centered = false
+
+[node name="Wind" parent="." instance=ExtResource("14_86ljy")]
 
 [node name="Enviremnet" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1714,7 +1700,6 @@ position = Vector2(-151, -10)
 visible = false
 position = Vector2(0, 179)
 polygon = PackedVector2Array(-143, -310, -143, 45, 408, 45, 408, -310)
-cameraSize = Vector2(107, 60)
 
 [node name="SetPointCameraZone" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("19_4clin")]
 position = Vector2(-120, 253)
@@ -1724,5 +1709,4 @@ cameraPos = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="CameraBoundriesComponent/SetPointCameraZone"]
 position = Vector2(69, -115)
 
-[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
-environment = SubResource("Environment_hyfn1")
+[node name="StarweepWorldEnvierment" parent="." instance=ExtResource("34_86ljy")]

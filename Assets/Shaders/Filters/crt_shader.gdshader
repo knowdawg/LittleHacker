@@ -32,7 +32,7 @@ void fragment() {
 	//Verticle seperators
 	float seperator = abs(sin(0.667 + pixelsWidth * (curvedUV.x * PI)));
 	seperator = smoothstep(0.95, 1.0, seperator);
-	seperator *= 0.03;
+	seperator *= 0.01;
 
 	//Light Vinete effect
 	float darkEdges = distance(vec2(0.5, 0.5), curvedUV);

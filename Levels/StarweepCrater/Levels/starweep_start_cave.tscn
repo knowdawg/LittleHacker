@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bkpqd3ei3e87s"]
+[gd_scene load_steps=34 format=3 uid="uid://bkpqd3ei3e87s"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_37lxr"]
 [ext_resource type="PackedScene" uid="uid://b4ugiyef56755" path="res://Levels/StarweepCrater/EnvirementScenes/sandstone_start_cave.tscn" id="2_kcft2"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://bnarclf1ceswr" path="res://Components/CameraBoundriesComponent/SpecialCameraZone/Zones/set_point_camera_zone.tscn" id="13_8jv7p"]
 [ext_resource type="PackedScene" uid="uid://bvdxkosvo3rdd" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.tscn" id="13_nsbrd"]
 [ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="14_vf27f"]
+[ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="16_8jv7p"]
 
 [sub_resource type="Gradient" id="Gradient_axx6j"]
 offsets = PackedFloat32Array(1)
@@ -394,3 +395,5 @@ offset_bottom = -235.0
 
 [node name="CursorFollower" parent="." instance=ExtResource("14_vf27f")]
 visible = false
+
+[node name="StarweepWorldEnvierment" parent="." instance=ExtResource("16_8jv7p")]
