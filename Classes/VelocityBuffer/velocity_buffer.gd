@@ -7,9 +7,13 @@ var myShapes : Array[ColorRect] = []
 @onready var prevFrame = $PrevFrame/Final
 @onready var texture = $CanvasLayer/Texture
 
+var screenUVMaterial : ShaderMaterial = preload("res://Assets/Shaders/ScreenUvShader.tres")
+
+
 var prevCamPos : Vector2 = Vector2.ZERO
 var totalCameraPosChange : Vector2 = Vector2.ZERO
 func _process(_delta: float) -> void:
+	
 	for i in shapeHolder.get_children():
 		i.queue_free()
 	myShapes.clear()
@@ -19,6 +23,11 @@ func _process(_delta: float) -> void:
 			var myShape = ColorRect.new()
 			myShape.color = s.color
 			myShape.size = s.size
+			
+			var m = ShaderMaterial.new()
+			m = screenUVMaterial
+			myShape.set_material(m)
+			
 			shapeHolder.add_child(myShape)
 			myShape.position = round(s.get_global_transform_with_canvas().origin * 0.1)
 	

@@ -21,7 +21,7 @@ func enter(_prevState):
 	weaponStateMachine.inputBuffer = ""
 	
 	if target:
-		
+		target.onSelectedForGrappleTarget()
 		weaponAnimator.play(animationNameSucess)
 		grappleState.target = target
 		grappleState.angle = angle

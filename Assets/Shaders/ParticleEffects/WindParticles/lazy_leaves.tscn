@@ -1,0 +1,53 @@
+[gd_scene load_steps=8 format=3 uid="uid://digvxocyo0mr4"]
+
+[ext_resource type="Texture2D" uid="uid://c720lt7wwperv" path="res://Assets/Sprites/WorldObjects/LeafDry.png" id="1_llxbv"]
+[ext_resource type="Script" uid="uid://cywve8ncn4pa0" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.gd" id="2_l0v76"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_l0v76"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_ewd1s"]
+_data = [Vector2(0, 0.504908), 0.0, 0.0, 0, 0, Vector2(0.0671296, 1), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.356481, 1), 0.0, 0.0, 0, 0, Vector2(0.451389, 0.00471139), 0.0, 0.0, 0, 0, Vector2(0.597222, 1), 0.0, 0.0, 0, 0, Vector2(0.666667, 0), 0.0, 0.0, 0, 0, Vector2(0.775463, 1), 0.0, 0.0, 0, 0, Vector2(0.884259, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.510012), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="Curve" id="Curve_dlt41"]
+_data = [Vector2(0, 0.515116), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.365741, 1), 0.0, 0.0, 0, 0, Vector2(0.532407, 0), 0.0, 0.0, 0, 0, Vector2(0.796296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497252), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_h02pv"]
+curve_x = SubResource("Curve_ewd1s")
+curve_y = SubResource("Curve_dlt41")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_wv7kq"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(150, -60, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 80, 1)
+direction = Vector3(-1, 0.3, 0)
+spread = 20.0
+initial_velocity_min = 43.06
+initial_velocity_max = 43.06
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+directional_velocity_min = -15.0
+directional_velocity_max = 15.0
+directional_velocity_curve = SubResource("CurveXYZTexture_h02pv")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+anim_speed_min = 10.0
+anim_speed_max = 15.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.01
+
+[node name="LazyLeaves" type="GPUParticles2D"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_l0v76")
+texture = ExtResource("1_llxbv")
+lifetime = 10.0
+preprocess = 10.0
+process_material = SubResource("ParticleProcessMaterial_wv7kq")
+script = ExtResource("2_l0v76")

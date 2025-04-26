@@ -6,29 +6,17 @@ extends ColorRect
 func _ready() -> void:
 	VelocityBuffer.shapes.append(self)
 
-
+var prevPos = Vector2.ZERO
+var curPos = Vector2.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	prevPos = curPos
+	curPos = thingToTrack.global_position
+	var v : Vector2 = curPos - prevPos
 	
-	var red = -clamp(thingToTrack.velocity.x / 200.0, -0.5, 0.5)
-	red = process2(delta)
-	var blue = 1.0
-	if red < 0:
-		blue = 0.2
-	if red != 0:
-		color = Color(red + 0.5, 1.0, blue, 1.0)
-	else:
-		color = Color(0.5, 0.0, 0.0, 1.0)
-	
-
-#postion delta
-var prevPos : Vector2 = Vector2.ZERO
-func process2(delta: float):
-	var posDiff = global_position - prevPos
-	prevPos = global_position
-
-	var red = -clamp(posDiff.x * delta * 20.0, -0.5, 0.5)
-	return red
+	var red = v.x
+	var green = v.y
+	color = Color(red, green, 1.0, 1.0)
 
 func _exit_tree() -> void:
 	VelocityBuffer.shapes.remove_at(VelocityBuffer.shapes.find(self))

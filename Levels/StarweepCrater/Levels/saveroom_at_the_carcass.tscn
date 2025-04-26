@@ -1,4 +1,4 @@
-[gd_scene load_steps=138 format=3 uid="uid://3qsk7wseq25g"]
+[gd_scene load_steps=139 format=3 uid="uid://3qsk7wseq25g"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_rgb68"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_dugcb"]
@@ -33,9 +33,10 @@
 [ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="20_f8mjn"]
 [ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="22_n0e0i"]
 [ext_resource type="PackedScene" uid="uid://dabx5or51d1jv" path="res://Objects/WorldObjects/Tilemaps/blood_pipes_tilemap.tscn" id="22_p6sko"]
+[ext_resource type="PackedScene" uid="uid://digvxocyo0mr4" path="res://Assets/Shaders/ParticleEffects/WindParticles/lazy_leaves.tscn" id="23_73on7"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="23_lnr3t"]
 [ext_resource type="PackedScene" uid="uid://ci8j3oe6fdx3u" path="res://Objects/Enemies/GrappleBug/grapple_bug.tscn" id="24_omy6c"]
-[ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="36_1k6sk"]
+[ext_resource type="PackedScene" uid="uid://ccha3ul4vqdo7" path="res://Assets/Shaders/ParticleEffects/ButterflyFlock/butterfly_flock.tscn" id="28_cbcc5"]
 
 [sub_resource type="Gradient" id="Gradient_sy7vn"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
@@ -624,7 +625,7 @@ shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2fksd"]
-polygon = PackedVector2Array(90, 345, 182, 345, 182, 350, 177, 361, 171, 361, 171, 371, 168, 371, 165, 375, 127, 376, 124, 386, 99, 386, 99, 396, 124, 396, 136, 396, 136, 381, 176, 381, 176, 389, 165, 389, 164, 418, 182, 430, 212, 430, 218, 429, 227, 429, 247, 419, 260, 421, 286, 419, 287, 416, 303, 416, 304, 418, 349, 418, 349, 422, 373, 422, 373, 418, 388, 414, 413, 409, 418, 409, 446, 410, 448, 412, 452, 412, 456, 411, 458, 411, 458, 415, 454, 418, 462, 423, 457, 425, 456, 434, 459, 436, 459, 440, 458, 450, 455, 452, 455, 461, 457, 461, 457, 481, 475, 481, 475, 474, 477, 471, 477, 461, 473, 460, 476, 458, 475, 456, 476, 452, 476, 443, 479, 434, 476, 433, 476, 428, 479, 423, 474, 418, 477, 417, 477, 411, 502, 411, 502, 343, 542, 403, 492, 497, 439, 498, 390, 446, 164, 442, 77, 492, 73, 375, 73, 322, 90, 322)
+polygon = PackedVector2Array(90, 345, 173, 345, 179, 346, 182, 346, 182, 350, 177, 361, 171, 361, 171, 371, 168, 371, 165, 375, 127, 376, 124, 386, 99, 386, 99, 396, 124, 396, 136, 396, 136, 381, 176, 381, 176, 389, 165, 389, 164, 418, 182, 430, 212, 430, 218, 429, 227, 429, 247, 419, 260, 421, 286, 419, 287, 416, 303, 416, 304, 418, 349, 418, 349, 422, 373, 422, 373, 418, 388, 414, 413, 409, 418, 409, 446, 410, 448, 412, 452, 412, 456, 411, 458, 411, 458, 415, 454, 418, 462, 423, 457, 425, 456, 434, 459, 436, 459, 440, 458, 450, 455, 452, 455, 461, 457, 461, 457, 481, 475, 481, 475, 474, 477, 471, 477, 461, 473, 460, 476, 458, 475, 456, 476, 452, 476, 443, 479, 434, 476, 433, 476, 428, 479, 423, 474, 418, 477, 417, 477, 411, 502, 411, 502, 343, 542, 403, 492, 497, 439, 498, 390, 446, 164, 442, 77, 492, 73, 375, 73, 322, 90, 322)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_73on7"]
 polygon = PackedVector2Array(181, 346, 192, 346, 192, 347, 181, 347)
@@ -823,6 +824,10 @@ _points = SubResource("Resource_l7rvr")
 [node name="MediumFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.7, 0.7)
 
+[node name="ButterflyFlock" parent="Paralax/MediumFar" instance=ExtResource("28_cbcc5")]
+position = Vector2(316.243, 404.153)
+local_coords = true
+
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MediumFar"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_bmg0s")
@@ -906,6 +911,18 @@ texture = ExtResource("6_3v345")
 
 [node name="Close" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.9, 0.9)
+
+[node name="ButterflyFlock2" parent="Paralax/Close" instance=ExtResource("28_cbcc5")]
+position = Vector2(240.176, 330.307)
+local_coords = true
+
+[node name="ButterflyFlock3" parent="Paralax/Close" instance=ExtResource("28_cbcc5")]
+position = Vector2(373.525, 359.911)
+local_coords = true
+
+[node name="ButterflyFlock4" parent="Paralax/Close" instance=ExtResource("28_cbcc5")]
+position = Vector2(387.96, 391.459)
+local_coords = true
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Close"]
 texture_filter = 1
@@ -1029,6 +1046,9 @@ texture_filter = 1
 position = Vector2(355, 424)
 texture = ExtResource("8_5fjm1")
 
+[node name="LazyLeaves" parent="." instance=ExtResource("23_73on7")]
+position = Vector2(359, 294)
+
 [node name="Wind" parent="." instance=ExtResource("22_n0e0i")]
 position = Vector2(359, 294)
 
@@ -1126,7 +1146,7 @@ respawnPointName = "UnderTheWyrm"
 position = Vector2(115, 391)
 
 [node name="GrappleBug" parent="Enemies" instance=ExtResource("24_omy6c")]
-position = Vector2(324, 389)
+position = Vector2(360, 395)
 
 [node name="GrappleBug2" parent="Enemies" instance=ExtResource("24_omy6c")]
 position = Vector2(196, 327)
@@ -1173,5 +1193,3 @@ position = Vector2(23, 3)
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_ls22c")]
 visible = false
 polygon = PackedVector2Array(96, 224, 96, 368, 60, 368, 60, 480, 148, 480, 148, 452, 384, 452, 384, 476, 688, 476, 688, 224)
-
-[node name="WorldEnvironment" parent="." instance=ExtResource("36_1k6sk")]

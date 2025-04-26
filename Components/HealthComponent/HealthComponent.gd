@@ -58,6 +58,8 @@ func damage(attack : Attack):
 	if locked == true:
 		#can put in a resource / class that can be changed / created as I wish
 		return
+	if health <= 0:
+		return
 	
 	if attack.isHazard and !isPlayerHealth:
 		set_health(0)

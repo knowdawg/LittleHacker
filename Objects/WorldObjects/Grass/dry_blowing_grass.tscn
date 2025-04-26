@@ -1,0 +1,46 @@
+[gd_scene load_steps=7 format=3 uid="uid://ex4xae8j4f18"]
+
+[ext_resource type="Texture2D" uid="uid://ddrnx2887ep24" path="res://Assets/Sprites/WorldObjects/PlantWind.png" id="1_ngxd4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ds3me"]
+atlas = ExtResource("1_ngxd4")
+region = Rect2(0, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vt6h5"]
+atlas = ExtResource("1_ngxd4")
+region = Rect2(8, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5grag"]
+atlas = ExtResource("1_ngxd4")
+region = Rect2(16, 0, 8, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_36pfx"]
+atlas = ExtResource("1_ngxd4")
+region = Rect2(24, 0, 8, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_k7n3u"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ds3me")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vt6h5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5grag")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_36pfx")
+}],
+"loop": true,
+"name": &"Blow",
+"speed": 10.0
+}]
+
+[node name="DryBlowingGrass" type="AnimatedSprite2D"]
+texture_filter = 1
+position = Vector2(-3, -4)
+sprite_frames = SubResource("SpriteFrames_k7n3u")
+animation = &"Blow"
+frame_progress = 0.792416

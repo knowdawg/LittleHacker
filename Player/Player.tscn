@@ -1,4 +1,4 @@
-[gd_scene load_steps=231 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=232 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="5_38mkd"]
 [ext_resource type="Script" uid="uid://biiby66878j3i" path="res://Player/Fall.gd" id="6_yew1w"]
 [ext_resource type="Script" uid="uid://b1hv4d0vfdvam" path="res://Player/Roll.gd" id="7_5l01g"]
+[ext_resource type="Material" uid="uid://olhvuev8j23b" path="res://Assets/Shaders/ScreenUvShader.tres" id="7_xqyul"]
 [ext_resource type="Script" uid="uid://niqkbox7hwx4" path="res://Player/Parry.gd" id="8_oxv8y"]
 [ext_resource type="Script" uid="uid://crybyms0fhukm" path="res://Player/WeaponStateMachine/AttackHorizontal.gd" id="10_d677x"]
 [ext_resource type="Script" uid="uid://d0qbbvxv85blt" path="res://Player/WeaponStateMachine/Idle.gd" id="11_45rs4"]
@@ -2741,6 +2742,7 @@ volume_db = -5.0
 bus = &"SoundEffects"
 
 [node name="ColorRect" parent="." node_paths=PackedStringArray("thingToTrack") instance=ExtResource("2_mnd2b")]
+material = ExtResource("7_xqyul")
 offset_top = -2.0
 offset_bottom = 2.0
 thingToTrack = NodePath("..")

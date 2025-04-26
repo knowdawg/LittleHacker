@@ -1,0 +1,66 @@
+[gd_scene load_steps=11 format=3 uid="uid://ccha3ul4vqdo7"]
+
+[ext_resource type="Texture2D" uid="uid://c8qblnwb0dce6" path="res://Assets/Sprites/Enemies/VoidButterflyTiny.png" id="1_mh2yd"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_6seb0"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_vfutq"]
+
+[sub_resource type="Curve" id="Curve_ecfy4"]
+_data = [Vector2(0, 0.498769), 0.0, 0.0, 0, 0, Vector2(0.247974, 1), 0.0, 0.0, 0, 0, Vector2(0.416532, 0.00109386), 0.0, 0.0, 0, 0, Vector2(0.690438, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.49166), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_xn1nc"]
+curve_x = SubResource("Curve_vfutq")
+curve_y = SubResource("Curve_ecfy4")
+
+[sub_resource type="Curve" id="Curve_b2yi0"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.23825, -1), 0.0, 0.0, 0, 0, Vector2(0.703404, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_kpk8p"]
+curve = SubResource("Curve_b2yi0")
+
+[sub_resource type="Curve" id="Curve_3rq7h"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.106969, 1), 0.0, 0.0, 0, 0, Vector2(0.93517, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_jiypf"]
+curve = SubResource("Curve_3rq7h")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ar4tg"]
+particle_flag_disable_z = true
+emission_shape = 6
+emission_ring_axis = Vector3(0, 0, 1)
+emission_ring_height = 1.0
+emission_ring_radius = 10.0
+emission_ring_inner_radius = 5.0
+emission_ring_cone_angle = 90.0
+directional_velocity_min = -5.00002
+directional_velocity_max = 4.99998
+directional_velocity_curve = SubResource("CurveXYZTexture_xn1nc")
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.3
+orbit_velocity_curve = SubResource("CurveTexture_kpk8p")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 0.7
+scale_curve = SubResource("CurveTexture_jiypf")
+anim_speed_min = 15.0
+anim_speed_max = 20.0
+
+[node name="ButterflyFlock" type="GPUParticles2D"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_6seb0")
+position = Vector2(1, 0)
+amount = 4
+texture = ExtResource("1_mh2yd")
+lifetime = 5.0
+preprocess = 5.0
+process_material = SubResource("ParticleProcessMaterial_ar4tg")
