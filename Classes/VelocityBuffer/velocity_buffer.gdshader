@@ -3,7 +3,7 @@ shader_type canvas_item;
 uniform sampler2D positions_current;
 uniform sampler2D positions_previous;
 uniform sampler2D velocity_previous;  // Last frame's velocities
-uniform float velocity_scale = 0.2;  
+uniform float velocity_scale = 0.2;
 uniform float decay = 0.9;           // 0.9 = 10% fade per frame
 
 void fragment() {

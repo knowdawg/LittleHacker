@@ -21,7 +21,7 @@ func exit(_n):
 	if is_instance_valid(grappleTarget):
 		grappleTarget.onPlayerJumpOffMe()
 
-func update_physics(delta):
+func update_physics(_delta):
 	player.velocity = Vector2.ZERO
 	if is_instance_valid(grappleTarget):
 		player.global_position = grappleTarget.global_position
@@ -41,4 +41,9 @@ func update_physics(delta):
 		
 		weaponStateMachine.switchStates("GrappleAttack")
 		trasitioned.emit(self, "GrappleAttack")
+		return
+	
+	if !grappleTarget.canBeGrappledTo():
+		weaponStateMachine.switchStates("Idle")
+		trasitioned.emit(self, "Fall")
 		return

@@ -3,6 +3,10 @@ class_name PlayerSaveData
 
 
 
+var abilities : Dictionary[String, bool] = {
+	"VoidPin" : false
+}
+
 #Arenas:
 var arenas : Dictionary[String, bool] = {
 	"beforeTheCarcassArena" : false

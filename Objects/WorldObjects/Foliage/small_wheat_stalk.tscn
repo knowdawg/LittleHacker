@@ -1,0 +1,199 @@
+[gd_scene load_steps=15 format=3 uid="uid://8n7tkiqmifa"]
+
+[ext_resource type="Script" uid="uid://b54yy8trf1k47" path="res://Objects/WorldObjects/Foliage/generic_folioge.gd" id="1_nis30"]
+[ext_resource type="Texture2D" uid="uid://duno5ew01utrt" path="res://Assets/Sprites/WorldObjects/WheatStalks.png" id="2_niia0"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_ysi2x"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_g0l11"]
+
+[sub_resource type="Gradient" id="Gradient_5x2fs"]
+offsets = PackedFloat32Array(0.792308, 0.969231)
+colors = PackedColorArray(0.878431, 0.819608, 0.760784, 1, 0.878431, 0.819608, 0.760784, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uexjw"]
+gradient = SubResource("Gradient_5x2fs")
+width = 8
+height = 8
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Curve" id="Curve_5x2fs"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.519663, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_uexjw"]
+curve = SubResource("Curve_5x2fs")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kyp63"]
+particle_flag_disable_z = true
+emission_shape_scale = Vector3(3, 0, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 10.0
+initial_velocity_min = 30.0
+initial_velocity_max = 50.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = -1.60933e-05
+orbit_velocity_min = 9.49949e-08
+orbit_velocity_max = 9.49949e-08
+gravity = Vector3(0, 100, 0)
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_uexjw")
+anim_speed_min = 3.0
+anim_speed_max = 3.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_nis30"]
+size = Vector2(2, 3)
+
+[sub_resource type="Animation" id="Animation_niia0"]
+resource_name = "Blow"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_ysi2x"]
+resource_name = "Death"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_g0l11"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [8]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mveeh"]
+_data = {
+&"Blow": SubResource("Animation_niia0"),
+&"Death": SubResource("Animation_ysi2x"),
+&"RESET": SubResource("Animation_g0l11")
+}
+
+[node name="SmallWheatStalk" type="Node2D" node_paths=PackedStringArray("hurtbox", "healthComponent", "animator")]
+position = Vector2(-0.5, -0.5)
+script = ExtResource("1_nis30")
+hurtbox = NodePath("HurtboxComponent")
+healthComponent = NodePath("HealthComponent")
+animator = NodePath("AnimationPlayer")
+idleAnimatorName = "Blow"
+deathAnimationName = "Death"
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(-1, -7)
+texture = ExtResource("2_niia0")
+hframes = 12
+frame = 8
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+texture_filter = 1
+position = Vector2(-0.5, 1.5)
+emitting = false
+amount = 16
+texture = SubResource("GradientTexture2D_uexjw")
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_kyp63")
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_componnet") instance=ExtResource("3_ysi2x")]
+position = Vector2(-0.5, -0.5)
+collision_layer = 8
+health_componnet = NodePath("../HealthComponent")
+isHackable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+visible = false
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_nis30")
+
+[node name="HealthComponent" parent="." instance=ExtResource("4_g0l11")]
+MAX_HEALTH = 1.0
+MAX_WEAKNESS = 1.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_mveeh")
+}

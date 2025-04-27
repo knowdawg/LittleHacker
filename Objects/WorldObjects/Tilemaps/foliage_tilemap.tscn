@@ -1,6 +1,63 @@
-[gd_scene load_steps=4 format=3 uid="uid://cr4dj46wcech6"]
+[gd_scene load_steps=12 format=3 uid="uid://cr4dj46wcech6"]
 
+[ext_resource type="Texture2D" uid="uid://duno5ew01utrt" path="res://Assets/Sprites/WorldObjects/WheatStalks.png" id="1_45rq5"]
 [ext_resource type="Texture2D" uid="uid://ddrnx2887ep24" path="res://Assets/Sprites/WorldObjects/PlantWind.png" id="1_pr1o2"]
+[ext_resource type="Texture2D" uid="uid://dj3x7kwly8sk4" path="res://Assets/Sprites/WorldObjects/WheatStalksDark.png" id="2_jlff7"]
+[ext_resource type="PackedScene" uid="uid://dp5q2qjchm234" path="res://Objects/WorldObjects/Foliage/large_wheat_stalk.tscn" id="3_45d0d"]
+[ext_resource type="PackedScene" uid="uid://b6aer1rnobo1o" path="res://Objects/WorldObjects/Foliage/medium_wheat_stalk.tscn" id="4_ebf8o"]
+[ext_resource type="PackedScene" uid="uid://8n7tkiqmifa" path="res://Objects/WorldObjects/Foliage/small_wheat_stalk.tscn" id="5_met4o"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_jlff7"]
+texture = ExtResource("1_45rq5")
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+4:0/animation_speed = 10.0
+4:0/animation_mode = 1
+4:0/animation_frame_0/duration = 1.0
+4:0/animation_frame_1/duration = 1.0
+4:0/animation_frame_2/duration = 1.0
+4:0/animation_frame_3/duration = 1.0
+4:0/0 = 0
+8:0/animation_speed = 10.0
+8:0/animation_mode = 1
+8:0/animation_frame_0/duration = 1.0
+8:0/animation_frame_1/duration = 1.0
+8:0/animation_frame_2/duration = 1.0
+8:0/animation_frame_3/duration = 1.0
+8:0/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_aeomn"]
+texture = ExtResource("2_jlff7")
+0:0/animation_speed = 10.0
+0:0/animation_mode = 1
+0:0/animation_frame_0/duration = 1.0
+0:0/animation_frame_1/duration = 1.0
+0:0/animation_frame_2/duration = 1.0
+0:0/animation_frame_3/duration = 1.0
+0:0/0 = 0
+4:0/animation_speed = 10.0
+4:0/animation_mode = 1
+4:0/animation_frame_0/duration = 1.0
+4:0/animation_frame_1/duration = 1.0
+4:0/animation_frame_2/duration = 1.0
+4:0/animation_frame_3/duration = 1.0
+4:0/0 = 0
+8:0/animation_speed = 10.0
+8:0/animation_frame_0/duration = 1.0
+8:0/animation_frame_1/duration = 1.0
+8:0/animation_frame_2/duration = 1.0
+8:0/animation_frame_3/duration = 1.0
+8:0/0 = 0
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_yxitp"]
+scenes/1/scene = ExtResource("3_45d0d")
+scenes/2/scene = ExtResource("4_ebf8o")
+scenes/3/scene = ExtResource("5_met4o")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pr1o2"]
 texture = ExtResource("1_pr1o2")
@@ -15,6 +72,9 @@ texture_region_size = Vector2i(8, 8)
 [sub_resource type="TileSet" id="TileSet_4lh86"]
 tile_size = Vector2i(1, 1)
 sources/4 = SubResource("TileSetAtlasSource_pr1o2")
+sources/0 = SubResource("TileSetAtlasSource_jlff7")
+sources/2 = SubResource("TileSetAtlasSource_aeomn")
+sources/3 = SubResource("TileSetScenesCollectionSource_yxitp")
 
 [node name="FoliageTilemap" type="TileMap"]
 texture_filter = 1

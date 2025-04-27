@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://1tuokhs2afei"]
+
+[ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="2_p7rd0"]
+[ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="3_itnb6"]
+[ext_resource type="Texture2D" uid="uid://c77jpq12uj32o" path="res://Assets/Sprites/WorldObjects/FlagPole.png" id="3_s8vyc"]
+
+[node name="TornFlag" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+texture = ExtResource("3_s8vyc")
+
+[node name="ClothSim" parent="." instance=ExtResource("2_p7rd0")]
+position = Vector2(5, -7)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_itnb6")
+clothAngle = -30.0
+particle_count_x = 6
+particle_count_y = 2
+windAmplitude = 8.0
+
+[node name="ClothSim2" parent="." instance=ExtResource("2_p7rd0")]
+position = Vector2(2, -3)
+rotation = 3.14159
+scale = Vector2(1, -1)
+texture = ExtResource("3_itnb6")
+clothAngle = -15.0
+particle_count_x = 12
+particle_count_y = 3

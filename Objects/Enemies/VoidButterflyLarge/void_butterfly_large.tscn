@@ -1,0 +1,415 @@
+[gd_scene load_steps=37 format=3 uid="uid://dypkm8gk6yots"]
+
+[ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_5qh1i"]
+[ext_resource type="Script" uid="uid://ci1cinvp6kg1t" path="res://Objects/Enemies/VoidButterflyLarge/void_butterfly_large.gd" id="1_iieb5"]
+[ext_resource type="Texture2D" uid="uid://iti0htiea6ck" path="res://Assets/Sprites/Enemies/VoidButterflyLarge.png" id="1_s7w11"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="2_0t5jp"]
+[ext_resource type="Script" uid="uid://cxvmo0vve3odg" path="res://Classes/StateMachine.gd" id="2_iieb5"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_0t5jp"]
+[ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="4_ac4bp"]
+[ext_resource type="PackedScene" uid="uid://bl4qmgyrutas2" path="res://Components/DeathComponent/death_component.tscn" id="4_p5e0x"]
+[ext_resource type="Script" uid="uid://d4mm7e43muiop" path="res://Objects/Enemies/VoidButterflyLarge/fly_away.gd" id="5_eqj17"]
+[ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_yai8n"]
+[ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="6_eqj17"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_s5rsa"]
+[ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_nfpr2"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_2yanm"]
+[ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_lgadb"]
+[ext_resource type="PackedScene" uid="uid://ccha3ul4vqdo7" path="res://Assets/Shaders/ParticleEffects/ButterflyFlock/butterfly_flock.tscn" id="15_iieb5"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p5e0x"]
+resource_local_to_scene = true
+shader = ExtResource("2_0t5jp")
+shader_parameter/color = Color(0.87451, 0.517647, 0.647059, 1)
+shader_parameter/width = 0.3
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="Curve" id="Curve_5qh1i"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 2.5605, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_iieb5"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Animation" id="Animation_0t5jp"]
+resource_name = "Death"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ButterflyFlock:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(0.588235, 0.588235, 0.588235, 1), Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:texture_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 0.01]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_iieb5"]
+resource_name = "Fly"
+length = 0.4
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 5, 6, 7, 8, 9, 10, 11]
+}
+
+[sub_resource type="Animation" id="Animation_5qh1i"]
+resource_name = "Idle"
+length = 2.0
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 0]
+}
+
+[sub_resource type="Animation" id="Animation_p5e0x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ButterflyFlock:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PointLight2D:color")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PointLight2D:texture_scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yai8n"]
+_data = {
+&"Death": SubResource("Animation_0t5jp"),
+&"Fly": SubResource("Animation_iieb5"),
+&"Idle": SubResource("Animation_5qh1i"),
+&"RESET": SubResource("Animation_p5e0x")
+}
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5qh1i"]
+radius = 3.16228
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_eqj17"]
+radius = 21.0238
+
+[sub_resource type="Curve" id="Curve_0t5jp"]
+
+[sub_resource type="Curve" id="Curve_p5e0x"]
+_data = [Vector2(0, 0.498769), 0.0, 0.0, 0, 0, Vector2(0.247974, 1), 0.0, 0.0, 0, 0, Vector2(0.416532, 0.00109386), 0.0, 0.0, 0, 0, Vector2(0.690438, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.49166), 0.0, 0.0, 0, 0]
+point_count = 5
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_yai8n"]
+curve_x = SubResource("Curve_0t5jp")
+curve_y = SubResource("Curve_p5e0x")
+
+[sub_resource type="Curve" id="Curve_e0dgs"]
+_limits = [-1.0, 1.0, 0.0, 1.0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.23825, -1), 0.0, 0.0, 0, 0, Vector2(0.703404, 1), 0.0, 0.0, 0, 0, Vector2(1, -1), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_s5rsa"]
+curve = SubResource("Curve_e0dgs")
+
+[sub_resource type="Curve" id="Curve_nfpr2"]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.106969, 1), 0.0, 0.0, 0, 0, Vector2(0.93517, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 4
+
+[sub_resource type="CurveTexture" id="CurveTexture_2yanm"]
+curve = SubResource("Curve_nfpr2")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pxo15"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 3.0
+spread = 180.0
+initial_velocity_max = 10.0
+directional_velocity_min = -5.00002
+directional_velocity_max = 4.99998
+directional_velocity_curve = SubResource("CurveXYZTexture_yai8n")
+orbit_velocity_min = 0.1
+orbit_velocity_max = 0.3
+orbit_velocity_curve = SubResource("CurveTexture_s5rsa")
+radial_velocity_min = -2.23517e-05
+radial_velocity_max = -2.23517e-05
+gravity = Vector3(0, 0, 0)
+scale_min = 0.4
+scale_max = 0.6
+scale_curve = SubResource("CurveTexture_2yanm")
+anim_speed_min = 15.0
+anim_speed_max = 20.0
+
+[sub_resource type="Gradient" id="Gradient_iieb5"]
+offsets = PackedFloat32Array(0, 0.992308)
+colors = PackedColorArray(0.776471, 0.317647, 0.592157, 1, 0.776471, 0.317647, 0.592157, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_0t5jp"]
+gradient = SubResource("Gradient_iieb5")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[node name="VoidButterflyLarge" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
+texture_filter = 1
+collision_layer = 8
+script = ExtResource("1_iieb5")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
+
+[node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_p5e0x")
+texture = ExtResource("1_s7w11")
+hframes = 12
+
+[node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_5qh1i")]
+spriteToFlip = NodePath("..")
+velocityToCheck = NodePath("../..")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+script = ExtResource("2_iieb5")
+initial_state = NodePath("Idle")
+hackedState = NodePath("Idle")
+parent = NodePath("..")
+animators = [NodePath("../Animator")]
+
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
+script = ExtResource("4_ac4bp")
+agroStates = [NodePath("../FlyAway")]
+animator = NodePath("../../Animator")
+animationName = "Idle"
+playerProximity = NodePath("../../Proximities/ProximityArea")
+
+[node name="FlyAway" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "sprite", "spriteDirector", "parrent", "movement")]
+script = ExtResource("5_eqj17")
+animator = NodePath("../../Animator")
+animName = "Fly"
+sprite = NodePath("../../Sprite2D")
+spriteDirector = NodePath("../../Sprite2D/SpriteDirectorComponent")
+parrent = NodePath("../..")
+curveY = SubResource("Curve_5qh1i")
+curveX = SubResource("Curve_iieb5")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
+script = ExtResource("6_eqj17")
+animator = NodePath("../../Animator")
+animationName = "Death"
+hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
+
+[node name="Animator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_yai8n")
+}
+
+[node name="GeneralComponents" type="Node2D" parent="."]
+
+[node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_0t5jp")]
+MAX_HEALTH = 1.0
+MAX_WEAKNESS = 1.0
+
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_p5e0x")]
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+stateToSwitchTo = NodePath("../../StateMachine/Death")
+
+[node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_yai8n")]
+parent = NodePath("../..")
+
+[node name="HurtboxComponent" parent="GeneralComponents" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_s5rsa")]
+collision_layer = 8
+stateMachine = NodePath("../../StateMachine")
+health_componnet = NodePath("../HealthComponent")
+isHackable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GeneralComponents/HurtboxComponent"]
+visible = false
+shape = SubResource("CircleShape2D_5qh1i")
+
+[node name="EnemyHeathbar" parent="GeneralComponents" node_paths=PackedStringArray("parent", "follow", "healthComponent", "stateMachine") instance=ExtResource("8_nfpr2")]
+showBars = false
+parent = NodePath("../..")
+follow = NodePath("../EnemyHealthbarMarker")
+healthComponent = NodePath("../HealthComponent")
+stateMachine = NodePath("../../StateMachine")
+
+[node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
+
+[node name="Proximities" type="Node2D" parent="."]
+
+[node name="ProximityArea" parent="Proximities" instance=ExtResource("9_2yanm")]
+collision_mask = 4
+requireLineOfSight = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/ProximityArea"]
+visible = false
+shape = SubResource("CircleShape2D_eqj17")
+
+[node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent") instance=ExtResource("12_lgadb")]
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
+
+[node name="Sounds" type="Node2D" parent="."]
+
+[node name="ButterflyFlock" parent="." instance=ExtResource("15_iieb5")]
+position = Vector2(0, 0)
+emitting = false
+amount = 16
+lifetime = 2.0
+one_shot = true
+preprocess = 0.0
+explosiveness = 0.75
+process_material = SubResource("ParticleProcessMaterial_pxo15")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0, 0, 0, 1)
+energy = 0.0
+texture = SubResource("GradientTexture2D_0t5jp")
+
+[node name="GrappleDisapearTimer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="GrappleDisapearTimer" to="." method="_on_grapple_disapear_timer_timeout"]

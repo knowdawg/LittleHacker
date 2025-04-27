@@ -9,7 +9,7 @@ func _ready() -> void:
 var prevPos = Vector2.ZERO
 var curPos = Vector2.ZERO
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	prevPos = curPos
 	curPos = thingToTrack.global_position
 	var v : Vector2 = curPos - prevPos

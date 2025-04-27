@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://d4gnsuwdxd5av"]
+
+[ext_resource type="Script" uid="uid://b54yy8trf1k47" path="res://Objects/WorldObjects/Foliage/generic_folioge.gd" id="1_hjcx3"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_v1e3f"]
+[ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_nx8sg"]
+
+[node name="GenericFolioge" type="Node2D" node_paths=PackedStringArray("hurtbox", "animator")]
+script = ExtResource("1_hjcx3")
+hurtbox = NodePath("HurtboxComponent")
+animator = NodePath("AnimationPlayer")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
+
+[node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_componnet") instance=ExtResource("2_v1e3f")]
+collision_layer = 8
+health_componnet = NodePath("../HealthComponent")
+isHackable = false
+
+[node name="HealthComponent" parent="." instance=ExtResource("3_nx8sg")]
+MAX_HEALTH = 1.0
+MAX_WEAKNESS = 1.0

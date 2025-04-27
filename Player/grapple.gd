@@ -25,12 +25,10 @@ func enter(_prevState):
 func update_physics(delta):
 	var f : float = 150.0
 	var posDir = (player.global_position - target.global_position).normalized()
-	var posDif = player.global_position
 	
 	t += delta * 3.0
 	var c = velocityCurve.sample(t)
 	player.global_position = player.global_position.move_toward(target.global_position, c * delta * 150.0)
-	posDif -= player.global_position
 	
 	if posDir.x > 0:
 		playerSprite.flip_h = false
@@ -47,6 +45,12 @@ func update_physics(delta):
 		player.global_position = target.global_position
 		grappleStickState.grappleTarget = target
 		trasitioned.emit(self, "GrappleStick")
+		return
+	
+	if !target.canBeGrappledTo():
+		weaponStateMachine.switchStates("Idle")
+		player.grappleBoost += -posDir * f * Vector2(0.5, 0.3)
+		trasitioned.emit(self, "Fall")
 		return
 
 func update(_delta):

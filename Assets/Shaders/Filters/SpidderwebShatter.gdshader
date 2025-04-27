@@ -115,19 +115,19 @@ vec4 generate_cracks(vec2 uv) {
         U *= 1.5;
     }
     color *= crack_color;
-	
+
 	return color;
 }
 
 
-void fragment() {	
+void fragment() {
 	COLOR = generate_cracks(UV);
 	vec4 orig_color = COLOR;
 	vec4 adjacent_color = generate_cracks(UV + TEXTURE_PIXEL_SIZE * reflection_offset);
 	float dis = distance(vec2(0.5), UV);
 	//dis = step(0.2, dis);
 	adjacent_color.a -= dis * 2.0;
-	
+
 	if (adjacent_color.a >= 1.0) {
 		COLOR = reflection_color;
 	} else {

@@ -81,3 +81,6 @@ func doesPlayerExist() -> bool:
 			return true
 	
 	return false
+
+func levelSwitched(sceneDate : SceneSwitchData):
+	onLevelSwitch.emit(sceneDate)

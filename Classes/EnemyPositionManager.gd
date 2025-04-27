@@ -25,7 +25,7 @@ func removeEnemy(e : Enemy):
 
 
 func findGrappleTarget(startingPos : Vector2, ang : float, maxAngDis : float, maxDistance : float, lineOfSight : bool = true, mustBeOnScreen : bool = false) -> Enemy:
-	var target : Enemy
+	var target : Enemy = null
 	
 	for e in canBeGrabbed:
 		var ePos = e.global_position
@@ -59,7 +59,7 @@ func findGrappleTarget(startingPos : Vector2, ang : float, maxAngDis : float, ma
 			continue
 		
 		#swap if an enemy is found with a better angle
-		var targetAngleDif = abs(startingPos.angle_to(target.global_position) - ang)
+		#var targetAngleDif = abs(startingPos.angle_to(target.global_position) - ang)
 		var targetDisDif = abs(startingPos.distance_to(target.global_position))
 		
 		#var tWieght = 1 / (targetAngleDif * targetDisDif)

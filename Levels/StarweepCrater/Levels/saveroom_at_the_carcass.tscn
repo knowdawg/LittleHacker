@@ -1,4 +1,4 @@
-[gd_scene load_steps=139 format=3 uid="uid://3qsk7wseq25g"]
+[gd_scene load_steps=146 format=3 uid="uid://3qsk7wseq25g"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_rgb68"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_dugcb"]
@@ -26,9 +26,7 @@
 [ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="8_wk1hb"]
 [ext_resource type="Script" uid="uid://dp8aqc2sy3i5u" path="res://addons/rmsmartshape/shapes/point_array.gd" id="9_1k6sk"]
 [ext_resource type="Texture2D" uid="uid://ffv1hiio2m8j" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmSkullForeground.png" id="9_2fksd"]
-[ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="9_a3fmi"]
 [ext_resource type="Texture2D" uid="uid://b8akensfj4e61" path="res://Palletes/sandstone_envirement_Pallete.tres" id="9_f8mjn"]
-[ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="10_6bmup"]
 [ext_resource type="Texture2D" uid="uid://crp0ox17pwocs" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmWindingAway1.png" id="12_se0rp"]
 [ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="20_f8mjn"]
 [ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="22_n0e0i"]
@@ -36,7 +34,11 @@
 [ext_resource type="PackedScene" uid="uid://digvxocyo0mr4" path="res://Assets/Shaders/ParticleEffects/WindParticles/lazy_leaves.tscn" id="23_73on7"]
 [ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="23_lnr3t"]
 [ext_resource type="PackedScene" uid="uid://ci8j3oe6fdx3u" path="res://Objects/Enemies/GrappleBug/grapple_bug.tscn" id="24_omy6c"]
+[ext_resource type="Texture2D" uid="uid://bbwqrj6yqt8da" path="res://Assets/Sprites/WorldObjects/LazySpec.png" id="24_yaipn"]
 [ext_resource type="PackedScene" uid="uid://ccha3ul4vqdo7" path="res://Assets/Shaders/ParticleEffects/ButterflyFlock/butterfly_flock.tscn" id="28_cbcc5"]
+[ext_resource type="PackedScene" uid="uid://1tuokhs2afei" path="res://Objects/WorldObjects/StarfallDecoration/torn_flag.tscn" id="29_i2gd3"]
+[ext_resource type="PackedScene" uid="uid://cr4dj46wcech6" path="res://Objects/WorldObjects/Tilemaps/foliage_tilemap.tscn" id="30_i2gd3"]
+[ext_resource type="PackedScene" uid="uid://dypkm8gk6yots" path="res://Objects/Enemies/VoidButterflyLarge/void_butterfly_large.tscn" id="33_73on7"]
 
 [sub_resource type="Gradient" id="Gradient_sy7vn"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
@@ -59,7 +61,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_73on7"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_i2gd3"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -69,7 +71,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i2gd3"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yaipn"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -107,7 +109,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yaipn"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5xlpe"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -153,7 +155,7 @@ shader = SubResource("Shader_fhqyc")
 shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.8
 
-[sub_resource type="Resource" id="Resource_73on7"]
+[sub_resource type="Resource" id="Resource_cq4e5"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -164,9 +166,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(309.902, 593.478)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_73on7")
+properties = SubResource("Resource_cq4e5")
 
-[sub_resource type="Resource" id="Resource_yaipn"]
+[sub_resource type="Resource" id="Resource_i5bmb"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -177,9 +179,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(411.368, 466.437)
 point_in = Vector2(-101.605, 0)
 point_out = Vector2(101.605, 0)
-properties = SubResource("Resource_yaipn")
+properties = SubResource("Resource_i5bmb")
 
-[sub_resource type="Resource" id="Resource_tq0qk"]
+[sub_resource type="Resource" id="Resource_k0i0g"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -190,9 +192,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(523.708, 626.331)
 point_in = Vector2(-49.8619, -15.0526)
 point_out = Vector2(49.8619, 15.0526)
-properties = SubResource("Resource_tq0qk")
+properties = SubResource("Resource_k0i0g")
 
-[sub_resource type="Resource" id="Resource_o3tnf"]
+[sub_resource type="Resource" id="Resource_jh0vu"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -203,9 +205,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(638.328, 455.642)
 point_in = Vector2(-69.6184, -8.4671)
 point_out = Vector2(69.6184, 8.4671)
-properties = SubResource("Resource_o3tnf")
+properties = SubResource("Resource_jh0vu")
 
-[sub_resource type="Resource" id="Resource_cq4e5"]
+[sub_resource type="Resource" id="Resource_tdovu"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -216,9 +218,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(740.491, 655.419)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_cq4e5")
+properties = SubResource("Resource_tdovu")
 
-[sub_resource type="Resource" id="Resource_i5bmb"]
+[sub_resource type="Resource" id="Resource_fnfoe"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -229,9 +231,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(309.61, 525.027)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_i5bmb")
+properties = SubResource("Resource_fnfoe")
 
-[sub_resource type="Resource" id="Resource_k0i0g"]
+[sub_resource type="Resource" id="Resource_gv56w"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -242,7 +244,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(736.047, 578.677)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_k0i0g")
+properties = SubResource("Resource_gv56w")
 
 [sub_resource type="Resource" id="Resource_35yog"]
 script = ExtResource("9_1k6sk")
@@ -263,7 +265,7 @@ tessellation_stages = 3
 tessellation_tolerance = 6.0
 curve_bake_interval = 20.0
 
-[sub_resource type="Resource" id="Resource_jh0vu"]
+[sub_resource type="Resource" id="Resource_0nbx2"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -274,9 +276,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(352.332, 387.539)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_jh0vu")
+properties = SubResource("Resource_0nbx2")
 
-[sub_resource type="Resource" id="Resource_tdovu"]
+[sub_resource type="Resource" id="Resource_wob8y"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -287,9 +289,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(491.747, 749.593)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_tdovu")
+properties = SubResource("Resource_wob8y")
 
-[sub_resource type="Resource" id="Resource_fnfoe"]
+[sub_resource type="Resource" id="Resource_btbao"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -300,9 +302,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(542.683, 578.499)
 point_in = Vector2(34.5868, -50.127)
 point_out = Vector2(-43.9948, 60.39)
-properties = SubResource("Resource_fnfoe")
+properties = SubResource("Resource_btbao")
 
-[sub_resource type="Resource" id="Resource_gv56w"]
+[sub_resource type="Resource" id="Resource_ljhid"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -313,7 +315,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(466.668, 365.094)
 point_in = Vector2(-45.4915, -19.3974)
 point_out = Vector2(45.4915, 19.3974)
-properties = SubResource("Resource_gv56w")
+properties = SubResource("Resource_ljhid")
 
 [sub_resource type="Resource" id="Resource_cnvwn"]
 script = ExtResource("9_1k6sk")
@@ -359,7 +361,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.7
 
-[sub_resource type="Resource" id="Resource_0nbx2"]
+[sub_resource type="Resource" id="Resource_tend6"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -370,9 +372,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(225.903, 532.256)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_0nbx2")
+properties = SubResource("Resource_tend6")
 
-[sub_resource type="Resource" id="Resource_wob8y"]
+[sub_resource type="Resource" id="Resource_pkp2j"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -383,9 +385,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(255.722, 285.568)
 point_in = Vector2(-25.3, 11)
 point_out = Vector2(25.3, -11)
-properties = SubResource("Resource_wob8y")
+properties = SubResource("Resource_pkp2j")
 
-[sub_resource type="Resource" id="Resource_btbao"]
+[sub_resource type="Resource" id="Resource_a2u81"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -396,9 +398,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(351.74, 357.044)
 point_in = Vector2(-14.85, -19.25)
 point_out = Vector2(14.85, 19.25)
-properties = SubResource("Resource_btbao")
+properties = SubResource("Resource_a2u81")
 
-[sub_resource type="Resource" id="Resource_ljhid"]
+[sub_resource type="Resource" id="Resource_riw21"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -409,9 +411,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(416.5, 356.5)
 point_in = Vector2(-12.1, 11.55)
 point_out = Vector2(12.1, -11.55)
-properties = SubResource("Resource_ljhid")
+properties = SubResource("Resource_riw21")
 
-[sub_resource type="Resource" id="Resource_tend6"]
+[sub_resource type="Resource" id="Resource_s4y56"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -422,9 +424,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(456.5, 284)
 point_in = Vector2(-19.25, 17.6)
 point_out = Vector2(19.25, -17.6)
-properties = SubResource("Resource_tend6")
+properties = SubResource("Resource_s4y56")
 
-[sub_resource type="Resource" id="Resource_pkp2j"]
+[sub_resource type="Resource" id="Resource_vjqc2"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -435,9 +437,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(531, 282.5)
 point_in = Vector2(-19.25, -11)
 point_out = Vector2(19.25, 11)
-properties = SubResource("Resource_pkp2j")
+properties = SubResource("Resource_vjqc2")
 
-[sub_resource type="Resource" id="Resource_a2u81"]
+[sub_resource type="Resource" id="Resource_n5ms7"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -448,9 +450,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(574.2, 577.1)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_a2u81")
+properties = SubResource("Resource_n5ms7")
 
-[sub_resource type="Resource" id="Resource_riw21"]
+[sub_resource type="Resource" id="Resource_ll13v"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -461,7 +463,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(300.768, 284.915)
 point_in = Vector2(-13.75, -6.60001)
 point_out = Vector2(13.75, 6.60001)
-properties = SubResource("Resource_riw21")
+properties = SubResource("Resource_ll13v")
 
 [sub_resource type="Resource" id="Resource_l7rvr"]
 script = ExtResource("9_1k6sk")
@@ -489,7 +491,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.4
 
-[sub_resource type="Resource" id="Resource_s4y56"]
+[sub_resource type="Resource" id="Resource_wnpee"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -500,9 +502,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(335.109, 381.264)
 point_in = Vector2(12.5, 10)
 point_out = Vector2(-3, -3.5)
-properties = SubResource("Resource_s4y56")
+properties = SubResource("Resource_wnpee")
 
-[sub_resource type="Resource" id="Resource_vjqc2"]
+[sub_resource type="Resource" id="Resource_1da87"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -513,9 +515,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(364.989, 322.039)
 point_in = Vector2(-9, 14)
 point_out = Vector2(9, -14)
-properties = SubResource("Resource_vjqc2")
+properties = SubResource("Resource_1da87")
 
-[sub_resource type="Resource" id="Resource_n5ms7"]
+[sub_resource type="Resource" id="Resource_b1t2c"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -526,9 +528,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(421.726, 324.404)
 point_in = Vector2(-18.5, -20)
 point_out = Vector2(18.5, 20)
-properties = SubResource("Resource_n5ms7")
+properties = SubResource("Resource_b1t2c")
 
-[sub_resource type="Resource" id="Resource_ll13v"]
+[sub_resource type="Resource" id="Resource_ay4ao"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -539,7 +541,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(472.865, 380.806)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_ll13v")
+properties = SubResource("Resource_ay4ao")
 
 [sub_resource type="Resource" id="Resource_ffeyq"]
 script = ExtResource("9_1k6sk")
@@ -625,7 +627,7 @@ shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.1
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_2fksd"]
-polygon = PackedVector2Array(90, 345, 173, 345, 179, 346, 182, 346, 182, 350, 177, 361, 171, 361, 171, 371, 168, 371, 165, 375, 127, 376, 124, 386, 99, 386, 99, 396, 124, 396, 136, 396, 136, 381, 176, 381, 176, 389, 165, 389, 164, 418, 182, 430, 212, 430, 218, 429, 227, 429, 247, 419, 260, 421, 286, 419, 287, 416, 303, 416, 304, 418, 349, 418, 349, 422, 373, 422, 373, 418, 388, 414, 413, 409, 418, 409, 446, 410, 448, 412, 452, 412, 456, 411, 458, 411, 458, 415, 454, 418, 462, 423, 457, 425, 456, 434, 459, 436, 459, 440, 458, 450, 455, 452, 455, 461, 457, 461, 457, 481, 475, 481, 475, 474, 477, 471, 477, 461, 473, 460, 476, 458, 475, 456, 476, 452, 476, 443, 479, 434, 476, 433, 476, 428, 479, 423, 474, 418, 477, 417, 477, 411, 502, 411, 502, 343, 542, 403, 492, 497, 439, 498, 390, 446, 164, 442, 77, 492, 73, 375, 73, 322, 90, 322)
+polygon = PackedVector2Array(90, 345, 173, 345, 179, 346, 182, 346, 182, 350, 177, 361, 171, 361, 171, 371, 168, 371, 165, 375, 127, 376, 124, 386, 124, 466, 136, 466, 136, 381, 176, 381, 176, 389, 165, 389, 164, 418, 182, 430, 212, 430, 218, 429, 227, 429, 247, 419, 260, 421, 286, 419, 287, 416, 303, 416, 304, 418, 349, 418, 349, 422, 373, 422, 373, 418, 388, 414, 413, 409, 418, 409, 446, 410, 448, 412, 452, 412, 456, 411, 458, 411, 458, 415, 454, 418, 462, 423, 457, 425, 456, 434, 459, 436, 459, 440, 458, 450, 455, 452, 455, 461, 457, 461, 457, 481, 475, 481, 475, 474, 477, 471, 477, 461, 473, 460, 476, 458, 475, 456, 476, 452, 476, 443, 479, 434, 476, 433, 476, 428, 479, 423, 474, 418, 477, 417, 477, 411, 502, 411, 502, 343, 542, 403, 492, 497, 439, 498, 390, 446, 171, 487, 77, 492, 73, 375, 73, 322, 90, 322)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_73on7"]
 polygon = PackedVector2Array(181, 346, 192, 346, 192, 347, 181, 347)
@@ -656,6 +658,46 @@ polygon = PackedVector2Array(458, 412, 458, 411, 477, 411, 477, 412)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_cbcc5"]
 polygon = PackedVector2Array(458, 468, 478, 468, 478, 469, 458, 469)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o3tnf"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_1wuu1"]
+_data = [Vector2(0, 0.504908), 0.0, 0.0, 0, 0, Vector2(0.0671296, 1), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.356481, 1), 0.0, 0.0, 0, 0, Vector2(0.451389, 0.00471139), 0.0, 0.0, 0, 0, Vector2(0.597222, 1), 0.0, 0.0, 0, 0, Vector2(0.666667, 0), 0.0, 0.0, 0, 0, Vector2(0.775463, 1), 0.0, 0.0, 0, 0, Vector2(0.884259, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.510012), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="Curve" id="Curve_cq4e5"]
+_data = [Vector2(0, 0.515116), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.365741, 1), 0.0, 0.0, 0, 0, Vector2(0.532407, 0), 0.0, 0.0, 0, 0, Vector2(0.796296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497252), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_cxi4c"]
+curve_x = SubResource("Curve_1wuu1")
+curve_y = SubResource("Curve_cq4e5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i5bmb"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(150, -60, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 80, 1)
+direction = Vector3(-1, 0.3, 0)
+spread = 20.0
+initial_velocity_min = 43.06
+initial_velocity_max = 43.06
+angular_velocity_min = 500.0
+angular_velocity_max = 500.0
+directional_velocity_min = -15.0
+directional_velocity_max = 15.0
+directional_velocity_curve = SubResource("CurveXYZTexture_cxi4c")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+anim_speed_min = 10.0
+anim_speed_max = 15.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.01
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_dugcb"]
 viewport_path = NodePath("Main")
@@ -713,16 +755,16 @@ texture = SubResource("GradientTexture2D_0kij4")
 
 [node name="Clouds3" parent="Background" instance=ExtResource("2_n3clg")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_73on7")
+texture = SubResource("GradientTexture2D_i2gd3")
 
 [node name="Clouds" parent="Background" instance=ExtResource("2_n3clg")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_i2gd3")
+texture = SubResource("GradientTexture2D_yaipn")
 
 [node name="Clouds2" parent="Background" instance=ExtResource("2_n3clg")]
 material = SubResource("ShaderMaterial_a3fmi")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_yaipn")
+texture = SubResource("GradientTexture2D_5xlpe")
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -1049,8 +1091,18 @@ texture = ExtResource("8_5fjm1")
 [node name="LazyLeaves" parent="." instance=ExtResource("23_73on7")]
 position = Vector2(359, 294)
 
+[node name="LazySpecs" parent="." instance=ExtResource("23_73on7")]
+material = SubResource("CanvasItemMaterial_o3tnf")
+position = Vector2(359, 294)
+texture = ExtResource("24_yaipn")
+process_material = SubResource("ParticleProcessMaterial_i5bmb")
+
 [node name="Wind" parent="." instance=ExtResource("22_n0e0i")]
 position = Vector2(359, 294)
+
+[node name="BehindFoliage" parent="." instance=ExtResource("30_i2gd3")]
+position = Vector2(0.5, 0.5)
+layer_0/tile_data = PackedInt32Array(26870033, 262146, 0, 26804503, 524290, 0, 26935565, 524290, 0)
 
 [node name="Envirement" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1111,22 +1163,8 @@ shape = SubResource("CircleShape2D_2fksd")
 [node name="Marker2D" type="Marker2D" parent="Envirement/ZiplineAnchor2/InteractableArea"]
 position = Vector2(0.5, 10)
 
-[node name="ClothSim" parent="Envirement" instance=ExtResource("9_a3fmi")]
-position = Vector2(207, 414)
-scale = Vector2(-1, 1)
-texture = ExtResource("10_6bmup")
-clothAngle = -30.0
-particle_count_x = 6
-particle_count_y = 2
-windAmplitude = 8.0
-
-[node name="ClothSim2" parent="Envirement" instance=ExtResource("9_a3fmi")]
-position = Vector2(205, 419)
-scale = Vector2(-1, 1)
-texture = ExtResource("10_6bmup")
-clothAngle = -15.0
-particle_count_x = 12
-particle_count_y = 3
+[node name="TornFlag" parent="Envirement" instance=ExtResource("29_i2gd3")]
+position = Vector2(205, 422)
 
 [node name="BloodPipesTilemap" parent="Envirement" instance=ExtResource("22_p6sko")]
 position = Vector2(5, 0)
@@ -1154,6 +1192,17 @@ position = Vector2(196, 327)
 [node name="GrappleBug3" parent="Enemies" instance=ExtResource("24_omy6c")]
 position = Vector2(344, 360)
 
+[node name="VoidButterflyLarge" parent="Enemies" instance=ExtResource("33_73on7")]
+position = Vector2(163, 323)
+startingRotation = 90.0
+
+[node name="VoidButterflyLarge2" parent="Enemies" instance=ExtResource("33_73on7")]
+position = Vector2(215, 391)
+
+[node name="VoidButterflyLarge4" parent="Enemies" instance=ExtResource("33_73on7")]
+position = Vector2(329, 388)
+startingRotation = 180.0
+
 [node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="WyrmSkullForeground" type="Sprite2D" parent="."]
@@ -1161,6 +1210,10 @@ z_index = 1
 texture_filter = 1
 position = Vector2(355, 424)
 texture = ExtResource("9_2fksd")
+
+[node name="FrontFolioge" parent="." instance=ExtResource("30_i2gd3")]
+z_index = 1
+layer_0/tile_data = PackedInt32Array(22544546, 3, 65536, 22544555, 3, 131072, 22544550, 3, 196608, 22544539, 3, 196608, 22544533, 3, 196608, 22544558, 3, 196608, 28115151, 3, 131072, 28115145, 3, 196608, 24903853, 3, 196608, 24903847, 3, 196608, 27459914, 3, 65536, 27394384, 3, 131072, 27328852, 3, 196608, 27328833, 3, 196608)
 
 [node name="Proectiles" type="Node2D" parent="."]
 
@@ -1191,5 +1244,4 @@ shape = SubResource("RectangleShape2D_n3clg")
 position = Vector2(23, 3)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_ls22c")]
-visible = false
-polygon = PackedVector2Array(96, 224, 96, 368, 60, 368, 60, 480, 148, 480, 148, 452, 384, 452, 384, 476, 688, 476, 688, 224)
+polygon = PackedVector2Array(96, 224, 96, 475, 688, 476, 688, 224)
