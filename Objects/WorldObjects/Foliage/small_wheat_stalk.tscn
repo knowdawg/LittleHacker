@@ -1,30 +1,32 @@
-[gd_scene load_steps=15 format=3 uid="uid://8n7tkiqmifa"]
+[gd_scene load_steps=17 format=3 uid="uid://8n7tkiqmifa"]
 
 [ext_resource type="Script" uid="uid://b54yy8trf1k47" path="res://Objects/WorldObjects/Foliage/generic_folioge.gd" id="1_nis30"]
 [ext_resource type="Texture2D" uid="uid://duno5ew01utrt" path="res://Assets/Sprites/WorldObjects/WheatStalks.png" id="2_niia0"]
+[ext_resource type="Texture2D" uid="uid://c720lt7wwperv" path="res://Assets/Sprites/WorldObjects/LeafDry.png" id="3_niia0"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="3_ysi2x"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="4_g0l11"]
 
-[sub_resource type="Gradient" id="Gradient_5x2fs"]
-offsets = PackedFloat32Array(0.792308, 0.969231)
-colors = PackedColorArray(0.878431, 0.819608, 0.760784, 1, 0.878431, 0.819608, 0.760784, 0)
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_ysi2x"]
+particles_animation = true
+particles_anim_h_frames = 8
+particles_anim_v_frames = 1
+particles_anim_loop = true
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_uexjw"]
-gradient = SubResource("Gradient_5x2fs")
-width = 8
-height = 8
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.8)
+[sub_resource type="Curve" id="Curve_g0l11"]
+_data = [Vector2(0, 0.505739), 0.0, 0.0, 0, 0, Vector2(0.353933, 1), 0.0, 0.0, 0, 0, Vector2(0.755618, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.505739), 0.0, 0.0, 0, 0]
+point_count = 4
 
-[sub_resource type="Curve" id="Curve_5x2fs"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_mveeh"]
+curve_x = SubResource("Curve_g0l11")
+
+[sub_resource type="Curve" id="Curve_j26f3"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.519663, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_uexjw"]
-curve = SubResource("Curve_5x2fs")
+[sub_resource type="CurveTexture" id="CurveTexture_xdvoy"]
+curve = SubResource("Curve_j26f3")
 
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_kyp63"]
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_we421"]
 particle_flag_disable_z = true
 emission_shape_scale = Vector3(3, 0, 1)
 emission_shape = 3
@@ -35,12 +37,15 @@ initial_velocity_min = 30.0
 initial_velocity_max = 50.0
 angular_velocity_min = -1.60933e-05
 angular_velocity_max = -1.60933e-05
+directional_velocity_min = -5.00002
+directional_velocity_max = 4.99998
+directional_velocity_curve = SubResource("CurveXYZTexture_mveeh")
 orbit_velocity_min = 9.49949e-08
 orbit_velocity_max = 9.49949e-08
 gravity = Vector3(0, 100, 0)
 scale_min = 0.2
 scale_max = 0.2
-scale_curve = SubResource("CurveTexture_uexjw")
+scale_curve = SubResource("CurveTexture_xdvoy")
 anim_speed_min = 3.0
 anim_speed_max = 3.0
 
@@ -84,26 +89,26 @@ step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/path = NodePath("Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/path = NodePath("GPUParticles2D:emitting")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_g0l11"]
@@ -111,38 +116,38 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("GPUParticles2D:emitting")
+tracks/0/path = NodePath("Sprite2D:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:visible")
+tracks/1/path = NodePath("Sprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [true]
+"values": [8]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite2D:frame")
+tracks/2/path = NodePath("GPUParticles2D:emitting")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [8]
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_mveeh"]
@@ -170,13 +175,14 @@ frame = 8
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_ysi2x")
 position = Vector2(-0.5, 1.5)
 emitting = false
-amount = 16
-texture = SubResource("GradientTexture2D_uexjw")
+amount = 6
+texture = ExtResource("3_niia0")
 one_shot = true
 explosiveness = 1.0
-process_material = SubResource("ParticleProcessMaterial_kyp63")
+process_material = SubResource("ParticleProcessMaterial_we421")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_componnet") instance=ExtResource("3_ysi2x")]
 position = Vector2(-0.5, -0.5)

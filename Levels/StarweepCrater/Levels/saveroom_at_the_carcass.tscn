@@ -1,4 +1,4 @@
-[gd_scene load_steps=146 format=3 uid="uid://3qsk7wseq25g"]
+[gd_scene load_steps=148 format=3 uid="uid://3qsk7wseq25g"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_rgb68"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_dugcb"]
@@ -28,17 +28,19 @@
 [ext_resource type="Texture2D" uid="uid://ffv1hiio2m8j" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmSkullForeground.png" id="9_2fksd"]
 [ext_resource type="Texture2D" uid="uid://b8akensfj4e61" path="res://Palletes/sandstone_envirement_Pallete.tres" id="9_f8mjn"]
 [ext_resource type="Texture2D" uid="uid://crp0ox17pwocs" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmWindingAway1.png" id="12_se0rp"]
+[ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="14_5xlpe"]
 [ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="20_f8mjn"]
 [ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="22_n0e0i"]
 [ext_resource type="PackedScene" uid="uid://dabx5or51d1jv" path="res://Objects/WorldObjects/Tilemaps/blood_pipes_tilemap.tscn" id="22_p6sko"]
 [ext_resource type="PackedScene" uid="uid://digvxocyo0mr4" path="res://Assets/Shaders/ParticleEffects/WindParticles/lazy_leaves.tscn" id="23_73on7"]
-[ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="23_lnr3t"]
 [ext_resource type="PackedScene" uid="uid://ci8j3oe6fdx3u" path="res://Objects/Enemies/GrappleBug/grapple_bug.tscn" id="24_omy6c"]
 [ext_resource type="Texture2D" uid="uid://bbwqrj6yqt8da" path="res://Assets/Sprites/WorldObjects/LazySpec.png" id="24_yaipn"]
 [ext_resource type="PackedScene" uid="uid://ccha3ul4vqdo7" path="res://Assets/Shaders/ParticleEffects/ButterflyFlock/butterfly_flock.tscn" id="28_cbcc5"]
 [ext_resource type="PackedScene" uid="uid://1tuokhs2afei" path="res://Objects/WorldObjects/StarfallDecoration/torn_flag.tscn" id="29_i2gd3"]
 [ext_resource type="PackedScene" uid="uid://cr4dj46wcech6" path="res://Objects/WorldObjects/Tilemaps/foliage_tilemap.tscn" id="30_i2gd3"]
 [ext_resource type="PackedScene" uid="uid://dypkm8gk6yots" path="res://Objects/Enemies/VoidButterflyLarge/void_butterfly_large.tscn" id="33_73on7"]
+[ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="40_5xlpe"]
+[ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="40_yaipn"]
 
 [sub_resource type="Gradient" id="Gradient_sy7vn"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
@@ -46,34 +48,34 @@ colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_5fjm1"]
 gradient = SubResource("Gradient_sy7vn")
 
-[sub_resource type="Gradient" id="Gradient_tpsgt"]
+[sub_resource type="Gradient" id="Gradient_i2gd3"]
 interpolation_mode = 2
 offsets = PackedFloat32Array(0, 0.417143, 0.702857, 1)
 colors = PackedColorArray(0.909804, 0.756863, 0.439216, 1, 0.811765, 0.341176, 0.235294, 1, 0.254902, 0.113725, 0.192157, 1, 0.0901961, 0.12549, 0.219608, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_0kij4"]
-gradient = SubResource("Gradient_tpsgt")
+gradient = SubResource("Gradient_i2gd3")
 width = 106
 height = 60
 fill_from = Vector2(1, 1)
 
-[sub_resource type="Gradient" id="Gradient_53ke4"]
+[sub_resource type="Gradient" id="Gradient_yaipn"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_i2gd3"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5xlpe"]
 resource_local_to_scene = true
-gradient = SubResource("Gradient_53ke4")
+gradient = SubResource("Gradient_yaipn")
 width = 1280
 height = 720
 
-[sub_resource type="Gradient" id="Gradient_k66g4"]
+[sub_resource type="Gradient" id="Gradient_5xlpe"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yaipn"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_tq0qk"]
 resource_local_to_scene = true
-gradient = SubResource("Gradient_k66g4")
+gradient = SubResource("Gradient_5xlpe")
 width = 1280
 height = 720
 
@@ -81,7 +83,7 @@ height = 720
 seed = 1
 frequency = 0.008
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o84sx"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_tq0qk"]
 width = 64
 seamless = true
 seamless_blend_skirt = 0.3
@@ -90,28 +92,28 @@ noise = SubResource("FastNoiseLite_5fjm1")
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2fksd"]
 frequency = 0.0022
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m61x4"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_uofc5"]
 seamless = true
 seamless_blend_skirt = 0.5
 noise = SubResource("FastNoiseLite_2fksd")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_a3fmi"]
 shader = ExtResource("3_ls22c")
-shader_parameter/cloudNoise = SubResource("NoiseTexture2D_o84sx")
-shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_tq0qk")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_uofc5")
 shader_parameter/resolution = Vector2(128, 72)
 shader_parameter/speed = 0.5
 shader_parameter/cloudFullness = 0.544
 shader_parameter/cloudPosition = 0.568
 shader_parameter/xDisplacment = 0.4
 
-[sub_resource type="Gradient" id="Gradient_kqt26"]
+[sub_resource type="Gradient" id="Gradient_o3tnf"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5xlpe"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_uofc5"]
 resource_local_to_scene = true
-gradient = SubResource("Gradient_kqt26")
+gradient = SubResource("Gradient_o3tnf")
 width = 1280
 height = 720
 
@@ -155,7 +157,7 @@ shader = SubResource("Shader_fhqyc")
 shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.8
 
-[sub_resource type="Resource" id="Resource_cq4e5"]
+[sub_resource type="Resource" id="Resource_o3tnf"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -166,9 +168,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(309.902, 593.478)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_cq4e5")
+properties = SubResource("Resource_o3tnf")
 
-[sub_resource type="Resource" id="Resource_i5bmb"]
+[sub_resource type="Resource" id="Resource_cq4e5"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -179,9 +181,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(411.368, 466.437)
 point_in = Vector2(-101.605, 0)
 point_out = Vector2(101.605, 0)
-properties = SubResource("Resource_i5bmb")
+properties = SubResource("Resource_cq4e5")
 
-[sub_resource type="Resource" id="Resource_k0i0g"]
+[sub_resource type="Resource" id="Resource_i5bmb"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -192,9 +194,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(523.708, 626.331)
 point_in = Vector2(-49.8619, -15.0526)
 point_out = Vector2(49.8619, 15.0526)
-properties = SubResource("Resource_k0i0g")
+properties = SubResource("Resource_i5bmb")
 
-[sub_resource type="Resource" id="Resource_jh0vu"]
+[sub_resource type="Resource" id="Resource_k0i0g"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -205,9 +207,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(638.328, 455.642)
 point_in = Vector2(-69.6184, -8.4671)
 point_out = Vector2(69.6184, 8.4671)
-properties = SubResource("Resource_jh0vu")
+properties = SubResource("Resource_k0i0g")
 
-[sub_resource type="Resource" id="Resource_tdovu"]
+[sub_resource type="Resource" id="Resource_jh0vu"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -218,9 +220,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(740.491, 655.419)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_tdovu")
+properties = SubResource("Resource_jh0vu")
 
-[sub_resource type="Resource" id="Resource_fnfoe"]
+[sub_resource type="Resource" id="Resource_tdovu"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -231,9 +233,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(309.61, 525.027)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_fnfoe")
+properties = SubResource("Resource_tdovu")
 
-[sub_resource type="Resource" id="Resource_gv56w"]
+[sub_resource type="Resource" id="Resource_fnfoe"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -244,7 +246,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(736.047, 578.677)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_gv56w")
+properties = SubResource("Resource_fnfoe")
 
 [sub_resource type="Resource" id="Resource_35yog"]
 script = ExtResource("9_1k6sk")
@@ -265,7 +267,7 @@ tessellation_stages = 3
 tessellation_tolerance = 6.0
 curve_bake_interval = 20.0
 
-[sub_resource type="Resource" id="Resource_0nbx2"]
+[sub_resource type="Resource" id="Resource_gv56w"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -276,9 +278,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(352.332, 387.539)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_0nbx2")
+properties = SubResource("Resource_gv56w")
 
-[sub_resource type="Resource" id="Resource_wob8y"]
+[sub_resource type="Resource" id="Resource_0nbx2"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -289,9 +291,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(491.747, 749.593)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_wob8y")
+properties = SubResource("Resource_0nbx2")
 
-[sub_resource type="Resource" id="Resource_btbao"]
+[sub_resource type="Resource" id="Resource_wob8y"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -302,9 +304,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(542.683, 578.499)
 point_in = Vector2(34.5868, -50.127)
 point_out = Vector2(-43.9948, 60.39)
-properties = SubResource("Resource_btbao")
+properties = SubResource("Resource_wob8y")
 
-[sub_resource type="Resource" id="Resource_ljhid"]
+[sub_resource type="Resource" id="Resource_btbao"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -315,7 +317,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(466.668, 365.094)
 point_in = Vector2(-45.4915, -19.3974)
 point_out = Vector2(45.4915, 19.3974)
-properties = SubResource("Resource_ljhid")
+properties = SubResource("Resource_btbao")
 
 [sub_resource type="Resource" id="Resource_cnvwn"]
 script = ExtResource("9_1k6sk")
@@ -361,7 +363,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.7
 
-[sub_resource type="Resource" id="Resource_tend6"]
+[sub_resource type="Resource" id="Resource_ljhid"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -372,9 +374,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(225.903, 532.256)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_tend6")
+properties = SubResource("Resource_ljhid")
 
-[sub_resource type="Resource" id="Resource_pkp2j"]
+[sub_resource type="Resource" id="Resource_tend6"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -385,9 +387,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(255.722, 285.568)
 point_in = Vector2(-25.3, 11)
 point_out = Vector2(25.3, -11)
-properties = SubResource("Resource_pkp2j")
+properties = SubResource("Resource_tend6")
 
-[sub_resource type="Resource" id="Resource_a2u81"]
+[sub_resource type="Resource" id="Resource_pkp2j"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -398,9 +400,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(351.74, 357.044)
 point_in = Vector2(-14.85, -19.25)
 point_out = Vector2(14.85, 19.25)
-properties = SubResource("Resource_a2u81")
+properties = SubResource("Resource_pkp2j")
 
-[sub_resource type="Resource" id="Resource_riw21"]
+[sub_resource type="Resource" id="Resource_a2u81"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -411,9 +413,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(416.5, 356.5)
 point_in = Vector2(-12.1, 11.55)
 point_out = Vector2(12.1, -11.55)
-properties = SubResource("Resource_riw21")
+properties = SubResource("Resource_a2u81")
 
-[sub_resource type="Resource" id="Resource_s4y56"]
+[sub_resource type="Resource" id="Resource_riw21"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -424,9 +426,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(456.5, 284)
 point_in = Vector2(-19.25, 17.6)
 point_out = Vector2(19.25, -17.6)
-properties = SubResource("Resource_s4y56")
+properties = SubResource("Resource_riw21")
 
-[sub_resource type="Resource" id="Resource_vjqc2"]
+[sub_resource type="Resource" id="Resource_s4y56"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -437,9 +439,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(531, 282.5)
 point_in = Vector2(-19.25, -11)
 point_out = Vector2(19.25, 11)
-properties = SubResource("Resource_vjqc2")
+properties = SubResource("Resource_s4y56")
 
-[sub_resource type="Resource" id="Resource_n5ms7"]
+[sub_resource type="Resource" id="Resource_vjqc2"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -450,9 +452,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(574.2, 577.1)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_n5ms7")
+properties = SubResource("Resource_vjqc2")
 
-[sub_resource type="Resource" id="Resource_ll13v"]
+[sub_resource type="Resource" id="Resource_n5ms7"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -463,7 +465,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(300.768, 284.915)
 point_in = Vector2(-13.75, -6.60001)
 point_out = Vector2(13.75, 6.60001)
-properties = SubResource("Resource_ll13v")
+properties = SubResource("Resource_n5ms7")
 
 [sub_resource type="Resource" id="Resource_l7rvr"]
 script = ExtResource("9_1k6sk")
@@ -491,7 +493,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_5fjm1")
 shader_parameter/depth = 0.4
 
-[sub_resource type="Resource" id="Resource_wnpee"]
+[sub_resource type="Resource" id="Resource_ll13v"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -502,9 +504,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(335.109, 381.264)
 point_in = Vector2(12.5, 10)
 point_out = Vector2(-3, -3.5)
-properties = SubResource("Resource_wnpee")
+properties = SubResource("Resource_ll13v")
 
-[sub_resource type="Resource" id="Resource_1da87"]
+[sub_resource type="Resource" id="Resource_wnpee"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -515,9 +517,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(364.989, 322.039)
 point_in = Vector2(-9, 14)
 point_out = Vector2(9, -14)
-properties = SubResource("Resource_1da87")
+properties = SubResource("Resource_wnpee")
 
-[sub_resource type="Resource" id="Resource_b1t2c"]
+[sub_resource type="Resource" id="Resource_1da87"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -528,9 +530,9 @@ script = ExtResource("8_n0e0i")
 position = Vector2(421.726, 324.404)
 point_in = Vector2(-18.5, -20)
 point_out = Vector2(18.5, 20)
-properties = SubResource("Resource_b1t2c")
+properties = SubResource("Resource_1da87")
 
-[sub_resource type="Resource" id="Resource_ay4ao"]
+[sub_resource type="Resource" id="Resource_b1t2c"]
 script = ExtResource("7_fhqyc")
 texture_idx = 0
 flip = false
@@ -541,7 +543,7 @@ script = ExtResource("8_n0e0i")
 position = Vector2(472.865, 380.806)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_ay4ao")
+properties = SubResource("Resource_b1t2c")
 
 [sub_resource type="Resource" id="Resource_ffeyq"]
 script = ExtResource("9_1k6sk")
@@ -673,7 +675,7 @@ point_count = 10
 _data = [Vector2(0, 0.515116), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.365741, 1), 0.0, 0.0, 0, 0, Vector2(0.532407, 0), 0.0, 0.0, 0, 0, Vector2(0.796296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497252), 0.0, 0.0, 0, 0]
 point_count = 6
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_cxi4c"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_1wuu1"]
 curve_x = SubResource("Curve_1wuu1")
 curve_y = SubResource("Curve_cq4e5")
 
@@ -690,7 +692,7 @@ angular_velocity_min = 500.0
 angular_velocity_max = 500.0
 directional_velocity_min = -15.0
 directional_velocity_max = 15.0
-directional_velocity_curve = SubResource("CurveXYZTexture_cxi4c")
+directional_velocity_curve = SubResource("CurveXYZTexture_1wuu1")
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.5
@@ -755,16 +757,16 @@ texture = SubResource("GradientTexture2D_0kij4")
 
 [node name="Clouds3" parent="Background" instance=ExtResource("2_n3clg")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_i2gd3")
+texture = SubResource("GradientTexture2D_5xlpe")
 
 [node name="Clouds" parent="Background" instance=ExtResource("2_n3clg")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_yaipn")
+texture = SubResource("GradientTexture2D_tq0qk")
 
 [node name="Clouds2" parent="Background" instance=ExtResource("2_n3clg")]
 material = SubResource("ShaderMaterial_a3fmi")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_5xlpe")
+texture = SubResource("GradientTexture2D_uofc5")
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -786,7 +788,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(256, 256)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Paralax/Stationaary/SubViewportContainer/Main2"]
 texture_filter = 1
@@ -812,7 +817,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(256, 128)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="Wrym" type="Sprite2D" parent="Paralax/VeryFar/SubViewportContainer/Main2"]
 visible = false
@@ -849,7 +857,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(512, 256)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="Wrym" type="Sprite2D" parent="Paralax/Far/SubViewportContainer/Main2"]
 visible = false
@@ -885,7 +896,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(128, 256)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="Sprite2D5" type="Sprite2D" parent="Paralax/MediumFar/SubViewportContainer/Main2"]
 texture_filter = 1
@@ -910,7 +924,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(512, 256)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="Sprite2D4" type="Sprite2D" parent="Paralax/Medium/SubViewportContainer/Main2"]
 visible = false
@@ -944,7 +961,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(256, 256)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="Sprite2D3" type="Sprite2D" parent="Paralax/MeduimClose/SubViewportContainer/Main2"]
 texture_filter = 1
@@ -981,7 +1001,10 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(128, 128)
 render_target_update_mode = 4
+script = ExtResource("14_5xlpe")
+renderTarget = 1
 
 [node name="SDFTilemap" parent="Paralax/Close/SubViewportContainer/Main2" instance=ExtResource("5_b0k56")]
 visible = false
@@ -1024,6 +1047,7 @@ transparent_bg = true
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(1000, 864)
+script = ExtResource("14_5xlpe")
 
 [node name="SaveroomAtTheCarcassEnvirement" parent="Main" instance=ExtResource("2_fa3pn")]
 
@@ -1180,9 +1204,6 @@ respawnPointName = "UnderTheWyrm"
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="CrystalThug2" parent="Enemies" instance=ExtResource("23_lnr3t")]
-position = Vector2(115, 391)
-
 [node name="GrappleBug" parent="Enemies" instance=ExtResource("24_omy6c")]
 position = Vector2(360, 395)
 
@@ -1244,4 +1265,12 @@ shape = SubResource("RectangleShape2D_n3clg")
 position = Vector2(23, 3)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_ls22c")]
+visible = false
 polygon = PackedVector2Array(96, 224, 96, 475, 688, 476, 688, 224)
+
+[node name="WindNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("40_yaipn")
+autoplay = true
+bus = &"SoundEffects"
+
+[node name="StarweepWorldEnvierment" parent="." instance=ExtResource("40_5xlpe")]

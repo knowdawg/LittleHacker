@@ -1,8 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://bm0s7ek1l7gcu"]
+[gd_scene load_steps=16 format=3 uid="uid://bm0s7ek1l7gcu"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sahbk"]
+[ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="2_5yegh"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_w4aep"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_qjk1c"]
+[ext_resource type="PackedScene" uid="uid://xssqw5n2yax2" path="res://Components/PlatformRespawnArea/platform_respawn_area.tscn" id="4_bmg0s"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_jvbrh"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="5_cjsib"]
 
@@ -105,6 +107,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="Far" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.2, 0.2)
@@ -123,6 +126,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="MediumFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.5, 0.5)
@@ -141,6 +145,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="Medium" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.8, 0.8)
@@ -159,6 +164,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="MeduimClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.85, 0.85)
@@ -176,6 +182,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="Close" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.9, 0.9)
@@ -193,6 +200,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="VeryClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.95, 0.95)
@@ -209,6 +217,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
+script = ExtResource("2_5yegh")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -234,8 +243,11 @@ centered = false
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_w4aep")]
 material = SubResource("ShaderMaterial_3bpdn")
+metadata/_edit_use_anchors_ = true
 
 [node name="PlatformRespawnPoints" type="Node2D" parent="."]
+
+[node name="PlatformRespawnArea" parent="PlatformRespawnPoints" instance=ExtResource("4_bmg0s")]
 
 [node name="Doors" type="Node2D" parent="."]
 
