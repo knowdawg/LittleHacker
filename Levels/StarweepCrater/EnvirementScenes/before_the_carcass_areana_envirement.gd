@@ -21,7 +21,7 @@ func endLava():
 		c.set_deferred("disabled", true)
 
 func _process(delta: float) -> void:
-	if Game.camera:
+	if Game.camera and shakeAmount > 0.01:
 		Game.camera.set_shake(shakeAmount)
 	
 	#Temp, find a better way to enable

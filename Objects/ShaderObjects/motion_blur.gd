@@ -3,6 +3,7 @@ class_name ScreenEffects
 
 
 func blur(node : Node2D):
+	#Game.camera.set_shake(50.0)
 	var p : Vector2 = node.get_global_transform_with_canvas().origin
 	p.x /= get_viewport().size.x
 	p.y /=  get_viewport().size.y
@@ -34,9 +35,10 @@ func superParry(node : Node2D):
 	p.y /=  get_viewport().size.y
 	$SuperParry.material.set_shader_parameter("blurCenter", p)
 	$SuperParryAnimator.play("SuperParry")
-	Game.camera.set_shake(3.0)
+	Game.camera.set_shake(5.0)
 	Game.camera.zoom = Vector2(12.0, 12.0)
 	Game.setTimeScale(0.1)
+
 
 func showStatic():
 	%StaticNoiseTimer.start()

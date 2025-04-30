@@ -79,7 +79,12 @@ func doesPlayerExist() -> bool:
 	if player:
 		if is_instance_valid(player):
 			return true
-	
+	return false
+
+func doesCameraExist() -> bool:
+	if camera:
+		if is_instance_valid(camera):
+			return true
 	return false
 
 func levelSwitched(sceneDate : SceneSwitchData):

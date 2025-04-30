@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://d4aqafxdibln2"]
+[gd_scene load_steps=38 format=3 uid="uid://d4aqafxdibln2"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sny8n"]
 [ext_resource type="PackedScene" uid="uid://eg5mvs75ckl2" path="res://Levels/StarweepCrater/EnvirementScenes/before_the_carcass_areana_envirement.tscn" id="2_lrg3a"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bsbpltyxlcy5f" path="res://Objects/WorldObjects/Lantern/lantern_light.tscn" id="15_23ouk"]
 [ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="16_m5a78"]
 [ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="17_rhqnk"]
+[ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="18_lyela"]
 
 [sub_resource type="Shader" id="Shader_73joc"]
 code = "shader_type canvas_item;
@@ -500,3 +501,5 @@ stream = ExtResource("17_rhqnk")
 pitch_scale = 0.3
 autoplay = true
 bus = &"SoundEffects"
+script = ExtResource("18_lyela")
+volumeDB = -5.0

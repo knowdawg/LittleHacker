@@ -3207,6 +3207,7 @@ attackStrength = 2
 knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 hitEfect = ExtResource("19_0ng1i")
+screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackLeft"]
 visible = false
@@ -3224,6 +3225,7 @@ attackStrength = 2
 knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
+screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackRight"]
 visible = false
@@ -3239,6 +3241,7 @@ weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 hitEfect = ExtResource("19_0ng1i")
+screenShakeOnHit = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackLeft"]
 visible = false
@@ -3246,12 +3249,14 @@ polygon = PackedVector2Array(-5, 0, 1, 0, 1, -7, 1, -12, -2, -12, -8, -6, -8, -2
 
 [node name="AttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
+attackName = "PlayerAttackRight"
 collisionShape = NodePath("CollisionPolygon2D")
 attack_damage = 3.0
 weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
+screenShakeOnHit = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackRight"]
 visible = false
@@ -3259,6 +3264,7 @@ polygon = PackedVector2Array(8, -2, 8, -6, 2, -12, -1, -12, -1, 0, 5, 0)
 
 [node name="AttackDown" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
+attackName = "PlayerAttackDown"
 collisionShape = NodePath("CollisionShape2D")
 attack_damage = 1.0
 weakness_damage = 1.0
@@ -3266,6 +3272,7 @@ knockback_force = 50.0
 knockbackVector = Vector2(0, 1)
 isPogo = true
 hitEfect = ExtResource("19_0ng1i")
+screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackDown"]
 visible = false
@@ -3274,12 +3281,14 @@ shape = SubResource("RectangleShape2D_dq4fh")
 
 [node name="AttackUp" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
+attackName = "PlayerAttackUp"
 collisionShape = NodePath("CollisionShape2D")
 attack_damage = 3.0
 weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(0, -1)
 hitEfect = ExtResource("19_0ng1i")
+screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackUp"]
 visible = false
@@ -3290,6 +3299,7 @@ polygon = PackedVector2Array(-6, 0, -1, -8, 1, -8, 6, 0, 7, 8, -7, 8)
 
 [node name="HackAttackLeft" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
+attackName = "PlayerHackAttackLeft"
 collisionShape = NodePath("CollisionShape2D")
 knockbackVector = Vector2(-1, 0)
 isHackAttack = true
@@ -3302,6 +3312,7 @@ shape = SubResource("RectangleShape2D_0sr2h")
 
 [node name="HackAttackRight" parent="WeaponDislocator/WeaponSprite" node_paths=PackedStringArray("collisionShape") instance=ExtResource("18_3hvnj")]
 collision_mask = 8
+attackName = "PlayerHackAttackRight"
 collisionShape = NodePath("CollisionShape2D")
 knockbackVector = Vector2(1, 0)
 isHackAttack = true
@@ -3690,6 +3701,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="MotionBlur" parent="." instance=ExtResource("60_mf4dy")]
+unique_name_in_owner = true
 layer = 100
 
 [node name="PlayerUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("healthComponent", "highlight", "backgroundLine", "middleLine")]

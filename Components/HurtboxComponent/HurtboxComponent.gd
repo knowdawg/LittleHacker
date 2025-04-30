@@ -8,6 +8,8 @@ signal parry
 @export var health_componnet : HealthComponent
 @export var IFRAMETIMER : float = 0.0
 @export var isHackable = true
+
+@export var isSolid : bool = true #for things like applyinh screenshake on hit ect
 var ift : float = 0.0
 
 var parryStrength = 0

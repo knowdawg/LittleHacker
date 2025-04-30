@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://bx7i5q252gya5"]
+[gd_scene load_steps=78 format=3 uid="uid://bx7i5q252gya5"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_d1l05"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="2_oi261"]
@@ -9,7 +9,33 @@
 [ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="4_dsaaq"]
 [ext_resource type="PackedScene" uid="uid://xssqw5n2yax2" path="res://Components/PlatformRespawnArea/platform_respawn_area.tscn" id="4_k3ysf"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="5_4uj70"]
+[ext_resource type="PackedScene" uid="uid://ob6rkkv311c5" path="res://Components/SpineTextureMapper/spine_texture_mapper.tscn" id="5_ceygg"]
+[ext_resource type="Texture2D" uid="uid://beycbrvpuf3g0" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse.png" id="5_t8d8q"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_dsaaq"]
+[ext_resource type="Texture2D" uid="uid://cdv6us5lootnk" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse2.png" id="6_eg4k2"]
+[ext_resource type="PackedScene" uid="uid://d4jk8bbxbaeki" path="res://Components/SDFandCollitionComponent/SDFandCollition.tscn" id="6_mdi6s"]
+[ext_resource type="Script" uid="uid://dke75o7tsusdb" path="res://addons/rmsmartshape/vertex_properties.gd" id="7_jpcra"]
+[ext_resource type="PackedScene" uid="uid://b73rjyjkc6438" path="res://Objects/WorldObjects/Zipline/zipline_anchor.tscn" id="7_md1pq"]
+[ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="8_300l7"]
+[ext_resource type="Script" uid="uid://drwe3xmntrjbm" path="res://addons/rmsmartshape/shapes/point.gd" id="8_x452h"]
+[ext_resource type="PackedScene" uid="uid://digvxocyo0mr4" path="res://Assets/Shaders/ParticleEffects/WindParticles/lazy_leaves.tscn" id="9_1afi5"]
+[ext_resource type="Script" uid="uid://dp8aqc2sy3i5u" path="res://addons/rmsmartshape/shapes/point_array.gd" id="9_5e62k"]
+[ext_resource type="PackedScene" uid="uid://ci8j3oe6fdx3u" path="res://Objects/Enemies/GrappleBug/grapple_bug.tscn" id="9_xr4cd"]
+[ext_resource type="Texture2D" uid="uid://bbwqrj6yqt8da" path="res://Assets/Sprites/WorldObjects/LazySpec.png" id="10_t8d8q"]
+[ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="11_eg4k2"]
+[ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="12_mdi6s"]
+[ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="16_8vbbb"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="16_trydb"]
+[ext_resource type="Texture2D" uid="uid://b2keo0j23vrvo" path="res://Assets/Sprites/Enemies/CrystalElite.png" id="16_wvyir"]
+[ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="17_ceygg"]
+[ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="20_5e62k"]
+[ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="21_c4km3"]
+
+[sub_resource type="Gradient" id="Gradient_sy7vn"]
+colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_t8d8q"]
+gradient = SubResource("Gradient_sy7vn")
 
 [sub_resource type="Gradient" id="Gradient_tpsgt"]
 interpolation_mode = 2
@@ -26,7 +52,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mdi6s"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_jpcra"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -36,7 +62,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_md1pq"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x452h"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -74,7 +100,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_300l7"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5e62k"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -105,35 +131,164 @@ void fragment() {
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cjsib"]
 resource_local_to_scene = true
 shader = SubResource("Shader_73joc")
+shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bmg0s"]
 resource_local_to_scene = true
 shader = SubResource("Shader_73joc")
+shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5yegh"]
 resource_local_to_scene = true
 shader = SubResource("Shader_73joc")
+shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_evqcy"]
 resource_local_to_scene = true
 shader = SubResource("Shader_73joc")
+shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjry8"]
 resource_local_to_scene = true
 shader = SubResource("Shader_73joc")
+shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.2
+
+[sub_resource type="Resource" id="Resource_jpcra"]
+script = ExtResource("7_jpcra")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_x452h"]
+script = ExtResource("8_x452h")
+position = Vector2(215.502, 462.468)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_jpcra")
+
+[sub_resource type="Resource" id="Resource_5e62k"]
+script = ExtResource("7_jpcra")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_c4km3"]
+script = ExtResource("8_x452h")
+position = Vector2(365.949, 322.647)
+point_in = Vector2(-152.505, 1.15637)
+point_out = Vector2(152.505, -1.15637)
+properties = SubResource("Resource_5e62k")
+
+[sub_resource type="Resource" id="Resource_gb8d3"]
+script = ExtResource("7_jpcra")
+texture_idx = 0
+flip = false
+width = 1.0
+
+[sub_resource type="Resource" id="Resource_1afi5"]
+script = ExtResource("8_x452h")
+position = Vector2(514.448, 468.315)
+point_in = Vector2(0, 0)
+point_out = Vector2(0, 0)
+properties = SubResource("Resource_gb8d3")
+
+[sub_resource type="Resource" id="Resource_t8d8q"]
+script = ExtResource("9_5e62k")
+_points = {
+13: SubResource("Resource_x452h"),
+18: SubResource("Resource_c4km3"),
+19: SubResource("Resource_1afi5")
+}
+_point_order = PackedInt32Array(13, 18, 19)
+_constraints = {}
+_next_key = 21
+_material_overrides = {}
+tessellation_stages = 3
+tessellation_tolerance = 6.0
+curve_bake_interval = 20.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4a3ey"]
 resource_local_to_scene = true
 shader = SubResource("Shader_73joc")
+shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_iqh2m"]
+particles_animation = true
+particles_anim_h_frames = 4
+particles_anim_v_frames = 1
+particles_anim_loop = true
+
+[sub_resource type="Curve" id="Curve_ei1mr"]
+_data = [Vector2(0, 0.504908), 0.0, 0.0, 0, 0, Vector2(0.0671296, 1), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.356481, 1), 0.0, 0.0, 0, 0, Vector2(0.451389, 0.00471139), 0.0, 0.0, 0, 0, Vector2(0.597222, 1), 0.0, 0.0, 0, 0, Vector2(0.666667, 0), 0.0, 0.0, 0, 0, Vector2(0.775463, 1), 0.0, 0.0, 0, 0, Vector2(0.884259, 0), 0.0, 0.0, 0, 0, Vector2(1, 0.510012), 0.0, 0.0, 0, 0]
+point_count = 10
+
+[sub_resource type="Curve" id="Curve_1sp2w"]
+_data = [Vector2(0, 0.515116), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.365741, 1), 0.0, 0.0, 0, 0, Vector2(0.532407, 0), 0.0, 0.0, 0, 0, Vector2(0.796296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497252), 0.0, 0.0, 0, 0]
+point_count = 6
+
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_cxi4c"]
+curve_x = SubResource("Curve_ei1mr")
+curve_y = SubResource("Curve_1sp2w")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_apdyx"]
+particle_flag_disable_z = true
+emission_shape_offset = Vector3(150, -60, 0)
+emission_shape = 3
+emission_box_extents = Vector3(1, 80, 1)
+direction = Vector3(-1, 0.3, 0)
+spread = 20.0
+initial_velocity_min = 43.06
+initial_velocity_max = 43.06
+angular_velocity_min = 500.0
+angular_velocity_max = 500.0
+directional_velocity_min = -15.0
+directional_velocity_max = 15.0
+directional_velocity_curve = SubResource("CurveXYZTexture_cxi4c")
+gravity = Vector3(0, 0, 0)
+scale_min = 0.3
+scale_max = 0.5
+anim_speed_min = 10.0
+anim_speed_max = 15.0
+turbulence_influence_min = 0.0
+turbulence_influence_max = 0.01
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xr4cd"]
+polygon = PackedVector2Array(238, 720, 238, 715, 240, 712, 240, 705, 254, 705, 254, 700, 305, 700, 311, 699, 315, 699, 321, 700, 324, 700, 324, 703, 326, 704, 326, 706, 317, 706, 315, 711, 302, 711, 301, 715, 295, 715, 294, 720)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wvyir"]
+polygon = PackedVector2Array(219, 720, 220, 718, 220, 706, 222, 703, 219, 702, 219, 697, 226, 695, 226, 689, 231, 688, 231, 685, 265, 685, 268, 680, 265, 679, 265, 667, 270, 663, 266, 660, 268, 657, 262, 655, 177, 655, 177, 653, 175, 653, 175, 650, 157, 650, 157, 645, 145, 645, 145, 720)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c80gb"]
+polygon = PackedVector2Array(464, 710, 464, 714, 463, 714, 463, 715, 480, 715, 477, 720, 538, 720, 538, 655, 415, 656, 414, 659, 415, 665, 423, 665, 429, 671, 438, 671, 438, 675, 448, 675, 451, 680, 469, 680, 471, 685, 484, 685, 484, 689, 492, 690, 493, 695, 505, 695, 505, 701, 512, 704, 510, 706, 510, 711, 479, 711, 472, 710)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_300l7"]
+polygon = PackedVector2Array(215, 711, 251, 711, 251, 710, 215, 710)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_8vbbb"]
+polygon = PackedVector2Array(324, 700, 340, 700, 340, 701, 324, 701)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ceygg"]
+polygon = PackedVector2Array(324, 700, 340, 700, 340, 701, 324, 701)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_trydb"]
+polygon = PackedVector2Array(267, 655, 273, 656, 279, 658, 283, 659, 287, 660, 292, 661, 295, 661, 301, 662, 309, 662, 315, 663, 367, 663, 373, 662, 381, 662, 387, 661, 390, 661, 395, 660, 403, 658, 409, 656, 412, 655, 415, 655, 415, 656, 412, 656, 409, 657, 403, 659, 395, 661, 390, 662, 387, 662, 381, 663, 373, 663, 367, 664, 315, 664, 309, 663, 301, 663, 295, 662, 292, 662, 279, 659, 273, 657, 267, 656, 263, 656, 263, 655)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k3ysf"]
 viewport_path = NodePath("Main")
+
+[sub_resource type="Curve" id="Curve_xr4cd"]
+resource_local_to_scene = true
+_data = [Vector2(0, 0), 0.0, -0.0262488, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_wvyir"]
+radius = 3.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mdi6s"]
 resource_local_to_scene = true
@@ -141,15 +296,27 @@ shader = ExtResource("3_oi261")
 shader_parameter/brightness = 1.0
 shader_parameter/shadowIntensitiy = 0.0
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_4uj70"]
+size = Vector2(60, 12)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c80gb"]
+shader = ExtResource("16_trydb")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 0.3
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
 [node name="UpperStarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 script = ExtResource("1_d1l05")
 projectileSpawnNode = NodePath("Proectiles")
 enemySpawnLocation = NodePath("Enemies")
-doorToSpawnPlayerOnFailure = NodePath("Doors/LevelTransition")
+doorToSpawnPlayerOnFailure = NodePath("Doors/Down")
 doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParrent")
 respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
+backgroundGradient = SubResource("GradientTexture2D_t8d8q")
 backgroundContainers = [NodePath("Paralax/VeryFar/SubViewportContainer"), NodePath("Paralax/Far/SubViewportContainer"), NodePath("Paralax/MediumFar/SubViewportContainer"), NodePath("Paralax/Medium/SubViewportContainer"), NodePath("Paralax/MeduimClose/SubViewportContainer"), NodePath("Paralax/Close/SubViewportContainer"), NodePath("Paralax/VeryClose/SubViewportContainer")]
 
 [node name="Background" type="CanvasLayer" parent="."]
@@ -163,16 +330,16 @@ texture = SubResource("GradientTexture2D_4uj70")
 
 [node name="Clouds3" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_mdi6s")
+texture = SubResource("GradientTexture2D_jpcra")
 
 [node name="Clouds" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_md1pq")
+texture = SubResource("GradientTexture2D_x452h")
 
 [node name="Clouds2" parent="Background" instance=ExtResource("2_oi261")]
 material = SubResource("ShaderMaterial_xr4cd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_300l7")
+texture = SubResource("GradientTexture2D_5e62k")
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -182,8 +349,10 @@ scroll_scale = Vector2(0.1, 0.1)
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryFar"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_cjsib")
-offset_right = 512.0
-offset_bottom = 512.0
+offset_left = 503.892
+offset_top = 351.397
+offset_right = 1015.89
+offset_bottom = 863.397
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryFar/SubViewportContainer"]
@@ -195,14 +364,21 @@ sdf_scale = 0
 render_target_update_mode = 4
 script = ExtResource("4_dsaaq")
 
+[node name="Wrym" type="Sprite2D" parent="Paralax/VeryFar/SubViewportContainer/Main2"]
+texture_filter = 1
+position = Vector2(106.293, 95.1541)
+texture = ExtResource("5_t8d8q")
+
 [node name="Far" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.2, 0.2)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Far"]
 texture_filter = 1
 material = SubResource("ShaderMaterial_bmg0s")
-offset_right = 512.0
-offset_bottom = 512.0
+offset_left = 486.53
+offset_top = 371.842
+offset_right = 998.53
+offset_bottom = 883.842
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Far/SubViewportContainer"]
@@ -213,6 +389,11 @@ sdf_oversize = 0
 sdf_scale = 0
 render_target_update_mode = 4
 script = ExtResource("4_dsaaq")
+
+[node name="Wrym2" type="Sprite2D" parent="Paralax/Far/SubViewportContainer/Main2"]
+texture_filter = 1
+position = Vector2(158.873, 84.709)
+texture = ExtResource("6_eg4k2")
 
 [node name="MediumFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.5, 0.5)
@@ -274,6 +455,7 @@ script = ExtResource("4_dsaaq")
 scroll_scale = Vector2(0.9, 0.9)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Close"]
+texture_filter = 1
 material = SubResource("ShaderMaterial_tjry8")
 offset_right = 512.0
 offset_bottom = 512.0
@@ -285,8 +467,13 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(1080, 720)
 render_target_update_mode = 4
 script = ExtResource("4_dsaaq")
+
+[node name="WyrmSpine" parent="Paralax/Close/SubViewportContainer/Main2" instance=ExtResource("5_ceygg")]
+position = Vector2(5.11456, 284.984)
+_points = SubResource("Resource_t8d8q")
 
 [node name="VeryClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.95, 0.95)
@@ -305,6 +492,17 @@ sdf_scale = 0
 render_target_update_mode = 4
 script = ExtResource("4_dsaaq")
 
+[node name="LazyLeaves" parent="." instance=ExtResource("9_1afi5")]
+position = Vector2(359, 294)
+
+[node name="LazySpecs" parent="." instance=ExtResource("9_1afi5")]
+material = SubResource("CanvasItemMaterial_iqh2m")
+position = Vector2(359, 294)
+texture = ExtResource("10_t8d8q")
+process_material = SubResource("ParticleProcessMaterial_apdyx")
+
+[node name="Wind" parent="." instance=ExtResource("11_eg4k2")]
+
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
 sdf_oversize = 0
@@ -315,6 +513,39 @@ size = Vector2i(1000, 720)
 
 [node name="Collisions" type="Node2D" parent="."]
 
+[node name="PointsRockAtStart" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_xr4cd")
+
+[node name="LeftRockMass" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_wvyir")
+
+[node name="RightRockMass" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_c80gb")
+
+[node name="DownDoorPlatform" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_300l7")
+oneWay = true
+
+[node name="GrappleSecretPlatform1" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_8vbbb")
+oneWay = true
+
+[node name="GrappleSecretPlatform2" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(127, 10)
+occluder = SubResource("OccluderPolygon2D_ceygg")
+oneWay = true
+
+[node name="Bridge" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_trydb")
+oneWay = true
+
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="Envirement" type="Sprite2D" parent="."]
@@ -322,9 +553,46 @@ texture_filter = 1
 texture = SubResource("ViewportTexture_k3ysf")
 centered = false
 
+[node name="ZiplineAnchor2" parent="Envirement" node_paths=PackedStringArray("interactableComponent", "startingPos", "destination") instance=ExtResource("7_md1pq")]
+position = Vector2(270, 650)
+flipH = true
+interactableComponent = NodePath("InteractableArea")
+startingPos = NodePath("StartingPos")
+destination = NodePath("Destination")
+duration = 0.7
+curve = SubResource("Curve_xr4cd")
+
+[node name="StartingPos" type="Marker2D" parent="Envirement/ZiplineAnchor2"]
+position = Vector2(3.5, 47)
+
+[node name="Destination" type="Marker2D" parent="Envirement/ZiplineAnchor2"]
+position = Vector2(3.5, -1)
+
+[node name="InteractableArea" parent="Envirement/ZiplineAnchor2" node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("8_300l7")]
+position = Vector2(6, 9)
+text = "Attach"
+textPos = NodePath("Marker2D")
+colShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Envirement/ZiplineAnchor2/InteractableArea"]
+position = Vector2(-3, 38)
+shape = SubResource("CircleShape2D_wvyir")
+
+[node name="Marker2D" type="Marker2D" parent="Envirement/ZiplineAnchor2/InteractableArea"]
+position = Vector2(-3, 44)
+
 [node name="RespawnPoints" type="Node2D" parent="."]
 
 [node name="Enemies" type="Node2D" parent="."]
+
+[node name="VoidButterfly" parent="Enemies" instance=ExtResource("9_xr4cd")]
+position = Vector2(355, 692)
+
+[node name="VoidButterfly3" parent="Enemies" instance=ExtResource("9_xr4cd")]
+position = Vector2(396, 696)
+
+[node name="VoidButterfly2" parent="Enemies" instance=ExtResource("9_xr4cd")]
+position = Vector2(438, 701)
 
 [node name="PlayerParrent" type="Node2D" parent="."]
 
@@ -340,11 +608,44 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Doors" type="Node2D" parent="."]
 
-[node name="LevelTransition" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("5_4uj70")]
+[node name="Down" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("5_4uj70")]
+position = Vector2(232, 716)
+scene = "uid://cb2mgf3vv8ptm"
+doorName = "Top"
 enterPosition = NodePath("Marker2D")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/LevelTransition"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/Down"]
+position = Vector2(2, 10)
+shape = SubResource("RectangleShape2D_4uj70")
 
-[node name="Marker2D" type="Marker2D" parent="Doors/LevelTransition"]
+[node name="Marker2D" type="Marker2D" parent="Doors/Down"]
+position = Vector2(0, -8)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("6_dsaaq")]
+visible = false
+polygon = PackedVector2Array(96, 716, 992, 716, 992, 128, 96, 128)
+
+[node name="StarweepWorldEnvierment" parent="." instance=ExtResource("12_mdi6s")]
+
+[node name="WindNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_5e62k")
+volume_db = -5.0
+autoplay = true
+bus = &"SoundEffects"
+script = ExtResource("21_c4km3")
+volumeDB = -8.0
+
+[node name="ClothSim" parent="." instance=ExtResource("16_8vbbb")]
+position = Vector2(359, 652)
+texture = ExtResource("17_ceygg")
+outlineColor = Color(0.113725, 0.0627451, 0.12549, 1)
+clothAngle = -15.0
+particle_count_y = 3
+particle_spacing = 1.0
+movementForceMultiplier = 0.3
+
+[node name="CrystalElite" type="Sprite2D" parent="."]
+texture_filter = 1
+material = SubResource("ShaderMaterial_c80gb")
+position = Vector2(358, 654)
+texture = ExtResource("16_wvyir")

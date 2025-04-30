@@ -171,13 +171,13 @@ func hitEffects():
 	$Sounds/PlayerHitMain.play()
 	$Sounds/PlayerHitSecoundary.play()
 	$MotionBlur.glitch()
-	Game.camera.set_shake(2.0)
+	Game.camera.set_shake(10.0)
 
 var parryStunTime = 0.3
 var parriedAttack : Attack
 func parry(attack : Attack):
 	parriedAttack = attack
-	
+	Game.camera.set_shake(2.0)
 	var c = $StateMachine.current_state #dont enter if in a certain state
 	if c is PlayerHackAttack or c is PlayerHackMode:
 		return

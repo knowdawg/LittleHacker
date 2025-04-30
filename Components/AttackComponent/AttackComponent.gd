@@ -25,11 +25,13 @@ class_name AttackComponent
 @export_group("Hit Effects")
 @export var hitEfect : PackedScene
 @export var numberOfHitEffect : int = 1
+@export var screenShakeOnHit : float = 0.0
 
 @onready var attackID : float = randf()
 
 signal gotParried
 signal grabSucessful
+signal attackHit(area)
 
 func _ready() -> void:
 	if disabled:
@@ -72,12 +74,19 @@ func _on_area_entered(area):
 		if isSpikes:
 			generateAttackID()
 		
+		attackHit.emit(area)
+		
 		if hitEfect:
 			for num in numberOfHitEffect:
 				var e = hitEfect.instantiate()
 				area.add_child(e)
 				e.initialize(area.global_position)
 		
+		if area is HurtboxComponent:
+			if area.isSolid:
+				if Game.doesCameraExist():
+					Game.camera.add_shake(screenShakeOnHit)
+
 
 func generateAttackID():
 	attackID = randf_range(0.0, 10000.0)

@@ -6,6 +6,8 @@ class_name LittleSceneTransitioner
 var pathAndScene : Dictionary = {}
 var paths : Array[String] = []
 
+signal onFadeInStart
+
 func _ready() -> void:
 	var startingScene : StartingLevelResourceScript = load("uid://byhqpp6gc4xnd")
 	Game.littleViewport = self
@@ -23,6 +25,7 @@ var sceneData : SceneSwitchData
 func switchScene(sd : SceneSwitchData) -> void:
 	self.sceneData = sd
 	fadeAnimator.play("FadeIn")
+	onFadeInStart.emit()
 	
 func onFadeInComplete():
 	#for t in threads:

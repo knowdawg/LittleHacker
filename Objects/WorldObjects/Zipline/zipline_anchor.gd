@@ -16,7 +16,8 @@ var playerOnZipline : bool = false
 var t = 0.0
 
 func _ready() -> void:
-	setup()
+	if !Engine.is_editor_hint():
+		setup()
 
 func setup():
 	if interactableComponent:

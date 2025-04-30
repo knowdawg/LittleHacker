@@ -66,7 +66,7 @@ func _process(_delta: float) -> void:
 					$SelectLineContainer/SelectParticles.emitting = true
 					
 					blur.blur(Game.player)
-					Game.camera.set_shake(2.0)
+					Game.camera.set_shake(4.0)
 					$Audio/HackExecuted.play()
 					camera.zoom = Vector2(15, 15)
 					executeHack.emit()

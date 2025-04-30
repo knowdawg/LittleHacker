@@ -17,6 +17,7 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 texture = ExtResource("3_itnb6")
 clothAngle = -30.0
+collidable = false
 particle_count_x = 6
 particle_count_y = 2
 windAmplitude = 8.0
@@ -27,6 +28,7 @@ rotation = 3.14159
 scale = Vector2(1, -1)
 texture = ExtResource("3_itnb6")
 clothAngle = -15.0
+collidable = false
 particle_count_x = 12
 particle_count_y = 3
 

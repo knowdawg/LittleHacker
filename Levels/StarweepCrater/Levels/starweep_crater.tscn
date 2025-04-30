@@ -1,4 +1,4 @@
-[gd_scene load_steps=151 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=153 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
@@ -6,7 +6,6 @@
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
 [ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="6_mbqal"]
 [ext_resource type="Texture2D" uid="uid://cdv6us5lootnk" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse2.png" id="6_tpsgt"]
-[ext_resource type="PackedScene" uid="uid://ob6rkkv311c5" path="res://Components/SpineTextureMapper/spine_texture_mapper.tscn" id="7_ixek2"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="8_3qqdn"]
 [ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="9_oo6lu"]
 [ext_resource type="PackedScene" uid="uid://cfy3aart4poj3" path="res://Objects/WorldObjects/Tilemaps/sdf_tilemap.tscn" id="10_73joc"]
@@ -38,6 +37,8 @@
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="31_8agmq"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="31_htj2c"]
 [ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="34_86ljy"]
+[ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="39_w31va"]
+[ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="40_4685e"]
 
 [sub_resource type="Gradient" id="Gradient_sy7vn"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
@@ -60,7 +61,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ixek2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_w31va"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -70,7 +71,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_mbqal"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4685e"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -108,7 +109,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w31va"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fck5"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -634,7 +635,7 @@ point_count = 10
 _data = [Vector2(0, 0.515116), 0.0, 0.0, 0, 0, Vector2(0.18287, 0), 0.0, 0.0, 0, 0, Vector2(0.365741, 1), 0.0, 0.0, 0, 0, Vector2(0.532407, 0), 0.0, 0.0, 0, 0, Vector2(0.796296, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.497252), 0.0, 0.0, 0, 0]
 point_count = 6
 
-[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_cxi4c"]
+[sub_resource type="CurveXYZTexture" id="CurveXYZTexture_w31va"]
 curve_x = SubResource("Curve_cg64b")
 curve_y = SubResource("Curve_qksy1")
 
@@ -651,7 +652,7 @@ angular_velocity_min = 500.0
 angular_velocity_max = 500.0
 directional_velocity_min = -15.0
 directional_velocity_max = 15.0
-directional_velocity_curve = SubResource("CurveXYZTexture_cxi4c")
+directional_velocity_curve = SubResource("CurveXYZTexture_w31va")
 gravity = Vector3(0, 0, 0)
 scale_min = 0.3
 scale_max = 0.5
@@ -709,6 +710,9 @@ polygon = PackedVector2Array(-166, -84, -148, -84, -148, -83, -166, -83)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tn0e6"]
 polygon = PackedVector2Array(-149, -113, -141, -113, -141, -112, -149, -112)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_6omup"]
+polygon = PackedVector2Array(-111, -187, -92, -187, -92, -186, -111, -186)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_uwpgy"]
 polygon = PackedVector2Array(-48, 30, -8, 30, -8, 27, -17, 19, -28, 19, -28, 9, -15, 9, -15, 4, -23, 4, -23, 0, -15, 0, -1, -16, -13, -21, -19, -32, -19, -41, -4, -41, -4, -45, 12, -45, 6, -61, 21, -65, 46, -66, 46, -71, 61, -71, 61, -76, 57, -76, 57, -81, 37, -81, 37, -86, 49, -100, 59, -100, 61, -110, 82, -110, 84, -116, -38, -116, -38, -109, -40, -109, -39, -108, -39, -107, -37, -105, -37, -100, -39, -100, -39, -98, -40, -98, -40, -96, -45, -96, -45, -86, -50, -86, -50, -81, -59, -81, -59, -76, -100, -76, -100, -51, -79, -51, -78, -35, -77, -30, -53, -30, -53, -25, -45, -25, -45, -21, -41, -21, -39, -19, -39, -15, -72, -15, -72, 14, -81, 14, -81, 17, -77, 20, -64, 20, -64, 24, -51, 24)
@@ -802,16 +806,16 @@ texture = SubResource("GradientTexture2D_86ljy")
 
 [node name="Clouds3" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_ixek2")
+texture = SubResource("GradientTexture2D_w31va")
 
 [node name="Clouds" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_mbqal")
+texture = SubResource("GradientTexture2D_4685e")
 
 [node name="Clouds2" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_w31va")
+texture = SubResource("GradientTexture2D_5fck5")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -870,10 +874,6 @@ renderTarget = 1
 texture_filter = 1
 position = Vector2(158.873, 84.709)
 texture = ExtResource("6_tpsgt")
-
-[node name="WyrmSpine" parent="Far/SubViewportContainer/Main2" instance=ExtResource("7_ixek2")]
-visible = false
-position = Vector2(-22.1404, 124.434)
 
 [node name="MediumFar" type="Parallax2D" parent="."]
 visible = false
@@ -1370,6 +1370,12 @@ position = Vector2(55, 67)
 occluder = SubResource("OccluderPolygon2D_tn0e6")
 oneWay = true
 
+[node name="LeftCliffPlatform4" parent="Collitions" instance=ExtResource("20_30t6e")]
+modulate = Color(1, 1, 1, 0)
+position = Vector2(55, 67)
+occluder = SubResource("OccluderPolygon2D_6omup")
+oneWay = true
+
 [node name="LeftCliff2" parent="Collitions" instance=ExtResource("20_30t6e")]
 modulate = Color(1, 1, 1, 0)
 position = Vector2(0, -15)
@@ -1501,10 +1507,6 @@ color = 1
 position = Vector2(-103, 15)
 color = 1
 
-[node name="CrystalThug6" parent="Enemies" instance=ExtResource("20_xrcj4")]
-position = Vector2(-62, -94)
-color = 1
-
 [node name="CrystalPillbug" parent="Enemies" instance=ExtResource("21_wxdan")]
 position = Vector2(175, 71)
 
@@ -1512,7 +1514,7 @@ position = Vector2(175, 71)
 position = Vector2(322, -78)
 
 [node name="CrystalLauncher2" parent="Enemies" instance=ExtResource("25_ut7a1")]
-position = Vector2(-69, -93)
+position = Vector2(-72, -93)
 
 [node name="Hazards" type="Node2D" parent="Enemies"]
 
@@ -1737,7 +1739,7 @@ position = Vector2(-118, -6)
 
 [node name="Top" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
 position = Vector2(87, -131)
-scene = "uid://c80acag1837nm"
+scene = "uid://bx7i5q252gya5"
 doorName = "Down"
 enterPosition = NodePath("Marker2D")
 directionToFaceWhenEnteringTHISDoor = 1
@@ -1747,7 +1749,7 @@ position = Vector2(-134, -11)
 shape = SubResource("RectangleShape2D_6g51h")
 
 [node name="Marker2D" type="Marker2D" parent="Doors/Top"]
-position = Vector2(-130, 18)
+position = Vector2(-134, 9)
 
 [node name="Right" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("31_8agmq")]
 position = Vector2(554, -38)
@@ -1776,3 +1778,11 @@ cameraPos = NodePath("Marker2D")
 position = Vector2(69, -115)
 
 [node name="StarweepWorldEnvierment" parent="." instance=ExtResource("34_86ljy")]
+
+[node name="WindNoises" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("39_w31va")
+volume_db = -5.0
+autoplay = true
+bus = &"SoundEffects"
+script = ExtResource("40_4685e")
+volumeDB = -8.0

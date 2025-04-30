@@ -188,9 +188,10 @@ process_material = SubResource("ParticleProcessMaterial_kyp63")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("health_componnet") instance=ExtResource("3_0xe08")]
 position = Vector2(-5, -3)
-collision_layer = 8
+collision_layer = 12
 health_componnet = NodePath("../HealthComponent")
 isHackable = false
+isSolid = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
 visible = false
