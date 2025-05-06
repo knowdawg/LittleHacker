@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://c6eflefpmo32h"]
+[gd_scene load_steps=50 format=3 uid="uid://c6eflefpmo32h"]
 
 [ext_resource type="Script" uid="uid://mt8sh1m67s4b" path="res://Objects/Enemies/CrystalLauncher/crystal_launcher.gd" id="1_1fgvd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_5ylyd"]
@@ -28,6 +28,7 @@
 [ext_resource type="Script" uid="uid://coulc1y5li7rb" path="res://Classes/GenericStates/GenericTransitionState.gd" id="14_hsbah"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="19_bbh6r"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="26_8foh4"]
+[ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="29_hsbah"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8foh4"]
 radius = 3.0
@@ -465,6 +466,16 @@ healthComponent = NodePath("GeneralComponents/HealthComponent")
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_8foh4")
 
+[node name="AfterImmageMarker" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(0, -4)
+
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("26_8foh4")]
+follow = NodePath("../AfterImmageMarker")
+sprite = NodePath("../Sprite2D")
+frequency = 0.05
+fadeTime = 0.5
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 material = SubResource("ShaderMaterial_akog8")
@@ -690,16 +701,6 @@ material = SubResource("ShaderMaterial_hsbah")
 
 [node name="Sounds" type="Node2D" parent="."]
 
-[node name="AfterImmageMarker" type="Marker2D" parent="."]
-unique_name_in_owner = true
-position = Vector2(0, -4)
-
-[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("26_8foh4")]
-follow = NodePath("../AfterImmageMarker")
-sprite = NodePath("../Sprite2D")
-fadeTime = 0.2
-modulate = Color(1, 1, 1, 0.686275)
-
 [node name="PlayerVision" type="RayCast2D" parent="."]
 unique_name_in_owner = true
 visible = false
@@ -734,6 +735,10 @@ collision_mask = 3
 unique_name_in_owner = true
 target_position = Vector2(0, 4)
 collision_mask = 3
+
+[node name="SquishComponent" parent="." node_paths=PackedStringArray("squishTarget", "healthComponent") instance=ExtResource("29_hsbah")]
+squishTarget = NodePath("../Sprite2D")
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
 
 [connection signal="animation_finished" from="Animator" to="StateMachine/Launch" method="_on_animator_animation_finished"]
 [connection signal="death" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_death"]

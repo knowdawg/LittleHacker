@@ -30,8 +30,8 @@ EnemyPositionManager="*res://Classes/EnemyPositionManager.gd"
 
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=720
+window/size/viewport_width=1408
+window/size/viewport_height=792
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"

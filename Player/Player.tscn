@@ -1,4 +1,4 @@
-[gd_scene load_steps=232 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=234 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -140,6 +140,19 @@ colors = PackedColorArray(1, 1, 1, 0.541176, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ufcdm"]
 gradient = SubResource("Gradient_efsdk")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Gradient" id="Gradient_xqyul"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.516746, 1)
+colors = PackedColorArray(0, 0, 0, 0.470588, 0, 0, 0, 0.117647, 0, 0, 0, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6d7k2"]
+gradient = SubResource("Gradient_xqyul")
+width = 256
+height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -1393,7 +1406,7 @@ point_count = 2
 shader = ExtResource("33_rdnj2")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
-shader_parameter/pattern = 0
+shader_parameter/pattern = 2
 shader_parameter/inside = false
 shader_parameter/modulate = Color(1, 1, 1, 1)
 
@@ -2814,9 +2827,21 @@ process_material = SubResource("ParticleProcessMaterial_efsdk")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
 unique_name_in_owner = true
+visible = false
 color = Color(0.137255, 0.137255, 0.137255, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_ufcdm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+z_index = -1
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_6d7k2")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+scale = Vector2(0.5, 0.5)
+texture = SubResource("GradientTexture2D_6d7k2")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "hurtboxComponent", "attackComponentsThatCanBeParried")]
 script = ExtResource("1_8slbu")
@@ -2975,7 +3000,6 @@ line = NodePath("GrappleLine")
 
 [node name="GrappleLine" type="Line2D" parent="StateMachine/Grapple"]
 material = SubResource("ShaderMaterial_xqyul")
-points = PackedVector2Array(-41, -16, 30, -16)
 default_color = Color(0.478431, 0.211765, 0.482353, 1)
 texture_mode = 1
 
@@ -3207,7 +3231,6 @@ attackStrength = 2
 knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 hitEfect = ExtResource("19_0ng1i")
-screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackLeft"]
 visible = false
@@ -3225,7 +3248,6 @@ attackStrength = 2
 knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
-screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/GrappleAttackRight"]
 visible = false
@@ -3241,7 +3263,6 @@ weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(-1, 0)
 hitEfect = ExtResource("19_0ng1i")
-screenShakeOnHit = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackLeft"]
 visible = false
@@ -3256,7 +3277,6 @@ weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(1, 0)
 hitEfect = ExtResource("19_0ng1i")
-screenShakeOnHit = 0.5
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackRight"]
 visible = false
@@ -3272,7 +3292,6 @@ knockback_force = 50.0
 knockbackVector = Vector2(0, 1)
 isPogo = true
 hitEfect = ExtResource("19_0ng1i")
-screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="WeaponDislocator/WeaponSprite/AttackDown"]
 visible = false
@@ -3288,7 +3307,6 @@ weakness_damage = 1.0
 knockback_force = 50.0
 knockbackVector = Vector2(0, -1)
 hitEfect = ExtResource("19_0ng1i")
-screenShakeOnHit = 0.5
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="WeaponDislocator/WeaponSprite/AttackUp"]
 visible = false

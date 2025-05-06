@@ -1,4 +1,4 @@
-[gd_scene load_steps=166 format=3 uid="uid://dcqwmsg54sjn4"]
+[gd_scene load_steps=167 format=3 uid="uid://dcqwmsg54sjn4"]
 
 [ext_resource type="Texture2D" uid="uid://7jvgdu1xg7n3" path="res://Assets/Sprites/Enemies/Bosses/AspectOfCreation.png" id="1_cinor"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_ey2r6"]
@@ -53,6 +53,7 @@
 [ext_resource type="Texture2D" uid="uid://bt5ng4ut18p1u" path="res://Assets/Sprites/Effects/ParticleEffects/ExplosionSmoke.png" id="45_hs17a"]
 [ext_resource type="Texture2D" uid="uid://dxk7ue4kllpcl" path="res://Assets/Sprites/UI/AspectOfCreationWeaknessbarHealth.png" id="46_4mohx"]
 [ext_resource type="PackedScene" uid="uid://cc28hgwabw7gw" path="res://Objects/ShaderObjects/BossIntro.tscn" id="53_dur7j"]
+[ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="54_hs17a"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbxk7"]
 size = Vector2(6, 7)
@@ -2517,8 +2518,8 @@ position = Vector2(0, 0.5)
 shape = SubResource("RectangleShape2D_fbxk7")
 
 [node name="HumanSprite" type="Sprite2D" parent="."]
-position = Vector2(0, -10)
 texture = ExtResource("1_cinor")
+offset = Vector2(0, -10)
 hframes = 132
 frame = 1
 
@@ -3054,6 +3055,10 @@ texture_progress = ExtResource("46_4mohx")
 [node name="BossIntro" parent="." instance=ExtResource("53_dur7j")]
 title = "Bloodcrazed Artist"
 bossName = "Aspect of Talent"
+
+[node name="SquishComponent" parent="." node_paths=PackedStringArray("squishTarget", "healthComponent") instance=ExtResource("54_hs17a")]
+squishTarget = NodePath("../HumanSprite")
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
 
 [connection signal="animation_finished" from="SmallHands/SmallHandAnimator" to="SmallHands" method="_on_small_hand_animator_animation_finished"]
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]

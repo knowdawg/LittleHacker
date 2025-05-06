@@ -1,11 +1,10 @@
-[gd_scene load_steps=16 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=15 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
-[ext_resource type="PackedScene" uid="uid://dcqwmsg54sjn4" path="res://Objects/Enemies/AspectOfCreation/aspect_of_creation.tscn" id="2_kquoi"]
+[ext_resource type="PackedScene" uid="uid://b5cp00hin8my6" path="res://Objects/Enemies/CrystalElite/crystal_elite.tscn" id="2_mn1fc"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_p32do"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_4mm16"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
-[ext_resource type="PackedScene" uid="uid://ct3iy3bd7qrp8" path="res://UI/CursorFollower/cursor_follower.tscn" id="6_4kmjg"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_n4nu2"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2b6ii"]
@@ -130,8 +129,8 @@ texture = SubResource("ViewportTexture_f40ai")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="AspectOfCreation" parent="Enemies" instance=ExtResource("2_kquoi")]
-position = Vector2(15, 11)
+[node name="CrystalElite" parent="Enemies" instance=ExtResource("2_mn1fc")]
+position = Vector2(34, 8)
 
 [node name="Proectiles" type="Node2D" parent="."]
 
@@ -148,9 +147,6 @@ directionToFaceWhenEnteringTHISDoor = 1
 
 [node name="Marker2D" type="Marker2D" parent="Doors/LevelTransition"]
 position = Vector2(-16, 13)
-
-[node name="CursorFollower" parent="." instance=ExtResource("6_4kmjg")]
-visible = false
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("6_n4nu2")]
 position = Vector2(61, 36)

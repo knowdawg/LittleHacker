@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=3 uid="uid://bae1ixxbndyw3"]
+[gd_scene load_steps=62 format=3 uid="uid://bae1ixxbndyw3"]
 
 [ext_resource type="Script" uid="uid://bgf5im1hmu456" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.gd" id="1_42bp5"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_jv6iw"]
@@ -38,6 +38,7 @@
 [ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="35_vwc5n"]
 [ext_resource type="AudioStream" uid="uid://c6anld0mwuprt" path="res://Assets/Audio/SoundEffects/GoreExsplosion.wav" id="36_54lns"]
 [ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="36_i0g28"]
+[ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="39_gxx70"]
 
 [sub_resource type="Gradient" id="Gradient_cmus3"]
 offsets = PackedFloat32Array(0, 0.99789)
@@ -846,6 +847,10 @@ one_shot = true
 
 [node name="ResonanceCooldownTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SquishComponent" parent="." node_paths=PackedStringArray("squishTarget", "healthComponent") instance=ExtResource("39_gxx70")]
+squishTarget = NodePath("../Sprite2D")
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
 
 [connection signal="timeout" from="ResonanceTimer" to="." method="_on_resonance_timer_timeout"]
 [connection signal="timeout" from="ResonanceCooldownTimer" to="." method="_on_resonance_cooldown_timer_timeout"]

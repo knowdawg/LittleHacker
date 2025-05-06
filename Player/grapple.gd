@@ -37,6 +37,7 @@ func update_physics(delta):
 	
 	if playerStateMachine.getInputBuffer() == "Jump":
 		weaponStateMachine.switchStates("Idle")
+		player.grappleBoost *= 0.75 #minimize Grapple Jump Chaning wihtout outrigt removing it
 		player.grappleBoost += -posDir * f * Vector2(0.5, 0.3)
 		trasitioned.emit(self, "Jump")
 		return
@@ -49,6 +50,7 @@ func update_physics(delta):
 	
 	if !target.canBeGrappledTo():
 		weaponStateMachine.switchStates("Idle")
+		player.grappleBoost /= 2.0 #minimize Grapple Jump Chaning wihtout outrigt removing it
 		player.grappleBoost += -posDir * f * Vector2(0.5, 0.3)
 		trasitioned.emit(self, "Fall")
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=76 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Script" uid="uid://dxlohk1v41qh3" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_knvuj"]
@@ -45,6 +45,7 @@
 [ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="40_n5g6f"]
 [ext_resource type="AudioStream" uid="uid://jv4mcug84bxn" path="res://Assets/Audio/SoundEffects/RockHit.wav" id="42_ntu01"]
 [ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="43_x7ehq"]
+[ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="46_pi7n5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id2w4"]
 size = Vector2(2, 6)
@@ -531,8 +532,8 @@ texture = SubResource("GradientTexture2D_0qmxs")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 clip_children = 2
 material = SubResource("ShaderMaterial_tm7ga")
-position = Vector2(0, -4)
 texture = ExtResource("3_t8cw1")
+offset = Vector2(0, -4)
 hframes = 45
 frame = 1
 
@@ -843,6 +844,10 @@ one_shot = true
 
 [node name="ResonanceCooldown" type="Timer" parent="."]
 one_shot = true
+
+[node name="SquishComponent" parent="." node_paths=PackedStringArray("squishTarget", "healthComponent") instance=ExtResource("46_pi7n5")]
+squishTarget = NodePath("../Sprite2D")
+healthComponent = NodePath("../GeneralComponents/HealthComponent")
 
 [connection signal="executed" from="GeneralComponents/EnemyHeathbar/HeadShatter" to="." method="_on_head_shatter_executed"]
 [connection signal="timeout" from="ResonanceTimer" to="." method="_on_resonance_timer_timeout"]

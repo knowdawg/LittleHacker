@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://b7vusvpcfxm"]
+
+[ext_resource type="Script" uid="uid://cf4o86n6je3kh" path="res://Components/SquishComponent/squish_component.gd" id="1_2yvht"]
+
+[node name="SquishComponent" type="Node"]
+script = ExtResource("1_2yvht")

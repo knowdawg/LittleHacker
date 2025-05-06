@@ -97,6 +97,10 @@ func disable():
 func enable():
 	collisionShape.disabled = false
 
+func readyAttack():
+	attackID = randf_range(0.0, 10000.0)
+	collisionShape.disabled = false
+
 func parried(attack : Attack):
 	if hurtboxSignal.is_connected(parried):
 		hurtboxSignal.disconnect(parried)

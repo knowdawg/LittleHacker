@@ -6,7 +6,7 @@ extends Node
 @export var fadeTime : float = 0.1
 @export var modulate : Color = Color(1.0, 1.0, 1.0, 1.0)
 
-var active = true
+@export var active = true
 
 var t = 0.0
 func setActive(a : bool):

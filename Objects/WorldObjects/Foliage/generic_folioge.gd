@@ -9,11 +9,12 @@ class_name GenericFoliage
 @export var deathAnimationName : String
 
 func _ready() -> void:
-	if healthComponent:
-		healthComponent.hit.connect(hit)
-	if animator:
-		animator.speed_scale = randf_range(0.9, 1.1)
-		animator.play(idleAnimatorName)
+	if !Engine.is_editor_hint():
+		if healthComponent:
+			healthComponent.hit.connect(hit)
+		if animator:
+			animator.speed_scale = randf_range(0.9, 1.1)
+			animator.play(idleAnimatorName)
 
 func _process(delta: float) -> void:
 	if Engine.is_editor_hint():

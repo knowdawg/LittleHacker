@@ -61,6 +61,10 @@ func getVelocity():
 		velocityTotal += v
 	return velocityTotal
 
+func lerpToPlayerX(delta : float, offset : float):
+	if Game.doesPlayerExist():
+		parent.global_position.x = lerpf(parent.position.x, offset + Game.player.global_position.x, delta)
+
 func moveTowardsPlayer(speed, delta):
 	var v = Vector2.ZERO
 	if is_instance_valid(Game.player):

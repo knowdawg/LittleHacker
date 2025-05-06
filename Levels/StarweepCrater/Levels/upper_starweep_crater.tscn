@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=3 uid="uid://bx7i5q252gya5"]
+[gd_scene load_steps=75 format=3 uid="uid://bx7i5q252gya5"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_d1l05"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="2_oi261"]
@@ -24,10 +24,8 @@
 [ext_resource type="Texture2D" uid="uid://bbwqrj6yqt8da" path="res://Assets/Sprites/WorldObjects/LazySpec.png" id="10_t8d8q"]
 [ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="11_eg4k2"]
 [ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="12_mdi6s"]
-[ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="16_8vbbb"]
-[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="16_trydb"]
-[ext_resource type="Texture2D" uid="uid://b2keo0j23vrvo" path="res://Assets/Sprites/Enemies/CrystalElite.png" id="16_wvyir"]
-[ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="17_ceygg"]
+[ext_resource type="PackedScene" uid="uid://b5cp00hin8my6" path="res://Objects/Enemies/CrystalElite/crystal_elite.tscn" id="19_gb8d3"]
+[ext_resource type="PackedScene" uid="uid://cr4dj46wcech6" path="res://Objects/WorldObjects/Tilemaps/foliage_tilemap.tscn" id="20_1afi5"]
 [ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="20_5e62k"]
 [ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="21_c4km3"]
 
@@ -52,7 +50,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_jpcra"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1afi5"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -62,7 +60,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_x452h"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg4k2"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -100,7 +98,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5e62k"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iqh2m"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -158,7 +156,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.2
 
-[sub_resource type="Resource" id="Resource_jpcra"]
+[sub_resource type="Resource" id="Resource_ei1mr"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -169,9 +167,9 @@ script = ExtResource("8_x452h")
 position = Vector2(215.502, 462.468)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_jpcra")
+properties = SubResource("Resource_ei1mr")
 
-[sub_resource type="Resource" id="Resource_5e62k"]
+[sub_resource type="Resource" id="Resource_1sp2w"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -182,9 +180,9 @@ script = ExtResource("8_x452h")
 position = Vector2(365.949, 322.647)
 point_in = Vector2(-152.505, 1.15637)
 point_out = Vector2(152.505, -1.15637)
-properties = SubResource("Resource_5e62k")
+properties = SubResource("Resource_1sp2w")
 
-[sub_resource type="Resource" id="Resource_gb8d3"]
+[sub_resource type="Resource" id="Resource_apdyx"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -195,7 +193,7 @@ script = ExtResource("8_x452h")
 position = Vector2(514.448, 468.315)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_gb8d3")
+properties = SubResource("Resource_apdyx")
 
 [sub_resource type="Resource" id="Resource_t8d8q"]
 script = ExtResource("9_5e62k")
@@ -259,7 +257,7 @@ turbulence_influence_min = 0.0
 turbulence_influence_max = 0.01
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_xr4cd"]
-polygon = PackedVector2Array(238, 720, 238, 715, 240, 712, 240, 705, 254, 705, 254, 700, 305, 700, 311, 699, 315, 699, 321, 700, 324, 700, 324, 703, 326, 704, 326, 706, 317, 706, 315, 711, 302, 711, 301, 715, 295, 715, 294, 720)
+polygon = PackedVector2Array(238, 720, 238, 715, 240, 712, 240, 705, 254, 705, 254, 700, 305, 700, 311, 699, 315, 699, 321, 700, 324, 700, 324, 703, 326, 704, 326, 706, 317, 706, 315, 711, 302, 711, 301, 715, 295, 715, 294, 718, 477, 720)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wvyir"]
 polygon = PackedVector2Array(219, 720, 220, 718, 220, 706, 222, 703, 219, 702, 219, 697, 226, 695, 226, 689, 231, 688, 231, 685, 265, 685, 268, 680, 265, 679, 265, 667, 270, 663, 266, 660, 268, 657, 262, 655, 177, 655, 177, 653, 175, 653, 175, 650, 157, 650, 157, 645, 145, 645, 145, 720)
@@ -299,14 +297,6 @@ shader_parameter/shadowIntensitiy = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4uj70"]
 size = Vector2(60, 12)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c80gb"]
-shader = ExtResource("16_trydb")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 0.3
-shader_parameter/pattern = 0
-shader_parameter/inside = false
-shader_parameter/modulate = Color(1, 1, 1, 1)
-
 [node name="UpperStarweepCrater" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 script = ExtResource("1_d1l05")
 projectileSpawnNode = NodePath("Proectiles")
@@ -330,16 +320,16 @@ texture = SubResource("GradientTexture2D_4uj70")
 
 [node name="Clouds3" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_jpcra")
+texture = SubResource("GradientTexture2D_1afi5")
 
 [node name="Clouds" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_x452h")
+texture = SubResource("GradientTexture2D_eg4k2")
 
 [node name="Clouds2" parent="Background" instance=ExtResource("2_oi261")]
 material = SubResource("ShaderMaterial_xr4cd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_5e62k")
+texture = SubResource("GradientTexture2D_iqh2m")
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -594,7 +584,13 @@ position = Vector2(396, 696)
 [node name="VoidButterfly2" parent="Enemies" instance=ExtResource("9_xr4cd")]
 position = Vector2(438, 701)
 
+[node name="CrystalElite" parent="Enemies" instance=ExtResource("19_gb8d3")]
+position = Vector2(356, 656)
+
 [node name="PlayerParrent" type="Node2D" parent="."]
+
+[node name="FoliageTilemap" parent="." instance=ExtResource("20_1afi5")]
+layer_0/tile_data = PackedInt32Array(45875482, 3, 65536, 45809951, 3, 131072, 45809927, 3, 131072, 45809931, 3, 196608, 45809936, 3, 196608, 45809956, 3, 196608, 45809921, 3, 196608, 45744441, 3, 131072, 45744447, 3, 196608, 46465495, 3, 65536, 46465500, 3, 196608, 42860767, 3, 131072, 42860780, 3, 131072, 42860772, 3, 196608, 42860786, 3, 196608, 42860964, 3, 65536, 42860979, 3, 65536, 42795434, 3, 131072, 42860983, 3, 196608, 42860988, 3, 196608)
 
 [node name="Proectiles" type="Node2D" parent="."]
 
@@ -634,18 +630,3 @@ autoplay = true
 bus = &"SoundEffects"
 script = ExtResource("21_c4km3")
 volumeDB = -8.0
-
-[node name="ClothSim" parent="." instance=ExtResource("16_8vbbb")]
-position = Vector2(359, 652)
-texture = ExtResource("17_ceygg")
-outlineColor = Color(0.113725, 0.0627451, 0.12549, 1)
-clothAngle = -15.0
-particle_count_y = 3
-particle_spacing = 1.0
-movementForceMultiplier = 0.3
-
-[node name="CrystalElite" type="Sprite2D" parent="."]
-texture_filter = 1
-material = SubResource("ShaderMaterial_c80gb")
-position = Vector2(358, 654)
-texture = ExtResource("16_wvyir")
