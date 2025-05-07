@@ -2793,6 +2793,7 @@ rotation = 3.14159
 parent = NodePath("../..")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("parryForgivenesTimer", "health_componnet") instance=ExtResource("2_hn6pj")]
+unique_name_in_owner = true
 collision_layer = 4
 parryForgivenesTimer = NodePath("../Timer")
 health_componnet = NodePath("../HealthComponent")

@@ -48,6 +48,8 @@ func update(_delta):
 	while rand == prevAttack:
 		rand = randi_range(0, ATTACKS.size() - 1)
 	
+	#rand = 0
+	
 	if rand == ATTACKS.BACKBREAK:
 		prevAttack = ATTACKS.BACKBREAK
 		nextStates.append("BackBreakCombo")

@@ -46,9 +46,6 @@ func _on_envirement_detector_body_entered(_body: Node2D) -> void:
 func delete():
 	speed = 0
 	$AfterImageComponent.setActive(false)
-	#$Sprite2D.visible = false
-	#$PointLight2D.visible = false
-	#$AttackComponent.call_deferred("disable")
 	$AnimationPlayer.play("Shrink")
 
 

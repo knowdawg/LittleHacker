@@ -1,0 +1,50 @@
+[gd_scene load_steps=5 format=3 uid="uid://cpwipfxes1rm0"]
+
+[ext_resource type="Script" uid="uid://s8n56hhbs1ir" path="res://Objects/Projectiles/GrowingCrystals/growing_crystals_projectile.gd" id="1_nrqek"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="1_vswhi"]
+[ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="3_jhj8m"]
+[ext_resource type="Texture2D" uid="uid://b7eho7neiew5c" path="res://Assets/Sprites/Projectiles/EliteSlamProjectile.png" id="3_nrqek"]
+
+[node name="GrowingCrystalsProjectile" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_nrqek")
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("1_vswhi")]
+collision_mask = 12
+attackName = "CrystalSword"
+collisionShape = NodePath("CollisionShape2D")
+attack_damage = 2.0
+weakness_damage = 3.0
+knockback_force = 50.0
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackComponent"]
+visible = false
+position = Vector2(-3, -3)
+polygon = PackedVector2Array(-7, 3, -13, -1, -8, 0, -11, -4, -3, 0, -6, -9, 1, -2, 0, -8, 5, -2, 8, -10, 9, -3, 15, -8, 12, 0, 19, -5, 17, -1, 19, -1, 16, 3)
+
+[node name="Transform" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Transform"]
+position = Vector2(0, -8)
+texture = ExtResource("3_nrqek")
+hframes = 7
+frame = 2
+
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("3_jhj8m")]
+follow = NodePath("../Transform/Sprite2D")
+sprite = NodePath("../Transform/Sprite2D")
+frequency = 0.05
+fadeTime = 0.3
+modulate = Color(1, 1, 1, 0.313726)
+
+[node name="Grounded" type="RayCast2D" parent="."]
+position = Vector2(-7, 0)
+target_position = Vector2(0, 5)
+collision_mask = 3
+
+[node name="Grounded2" type="RayCast2D" parent="."]
+position = Vector2(7, 0)
+target_position = Vector2(0, 5)
+collision_mask = 3
+
+[connection signal="gotParried" from="AttackComponent" to="." method="_on_attack_component_got_parried"]

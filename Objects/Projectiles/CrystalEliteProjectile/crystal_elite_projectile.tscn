@@ -1,0 +1,47 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7xd4741m8qkc"]
+
+[ext_resource type="Script" uid="uid://cpnhqe6ew3gun" path="res://Objects/Projectiles/CrystalEliteProjectile/crystal_elite_projectile.gd" id="1_ll3o8"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_ccg72"]
+[ext_resource type="Texture2D" uid="uid://cr3qqpd3vl3gq" path="res://Assets/Sprites/Projectiles/CrystalEliteSlashProj.png" id="3_kou3b"]
+[ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="4_ubkjq"]
+
+[node name="CrystalEliteProjectile" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_ll3o8")
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("2_ccg72")]
+collision_mask = 12
+attackName = "CrystalSword"
+collisionShape = NodePath("CollisionShape2D")
+disabled = false
+attack_damage = 2.0
+weakness_damage = 3.0
+knockback_force = 50.0
+
+[node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackComponent"]
+position = Vector2(-3, -3)
+polygon = PackedVector2Array(-4, 3, -4, -10, 3, -17, 11, -21, 2, -10, 1, -2, 7, 3)
+
+[node name="Transform" type="Node2D" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="Transform"]
+position = Vector2(0, -12)
+texture = ExtResource("3_kou3b")
+
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("4_ubkjq")]
+follow = NodePath("../Transform/Sprite2D")
+sprite = NodePath("../Transform/Sprite2D")
+fadeTime = 0.3
+modulate = Color(1, 1, 1, 0.313726)
+
+[node name="Grounded" type="RayCast2D" parent="."]
+position = Vector2(-7, 0)
+target_position = Vector2(0, 5)
+collision_mask = 3
+
+[node name="Grounded2" type="RayCast2D" parent="."]
+position = Vector2(7, 0)
+target_position = Vector2(0, 5)
+collision_mask = 3
+
+[connection signal="gotParried" from="AttackComponent" to="." method="_on_attack_component_got_parried"]

@@ -102,7 +102,12 @@ func _process(delta: float) -> void:
 	%FPS.text = str(Engine.time_scale  * 1.0 / delta).pad_decimals(2)
 	
 	Game.player = self
-		
+	
+	if %HurtboxComponent.parrying:
+		%HurtboxComponent.scale = Vector2(4.0, 2.0)
+	else:
+		%HurtboxComponent.scale = Vector2(1.0, 1.0)
+	
 	var c : Camera2D = Game.camera
 	var camPos = c.global_position
 	var snapDis = (camPos - floor(camPos) - Vector2(0.0, 1.0)) / Vector2(128, 72)
