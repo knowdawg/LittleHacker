@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://bx7i5q252gya5"]
+[gd_scene load_steps=77 format=3 uid="uid://bx7i5q252gya5"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_d1l05"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="2_oi261"]
@@ -24,6 +24,7 @@
 [ext_resource type="Texture2D" uid="uid://bbwqrj6yqt8da" path="res://Assets/Sprites/WorldObjects/LazySpec.png" id="10_t8d8q"]
 [ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="11_eg4k2"]
 [ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="12_mdi6s"]
+[ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="18_t8d8q"]
 [ext_resource type="PackedScene" uid="uid://b5cp00hin8my6" path="res://Objects/Enemies/CrystalElite/crystal_elite.tscn" id="19_gb8d3"]
 [ext_resource type="PackedScene" uid="uid://cr4dj46wcech6" path="res://Objects/WorldObjects/Tilemaps/foliage_tilemap.tscn" id="20_1afi5"]
 [ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="20_5e62k"]
@@ -50,7 +51,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_1afi5"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg4k2"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -60,7 +61,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg4k2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iqh2m"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -98,7 +99,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_iqh2m"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ei1mr"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -156,7 +157,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.2
 
-[sub_resource type="Resource" id="Resource_ei1mr"]
+[sub_resource type="Resource" id="Resource_1sp2w"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -167,9 +168,9 @@ script = ExtResource("8_x452h")
 position = Vector2(215.502, 462.468)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_ei1mr")
+properties = SubResource("Resource_1sp2w")
 
-[sub_resource type="Resource" id="Resource_1sp2w"]
+[sub_resource type="Resource" id="Resource_apdyx"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -180,9 +181,9 @@ script = ExtResource("8_x452h")
 position = Vector2(365.949, 322.647)
 point_in = Vector2(-152.505, 1.15637)
 point_out = Vector2(152.505, -1.15637)
-properties = SubResource("Resource_1sp2w")
+properties = SubResource("Resource_apdyx")
 
-[sub_resource type="Resource" id="Resource_apdyx"]
+[sub_resource type="Resource" id="Resource_at35k"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -193,7 +194,7 @@ script = ExtResource("8_x452h")
 position = Vector2(514.448, 468.315)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_apdyx")
+properties = SubResource("Resource_at35k")
 
 [sub_resource type="Resource" id="Resource_t8d8q"]
 script = ExtResource("9_5e62k")
@@ -260,10 +261,10 @@ turbulence_influence_max = 0.01
 polygon = PackedVector2Array(238, 720, 238, 715, 240, 712, 240, 705, 254, 705, 254, 700, 305, 700, 311, 699, 315, 699, 321, 700, 324, 700, 324, 703, 326, 704, 326, 706, 317, 706, 315, 711, 302, 711, 301, 715, 295, 715, 294, 718, 477, 720)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_wvyir"]
-polygon = PackedVector2Array(219, 720, 220, 718, 220, 706, 222, 703, 219, 702, 219, 697, 226, 695, 226, 689, 231, 688, 231, 685, 265, 685, 268, 680, 265, 679, 265, 667, 270, 663, 266, 660, 268, 657, 262, 655, 177, 655, 177, 653, 175, 653, 175, 650, 157, 650, 157, 645, 145, 645, 145, 720)
+polygon = PackedVector2Array(219, 720, 220, 718, 220, 706, 222, 703, 219, 702, 219, 697, 226, 695, 226, 689, 231, 688, 231, 685, 265, 685, 268, 680, 265, 679, 265, 667, 270, 663, 266, 660, 268, 657, 266, 657, 264, 656, 264, 653, 268, 650, 266, 649, 266, 641, 177, 641, 145, 645, 145, 720)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_c80gb"]
-polygon = PackedVector2Array(464, 710, 464, 714, 463, 714, 463, 715, 480, 715, 477, 720, 538, 720, 538, 655, 415, 656, 414, 659, 415, 665, 423, 665, 429, 671, 438, 671, 438, 675, 448, 675, 451, 680, 469, 680, 471, 685, 484, 685, 484, 689, 492, 690, 493, 695, 505, 695, 505, 701, 512, 704, 510, 706, 510, 711, 479, 711, 472, 710)
+polygon = PackedVector2Array(464, 710, 464, 714, 463, 714, 463, 715, 480, 715, 477, 720, 538, 720, 538, 655, 309, 655, 309, 657, 316, 661, 354, 661, 357, 665, 393, 665, 395, 671, 423, 671, 423, 675, 448, 675, 448, 680, 469, 680, 471, 685, 484, 685, 484, 689, 492, 690, 493, 695, 505, 695, 505, 701, 512, 704, 510, 706, 510, 711, 479, 711, 472, 710)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_300l7"]
 polygon = PackedVector2Array(215, 711, 251, 711, 251, 710, 215, 710)
@@ -274,8 +275,11 @@ polygon = PackedVector2Array(324, 700, 340, 700, 340, 701, 324, 701)
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ceygg"]
 polygon = PackedVector2Array(324, 700, 340, 700, 340, 701, 324, 701)
 
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_trydb"]
-polygon = PackedVector2Array(267, 655, 273, 656, 279, 658, 283, 659, 287, 660, 292, 661, 295, 661, 301, 662, 309, 662, 315, 663, 367, 663, 373, 662, 381, 662, 387, 661, 390, 661, 395, 660, 403, 658, 409, 656, 412, 655, 415, 655, 415, 656, 412, 656, 409, 657, 403, 659, 395, 661, 390, 662, 387, 662, 381, 663, 373, 663, 367, 664, 315, 664, 309, 663, 301, 663, 295, 662, 292, 662, 279, 659, 273, 657, 267, 656, 263, 656, 263, 655)
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_1afi5"]
+polygon = PackedVector2Array(267, 641, 281, 641, 281, 642, 267, 642)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_t8d8q"]
+polygon = PackedVector2Array(295, 655, 310, 655, 310, 656, 295, 656)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_k3ysf"]
 viewport_path = NodePath("Main")
@@ -320,16 +324,16 @@ texture = SubResource("GradientTexture2D_4uj70")
 
 [node name="Clouds3" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_1afi5")
+texture = SubResource("GradientTexture2D_eg4k2")
 
 [node name="Clouds" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_eg4k2")
+texture = SubResource("GradientTexture2D_iqh2m")
 
 [node name="Clouds2" parent="Background" instance=ExtResource("2_oi261")]
 material = SubResource("ShaderMaterial_xr4cd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_iqh2m")
+texture = SubResource("GradientTexture2D_ei1mr")
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -531,9 +535,14 @@ position = Vector2(127, 10)
 occluder = SubResource("OccluderPolygon2D_ceygg")
 oneWay = true
 
-[node name="Bridge" parent="Collisions" instance=ExtResource("6_mdi6s")]
+[node name="ZiplinePlatform" parent="Collisions" instance=ExtResource("6_mdi6s")]
 modulate = Color(1, 1, 1, 0)
-occluder = SubResource("OccluderPolygon2D_trydb")
+occluder = SubResource("OccluderPolygon2D_1afi5")
+oneWay = true
+
+[node name="AreanaPlatform" parent="Collisions" instance=ExtResource("6_mdi6s")]
+modulate = Color(1, 1, 1, 0)
+occluder = SubResource("OccluderPolygon2D_t8d8q")
 oneWay = true
 
 [node name="Lights" type="Node2D" parent="."]
@@ -544,7 +553,7 @@ texture = SubResource("ViewportTexture_k3ysf")
 centered = false
 
 [node name="ZiplineAnchor2" parent="Envirement" node_paths=PackedStringArray("interactableComponent", "startingPos", "destination") instance=ExtResource("7_md1pq")]
-position = Vector2(270, 650)
+position = Vector2(270, 635)
 flipH = true
 interactableComponent = NodePath("InteractableArea")
 startingPos = NodePath("StartingPos")
@@ -553,13 +562,13 @@ duration = 0.7
 curve = SubResource("Curve_xr4cd")
 
 [node name="StartingPos" type="Marker2D" parent="Envirement/ZiplineAnchor2"]
-position = Vector2(3.5, 47)
+position = Vector2(3.5, 61)
 
 [node name="Destination" type="Marker2D" parent="Envirement/ZiplineAnchor2"]
 position = Vector2(3.5, -1)
 
 [node name="InteractableArea" parent="Envirement/ZiplineAnchor2" node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("8_300l7")]
-position = Vector2(6, 9)
+position = Vector2(6, 23)
 text = "Attach"
 textPos = NodePath("Marker2D")
 colShape = NodePath("CollisionShape2D")
@@ -573,6 +582,13 @@ position = Vector2(-3, 44)
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
+[node name="RespawnPoint" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("18_t8d8q")]
+position = Vector2(293, 702)
+level = NodePath("../..")
+respawnPointName = "TestAtEleite"
+
+[node name="PlayerParrent" type="Node2D" parent="."]
+
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="VoidButterfly" parent="Enemies" instance=ExtResource("9_xr4cd")]
@@ -585,12 +601,10 @@ position = Vector2(396, 696)
 position = Vector2(438, 701)
 
 [node name="CrystalElite" parent="Enemies" instance=ExtResource("19_gb8d3")]
-position = Vector2(356, 656)
-
-[node name="PlayerParrent" type="Node2D" parent="."]
+position = Vector2(398, 647)
 
 [node name="FoliageTilemap" parent="." instance=ExtResource("20_1afi5")]
-layer_0/tile_data = PackedInt32Array(45875482, 3, 65536, 45809951, 3, 131072, 45809927, 3, 131072, 45809931, 3, 196608, 45809936, 3, 196608, 45809956, 3, 196608, 45809921, 3, 196608, 45744441, 3, 131072, 45744447, 3, 196608, 46465495, 3, 65536, 46465500, 3, 196608, 42860767, 3, 131072, 42860780, 3, 131072, 42860772, 3, 196608, 42860786, 3, 196608, 42860964, 3, 65536, 42860979, 3, 65536, 42795434, 3, 131072, 42860983, 3, 196608, 42860988, 3, 196608)
+layer_0/tile_data = PackedInt32Array(45875482, 3, 65536, 45809951, 3, 131072, 45809927, 3, 131072, 45809931, 3, 196608, 45809936, 3, 196608, 45809956, 3, 196608, 45809921, 3, 196608, 45744441, 3, 131072, 45744447, 3, 196608, 46465495, 3, 65536, 46465500, 3, 196608, 42860964, 3, 65536, 42860979, 3, 65536, 42795434, 3, 131072, 42860983, 3, 196608, 42860988, 3, 196608, 42860862, 3, 65536, 42860875, 3, 65536, 42860893, 3, 65536, 42860921, 3, 65536, 42860898, 3, 131072, 42860905, 3, 131072, 42860878, 3, 131072, 42860853, 3, 131072, 42860925, 3, 131072, 42860946, 3, 131072, 42860940, 3, 196608, 42860933, 3, 196608, 42860954, 3, 196608, 42860912, 3, 196608, 42860908, 3, 196608, 42860882, 3, 196608, 42860867, 3, 196608, 42860856, 3, 196608, 42860887, 3, 196608, 42860871, 3, 196608, 42860929, 3, 196608, 42860967, 3, 196608, 42860994, 3, 131072, 42861000, 3, 196608)
 
 [node name="Proectiles" type="Node2D" parent="."]
 

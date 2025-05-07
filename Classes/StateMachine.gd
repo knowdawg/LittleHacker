@@ -2,10 +2,14 @@ extends Node
 class_name StateMachine
 
 @export var initial_state : State
-@export var hackedState : State
 @export var parent : Node
 
+@export_group("Hack Parameters")
 @export var animators : Array[AnimationPlayer] = []
+@export var leftGrabPos : Marker2D
+@export var rightGrabPos : Marker2D
+@export var movement : MovementComponent
+
 
 var current_state : State
 var states : Dictionary = {}
@@ -36,15 +40,32 @@ func _process(delta):
 			#States such as hacked states still need to be updated
 			if current_state.updateWhileHacked:
 				current_state.update(delta)
-			else:
-				#stop the animators as well
-				for a in animators:
-					a.pause()
+			#stop the animators as well
+			for a in animators:
+				a.pause()
+			
+			if Game.hackedEnemy == parent:
+				hackedUpdate()
+			
 	custumProcess(delta)
 	
 func custumProcess(_delta):
 	pass
-	
+
+func hackedUpdate():
+	if Game.player:
+		var dir = Game.player.getSpriteDirection()
+		var offset = Vector2(3, 0)
+		if dir == -1:
+			offset *= -1
+			offset += leftGrabPos.position + Vector2(6, 0)
+		else:
+			offset += rightGrabPos.position + Vector2(-6, 0)
+		
+		var targetPos = Game.player.global_position + offset
+		var pos = lerp(parent.global_position, targetPos, 0.5)
+		Game.player.position = pos
+
 func hackModeFinished():
 	#Resume the animators once hack mode is finished
 	for a in animators:
@@ -79,13 +100,14 @@ func switchStates(newState : String):
 	stateSwitched.emit(prevState, n)
 	current_state = n
 
+
+#Methods for selecting and deslecting hack target
 signal onHacked
 signal onHackFinished
 
 func enterHackMode():
 	Game.hackedEnemy = parent
 	onHacked.emit()
-	switchStates(hackedState.name)
 
 func exitHackMode():
 	onHackFinished.emit()

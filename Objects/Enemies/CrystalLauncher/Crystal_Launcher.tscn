@@ -13,9 +13,9 @@
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_ule8h"]
 [ext_resource type="Script" uid="uid://7jeeloyjwt7f" path="res://Objects/Enemies/CrystalLauncher/launch.gd" id="6_jy6hu"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_tfliw"]
+[ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="6_yw0hw"]
 [ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="7_gbjp8"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_tmtnm"]
-[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="8_bbh6r"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_ku13d"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_1fgvd"]
 [ext_resource type="Script" uid="uid://b7lt1knt8dds5" path="res://Objects/Enemies/CrystalLauncher/death.gd" id="9_8foh4"]
@@ -478,6 +478,7 @@ fadeTime = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
+clip_children = 2
 material = SubResource("ShaderMaterial_akog8")
 texture = ExtResource("1_wnjpt")
 offset = Vector2(0, -4)
@@ -487,6 +488,8 @@ hframes = 40
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 flipX = false
+
+[node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("6_yw0hw")]
 
 [node name="CrystalSpike" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_akog8")
@@ -513,13 +516,21 @@ offset = Vector2(0.5, -6)
 hframes = 40
 frame = 13
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
 unique_name_in_owner = true
 script = ExtResource("2_wnjpt")
 initial_state = NodePath("Idle")
-hackedState = NodePath("Hacked")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
+leftGrabPos = NodePath("LeftGrabPos")
+rightGrabPos = NodePath("RightGrabPos")
+movement = NodePath("../GeneralComponents/MovementComponent")
+
+[node name="LeftGrabPos" type="Marker2D" parent="StateMachine"]
+position = Vector2(-1, 0)
+
+[node name="RightGrabPos" type="Marker2D" parent="StateMachine"]
+position = Vector2(1, 0)
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
 script = ExtResource("4_ku13d")
@@ -555,25 +566,6 @@ parrent = NodePath("../..")
 animator = NodePath("../../Animator")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
-
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer")]
-script = ExtResource("8_bbh6r")
-stateMachine = NodePath("..")
-parent = NodePath("../..")
-movement = NodePath("../../GeneralComponents/MovementComponent")
-nextState = NodePath("../Agro")
-nextStateOnHack = NodePath("../Agro")
-leftGrabPos = NodePath("LeftGrabPos")
-rightGrabPos = NodePath("RightGrabPos")
-animationName = "Hit"
-animationPlayer = NodePath("../../Animator")
-updateWhileHacked = true
-
-[node name="LeftGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(-1, 0)
-
-[node name="RightGrabPos" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(1, 0)
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "animator", "movement", "spikeSprite")]
 script = ExtResource("9_8foh4")
@@ -694,7 +686,7 @@ shape = SubResource("CircleShape2D_gbjp8")
 
 [node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects") instance=ExtResource("12_bbh6r")]
 healthComponent = NodePath("../GeneralComponents/HealthComponent")
-hitEffects = [NodePath("BloodEffect")]
+hitEffects = [NodePath("BloodEffect"), NodePath("../Sprite2D/HitFlashComponent")]
 
 [node name="BloodEffect" parent="OnHitComponent" instance=ExtResource("13_8foh4")]
 material = SubResource("ShaderMaterial_hsbah")

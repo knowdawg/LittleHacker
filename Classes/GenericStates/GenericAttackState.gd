@@ -55,11 +55,14 @@ func update(delta):
 	if t >= attackLength:
 		trasitioned.emit(self, agroState.name)
 
-func canParry():
+func canParry(attack : Attack):
 	for v in dontReactToParryTimes:
 		if t >= v.x and t <= v.y:
 			return false
-	return true
+	for a in attackComponents:
+		if a.attackName == attack.attackName:
+			return true
+	return false
 	
 func getParryState():
 	return parryState

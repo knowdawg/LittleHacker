@@ -14,6 +14,8 @@ var direction = 1
 var velocities : Array[Vector2] = []
 var accelerations : Array[Vector2] = []
 func _physics_process(delta: float) -> void:
+	if Game.inHackMode:
+		return
 	#Gravity
 	g += Vector2(0.0, gravity)
 	if parent is CharacterBody2D:
@@ -62,6 +64,8 @@ func getVelocity():
 	return velocityTotal
 
 func lerpToPlayerX(delta : float, offset : float):
+	if Game.inHackMode:
+		return
 	if Game.doesPlayerExist():
 		parent.global_position.x = lerpf(parent.position.x, offset + Game.player.global_position.x, delta)
 

@@ -5,5 +5,5 @@ extends HackCommandComponent
 
 func executeHack():
 	var p = projectile.instantiate()
-	Game.level.add_child(p)
+	Game.addProjectile(p)
 	p.global_position = projectileLocation.global_position

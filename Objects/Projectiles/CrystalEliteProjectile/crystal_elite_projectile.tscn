@@ -11,7 +11,7 @@ script = ExtResource("1_ll3o8")
 
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("2_ccg72")]
 collision_mask = 12
-attackName = "CrystalSword"
+attackName = "SwordSlashProjectile"
 collisionShape = NodePath("CollisionShape2D")
 disabled = false
 attack_damage = 2.0

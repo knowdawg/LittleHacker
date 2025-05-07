@@ -17,12 +17,14 @@ class_name GenericEnemyHackedState
 @export var spriteDirectorComponent : SpriteDirectorComponent 
 
 
-func _ready() -> void:
-	Game.exitHackMode.connect(exitHackMode)
-
-func exitHackMode():
-	if isCurrentState:
-		trasitioned.emit(self, nextStateOnHack.name)
+#func _ready() -> void:
+	#Game.exitHackMode.connect(exitHackMode)
+#
+#func exitHackMode():
+	#if Game.hackedEnemy == parent:
+		#trasitioned.emit(self, nextStateOnHack.name)
+	##if isCurrentState:
+		##trasitioned.emit(self, nextStateOnHack.name)
 
 var isCurrentState = false
 func enter(_prevState):
@@ -47,7 +49,8 @@ func update(_delta):
 		Game.player.position = pos
 	
 	if Game.hackedEnemy != parent:
-		trasitioned.emit(self, nextState.name)
+		if nextState:
+			trasitioned.emit(self, nextState.name)
 		
 	if spriteDirectorComponent:
 		spriteDirectorComponent.lookAtPlayer()

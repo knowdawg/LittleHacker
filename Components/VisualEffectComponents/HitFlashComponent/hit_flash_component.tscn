@@ -48,6 +48,6 @@ polygon = PackedVector2Array(-78, -69, 141, -72, 104, 61, -100, 70)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_7fr1b")
+&"": SubResource("AnimationLibrary_7fr1b")
 }
 speed_scale = 0.75

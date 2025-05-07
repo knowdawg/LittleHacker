@@ -16,7 +16,7 @@ func _ready() -> void:
 			animator.speed_scale = randf_range(0.9, 1.1)
 			animator.play(idleAnimatorName)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Engine.is_editor_hint():
 		if animator:
 			animator.play(idleAnimatorName)

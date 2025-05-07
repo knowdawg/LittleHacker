@@ -10,10 +10,10 @@ func _ready() -> void:
 	for a in attackComponents:
 		a.gotParried.connect(onEnemyParried)
 
-func onEnemyParried(_attack : Attack):
+func onEnemyParried(attack : Attack):
 	if stateMachine:
 		if stateMachine.current_state.has_method("canParry"):
-			if !stateMachine.current_state.canParry():
+			if !stateMachine.current_state.canParry(attack):
 				return
 		if stateMachine.current_state.has_method("getParryState"):
 			stateMachine.switchStates(stateMachine.current_state.getParryState().name)

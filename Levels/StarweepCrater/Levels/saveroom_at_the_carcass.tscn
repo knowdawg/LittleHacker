@@ -793,7 +793,6 @@ sdf_scale = 0
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="Sprite2D" type="Sprite2D" parent="Paralax/Stationaary/SubViewportContainer/Main2"]
 texture_filter = 1
@@ -822,7 +821,6 @@ sdf_scale = 0
 size = Vector2i(256, 128)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="Wrym" type="Sprite2D" parent="Paralax/VeryFar/SubViewportContainer/Main2"]
 visible = false
@@ -862,7 +860,6 @@ sdf_scale = 0
 size = Vector2i(512, 256)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="Wrym" type="Sprite2D" parent="Paralax/Far/SubViewportContainer/Main2"]
 visible = false
@@ -901,7 +898,6 @@ sdf_scale = 0
 size = Vector2i(128, 256)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="Sprite2D5" type="Sprite2D" parent="Paralax/MediumFar/SubViewportContainer/Main2"]
 texture_filter = 1
@@ -929,7 +925,6 @@ sdf_scale = 0
 size = Vector2i(512, 256)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="Sprite2D4" type="Sprite2D" parent="Paralax/Medium/SubViewportContainer/Main2"]
 visible = false
@@ -966,7 +961,6 @@ sdf_scale = 0
 size = Vector2i(256, 256)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="Sprite2D3" type="Sprite2D" parent="Paralax/MeduimClose/SubViewportContainer/Main2"]
 texture_filter = 1
@@ -1006,7 +1000,6 @@ sdf_scale = 0
 size = Vector2i(128, 128)
 render_target_update_mode = 4
 script = ExtResource("14_5xlpe")
-renderTarget = 1
 
 [node name="SDFTilemap" parent="Paralax/Close/SubViewportContainer/Main2" instance=ExtResource("5_b0k56")]
 visible = false
@@ -1049,7 +1042,6 @@ transparent_bg = true
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(1000, 864)
-script = ExtResource("14_5xlpe")
 
 [node name="SaveroomAtTheCarcassEnvirement" parent="Main" instance=ExtResource("2_fa3pn")]
 

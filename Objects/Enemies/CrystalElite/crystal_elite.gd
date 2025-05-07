@@ -5,7 +5,6 @@ func _process(delta: float) -> void:
 	if %StateMachine.current_state.name == "DashDoubleSlash":
 		if %DashDoubleSlash.t > 0.8 and %DashDoubleSlash.t < 1.0:
 			%MovementComponent.lerpToPlayerX(delta * 10.0, 0.0)
-	
 
 func _on_spin_got_parried(_a) -> void:
 	if %StateMachine.current_state.name == "SpinAttack":
@@ -46,11 +45,12 @@ func createGrowingCrystalProjectile():
 
 func setXPosToPlayerXPos():
 	if Game.doesPlayerExist():
-		global_position = Game.player.global_position
+		global_position.x = Game.player.global_position.x
 
 func _on_spin_finisher_got_parried(_a) -> void:
-	if %StateMachine.current_state.name == "SpinAttack":
+	if %StateMachine.current_state.name == "SpinAttack" or %StateMachine.current_state.name == "Stun":
 		Game.superParry(self)
+		
 
 
 func _on_dive_trasitioned(_p, _n) -> void:
@@ -62,10 +62,15 @@ func _on_re_dive_trasitioned(_p, _n) -> void:
 
 
 func _on_sword_poke_trasitioned(_p, _n) -> void:
-	setXPosToPlayerXPos()
-
+	return
+	#setXPosToPlayerXPos()
+	#if randf() > 0.5:
+		#global_position.x += 14.0
+	#else:
+		#global_position.x -= 14.0
 
 func _on_head_slam_got_parried(_a) -> void:
-	if $Animator.current_animation == "BackBreakCombo":
-		if %StateMachine.current_state.name == "BackBreakCombo" and $Animator.current_animation_position > 1.6:
-			Game.superParry(self)
+	pass
+	#if $Animator.current_animation == "BackBreakCombo":
+		#if %StateMachine.current_state.name == "BackBreakCombo" and $Animator.current_animation_position > 1.6:
+			#Game.superParry(self)

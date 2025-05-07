@@ -3,6 +3,7 @@ class_name OmniDirectionalKnockbackComponent
 
 @export var parent : Node
 @export var movement : MovementComponent
+@export var knockbackMultiplier : float = 1.0
 
 func calculateKnockback(attack : Attack):
 	var kbVec = Vector2.ZERO
@@ -11,10 +12,11 @@ func calculateKnockback(attack : Attack):
 	else:
 		kbVec = attack.knockback_vector
 	
+	
 	if parent.has_method("hitFromDirection"):
 		parent.hitFromDirection(attack, kbVec)
 	else:
-		movement.applyForce(kbVec, attack.knockback_force)
+		movement.applyForce(kbVec, attack.knockback_force * knockbackMultiplier)
 
 
 func returnVec(attack : Attack):

@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://bvdxkosvo3rdd"]
+[gd_scene load_steps=37 format=3 uid="uid://bvdxkosvo3rdd"]
 
 [ext_resource type="Script" uid="uid://dnfqhyu1gc5m4" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.gd" id="1_c87lh"]
 [ext_resource type="Texture2D" uid="uid://clhukrq4eumls" path="res://Assets/Sprites/Enemies/CrystalPillbug.png" id="1_g6wqo"]
@@ -11,7 +11,6 @@
 [ext_resource type="Script" uid="uid://7aq08fbuj753" path="res://Classes/GenericStates/idle.gd" id="5_ucp6s"]
 [ext_resource type="Script" uid="uid://bkbvcn61p04ge" path="res://Classes/GenericStates/GenericAttackState.gd" id="6_c87lh"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_wm562"]
-[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="7_3lsv3"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_gije5"]
 [ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="8_awkn2"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_ucp6s"]
@@ -198,12 +197,20 @@ unique_name_in_owner = true
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
 script = ExtResource("2_g6wqo")
 initial_state = NodePath("Idle")
-hackedState = NodePath("Hacked")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
+leftGrabPos = NodePath("Left")
+rightGrabPos = NodePath("Right")
+movement = NodePath("../GeneralComponents/MovementComponent")
+
+[node name="Left" type="Marker2D" parent="StateMachine"]
+position = Vector2(-1, 1)
+
+[node name="Right" type="Marker2D" parent="StateMachine"]
+position = Vector2(1, 1)
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroStates", "animator", "playerProximity")]
 script = ExtResource("5_ucp6s")
@@ -224,24 +231,6 @@ nodeToFlip = NodePath("../../AttackComponents/AttackComponent")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 100)])
-
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer")]
-script = ExtResource("7_3lsv3")
-stateMachine = NodePath("..")
-parent = NodePath("../..")
-movement = NodePath("../../GeneralComponents/MovementComponent")
-nextState = NodePath("../Idle")
-nextStateOnHack = NodePath("../Idle")
-leftGrabPos = NodePath("Left")
-rightGrabPos = NodePath("Right")
-animationName = "Stun"
-animationPlayer = NodePath("../../Animator")
-
-[node name="Left" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(-1, 1)
-
-[node name="Right" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(1, 1)
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
 script = ExtResource("8_awkn2")

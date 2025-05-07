@@ -43,5 +43,5 @@ void fragment() {
 	c.rgb -= seperator;
 	c.rgb *= darkEdges;
 
-	COLOR = c;
+	//COLOR = c;
 }

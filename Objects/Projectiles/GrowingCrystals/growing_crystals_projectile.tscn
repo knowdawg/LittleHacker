@@ -1,9 +1,18 @@
-[gd_scene load_steps=5 format=3 uid="uid://cpwipfxes1rm0"]
+[gd_scene load_steps=7 format=3 uid="uid://cpwipfxes1rm0"]
 
 [ext_resource type="Script" uid="uid://s8n56hhbs1ir" path="res://Objects/Projectiles/GrowingCrystals/growing_crystals_projectile.gd" id="1_nrqek"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="1_vswhi"]
+[ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="3_2c6if"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="3_jhj8m"]
 [ext_resource type="Texture2D" uid="uid://b7eho7neiew5c" path="res://Assets/Sprites/Projectiles/EliteSlamProjectile.png" id="3_nrqek"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_uxvab"]
+shader = ExtResource("3_2c6if")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 1.0
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [node name="GrowingCrystalsProjectile" type="Node2D"]
 texture_filter = 1
@@ -11,7 +20,7 @@ script = ExtResource("1_nrqek")
 
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("1_vswhi")]
 collision_mask = 12
-attackName = "CrystalSword"
+attackName = "GrowingCrystals"
 collisionShape = NodePath("CollisionShape2D")
 attack_damage = 2.0
 weakness_damage = 3.0
@@ -25,6 +34,7 @@ polygon = PackedVector2Array(-7, 3, -13, -1, -8, 0, -11, -4, -3, 0, -6, -9, 1, -
 [node name="Transform" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Transform"]
+material = SubResource("ShaderMaterial_uxvab")
 position = Vector2(0, -8)
 texture = ExtResource("3_nrqek")
 hframes = 7
@@ -35,7 +45,7 @@ follow = NodePath("../Transform/Sprite2D")
 sprite = NodePath("../Transform/Sprite2D")
 frequency = 0.05
 fadeTime = 0.3
-modulate = Color(1, 1, 1, 0.313726)
+modulate = Color(1, 1, 1, 0.588235)
 
 [node name="Grounded" type="RayCast2D" parent="."]
 position = Vector2(-7, 0)

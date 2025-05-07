@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bae1ixxbndyw3"]
+[gd_scene load_steps=61 format=3 uid="uid://bae1ixxbndyw3"]
 
 [ext_resource type="Script" uid="uid://bgf5im1hmu456" path="res://Objects/Enemies/CrystalSwordsman/crystal_swordsman.gd" id="1_42bp5"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_jv6iw"]
@@ -12,7 +12,6 @@
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="5_8yhaw"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_o6jpw"]
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_2u2j7"]
-[ext_resource type="Script" uid="uid://coy2fh2e6hems" path="res://Classes/GenericStates/GenericEnemyHackedState.gd" id="6_hkq3m"]
 [ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="7_bqot1"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_f5i78"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_h8ghy"]
@@ -546,12 +545,20 @@ velocityToCheck = NodePath("../..")
 [node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("5_8yhaw")]
 metadata/_edit_lock_ = true
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
 script = ExtResource("2_f778v")
 initial_state = NodePath("Patroll")
-hackedState = NodePath("Hacked")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
+leftGrabPos = NodePath("Left")
+rightGrabPos = NodePath("Right")
+movement = NodePath("../GeneralComponents/MovementComponent")
+
+[node name="Left" type="Marker2D" parent="StateMachine"]
+position = Vector2(0, 0.5)
+
+[node name="Right" type="Marker2D" parent="StateMachine"]
+position = Vector2(0, 0.5)
 
 [node name="Patroll" type="Node" parent="StateMachine" node_paths=PackedStringArray("aggroState", "animator", "aggroProximity", "movement", "spriteDirector")]
 script = ExtResource("4_pjn6l")
@@ -595,26 +602,6 @@ nodeToFlip = NodePath("../../AttackComponents/AttackComponent")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 movementPeriods = Array[Vector3]([Vector3(1.1, 1.3, 240)])
-
-[node name="Hacked" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "parent", "movement", "nextState", "nextStateOnHack", "leftGrabPos", "rightGrabPos", "animationPlayer", "spriteDirectorComponent")]
-script = ExtResource("6_hkq3m")
-stateMachine = NodePath("..")
-parent = NodePath("../..")
-movement = NodePath("../../GeneralComponents/MovementComponent")
-nextState = NodePath("../Chase")
-nextStateOnHack = NodePath("../Stun")
-leftGrabPos = NodePath("Left")
-rightGrabPos = NodePath("Right")
-animationName = "Stun"
-animationPlayer = NodePath("../../Animator")
-spriteDirectorComponent = NodePath("../../Sprite2D/SpriteDirectorComponent")
-updateWhileHacked = true
-
-[node name="Left" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(0, 0.5)
-
-[node name="Right" type="Marker2D" parent="StateMachine/Hacked"]
-position = Vector2(0, 0.5)
 
 [node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
 script = ExtResource("7_bqot1")

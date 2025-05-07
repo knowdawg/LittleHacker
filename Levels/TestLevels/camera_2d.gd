@@ -6,6 +6,9 @@ var shake : float = 0.0
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Game.camera = self
+	Game.exitHackMode.connect(onHackModeExit)
+
+var targetZoom := Vector2(10.0, 10.0)
 
 func _process(delta: float) -> void:
 	if shake > 0:
@@ -16,8 +19,16 @@ func _process(delta: float) -> void:
 		
 		offset = Vector2(xDis, yDis)
 	
-	if zoom != Vector2(10, 10):
-		zoom = lerp(zoom, Vector2(10, 10), 10.0 * delta)
+	if zoom != targetZoom:
+		zoom = lerp(zoom, targetZoom, 10.0 * delta)
+	
+	if Game.inHackMode:
+		targetZoom = Vector2(11.0, 11.0)
+	else:
+		targetZoom = Vector2(10.0, 10.0)
+
+func onHackModeExit():
+	zoom = Vector2(14.0, 14.0)
 
 func set_shake(amount : float):
 	shake = amount
