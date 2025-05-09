@@ -99,6 +99,21 @@ func _on_health_component_hit(_attack: Attack) -> void:
 		%StateMachine.switchStates("Stun")
 
 
+@export var enemyToSpawn : PackedScene
+
+func createEnemy():
+	var e : CrystalThug = enemyToSpawn.instantiate()
+	Game.call_deferred("addEnemy", e)
+	e.global_position = global_position
+	if %Sprite2D.flip_h:
+		e.global_position += Vector2(8.0, 0.0)
+		e.shootOut(Vector2(1.0, -0.5))
+	else:
+		e.global_position -= Vector2(8.0, 0.0)
+		e.shootOut(Vector2(-1.0, -0.5))
+	
+
+
 func _on_health_component_death(attack: Attack) -> void:
 	%MovementComponent.applyForce(%MovementComponent.getVectorToPlayerX(global_position), 100.0)
 

@@ -1,4 +1,5 @@
 extends Enemy
+class_name CrystalThug
 
 @export var buggy : PackedScene
 enum colorChoices {PURPLE = 0, RED = 1, GREEN = 2}
@@ -16,6 +17,9 @@ enum colorChoices {PURPLE = 0, RED = 1, GREEN = 2}
 
 func wake():
 	%StateMachine.switchStates("Wake")
+
+func shootOut(dir : Vector2):
+	$GeneralComponents/MovementComponent.applyForce(dir, 200.0)
 
 var canResonate : bool = true
 # Called when the node enters the scene tree for the first time.

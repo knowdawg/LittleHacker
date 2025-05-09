@@ -22,7 +22,7 @@ script = ExtResource("1_nrqek")
 collision_mask = 4
 attackName = "GrowingCrystals"
 collisionShape = NodePath("CollisionShape2D")
-attack_damage = 2.0
+attack_damage = 1.0
 weakness_damage = 3.0
 knockback_force = 50.0
 
@@ -48,13 +48,20 @@ fadeTime = 0.3
 modulate = Color(1, 1, 1, 0.588235)
 
 [node name="Grounded" type="RayCast2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(-7, 0)
 target_position = Vector2(0, 5)
 collision_mask = 3
 
 [node name="Grounded2" type="RayCast2D" parent="."]
+unique_name_in_owner = true
 position = Vector2(7, 0)
 target_position = Vector2(0, 5)
 collision_mask = 3
 
+[node name="DestroyTimer" type="Timer" parent="."]
+wait_time = 2.0
+one_shot = true
+
 [connection signal="gotParried" from="AttackComponent" to="." method="_on_attack_component_got_parried"]
+[connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

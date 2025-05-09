@@ -1,4 +1,4 @@
-[gd_scene load_steps=77 format=3 uid="uid://bx7i5q252gya5"]
+[gd_scene load_steps=76 format=3 uid="uid://bx7i5q252gya5"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_d1l05"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="2_oi261"]
@@ -24,7 +24,6 @@
 [ext_resource type="Texture2D" uid="uid://bbwqrj6yqt8da" path="res://Assets/Sprites/WorldObjects/LazySpec.png" id="10_t8d8q"]
 [ext_resource type="PackedScene" uid="uid://cjxxnykthpufg" path="res://Assets/Shaders/ParticleEffects/WindParticles/wind.tscn" id="11_eg4k2"]
 [ext_resource type="PackedScene" uid="uid://cncanuof8iw4r" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tscn" id="12_mdi6s"]
-[ext_resource type="PackedScene" uid="uid://dnxcrvnkj7fhj" path="res://Objects/WorldObjects/RespawnPoint/respawn_point.tscn" id="18_t8d8q"]
 [ext_resource type="PackedScene" uid="uid://b5cp00hin8my6" path="res://Objects/Enemies/CrystalElite/crystal_elite.tscn" id="19_gb8d3"]
 [ext_resource type="PackedScene" uid="uid://cr4dj46wcech6" path="res://Objects/WorldObjects/Tilemaps/foliage_tilemap.tscn" id="20_1afi5"]
 [ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="20_5e62k"]
@@ -51,7 +50,7 @@ fill_from = Vector2(1, 1)
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg4k2"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1afi5"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
 width = 1280
@@ -61,7 +60,7 @@ height = 720
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_iqh2m"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_eg4k2"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
 width = 1280
@@ -99,7 +98,7 @@ shader_parameter/xDisplacment = 0.4
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_ei1mr"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_iqh2m"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
 width = 1280
@@ -157,7 +156,7 @@ shader = SubResource("Shader_73joc")
 shader_parameter/fog = SubResource("GradientTexture2D_t8d8q")
 shader_parameter/depth = 0.2
 
-[sub_resource type="Resource" id="Resource_1sp2w"]
+[sub_resource type="Resource" id="Resource_ei1mr"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -168,9 +167,9 @@ script = ExtResource("8_x452h")
 position = Vector2(215.502, 462.468)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_1sp2w")
+properties = SubResource("Resource_ei1mr")
 
-[sub_resource type="Resource" id="Resource_apdyx"]
+[sub_resource type="Resource" id="Resource_1sp2w"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -181,9 +180,9 @@ script = ExtResource("8_x452h")
 position = Vector2(365.949, 322.647)
 point_in = Vector2(-152.505, 1.15637)
 point_out = Vector2(152.505, -1.15637)
-properties = SubResource("Resource_apdyx")
+properties = SubResource("Resource_1sp2w")
 
-[sub_resource type="Resource" id="Resource_at35k"]
+[sub_resource type="Resource" id="Resource_apdyx"]
 script = ExtResource("7_jpcra")
 texture_idx = 0
 flip = false
@@ -194,7 +193,7 @@ script = ExtResource("8_x452h")
 position = Vector2(514.448, 468.315)
 point_in = Vector2(0, 0)
 point_out = Vector2(0, 0)
-properties = SubResource("Resource_at35k")
+properties = SubResource("Resource_apdyx")
 
 [sub_resource type="Resource" id="Resource_t8d8q"]
 script = ExtResource("9_5e62k")
@@ -324,16 +323,16 @@ texture = SubResource("GradientTexture2D_4uj70")
 
 [node name="Clouds3" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_eg4k2")
+texture = SubResource("GradientTexture2D_1afi5")
 
 [node name="Clouds" parent="Background" instance=ExtResource("2_oi261")]
 position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_iqh2m")
+texture = SubResource("GradientTexture2D_eg4k2")
 
 [node name="Clouds2" parent="Background" instance=ExtResource("2_oi261")]
 material = SubResource("ShaderMaterial_xr4cd")
 position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_ei1mr")
+texture = SubResource("GradientTexture2D_iqh2m")
 
 [node name="Paralax" type="Node2D" parent="."]
 
@@ -581,11 +580,6 @@ shape = SubResource("CircleShape2D_wvyir")
 position = Vector2(-3, 44)
 
 [node name="RespawnPoints" type="Node2D" parent="."]
-
-[node name="RespawnPoint" parent="RespawnPoints" node_paths=PackedStringArray("level") instance=ExtResource("18_t8d8q")]
-position = Vector2(293, 702)
-level = NodePath("../..")
-respawnPointName = "TestAtEleite"
 
 [node name="PlayerParrent" type="Node2D" parent="."]
 

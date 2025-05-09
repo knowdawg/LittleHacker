@@ -7,6 +7,12 @@ var t = 0.0
 func _process(delta: float) -> void:
 	distTaveled += abs(delta * speed * dirVector.x)
 	if distTaveled >= disJump:
+		
+		if !%Grounded.is_colliding() or !%Grounded2.is_colliding():
+			$AttackComponent.call_deferred("disable")
+			$DestroyTimer.start()
+			return
+		
 		distTaveled -= disJump
 		global_position.x += disJump * Vector2(dirVector.x, 0.0).normalized().x
 		$Transform/Sprite2D.frame = 0
@@ -26,3 +32,7 @@ func _process(delta: float) -> void:
 		$AttackComponent.enable()
 	else:
 		$AttackComponent.disable()
+
+
+func _on_destroy_timer_timeout() -> void:
+	queue_free()
