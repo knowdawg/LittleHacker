@@ -1,4 +1,4 @@
-extends Node2D
+extends Projectile
 
 @export var greenProjectile : Resource
 @export var redProjectile : Resource

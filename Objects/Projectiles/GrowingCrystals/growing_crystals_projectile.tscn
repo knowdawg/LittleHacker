@@ -19,7 +19,7 @@ texture_filter = 1
 script = ExtResource("1_nrqek")
 
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("1_vswhi")]
-collision_mask = 12
+collision_mask = 4
 attackName = "GrowingCrystals"
 collisionShape = NodePath("CollisionShape2D")
 attack_damage = 2.0

@@ -1,10 +1,11 @@
-[gd_scene load_steps=58 format=3 uid="uid://b5cp00hin8my6"]
+[gd_scene load_steps=63 format=3 uid="uid://b5cp00hin8my6"]
 
 [ext_resource type="Texture2D" uid="uid://b2keo0j23vrvo" path="res://Assets/Sprites/Enemies/CrystalElite.png" id="1_ikeyq"]
 [ext_resource type="Script" uid="uid://bktdntqllkuhg" path="res://Objects/Enemies/CrystalElite/crystal_elite.gd" id="1_ngmos"]
 [ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="1_rqy5u"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_txiik"]
 [ext_resource type="Texture2D" uid="uid://bir3cnwoqb33s" path="res://Assets/Sprites/WorldObjects/ScarfTest.png" id="2_ob334"]
+[ext_resource type="PackedScene" uid="uid://b8t05k375ws5w" path="res://Objects/Projectiles/CrystalResonaceBlast/crystal_resonance_blast_projectile.tscn" id="2_p5kjr"]
 [ext_resource type="Script" uid="uid://dxaf6de4g703x" path="res://Objects/Enemies/CrystalElite/move_this_to_move_cloth_sim.gd" id="3_125v2"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_adbwt"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="3_b4agp"]
@@ -29,8 +30,10 @@
 [ext_resource type="Script" uid="uid://cynqij5jqy1k2" path="res://Classes/GenericStates/dead.gd" id="13_a75r7"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_l4307"]
 [ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_ngmos"]
+[ext_resource type="Script" uid="uid://dywb4hof1711" path="res://Objects/Enemies/CrystalElite/resonate.gd" id="16_yobyw"]
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="25_yobyw"]
 [ext_resource type="Texture2D" uid="uid://b7eho7neiew5c" path="res://Assets/Sprites/Projectiles/EliteSlamProjectile.png" id="26_a75r7"]
+[ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="27_b2gw6"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="32_uopo6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikeyq"]
@@ -197,7 +200,7 @@ tracks/3/path = NodePath("AfterImageComponent")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.8, 1),
+"times": PackedFloat32Array(0.7, 1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [true],
@@ -231,10 +234,10 @@ tracks/1/path = NodePath("MoveThisToMoveClothSim:position")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.7, 0.8, 0.9, 1, 1.4),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.7, 0.8, 0.9, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, -2), Vector2(0, 1), Vector2(0, 1), Vector2(0, 1), Vector2(-1, -6), Vector2(-10, -3), Vector2(-11, 1), Vector2(-11, 9), Vector2(-11, 9)]
+"values": [Vector2(0, -2), Vector2(0, 1), Vector2(0, 1), Vector2(0, 1), Vector2(-1, -6), Vector2(-10, -3), Vector2(-11, 1), Vector2(-11, 1)]
 }
 tracks/2/type = "method"
 tracks/2/imported = false
@@ -304,7 +307,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 9), Vector2(0, -6), Vector2(0, -5), Vector2(0, -2), Vector2(0, -3), Vector2(0, -4), Vector2(0, -4)]
+"values": [Vector2(0, 1), Vector2(0, -6), Vector2(0, -5), Vector2(0, -2), Vector2(0, -3), Vector2(0, -4), Vector2(0, -4)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -469,6 +472,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [6]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_l4307"]
@@ -738,10 +753,94 @@ tracks/4/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_uopo6"]
+resource_name = "Resonate"
+length = 0.4
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [158, 159, 160, 161]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MoveThisToMoveClothSim:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -2)]
+}
+
+[sub_resource type="Animation" id="Animation_yobyw"]
+resource_name = "Death"
+length = 4.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [163, 164, 165, 166, 167, 168, 169, 170, 171, 172, 173, 174, 175, 176, 177]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MoveThisToMoveClothSim:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -4)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClothSim:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:material:shader_parameter/modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3.65, 3.95),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tace1"]
 _data = {
 &"BackBreakCombo": SubResource("Animation_rcoo6"),
 &"DashDoubleSlash": SubResource("Animation_lieb7"),
+&"Death": SubResource("Animation_yobyw"),
 &"Dive": SubResource("Animation_2mqo8"),
 &"Emerge": SubResource("Animation_flgyp"),
 &"IdleCrystalStance": SubResource("Animation_c3lnx"),
@@ -749,6 +848,7 @@ _data = {
 &"Laser": SubResource("Animation_a75r7"),
 &"RESET": SubResource("Animation_adbwt"),
 &"ReDive": SubResource("Animation_l4307"),
+&"Resonate": SubResource("Animation_uopo6"),
 &"SpinAttack": SubResource("Animation_125v2"),
 &"Stun": SubResource("Animation_b4agp"),
 &"SwordPoke": SubResource("Animation_ngmos")
@@ -804,6 +904,7 @@ texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_ngmos")
+resonanceProjectile = ExtResource("2_p5kjr")
 healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
@@ -812,7 +913,7 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ikeyq")
 
 [node name="ClothSim" parent="." instance=ExtResource("1_rqy5u")]
-position = Vector2(0, -4)
+position = Vector2(1.49012e-07, -3)
 texture = ExtResource("2_ob334")
 clothAngle = 5.0
 collidable = false
@@ -844,12 +945,13 @@ clip_children = 2
 material = SubResource("ShaderMaterial_b4agp")
 position = Vector2(0, -2)
 texture = ExtResource("1_ikeyq")
-hframes = 158
+hframes = 178
 frame = 1
 
 [node name="HitFlashComponent" parent="Sprite2D" instance=ExtResource("8_yemvd")]
 
 [node name="SpriteDirectorComponent" parent="Sprite2D" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("1_txiik")]
+unique_name_in_owner = true
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
@@ -998,6 +1100,11 @@ length = 0.6
 animator = NodePath("../../Animator")
 animationName = "Emerge"
 
+[node name="Resonate" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "afterImage")]
+script = ExtResource("16_yobyw")
+animator = NodePath("../../Animator")
+afterImage = NodePath("../../AfterImageComponent")
+
 [node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom", "sprite")]
 script = ExtResource("11_ngmos")
 parryLength = 2.0
@@ -1010,8 +1117,11 @@ kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
 knockbackBasedOnDir = true
 sprite = NodePath("../../Sprite2D")
 
-[node name="Death" type="Node" parent="StateMachine"]
+[node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "hurtboxesToDisable")]
 script = ExtResource("13_a75r7")
+animator = NodePath("../../Animator")
+animationName = "Death"
+hurtboxesToDisable = [NodePath("../../GeneralComponents/HurtboxComponent")]
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1021,11 +1131,12 @@ libraries = {
 [node name="GeneralComponents" type="Node2D" parent="."]
 
 [node name="HealthComponent" parent="GeneralComponents" instance=ExtResource("3_adbwt")]
-MAX_HEALTH = 150.0
+MAX_HEALTH = 50.0
 
-[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine") instance=ExtResource("4_tace1")]
+[node name="DeathComponent" parent="GeneralComponents" node_paths=PackedStringArray("healthComponent", "stateMachine", "stateToSwitchTo") instance=ExtResource("4_tace1")]
 healthComponent = NodePath("../HealthComponent")
 stateMachine = NodePath("../../StateMachine")
+stateToSwitchTo = NodePath("../../StateMachine/Death")
 
 [node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_rqy5u")]
 unique_name_in_owner = true
@@ -1051,24 +1162,33 @@ shape = SubResource("RectangleShape2D_a75r7")
 parent = NodePath("../..")
 follow = NodePath("../EnemyHealthbarMarker")
 healthComponent = NodePath("../HealthComponent")
-hackCommands = [NodePath("CeapTest"), NodePath("ExspensiveTest")]
+hackCommands = [NodePath("Resonate"), NodePath("Execute"), NodePath("LifeDrain")]
 stateMachine = NodePath("../../StateMachine")
 
-[node name="CeapTest" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "deathComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("25_yobyw")]
+[node name="Resonate" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "deathComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("25_yobyw")]
 stateMachine = NodePath("../../../StateMachine")
-stateToSwitchTo = NodePath("../../../StateMachine/Stun")
-deathComponent = NodePath("../../DeathComponent")
-enemyHealthbar = NodePath("..")
-hackName = "FREE"
-healthComponent = NodePath("../../HealthComponent")
-
-[node name="ExspensiveTest" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "deathComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("25_yobyw")]
-stateMachine = NodePath("../../../StateMachine")
-stateToSwitchTo = NodePath("../../../StateMachine/Stun")
+stateToSwitchTo = NodePath("../../../StateMachine/Resonate")
 deathComponent = NodePath("../../DeathComponent")
 enemyHealthbar = NodePath("..")
 cost = 10.0
-hackName = "PRICEY"
+hackName = "Resonate"
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="Execute" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("stateMachine", "stateToSwitchTo", "deathComponent", "enemyHealthbar", "healthComponent") instance=ExtResource("25_yobyw")]
+stateMachine = NodePath("../../../StateMachine")
+stateToSwitchTo = NodePath("../../../StateMachine/Death")
+deathComponent = NodePath("../../DeathComponent")
+killsEnemy = true
+removeAfterExecuted = true
+enemyHealthbar = NodePath("..")
+cost = 20.0
+hackName = "Execute"
+healthComponent = NodePath("../../HealthComponent")
+
+[node name="LifeDrain" parent="GeneralComponents/EnemyHeathbar" node_paths=PackedStringArray("parent", "healthComponent") instance=ExtResource("27_b2gw6")]
+parent = NodePath("../../..")
+cost = 5.0
+hackName = "LifeDrain"
 healthComponent = NodePath("../../HealthComponent")
 
 [node name="EnemyHealthbarMarker" type="Marker2D" parent="GeneralComponents"]
@@ -1094,7 +1214,7 @@ stateMachine = NodePath("../../StateMachine")
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/DoubleSlash"]
 visible = false
@@ -1106,7 +1226,7 @@ shape = SubResource("CapsuleShape2D_flgyp")
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Spin"]
 visible = false
@@ -1118,7 +1238,7 @@ shape = SubResource("CapsuleShape2D_l4307")
 collision_mask = 4
 collisionShape = NodePath("CollisionPolygon2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponents/SpinFinisher"]
 visible = false
@@ -1128,7 +1248,7 @@ polygon = PackedVector2Array(-20, 7, 0, 7, 0, -18, -13, -12, -17, -8, -20, -1)
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackComponents/HeadSlam"]
 visible = false
@@ -1139,7 +1259,7 @@ polygon = PackedVector2Array(-19, 5, -25, 1, -19, 2, -23, -2, -15, 2, -18, -7, -
 collision_mask = 4
 collisionShape = NodePath("CollisionPolygon2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponents/OverheadSweep"]
 visible = false
@@ -1149,7 +1269,7 @@ polygon = PackedVector2Array(-19, 7, -21, 5, -21, -2, -14, -12, 3, -17, 15, -16,
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionPolygon2D" parent="AttackComponents/Dive"]
 visible = false
@@ -1160,7 +1280,7 @@ polygon = PackedVector2Array(-11, 6, -17, 2, -13, 3, -15, -2.38419e-07, -8, 3, -
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/SwordPokeSweep"]
 visible = false
@@ -1172,7 +1292,7 @@ shape = SubResource("CapsuleShape2D_yemvd")
 collision_mask = 4
 collisionShape = NodePath("CollisionPolygon2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponents/SwordPokeSweepLeft"]
 visible = false
@@ -1182,7 +1302,7 @@ polygon = PackedVector2Array(-16, 6, 0, 6, 3, -8, -4, -8, -10, -5, -16, 3)
 collision_mask = 4
 collisionShape = NodePath("CollisionShape2D")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-attack_damage = 2.0
+attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/SwordPoke"]
 visible = false
@@ -1216,9 +1336,13 @@ material = SubResource("ShaderMaterial_a75r7")
 
 [node name="Sounds" type="Node2D" parent="."]
 
+[connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]
 [connection signal="trasitioned" from="StateMachine/Dive" to="." method="_on_dive_trasitioned"]
 [connection signal="trasitioned" from="StateMachine/ReDive" to="." method="_on_re_dive_trasitioned"]
 [connection signal="trasitioned" from="StateMachine/SwordPoke" to="." method="_on_sword_poke_trasitioned"]
+[connection signal="death" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_death"]
+[connection signal="hit" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_hit"]
+[connection signal="executed" from="GeneralComponents/EnemyHeathbar/Resonate" to="." method="_on_ceap_test_executed"]
 [connection signal="gotParried" from="AttackComponents/Spin" to="." method="_on_spin_got_parried"]
 [connection signal="gotParried" from="AttackComponents/SpinFinisher" to="." method="_on_spin_finisher_got_parried"]
 [connection signal="gotParried" from="AttackComponents/HeadSlam" to="." method="_on_head_slam_got_parried"]

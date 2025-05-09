@@ -2773,6 +2773,7 @@ shape = SubResource("RectangleShape2D_gvghi")
 [node name="HealthComponent" parent="." instance=ExtResource("2_l0uvv")]
 rotation = 3.14159
 isPlayerHealth = true
+MAX_HEALTH = 5.0
 MAX_WEAKNESS = 0.0
 
 [node name="EnemyHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("3_nr8gu")]

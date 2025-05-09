@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://c6eflefpmo32h"]
+[gd_scene load_steps=52 format=3 uid="uid://c6eflefpmo32h"]
 
 [ext_resource type="Script" uid="uid://mt8sh1m67s4b" path="res://Objects/Enemies/CrystalLauncher/crystal_launcher.gd" id="1_1fgvd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_5ylyd"]
@@ -29,6 +29,7 @@
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="19_bbh6r"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="26_8foh4"]
 [ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="29_hsbah"]
+[ext_resource type="Texture2D" uid="uid://b7eho7neiew5c" path="res://Assets/Sprites/Projectiles/EliteSlamProjectile.png" id="30_yw0hw"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8foh4"]
 radius = 3.0
@@ -37,6 +38,14 @@ radius = 3.0
 shader = ExtResource("2_2ph5j")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
+shader_parameter/pattern = 0
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ndp6h"]
+shader = ExtResource("2_2ph5j")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/width = 1.0
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/modulate = Color(1, 1, 1, 1)
@@ -515,6 +524,15 @@ texture = ExtResource("4_jy6hu")
 offset = Vector2(0.5, -6)
 hframes = 40
 frame = 13
+
+[node name="EliteSlamProjectile" type="Sprite2D" parent="."]
+unique_name_in_owner = true
+visible = false
+material = SubResource("ShaderMaterial_ndp6h")
+texture = ExtResource("30_yw0hw")
+offset = Vector2(0, -6)
+hframes = 7
+frame = 2
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
 unique_name_in_owner = true

@@ -1,4 +1,5 @@
 extends Node
+class_name AfterImageComponent
 
 @export var follow : Node2D
 @export var sprite : Sprite2D

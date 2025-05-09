@@ -1,5 +1,6 @@
 extends GenericParriedState
 
+
 @export var healthComponent : HealthComponent
 @export var projectileScene : PackedScene
 @export var parent : CharacterBody2D

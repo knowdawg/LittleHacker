@@ -27,11 +27,7 @@ var t = 0.0
 func enter(prevState):
 	t = 0.0
 	animator.play(animationName)
-	if nodeToFlip and parent and Game.player:
-		if parent.position.x > Game.player.global_position.x: 
-			nodeToFlip.scale.x = 1.0
-		else:
-			nodeToFlip.scale.x = -1.0
+	orientateFlipNode()
 	
 	if parent and Game.player:
 		if parent.position.x > Game.player.global_position.x: 
@@ -39,6 +35,13 @@ func enter(prevState):
 		else:
 			dir = 1.0
 	customEnter(prevState)
+
+func orientateFlipNode():
+	if nodeToFlip and parent and Game.player:
+		if parent.position.x > Game.player.global_position.x: 
+			nodeToFlip.scale.x = 1.0
+		else:
+			nodeToFlip.scale.x = -1.0
 
 func customEnter(_prevSate):
 	pass

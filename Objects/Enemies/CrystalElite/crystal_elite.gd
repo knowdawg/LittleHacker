@@ -4,7 +4,14 @@ extends Enemy
 func _process(delta: float) -> void:
 	if %StateMachine.current_state.name == "DashDoubleSlash":
 		if %DashDoubleSlash.t > 0.8 and %DashDoubleSlash.t < 1.0:
-			%MovementComponent.lerpToPlayerX(delta * 10.0, 0.0)
+			var spriteDir = %Sprite2D.flip_h
+			var moveDir = global_position < Game.player.global_position
+			if spriteDir == moveDir:
+				%MovementComponent.lerpToPlayerX(delta * 10.0, 0.0)
+		elif %DashDoubleSlash.t < 0.7:
+			%SpriteDirectorComponent.lookAtPlayer()
+			%DashDoubleSlash.orientateFlipNode()
+	
 
 func _on_spin_got_parried(_a) -> void:
 	if %StateMachine.current_state.name == "SpinAttack":
@@ -74,3 +81,30 @@ func _on_head_slam_got_parried(_a) -> void:
 	#if $Animator.current_animation == "BackBreakCombo":
 		#if %StateMachine.current_state.name == "BackBreakCombo" and $Animator.current_animation_position > 1.6:
 			#Game.superParry(self)
+
+
+func _on_ceap_test_executed() -> void:
+	%MovementComponent.applyForce(%MovementComponent.getVectorToPlayerX(global_position), 100.0)
+
+@export var resonanceProjectile : PackedScene
+
+func _on_health_component_hit(_attack: Attack) -> void:
+	if %StateMachine.current_state.name == "Resonate":
+		var p = resonanceProjectile.instantiate()
+		p.color = 1
+		Game.call_deferred("addProjectile", p)
+		p.position = global_position
+		p.scale = Vector2(2.0, 2.0)
+		
+		%StateMachine.switchStates("Stun")
+
+
+func _on_health_component_death(attack: Attack) -> void:
+	%MovementComponent.applyForce(%MovementComponent.getVectorToPlayerX(global_position), 100.0)
+
+
+func _on_state_machine_state_switched(prevState: State, newState: State) -> void:
+	if prevState:
+		if prevState.name == "DashDoubleSlash":
+			if newState.name != "Resonate":
+				%AfterImageComponent.setActive(false)

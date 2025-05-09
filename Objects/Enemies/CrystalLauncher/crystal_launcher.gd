@@ -21,6 +21,8 @@ func _process(_delta: float) -> void:
 	if Game.doesPlayerExist():
 		dirToPlayer = (global_position - (Game.player.global_position - Vector2(0.0, 3.0))).angle()
 	%Sprite2D.rotation = curRotation
+	%EliteSlamProjectile.rotation = %Sprite2D.rotation
+	%EliteSlamProjectile.position = %Sprite2D.position
 
 func _physics_process(_delta: float) -> void:
 	move_and_slide()
