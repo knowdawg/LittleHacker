@@ -1,10 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://cpwipfxes1rm0"]
+[gd_scene load_steps=9 format=3 uid="uid://cpwipfxes1rm0"]
 
 [ext_resource type="Script" uid="uid://s8n56hhbs1ir" path="res://Objects/Projectiles/GrowingCrystals/growing_crystals_projectile.gd" id="1_nrqek"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="1_vswhi"]
 [ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="3_2c6if"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="3_jhj8m"]
 [ext_resource type="Texture2D" uid="uid://b7eho7neiew5c" path="res://Assets/Sprites/Projectiles/EliteSlamProjectile.png" id="3_nrqek"]
+[ext_resource type="AudioStream" uid="uid://qgk3xo45hmvh" path="res://Assets/Audio/SoundEffects/GrowingCrystals.wav" id="6_uxvab"]
+[ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="7_ixlh6"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uxvab"]
 shader = ExtResource("3_2c6if")
@@ -62,6 +64,13 @@ collision_mask = 3
 [node name="DestroyTimer" type="Timer" parent="."]
 wait_time = 2.0
 one_shot = true
+
+[node name="CrystalGrow" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("6_uxvab")
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("7_ixlh6")
 
 [connection signal="gotParried" from="AttackComponent" to="." method="_on_attack_component_got_parried"]
 [connection signal="timeout" from="DestroyTimer" to="." method="_on_destroy_timer_timeout"]

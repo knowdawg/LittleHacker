@@ -32,7 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://lolanstyika2" path="res://Assets/Audio/SoundEffects/BarefootStep.wav" id="29_bcfdh"]
 [ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="30_ffdyt"]
 [ext_resource type="Material" uid="uid://i6j2egx4otxu" path="res://Assets/Shaders/ParticleEffects/Sparks.tres" id="30_mwxko"]
-[ext_resource type="AudioStream" uid="uid://jv4mcug84bxn" path="res://Assets/Audio/SoundEffects/RockHit.wav" id="35_47lyt"]
+[ext_resource type="AudioStream" uid="uid://mh02qdesaj52" path="res://Assets/Audio/SoundEffects/CrystalEnemyHit.wav" id="33_y6j1l"]
 [ext_resource type="AudioStream" uid="uid://dlgdsvxfmuean" path="res://Assets/Audio/SoundEffects/ResonateExecuted.wav" id="35_glcv1"]
 [ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="35_vwc5n"]
 [ext_resource type="AudioStream" uid="uid://c6anld0mwuprt" path="res://Assets/Audio/SoundEffects/GoreExsplosion.wav" id="36_54lns"]
@@ -793,14 +793,13 @@ script = ExtResource("30_ffdyt")
 metadata/_edit_lock_ = true
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("healthComponent")]
-stream = ExtResource("35_47lyt")
+stream = ExtResource("33_y6j1l")
 volume_db = 10.0
 max_distance = 100.0
 bus = &"SoundEffects"
 script = ExtResource("36_i0g28")
 onHit = true
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-pitchRange = Vector2(0.8, 1.2)
 metadata/_edit_lock_ = true
 
 [node name="MalfunctionGore" type="AudioStreamPlayer2D" parent="Sounds"]

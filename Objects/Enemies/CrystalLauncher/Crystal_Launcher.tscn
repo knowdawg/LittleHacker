@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://c6eflefpmo32h"]
+[gd_scene load_steps=54 format=3 uid="uid://c6eflefpmo32h"]
 
 [ext_resource type="Script" uid="uid://mt8sh1m67s4b" path="res://Objects/Enemies/CrystalLauncher/crystal_launcher.gd" id="1_1fgvd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_5ylyd"]
@@ -29,7 +29,9 @@
 [ext_resource type="PackedScene" uid="uid://c50x0ma4r25le" path="res://Objects/Hacks/StateSwitchHack/StateSwitchHack.tscn" id="19_bbh6r"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="26_8foh4"]
 [ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="29_hsbah"]
+[ext_resource type="AudioStream" uid="uid://mh02qdesaj52" path="res://Assets/Audio/SoundEffects/CrystalEnemyHit.wav" id="30_jw3nv"]
 [ext_resource type="Texture2D" uid="uid://b7eho7neiew5c" path="res://Assets/Sprites/Projectiles/EliteSlamProjectile.png" id="30_yw0hw"]
+[ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="31_b5pn0"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8foh4"]
 radius = 3.0
@@ -710,6 +712,16 @@ hitEffects = [NodePath("BloodEffect"), NodePath("../Sprite2D/HitFlashComponent")
 material = SubResource("ShaderMaterial_hsbah")
 
 [node name="Sounds" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("healthComponent")]
+stream = ExtResource("30_jw3nv")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("31_b5pn0")
+onHit = true
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+metadata/_edit_lock_ = true
 
 [node name="PlayerVision" type="RayCast2D" parent="."]
 unique_name_in_owner = true

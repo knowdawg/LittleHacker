@@ -74,7 +74,6 @@
 [ext_resource type="Shader" uid="uid://b3brnbukfnfmc" path="res://Assets/Shaders/Effects/PlayerHackFistLaser.gdshader" id="40_cslm4"]
 [ext_resource type="AudioStream" uid="uid://dd7ed3cdwvi81" path="res://Assets/Audio/SoundEffects/Whoosh.wav" id="43_1cl5h"]
 [ext_resource type="AudioStream" uid="uid://3bpb1qrv4tya" path="res://Assets/Audio/SoundEffects/PlayerSwing.wav" id="43_ho0pg"]
-[ext_resource type="AudioStream" uid="uid://bqthecipgxswv" path="res://Assets/Audio/SoundEffects/HackExecuted.wav" id="46_xfg1q"]
 [ext_resource type="Script" uid="uid://y88tutcu5qop" path="res://Player/WeaponStateMachine/grapple.gd" id="47_4ht5j"]
 [ext_resource type="Script" uid="uid://32ttvp2eqk7k" path="res://Player/HealthBar/progress_bar.gd" id="54_l53i3"]
 [ext_resource type="Script" uid="uid://cqdgehuqqaexl" path="res://Player/player_ui.gd" id="54_qkh22"]
@@ -89,6 +88,7 @@
 [ext_resource type="AudioStream" uid="uid://brm1d5tuxe1ab" path="res://Assets/Audio/SoundEffects/Fire.wav" id="58_o6fl6"]
 [ext_resource type="AudioStream" uid="uid://dk8gsdpbda3an" path="res://Assets/Audio/SoundEffects/HackModeAmbience.wav" id="59_ly53n"]
 [ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
+[ext_resource type="AudioStream" uid="uid://7d4y3bn7ksgd" path="res://Assets/Audio/SoundEffects/HackExecuted2.wav" id="69_xqyul"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2bo2"]
 size = Vector2(2, 5)
@@ -2874,10 +2874,10 @@ bus = &"SoundEffects"
 script = ExtResource("5_8j04r")
 animated_player_sprite = NodePath("../../SpriteAnimator")
 player = NodePath("../..")
-audios = [NodePath("AudioStreamPlayer")]
+audios = [NodePath("Jump")]
 particles = NodePath("../../Effects/Jump")
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StateMachine/Jump"]
+[node name="Jump" type="AudioStreamPlayer" parent="StateMachine/Jump"]
 stream = ExtResource("14_kaha2")
 volume_db = 5.0
 bus = &"SoundEffects"
@@ -2904,9 +2904,9 @@ rollSpeedMultiplier = 5000.0
 playerStateMachine = NodePath("..")
 hurtboxForIframes = NodePath("../../HurtboxComponent")
 weaponStateMachine = NodePath("../../WeaponStateMachine")
-audios = [NodePath("AudioStreamPlayer")]
+audios = [NodePath("Roll")]
 
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StateMachine/Roll"]
+[node name="Roll" type="AudioStreamPlayer" parent="StateMachine/Roll"]
 stream = ExtResource("18_l7j6t")
 volume_db = -10.0
 pitch_scale = 1.52
@@ -3025,7 +3025,7 @@ animationName = "GrappleFlip"
 script = ExtResource("36_c5st5")
 animated_player_sprite = NodePath("../../SpriteAnimator")
 player = NodePath("../..")
-audios = [NodePath("../Jump/AudioStreamPlayer")]
+audios = [NodePath("../Jump/Jump")]
 particles = NodePath("../../Effects/Jump")
 
 [node name="Death" type="Node" parent="StateMachine" node_paths=PackedStringArray("hurtboxToDisable")]
@@ -3559,8 +3559,8 @@ scroll_active = false
 [node name="Audio" type="Node2D" parent="HackUI"]
 
 [node name="HackExecuted" type="AudioStreamPlayer" parent="HackUI/Audio"]
-stream = ExtResource("46_xfg1q")
-volume_db = 6.0
+stream = ExtResource("69_xqyul")
+volume_db = 10.0
 bus = &"SoundEffects"
 
 [node name="HackAttackHit" type="AudioStreamPlayer" parent="HackUI/Audio"]

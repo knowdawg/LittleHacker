@@ -41,7 +41,10 @@ func enter(_prevState):
 	
 	#get targets to switch between
 	curTargetIndex = 0
-	viableTargets = detectionBox.get_overlapping_areas()
+	for v : HurtboxComponent in detectionBox.get_overlapping_areas():
+		if v.stateMachine:
+			viableTargets.append(v)
+	
 	viableTargets.sort_custom(sortTargets)
 
 func sortTargets(a : HurtboxComponent, b : HurtboxComponent):

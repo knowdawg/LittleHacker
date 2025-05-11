@@ -34,7 +34,6 @@ func createSwordProjectile():
 	p.global_position = global_position + offset
 	Game.addProjectile(p)
 
-
 var growingCrystalProjectile = preload("uid://cpwipfxes1rm0")
 func createGrowingCrystalProjectile():
 	var p : Projectile = growingCrystalProjectile.instantiate()
@@ -58,7 +57,6 @@ func _on_spin_finisher_got_parried(_a) -> void:
 	if %StateMachine.current_state.name == "SpinAttack" or %StateMachine.current_state.name == "Stun":
 		Game.superParry(self)
 		
-
 
 func _on_dive_trasitioned(_p, _n) -> void:
 	setXPosToPlayerXPos()
@@ -98,7 +96,6 @@ func _on_health_component_hit(_attack: Attack) -> void:
 		
 		%StateMachine.switchStates("Stun")
 
-
 @export var enemyToSpawn : PackedScene
 
 func createEnemy():
@@ -111,7 +108,6 @@ func createEnemy():
 	else:
 		e.global_position -= Vector2(8.0, 0.0)
 		e.shootOut(Vector2(-1.0, -0.5))
-	
 
 
 func _on_health_component_death(attack: Attack) -> void:

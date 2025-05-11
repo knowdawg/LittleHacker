@@ -3,6 +3,9 @@ extends Projectile
 var distTaveled : float = 0.0
 var disJump : float = 12.0
 
+func _ready() -> void:
+	%CrystalGrow.playSound()
+
 var t = 0.0
 func _process(delta: float) -> void:
 	distTaveled += abs(delta * speed * dirVector.x)
@@ -16,6 +19,7 @@ func _process(delta: float) -> void:
 		distTaveled -= disJump
 		global_position.x += disJump * Vector2(dirVector.x, 0.0).normalized().x
 		$Transform/Sprite2D.frame = 0
+		%CrystalGrow.playSound()
 		t = 0.0
 		#$AttackComponent.generateAttackID()
 	

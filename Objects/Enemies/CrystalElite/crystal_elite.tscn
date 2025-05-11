@@ -1,4 +1,4 @@
-[gd_scene load_steps=65 format=3 uid="uid://b5cp00hin8my6"]
+[gd_scene load_steps=83 format=3 uid="uid://b5cp00hin8my6"]
 
 [ext_resource type="Texture2D" uid="uid://b2keo0j23vrvo" path="res://Assets/Sprites/Enemies/CrystalElite.png" id="1_ikeyq"]
 [ext_resource type="Script" uid="uid://bktdntqllkuhg" path="res://Objects/Enemies/CrystalElite/crystal_elite.gd" id="1_ngmos"]
@@ -37,6 +37,24 @@
 [ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="27_b2gw6"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="32_uopo6"]
 [ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="37_170cm"]
+[ext_resource type="AudioStream" uid="uid://mh02qdesaj52" path="res://Assets/Audio/SoundEffects/CrystalEnemyHit.wav" id="37_iyss5"]
+[ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="38_vpw3h"]
+[ext_resource type="AudioStream" uid="uid://ciinlm576rk70" path="res://Assets/Audio/SoundEffects/BackBreaking.wav" id="39_hl100"]
+[ext_resource type="AudioStream" uid="uid://b66rso5o7l03b" path="res://Assets/Audio/SoundEffects/BackBreaking2.wav" id="40_rjn3y"]
+[ext_resource type="AudioStream" uid="uid://byyupme8ik0q2" path="res://Assets/Audio/SoundEffects/CrystalSlam.wav" id="41_r8eln"]
+[ext_resource type="AudioStream" uid="uid://bvanoyk5xjhom" path="res://Assets/Audio/SoundEffects/MetalRockScrape.wav" id="42_f3knw"]
+[ext_resource type="AudioStream" uid="uid://ucxdo2ckurfr" path="res://Assets/Audio/SoundEffects/WeaponSwing.wav" id="43_arqy7"]
+[ext_resource type="AudioStream" uid="uid://v7ktyjagf37g" path="res://Assets/Audio/SoundEffects/WeaponCollision.wav" id="44_tkxit"]
+[ext_resource type="AudioStream" uid="uid://cv3hmd56soa1f" path="res://Assets/Audio/SoundEffects/SwordResonating.wav" id="45_arqy7"]
+[ext_resource type="AudioStream" uid="uid://t4u6e04hwaov" path="res://Assets/Audio/SoundEffects/QuickSpin.wav" id="46_tkxit"]
+[ext_resource type="AudioStream" uid="uid://b8hlyadt2huai" path="res://Assets/Audio/SoundEffects/CrystalEmerge.wav" id="47_dbaq5"]
+[ext_resource type="AudioStream" uid="uid://c6anld0mwuprt" path="res://Assets/Audio/SoundEffects/GoreExsplosion.wav" id="48_ij6ct"]
+[ext_resource type="AudioStream" uid="uid://se14w6ctlmkj" path="res://Assets/Audio/SoundEffects/SwordHitGround.wav" id="49_wq6xe"]
+[ext_resource type="AudioStream" uid="uid://c05d5iljnh1ft" path="res://Assets/Audio/SoundEffects/FallToGroundBody.wav" id="50_ktdju"]
+[ext_resource type="AudioStream" uid="uid://b6uevad6ublm4" path="res://Assets/Audio/SoundEffects/SoftGoreImpact.wav" id="51_pfnph"]
+[ext_resource type="AudioStream" uid="uid://dlxjpih8nipum" path="res://Assets/Audio/SoundEffects/SoftGoreMultiImpact.wav" id="52_3f344"]
+[ext_resource type="AudioStream" uid="uid://do6mupyg04nbb" path="res://Assets/Audio/SoundEffects/InflateExsplode.wav" id="53_wq6xe"]
+[ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="54_ktdju"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ikeyq"]
 size = Vector2(4, 12)
@@ -144,6 +162,66 @@ tracks/5/keys = {
 "method": &"createGrowingCrystalProjectile"
 }]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/BackBreak1:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sounds/BackBreak2:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/CrystalSlam:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6, 1.7),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, true]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/WeaponScrape:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sounds/WeaponSwing:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_lieb7"]
 resource_name = "DashDoubleSlash"
@@ -213,6 +291,26 @@ tracks/3/keys = {
 "method": &"setActive"
 }]
 }
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/WeaponSwing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 1.1, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yobyw"]
 resource_name = "Death"
@@ -265,6 +363,66 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sounds/HeadExsplode:playing")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.15),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/SwordDrop:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/HitGround:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sounds/BrainHitGround:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/Blood:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.65),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_2mqo8"]
@@ -336,6 +494,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [6, 0, 1, 2, 3, 4, 5, 6]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/CrystalSlam:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_flgyp"]
 resource_name = "Emerge"
@@ -372,6 +542,18 @@ tracks/2/path = NodePath("ClothSim:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/EmergeFromGround:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -480,6 +662,18 @@ tracks/2/keys = {
 "method": &"createEnemy"
 }]
 }
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/SummonGoon:playing")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_adbwt"]
 length = 0.001
@@ -554,6 +748,186 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 1)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/BackBreak1:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sounds/BackBreak2:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/CrystalSlam:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/WeaponScrape:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sounds/WeaponSwing:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sounds/WeaponResonate:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/WeaponImpact:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/FlipSpinWhoosh:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/EmergeFromGround:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/HeadExsplode:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/SwordDrop:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Sounds/HitGround:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Sounds/BrainHitGround:playing")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Sounds/Blood:playing")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Sounds/SummonGoon:playing")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_l4307"]
@@ -737,6 +1111,59 @@ tracks/4/keys = {
 "method": &"createSwordProjectile"
 }]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/WeaponSwing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 1.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/WeaponResonate:playing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sounds/WeaponImpact:playing")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(1.4),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/FlipSpinWhoosh:playing")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_b4agp"]
 resource_name = "Stun"
@@ -852,6 +1279,38 @@ tracks/4/keys = {
 "method": &"disable"
 }]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/EmergeFromGround:playing")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/WeaponSwing")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(1, 1.3, 1.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_tace1"]
 _data = {
@@ -931,7 +1390,7 @@ position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_ikeyq")
 
 [node name="ClothSim" parent="." instance=ExtResource("1_rqy5u")]
-position = Vector2(3, -3)
+position = Vector2(0, -4)
 texture = ExtResource("2_ob334")
 clothAngle = 5.0
 collidable = false
@@ -1118,10 +1577,11 @@ length = 0.6
 animator = NodePath("../../Animator")
 animationName = "Emerge"
 
-[node name="Resonate" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "afterImage")]
+[node name="Resonate" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "afterImage", "sound")]
 script = ExtResource("16_yobyw")
 animator = NodePath("../../Animator")
 afterImage = NodePath("../../AfterImageComponent")
+sound = NodePath("../../Sounds/Resonate")
 
 [node name="Stun" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom", "sprite")]
 script = ExtResource("11_ngmos")
@@ -1353,6 +1813,143 @@ material = SubResource("ShaderMaterial_a75r7")
 [node name="DirectionalParticlesComponent" parent="OnHitComponent" instance=ExtResource("32_uopo6")]
 
 [node name="Sounds" type="Node2D" parent="."]
+
+[node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("healthComponent")]
+stream = ExtResource("37_iyss5")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+onHit = true
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+
+[node name="BackBreak1" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("39_hl100")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="BackBreak2" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("40_rjn3y")
+volume_db = 15.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="CrystalSlam" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("41_r8eln")
+volume_db = -5.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="WeaponScrape" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("42_f3knw")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="WeaponSwing" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("43_arqy7")
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(0.8, 1.2)
+
+[node name="WeaponImpact" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("44_tkxit")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="WeaponResonate" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("45_arqy7")
+volume_db = -20.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="FlipSpinWhoosh" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("46_tkxit")
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="EmergeFromGround" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("47_dbaq5")
+volume_db = 5.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="HeadExsplode" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("48_ij6ct")
+volume_db = 5.0
+pitch_scale = 1.5
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="SwordDrop" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("49_wq6xe")
+volume_db = -10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="HitGround" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("50_ktdju")
+volume_db = -10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="BrainHitGround" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("51_pfnph")
+volume_db = 4.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="Blood" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("52_3f344")
+volume_db = 5.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="SummonGoon" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("53_wq6xe")
+volume_db = 10.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
+
+[node name="Resonate" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("54_ktdju")
+volume_db = -10.0
+pitch_scale = 0.7
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("38_vpw3h")
+pitchRange = Vector2(1, 1)
 
 [node name="SquishComponent" parent="." node_paths=PackedStringArray("squishTarget", "healthComponent") instance=ExtResource("37_170cm")]
 squishTarget = NodePath("../Sprite2D")

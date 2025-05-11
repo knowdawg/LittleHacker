@@ -9,7 +9,7 @@ void fragment() {
 
 	c.a = 1.0 - abs(0.5 - UV.y + offset);
 	c.a = step(0.95, c.a);
-	
+
 
 	COLOR *= c;
 }

@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://cl5qeeqx66i6e"]
+[gd_scene load_steps=77 format=3 uid="uid://cl5qeeqx66i6e"]
 
 [ext_resource type="Script" uid="uid://dxlohk1v41qh3" path="res://Objects/Enemies/CrystalThug/crystal_thug.gd" id="1_ablmd"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="1_knvuj"]
@@ -42,8 +42,10 @@
 [ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="38_trsn2"]
 [ext_resource type="AudioStream" uid="uid://dlgdsvxfmuean" path="res://Assets/Audio/SoundEffects/ResonateExecuted.wav" id="40_1ueg4"]
 [ext_resource type="AudioStream" uid="uid://b607r2lhpm4gq" path="res://Assets/Audio/SoundEffects/Resonating.wav" id="40_n5g6f"]
-[ext_resource type="AudioStream" uid="uid://jv4mcug84bxn" path="res://Assets/Audio/SoundEffects/RockHit.wav" id="42_ntu01"]
+[ext_resource type="AudioStream" uid="uid://mh02qdesaj52" path="res://Assets/Audio/SoundEffects/CrystalEnemyHit.wav" id="43_3fdjg"]
 [ext_resource type="Script" uid="uid://cdoxnn4y0nms3" path="res://Classes/AudioScripts/onEventAudio.gd" id="43_x7ehq"]
+[ext_resource type="AudioStream" uid="uid://cr0x2dy37mptg" path="res://Assets/Audio/SoundEffects/SmallCrystalShatter.wav" id="45_apn7h"]
+[ext_resource type="AudioStream" uid="uid://qgk3xo45hmvh" path="res://Assets/Audio/SoundEffects/GrowingCrystals.wav" id="46_apn7h"]
 [ext_resource type="PackedScene" uid="uid://b7vusvpcfxm" path="res://Components/SquishComponent/squish_component.tscn" id="46_pi7n5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_id2w4"]
@@ -158,6 +160,20 @@ tracks/2/keys = {
 "method": &"play"
 }]
 }
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sounds/Slam")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_lo1io"]
 resource_name = "Death"
@@ -224,6 +240,20 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/Shatter")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_kuq1r"]
@@ -803,27 +833,39 @@ script = ExtResource("38_trsn2")
 
 [node name="Resonate" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("40_1ueg4")
-volume_db = -10.0
 max_distance = 100.0
 bus = &"SoundEffects"
 script = ExtResource("38_trsn2")
 
 [node name="Resonating" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("40_n5g6f")
-volume_db = -25.0
+volume_db = -10.0
 max_distance = 50.0
 bus = &"SoundEffects"
 script = ExtResource("38_trsn2")
 
 [node name="Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("healthComponent")]
-stream = ExtResource("42_ntu01")
+stream = ExtResource("43_3fdjg")
 volume_db = 10.0
 max_distance = 100.0
 bus = &"SoundEffects"
 script = ExtResource("43_x7ehq")
 onHit = true
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
-pitchRange = Vector2(0.8, 1.2)
+
+[node name="Shatter" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("45_apn7h")
+volume_db = -80.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("43_x7ehq")
+
+[node name="Slam" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("46_apn7h")
+volume_db = 5.0
+max_distance = 100.0
+bus = &"SoundEffects"
+script = ExtResource("43_x7ehq")
 
 [node name="ResonanceTimer" type="Timer" parent="."]
 wait_time = 0.3
