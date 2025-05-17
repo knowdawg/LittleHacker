@@ -38,7 +38,7 @@ func enter(_prevState):
 	animator.play("HackMode")
 	scaleAnimator.play("HackMode")
 	
-	
+	viableTargets.clear()
 	#get targets to switch between
 	curTargetIndex = 0
 	for v : HurtboxComponent in detectionBox.get_overlapping_areas():
@@ -66,7 +66,7 @@ func update_physics(delta):
 var curTargetIndex = 0
 func update(_delta):
 	if Input.is_action_just_pressed("Parry"):
-		if viableTargets.size() == 0 or viableTargets.size() == 1:
+		if viableTargets.size() <= 1:
 			return
 		viableTargets[curTargetIndex].stateMachine.exitHackMode()
 		curTargetIndex += 1

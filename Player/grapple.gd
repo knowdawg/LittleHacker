@@ -11,6 +11,11 @@ class_name PlayerGrapple
 @export var velocityCurve : Curve
 @export var grappleStickState : PlayerGrappleStick
 @export var line : Line2D
+
+@export var grappleLaunchSound : AudioStreamPlayer
+@export var grappleGrapplingSound : AudioStreamPlayer
+@export var grappleLand : AudioStreamPlayer
+
 var target : Enemy
 var angle : float
 
@@ -21,6 +26,8 @@ func enter(_prevState):
 	animator.play(animationName)
 	t = 0.0
 	
+	grappleLaunchSound.play()
+	grappleGrapplingSound.play()
 
 func update_physics(delta):
 	var f : float = 150.0
@@ -63,3 +70,6 @@ func update(_delta):
 
 func exit(_n):
 	line.clear_points()
+	
+	grappleGrapplingSound.stop()
+	grappleLand.play()

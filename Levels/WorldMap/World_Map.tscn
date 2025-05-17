@@ -1,0 +1,63 @@
+[gd_scene load_steps=7 format=3 uid="uid://b8wmjofxmbeec"]
+
+[ext_resource type="PackedScene" uid="uid://bx7i5q252gya5" path="res://Levels/StarweepCrater/Levels/upper_starweep_crater.tscn" id="1_7ol45"]
+[ext_resource type="PackedScene" uid="uid://cb2mgf3vv8ptm" path="res://Levels/StarweepCrater/Levels/starweep_crater.tscn" id="1_n4n1x"]
+[ext_resource type="PackedScene" uid="uid://3qsk7wseq25g" path="res://Levels/StarweepCrater/Levels/saveroom_at_the_carcass.tscn" id="1_odci3"]
+[ext_resource type="PackedScene" uid="uid://d4aqafxdibln2" path="res://Levels/StarweepCrater/Levels/before_the_carcass_areana.tscn" id="2_7ol45"]
+[ext_resource type="PackedScene" uid="uid://c80acag1837nm" path="res://Levels/StarweepCrater/Levels/starweep_start_cave_2.tscn" id="2_rtume"]
+[ext_resource type="PackedScene" uid="uid://bkpqd3ei3e87s" path="res://Levels/StarweepCrater/Levels/starweep_start_cave.tscn" id="3_odci3"]
+
+[node name="World" type="Node2D"]
+
+[node name="CutoutCopy" type="Polygon2D" parent="."]
+clip_children = 1
+
+[node name="Background" type="Polygon2D" parent="."]
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-3066, -1700, -3482, 1945, 4037, 1699, 4013, -2409)
+
+[node name="CutoutCopy4" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-19, 122)
+polygon = PackedVector2Array(-288, -252, 184, -252, 184, -480, -288, -480)
+
+[node name="UpperStarweepCrater" parent="CutoutCopy4" instance=ExtResource("1_7ol45")]
+position = Vector2(-385, -973)
+
+[node name="CutoutCopy3" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-152, 102)
+polygon = PackedVector2Array(680, -32, 992, -32, 992, -12, 1260, -12, 1260, -188, 800, -188, 800, -320, 680, -320)
+
+[node name="SaveroomAtTheCarcass" parent="CutoutCopy3" instance=ExtResource("1_odci3")]
+position = Vector2(584, -492)
+
+[node name="CutoutCopy2" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-124, 16)
+polygon = PackedVector2Array(404, -32, 404, -160, 652, -160, 652, -32)
+
+[node name="BeforeTheCarcassAreana" parent="CutoutCopy2" instance=ExtResource("2_7ol45")]
+position = Vector2(296, -368)
+
+[node name="Cutout3" type="Polygon2D" parent="."]
+clip_children = 1
+polygon = PackedVector2Array(-272, 32, -272, 176, 68, 180, 168, 144, 252, 60, 280, -12, 280, -132, -272, -132)
+
+[node name="StarweepCrater" parent="Cutout3" instance=ExtResource("1_n4n1x")]
+position = Vector2(-128, 0)
+
+[node name="Cutout2" type="Polygon2D" parent="."]
+clip_children = 1
+polygon = PackedVector2Array(-1200, 184, -1184, 248, -1144, 292, -968, 284, -848, 240, -848, 200, -824, 200, -772, 164, -692, 172, -660, 196, -576, 208, -528, 220, -500, 236, -272, 196, -272, -20, -1172, -28)
+
+[node name="TutorialRoom2" parent="Cutout2" instance=ExtResource("2_rtume")]
+position = Vector2(-1360, -31)
+
+[node name="Cutout" type="Polygon2D" parent="."]
+clip_children = 1
+position = Vector2(-40, -87)
+polygon = PackedVector2Array(-946, 363, -808, 320, -808, 280, -820, 260, -755, 256, -722, 237, -680, 234, -654, 243, -630, 265, -591, 282, -556, 292, -484, 300, -456, 404, -472, 500, -565, 539, -1200, 519, -1200, 367)
+
+[node name="StarweepStartCave" parent="Cutout" instance=ExtResource("3_odci3")]
+position = Vector2(-926, 318)

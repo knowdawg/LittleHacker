@@ -85,7 +85,7 @@ func _on_area_entered(area):
 		if area is HurtboxComponent:
 			if area.isSolid:
 				if Game.doesCameraExist():
-					Game.camera.add_shake(screenShakeOnHit)
+					Game.camera.set_min_shake(screenShakeOnHit)
 
 
 func generateAttackID():

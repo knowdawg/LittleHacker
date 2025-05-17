@@ -1,4 +1,4 @@
-[gd_scene load_steps=234 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=239 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -16,10 +16,13 @@
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="4_xxukg"]
 [ext_resource type="Script" uid="uid://dlyxus8gbvgpg" path="res://Player/Jump.gd" id="5_8j04r"]
 [ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="5_38mkd"]
+[ext_resource type="AudioStream" uid="uid://c642tuqh4371h" path="res://Assets/Audio/SoundEffects/GrappleLaunched.wav" id="6_5vwdf"]
 [ext_resource type="Script" uid="uid://biiby66878j3i" path="res://Player/Fall.gd" id="6_yew1w"]
 [ext_resource type="Script" uid="uid://b1hv4d0vfdvam" path="res://Player/Roll.gd" id="7_5l01g"]
+[ext_resource type="AudioStream" uid="uid://cafh4a3eq71pk" path="res://Assets/Audio/SoundEffects/Grappling.wav" id="7_q8ub3"]
 [ext_resource type="Material" uid="uid://olhvuev8j23b" path="res://Assets/Shaders/ScreenUvShader.tres" id="7_xqyul"]
 [ext_resource type="Script" uid="uid://niqkbox7hwx4" path="res://Player/Parry.gd" id="8_oxv8y"]
+[ext_resource type="AudioStream" uid="uid://j4wm582r0jos" path="res://Assets/Audio/SoundEffects/GrappleLand.wav" id="8_oyr7x"]
 [ext_resource type="Script" uid="uid://crybyms0fhukm" path="res://Player/WeaponStateMachine/AttackHorizontal.gd" id="10_d677x"]
 [ext_resource type="Script" uid="uid://d0qbbvxv85blt" path="res://Player/WeaponStateMachine/Idle.gd" id="11_45rs4"]
 [ext_resource type="Script" uid="uid://b2p2d331vibg" path="res://Player/WeaponStateMachine/SwapSides.gd" id="11_s4bm2"]
@@ -2706,6 +2709,19 @@ corner_radius_top_right = 20
 [sub_resource type="CircleShape2D" id="CircleShape2D_jfgjt"]
 radius = 3.0
 
+[sub_resource type="Gradient" id="Gradient_5vwdf"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.483871, 0.693548, 0.709677)
+colors = PackedColorArray(0.25098, 0.152941, 0.317647, 0, 0.25098, 0.152941, 0.317647, 0.0410323, 0.25098, 0.152941, 0.317647, 0.392157, 0.25098, 0.152941, 0.317647, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q8ub3"]
+gradient = SubResource("Gradient_5vwdf")
+width = 100
+height = 100
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 1)
+
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("sprite", "weaponSprite", "healthComponent", "hurtboxComponent", "stateMachine", "screenEffects")]
 texture_filter = 1
 collision_layer = 4
@@ -2752,6 +2768,20 @@ bus = &"SoundEffects"
 [node name="PlayerHitSecoundary" type="AudioStreamPlayer" parent="Sounds"]
 stream = ExtResource("3_t3i0y")
 volume_db = -5.0
+bus = &"SoundEffects"
+
+[node name="LaunchGrapple" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("6_5vwdf")
+bus = &"SoundEffects"
+
+[node name="Grappling" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("7_q8ub3")
+volume_db = -10.0
+pitch_scale = 2.5
+bus = &"SoundEffects"
+
+[node name="GrappleLand" type="AudioStreamPlayer" parent="Sounds"]
+stream = ExtResource("8_oyr7x")
 bus = &"SoundEffects"
 
 [node name="ColorRect" parent="." node_paths=PackedStringArray("thingToTrack") instance=ExtResource("2_mnd2b")]
@@ -2988,7 +3018,7 @@ spriteAnimator = NodePath("../../SpriteAnimator")
 playerStateMachine = NodePath("..")
 player = NodePath("../..")
 
-[node name="Grapple" type="Node" parent="StateMachine" node_paths=PackedStringArray("playerStateMachine", "weaponStateMachine", "animator", "player", "playerSprite", "grappleStickState", "line")]
+[node name="Grapple" type="Node" parent="StateMachine" node_paths=PackedStringArray("playerStateMachine", "weaponStateMachine", "animator", "player", "playerSprite", "grappleStickState", "line", "grappleLaunchSound", "grappleGrapplingSound", "grappleLand")]
 script = ExtResource("34_jbnee")
 playerStateMachine = NodePath("..")
 weaponStateMachine = NodePath("../../WeaponStateMachine")
@@ -2999,6 +3029,9 @@ playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 velocityCurve = SubResource("Curve_fycm6")
 grappleStickState = NodePath("../GrappleStick")
 line = NodePath("GrappleLine")
+grappleLaunchSound = NodePath("../../Sounds/LaunchGrapple")
+grappleGrapplingSound = NodePath("../../Sounds/Grappling")
+grappleLand = NodePath("../../Sounds/GrappleLand")
 
 [node name="GrappleLine" type="Line2D" parent="StateMachine/Grapple"]
 material = SubResource("ShaderMaterial_xqyul")
@@ -3835,6 +3868,10 @@ script = ExtResource("55_c7l4y")
 unique_name_in_owner = true
 wait_time = 5.6
 one_shot = true
+
+[node name="GrappleAreaVisualized" type="Sprite2D" parent="."]
+visible = false
+texture = SubResource("GradientTexture2D_q8ub3")
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="death" from="HealthComponent" to="StateMachine" method="_on_health_component_death"]

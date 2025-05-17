@@ -21,6 +21,7 @@ func enter(_prevState):
 	weaponStateMachine.inputBuffer = ""
 	
 	if target:
+		
 		target.onSelectedForGrappleTarget()
 		weaponAnimator.play(animationNameSucess)
 		grappleState.target = target
@@ -61,3 +62,4 @@ func update(delta):
 
 func exit(_next):
 	weaponSprite.rotation = 0.0
+	

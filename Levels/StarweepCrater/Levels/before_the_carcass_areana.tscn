@@ -103,7 +103,7 @@ viewport_path = NodePath("Main")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bpdn"]
 resource_local_to_scene = true
 shader = ExtResource("3_lrg3a")
-shader_parameter/brightness = 0.2
+shader_parameter/brightness = 1.0
 shader_parameter/shadowIntensitiy = 0.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_un2ar"]
@@ -444,10 +444,10 @@ disabled = true
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_vknbe")]
 material = SubResource("ShaderMaterial_3bpdn")
-offset_left = -42.0
-offset_top = 158.0
-offset_right = 66.0
-offset_bottom = 220.0
+offset_left = 26.0
+offset_top = 182.0
+offset_right = 134.0
+offset_bottom = 244.0
 metadata/_edit_use_anchors_ = true
 
 [node name="PlatformRespawnPoints" type="Node2D" parent="."]

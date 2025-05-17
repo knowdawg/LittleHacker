@@ -35,3 +35,7 @@ func set_shake(amount : float):
 	
 func add_shake(amount : float):
 	shake += amount
+
+func set_min_shake(amount : float):
+	if shake < amount:
+		shake = amount
