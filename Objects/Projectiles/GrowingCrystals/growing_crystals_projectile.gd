@@ -12,8 +12,9 @@ func _process(delta: float) -> void:
 	if distTaveled >= disJump:
 		
 		if !%Grounded.is_colliding() or !%Grounded2.is_colliding():
-			$AttackComponent.call_deferred("disable")
-			$DestroyTimer.start()
+			if $DestroyTimer.is_stopped():
+				$AttackComponent.call_deferred("disable")
+				$DestroyTimer.start()
 			return
 		
 		distTaveled -= disJump

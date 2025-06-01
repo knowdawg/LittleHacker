@@ -4,5 +4,5 @@
 
 [resource]
 script = ExtResource("1_bdg6p")
-levelPath = "res://Levels/StarweepCrater/Levels/saveroom_at_the_carcass.tscn"
+levelPath = "res://Levels/StarweepCrater/Levels/upper_starweep_crater.tscn"
 metadata/_custom_type_script = "uid://cseckmsy0oxu1"

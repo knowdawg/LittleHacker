@@ -1,4 +1,5 @@
 extends Node2D
+class_name InteractableManager
 
 @export var prox : ProximityAreaComponent
 var areas : Array[Area2D]

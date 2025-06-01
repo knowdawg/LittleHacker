@@ -40,6 +40,7 @@ func _ready():
 
 func _process(_delta: float) -> void:
 	$Sprite2D.material.set_shader_parameter("modulate", modulate)
+	$Sprite2D.position = offset
 
 func populateParticles():
 	particles.clear()

@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://b73rjyjkc6438"]
+[gd_scene load_steps=12 format=3 uid="uid://b73rjyjkc6438"]
 
 [ext_resource type="Script" uid="uid://11edikydb7ty" path="res://Objects/WorldObjects/Zipline/zipline_anchor.gd" id="1_5t2xk"]
 [ext_resource type="Texture2D" uid="uid://bs0bibbso6a4w" path="res://Assets/Sprites/WorldObjects/ZiplineAnchor.png" id="1_x61qb"]
 [ext_resource type="PackedScene" uid="uid://dr8t41k422n1f" path="res://Components/GrabComponent/grab_component.tscn" id="2_iqamj"]
 [ext_resource type="Texture2D" uid="uid://ddtwx5g1xvn5d" path="res://Assets/Sprites/WorldObjects/ZiplineHook.png" id="4_5t2xk"]
+[ext_resource type="AudioStream" uid="uid://cafh4a3eq71pk" path="res://Assets/Audio/SoundEffects/Grappling.wav" id="5_0soj7"]
 
 [sub_resource type="Curve" id="Curve_5t2xk"]
 resource_local_to_scene = true
@@ -113,3 +114,10 @@ unique_name_in_owner = true
 libraries = {
 &"": SubResource("AnimationLibrary_4qpam")
 }
+
+[node name="Grappling" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("5_0soj7")
+volume_db = -10.0
+pitch_scale = 2.5
+bus = &"SoundEffects"

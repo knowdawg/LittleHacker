@@ -1,9 +1,18 @@
 extends Node
 
+#Little Level
 var player : Player
 var camera : SmallPlayerCamera
 var littleLevel : GenericLevel
 var littleViewport : LittleSceneTransitioner
+
+########
+var inLittleGame : bool = false
+########
+
+#Big Level
+var bigPlayer : BigPlayer
+var bigCamera : BigCamera
 
 var respawnData : RespawnData
 
@@ -84,6 +93,18 @@ func doesPlayerExist() -> bool:
 func doesCameraExist() -> bool:
 	if camera:
 		if is_instance_valid(camera):
+			return true
+	return false
+
+func doesBigPlayerExist() -> bool:
+	if bigPlayer:
+		if is_instance_valid(bigPlayer):
+			return true
+	return false
+
+func doesBigCameraExist() -> bool:
+	if bigCamera:
+		if is_instance_valid(bigCamera):
 			return true
 	return false
 

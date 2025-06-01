@@ -43,6 +43,7 @@ func onInteract():
 		t = 0.0
 		
 		%AnimationPlayer.play("OnInteract")
+		%Grappling.play()
 
 #forceExited is true if the player exited the grab and false if the timer ran out
 func ziplineFinished(forceExited : bool = true):
@@ -50,6 +51,7 @@ func ziplineFinished(forceExited : bool = true):
 	%GrabComponent.setActive(false, null, !forceExited)
 	%GrabPos.global_position = startingPos.global_position
 	%AnimationPlayer.play("OnFinish")
+	%Grappling.stop()
 	
 	if Game.player:
 		if applyForceOnExit:

@@ -41,6 +41,8 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	
 	if canMove:
 		var direction = Input.get_axis("Left", "Right")
+		#if !Game.inLittleGame:	direction = Vector2.ZERO
+		
 		if direction:
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
 		else:
@@ -68,7 +70,7 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	boostVector.y = move_toward(boostVector.y, 0, delta * 200.0)
 	
 	velocity += grappleBoost
-	grappleBoost.x = move_toward(grappleBoost.x, 0, delta * 200.0)
+	grappleBoost.x = move_toward(grappleBoost.x, 0, delta * 500.0)
 	grappleBoost.y = move_toward(grappleBoost.y, 0, delta * 50.0)
 	
 	#rollJumpBoost.x = clamp(rollJumpBoost.x, -SPEED - v.x, SPEED - v.x)

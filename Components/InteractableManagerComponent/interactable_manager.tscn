@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://7o660wn70u74"]
+
+[ext_resource type="Script" uid="uid://b6pm0hnfe8v8n" path="res://Player/interactable_manager.gd" id="1_e8kdn"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="2_iut5j"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bundm"]
+size = Vector2(10, 4)
+
+[node name="InteractableManager" type="Node2D" node_paths=PackedStringArray("prox")]
+script = ExtResource("1_e8kdn")
+prox = NodePath("InteractableProximity")
+
+[node name="InteractableProximity" parent="." instance=ExtResource("2_iut5j")]
+collision_mask = 128
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableProximity"]
+visible = false
+shape = SubResource("RectangleShape2D_bundm")

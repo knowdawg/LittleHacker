@@ -1,13 +1,13 @@
-[gd_scene load_steps=239 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=238 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
 [ext_resource type="AudioStream" uid="uid://bkcmxwvkhmu4a" path="res://Assets/Audio/SoundEffects/SmallPlayerHitMain.wav" id="2_05a5k"]
+[ext_resource type="PackedScene" uid="uid://7o660wn70u74" path="res://Components/InteractableManagerComponent/interactable_manager.tscn" id="2_5vwdf"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="2_67e55"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_hn6pj"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="2_l0uvv"]
 [ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="2_mnd2b"]
-[ext_resource type="Script" uid="uid://b6pm0hnfe8v8n" path="res://Player/interactable_manager.gd" id="2_rtdom"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="3_412y7"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="3_nr8gu"]
 [ext_resource type="AudioStream" uid="uid://dbcrjgsxk4a1x" path="res://Assets/Audio/SoundEffects/SmallPlayerHit.wav" id="3_t3i0y"]
@@ -98,9 +98,6 @@ size = Vector2(2, 5)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_e2bo2"]
 radius = 5.0
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bundm"]
-size = Vector2(10, 4)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
 size = Vector2(31, 12)
@@ -223,8 +220,9 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="Curve" id="Curve_fycm6"]
-_data = [Vector2(0, 0), 0.0, 2.83665, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
-point_count = 2
+_limits = [-0.1, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 0), 0.0, -0.678286, 0, 0, Vector2(0.147368, -0.1), 0.0, 0.0, 0, 0, Vector2(0.25, 2.13607), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 4
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xqyul"]
 shader = ExtResource("35_xt36k")
@@ -2747,16 +2745,7 @@ collision_mask = 0
 visible = false
 shape = SubResource("CircleShape2D_e2bo2")
 
-[node name="InteractableManager" type="Node2D" parent="." node_paths=PackedStringArray("prox")]
-script = ExtResource("2_rtdom")
-prox = NodePath("InteractableProximity")
-
-[node name="InteractableProximity" parent="InteractableManager" instance=ExtResource("2_67e55")]
-collision_mask = 128
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableManager/InteractableProximity"]
-visible = false
-shape = SubResource("RectangleShape2D_bundm")
+[node name="InteractableManager" parent="." instance=ExtResource("2_5vwdf")]
 
 [node name="Sounds" type="Node" parent="."]
 
@@ -3035,7 +3024,7 @@ grappleLand = NodePath("../../Sounds/GrappleLand")
 
 [node name="GrappleLine" type="Line2D" parent="StateMachine/Grapple"]
 material = SubResource("ShaderMaterial_xqyul")
-default_color = Color(0.478431, 0.211765, 0.482353, 1)
+default_color = Color(0.87451, 0.517647, 0.647059, 1)
 texture_mode = 1
 
 [node name="GrappleStick" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "playerStateMachine", "weaponStateMachine", "animator")]

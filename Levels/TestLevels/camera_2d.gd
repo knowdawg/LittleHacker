@@ -8,7 +8,7 @@ func _ready() -> void:
 	Game.camera = self
 	Game.exitHackMode.connect(onHackModeExit)
 
-var targetZoom := Vector2(10.0, 10.0)
+var targetZoom := Vector2(2.0, 2.0)
 
 func _process(delta: float) -> void:
 	if shake > 0:

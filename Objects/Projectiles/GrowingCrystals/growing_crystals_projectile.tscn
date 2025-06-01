@@ -51,13 +51,13 @@ modulate = Color(1, 1, 1, 0.588235)
 
 [node name="Grounded" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(-7, 0)
+position = Vector2(-7, -1)
 target_position = Vector2(0, 5)
 collision_mask = 3
 
 [node name="Grounded2" type="RayCast2D" parent="."]
 unique_name_in_owner = true
-position = Vector2(7, 0)
+position = Vector2(7, -1)
 target_position = Vector2(0, 5)
 collision_mask = 3
 

@@ -29,7 +29,7 @@ func update_physics(_delta):
 	
 	if playerStateMachine.getInputBuffer() == "Jump":
 		var direction = Input.get_axis("Left", "Right")
-		player.grappleBoost.x += direction * 50.0
+		player.grappleBoost.x += direction * 100.0
 		player.global_position += Vector2(Input.get_axis("Left", "Right"), -1.0) #For enemy Knockback
 		
 		weaponStateMachine.switchStates("Idle")

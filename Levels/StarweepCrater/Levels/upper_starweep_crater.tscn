@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=3 uid="uid://bx7i5q252gya5"]
+[gd_scene load_steps=77 format=3 uid="uid://bx7i5q252gya5"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_d1l05"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="2_oi261"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://cr4dj46wcech6" path="res://Objects/WorldObjects/Tilemaps/foliage_tilemap.tscn" id="20_1afi5"]
 [ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="20_5e62k"]
 [ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="21_c4km3"]
+[ext_resource type="Texture2D" uid="uid://2kvxrfdkxsxk" path="res://Assets/Sprites/UI/DialogProfiles/TestProfile.png" id="29_t8d8q"]
 
 [sub_resource type="Gradient" id="Gradient_sy7vn"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
@@ -595,7 +596,7 @@ position = Vector2(396, 696)
 position = Vector2(438, 701)
 
 [node name="CrystalElite" parent="Enemies" instance=ExtResource("19_gb8d3")]
-position = Vector2(398, 647)
+position = Vector2(383, 648)
 
 [node name="FoliageTilemap" parent="." instance=ExtResource("20_1afi5")]
 z_index = 1
@@ -639,3 +640,19 @@ autoplay = true
 bus = &"SoundEffects"
 script = ExtResource("21_c4km3")
 volumeDB = -8.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+offset_left = 40.0
+offset_top = 360.0
+offset_right = 360.0
+offset_bottom = 680.0
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(200, 520)
+scale = Vector2(10, 10)
+texture = ExtResource("29_t8d8q")

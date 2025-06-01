@@ -8,6 +8,7 @@ var paths : Array[String] = []
 
 signal onFadeInStart
 
+
 func _ready() -> void:
 	var startingScene : StartingLevelResourceScript = load("uid://byhqpp6gc4xnd")
 	Game.littleViewport = self
@@ -17,6 +18,7 @@ func _ready() -> void:
 	
 	sceneData = s
 	onFadeInComplete()
+	
 
 signal onSceneExit
 var curScene : Node2D

@@ -1,0 +1,128 @@
+[gd_scene load_steps=12 format=3 uid="uid://cgmvdcy64j46l"]
+
+[ext_resource type="Script" uid="uid://7psq1hbdlet6" path="res://Objects/LittleGameTerminal/LittleGameTerminal.gd" id="1_8d0dd"]
+[ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_h3som"]
+[ext_resource type="Script" uid="uid://bbwat6b3fi8ft" path="res://Classes/SceneTransitionManager.gd" id="2_g0xku"]
+[ext_resource type="Script" uid="uid://bvygbydj8mpnq" path="res://Objects/LittleGameTerminal/game_container.gd" id="3_0tjig"]
+[ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="3_g0xku"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
+shader = ExtResource("1_h3som")
+shader_parameter/pixelsWidth = 106.667
+shader_parameter/pixelsHight = 60.0
+
+[sub_resource type="Animation" id="Animation_ib7ep"]
+resource_name = "FadeIn"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_unr0c"]
+resource_name = "FadeOut"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_nn5c8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/FadeTransition:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_v21w5"]
+_data = {
+&"FadeIn": SubResource("Animation_ib7ep"),
+&"FadeOut": SubResource("Animation_unr0c"),
+&"RESET": SubResource("Animation_nn5c8")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xku"]
+size = Vector2(1344, 768)
+
+[node name="LittleGameTerminal" type="Node2D"]
+script = ExtResource("1_8d0dd")
+
+[node name="GameContainer" type="SubViewportContainer" parent="."]
+material = SubResource("ShaderMaterial_2ty4p")
+offset_left = -640.0
+offset_top = -360.0
+offset_right = 640.0
+offset_bottom = 360.0
+script = ExtResource("3_0tjig")
+
+[node name="LittleLevelViewport" type="SubViewport" parent="GameContainer" node_paths=PackedStringArray("fadeAnimator")]
+unique_name_in_owner = true
+handle_input_locally = false
+audio_listener_enable_2d = true
+sdf_scale = 2
+size = Vector2i(1280, 720)
+render_target_update_mode = 4
+script = ExtResource("2_g0xku")
+fadeAnimator = NodePath("AnimationPlayer")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="GameContainer/LittleLevelViewport"]
+layer = 128
+
+[node name="FadeTransition" type="ColorRect" parent="GameContainer/LittleLevelViewport/CanvasLayer"]
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameContainer/LittleLevelViewport"]
+libraries = {
+&"": SubResource("AnimationLibrary_v21w5")
+}
+
+[node name="Border" type="Line2D" parent="."]
+points = PackedVector2Array(0, -364, 640, -360, 644, 0, 640, 360, 0, 364, -640, 360, -644, 0, -640, -360)
+closed = true
+width = 12.0
+default_color = Color(0, 0, 0, 1)
+antialiased = true
+
+[node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("3_g0xku")]
+unique_name_in_owner = true
+textPos = NodePath("TextMarker")
+colShape = NodePath("CollisionShape2D")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
+visible = false
+shape = SubResource("RectangleShape2D_g0xku")
+
+[node name="TextMarker" type="Marker2D" parent="InteractableArea"]
+position = Vector2(0, 384)
+
+[connection signal="animation_finished" from="GameContainer/LittleLevelViewport/AnimationPlayer" to="GameContainer/LittleLevelViewport" method="_on_animation_player_animation_finished"]
