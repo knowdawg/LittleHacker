@@ -41,14 +41,14 @@ func update_physics(delta, canFall : bool = true, canMove : bool = true):
 	
 	if canMove:
 		var direction = Input.get_axis("Left", "Right")
-		#if !Game.inLittleGame:	direction = Vector2.ZERO
+		if !Game.inLittleGame:	direction = Vector2.ZERO
 		
 		if direction:
 			v.x = move_toward(v.x, direction * SPEED, 20.0 * delta * 60);
 		else:
 			v.x = move_toward(v.x, 0.0, 20.0 * delta * 60);
 		
-		if Input.is_action_pressed("Down") and Input.is_action_pressed("Jump"):
+		if Input.is_action_pressed("Down") and Input.is_action_pressed("Jump") and Game.inLittleGame:
 			set_collision_mask_value(2, false)
 		else:
 			set_collision_mask_value(2, true)

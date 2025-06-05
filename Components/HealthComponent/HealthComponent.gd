@@ -76,7 +76,7 @@ func damage(attack : Attack):
 		dead = true
 		death.emit(attack)
 	
-	
+
 func setHealthLock(lock : bool):
 	locked = lock
 

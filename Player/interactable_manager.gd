@@ -1,6 +1,7 @@
 extends Node2D
 class_name InteractableManager
 
+@export var inLittleGame : bool = false
 @export var prox : ProximityAreaComponent
 var areas : Array[Area2D]
 
@@ -13,6 +14,9 @@ func _process(_delta: float) -> void:
 		areas[0].showText()
 		
 		if Input.is_action_just_pressed("Interact"):
+			if inLittleGame:
+				if !Game.inLittleGame:
+					return
 			areas[0].interact()
 
 func sortByDistance(a1, a2):

@@ -3,6 +3,7 @@ class_name BigPlayerIdle
 
 @export var animator : AnimationPlayer
 @export var parent : BigPlayer
+@export var stateMachine : BigPlayerStateMachine
 
 func enter(_p):
 	animator.play("Idle")
@@ -12,11 +13,11 @@ func update_physics(delta: float) -> void:
 	parent.check_for_movement(delta)
 
 func update(_delta):
-	if abs(parent.velocity.x) > 0.0:
+	if abs(parent.xMovement.x) > 0.0:
 		trasitioned.emit(self, "Walk")
 	
-	if parent.velocity.y > 0:
+	if parent.getSummedVelocities().y > 0:
 		trasitioned.emit(self, "Fall")
 	
-	if Input.is_action_just_pressed("Jump"):
+	if stateMachine.getInputBuffer() == "Jump":
 		trasitioned.emit(self, "Jump")

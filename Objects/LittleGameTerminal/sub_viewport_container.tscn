@@ -1,10 +1,11 @@
-[gd_scene load_steps=12 format=3 uid="uid://cgmvdcy64j46l"]
+[gd_scene load_steps=13 format=3 uid="uid://cgmvdcy64j46l"]
 
 [ext_resource type="Script" uid="uid://7psq1hbdlet6" path="res://Objects/LittleGameTerminal/LittleGameTerminal.gd" id="1_8d0dd"]
 [ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_h3som"]
 [ext_resource type="Script" uid="uid://bbwat6b3fi8ft" path="res://Classes/SceneTransitionManager.gd" id="2_g0xku"]
 [ext_resource type="Script" uid="uid://bvygbydj8mpnq" path="res://Objects/LittleGameTerminal/game_container.gd" id="3_0tjig"]
 [ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="3_g0xku"]
+[ext_resource type="Texture2D" uid="uid://biai3ccvps32w" path="res://Assets/Sprites/WorldObjects/TerminalSettup.png" id="6_ycxw0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
 shader = ExtResource("1_h3som")
@@ -70,13 +71,23 @@ size = Vector2(1344, 768)
 
 [node name="LittleGameTerminal" type="Node2D"]
 script = ExtResource("1_8d0dd")
+viewportScale = Vector2(0.025, 0.025)
 
 [node name="GameContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_2ty4p")
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
 offset_left = -640.0
 offset_top = -360.0
 offset_right = 640.0
 offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.025, 0.025)
+pivot_offset = Vector2(640, 360)
 script = ExtResource("3_0tjig")
 
 [node name="LittleLevelViewport" type="SubViewport" parent="GameContainer" node_paths=PackedStringArray("fadeAnimator")]
@@ -107,14 +118,21 @@ libraries = {
 }
 
 [node name="Border" type="Line2D" parent="."]
+scale = Vector2(0.025, 0.025)
 points = PackedVector2Array(0, -364, 640, -360, 644, 0, 640, 360, 0, 364, -640, 360, -644, 0, -640, -360)
 closed = true
 width = 12.0
 default_color = Color(0, 0, 0, 1)
 antialiased = true
 
+[node name="Border2" type="Polygon2D" parent="."]
+scale = Vector2(0.025, 0.025)
+color = Color(0, 0, 0, 1)
+polygon = PackedVector2Array(-672, -384, 672, -384, 672, 384, -672, 384, -672, 0, -640, 0, -640, 360, 640, 360, 640, -360, -640, -360, -640, 0, -672, 0)
+
 [node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("3_g0xku")]
 unique_name_in_owner = true
+scale = Vector2(0.025, 0.025)
 textPos = NodePath("TextMarker")
 colShape = NodePath("CollisionShape2D")
 
@@ -124,5 +142,10 @@ shape = SubResource("RectangleShape2D_g0xku")
 
 [node name="TextMarker" type="Marker2D" parent="InteractableArea"]
 position = Vector2(0, 384)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(5, 11)
+texture = ExtResource("6_ycxw0")
 
 [connection signal="animation_finished" from="GameContainer/LittleLevelViewport/AnimationPlayer" to="GameContainer/LittleLevelViewport" method="_on_animation_player_animation_finished"]

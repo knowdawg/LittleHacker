@@ -48,14 +48,14 @@ func _process(_delta: float) -> void:
 				pass
 			
 			
-		if Input.is_action_just_pressed("SwitchBar"):
+		if Input.is_action_just_pressed("SwitchBar") and Game.inLittleGame:
 			selectedHackIndex -= 1
 			if selectedHackIndex > curentLabels.size() -1:
 				selectedHackIndex = 0
 			if selectedHackIndex <  0:
 				selectedHackIndex = curentLabels.size() -1
 		
-		if Input.is_action_just_pressed("HackAttack") or Input.is_action_just_pressed("Attack"):
+		if (Input.is_action_just_pressed("HackAttack") or Input.is_action_just_pressed("Attack"))  and Game.inLittleGame:
 			if HackCommandManager.hackCommands[selectedHackIndex].isExecutable():
 				if curentLabels[selectedHackIndex].isCrossed == false:
 					HackCommandManager.hackCommands[selectedHackIndex].execute()

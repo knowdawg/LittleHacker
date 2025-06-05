@@ -37,6 +37,9 @@ func _process(delta):
 	if dead:
 		inputBuffer = ""
 	
+	if !Game.inLittleGame:
+		inputBuffer = ""
+	
 	if current_state:
 		current_state.update(delta)
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=6 format=3 uid="uid://dlfxfm3ebd5n7"]
 
 [ext_resource type="PackedScene" uid="uid://cgmvdcy64j46l" path="res://Objects/LittleGameTerminal/sub_viewport_container.tscn" id="1_yyfki"]
 [ext_resource type="PackedScene" uid="uid://cirxwk2d3306d" path="res://BigPlayer/big_player.tscn" id="3_yyfki"]
@@ -6,12 +6,17 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yyfki"]
 size = Vector2(320, 20)
 
+[sub_resource type="Gradient" id="Gradient_odpv5"]
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_yyfki"]
+gradient = SubResource("Gradient_odpv5")
+width = 128
+
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1
 
 [node name="SubViewportContainer" parent="." instance=ExtResource("1_yyfki")]
-position = Vector2(0, -22)
-scale = Vector2(0.02, 0.02)
+position = Vector2(-1, -31)
 
 [node name="BigPlayer" parent="." instance=ExtResource("3_yyfki")]
 position = Vector2(0, -23)
@@ -23,4 +28,5 @@ position = Vector2(8, 10)
 shape = SubResource("RectangleShape2D_yyfki")
 
 [node name="Polygon2D" type="Polygon2D" parent="StaticBody2D"]
+texture = SubResource("GradientTexture1D_yyfki")
 polygon = PackedVector2Array(-152, 0, 168, 0, 168, 20, -152, 20)

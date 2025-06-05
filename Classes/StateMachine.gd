@@ -4,6 +4,8 @@ class_name StateMachine
 @export var initial_state : State
 @export var parent : Node
 
+@export var isInLittleGame : bool = true
+
 @export_group("Hack Parameters")
 @export var animators : Array[AnimationPlayer] = []
 @export var leftGrabPos : Marker2D
@@ -34,18 +36,22 @@ func _process(delta):
 	#this allows the player to have unlimited time while choosing 
 	#what commands to execute
 	if current_state:
-		if !Game.inHackMode:
+		#Big Game
+		if !isInLittleGame and !Game.inLittleGame:
 			current_state.update(delta)
-		else:
-			#States such as hacked states still need to be updated
-			if current_state.updateWhileHacked:
+		elif isInLittleGame: #Little Game
+			if !Game.inHackMode:
 				current_state.update(delta)
-			#stop the animators as well
-			for a in animators:
-				a.pause()
-			
-			if Game.hackedEnemy == parent:
-				hackedUpdate()
+			else:
+				#States such as hacked states still need to be updated
+				if current_state.updateWhileHacked:
+					current_state.update(delta)
+				#stop the animators as well
+				for a in animators:
+					a.pause()
+				
+				if Game.hackedEnemy == parent:
+					hackedUpdate()
 			
 	custumProcess(delta)
 	

@@ -2746,6 +2746,7 @@ visible = false
 shape = SubResource("CircleShape2D_e2bo2")
 
 [node name="InteractableManager" parent="." instance=ExtResource("2_5vwdf")]
+inLittleGame = true
 
 [node name="Sounds" type="Node" parent="."]
 

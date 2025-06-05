@@ -1,22 +1,34 @@
-[gd_scene load_steps=17 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=45 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
 [ext_resource type="Script" uid="uid://b6dkkxcbgrfq4" path="res://BigPlayer/StateMachine/state_machine.gd" id="3_41qoe"]
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="3_m83fv"]
 [ext_resource type="Script" uid="uid://dm31oimwh6y3j" path="res://Classes/BigCamera.gd" id="4_2v8nb"]
+[ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="4_jsvsi"]
 [ext_resource type="Script" uid="uid://cq16og0yowe57" path="res://BigPlayer/StateMachine/idle.gd" id="4_r3020"]
 [ext_resource type="Script" uid="uid://ci1iuc834ihxl" path="res://BigPlayer/StateMachine/walk.gd" id="5_2t6u2"]
 [ext_resource type="Script" uid="uid://8kh7wkku02wt" path="res://BigPlayer/StateMachine/fall.gd" id="6_m83fv"]
 [ext_resource type="Script" uid="uid://crwhsyrvk7kxn" path="res://BigPlayer/StateMachine/jump.gd" id="7_2v8nb"]
 [ext_resource type="PackedScene" uid="uid://7o660wn70u74" path="res://Components/InteractableManagerComponent/interactable_manager.tscn" id="10_axpou"]
+[ext_resource type="Script" uid="uid://bsss1jb0k7g83" path="res://BigPlayer/StateMachine/land.gd" id="10_vbday"]
+[ext_resource type="Script" uid="uid://c8fvm3qan2syb" path="res://BigPlayer/StateMachine/run.gd" id="12_bl051"]
+[ext_resource type="Script" uid="uid://rvnfkdjaiwlj" path="res://BigPlayer/UI/ui.gd" id="13_13av7"]
+[ext_resource type="Texture2D" uid="uid://c1hnlyj8rj4ej" path="res://Assets/Sprites/UI/BigGameHealthUIUnder.png" id="13_c2864"]
+[ext_resource type="Texture2D" uid="uid://cl2hgt03kfg13" path="res://Assets/Sprites/UI/HeartBeat.png" id="13_ssk3x"]
+[ext_resource type="Texture2D" uid="uid://tn381ghkpgwj" path="res://Assets/Sprites/UI/BigGameHealthUIProgress.png" id="14_vapvf"]
+[ext_resource type="Texture2D" uid="uid://oah70e1b3jlf" path="res://Assets/Sprites/UI/BigGameStaminaUIUnder.png" id="15_lhw75"]
+[ext_resource type="Texture2D" uid="uid://5xpsu0h5soiq" path="res://Assets/Sprites/UI/BigGameStaminaUIProgress.png" id="16_13av7"]
+[ext_resource type="PackedScene" uid="uid://jigel5y6vf4o" path="res://Components/HealthComponent/stamina_component.tscn" id="20_hpub4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mspic"]
 size = Vector2(10, 25)
 
 [sub_resource type="Animation" id="Animation_mspic"]
 resource_name = "Idle"
+length = 2.4
 loop_mode = 1
+step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -24,10 +36,89 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.6, 0.7, 0.8, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [13]
+"values": [22, 23, 24, 25, 24, 23, 22]
+}
+
+[sub_resource type="Animation" id="Animation_ssk3x"]
+resource_name = "JumpCrouch"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [27, 28, 29]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite/HitFlashComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_vbday"]
+resource_name = "JumpPeak"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [34, 35, 36]
+}
+
+[sub_resource type="Animation" id="Animation_axpou"]
+resource_name = "JumpStart"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [30, 31, 32, 33]
+}
+
+[sub_resource type="Animation" id="Animation_jsvsi"]
+resource_name = "Land"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [37, 38, 39, 40]
 }
 
 [sub_resource type="Animation" id="Animation_qmsvx"]
@@ -60,18 +151,164 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [14, 15, 16, 17, 18, 19, 20, 21]
+"values": [15, 16, 17, 18, 19, 20, 21, 14]
+}
+
+[sub_resource type="Animation" id="Animation_13av7"]
+resource_name = "Run"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [44, 45, 46, 47, 48, 49, 50, 51, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_hpub4"]
+resource_name = "StartOfRun"
+length = 0.4
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [52, 53, 54, 55]
+}
+
+[sub_resource type="Animation" id="Animation_enlr8"]
+resource_name = "SprintJumpStart"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [56]
+}
+
+[sub_resource type="Animation" id="Animation_lsjcy"]
+resource_name = "SprintJumpPeak"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [57, 58, 59]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]
 _data = {
 &"Idle": SubResource("Animation_mspic"),
+&"JumpCrouch": SubResource("Animation_ssk3x"),
+&"JumpPeak": SubResource("Animation_vbday"),
+&"JumpStart": SubResource("Animation_axpou"),
+&"Land": SubResource("Animation_jsvsi"),
 &"RESET": SubResource("Animation_qmsvx"),
+&"Run": SubResource("Animation_13av7"),
+&"SprintJumpPeak": SubResource("Animation_lsjcy"),
+&"SprintJumpStart": SubResource("Animation_enlr8"),
+&"StartOfRun": SubResource("Animation_hpub4"),
 &"Walk": SubResource("Animation_41qoe")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axpou"]
 size = Vector2(12, 28)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1jtv"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(20, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c2864"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(40, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vapvf"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(60, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhw75"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(80, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_13av7"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(100, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bl051"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(120, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hpub4"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(140, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_enlr8"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(160, 0, 20, 20)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lsjcy"]
+atlas = ExtResource("13_ssk3x")
+region = Rect2(180, 0, 20, 20)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_n8cw0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1jtv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c2864")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vapvf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhw75")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_13av7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bl051")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hpub4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_enlr8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lsjcy")
+}],
+"loop": true,
+"name": &"HeartBeat",
+"speed": 10.0
+}]
 
 [node name="BigPlayer" type="CharacterBody2D"]
 collision_layer = 4
@@ -84,15 +321,18 @@ position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_mspic")
 
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+clip_children = 2
 texture_filter = 1
 texture = ExtResource("1_mspic")
-hframes = 22
+hframes = 60
 frame = 13
 
 [node name="SpriteDirectorComponent" parent="PlayerSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("3_m83fv")]
 unique_name_in_owner = true
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
+
+[node name="HitFlashComponent" parent="PlayerSprite" instance=ExtResource("4_jsvsi")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -104,33 +344,100 @@ position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_2v8nb")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("staminaComponent", "initial_state", "parent")]
 script = ExtResource("3_41qoe")
+staminaComponent = NodePath("../Components/StaminaComponent")
 initial_state = NodePath("Idle")
 parent = NodePath("..")
+isInLittleGame = false
 
-[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent")]
+[node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("4_r3020")
 animator = NodePath("../../AnimationPlayer")
 parent = NodePath("../..")
+stateMachine = NodePath("..")
 
-[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent")]
+[node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("5_2t6u2")
 animator = NodePath("../../AnimationPlayer")
 parent = NodePath("../..")
+stateMachine = NodePath("..")
 
-[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent")]
+[node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("6_m83fv")
 animator = NodePath("../../AnimationPlayer")
 parent = NodePath("../..")
+stateMachine = NodePath("..")
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("7_2v8nb")
+animator = NodePath("../../AnimationPlayer")
 parent = NodePath("../..")
+stateMachine = NodePath("..")
+
+[node name="Land" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "animator")]
+script = ExtResource("10_vbday")
+stateMachine = NodePath("..")
+animator = NodePath("../../AnimationPlayer")
+
+[node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "sprite")]
+script = ExtResource("12_bl051")
+animator = NodePath("../../AnimationPlayer")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+sprite = NodePath("../../PlayerSprite")
 
 [node name="InteractableManager" parent="." instance=ExtResource("10_axpou")]
 
 [node name="CollisionShape2D" parent="InteractableManager/InteractableProximity" index="1"]
 shape = SubResource("RectangleShape2D_axpou")
+
+[node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("staminaComponent")]
+script = ExtResource("13_13av7")
+staminaComponent = NodePath("../Components/StaminaComponent")
+
+[node name="Health" type="TextureProgressBar" parent="UI"]
+unique_name_in_owner = true
+texture_filter = 1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 59.0
+offset_bottom = 59.0
+value = 70.0
+fill_mode = 5
+radial_initial_angle = 242.0
+radial_fill_degrees = 214.0
+texture_under = ExtResource("13_c2864")
+texture_progress = ExtResource("14_vapvf")
+
+[node name="Stamina" type="TextureProgressBar" parent="UI"]
+unique_name_in_owner = true
+texture_filter = 1
+offset_left = -5.0
+offset_top = -5.0
+offset_right = 59.0
+offset_bottom = 59.0
+value = 50.0
+fill_mode = 5
+radial_initial_angle = 237.0
+radial_fill_degrees = 204.0
+texture_under = ExtResource("15_lhw75")
+texture_progress = ExtResource("16_13av7")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI"]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(20, 20)
+sprite_frames = SubResource("SpriteFrames_n8cw0")
+animation = &"HeartBeat"
+frame_progress = 0.0622152
+
+[node name="Components" type="Node2D" parent="."]
+
+[node name="StaminaComponent" parent="Components" instance=ExtResource("20_hpub4")]
+unique_name_in_owner = true
+maxStamina = 100.0
+staminaRegenPerSecound = 50.0
+MAX_HEALTH = 70.0
 
 [editable path="InteractableManager"]
