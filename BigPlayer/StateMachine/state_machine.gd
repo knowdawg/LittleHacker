@@ -11,6 +11,14 @@ func custumProcess(delta):
 	if Input.is_action_just_pressed("Jump") and !Input.is_action_pressed("Down"):
 		inputBuffer = "Jump"
 		t = 0.15
+	
+	if Input.is_action_just_pressed("Attack"):
+		inputBuffer = "Attack"
+		t = 0.15
+
+	if Input.is_action_just_pressed("Parry"):
+		inputBuffer = "Block"
+		t = 0.15
 		
 	if t <= 0.0:
 		inputBuffer = ""

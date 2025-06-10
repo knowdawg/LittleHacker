@@ -15,9 +15,20 @@ func update_physics(delta: float) -> void:
 func update(_delta):
 	if abs(parent.xMovement.x) > 0.0:
 		trasitioned.emit(self, "Walk")
+		return
 	
 	if parent.getSummedVelocities().y > 0:
 		trasitioned.emit(self, "Fall")
+		return
+	
+	if stateMachine.getInputBuffer() == "Block":
+		trasitioned.emit(self, "Block")
+		return
 	
 	if stateMachine.getInputBuffer() == "Jump":
 		trasitioned.emit(self, "Jump")
+		return
+		
+	if stateMachine.getInputBuffer() == "Attack":
+		trasitioned.emit(self, "AttackCharge")
+		return

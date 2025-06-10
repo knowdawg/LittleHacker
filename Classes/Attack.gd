@@ -16,6 +16,9 @@ var isPogo : bool = false
 var isGrabAttack : bool = false
 var grabComponent : GrabComponent
 
+enum SHARPNESS {SHARP, BLUNT, NIETHER = -1}
+var attackType : SHARPNESS = SHARPNESS.NIETHER
+
 var healthComponent : HealthComponent
 
 var attackID : float = 0.0

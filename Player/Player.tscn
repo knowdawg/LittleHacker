@@ -3836,6 +3836,7 @@ anchor_right = 0.1
 anchor_bottom = 0.05
 offset_right = 40.0
 offset_bottom = 23.0
+metadata/_edit_use_anchors_ = true
 
 [node name="CameraBounds" parent="." instance=ExtResource("2_67e55")]
 collision_mask = 256

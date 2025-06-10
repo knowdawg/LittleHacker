@@ -8,14 +8,10 @@ class_name BigPlayerRun
 @export var sprite : Sprite2D
 
 var t := 0.0
-func enter(p : State):
+func enter(_p : State):
 	animator.speed_scale = 1.5
-	if p is BigPlayerLand:
-		t = 0.26
-		animator.play("Run")
-	else:
-		t = 0.0
-		animator.play("StartOfRun")
+	t = 0.0
+	animator.play("StartOfRun")
 
 func update_physics(delta: float) -> void:
 	parent.fall(delta)
@@ -23,14 +19,12 @@ func update_physics(delta: float) -> void:
 
 var prevSpriteDir : bool = true
 func update(delta):
-	if !stateMachine.staminaComponent.atemptToSpendStamina(delta * 10.0):
-		trasitioned.emit(self, "Walk")
-		return
 	
 	if prevSpriteDir != sprite.flip_h:
 		prevSpriteDir = sprite.flip_h
-		t = 0.0
 		animator.play("StartOfRun")
+		if t > 0.26:
+			t = 0.0
 	
 	t += delta
 	if t >= (0.26):
@@ -48,8 +42,16 @@ func update(delta):
 		trasitioned.emit(self, "Fall")
 		return
 	
+	if stateMachine.getInputBuffer() == "Block":
+		trasitioned.emit(self, "Block")
+		return
+	
 	if stateMachine.getInputBuffer() == "Jump":
 		trasitioned.emit(self, "Jump")
+		return
+	
+	if stateMachine.getInputBuffer() == "Attack":
+		trasitioned.emit(self, "AttackCharge")
 		return
 
 func exit(_n):

@@ -13,14 +13,25 @@ func update_physics(delta: float) -> void:
 
 func update(_delta):
 	if Input.is_action_pressed("Roll"):
-		if stateMachine.staminaComponent.getStamina() >= 5.0:
-			trasitioned.emit(self, "Run")
+		trasitioned.emit(self, "Run")
+		return
 	
 	if abs(parent.xMovement.x) < 0.1:
 		trasitioned.emit(self, "Idle")
+		return
 	
 	if parent.getSummedVelocities().y > 0:
 		trasitioned.emit(self, "Fall")
+		return
+	
+	if stateMachine.getInputBuffer() == "Block":
+		trasitioned.emit(self, "Block")
+		return
 	
 	if stateMachine.getInputBuffer() == "Jump":
 		trasitioned.emit(self, "Jump")
+		return
+	
+	if stateMachine.getInputBuffer() == "Attack":
+		trasitioned.emit(self, "AttackCharge")
+		return

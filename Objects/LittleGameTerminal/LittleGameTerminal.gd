@@ -1,13 +1,11 @@
-@tool
 extends Node2D
-
-@export var viewportScale := Vector2(1.0, 1.0)
 
 var active : bool = false
 
 func _ready() -> void:
 	if Engine.is_editor_hint():
 		return
+	%Desk.play("On")
 	%InteractableArea.onInteract.connect(onInteract)
 
 func onInteract():
@@ -24,10 +22,6 @@ func onInteract():
 	Game.bigPlayer.enterLittleGameMode()
 
 func _process(_delta: float) -> void:
-	$GameContainer.scale = viewportScale
-	$Border.scale = viewportScale
-	$Border2.scale = viewportScale
-	%InteractableArea.scale = viewportScale
 	if Engine.is_editor_hint():
 		return
 	if active:
@@ -39,7 +33,7 @@ func _process(_delta: float) -> void:
 			return
 		
 		Game.bigCamera.global_position = global_position
-		Game.bigCamera.zoom = Vector2(1.0, 1.0) / (viewportScale * 5.0)
+		Game.bigCamera.zoom = Vector2(1.0, 1.0) / (0.022 * 5.0)
 		
 
 func leaveLittleGame():
@@ -49,7 +43,3 @@ func leaveLittleGame():
 		Game.bigCamera.reset()
 	if Game.doesBigPlayerExist():
 		Game.bigPlayer.leaveLittleGameMode()
-
-func _unhandled_input(event: InputEvent) -> void:
-	if !Game.inLittleGame:
-		get_viewport().set_input_as_handled()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cgmvdcy64j46l"]
+[gd_scene load_steps=18 format=3 uid="uid://cgmvdcy64j46l"]
 
 [ext_resource type="Script" uid="uid://7psq1hbdlet6" path="res://Objects/LittleGameTerminal/LittleGameTerminal.gd" id="1_8d0dd"]
 [ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_h3som"]
@@ -7,10 +7,46 @@
 [ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="3_g0xku"]
 [ext_resource type="Texture2D" uid="uid://biai3ccvps32w" path="res://Assets/Sprites/WorldObjects/TerminalSettup.png" id="6_ycxw0"]
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_ycxw0"]
+atlas = ExtResource("6_ycxw0")
+region = Rect2(0, 0, 80, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dc6mq"]
+atlas = ExtResource("6_ycxw0")
+region = Rect2(80, 0, 80, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr745"]
+atlas = ExtResource("6_ycxw0")
+region = Rect2(160, 0, 80, 44)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0msx1"]
+atlas = ExtResource("6_ycxw0")
+region = Rect2(240, 0, 80, 44)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rrfnm"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ycxw0")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dc6mq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fr745")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0msx1")
+}],
+"loop": true,
+"name": &"On",
+"speed": 10.0
+}]
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
 shader = ExtResource("1_h3som")
-shader_parameter/pixelsWidth = 106.667
-shader_parameter/pixelsHight = 60.0
+shader_parameter/pixelsWidth = 128.0
+shader_parameter/pixelsHight = 72.0
 
 [sub_resource type="Animation" id="Animation_ib7ep"]
 resource_name = "FadeIn"
@@ -67,11 +103,18 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xku"]
-size = Vector2(1344, 768)
+size = Vector2(32, 16)
 
 [node name="LittleGameTerminal" type="Node2D"]
 script = ExtResource("1_8d0dd")
-viewportScale = Vector2(0.025, 0.025)
+
+[node name="Desk" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+texture_filter = 1
+position = Vector2(0, 9)
+sprite_frames = SubResource("SpriteFrames_rrfnm")
+animation = &"On"
+frame_progress = 0.93576
 
 [node name="GameContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_2ty4p")
@@ -118,6 +161,7 @@ libraries = {
 }
 
 [node name="Border" type="Line2D" parent="."]
+visible = false
 scale = Vector2(0.025, 0.025)
 points = PackedVector2Array(0, -364, 640, -360, 644, 0, 640, 360, 0, 364, -640, 360, -644, 0, -640, -360)
 closed = true
@@ -126,26 +170,22 @@ default_color = Color(0, 0, 0, 1)
 antialiased = true
 
 [node name="Border2" type="Polygon2D" parent="."]
+visible = false
 scale = Vector2(0.025, 0.025)
 color = Color(0, 0, 0, 1)
 polygon = PackedVector2Array(-672, -384, 672, -384, 672, 384, -672, 384, -672, 0, -640, 0, -640, 360, 640, 360, 640, -360, -640, -360, -640, 0, -672, 0)
 
 [node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("3_g0xku")]
 unique_name_in_owner = true
-scale = Vector2(0.025, 0.025)
+text = "Interact"
 textPos = NodePath("TextMarker")
 colShape = NodePath("CollisionShape2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
-visible = false
+position = Vector2(0, 23)
 shape = SubResource("RectangleShape2D_g0xku")
 
 [node name="TextMarker" type="Marker2D" parent="InteractableArea"]
-position = Vector2(0, 384)
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-texture_filter = 1
-position = Vector2(5, 11)
-texture = ExtResource("6_ycxw0")
+position = Vector2(0, 38)
 
 [connection signal="animation_finished" from="GameContainer/LittleLevelViewport/AnimationPlayer" to="GameContainer/LittleLevelViewport" method="_on_animation_player_animation_finished"]

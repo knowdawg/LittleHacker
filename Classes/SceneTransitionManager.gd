@@ -10,6 +10,7 @@ signal onFadeInStart
 
 
 func _ready() -> void:
+	
 	var startingScene : StartingLevelResourceScript = load("uid://byhqpp6gc4xnd")
 	Game.littleViewport = self
 	
@@ -71,7 +72,7 @@ func onFadeInComplete():
 	#
 	#t.start(loadScene.bind(path))
 
-func loadScene(path : String):
+func loadScene(_path : String):
 	pass
 	#Hopefully freeze is fixed
 	#var s = load(path)

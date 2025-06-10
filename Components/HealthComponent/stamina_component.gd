@@ -3,6 +3,7 @@ class_name StaminaComponent
 
 @export var maxStamina : float
 @export var staminaRegenPerSecound : float
+@export var hurtboxComponent : HurtboxComponent
 
 signal onStaminaChanged(newStamina : float, changeAmount : float)
 signal onStaminaDepleted
@@ -36,6 +37,23 @@ func setStamina(val : float) -> void:
 		if prevVal != stamina:
 			onStaminaChanged.emit(stamina, prevVal)
 
+
+func onParry(a : Attack):
+	addStamina(calcualteStaminaCostOffAttack(a) * -10.5)
+	regenDelay = 1.0
+
+func onBlock(a : Attack):
+	addStamina(calcualteStaminaCostOffAttack(a) * -20.0)
+	regenDelay = 1.0
+
+func calcualteStaminaCostOffAttack(a : Attack) -> float:
+	var staminaCost : float = a.attack_damage
+	if a.attackType == 0: #Sharp
+		staminaCost *= 0.5
+	if a.attackType == 1: #Blunt
+		staminaCost *= 2.0
+	return staminaCost
+
 func _process(delta: float) -> void:
 	regenDelay -= delta
 	if regenDelay <= 0.0:
@@ -45,3 +63,5 @@ func _ready() -> void:
 	if !isPlayerHealth:
 		set_health(MAX_HEALTH)
 	stamina = maxStamina
+	hurtboxComponent.parry.connect(onParry)
+	hurtboxComponent.blocked.connect(onBlock)

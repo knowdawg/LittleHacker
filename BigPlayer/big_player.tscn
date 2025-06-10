@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=63 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
@@ -16,10 +16,18 @@
 [ext_resource type="Script" uid="uid://rvnfkdjaiwlj" path="res://BigPlayer/UI/ui.gd" id="13_13av7"]
 [ext_resource type="Texture2D" uid="uid://c1hnlyj8rj4ej" path="res://Assets/Sprites/UI/BigGameHealthUIUnder.png" id="13_c2864"]
 [ext_resource type="Texture2D" uid="uid://cl2hgt03kfg13" path="res://Assets/Sprites/UI/HeartBeat.png" id="13_ssk3x"]
+[ext_resource type="Script" uid="uid://n01gm4n53usb" path="res://BigPlayer/StateMachine/attack_charge.gd" id="14_lsjcy"]
 [ext_resource type="Texture2D" uid="uid://tn381ghkpgwj" path="res://Assets/Sprites/UI/BigGameHealthUIProgress.png" id="14_vapvf"]
 [ext_resource type="Texture2D" uid="uid://oah70e1b3jlf" path="res://Assets/Sprites/UI/BigGameStaminaUIUnder.png" id="15_lhw75"]
+[ext_resource type="Script" uid="uid://d0irokenvpnfk" path="res://BigPlayer/StateMachine/light_attack.gd" id="15_n8cw0"]
 [ext_resource type="Texture2D" uid="uid://5xpsu0h5soiq" path="res://Assets/Sprites/UI/BigGameStaminaUIProgress.png" id="16_13av7"]
+[ext_resource type="Script" uid="uid://b07v2natcdqmq" path="res://BigPlayer/StateMachine/charge_attack.gd" id="16_um6lt"]
+[ext_resource type="Script" uid="uid://dvcltuk788x48" path="res://BigPlayer/StateMachine/block.gd" id="17_oqejv"]
+[ext_resource type="Script" uid="uid://dj4aoesbp7oxe" path="res://BigPlayer/StateMachine/leave_block.gd" id="18_58u5n"]
 [ext_resource type="PackedScene" uid="uid://jigel5y6vf4o" path="res://Components/HealthComponent/stamina_component.tscn" id="20_hpub4"]
+[ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="21_enlr8"]
+[ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="25_fiuyr"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="25_jvlv8"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mspic"]
 size = Vector2(10, 25)
@@ -135,23 +143,40 @@ tracks/0/keys = {
 "update": 1,
 "values": [13]
 }
-
-[sub_resource type="Animation" id="Animation_41qoe"]
-resource_name = "Walk"
-length = 0.8
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [15, 16, 17, 18, 19, 20, 21, 14]
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaceholderWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaceholderWeapon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("PlaceholderWeapon:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_13av7"]
@@ -171,9 +196,9 @@ tracks/0/keys = {
 "values": [44, 45, 46, 47, 48, 49, 50, 51, 42, 43]
 }
 
-[sub_resource type="Animation" id="Animation_hpub4"]
-resource_name = "StartOfRun"
-length = 0.4
+[sub_resource type="Animation" id="Animation_lsjcy"]
+resource_name = "SprintJumpPeak"
+length = 0.3
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -182,10 +207,10 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [52, 53, 54, 55]
+"values": [57, 58, 59]
 }
 
 [sub_resource type="Animation" id="Animation_enlr8"]
@@ -204,9 +229,9 @@ tracks/0/keys = {
 "values": [56]
 }
 
-[sub_resource type="Animation" id="Animation_lsjcy"]
-resource_name = "SprintJumpPeak"
-length = 0.3
+[sub_resource type="Animation" id="Animation_hpub4"]
+resource_name = "StartOfRun"
+length = 0.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -215,19 +240,206 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [57, 58, 59]
+"values": [52, 53, 54, 55]
+}
+
+[sub_resource type="Animation" id="Animation_41qoe"]
+resource_name = "Walk"
+length = 0.8
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [15, 16, 17, 18, 19, 20, 21, 14]
+}
+
+[sub_resource type="Animation" id="Animation_um6lt"]
+resource_name = "LightAttack"
+length = 0.4
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0.5, -0.25, 0, 0, 0, -3.03828, -0.1, 3.48368, 0, 0, -6.283, -0.2, 0.230742, 0, 0),
+"times": PackedFloat32Array(0, 0.1, 0.4)
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponents/LightAttack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jvlv8"]
+resource_name = "ChargeAttack"
+length = 0.4
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0, -6.283, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4)
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaceholderWeapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.4),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("PlaceholderWeapon:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(2, 2), Vector2(1, 1)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackComponents/HeavyAttack")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_n8cw0"]
+resource_name = "Charging"
+length = 0.8
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(0, -0.25, 0, 0, 0.579, 0.5, 0, 0, 1, 0.027, 1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.2, 0.8)
+}
+
+[sub_resource type="Animation" id="Animation_fiuyr"]
+resource_name = "Block"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaceholderWeapon:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-1, -13)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaceholderWeapon:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-2.60323]
+}
+
+[sub_resource type="Animation" id="Animation_oqejv"]
+resource_name = "LeaveBlock"
+length = 0.1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-2.60323, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlaceholderWeapon:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-1, -13), Vector2(0, 0)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]
 _data = {
+&"Block": SubResource("Animation_fiuyr"),
+&"ChargeAttack": SubResource("Animation_jvlv8"),
+&"Charging": SubResource("Animation_n8cw0"),
 &"Idle": SubResource("Animation_mspic"),
 &"JumpCrouch": SubResource("Animation_ssk3x"),
 &"JumpPeak": SubResource("Animation_vbday"),
 &"JumpStart": SubResource("Animation_axpou"),
 &"Land": SubResource("Animation_jsvsi"),
+&"LeaveBlock": SubResource("Animation_oqejv"),
+&"LightAttack": SubResource("Animation_um6lt"),
 &"RESET": SubResource("Animation_qmsvx"),
 &"Run": SubResource("Animation_13av7"),
 &"SprintJumpPeak": SubResource("Animation_lsjcy"),
@@ -235,6 +447,16 @@ _data = {
 &"StartOfRun": SubResource("Animation_hpub4"),
 &"Walk": SubResource("Animation_41qoe")
 }
+
+[sub_resource type="Curve" id="Curve_um6lt"]
+_limits = [0.0, 1.0, 0.0, 0.4]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Curve" id="Curve_jvlv8"]
+_limits = [0.0, 1.0, 0.0, 0.4]
+_data = [Vector2(1e-05, 1), 0.0, 0.0, 0, 0, Vector2(0.4, 0), 0.0, 0.0, 0, 0]
+point_count = 2
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_axpou"]
 size = Vector2(12, 28)
@@ -310,17 +532,39 @@ animations = [{
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_oqejv"]
+size = Vector2(6, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jvlv8"]
+size = Vector2(30.5, 39)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fiuyr"]
+size = Vector2(48, 65)
+
 [node name="BigPlayer" type="CharacterBody2D"]
 collision_layer = 4
-collision_mask = 3
+collision_mask = 35
 script = ExtResource("1_qmsvx")
+
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("21_enlr8")]
+follow = NodePath("..")
+sprite = NodePath("../PlayerSprite")
+frequency = 0.1
+fadeTime = 1.0
+startColor = Color(0, 1, 1, 1)
+endColor = Color(1, 0, 0, 0)
+active = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_mspic")
 
+[node name="PlaceholderWeapon" type="Polygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, -3, -31, 3, -31)
+
 [node name="PlayerSprite" type="Sprite2D" parent="."]
+unique_name_in_owner = true
 clip_children = 2
 texture_filter = 1
 texture = ExtResource("1_mspic")
@@ -331,15 +575,16 @@ frame = 13
 unique_name_in_owner = true
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
+useVelocityVariable = true
 
 [node name="HitFlashComponent" parent="PlayerSprite" instance=ExtResource("4_jsvsi")]
 
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="PlayerAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_r3020")
 }
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="BigCamera" type="Camera2D" parent="."]
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 script = ExtResource("4_2v8nb")
@@ -353,39 +598,72 @@ isInLittleGame = false
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("4_r3020")
-animator = NodePath("../../AnimationPlayer")
+animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
 [node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("5_2t6u2")
-animator = NodePath("../../AnimationPlayer")
+animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
 [node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("6_m83fv")
-animator = NodePath("../../AnimationPlayer")
+animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
 [node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("7_2v8nb")
-animator = NodePath("../../AnimationPlayer")
+animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
 [node name="Land" type="Node" parent="StateMachine" node_paths=PackedStringArray("stateMachine", "animator")]
 script = ExtResource("10_vbday")
 stateMachine = NodePath("..")
-animator = NodePath("../../AnimationPlayer")
+animator = NodePath("../../PlayerAnimator")
 
 [node name="Run" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "sprite")]
 script = ExtResource("12_bl051")
-animator = NodePath("../../AnimationPlayer")
+animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 sprite = NodePath("../../PlayerSprite")
+
+[node name="AttackCharge" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
+script = ExtResource("14_lsjcy")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+
+[node name="LightAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "attackComponent")]
+script = ExtResource("15_n8cw0")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+movement = SubResource("Curve_um6lt")
+attackComponent = NodePath("../../AttackComponents/LightAttack")
+
+[node name="ChargeAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "attackComponent")]
+script = ExtResource("16_um6lt")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+movement = SubResource("Curve_jvlv8")
+attackComponent = NodePath("../../AttackComponents/HeavyAttack")
+
+[node name="Block" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "hurtbox")]
+script = ExtResource("17_oqejv")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+hurtbox = NodePath("../../Components/HurtboxComponent")
+
+[node name="LeaveBlock" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+script = ExtResource("18_58u5n")
+animator = NodePath("../../PlayerAnimator")
 
 [node name="InteractableManager" parent="." instance=ExtResource("10_axpou")]
 
@@ -396,7 +674,18 @@ shape = SubResource("RectangleShape2D_axpou")
 script = ExtResource("13_13av7")
 staminaComponent = NodePath("../Components/StaminaComponent")
 
-[node name="Health" type="TextureProgressBar" parent="UI"]
+[node name="SubViewportContainer" type="SubViewportContainer" parent="UI"]
+texture_filter = 1
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="SubViewport" type="SubViewport" parent="UI/SubViewportContainer"]
+transparent_bg = true
+handle_input_locally = false
+size = Vector2i(100, 100)
+render_target_update_mode = 4
+
+[node name="Health" type="TextureProgressBar" parent="UI/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 texture_filter = 1
 offset_left = -5.0
@@ -410,7 +699,7 @@ radial_fill_degrees = 214.0
 texture_under = ExtResource("13_c2864")
 texture_progress = ExtResource("14_vapvf")
 
-[node name="Stamina" type="TextureProgressBar" parent="UI"]
+[node name="Stamina" type="TextureProgressBar" parent="UI/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 texture_filter = 1
 offset_left = -5.0
@@ -424,20 +713,67 @@ radial_fill_degrees = 204.0
 texture_under = ExtResource("15_lhw75")
 texture_progress = ExtResource("16_13av7")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI"]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="UI/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true
 texture_filter = 1
-position = Vector2(20, 20)
+position = Vector2(20, 19)
 sprite_frames = SubResource("SpriteFrames_n8cw0")
 animation = &"HeartBeat"
 frame_progress = 0.0622152
 
 [node name="Components" type="Node2D" parent="."]
 
-[node name="StaminaComponent" parent="Components" instance=ExtResource("20_hpub4")]
+[node name="StaminaComponent" parent="Components" node_paths=PackedStringArray("hurtboxComponent") instance=ExtResource("20_hpub4")]
 unique_name_in_owner = true
 maxStamina = 100.0
-staminaRegenPerSecound = 50.0
+staminaRegenPerSecound = 10.0
+hurtboxComponent = NodePath("../HurtboxComponent")
 MAX_HEALTH = 70.0
+
+[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("stateMachine", "parryForgivenesTimer", "health_componnet") instance=ExtResource("25_fiuyr")]
+collision_layer = 4
+stateMachine = NodePath("../../StateMachine")
+parryForgivenesTimer = NodePath("ParryForgivenessTimer")
+health_componnet = NodePath("../StaminaComponent")
+isHackable = false
+isSolid = false
+
+[node name="ParryForgivenessTimer" type="Timer" parent="Components/HurtboxComponent"]
+wait_time = 0.15
+one_shot = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
+visible = false
+position = Vector2(0, 2)
+shape = SubResource("RectangleShape2D_oqejv")
+
+[node name="AttackComponents" type="Node2D" parent="."]
+
+[node name="LightAttack" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("25_jvlv8")]
+collision_mask = 8
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../Components/StaminaComponent")
+attack_damage = 5.0
+knockback_force = 50.0
+knockbackVector = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/LightAttack"]
+visible = false
+position = Vector2(15.25, -6)
+shape = SubResource("RectangleShape2D_jvlv8")
+
+[node name="HeavyAttack" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("25_jvlv8")]
+collision_mask = 8
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../Components/StaminaComponent")
+attack_damage = 10.0
+attackStrength = 2
+knockback_force = 100.0
+knockbackVector = Vector2(-1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/HeavyAttack"]
+visible = false
+position = Vector2(24, -18)
+shape = SubResource("RectangleShape2D_fiuyr")
 
 [editable path="InteractableManager"]

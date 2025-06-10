@@ -3,8 +3,10 @@ class_name HurtboxComponent
 
 @export var stateMachine : StateMachine
 @export var parrying : bool = false
+@export var blocking : bool = false
 @export var parryForgivenesTimer : Timer
-signal parry
+signal parry(a : Attack)
+signal blocked(a : Attack)
 @export var health_componnet : HealthComponent
 @export var IFRAMETIMER : float = 0.0
 @export var isHackable = true
@@ -43,6 +45,9 @@ func damage(attack: Attack):
 	if parrying and attack.attackStrength <= parryStrength:
 		parryStuff(attack)
 		return
+	if blocking and attack.attackStrength == 1:
+		attackBlocked(attack)
+		return
 	attackBuffer = attack
 	if parryForgivenesTimer:
 		parryForgivenesTimer.start()
@@ -52,10 +57,16 @@ func damage(attack: Attack):
 func parryStuff(attack : Attack):
 	parry.emit(attack)
 
+func attackBlocked(attack : Attack):
+	blocked.emit(attack)
+
 var attackBuffer : Attack
 func damageStuff():
 	if parrying == true and attackBuffer.attackStrength <= parryStrength:
 		parryStuff(attackBuffer)
+		return
+	if blocking and attackBuffer.attackStrength == 1:
+		attackBlocked(attackBuffer)
 		return
 	if ift >= 0.0:
 		return
@@ -93,3 +104,6 @@ func setParry(isParrying : bool, strength = 1):
 	else:
 		parrying = false
 		parryStrength = 0
+
+func setBlock(isBlocking : bool):
+	blocking = isBlocking

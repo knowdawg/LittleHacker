@@ -110,7 +110,7 @@ func createEnemy():
 		e.shootOut(Vector2(-1.0, -0.5))
 
 
-func _on_health_component_death(attack: Attack) -> void:
+func _on_health_component_death(_attack: Attack) -> void:
 	%MovementComponent.applyForce(%MovementComponent.getVectorToPlayerX(global_position), 100.0)
 
 

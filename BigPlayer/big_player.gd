@@ -11,6 +11,7 @@ var xMovement := Vector2.ZERO
 var runMovement := Vector2.ZERO
 var jumpFallVector := Vector2.ZERO
 var jumpBoostVector := Vector2.ZERO
+var attackBoost := Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
@@ -21,6 +22,7 @@ func _physics_process(delta: float) -> void:
 	velocity += jumpFallVector
 	velocity += jumpBoostVector
 	velocity += runMovement
+	velocity += attackBoost
 	
 	move_and_slide()
 	velocity = Vector2.ZERO
@@ -28,7 +30,7 @@ func _physics_process(delta: float) -> void:
 	xMovement = Vector2.ZERO#xMovement.move_toward(Vector2.ZERO, delta * 180.0)
 	jumpBoostVector = jumpBoostVector.move_toward(Vector2.ZERO, delta * 240.0)
 	runMovement = Vector2.ZERO#runMovement.move_toward(Vector2.ZERO, delta * 360.0)
-	
+	attackBoost = Vector2.ZERO
 
 func check_for_movement(delta : float):
 	if Input.is_action_pressed("Left"):
@@ -55,6 +57,9 @@ func fall(delta):
 	if is_on_floor():
 		if jumpFallVector.y > 0:
 			jumpFallVector.y = 0
+	if is_on_ceiling():
+		if jumpFallVector.y < 0:
+			jumpFallVector.y = 0
 
 func getSummedVelocities() -> Vector2:
 	var sum := Vector2.ZERO
@@ -76,3 +81,9 @@ func enterLittleGameMode():
 
 func leaveLittleGameMode():
 	modulate.a = 1.0
+
+func getDirection() -> float:
+	if %PlayerSprite.flip_h:
+		return 1.0
+	else:
+		return -1.0

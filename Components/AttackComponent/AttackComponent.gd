@@ -21,6 +21,7 @@ class_name AttackComponent
 @export var isPogo : bool = false
 @export var isGrabAttack : bool = false
 @export var grabNode : GrabComponent
+@export var attackType : Attack.SHARPNESS = Attack.SHARPNESS.NIETHER
 
 @export_group("Hit Effects")
 @export var hitEfect : PackedScene
@@ -61,6 +62,7 @@ func _on_area_entered(area):
 		attack.attackStrength = attackStrength
 		attack.attackName = attackName
 		attack.isHazard = isSpikes
+		attack.attackType = attackType
 		if healthComponent:
 			attack.healthComponent = healthComponent
 		
