@@ -71,7 +71,6 @@ func getSummedVelocities() -> Vector2:
 	return sum
 
 func _process(_delta: float) -> void:
-	%SpriteDirectorComponent.updateDirection()
 	Game.bigPlayer = self
 	
 	%StaminaComponent.maxStamina = %StaminaComponent.MAX_HEALTH
@@ -87,3 +86,6 @@ func getDirection() -> float:
 		return 1.0
 	else:
 		return -1.0
+
+func updateSpriteDirection():
+	%SpriteDirectorComponent.updateDirection()

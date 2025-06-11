@@ -7,6 +7,7 @@ class_name StaminaComponent
 
 signal onStaminaChanged(newStamina : float, changeAmount : float)
 signal onStaminaDepleted
+signal guardBroken(attack : Attack)
 
 var stamina : float
 var regenDelay : float = 0.0
@@ -41,10 +42,16 @@ func setStamina(val : float) -> void:
 func onParry(a : Attack):
 	addStamina(calcualteStaminaCostOffAttack(a) * -10.5)
 	regenDelay = 1.0
+	if stamina < 0.0:
+		guardBroken.emit(a)
+		#Tell Enemy that player is staggered
 
 func onBlock(a : Attack):
 	addStamina(calcualteStaminaCostOffAttack(a) * -20.0)
 	regenDelay = 1.0
+	if stamina < 0.0:
+		guardBroken.emit(a)
+		#Tell Enemy that player is staggered
 
 func calcualteStaminaCostOffAttack(a : Attack) -> float:
 	var staminaCost : float = a.attack_damage

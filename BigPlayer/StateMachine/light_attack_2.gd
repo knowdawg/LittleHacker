@@ -6,21 +6,31 @@ extends State
 
 @export var movement : Curve
 @export var attackComponent : AttackComponent
-@export var attackLength := 1.0
+@export var attackLength := 0.7
 @export var cancelPoint : = 0.4
 
+var dir := 1.0
 var t := 0.0
+
+var inTransition : bool = false
 func enter(_p):
+	inTransition = false
 	t = 0.0
-	animator.play("ChargeAttack")
+	animator.play("LightAttack2")
+	dir = parent.getDirection()
 
 func update(delta):
 	t += delta
 	
-	var b = movement.sample(t)
-	parent.attackBoost = Vector2(b, 0.0) * 200.0 * parent.getDirection()
+	if inTransition:
+		if t>= 0.2:
+			trasitioned.emit(self, "LightAttack")
+		return
 	
-	attackComponent.scale = Vector2(parent.getDirection(), 1.0)
+	var b = movement.sample(t)
+	parent.attackBoost = Vector2(b, 0.0) * 150.0 * dir
+	
+	attackComponent.scale = Vector2(dir, 1.0)
 	
 	if t > attackLength:
 		trasitioned.emit(self, "Idle")
@@ -28,9 +38,11 @@ func update(delta):
 		
 	if t > cancelPoint:
 		if stateMachine.getInputBuffer() == "Attack":
-			trasitioned.emit(self, "LightAttack2")
+			inTransition = true
+			t = 0.0
+			animator.play("Attack2ToAttack1Transition")
 			return
-			
+		
 		parent.check_for_movement(delta)
 		if abs(parent.xMovement.x) > 0.0:
 			trasitioned.emit(self, "Walk")
@@ -43,7 +55,7 @@ func update(delta):
 		if stateMachine.getInputBuffer() == "Jump":
 			trasitioned.emit(self, "Jump")
 			return
-			
+		
 
 func exit(_n):
 	attackComponent.call_deferred("disable")

@@ -12,6 +12,8 @@ func update_physics(delta: float) -> void:
 	parent.check_for_movement(delta)
 
 func update(_delta):
+	parent.updateSpriteDirection()
+	
 	if Input.is_action_pressed("Roll"):
 		trasitioned.emit(self, "Run")
 		return

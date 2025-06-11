@@ -19,6 +19,7 @@ func update_physics(delta: float) -> void:
 
 var prevSpriteDir : bool = true
 func update(delta):
+	parent.updateSpriteDirection()
 	
 	if prevSpriteDir != sprite.flip_h:
 		prevSpriteDir = sprite.flip_h

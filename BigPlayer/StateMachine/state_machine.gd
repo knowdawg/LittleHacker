@@ -31,3 +31,7 @@ func getInputBuffer():
 
 func resetInputBuffer():
 	inputBuffer = ""
+
+
+func _on_stamina_component_guard_broken(_attack: Attack) -> void:
+	switchStates("Stagger")
