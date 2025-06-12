@@ -33,6 +33,10 @@ func update(delta):
 			trasitioned.emit(self, "LightAttack2")
 			return
 		
+		if stateMachine.blockBuffer:
+			trasitioned.emit(self, "Block")
+			return
+		
 		parent.check_for_movement(delta)
 		if abs(parent.xMovement.x) > 0.0:
 			trasitioned.emit(self, "Walk")

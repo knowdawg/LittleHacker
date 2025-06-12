@@ -31,10 +31,11 @@ func enter(prevState):
 		else:
 			movement.applyForce(Vector2(1, 0), knockback)
 	else:
-		if !kbCom:
-			movement.applyForce(biDirectionalKbCom.returnVecFromTwoObjects(parrent, Game.player), knockback)
-		else:
-			movement.applyForce(kbCom.returnVecFromTwoObjects(parrent, Game.player), knockback)
+		if Game.doesPlayerExist():
+			if !kbCom:
+				movement.applyForce(biDirectionalKbCom.returnVecFromTwoObjects(parrent, Game.player), knockback)
+			else:
+				movement.applyForce(kbCom.returnVecFromTwoObjects(parrent, Game.player), knockback)
 
 func update(delta):
 	t += delta

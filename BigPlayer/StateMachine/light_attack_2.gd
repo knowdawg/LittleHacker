@@ -1,4 +1,5 @@
 extends State
+class_name BigPlayerLightAttack2
 
 @export var animator : AnimationPlayer
 @export var parent : BigPlayer
@@ -24,7 +25,7 @@ func update(delta):
 	
 	if inTransition:
 		if t>= 0.2:
-			trasitioned.emit(self, "LightAttack")
+			trasitioned.emit(self, "AttackCharge")
 		return
 	
 	var b = movement.sample(t)
@@ -41,6 +42,10 @@ func update(delta):
 			inTransition = true
 			t = 0.0
 			animator.play("Attack2ToAttack1Transition")
+			return
+		
+		if stateMachine.blockBuffer:
+			trasitioned.emit(self, "Block")
 			return
 		
 		parent.check_for_movement(delta)

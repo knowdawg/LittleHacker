@@ -5,7 +5,9 @@ func _process(delta: float) -> void:
 	if %StateMachine.current_state.name == "DashDoubleSlash":
 		if %DashDoubleSlash.t > 0.8 and %DashDoubleSlash.t < 1.0:
 			var spriteDir = %Sprite2D.flip_h
-			var moveDir = global_position < Game.player.global_position
+			var moveDir = false
+			if Game.doesPlayerExist():
+				moveDir = global_position < Game.player.global_position
 			if spriteDir == moveDir:
 				%MovementComponent.lerpToPlayerX(delta * 10.0, 0.0)
 		elif %DashDoubleSlash.t < 0.7:

@@ -5,6 +5,9 @@ class_name StaminaComponent
 @export var staminaRegenPerSecound : float
 @export var hurtboxComponent : HurtboxComponent
 
+@export var attackComponentsToRegenStamina : Array[AttackComponent]
+@export var staminaRestoredByAttacks : float = 10.0
+
 signal onStaminaChanged(newStamina : float, changeAmount : float)
 signal onStaminaDepleted
 signal guardBroken(attack : Attack)
@@ -31,7 +34,7 @@ func getStamina() -> float:
 
 func setStamina(val : float) -> void:
 	var prevVal = stamina
-	stamina = clampf(val, -99999.9, maxStamina)
+	stamina = clampf(val, -99999.9, min(maxStamina, health))
 	if stamina < 0.0:
 		onStaminaDepleted.emit()
 	else:
@@ -40,14 +43,14 @@ func setStamina(val : float) -> void:
 
 
 func onParry(a : Attack):
-	addStamina(calcualteStaminaCostOffAttack(a) * -10.5)
+	addStamina(calcualteStaminaCostOffAttack(a) * -1.0)
 	regenDelay = 1.0
 	if stamina < 0.0:
 		guardBroken.emit(a)
 		#Tell Enemy that player is staggered
 
 func onBlock(a : Attack):
-	addStamina(calcualteStaminaCostOffAttack(a) * -20.0)
+	addStamina(calcualteStaminaCostOffAttack(a) * -2.0)
 	regenDelay = 1.0
 	if stamina < 0.0:
 		guardBroken.emit(a)
@@ -72,3 +75,10 @@ func _ready() -> void:
 	stamina = maxStamina
 	hurtboxComponent.parry.connect(onParry)
 	hurtboxComponent.blocked.connect(onBlock)
+	
+	for h : AttackComponent in attackComponentsToRegenStamina:
+		h.attackHit.connect(attackComponentHit)
+	
+
+func attackComponentHit(_a):
+	addStamina(staminaRestoredByAttacks)

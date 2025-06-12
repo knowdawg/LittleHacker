@@ -13,6 +13,8 @@ var jumpFallVector := Vector2.ZERO
 var jumpBoostVector := Vector2.ZERO
 var attackBoost := Vector2.ZERO
 
+var knockback := Vector2.ZERO
+
 
 func _physics_process(delta: float) -> void:
 	if Game.inLittleGame:
@@ -23,6 +25,7 @@ func _physics_process(delta: float) -> void:
 	velocity += jumpBoostVector
 	velocity += runMovement
 	velocity += attackBoost
+	velocity += knockback
 	
 	move_and_slide()
 	velocity = Vector2.ZERO
@@ -31,6 +34,7 @@ func _physics_process(delta: float) -> void:
 	jumpBoostVector = jumpBoostVector.move_toward(Vector2.ZERO, delta * 240.0)
 	runMovement = Vector2.ZERO#runMovement.move_toward(Vector2.ZERO, delta * 360.0)
 	attackBoost = Vector2.ZERO
+	knockback = knockback.move_toward(Vector2.ZERO, delta * 480.0)
 
 func check_for_movement(delta : float):
 	if Input.is_action_pressed("Left"):
@@ -89,3 +93,22 @@ func getDirection() -> float:
 
 func updateSpriteDirection():
 	%SpriteDirectorComponent.updateDirection()
+
+func takeKnockback(a : Attack, knockBackMultiplier : float = 1.0):
+	var kbVec := Vector2(70.0, 0.0)
+	if global_position < a.attack_position:
+		kbVec.x *= -1.0
+	knockback += kbVec * knockBackMultiplier
+
+func _on_hurtbox_component_blocked(a: Attack) -> void:
+	takeKnockback(a)
+
+func _on_hurtbox_component_parry(a: Attack) -> void:
+	takeKnockback(a)
+
+func _on_stamina_component_hit(a: Attack) -> void:
+	takeKnockback(a)
+
+
+func _on_stamina_component_guard_broken(a: Attack) -> void:
+	pass

@@ -59,10 +59,12 @@ func getPlayerData() -> SmallPlayerData:
 	return s
 
 func addProjectile(projectile):
-	littleLevel.addProjectile(projectile)
+	if littleLevel:
+		littleLevel.addProjectile(projectile)
 
 func addEnemy(enemy):
-	littleLevel.addEnemy(enemy)
+	if littleLevel:
+		littleLevel.addEnemy(enemy)
 
 func superParry(pos : Node2D):
 	if player:

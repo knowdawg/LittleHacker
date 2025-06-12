@@ -21,7 +21,7 @@ func update(_delta):
 		trasitioned.emit(self, "Fall")
 		return
 	
-	if stateMachine.getInputBuffer() == "Block":
+	if stateMachine.blockBuffer:
 		trasitioned.emit(self, "Block")
 		return
 	

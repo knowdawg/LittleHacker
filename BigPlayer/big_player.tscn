@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=73 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
@@ -27,6 +27,7 @@
 [ext_resource type="Script" uid="uid://dj4aoesbp7oxe" path="res://BigPlayer/StateMachine/leave_block.gd" id="18_58u5n"]
 [ext_resource type="Script" uid="uid://ces6cv2wyhr5" path="res://BigPlayer/StateMachine/stagger.gd" id="19_npd63"]
 [ext_resource type="PackedScene" uid="uid://jigel5y6vf4o" path="res://Components/HealthComponent/stamina_component.tscn" id="20_hpub4"]
+[ext_resource type="Script" uid="uid://bbfajd1t3j5x1" path="res://BigPlayer/StateMachine/hit.gd" id="21_153p7"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="21_enlr8"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="25_fiuyr"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="25_jvlv8"]
@@ -34,81 +35,51 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mspic"]
 size = Vector2(10, 25)
 
-[sub_resource type="Animation" id="Animation_fiuyr"]
-resource_name = "Block"
-length = 0.1
-step = 0.1
+[sub_resource type="Animation" id="Animation_153p7"]
+resource_name = "Attack2ToAttack1Transition"
+length = 0.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderWeapon:position")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-1, -13)]
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [95, 96, 97]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-2.60323]
+
+[sub_resource type="Animation" id="Animation_fiuyr"]
+resource_name = "Block"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [99, 100, 101, 102]
 }
 
 [sub_resource type="Animation" id="Animation_jvlv8"]
 resource_name = "ChargeAttack"
 length = 0.9
 step = 0.05
-tracks/0/type = "bezier"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/path = NodePath("AttackComponents/HeavyAttack")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0),
-"points": PackedFloat32Array(1.571, -0.25, 0, 0.25, 0, -6.283, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderWeapon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.4),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlaceholderWeapon:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.4),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(2, 2), Vector2(1, 1)]
-}
-tracks/3/type = "method"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("AttackComponents/HeavyAttack")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0.2, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -119,13 +90,13 @@ tracks/3/keys = {
 "method": &"disable"
 }]
 }
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerSprite:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.05, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
@@ -136,24 +107,13 @@ tracks/4/keys = {
 resource_name = "Charging"
 length = 0.8
 step = 0.1
-tracks/0/type = "bezier"
+tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0, -0.25, 0, 0, 0.579, 0.5, 0, 0, 1, 0.027, 1, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.2, 0.8)
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.7),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
@@ -260,54 +220,31 @@ tracks/0/keys = {
 [sub_resource type="Animation" id="Animation_oqejv"]
 resource_name = "LeaveBlock"
 length = 0.1
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1),
+"times": PackedFloat32Array(0, 0.05),
 "transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [-2.60323, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderWeapon:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(-1, -13), Vector2(0, 0)]
+"update": 1,
+"values": [100, 99]
 }
 
 [sub_resource type="Animation" id="Animation_um6lt"]
 resource_name = "LightAttack"
 length = 0.7
 step = 0.1
-tracks/0/type = "bezier"
+tracks/0/type = "method"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderWeapon:rotation")
+tracks/0/path = NodePath("AttackComponents/LightAttack")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0),
-"points": PackedFloat32Array(0.5, -0.25, 0, 0, 0, -3.03828, -0.1, 3.48368, 0, 0, -6.283, -0.2, 0.230742, 0, 0),
-"times": PackedFloat32Array(0, 0.1, 0.4)
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AttackComponents/LightAttack")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
@@ -318,17 +255,51 @@ tracks/1/keys = {
 "method": &"disable"
 }]
 }
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerSprite:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [77, 78, 79, 80, 81, 82, 83]
+}
+
+[sub_resource type="Animation" id="Animation_4ilhq"]
+resource_name = "LightAttack2"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [85, 86, 87, 88, 89, 90, 91, 92]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponents/LightAttack")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_qmsvx"]
@@ -344,41 +315,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [13]
-}
-tracks/1/type = "bezier"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"handle_modes": PackedInt32Array(0),
-"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0)
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlaceholderWeapon:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlaceholderWeapon:scale")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_13av7"]
@@ -431,6 +367,23 @@ tracks/0/keys = {
 "values": [56]
 }
 
+[sub_resource type="Animation" id="Animation_npd63"]
+resource_name = "Stagger"
+length = 2.0
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.15, 0.25),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [112, 113, 114, 115]
+}
+
 [sub_resource type="Animation" id="Animation_hpub4"]
 resource_name = "StartOfRun"
 length = 0.4
@@ -466,83 +419,8 @@ tracks/0/keys = {
 "values": [15, 16, 17, 18, 19, 20, 21, 14]
 }
 
-[sub_resource type="Animation" id="Animation_npd63"]
-resource_name = "Stagger"
-length = 2.0
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlaceholderWeapon:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlaceholderWeapon:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [25.1327, 0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlaceholderWeapon:scale")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_4ilhq"]
-resource_name = "LightAttack2"
-length = 0.8
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [85, 86, 87, 88, 89, 90, 91, 92]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("AttackComponents/LightAttack")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"readyAttack"
-}, {
-"args": [],
-"method": &"disable"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_153p7"]
-resource_name = "Attack2ToAttack1Transition"
+[sub_resource type="Animation" id="Animation_5v7ne"]
+resource_name = "onBlock"
 length = 0.2
 step = 0.05
 tracks/0/type = "value"
@@ -552,10 +430,44 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [103, 104, 105, 102]
+}
+
+[sub_resource type="Animation" id="Animation_eqyes"]
+resource_name = "onParry"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [107, 108, 109, 110]
+}
+
+[sub_resource type="Animation" id="Animation_ayaik"]
+resource_name = "HitBlunt"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
-"values": [95, 96, 97]
+"values": [116, 117, 118]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]
@@ -564,6 +476,7 @@ _data = {
 &"Block": SubResource("Animation_fiuyr"),
 &"ChargeAttack": SubResource("Animation_jvlv8"),
 &"Charging": SubResource("Animation_n8cw0"),
+&"HitBlunt": SubResource("Animation_ayaik"),
 &"Idle": SubResource("Animation_mspic"),
 &"JumpCrouch": SubResource("Animation_ssk3x"),
 &"JumpPeak": SubResource("Animation_vbday"),
@@ -578,17 +491,19 @@ _data = {
 &"SprintJumpStart": SubResource("Animation_enlr8"),
 &"Stagger": SubResource("Animation_npd63"),
 &"StartOfRun": SubResource("Animation_hpub4"),
-&"Walk": SubResource("Animation_41qoe")
+&"Walk": SubResource("Animation_41qoe"),
+&"onBlock": SubResource("Animation_5v7ne"),
+&"onParry": SubResource("Animation_eqyes")
 }
 
 [sub_resource type="Curve" id="Curve_um6lt"]
-_limits = [-1.0, 1.0, 0.0, 0.7]
-_data = [Vector2(0, 0.794708), 0.0, 0.0, 0, 0, Vector2(0.198396, 0), 0.0, 0.0, 0, 0, Vector2(0.501604, 0), 0.0, 0.0, 0, 0, Vector2(0.59893, -0.664533), 0.0, 0.0, 0, 0, Vector2(0.7, 0), 0.0, 0.0, 0, 0]
+_limits = [-1.0, 1.5, 0.0, 0.7]
+_data = [Vector2(0, 1.5), 0.0, 0.0, 0, 0, Vector2(0.198396, 0), 0.0, 0.0, 0, 0, Vector2(0.501604, 0), 0.0, 0.0, 0, 0, Vector2(0.602674, -0.303092), 0.0, 0.0, 0, 0, Vector2(0.7, 0), 0.0, 0.0, 0, 0]
 point_count = 5
 
 [sub_resource type="Curve" id="Curve_4ilhq"]
-_limits = [0.0, 1.0, 0.0, 0.8]
-_data = [Vector2(0.203209, 0), 0.0, 0.0, 0, 0, Vector2(0.207487, 1), 0.0, 0.0, 0, 0, Vector2(0.316578, 0), 0.0, 0.0, 0, 0]
+_limits = [0.0, 2.0, 0.0, 0.8]
+_data = [Vector2(0.203209, 0), 0.0, 0.0, 0, 0, Vector2(0.207487, 2), 0.0, 0.0, 0, 0, Vector2(0.316578, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="Curve" id="Curve_jvlv8"]
@@ -697,17 +612,13 @@ visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_mspic")
 
-[node name="PlaceholderWeapon" type="Polygon2D" parent="."]
-visible = false
-polygon = PackedVector2Array(0, 0, -3, -31, 3, -31)
-
 [node name="PlayerSprite" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 clip_children = 2
 texture_filter = 1
 texture = ExtResource("1_mspic")
 flip_h = true
-hframes = 100
+hframes = 121
 frame = 13
 
 [node name="SpriteDirectorComponent" parent="PlayerSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("3_m83fv")]
@@ -820,6 +731,12 @@ animator = NodePath("../../PlayerAnimator")
 script = ExtResource("19_npd63")
 animator = NodePath("../../PlayerAnimator")
 
+[node name="Hit" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
+script = ExtResource("21_153p7")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+
 [node name="InteractableManager" parent="." instance=ExtResource("10_axpou")]
 
 [node name="CollisionShape2D" parent="InteractableManager/InteractableProximity" index="1"]
@@ -878,23 +795,23 @@ frame_progress = 0.0622152
 
 [node name="Components" type="Node2D" parent="."]
 
-[node name="StaminaComponent" parent="Components" node_paths=PackedStringArray("hurtboxComponent") instance=ExtResource("20_hpub4")]
+[node name="StaminaComponent" parent="Components" node_paths=PackedStringArray("hurtboxComponent", "attackComponentsToRegenStamina") instance=ExtResource("20_hpub4")]
 unique_name_in_owner = true
 maxStamina = 1.0
-staminaRegenPerSecound = 10.0
+staminaRegenPerSecound = 1.0
 hurtboxComponent = NodePath("../HurtboxComponent")
+attackComponentsToRegenStamina = [NodePath("../../AttackComponents/LightAttack"), NodePath("../../AttackComponents/HeavyAttack")]
 MAX_HEALTH = 100.0
 
-[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("stateMachine", "parryForgivenesTimer", "health_componnet") instance=ExtResource("25_fiuyr")]
+[node name="HurtboxComponent" parent="Components" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("25_fiuyr")]
 collision_layer = 4
 stateMachine = NodePath("../../StateMachine")
-parryForgivenesTimer = NodePath("ParryForgivenessTimer")
 health_componnet = NodePath("../StaminaComponent")
 isHackable = false
 isSolid = false
 
 [node name="ParryForgivenessTimer" type="Timer" parent="Components/HurtboxComponent"]
-wait_time = 0.15
+wait_time = 0.1
 one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/HurtboxComponent"]
@@ -930,6 +847,13 @@ visible = false
 position = Vector2(8, 4)
 shape = SubResource("CircleShape2D_npd63")
 
+[connection signal="guardBroken" from="Components/StaminaComponent" to="." method="_on_stamina_component_guard_broken"]
 [connection signal="guardBroken" from="Components/StaminaComponent" to="StateMachine" method="_on_stamina_component_guard_broken"]
+[connection signal="hit" from="Components/StaminaComponent" to="." method="_on_stamina_component_hit"]
+[connection signal="hit" from="Components/StaminaComponent" to="StateMachine" method="_on_stamina_component_hit"]
+[connection signal="blocked" from="Components/HurtboxComponent" to="." method="_on_hurtbox_component_blocked"]
+[connection signal="blocked" from="Components/HurtboxComponent" to="StateMachine/Block" method="_on_hurtbox_component_blocked"]
+[connection signal="parry" from="Components/HurtboxComponent" to="." method="_on_hurtbox_component_parry"]
+[connection signal="parry" from="Components/HurtboxComponent" to="StateMachine/Block" method="_on_hurtbox_component_parry"]
 
 [editable path="InteractableManager"]

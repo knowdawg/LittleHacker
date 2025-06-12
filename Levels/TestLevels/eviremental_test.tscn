@@ -5,7 +5,7 @@
 [ext_resource type="PackedScene" uid="uid://cirxwk2d3306d" path="res://BigPlayer/big_player.tscn" id="3_yyfki"]
 [ext_resource type="PackedScene" uid="uid://b5qidtrq8k8gn" path="res://Objects/WorldObjects/Tilemaps/metal_floor_plates.tscn" id="4_42e3u"]
 [ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="5_vtwor"]
-[ext_resource type="PackedScene" uid="uid://cl5qeeqx66i6e" path="res://Objects/Enemies/CrystalThug/crystal_thug.tscn" id="6_76gcm"]
+[ext_resource type="PackedScene" uid="uid://vtyfnhiboaxc" path="res://Objects/Enemies/CombatTestingAparatus/combat_testing_aparatus.tscn" id="6_76gcm"]
 
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1
@@ -33,13 +33,19 @@ layer_0/tile_data = PackedInt32Array(65529, 131075, 1, 65530, 131075, 1, 65531, 
 [node name="SubViewportContainer" parent="." instance=ExtResource("1_yyfki")]
 position = Vector2(-1, -31)
 
-[node name="BigPlayer" parent="." instance=ExtResource("3_yyfki")]
-position = Vector2(47, -14)
+[node name="Enemies" type="Node2D" parent="."]
 
-[node name="PunchingBag" parent="." instance=ExtResource("5_vtwor")]
+[node name="PunchingBag" parent="Enemies" instance=ExtResource("5_vtwor")]
 position = Vector2(-71, -5)
 scale = Vector2(5, 5)
 
-[node name="CrystalThug" parent="." instance=ExtResource("6_76gcm")]
-position = Vector2(-204, -18)
-scale = Vector2(5, 5)
+[node name="CombatTestingAparatus" parent="Enemies" instance=ExtResource("6_76gcm")]
+position = Vector2(173, -16)
+attackSetting = 1
+
+[node name="CombatTestingAparatus2" parent="Enemies" instance=ExtResource("6_76gcm")]
+position = Vector2(103, -16)
+attackSetting = 0
+
+[node name="BigPlayer" parent="." instance=ExtResource("3_yyfki")]
+position = Vector2(47, -14)

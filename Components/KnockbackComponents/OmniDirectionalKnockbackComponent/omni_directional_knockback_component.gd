@@ -28,6 +28,10 @@ func returnVec(attack : Attack):
 		
 	return kbVec
 
-func returnVecFromTwoObjects(obj1, obj2):
+func returnVecFromTwoObjects(obj1 : Node2D, obj2 : Node2D):
 	var vec = obj1.global_position - obj2.global_position
+	return vec.normalized()
+
+func returnVecFromTwoVectors(vec1 : Vector2, vec2 : Vector2):
+	var vec = vec1 - vec2
 	return vec.normalized()
