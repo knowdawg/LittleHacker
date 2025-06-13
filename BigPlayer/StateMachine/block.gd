@@ -2,6 +2,7 @@ extends State
 class_name BigPlayerBlock
 
 @export var animator : AnimationPlayer
+@export var sprite : Sprite2D
 @export var parent : BigPlayer
 @export var stateMachine : BigPlayerStateMachine
 @export var hurtbox : HurtboxComponent
@@ -11,7 +12,7 @@ func enter(_p):
 	t = 0.0
 	animator.play("Block")
 	hurtbox.setBlock(true)
-	hurtbox.setParry(true, 1)
+	#hurtbox.setParry(true, 1)
 
 func update(delta):
 	t += delta
@@ -25,10 +26,21 @@ func update(delta):
 	if !Input.is_action_pressed("Parry"):
 		trasitioned.emit(self, "LeaveBlock")
 		return
+	
+	if Input.get_axis("Left", "Right") == 0.0:
+		if animator.current_animation == "BlockWalk":
+			sprite.frame = 102
+	else:
+		animator.play("BlockWalk")
+	
+	if Input.is_action_pressed("Left"):
+		parent.shimmyMoment.x += -1500.0 * delta
+	if Input.is_action_pressed("Right"):
+		parent.shimmyMoment.x += 1500.0 * delta
 
 func exit(_n):
 	hurtbox.setBlock(false)
-	hurtbox.setParry(false)
+	#hurtbox.setParry(false)
 
 
 func _on_hurtbox_component_blocked(a: Attack) -> void:

@@ -7,7 +7,6 @@ extends State
 var canJump : bool = true
 var timeCrouched := 0.0
 func enter(p : State):
-	stateMachine.staminaComponent.atemptToSpendStamina(10.0, true)
 	
 	if p is BigPlayerRun:
 		canJump = false

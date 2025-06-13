@@ -1,19 +1,20 @@
 shader_type canvas_item;
 
 uniform sampler2D screen : hint_screen_texture;
+uniform float offset :hint_range(0.0, 10.0) = 0.0;
+uniform vec2 screenResolution = vec2(320.0, 180.0);
 
 void fragment() {
-	vec2 offsetAmount = SCREEN_PIXEL_SIZE * 0.0;
+	vec2 offsetAmount = vec2(1.0 / screenResolution.x, 1.0 / screenResolution.y) * offset;
 
 	vec4 c = texture(TEXTURE, UV);
 
-	float r = texture(screen, SCREEN_UV + vec2(0.0, offsetAmount.y)).r;
-	float g = texture(screen, SCREEN_UV + vec2(offsetAmount.x, -offsetAmount.y)).g;
-	float b = texture(screen, SCREEN_UV + vec2(-offsetAmount.x, -offsetAmount.y)).b;
+	float r = texture(screen, SCREEN_UV + vec2(offsetAmount.x, 0.0)).r;
+	float g = texture(screen, SCREEN_UV + vec2(0.0, 0.0)).g;
+	float b = texture(screen, SCREEN_UV + vec2(-offsetAmount.x, 0.0)).b;
 
-	//c.r += (1.0 - r) * 0.5;
-	//c.g += (1.0 - g) * 0.5;
-	//c.b += (1.0 - b) * 0.5;
+
+	c.rgb = vec3(r,g,b);
 
 	COLOR = c;
 }

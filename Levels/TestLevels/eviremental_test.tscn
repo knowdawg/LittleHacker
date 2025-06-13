@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=8 format=3 uid="uid://dlfxfm3ebd5n7"]
 
 [ext_resource type="PackedScene" uid="uid://c3bd14h6powqs" path="res://Objects/WorldObjects/Tilemaps/metal_plates_background.tscn" id="1_42e3u"]
 [ext_resource type="PackedScene" uid="uid://cgmvdcy64j46l" path="res://Objects/LittleGameTerminal/sub_viewport_container.tscn" id="1_yyfki"]
@@ -7,11 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://q5240bomkjnk" path="res://Objects/WorldObjects/PunchingBag/punching_bag.tscn" id="5_vtwor"]
 [ext_resource type="PackedScene" uid="uid://vtyfnhiboaxc" path="res://Objects/Enemies/CombatTestingAparatus/combat_testing_aparatus.tscn" id="6_76gcm"]
 
+[sub_resource type="Environment" id="Environment_wr6by"]
+background_mode = 3
+adjustment_enabled = true
+
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1
 
 [node name="ColorRect" type="ColorRect" parent="."]
-visible = false
 offset_left = -293.0
 offset_top = -273.0
 offset_right = 352.0
@@ -40,7 +43,7 @@ position = Vector2(-71, -5)
 scale = Vector2(5, 5)
 
 [node name="CombatTestingAparatus" parent="Enemies" instance=ExtResource("6_76gcm")]
-position = Vector2(173, -16)
+position = Vector2(-31, -16)
 attackSetting = 1
 
 [node name="CombatTestingAparatus2" parent="Enemies" instance=ExtResource("6_76gcm")]
@@ -49,3 +52,6 @@ attackSetting = 0
 
 [node name="BigPlayer" parent="." instance=ExtResource("3_yyfki")]
 position = Vector2(47, -14)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_wr6by")

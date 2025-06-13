@@ -215,6 +215,7 @@ shader_parameter/disToCenter = 1.0
 shader_parameter/color = Color(1, 1, 1, 1)
 shader_parameter/blackWhiteStepVal = 1.0
 shader_parameter/progress = 1.0
+shader_parameter/resolution = Vector2(128, 72)
 
 [sub_resource type="Animation" id="Animation_i7vl7"]
 length = 0.001

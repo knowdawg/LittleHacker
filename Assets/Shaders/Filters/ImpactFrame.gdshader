@@ -7,7 +7,7 @@ uniform float disToCenter : hint_range(0.0, 1.0, 0.1) = 1.0;
 uniform vec3 color : source_color;
 uniform float blackWhiteStepVal : hint_range(0.0, 1.0);
 uniform float progress : hint_range(0.0, 1.0);
-
+uniform vec2 resolution = vec2(128.0, 72.0);
 
 vec2 toPolar(vec2 uv){
 	vec2 clipUV = (uv * 2.0) - vec2(1.0);
@@ -19,7 +19,7 @@ vec2 toPolar(vec2 uv){
 }
 
 void fragment() {
-	vec2 qUV = round(UV * vec2(128, 72)) / vec2(128, 72);
+	vec2 qUV = round(UV * resolution) / resolution;
 	float n = texture(blurNoise, toPolar(qUV)).r;
 
 	float dis = distance(qUV, blurCenter);
