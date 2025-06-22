@@ -1,42 +1,49 @@
-[gd_scene load_steps=18 format=3 uid="uid://cgmvdcy64j46l"]
+[gd_scene load_steps=23 format=3 uid="uid://cgmvdcy64j46l"]
 
 [ext_resource type="Script" uid="uid://7psq1hbdlet6" path="res://Objects/LittleGameTerminal/LittleGameTerminal.gd" id="1_8d0dd"]
 [ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_h3som"]
+[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="2_7g3uf"]
 [ext_resource type="Script" uid="uid://bbwat6b3fi8ft" path="res://Classes/SceneTransitionManager.gd" id="2_g0xku"]
 [ext_resource type="Script" uid="uid://bvygbydj8mpnq" path="res://Objects/LittleGameTerminal/game_container.gd" id="3_0tjig"]
 [ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="3_g0xku"]
 [ext_resource type="Texture2D" uid="uid://biai3ccvps32w" path="res://Assets/Sprites/WorldObjects/TerminalSettup.png" id="6_ycxw0"]
+[ext_resource type="PackedScene" uid="uid://dvjxs21wp267s" path="res://Components/ShadowNormalDualLight/shadow_normal_dual_light.tscn" id="8_5tu4y"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_ycxw0"]
-atlas = ExtResource("6_ycxw0")
-region = Rect2(0, 0, 80, 44)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5tu4y"]
+shader = ExtResource("2_7g3uf")
+shader_parameter/width = 0.0
+shader_parameter/outlineAlpha = 1.0
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_dc6mq"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mueyt"]
 atlas = ExtResource("6_ycxw0")
-region = Rect2(80, 0, 80, 44)
+region = Rect2(0, 0, 82, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fr745"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_u31xh"]
 atlas = ExtResource("6_ycxw0")
-region = Rect2(160, 0, 80, 44)
+region = Rect2(82, 0, 82, 46)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0msx1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_f8kbl"]
 atlas = ExtResource("6_ycxw0")
-region = Rect2(240, 0, 80, 44)
+region = Rect2(164, 0, 82, 46)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_po74c"]
+atlas = ExtResource("6_ycxw0")
+region = Rect2(246, 0, 82, 46)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_rrfnm"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_ycxw0")
+"texture": SubResource("AtlasTexture_mueyt")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_dc6mq")
+"texture": SubResource("AtlasTexture_u31xh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fr745")
+"texture": SubResource("AtlasTexture_f8kbl")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0msx1")
+"texture": SubResource("AtlasTexture_po74c")
 }],
 "loop": true,
 "name": &"On",
@@ -105,12 +112,26 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_g0xku"]
 size = Vector2(32, 16)
 
+[sub_resource type="Gradient" id="Gradient_d0s3x"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.983264)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_mueyt"]
+gradient = SubResource("Gradient_d0s3x")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
 [node name="LittleGameTerminal" type="Node2D"]
 script = ExtResource("1_8d0dd")
 
 [node name="Desk" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
+material = SubResource("ShaderMaterial_5tu4y")
 position = Vector2(0, 9)
 sprite_frames = SubResource("SpriteFrames_rrfnm")
 animation = &"On"
@@ -188,4 +209,12 @@ shape = SubResource("RectangleShape2D_g0xku")
 [node name="TextMarker" type="Marker2D" parent="InteractableArea"]
 position = Vector2(0, 38)
 
+[node name="ShadowNormalDualLight" parent="." instance=ExtResource("8_5tu4y")]
+visible = false
+texture = SubResource("GradientTexture2D_mueyt")
+energy = 1.0
+color = Color(1, 0.588235, 0.588235, 1)
+
 [connection signal="animation_finished" from="GameContainer/LittleLevelViewport/AnimationPlayer" to="GameContainer/LittleLevelViewport" method="_on_animation_player_animation_finished"]
+[connection signal="onDeSelect" from="InteractableArea" to="." method="_on_interactable_area_on_de_select"]
+[connection signal="onSelect" from="InteractableArea" to="." method="_on_interactable_area_on_select"]

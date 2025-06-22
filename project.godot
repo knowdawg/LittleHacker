@@ -148,11 +148,6 @@ LeaveLittleGame={
 
 2d/default_gravity=500.0
 
-[rendering]
-
-renderer/rendering_method.mobile="forward_plus"
-renderer/rendering_method.web="forward_plus"
-
 [shader_globals]
 
 VelocityBuffer={

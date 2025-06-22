@@ -36,3 +36,4 @@ particle_count_y = 3
 stream = ExtResource("4_itnb6")
 autoplay = true
 max_distance = 100.0
+bus = &"SoundEffects"

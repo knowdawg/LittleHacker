@@ -2930,6 +2930,7 @@ audios = [NodePath("Roll")]
 stream = ExtResource("18_l7j6t")
 volume_db = -10.0
 pitch_scale = 1.52
+bus = &"SoundEffects"
 
 [node name="GroundParry" type="Node" parent="StateMachine" node_paths=PackedStringArray("animated_player_sprite", "player", "sm")]
 script = ExtResource("8_oxv8y")
@@ -3834,8 +3835,10 @@ anchor_left = 0.01
 anchor_top = 0.01
 anchor_right = 0.1
 anchor_bottom = 0.05
-offset_right = 40.0
-offset_bottom = 23.0
+offset_left = 245.8
+offset_top = 1.2
+offset_right = 285.8
+offset_bottom = 24.2
 metadata/_edit_use_anchors_ = true
 
 [node name="CameraBounds" parent="." instance=ExtResource("2_67e55")]

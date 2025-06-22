@@ -15,6 +15,7 @@ func onInteract():
 	
 	active = true
 	Game.inLittleGame = true
+	Game.inBigGame = false
 	
 	if !Game.doesBigPlayerExist():
 		printerr("No Big Player Found When Starting Terminal")
@@ -39,7 +40,15 @@ func _process(_delta: float) -> void:
 func leaveLittleGame():
 	active = false
 	Game.inLittleGame = false
+	Game.inBigGame = true
 	if Game.doesBigCameraExist():
 		Game.bigCamera.reset()
 	if Game.doesBigPlayerExist():
 		Game.bigPlayer.leaveLittleGameMode()
+
+
+func _on_interactable_area_on_select() -> void:
+	%Desk.material.set_shader_parameter("width", 1.0)
+
+func _on_interactable_area_on_de_select() -> void:
+	%Desk.material.set_shader_parameter("width", 0.0)

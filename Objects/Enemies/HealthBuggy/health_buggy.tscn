@@ -204,10 +204,9 @@ hframes = 13
 spriteToFlip = NodePath("..")
 velocityToCheck = NodePath("../..")
 
-[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "hackedState", "parent", "animators")]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators")]
 script = ExtResource("2_d8emb")
 initial_state = NodePath("Patroll")
-hackedState = NodePath("Patroll")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
 
@@ -299,6 +298,7 @@ material = SubResource("ShaderMaterial_c03nl")
 
 [node name="RandomPitchAudio" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("17_2nbvx")
+bus = &"SoundEffects"
 script = ExtResource("17_kocyt")
 
 [node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("16_ld5dq")]

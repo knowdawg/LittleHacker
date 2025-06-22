@@ -8,6 +8,7 @@ var littleViewport : LittleSceneTransitioner
 
 ########
 var inLittleGame : bool = false
+var inBigGame : bool = true
 ########
 
 #Big Level

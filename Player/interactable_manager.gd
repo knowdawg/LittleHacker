@@ -11,7 +11,7 @@ func _process(_delta: float) -> void:
 	areas.sort_custom(sortByDistance)
 	
 	if areas.size() > 0:
-		areas[0].showText()
+		areas[0].select()
 		
 		if Input.is_action_just_pressed("Interact"):
 			if inLittleGame:

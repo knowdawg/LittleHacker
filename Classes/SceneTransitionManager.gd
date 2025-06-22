@@ -10,7 +10,6 @@ signal onFadeInStart
 
 
 func _ready() -> void:
-	return
 	var startingScene : StartingLevelResourceScript = load("uid://byhqpp6gc4xnd")
 	Game.littleViewport = self
 	

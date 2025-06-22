@@ -29,14 +29,26 @@ func _physics_process(delta: float) -> void:
 	velocities.append(force)
 	
 	var totalForce : Vector2 = Vector2.ZERO
-	for v in velocities:
-		if parent is CharacterBody2D:
+	
+	if parent is CharacterBody2D:
+		for v in velocities:
 			parent.velocity += v
-			parent.move_and_slide()
-			parent.velocity = Vector2.ZERO
-		else:
+			totalForce += v
+		parent.move_and_slide()
+		parent.velocity = Vector2.ZERO
+	else:
+		for v in velocities:
 			parent.position += v
-		totalForce += v
+			totalForce += v
+	
+	#for v in velocities:
+		#if parent is CharacterBody2D:
+			#parent.velocity += v
+			#parent.move_and_slide()
+			#parent.velocity = Vector2.ZERO
+		#else:
+			#parent.position += v
+		#totalForce += v
 	
 	if totalForce.x >= 0:
 		direction = 1

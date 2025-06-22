@@ -62,7 +62,7 @@ size = Vector2(4, 12)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_b4agp"]
 resource_local_to_scene = true
 shader = ExtResource("3_ob334")
-shader_parameter/color = Color(0.141176, 0.0862745, 0.152941, 1)
+shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
 shader_parameter/pattern = 0
 shader_parameter/inside = false
@@ -1362,10 +1362,10 @@ sprite = NodePath("../Sprite2D")
 
 [node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("3_b4agp")]
 unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0.196078)
 follow = NodePath("../Sprite2D")
 sprite = NodePath("../Sprite2D")
 fadeTime = 0.5
-modulate = Color(1, 1, 1, 0.196078)
 active = false
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

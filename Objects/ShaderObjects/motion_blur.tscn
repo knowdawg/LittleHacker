@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://d03i3jperca7o"]
+[gd_scene load_steps=34 format=3 uid="uid://d03i3jperca7o"]
 
 [ext_resource type="Texture2D" uid="uid://dumx1gfulor0p" path="res://Assets/Sprites/EnvirmentTextures/Sandstone/SandstoneBackground.png" id="1_eaain"]
 [ext_resource type="Shader" uid="uid://d0bq1fctgvawk" path="res://Assets/Shaders/Filters/MotionBlur.gdshader" id="1_fumwe"]
@@ -222,7 +222,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SuperParry:material:shader_parameter/disToCenter")
+tracks/0/path = NodePath("../SuperParry:material:shader_parameter/disToCenter")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -238,7 +238,7 @@ length = 0.2
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("SuperParry:material:shader_parameter/disToCenter")
+tracks/0/path = NodePath("../SuperParry:material:shader_parameter/disToCenter")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -252,6 +252,68 @@ tracks/0/keys = {
 _data = {
 &"RESET": SubResource("Animation_i7vl7"),
 &"SuperParry": SubResource("Animation_hvify")
+}
+
+[sub_resource type="Animation" id="Animation_qjhj6"]
+resource_name = "Impact"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SuperParry:material:shader_parameter/blackWhiteStepVal")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.2, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SuperParry:material:shader_parameter/progress")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_qmob0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("SuperParry:material:shader_parameter/blackWhiteStepVal")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SuperParry:material:shader_parameter/progress")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_2cyle"]
+_data = {
+&"Impact": SubResource("Animation_qjhj6"),
+&"RESET": SubResource("Animation_qmob0")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8o7ku"]
@@ -302,8 +364,8 @@ script = ExtResource("1_qqnjj")
 [node name="TestingSprite" type="Sprite2D" parent="."]
 visible = false
 texture_filter = 1
-position = Vector2(640, 360)
-scale = Vector2(20, 11.25)
+position = Vector2(160, 90)
+scale = Vector2(5, 2.8125)
 texture = ExtResource("1_eaain")
 
 [node name="Hack" type="ColorRect" parent="."]
@@ -348,8 +410,14 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SuperParryAnimator" type="AnimationPlayer" parent="."]
+root_node = NodePath("../ImpactFrameAnimator")
 libraries = {
 &"": SubResource("AnimationLibrary_u3l1r")
+}
+
+[node name="ImpactFrameAnimator" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_2cyle")
 }
 
 [node name="StaticNoise" type="ColorRect" parent="."]

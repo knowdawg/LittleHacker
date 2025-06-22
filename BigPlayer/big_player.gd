@@ -18,7 +18,7 @@ var knockback := Vector2.ZERO
 
 
 func _physics_process(delta: float) -> void:
-	if Game.inLittleGame:
+	if !Game.inBigGame:
 		return
 	
 	velocity += xMovement

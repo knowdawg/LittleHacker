@@ -1,0 +1,9 @@
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://bhrq2icldj47"]
+
+[ext_resource type="Texture2D" uid="uid://watpskqvm6mj" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/TerminalRoomAutotile.png" id="1_eq1g8"]
+[ext_resource type="Texture2D" uid="uid://bfj8dvfyi88u0" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/TerminalRoomAutotileNormal.png" id="2_0wddb"]
+
+[resource]
+diffuse_texture = ExtResource("1_eq1g8")
+normal_texture = ExtResource("2_0wddb")
+texture_filter = 1

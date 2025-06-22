@@ -47,3 +47,6 @@ func showStatic():
 func _on_timer_timeout() -> void:
 	%StaticNoise.visible = true
 	%StaticNoiseSound.play()
+
+func impactFrame():
+	$ImpactFrameAnimator.play("Impact")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://dvjxs21wp267s"]
+
+[ext_resource type="Script" uid="uid://bmnog7ub2up5k" path="res://Components/ShadowNormalDualLight/shadow_normal_dual_light.gd" id="1_1viiu"]
+
+[node name="ShadowNormalDualLight" type="Node2D"]
+script = ExtResource("1_1viiu")
+energy = null
+
+[node name="Shadows" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+energy = 0.0
+shadow_enabled = true
+
+[node name="Normal" type="PointLight2D" parent="."]
+unique_name_in_owner = true
+energy = 0.0

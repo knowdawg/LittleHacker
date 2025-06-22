@@ -7,6 +7,8 @@ class_name InteractableComponent
 @export var disableOnInteract : bool = false
 
 signal onInteract
+signal onSelect
+signal onDeSelect
 
 func interact():
 	onInteract.emit()
@@ -19,11 +21,14 @@ func _ready() -> void:
 		$RichTextLabel.position = textPos.position + Vector2(-50, -8)
 
 var stayVisible : bool = false
-func showText():
+func select():
+	onSelect.emit()
 	stayVisible = true
 	$RichTextLabel.visible = true
 
-func hideText():
+func deSelect():
+	onDeSelect.emit()
+	stayVisible = false
 	$RichTextLabel.visible = false
 
 func disable():
@@ -37,5 +42,5 @@ func _process(_delta: float) -> void:
 	if !stayVisible:
 		$RichTextLabel.visible = false
 	else:
-		$RichTextLabel.visible = true
-		stayVisible = false
+		deSelect()
+		

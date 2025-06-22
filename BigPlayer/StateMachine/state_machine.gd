@@ -30,7 +30,7 @@ func custumProcess(delta):
 	if blockBufferTimer <= 0.0:
 		blockBuffer = false
 	
-	if Game.inLittleGame:
+	if !Game.inBigGame:
 		inputBuffer = ""
 		blockBuffer = false
 
