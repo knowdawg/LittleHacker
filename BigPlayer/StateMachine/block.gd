@@ -43,11 +43,11 @@ func exit(_n):
 	#hurtbox.setParry(false)
 
 
-func _on_hurtbox_component_blocked(a: Attack) -> void:
+func _on_hurtbox_component_blocked(_a: Attack) -> void:
 	if stateMachine.current_state is BigPlayerBlock:
 		animator.play("onBlock")
 
 
-func _on_hurtbox_component_parry(a: Attack) -> void:
+func _on_hurtbox_component_parry(_a: Attack) -> void:
 	if stateMachine.current_state is BigPlayerBlock:
 		animator.play("onParry")

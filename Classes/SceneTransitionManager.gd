@@ -1,4 +1,4 @@
-extends Viewport
+extends SubViewport
 class_name LittleSceneTransitioner
 
 @export var fadeAnimator : AnimationPlayer
@@ -8,6 +8,23 @@ var paths : Array[String] = []
 
 signal onFadeInStart
 
+var fps := 10.0
+
+var t = 0.0
+func _process(delta: float) -> void:
+	###############################################################
+	# PLACEHOLDER VALUES, ALLOW PLAYER TO SET VALUES IN SETTINGS  #
+	###############################################################
+	if Game.inLittleGame:
+		fps = 60.0
+	else:
+		fps = 10.0
+	
+	t += delta
+	var frame : float = 1.0 / fps
+	if t >= frame:
+		render_target_update_mode = SubViewport.UPDATE_ONCE
+		t -= frame
 
 func _ready() -> void:
 	var startingScene : StartingLevelResourceScript = load("uid://byhqpp6gc4xnd")

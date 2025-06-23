@@ -120,5 +120,5 @@ func _on_stamina_component_hit(a: Attack) -> void:
 	if a.attackType == Attack.SHARPNESS.BLUNT:
 		%ScreenEffects.bluntHit()
 
-func _on_stamina_component_guard_broken(a: Attack) -> void:
+func _on_stamina_component_guard_broken(_a: Attack) -> void:
 	%ScreenEffects.guardBreak()

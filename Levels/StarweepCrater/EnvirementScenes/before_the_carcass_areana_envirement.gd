@@ -20,7 +20,7 @@ func endLava():
 	for c in colShapes:
 		c.set_deferred("disabled", true)
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	if Game.camera and shakeAmount > 0.01:
 		Game.camera.set_shake(shakeAmount)
 	

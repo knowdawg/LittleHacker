@@ -24,19 +24,26 @@ func get_camera_bounds():
 
 @onready var ray : RayCast2D = $RayCast2D
 
+var playerInside : bool = false
 func is_player_inside():
+	return playerInside
+
+func checkForPlayerInside() -> bool:
 	var bodies = get_overlapping_bodies()
 	for body in bodies:
 		if body is Player or body is BigPlayer:
 			if requireLineOfSight:
 				ray.rotation = (global_position - body.global_position).angle()
-				ray.force_raycast_update()
+				#ray.force_raycast_update()
 				var b = ray.get_collider()
 				if b is Player or b is BigPlayer:
-					return(true)
+					return true
 			else:
-				return(true)
-	return(false)
+				return true
+	return false
+
+func _physics_process(_delta: float) -> void:
+	playerInside = checkForPlayerInside()
 
 func get_player():
 	var bodies = get_overlapping_bodies()

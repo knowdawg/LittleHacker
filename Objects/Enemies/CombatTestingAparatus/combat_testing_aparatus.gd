@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 enum attackOptions {BLUNT, SHARP, NIETHER = -1}
-@export var attackSetting : attackOptions = -1
+@export var attackSetting : attackOptions = attackOptions.NIETHER
 
 func _ready() -> void:
 	if attackSetting == attackOptions.SHARP:

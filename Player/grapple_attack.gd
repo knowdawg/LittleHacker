@@ -8,7 +8,7 @@ func customEnter(_prevState):
 	player.grappleBoost = Vector2(1.3, -1.0) * 50.0
 	player.grappleBoost.x *= -player.getSpriteDirection()
 
-func customUpdate(delta):
+func update_physics(delta):
 	player.update_physics(delta, true, false)
 	if player.is_on_floor():
 		player.grappleBoost.y = 0.0

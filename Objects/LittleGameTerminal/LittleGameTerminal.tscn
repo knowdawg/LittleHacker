@@ -156,11 +156,12 @@ script = ExtResource("3_0tjig")
 
 [node name="LittleLevelViewport" type="SubViewport" parent="GameContainer" node_paths=PackedStringArray("fadeAnimator")]
 unique_name_in_owner = true
+disable_3d = true
 handle_input_locally = false
 audio_listener_enable_2d = true
+gui_disable_input = true
 sdf_scale = 2
 size = Vector2i(1280, 720)
-render_target_update_mode = 4
 script = ExtResource("2_g0xku")
 fadeAnimator = NodePath("AnimationPlayer")
 
@@ -212,7 +213,6 @@ position = Vector2(0, 38)
 [node name="ShadowNormalDualLight" parent="." instance=ExtResource("8_5tu4y")]
 visible = false
 texture = SubResource("GradientTexture2D_mueyt")
-energy = 1.0
 color = Color(1, 0.588235, 0.588235, 1)
 
 [connection signal="animation_finished" from="GameContainer/LittleLevelViewport/AnimationPlayer" to="GameContainer/LittleLevelViewport" method="_on_animation_player_animation_finished"]

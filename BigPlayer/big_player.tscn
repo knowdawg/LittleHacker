@@ -1446,7 +1446,6 @@ libraries = {
 
 [node name="ShadowNormalDualLight" parent="." instance=ExtResource("36_d0s3x")]
 texture = SubResource("GradientTexture2D_w47nl")
-color = null
 
 [connection signal="guardBroken" from="Components/StaminaComponent" to="." method="_on_stamina_component_guard_broken"]
 [connection signal="guardBroken" from="Components/StaminaComponent" to="StateMachine" method="_on_stamina_component_guard_broken"]

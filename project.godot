@@ -24,7 +24,7 @@ config/icon="res://icon.svg"
 EnemyHealthBarPositionManager="*res://Classes/EnemyHealthBarPositionManager.gd"
 Game="*res://Classes/Game.gd"
 HackCommandManager="*res://Classes/HackCommandManager.gd"
-VelocityBuffer="*res://Classes/VelocityBuffer/velocity_buffer.tscn"
+VelocityBuffer="res://Classes/VelocityBuffer/velocity_buffer.tscn"
 SaveDataManager="*res://Classes/SaveDataManager.gd"
 EnemyPositionManager="*res://Classes/EnemyPositionManager.gd"
 
@@ -146,6 +146,7 @@ LeaveLittleGame={
 
 [physics]
 
+2d/run_on_separate_thread=true
 2d/default_gravity=500.0
 
 [shader_globals]
