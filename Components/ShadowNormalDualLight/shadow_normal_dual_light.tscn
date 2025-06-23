@@ -4,12 +4,13 @@
 
 [node name="ShadowNormalDualLight" type="Node2D"]
 script = ExtResource("1_1viiu")
+layer = null
 
 [node name="Shadows" type="PointLight2D" parent="."]
 unique_name_in_owner = true
-energy = 0.3
+energy = 0.5
 shadow_enabled = true
 
 [node name="Normal" type="PointLight2D" parent="."]
 unique_name_in_owner = true
-energy = 0.7
+energy = 0.5

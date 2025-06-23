@@ -1,19 +1,19 @@
 [gd_scene load_steps=6 format=3 uid="uid://c3bd14h6powqs"]
 
 [ext_resource type="Texture2D" uid="uid://dlf5v24vd5din" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalWallPlates1.png" id="1_q0dgt"]
-[ext_resource type="Texture2D" uid="uid://bp26pg00q2qt8" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalWallPlates2.png" id="2_x2thl"]
+[ext_resource type="Texture2D" uid="uid://5ma04cknsfae" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalWallBackground.tres" id="2_q0dgt"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_wl3d4"]
 texture = ExtResource("1_q0dgt")
 0:0/0 = 0
 
-[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_5otqd"]
-texture = ExtResource("2_x2thl")
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_x2thl"]
+texture = ExtResource("2_q0dgt")
 0:0/0 = 0
 
 [sub_resource type="TileSet" id="TileSet_qymn5"]
 sources/0 = SubResource("TileSetAtlasSource_wl3d4")
-sources/1 = SubResource("TileSetAtlasSource_5otqd")
+sources/2 = SubResource("TileSetAtlasSource_x2thl")
 
 [node name="MetalPlatesBackground" type="TileMap"]
 texture_filter = 1

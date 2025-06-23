@@ -1,4 +1,4 @@
-[gd_scene load_steps=94 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=95 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
@@ -31,11 +31,14 @@
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="21_enlr8"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="25_fiuyr"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="25_jvlv8"]
+[ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="29_6anp5"]
+[ext_resource type="Script" uid="uid://cpl0eb6ld6egy" path="res://UI/FPSDisplay.gd" id="29_ht2n7"]
 [ext_resource type="Script" uid="uid://dx2tb6bucvs4u" path="res://BigPlayer/screen_effects.gd" id="32_ayaik"]
 [ext_resource type="Shader" uid="uid://ck3wwh6i1qnj6" path="res://Assets/Shaders/Filters/ChromaticAberation.gdshader" id="32_eqyes"]
 [ext_resource type="Shader" uid="uid://bsltx2er5h46e" path="res://Assets/Shaders/Filters/ColorCorections.gdshader" id="33_ayaik"]
 [ext_resource type="Shader" uid="uid://dojcoea80jhuv" path="res://Assets/Shaders/Filters/ImpactFrame.gdshader" id="34_w47nl"]
 [ext_resource type="PackedScene" uid="uid://dvjxs21wp267s" path="res://Components/ShadowNormalDualLight/shadow_normal_dual_light.tscn" id="36_d0s3x"]
+[ext_resource type="Texture2D" uid="uid://ckifrsf13bdj7" path="res://Assets/Sprites/Gradiants/CircleGradiant.tres" id="37_nv3v6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mspic"]
 size = Vector2(10, 25)
@@ -1129,19 +1132,6 @@ _data = {
 &"SharpHit": SubResource("Animation_w47nl")
 }
 
-[sub_resource type="Gradient" id="Gradient_d0s3x"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.983264)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w47nl"]
-gradient = SubResource("Gradient_d0s3x")
-width = 256
-height = 256
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.8)
-
 [node name="BigPlayer" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 35
@@ -1343,6 +1333,15 @@ sprite_frames = SubResource("SpriteFrames_n8cw0")
 animation = &"HeartBeat"
 frame_progress = 0.0622152
 
+[node name="FPSLabel" type="Label" parent="UI/SubViewportContainer/SubViewport"]
+offset_left = 3.0
+offset_top = 40.0
+offset_right = 56.0
+offset_bottom = 63.0
+theme_override_fonts/font = ExtResource("29_6anp5")
+text = "FPS: 60"
+script = ExtResource("29_ht2n7")
+
 [node name="Components" type="Node2D" parent="."]
 
 [node name="StaminaComponent" parent="Components" node_paths=PackedStringArray("hurtboxComponent", "attackComponentsToRegenStamina") instance=ExtResource("20_hpub4")]
@@ -1445,7 +1444,10 @@ libraries = {
 }
 
 [node name="ShadowNormalDualLight" parent="." instance=ExtResource("36_d0s3x")]
-texture = SubResource("GradientTexture2D_w47nl")
+visible = false
+texture = ExtResource("37_nv3v6")
+layer = 0
+lightsToUse = null
 
 [connection signal="guardBroken" from="Components/StaminaComponent" to="." method="_on_stamina_component_guard_broken"]
 [connection signal="guardBroken" from="Components/StaminaComponent" to="StateMachine" method="_on_stamina_component_guard_broken"]

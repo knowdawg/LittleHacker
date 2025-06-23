@@ -1,0 +1,8 @@
+[gd_resource type="CanvasTexture" load_steps=3 format=3 uid="uid://5ma04cknsfae"]
+
+[ext_resource type="Texture2D" uid="uid://bp26pg00q2qt8" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalWallPlates2.png" id="1_5n2k3"]
+[ext_resource type="Texture2D" uid="uid://b00letn272n4w" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalBackgroundNormal.png" id="2_nesqa"]
+
+[resource]
+diffuse_texture = ExtResource("1_5n2k3")
+normal_texture = ExtResource("2_nesqa")
