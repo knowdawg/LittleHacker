@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://pk4dsca7x2m4"]
+
+[ext_resource type="Script" uid="uid://dh3sp53ehgy5d" path="res://Classes/GameWorldEnvirement/game_world_envirement.gd" id="1_h8rby"]
+
+[node name="GameWorldEnvirement" type="WorldEnvironment"]
+script = ExtResource("1_h8rby")

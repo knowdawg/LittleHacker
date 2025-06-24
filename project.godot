@@ -27,6 +27,7 @@ HackCommandManager="*res://Classes/HackCommandManager.gd"
 VelocityBuffer="res://Classes/VelocityBuffer/velocity_buffer.tscn"
 SaveDataManager="*res://Classes/SaveDataManager.gd"
 EnemyPositionManager="*res://Classes/EnemyPositionManager.gd"
+GameWorldEnvirement="*res://Classes/GameWorldEnvirement/game_world_envirement.tscn"
 
 [display]
 

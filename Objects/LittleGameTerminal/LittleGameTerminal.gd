@@ -14,8 +14,7 @@ func onInteract():
 		return
 	
 	active = true
-	Game.inLittleGame = true
-	Game.inBigGame = false
+	Game.setGameStatus(true, false)
 	
 	if !Game.doesBigPlayerExist():
 		printerr("No Big Player Found When Starting Terminal")
@@ -39,8 +38,7 @@ func _process(_delta: float) -> void:
 
 func leaveLittleGame():
 	active = false
-	Game.inLittleGame = false
-	Game.inBigGame = true
+	Game.setGameStatus(false, true)
 	if Game.doesBigCameraExist():
 		Game.bigCamera.reset()
 	if Game.doesBigPlayerExist():

@@ -9,6 +9,24 @@ var littleViewport : LittleSceneTransitioner
 ########
 var inLittleGame : bool = false
 var inBigGame : bool = true
+signal enterBigGame
+signal exitBigGame
+signal enterLittleGame
+signal exitLittleGame
+
+func setGameStatus(littleGame : bool, bigGame : bool):
+	if littleGame != inLittleGame:
+		inLittleGame = littleGame
+		if inLittleGame == true:
+			enterLittleGame.emit()
+		else:
+			exitLittleGame.emit()
+	if bigGame != inBigGame:
+		inBigGame = bigGame
+		if inBigGame == true:
+			enterBigGame.emit()
+		else:
+			exitBigGame.emit()
 ########
 
 #Big Level

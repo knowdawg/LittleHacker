@@ -1446,6 +1446,7 @@ libraries = {
 [node name="ShadowNormalDualLight" parent="." instance=ExtResource("36_d0s3x")]
 visible = false
 texture = ExtResource("37_nv3v6")
+height = null
 layer = 0
 lightsToUse = null
 

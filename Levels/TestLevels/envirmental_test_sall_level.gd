@@ -29,6 +29,11 @@ func setSelfAsStartingLevel():
 @export var backgroundGradient : GradientTexture2D
 @export var backgroundContainers : Array[SubViewportContainer] = []
 @export_tool_button("Set Backround Gradients", "Callable") var setGradientFog = setFog
+@export_subgroup("WorldEnvironment")
+@export var environment : Environment
+
+func _ready() -> void:
+	Game.enterLittleGame.connect(setEnvirement)
 
 #Called by SceneTransitionManager When the level is ready
 func initializeLevel(sceneData : SceneSwitchData) -> void:
@@ -70,6 +75,13 @@ func setFog():
 	for b in backgroundContainers:
 		b.material.set_shader_parameter("fog", backgroundGradient)
 	
+
+func setEnvirement():
+	if environment:
+		GameWorldEnvirement.setEnvironment(environment)
+	else:
+		GameWorldEnvirement.clearEnvironment()
+
 
 func addProjectile(projectile):
 	projectileSpawnNode.add_child(projectile)

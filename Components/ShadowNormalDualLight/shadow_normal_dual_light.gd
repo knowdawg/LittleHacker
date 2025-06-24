@@ -27,6 +27,9 @@ func updateLights():
 	%Shadows.offset = offset
 	%Normal.offset = offset
 	
+	%Shadows.height = height
+	%Normal.height = height
+	
 	%Shadows.range_layer_min = layer
 	%Shadows.range_layer_max = layer
 	%Normal.range_layer_min = layer
@@ -37,6 +40,7 @@ func updateLights():
 @export var energy : float = 1.0
 @export var color : Color = Color.WHITE
 @export var offset : Vector2 = Vector2.ZERO
+@export var height : float = 0.0
 @export var layer : int = 0
 
 enum lights {Shadows, Normal, Both = -1}

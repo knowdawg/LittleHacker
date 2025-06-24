@@ -1,6 +1,7 @@
-[gd_scene load_steps=153 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=154 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
+[ext_resource type="Environment" uid="uid://dmo71rg36b37b" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tres" id="2_w31va"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
 [ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="5_1x65e"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
@@ -794,6 +795,7 @@ respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
 backgroundGradient = SubResource("GradientTexture2D_hyfn1")
 backgroundContainers = [NodePath("VeryFar/SubViewportContainer"), NodePath("Far/SubViewportContainer"), NodePath("MediumFar/SubViewportContainer"), NodePath("Medium/SubViewportContainer"), NodePath("MeduimClose/SubViewportContainer"), NodePath("MeduimClose/SubViewportContainer2"), NodePath("MeduimClose/SubViewportContainer3"), NodePath("Close/SubViewportContainer"), NodePath("VeryClose/SubViewportContainer")]
+environment = ExtResource("2_w31va")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 layer = -1
@@ -822,6 +824,8 @@ transparent_bg = true
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(1024, 512)
+script = ExtResource("6_mbqal")
+renderTarget = 4
 
 [node name="SandstoneEnvirement" parent="Main" instance=ExtResource("14_arq7e")]
 

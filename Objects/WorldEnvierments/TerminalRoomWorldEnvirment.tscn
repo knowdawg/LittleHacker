@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dek8hjta7fnhu"]
+
+[ext_resource type="Environment" uid="uid://bdw01fcnpxl25" path="res://Objects/WorldEnvierments/TerminalRoomWorldEnvirment.tres" id="1_qssfk"]
+
+[node name="TerminalRoomWorldEnvirment" type="WorldEnvironment"]
+environment = ExtResource("1_qssfk")
