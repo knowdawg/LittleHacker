@@ -20,7 +20,7 @@ func update(delta):
 	t += delta
 	
 	var b = movement.sample(t)
-	parent.attackBoost = Vector2(b, 0.0) * 150.0 * dir * delta * 60.0
+	parent.attackBoost += Vector2(b, 0.0) * 150.0 * dir * delta * 60.0
 	
 	attackComponent.scale = Vector2(dir, 1.0)
 	

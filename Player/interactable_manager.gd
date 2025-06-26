@@ -17,7 +17,10 @@ func _process(_delta: float) -> void:
 			if inLittleGame:
 				if !Game.inLittleGame:
 					return
-			areas[0].interact()
+			if !inLittleGame:
+				if !Game.inBigGame:
+					return
+				areas[0].interact()
 
 func sortByDistance(a1, a2):
 	var dis1 : float = (a1.global_position - global_position).length()

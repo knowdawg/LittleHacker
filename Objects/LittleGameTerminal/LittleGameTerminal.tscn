@@ -217,6 +217,14 @@ texture = SubResource("GradientTexture2D_mueyt")
 color = Color(1, 0.588235, 0.588235, 1)
 height = 0.0
 
+[node name="Darken" type="ColorRect" parent="."]
+unique_name_in_owner = true
+offset_left = -16.0
+offset_top = -9.0
+offset_right = 16.0
+offset_bottom = 9.0
+color = Color(0, 0, 0, 0.588235)
+
 [connection signal="animation_finished" from="GameContainer/LittleLevelViewport/AnimationPlayer" to="GameContainer/LittleLevelViewport" method="_on_animation_player_animation_finished"]
 [connection signal="onDeSelect" from="InteractableArea" to="." method="_on_interactable_area_on_de_select"]
 [connection signal="onSelect" from="InteractableArea" to="." method="_on_interactable_area_on_select"]

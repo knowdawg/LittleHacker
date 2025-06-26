@@ -24,7 +24,6 @@ config/icon="res://icon.svg"
 EnemyHealthBarPositionManager="*res://Classes/EnemyHealthBarPositionManager.gd"
 Game="*res://Classes/Game.gd"
 HackCommandManager="*res://Classes/HackCommandManager.gd"
-VelocityBuffer="res://Classes/VelocityBuffer/velocity_buffer.tscn"
 SaveDataManager="*res://Classes/SaveDataManager.gd"
 EnemyPositionManager="*res://Classes/EnemyPositionManager.gd"
 GameWorldEnvirement="*res://Classes/GameWorldEnvirement/game_world_envirement.tscn"
@@ -144,6 +143,7 @@ LeaveLittleGame={
 2d_physics/layer_8="Interactables"
 2d_physics/layer_9="CameraBounds"
 2d_physics/layer_10="ClothPhysics"
+2d_physics/layer_11="LadderDetection"
 
 [physics]
 

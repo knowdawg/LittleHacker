@@ -18,3 +18,11 @@ func update_physics(delta: float) -> void:
 func update(_delta):
 	if parent.is_on_floor():
 		trasitioned.emit(self, "Land")
+		return
+		
+	if stateMachine.upLadderBuffer:
+		trasitioned.emit(self, "Climbing")
+		return
+	if stateMachine.downLadderBuffer:
+		trasitioned.emit(self, "SlideDown")
+		return

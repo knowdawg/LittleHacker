@@ -52,7 +52,6 @@ func get_player():
 			return body
 	return null
 
-
 func _on_body_entered(body: Node2D) -> void:
 	if body is Player:
 		onPlayerEnter.emit()
@@ -61,5 +60,5 @@ func _on_body_exited(body: Node2D) -> void:
 	if body is Player:
 		onPlayerExit.emit()
 
-func getAreas():
+func getAreas() -> Array[Area2D]:
 	return get_overlapping_areas()

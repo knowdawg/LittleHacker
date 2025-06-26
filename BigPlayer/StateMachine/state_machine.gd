@@ -7,6 +7,8 @@ var inputBuffer : String = ""
 var t = 0.15
 var blockBuffer : bool = false
 var blockBufferTimer := 0.1
+var upLadderBuffer : bool = false
+var downLadderBuffer : bool = false
 func custumProcess(delta):
 	t -= delta
 	blockBufferTimer -= delta
@@ -26,6 +28,25 @@ func custumProcess(delta):
 	if Input.is_action_pressed("Parry"):
 		blockBuffer = true
 		blockBufferTimer = 0.1
+	
+	
+	if Input.is_action_pressed("Up"):
+		var areas : Array[Area2D] = %TopLadder.getAreas()
+		if areas.size() > 0:
+			upLadderBuffer = true
+		else:
+			upLadderBuffer = false
+	else:
+		upLadderBuffer = false
+		
+	if Input.is_action_pressed("Down"):
+		var areas : Array[Area2D] = %BottomLadder.getAreas()
+		if areas.size() > 0:
+			downLadderBuffer = true
+		else:
+			downLadderBuffer = false
+	else:
+		downLadderBuffer = false
 	
 	if blockBufferTimer <= 0.0:
 		blockBuffer = false

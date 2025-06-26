@@ -1,4 +1,4 @@
-[gd_scene load_steps=95 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=105 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b0tqftq4kjpsh" path="res://Components/SpriteDirectorComponent/sprite_director_component.tscn" id="3_m83fv"]
 [ext_resource type="Script" uid="uid://dm31oimwh6y3j" path="res://Classes/BigCamera.gd" id="4_2v8nb"]
 [ext_resource type="PackedScene" uid="uid://ds57nknaqm0s" path="res://Components/VisualEffectComponents/HitFlashComponent/hit_flash_component.tscn" id="4_jsvsi"]
+[ext_resource type="Texture2D" uid="uid://dhtcg313fmcwr" path="res://BigPlayer/BigPlayerNormal.png" id="4_qints"]
 [ext_resource type="Script" uid="uid://cq16og0yowe57" path="res://BigPlayer/StateMachine/idle.gd" id="4_r3020"]
 [ext_resource type="Script" uid="uid://ci1iuc834ihxl" path="res://BigPlayer/StateMachine/walk.gd" id="5_2t6u2"]
 [ext_resource type="Script" uid="uid://8kh7wkku02wt" path="res://BigPlayer/StateMachine/fall.gd" id="6_m83fv"]
@@ -29,8 +30,11 @@
 [ext_resource type="PackedScene" uid="uid://jigel5y6vf4o" path="res://Components/HealthComponent/stamina_component.tscn" id="20_hpub4"]
 [ext_resource type="Script" uid="uid://bbfajd1t3j5x1" path="res://BigPlayer/StateMachine/hit.gd" id="21_153p7"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="21_enlr8"]
+[ext_resource type="Script" uid="uid://dlulsm3m66vh8" path="res://BigPlayer/StateMachine/climbing.gd" id="23_gvj7j"]
+[ext_resource type="Script" uid="uid://bvd3vs6kplwcd" path="res://BigPlayer/StateMachine/slide_down.gd" id="24_vt6b3"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="25_fiuyr"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="25_jvlv8"]
+[ext_resource type="Script" uid="uid://d1h5crakj37eu" path="res://BigPlayer/StateMachine/pull_up.gd" id="25_pc2tx"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="29_6anp5"]
 [ext_resource type="Script" uid="uid://cpl0eb6ld6egy" path="res://UI/FPSDisplay.gd" id="29_ht2n7"]
 [ext_resource type="Script" uid="uid://dx2tb6bucvs4u" path="res://BigPlayer/screen_effects.gd" id="32_ayaik"]
@@ -39,9 +43,14 @@
 [ext_resource type="Shader" uid="uid://dojcoea80jhuv" path="res://Assets/Shaders/Filters/ImpactFrame.gdshader" id="34_w47nl"]
 [ext_resource type="PackedScene" uid="uid://dvjxs21wp267s" path="res://Components/ShadowNormalDualLight/shadow_normal_dual_light.tscn" id="36_d0s3x"]
 [ext_resource type="Texture2D" uid="uid://ckifrsf13bdj7" path="res://Assets/Sprites/Gradiants/CircleGradiant.tres" id="37_nv3v6"]
+[ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="41_21t33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mspic"]
 size = Vector2(10, 25)
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_6anp5"]
+diffuse_texture = ExtResource("1_mspic")
+normal_texture = ExtResource("4_qints")
 
 [sub_resource type="Animation" id="Animation_153p7"]
 resource_name = "Attack2ToAttack1Transition"
@@ -496,6 +505,135 @@ tracks/0/keys = {
 "values": [107, 108, 109, 110]
 }
 
+[sub_resource type="Animation" id="Animation_gvj7j"]
+resource_name = "Climb"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Climbing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [4.0],
+"method": &"moveParrent"
+}, {
+"args": [3.0],
+"method": &"moveParrent"
+}, {
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [4.0],
+"method": &"moveParrent"
+}, {
+"args": [3.0],
+"method": &"moveParrent"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/Climbing")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"snapToRung"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_vt6b3"]
+resource_name = "SlideDown"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [136]
+}
+
+[sub_resource type="Animation" id="Animation_pc2tx"]
+resource_name = "PullUp"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/PullUp")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [6.0],
+"method": &"moveParrent"
+}, {
+"args": [3.0],
+"method": &"moveParrent"
+}, {
+"args": [2.0],
+"method": &"moveParrent"
+}, {
+"args": [5.0],
+"method": &"moveParrent"
+}, {
+"args": [5.0],
+"method": &"moveParrent"
+}, {
+"args": [2.0],
+"method": &"moveParrent"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]
 _data = {
 &"Attack2ToAttack1Transition": SubResource("Animation_153p7"),
@@ -503,6 +641,7 @@ _data = {
 &"BlockWalk": SubResource("Animation_qints"),
 &"ChargeAttack": SubResource("Animation_jvlv8"),
 &"Charging": SubResource("Animation_n8cw0"),
+&"Climb": SubResource("Animation_gvj7j"),
 &"HitBlunt": SubResource("Animation_ayaik"),
 &"Idle": SubResource("Animation_mspic"),
 &"JumpCrouch": SubResource("Animation_ssk3x"),
@@ -512,8 +651,10 @@ _data = {
 &"LeaveBlock": SubResource("Animation_oqejv"),
 &"LightAttack": SubResource("Animation_um6lt"),
 &"LightAttack2": SubResource("Animation_4ilhq"),
+&"PullUp": SubResource("Animation_pc2tx"),
 &"RESET": SubResource("Animation_qmsvx"),
 &"Run": SubResource("Animation_13av7"),
+&"SlideDown": SubResource("Animation_vt6b3"),
 &"SprintJumpPeak": SubResource("Animation_lsjcy"),
 &"SprintJumpStart": SubResource("Animation_enlr8"),
 &"Stagger": SubResource("Animation_npd63"),
@@ -614,6 +755,9 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqejv"]
 size = Vector2(6, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gvj7j"]
+size = Vector2(8, 1)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_4ilhq"]
 
@@ -1155,9 +1299,9 @@ shape = SubResource("RectangleShape2D_mspic")
 unique_name_in_owner = true
 clip_children = 2
 texture_filter = 1
-texture = ExtResource("1_mspic")
+texture = SubResource("CanvasTexture_6anp5")
 flip_h = true
-hframes = 126
+hframes = 149
 frame = 13
 
 [node name="SpriteDirectorComponent" parent="PlayerSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("3_m83fv")]
@@ -1277,6 +1421,26 @@ animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
+[node name="Climbing" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "topOfLadderProx")]
+script = ExtResource("23_gvj7j")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+topOfLadderProx = NodePath("../../Components/LadderProximities/TopLadder")
+
+[node name="SlideDown" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "bottomOfLadderProx")]
+script = ExtResource("24_vt6b3")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+bottomOfLadderProx = NodePath("../../Components/LadderProximities/BottomLadder")
+
+[node name="PullUp" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
+script = ExtResource("25_pc2tx")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+
 [node name="InteractableManager" parent="." instance=ExtResource("10_axpou")]
 
 [node name="CollisionShape2D" parent="InteractableManager/InteractableProximity" index="1"]
@@ -1368,6 +1532,24 @@ visible = false
 position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_oqejv")
 
+[node name="LadderProximities" type="Node2D" parent="Components"]
+
+[node name="TopLadder" parent="Components/LadderProximities" instance=ExtResource("41_21t33")]
+unique_name_in_owner = true
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/LadderProximities/TopLadder"]
+position = Vector2(0, -13.5)
+shape = SubResource("RectangleShape2D_gvj7j")
+
+[node name="BottomLadder" parent="Components/LadderProximities" instance=ExtResource("41_21t33")]
+unique_name_in_owner = true
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/LadderProximities/BottomLadder"]
+position = Vector2(0, 15.5)
+shape = SubResource("RectangleShape2D_gvj7j")
+
 [node name="AttackComponents" type="Node2D" parent="."]
 
 [node name="LightAttack" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("25_jvlv8")]
@@ -1446,9 +1628,7 @@ libraries = {
 [node name="ShadowNormalDualLight" parent="." instance=ExtResource("36_d0s3x")]
 visible = false
 texture = ExtResource("37_nv3v6")
-height = null
-layer = 0
-lightsToUse = null
+height = 0.0
 
 [connection signal="guardBroken" from="Components/StaminaComponent" to="." method="_on_stamina_component_guard_broken"]
 [connection signal="guardBroken" from="Components/StaminaComponent" to="StateMachine" method="_on_stamina_component_guard_broken"]

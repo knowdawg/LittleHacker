@@ -1,13 +1,9 @@
-[gd_scene load_steps=32 format=3 uid="uid://b5qidtrq8k8gn"]
+[gd_scene load_steps=30 format=3 uid="uid://b5qidtrq8k8gn"]
 
-[ext_resource type="Shader" uid="uid://p2g7y3am4vag" path="res://Assets/Shaders/NormalMapSmoothstep.gdshader" id="1_00ck0"]
 [ext_resource type="Texture2D" uid="uid://k8be72vxy08a" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalFloorPlates1.png" id="1_kppqj"]
 [ext_resource type="Texture2D" uid="uid://c7h5lwh3qoxd4" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalFloorPlates2.png" id="2_wfeg7"]
 [ext_resource type="Texture2D" uid="uid://bt4qq4gn4mig1" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/MetalFloorPlates3.png" id="3_00ck0"]
 [ext_resource type="Texture2D" uid="uid://bhrq2icldj47" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/TerminalRoomAutotile.tres" id="5_00ck0"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_44bqp"]
-shader = ExtResource("1_00ck0")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_44bqp"]
 texture = ExtResource("1_kppqj")
@@ -272,6 +268,5 @@ sources/2 = SubResource("TileSetAtlasSource_hyop0")
 sources/4 = SubResource("TileSetAtlasSource_a8v4p")
 
 [node name="MetalFloorPlates" type="TileMap"]
-material = SubResource("ShaderMaterial_44bqp")
 tile_set = SubResource("TileSet_a8v4p")
 format = 2

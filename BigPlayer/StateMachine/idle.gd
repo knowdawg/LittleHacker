@@ -32,3 +32,10 @@ func update(_delta):
 	if stateMachine.getInputBuffer() == "Attack":
 		trasitioned.emit(self, "AttackCharge")
 		return
+	
+	if stateMachine.upLadderBuffer:
+		trasitioned.emit(self, "Climbing")
+		return
+	if stateMachine.downLadderBuffer:
+		trasitioned.emit(self, "SlideDown")
+		return

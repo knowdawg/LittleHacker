@@ -32,3 +32,11 @@ func update(delta):
 
 	if parent.getSummedVelocities().y > 0:
 		trasitioned.emit(self, "Fall")
+		return
+	
+	if stateMachine.upLadderBuffer:
+		trasitioned.emit(self, "Climbing")
+		return
+	if stateMachine.downLadderBuffer:
+		trasitioned.emit(self, "SlideDown")
+		return

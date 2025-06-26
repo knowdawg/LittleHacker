@@ -30,7 +30,7 @@ modifications/1 = SubResource("SkeletonModification2DLookAt_ey6me")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_rwird"]
 shader = ExtResource("4_m80d6")
 
-[sub_resource type="ViewportTexture" id="ViewportTexture_ey6me"]
+[sub_resource type="ViewportTexture" id="ViewportTexture_rwird"]
 viewport_path = NodePath("SubViewport")
 
 [node name="RemantCrabLegs" type="Node"]
@@ -94,42 +94,43 @@ scale = Vector2(10, 10)
 [node name="LeftLeg" type="Node2D" parent="SubViewport/Body"]
 
 [node name="FootLeft" type="Sprite2D" parent="SubViewport/Body/LeftLeg"]
-position = Vector2(5.33582, 5.37428)
-rotation = -0.0722984
-scale = Vector2(0.099998, 0.099998)
+position = Vector2(3.21679, 4.70531)
+rotation = 0.0839476
+scale = Vector2(0.0999928, 0.0999928)
 texture = ExtResource("1_ey6me")
 offset = Vector2(-3, -6)
 
 [node name="LegLeft" type="Sprite2D" parent="SubViewport/Body/LeftLeg"]
-position = Vector2(4, 5.5)
-rotation = -1.20098
-scale = Vector2(0.0999978, 0.0999978)
+position = Vector2(3.05454, 3.37354)
+rotation = 0.342425
+scale = Vector2(0.0999929, 0.0999929)
 texture = ExtResource("1_oycq5")
 offset = Vector2(3, 6)
 
 [node name="ThighLeft" type="Sprite2D" parent="SubViewport/Body/LeftLeg"]
-position = Vector2(4.0456, 4.55239)
-rotation = -1.20096
-scale = Vector2(0.0999978, 0.0999978)
+position = Vector2(4.00299, 3.39317)
+rotation = 0.342438
+scale = Vector2(0.0999929, 0.0999929)
 texture = ExtResource("2_ey6me")
 offset = Vector2(-4, 2)
 
 [node name="IKTargets" type="Node2D" parent="."]
+position = Vector2(-1, 0)
 
 [node name="LeftLegTarget" type="Marker2D" parent="IKTargets"]
 unique_name_in_owner = true
-position = Vector2(40, 55)
+position = Vector2(-4, 33)
 
 [node name="LeftFootLookAt" type="Marker2D" parent="IKTargets/LeftLegTarget"]
-position = Vector2(-4, 0)
+position = Vector2(-11, 10)
 
 [node name="NextLeftLegTarget" type="Marker2D" parent="IKTargets"]
 unique_name_in_owner = true
-position = Vector2(40, 50)
+position = Vector2(-33, 35)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 unique_name_in_owner = true
 texture_filter = 1
 material = SubResource("ShaderMaterial_rwird")
 position = Vector2(11, 8)
-texture = SubResource("ViewportTexture_ey6me")
+texture = SubResource("ViewportTexture_rwird")

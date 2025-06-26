@@ -16,8 +16,14 @@ var attackBoost := Vector2.ZERO
 
 var knockback := Vector2.ZERO
 
+var climbing := false
 
 func _physics_process(delta: float) -> void:
+	if climbing:
+		resetVelocities()
+		move_and_slide()
+		return
+	
 	if !Game.inBigGame:
 		return
 	
@@ -70,13 +76,24 @@ func fall(delta):
 
 func getSummedVelocities() -> Vector2:
 	var sum := Vector2.ZERO
-	sum += jumpFallVector
 	sum += xMovement
-	sum += runMovement
+	sum += jumpFallVector
 	sum += jumpBoostVector
+	sum += runMovement
+	sum += attackBoost
+	sum += knockback
 	sum += shimmyMoment
 	
 	return sum
+
+func resetVelocities():
+	xMovement = Vector2.ZERO
+	jumpFallVector = Vector2.ZERO
+	jumpBoostVector = Vector2.ZERO
+	runMovement = Vector2.ZERO
+	attackBoost = Vector2.ZERO
+	knockback = Vector2.ZERO
+	shimmyMoment = Vector2.ZERO
 
 func _process(_delta: float) -> void:
 	Game.bigPlayer = self
