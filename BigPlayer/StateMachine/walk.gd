@@ -39,8 +39,8 @@ func update(_delta):
 		return
 		
 	if stateMachine.upLadderBuffer:
-		trasitioned.emit(self, "Climbing")
+		stateMachine.switchToClimb(true, self)
 		return
 	if stateMachine.downLadderBuffer:
-		trasitioned.emit(self, "SlideDown")
+		stateMachine.switchToClimb(false, self)
 		return

@@ -19,6 +19,8 @@ var knockback := Vector2.ZERO
 var climbing := false
 
 func _physics_process(delta: float) -> void:
+	summedVelocities = Vector2.ZERO
+	
 	if climbing:
 		resetVelocities()
 		move_and_slide()
@@ -35,6 +37,7 @@ func _physics_process(delta: float) -> void:
 	velocity += knockback
 	velocity += shimmyMoment
 	
+	summedVelocities = velocity
 	move_and_slide()
 	velocity = Vector2.ZERO
 	
@@ -74,17 +77,18 @@ func fall(delta):
 		if jumpFallVector.y < 0:
 			jumpFallVector.y = 0
 
+var summedVelocities : Vector2 = Vector2.ZERO
 func getSummedVelocities() -> Vector2:
-	var sum := Vector2.ZERO
-	sum += xMovement
-	sum += jumpFallVector
-	sum += jumpBoostVector
-	sum += runMovement
-	sum += attackBoost
-	sum += knockback
-	sum += shimmyMoment
+	#var sum := Vector2.ZERO
+	#sum += xMovement
+	#sum += jumpFallVector
+	#sum += jumpBoostVector
+	#sum += runMovement
+	#sum += attackBoost
+	#sum += knockback
+	#sum += shimmyMoment
 	
-	return sum
+	return summedVelocities#sum
 
 func resetVelocities():
 	xMovement = Vector2.ZERO

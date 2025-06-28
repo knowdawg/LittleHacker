@@ -61,7 +61,17 @@ func getInputBuffer():
 func resetInputBuffer():
 	inputBuffer = ""
 
-
+func switchToClimb(upInput : bool, s : State):
+	if parent.getSummedVelocities().length() > 100.0 and abs(parent.getSummedVelocities().x) >= 50.0 and !parent.is_on_floor():
+		switchStates("SprintToClimb")
+		return
+	if upInput:
+		switchStates("Climbing")
+		return
+	if !upInput:
+		switchStates("SlideDown")
+		return
+	
 func _on_stamina_component_guard_broken(_attack: Attack) -> void:
 	switchStates("Stagger")
 

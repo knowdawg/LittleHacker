@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=109 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
@@ -35,6 +35,7 @@
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="25_fiuyr"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="25_jvlv8"]
 [ext_resource type="Script" uid="uid://d1h5crakj37eu" path="res://BigPlayer/StateMachine/pull_up.gd" id="25_pc2tx"]
+[ext_resource type="Script" uid="uid://b02jkbf20gyl8" path="res://BigPlayer/StateMachine/sprint_to_climb.gd" id="26_qggjh"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="29_6anp5"]
 [ext_resource type="Script" uid="uid://cpl0eb6ld6egy" path="res://UI/FPSDisplay.gd" id="29_ht2n7"]
 [ext_resource type="Script" uid="uid://dx2tb6bucvs4u" path="res://BigPlayer/screen_effects.gd" id="32_ayaik"]
@@ -634,6 +635,23 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_qggjh"]
+resource_name = "SprintIntoClimb"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [150, 151, 152, 153, 154, 155, 149]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]
 _data = {
 &"Attack2ToAttack1Transition": SubResource("Animation_153p7"),
@@ -655,6 +673,7 @@ _data = {
 &"RESET": SubResource("Animation_qmsvx"),
 &"Run": SubResource("Animation_13av7"),
 &"SlideDown": SubResource("Animation_vt6b3"),
+&"SprintIntoClimb": SubResource("Animation_qggjh"),
 &"SprintJumpPeak": SubResource("Animation_lsjcy"),
 &"SprintJumpStart": SubResource("Animation_enlr8"),
 &"Stagger": SubResource("Animation_npd63"),
@@ -755,6 +774,12 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_oqejv"]
 size = Vector2(6, 24)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_qggjh"]
+size = Vector2(8, 30)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bcxs1"]
+size = Vector2(16, 38)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvj7j"]
 size = Vector2(8, 1)
@@ -1299,9 +1324,10 @@ shape = SubResource("RectangleShape2D_mspic")
 unique_name_in_owner = true
 clip_children = 2
 texture_filter = 1
+position = Vector2(-1, 0)
 texture = SubResource("CanvasTexture_6anp5")
 flip_h = true
-hframes = 149
+hframes = 156
 frame = 13
 
 [node name="SpriteDirectorComponent" parent="PlayerSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("3_m83fv")]
@@ -1337,6 +1363,7 @@ stateMachine = NodePath("..")
 
 [node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("5_2t6u2")
+updateWhileHacked = null
 animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
@@ -1421,18 +1448,21 @@ animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
-[node name="Climbing" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "topOfLadderProx")]
+[node name="Climbing" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "ladderProx", "topOfLadderProx")]
 script = ExtResource("23_gvj7j")
 animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
+ladderProx = NodePath("../../Components/LadderProximities/GeneralLadderProx")
 topOfLadderProx = NodePath("../../Components/LadderProximities/TopLadder")
 
-[node name="SlideDown" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "bottomOfLadderProx")]
+[node name="SlideDown" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "ladderProx", "topOfLadderProx", "bottomOfLadderProx")]
 script = ExtResource("24_vt6b3")
 animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
+ladderProx = NodePath("../../Components/LadderProximities/GeneralLadderProx")
+topOfLadderProx = NodePath("../../Components/LadderProximities/TopLadder")
 bottomOfLadderProx = NodePath("../../Components/LadderProximities/BottomLadder")
 
 [node name="PullUp" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
@@ -1440,6 +1470,13 @@ script = ExtResource("25_pc2tx")
 animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
+
+[node name="SprintToClimb" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "ladderProx")]
+script = ExtResource("26_qggjh")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+ladderProx = NodePath("../../Components/LadderProximities/GeneralLadderProx")
 
 [node name="InteractableManager" parent="." instance=ExtResource("10_axpou")]
 
@@ -1533,6 +1570,24 @@ position = Vector2(0, 2)
 shape = SubResource("RectangleShape2D_oqejv")
 
 [node name="LadderProximities" type="Node2D" parent="Components"]
+
+[node name="GeneralLadderProx" parent="Components/LadderProximities" instance=ExtResource("41_21t33")]
+unique_name_in_owner = true
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/LadderProximities/GeneralLadderProx"]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_qggjh")
+
+[node name="ExstendedReachForFalureToFind" parent="Components/LadderProximities" instance=ExtResource("41_21t33")]
+unique_name_in_owner = true
+collision_mask = 1024
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Components/LadderProximities/ExstendedReachForFalureToFind"]
+visible = false
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_bcxs1")
 
 [node name="TopLadder" parent="Components/LadderProximities" instance=ExtResource("41_21t33")]
 unique_name_in_owner = true

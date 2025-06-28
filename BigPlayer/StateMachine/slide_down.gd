@@ -4,7 +4,9 @@ class_name BigPlayerSlideDown
 @export var animator : AnimationPlayer
 @export var parent : BigPlayer
 @export var stateMachine : BigPlayerStateMachine
+@export var ladderProx : ProximityAreaComponent
 
+@export var topOfLadderProx : ProximityAreaComponent
 @export var bottomOfLadderProx : ProximityAreaComponent
 
 func enter(p : State):
@@ -13,13 +15,19 @@ func enter(p : State):
 		parent.set_collision_mask_value(1, false)
 		parent.set_collision_mask_value(2, false)
 	
-	if bottomOfLadderProx.getAreas().size() > 0:
-		parent.global_position.x = bottomOfLadderProx.getAreas()[0].global_position.x
+	if ladderProx.getAreas().size() > 0:
+		parent.global_position.x = ladderProx.getAreas()[0].global_position.x + 1.0
+	elif %ExstendedReachForFalureToFind.getAreas().size() > 0:
+		parent.global_position.x = %ExstendedReachForFalureToFind.getAreas()[0].global_position.x + 1.0
+	
+	
+	if topOfLadderProx.getAreas().size() == 0:
+		parent.global_position.y += 28 #Temp, replace with a get on ladder animation
+	
 	animator.play("SlideDown")
 
 func update_physics(delta):
 	parent.position.y += 120.0 * delta
-	
 	
 	if stateMachine.inputBuffer == "Jump":
 		trasitioned.emit(self, "Jump")

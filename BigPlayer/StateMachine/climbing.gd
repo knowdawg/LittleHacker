@@ -4,6 +4,7 @@ class_name BigPlayerClimb
 @export var animator : AnimationPlayer
 @export var parent : BigPlayer
 @export var stateMachine : BigPlayerStateMachine
+@export var ladderProx : ProximityAreaComponent
 
 @export var topOfLadderProx : ProximityAreaComponent
 
@@ -13,9 +14,13 @@ func enter(p : State):
 		parent.set_collision_mask_value(1, false)
 		parent.set_collision_mask_value(2, false)
 	
-	if topOfLadderProx.getAreas().size() > 0:
-		parent.global_position.x = topOfLadderProx.getAreas()[0].global_position.x
+	if ladderProx.getAreas().size() > 0:
+		parent.global_position.x = ladderProx.getAreas()[0].global_position.x + 1.0
+	elif %ExstendedReachForFalureToFind.getAreas().size() > 0:
+		parent.global_position.x = %ExstendedReachForFalureToFind.getAreas()[0].global_position.x + 1.0
+	
 	animator.play("Climb")
+	animator.speed_scale = 1.5
 
 func update_physics(delta):
 	if Input.is_action_pressed("Up"):
@@ -23,10 +28,10 @@ func update_physics(delta):
 	else:
 		animator.pause()
 	
-	if Input.is_action_pressed("Roll"):
-		animator.speed_scale = 2.0
-	else:
-		animator.speed_scale = 1.0
+	#if Input.is_action_pressed("Roll"):
+		#animator.speed_scale = 1.5
+	#else:
+		#animator.speed_scale = 1.0
 	
 	if stateMachine.inputBuffer == "Jump":
 		trasitioned.emit(self, "Jump")
@@ -45,8 +50,8 @@ func update_physics(delta):
 
 func snapToRung():
 	parent.global_position.y = round(parent.global_position.y)
-	if topOfLadderProx.getAreas().size() > 0:
-		parent.global_position.y += topOfLadderProx.getAreas()[0].getNearestRung(parent, -15.0)
+	if ladderProx.getAreas().size() > 0:
+		parent.global_position.y += ladderProx.getAreas()[0].getNearestRung(parent, -15.0)
 	
 
 func moveParrent(amount : float):

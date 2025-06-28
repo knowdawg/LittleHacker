@@ -17,11 +17,10 @@ func enter(p : State):
 func update_physics(delta):
 	t += delta
 	
-	if Input.is_action_pressed("Roll"):
-		animator.speed_scale = 2.0
-		t += delta
-	else:
-		animator.speed_scale = 1.0
+	if Input.get_axis("Left", "Right") != 0.0:
+		if t >= 0.7:
+			trasitioned.emit(self, "Idle")
+			return
 	
 	if t >= 1.2:
 		trasitioned.emit(self, "Idle")
@@ -39,7 +38,6 @@ func moveParrent(amount : float):
 	parent.position.y -= amount
 
 func exit(n : State):
-	animator.speed_scale = 1.0
 	if n is BigPlayerSlideDown:
 		return
 	parent.climbing = false

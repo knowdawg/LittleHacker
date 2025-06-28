@@ -5,7 +5,7 @@
 [ext_resource type="Script" uid="uid://dsimgbfujp8cv" path="res://Objects/WorldObjects/Ladder/body.gd" id="3_tkskj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_an6be"]
-size = Vector2(16, 97)
+size = Vector2(22, 97)
 
 [node name="Ladder" type="Node2D"]
 texture_filter = 1
@@ -23,6 +23,5 @@ script = ExtResource("3_tkskj")
 parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
-visible = false
 position = Vector2(0, 1.5)
 shape = SubResource("RectangleShape2D_an6be")

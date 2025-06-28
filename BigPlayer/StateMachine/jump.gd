@@ -12,12 +12,18 @@ func enter(p : State):
 		canJump = false
 		parent.jump(0.5)
 		animator.play("SprintJumpStart")
+	elif p is BigPlayerClimb or p is BigPlayerSlideDown:
+		canJump = false
+		parent.jump(0.6, 0.8)
+		animator.play("SprintJumpStart")
 	else:
 		timeCrouched = 0.0
 		canJump = true
 		animator.play("JumpCrouch")
 
 func update_physics(delta: float) -> void:
+	parent.updateSpriteDirection()
+	
 	parent.fall(delta)
 	if !canJump:
 		parent.check_for_movement(delta)
@@ -35,8 +41,8 @@ func update(delta):
 		return
 	
 	if stateMachine.upLadderBuffer:
-		trasitioned.emit(self, "Climbing")
+		stateMachine.switchToClimb(true, self)
 		return
 	if stateMachine.downLadderBuffer:
-		trasitioned.emit(self, "SlideDown")
+		stateMachine.switchToClimb(false, self)
 		return
