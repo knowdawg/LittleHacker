@@ -14,6 +14,9 @@ func enter(p : State):
 		animator.seek(0.3, true)
 	
 
+func update_physics(delta):
+	parent.fall(delta)
+
 func update(delta):
 	t += delta
 	if !Input.is_action_pressed("Attack"):

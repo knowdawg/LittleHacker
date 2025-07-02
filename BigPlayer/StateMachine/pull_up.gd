@@ -6,7 +6,7 @@ class_name BigPlayerPullUp
 @export var stateMachine : BigPlayerStateMachine
 
 var t := 0.0
-func enter(p : State):
+func enter(_p : State):
 	parent.climbing = true
 	parent.set_collision_mask_value(1, false)
 	parent.set_collision_mask_value(2, false)

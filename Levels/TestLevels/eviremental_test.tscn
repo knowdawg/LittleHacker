@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=26 format=3 uid="uid://dlfxfm3ebd5n7"]
 
 [ext_resource type="Texture2D" uid="uid://fno00145fuo4" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/CarcassOfCreationBleakSetting5.png" id="1_40igy"]
 [ext_resource type="PackedScene" uid="uid://c3bd14h6powqs" path="res://Objects/WorldObjects/Tilemaps/metal_plates_background.tscn" id="1_42e3u"]
@@ -18,6 +18,18 @@
 [ext_resource type="PackedScene" uid="uid://dek8hjta7fnhu" path="res://Objects/WorldEnvierments/TerminalRoomWorldEnvirment.tscn" id="15_ksyuk"]
 [ext_resource type="Texture2D" uid="uid://bf476bf5e1awy" path="res://BigPlayer/BigPlayerDifuseTest.png" id="17_yo6y3"]
 [ext_resource type="Texture2D" uid="uid://bkfiyxqym8kw7" path="res://BigPlayer/BigPlayerNormalTest.png" id="18_25rag"]
+[ext_resource type="Texture2D" uid="uid://q2wmo5q66tne" path="res://Test/CarcassOfCreationRobotNoble.png" id="19_25rag"]
+[ext_resource type="Texture2D" uid="uid://dm0qp77gddopx" path="res://Test/CarcassOfCreationRobotNobleNormal.png" id="20_lbh02"]
+[ext_resource type="Texture2D" uid="uid://w6ugjobtxl8h" path="res://Test/CarcassOfCreationInfectedPorcelain.png" id="21_lbh02"]
+[ext_resource type="Texture2D" uid="uid://b2x8we6nj5mop" path="res://Test/CarcassOfCreationInfectedPorcelainNormal.png" id="22_vi2od"]
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_vi2od"]
+diffuse_texture = ExtResource("19_25rag")
+normal_texture = ExtResource("20_lbh02")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_ofiqv"]
+diffuse_texture = ExtResource("21_lbh02")
+normal_texture = ExtResource("22_vi2od")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lbh02"]
 diffuse_texture = ExtResource("17_yo6y3")
@@ -47,7 +59,6 @@ scale = Vector2(5, 2)
 texture = ExtResource("5_41ytb")
 energy = 2.0
 color = Color(0.643137, 0.866667, 0.858824, 1)
-height = 0.0
 layer = -103
 lightsToUse = 1
 
@@ -82,7 +93,7 @@ scroll_scale = Vector2(0.15, 0.15)
 scroll_offset = Vector2(-538.193, -85.9597)
 
 [node name="Envirment3" type="Sprite2D" parent="CanvasLayer3/Parallax2D3"]
-position = Vector2(599.333, 159.538)
+position = Vector2(595.018, 155.16)
 texture = ExtResource("3_rfoos")
 
 [node name="ShadowNormalDualLight" parent="CanvasLayer3/Parallax2D3" instance=ExtResource("12_r2q2l")]
@@ -91,7 +102,6 @@ scale = Vector2(1, 0.5)
 texture = ExtResource("5_41ytb")
 energy = 3.0
 color = Color(0.647059, 0.188235, 0.188235, 1)
-height = 0.0
 layer = -101
 lightsToUse = 1
 
@@ -101,7 +111,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("5_41ytb")
 energy = 0.7
 color = Color(0.647059, 0.188235, 0.188235, 1)
-height = 0.0
 layer = -101
 lightsToUse = 1
 
@@ -110,7 +119,6 @@ position = Vector2(702.204, 146.032)
 scale = Vector2(0.5, 2)
 texture = ExtResource("5_41ytb")
 color = Color(0.643137, 0.866667, 0.858824, 1)
-height = 0.0
 layer = -101
 lightsToUse = 1
 
@@ -119,7 +127,6 @@ position = Vector2(492.204, 133.032)
 scale = Vector2(0.5, 2)
 texture = ExtResource("5_41ytb")
 color = Color(0.643137, 0.866667, 0.858824, 1)
-height = 0.0
 layer = -101
 lightsToUse = 1
 
@@ -162,14 +169,15 @@ position = Vector2(11, -31)
 [node name="Ladder3" parent="." instance=ExtResource("14_mc53s")]
 position = Vector2(-189, -1)
 
-[node name="Ladder4" parent="." instance=ExtResource("14_mc53s")]
-position = Vector2(-406, -130)
+[node name="Envirment" type="Sprite2D" parent="."]
+position = Vector2(-484, -14)
+texture = ExtResource("11_ksyuk")
 
-[node name="Ladder5" parent="." instance=ExtResource("14_mc53s")]
-position = Vector2(-449, -130)
+[node name="StaticBody2D" type="StaticBody2D" parent="Envirment"]
+visible = false
 
-[node name="Ladder6" parent="." instance=ExtResource("14_mc53s")]
-position = Vector2(-497, -130)
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment/StaticBody2D"]
+polygon = PackedVector2Array(180, 24, -76, 24, -180, 77, -180, 67, -77, 14, 180, 14, 180, 24)
 
 [node name="Envirment2" type="Sprite2D" parent="."]
 position = Vector2(-484, 82)
@@ -191,33 +199,93 @@ visible = false
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment3/StaticBody2D"]
 polygon = PackedVector2Array(180, 24, -76, 24, -180, 77, -180, 67, -77, 14, 180, 14, 180, 24)
 
-[node name="Envirment" type="Sprite2D" parent="."]
-position = Vector2(-484, -14)
+[node name="Envirment4" type="Sprite2D" parent="."]
+position = Vector2(-844, -62)
 texture = ExtResource("11_ksyuk")
 
-[node name="StaticBody2D" type="StaticBody2D" parent="Envirment"]
+[node name="StaticBody2D" type="StaticBody2D" parent="Envirment4"]
 visible = false
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment/StaticBody2D"]
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment4/StaticBody2D"]
 polygon = PackedVector2Array(180, 24, -76, 24, -180, 77, -180, 67, -77, 14, 180, 14, 180, 24)
 
-[node name="Ladder" parent="Envirment" instance=ExtResource("14_mc53s")]
-position = Vector2(84, 109)
+[node name="Envirment5" type="Sprite2D" parent="."]
+position = Vector2(-844, 34)
+texture = ExtResource("11_ksyuk")
 
-[node name="Ladder2" parent="Envirment" instance=ExtResource("14_mc53s")]
-position = Vector2(35, 13)
+[node name="StaticBody2D" type="StaticBody2D" parent="Envirment5"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment5/StaticBody2D"]
+polygon = PackedVector2Array(180, 24, -76, 24, -180, 77, -180, 67, -77, 14, 180, 14, 180, 24)
+
+[node name="Envirment6" type="Sprite2D" parent="."]
+position = Vector2(-844, 130)
+texture = ExtResource("11_ksyuk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Envirment6"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment6/StaticBody2D"]
+polygon = PackedVector2Array(180, 24, -76, 24, -180, 77, -180, 67, -77, 14, 180, 14, 180, 24)
+
+[node name="Envirment7" type="Sprite2D" parent="."]
+position = Vector2(-750, -225)
+texture = ExtResource("11_ksyuk")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Envirment7"]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Envirment7/StaticBody2D"]
+polygon = PackedVector2Array(180, 24, -76, 24, -180, 77, -180, 67, -77, 14, 180, 14, 180, 24)
+
+[node name="Ladder" parent="." instance=ExtResource("14_mc53s")]
+position = Vector2(-448, 95)
+
+[node name="Ladder2" parent="." instance=ExtResource("14_mc53s")]
+position = Vector2(-505, -1)
+
+[node name="Ladder4" parent="." instance=ExtResource("14_mc53s")]
+position = Vector2(-481, -289)
+
+[node name="Ladder7" parent="." instance=ExtResource("14_mc53s")]
+position = Vector2(-408, -186)
+
+[node name="Ladder6" parent="." instance=ExtResource("14_mc53s")]
+position = Vector2(-616, -116)
+
+[node name="Ladder5" parent="." instance=ExtResource("14_mc53s")]
+position = Vector2(-543, -243)
+
+[node name="EnemyExample" type="Sprite2D" parent="."]
+position = Vector2(-555, -19)
+texture = SubResource("CanvasTexture_vi2od")
+
+[node name="EnemyExample2" type="Sprite2D" parent="."]
+position = Vector2(83, -19)
+texture = SubResource("CanvasTexture_vi2od")
+
+[node name="CarcassOfCreationInfectedPorcelain" type="Sprite2D" parent="."]
+position = Vector2(216, -19)
+texture = SubResource("CanvasTexture_ofiqv")
+
+[node name="CarcassOfCreationInfectedPorcelain2" type="Sprite2D" parent="."]
+position = Vector2(-402, -19)
+texture = SubResource("CanvasTexture_ofiqv")
 
 [node name="BigPlayer" parent="." instance=ExtResource("3_yyfki")]
-position = Vector2(-419, -14)
+position = Vector2(-324, -21)
 
 [node name="ShadowNormalDualLight3" parent="." instance=ExtResource("12_r2q2l")]
-position = Vector2(-128, -47)
-rotation = 0.513078
+position = Vector2(242, -44)
+rotation = 0.871781
+scale = Vector2(2, 1)
 texture = ExtResource("13_rfoos")
 offset = Vector2(0, 55)
 height = 10.0
 
 [node name="ShadowNormalDualLight5" parent="." instance=ExtResource("12_r2q2l")]
+visible = false
 position = Vector2(134, -91)
 rotation = -0.609452
 texture = ExtResource("13_rfoos")
@@ -238,16 +306,18 @@ offset = Vector2(0, 55)
 height = 10.0
 
 [node name="RedDirectionalLight" type="DirectionalLight2D" parent="."]
-visible = false
+position = Vector2(98, -12)
+rotation = -0.349066
 scale = Vector2(5, 5)
 color = Color(0.647059, 0.188235, 0.188235, 1)
-energy = 5.0
+energy = 2.0
 range_z_min = 0
 range_z_max = 0
 shadow_enabled = true
 
 [node name="RedLight" parent="." instance=ExtResource("12_r2q2l")]
-position = Vector2(-456, -305)
+visible = false
+position = Vector2(-508, -256)
 scale = Vector2(5, 5)
 texture = ExtResource("5_41ytb")
 energy = 5.0
@@ -255,9 +325,8 @@ color = Color(0.647059, 0.188235, 0.188235, 1)
 height = -50.0
 
 [node name="TestingLight" parent="." instance=ExtResource("12_r2q2l")]
-position = Vector2(241, -17)
+position = Vector2(121, -32)
 texture = ExtResource("5_41ytb")
-energy = 2.0
 offset = Vector2(0, 55)
 height = 10.0
 

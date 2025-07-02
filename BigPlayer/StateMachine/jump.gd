@@ -1,4 +1,5 @@
 extends State
+class_name BigPlayerJump
 
 @export var animator : AnimationPlayer
 @export var parent : BigPlayer
@@ -12,7 +13,7 @@ func enter(p : State):
 		canJump = false
 		parent.jump(0.5)
 		animator.play("SprintJumpStart")
-	elif p is BigPlayerClimb or p is BigPlayerSlideDown:
+	elif p is BigPlayerClimb or p is BigPlayerSlideDown or p is BigPlayerHanging:
 		canJump = false
 		parent.jump(0.6, 0.8)
 		animator.play("SprintJumpStart")

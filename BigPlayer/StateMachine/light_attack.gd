@@ -16,6 +16,9 @@ func enter(_p):
 	animator.play("LightAttack")
 	dir = parent.getDirection()
 
+func update_physics(delta):
+	parent.fall(delta)
+
 func update(delta):
 	t += delta
 	

@@ -45,8 +45,12 @@ func custumProcess(delta):
 			downLadderBuffer = true
 		else:
 			downLadderBuffer = false
+		
+		if %GeneralLadderProx.getAreas().size() > 0 and !%IsTerrainBellow.is_colliding():
+			downLadderBuffer = true
 	else:
 		downLadderBuffer = false
+	
 	
 	if blockBufferTimer <= 0.0:
 		blockBuffer = false
@@ -61,14 +65,17 @@ func getInputBuffer():
 func resetInputBuffer():
 	inputBuffer = ""
 
-func switchToClimb(upInput : bool, s : State):
-	if parent.getSummedVelocities().length() > 100.0 and abs(parent.getSummedVelocities().x) >= 50.0 and !parent.is_on_floor():
-		switchStates("SprintToClimb")
+func switchToClimb(upInput : bool, _s : State):
+	if (parent.getSummedVelocities().y > 350.0 or abs(parent.getSummedVelocities().x) >= 100.0) and !parent.is_on_floor():
+		switchStates("SpeedIntoLadder")
 		return
 	if upInput:
 		switchStates("Climbing")
 		return
 	if !upInput:
+		if %IsTerrainBellow.is_colliding() and %TopLadder.getAreas().size() == 0:
+			switchStates("MountLadder")
+			return
 		switchStates("SlideDown")
 		return
 	

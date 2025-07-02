@@ -14,6 +14,9 @@ func enter(_p):
 	hurtbox.setBlock(true)
 	#hurtbox.setParry(true, 1)
 
+func update_physics(delta):
+	parent.fall(delta)
+
 func update(delta):
 	t += delta
 	if t >= 0.2:

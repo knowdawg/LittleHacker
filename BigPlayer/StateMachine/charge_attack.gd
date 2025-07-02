@@ -14,6 +14,9 @@ func enter(_p):
 	t = 0.0
 	animator.play("ChargeAttack")
 
+func update_physics(delta):
+	parent.fall(delta)
+
 func update(delta):
 	t += delta
 	

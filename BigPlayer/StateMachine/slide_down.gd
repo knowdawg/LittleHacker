@@ -21,9 +21,9 @@ func enter(p : State):
 		parent.global_position.x = %ExstendedReachForFalureToFind.getAreas()[0].global_position.x + 1.0
 	
 	
-	if topOfLadderProx.getAreas().size() == 0:
-		parent.global_position.y += 28 #Temp, replace with a get on ladder animation
-	
+	#if %IsTerrainBellow.is_colliding() and topOfLadderProx.getAreas().size() == 0:
+		#parent.global_position.y += 28 #Temp, replace with a get on ladder animation
+	#
 	animator.play("SlideDown")
 
 func update_physics(delta):
@@ -43,11 +43,16 @@ func update_physics(delta):
 	if Input.is_action_pressed("Down"):
 		if bottomOfLadderProx.getAreas().size() == 0:
 			#Finish
-			trasitioned.emit(self, "Land")
-			return
+			if %IsTerrainBellow.is_colliding(): #Parrent is curently never on floor, not a big deal tho still looks fine
+				trasitioned.emit(self, "Land")
+				return
+			else:
+				if topOfLadderProx.getAreas().size() == 0:
+					trasitioned.emit(self, "Hang")
+					return
 
 func exit(n : State):
-	if n is BigPlayerClimb:
+	if n is BigPlayerClimb or n is BigPlayerHanging:
 		return
 	parent.climbing = false
 	parent.set_collision_mask_value(1, true)

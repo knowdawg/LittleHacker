@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=3 uid="uid://cirxwk2d3306d"]
+[gd_scene load_steps=113 format=3 uid="uid://cirxwk2d3306d"]
 
 [ext_resource type="Texture2D" uid="uid://cl38inbswxxfi" path="res://BigPlayer/BigPlayer.png" id="1_mspic"]
 [ext_resource type="Script" uid="uid://bd07h0fg7ft8s" path="res://BigPlayer/big_player.gd" id="1_qmsvx"]
@@ -35,7 +35,9 @@
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="25_fiuyr"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="25_jvlv8"]
 [ext_resource type="Script" uid="uid://d1h5crakj37eu" path="res://BigPlayer/StateMachine/pull_up.gd" id="25_pc2tx"]
+[ext_resource type="Script" uid="uid://7ux3wj2o3tce" path="res://BigPlayer/StateMachine/mount_ladder.gd" id="26_lla44"]
 [ext_resource type="Script" uid="uid://b02jkbf20gyl8" path="res://BigPlayer/StateMachine/sprint_to_climb.gd" id="26_qggjh"]
+[ext_resource type="Script" uid="uid://dheif1id1ar71" path="res://BigPlayer/StateMachine/hang.gd" id="27_bcxs1"]
 [ext_resource type="FontFile" uid="uid://ntvx3v1fpcia" path="res://UI/5x5PixelFont.ttf" id="29_6anp5"]
 [ext_resource type="Script" uid="uid://cpl0eb6ld6egy" path="res://UI/FPSDisplay.gd" id="29_ht2n7"]
 [ext_resource type="Script" uid="uid://dx2tb6bucvs4u" path="res://BigPlayer/screen_effects.gd" id="32_ayaik"]
@@ -154,6 +156,52 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [60, 61, 62, 63, 64, 65]
+}
+
+[sub_resource type="Animation" id="Animation_gvj7j"]
+resource_name = "Climb"
+loop_mode = 1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/Climbing")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [4.0],
+"method": &"moveParrent"
+}, {
+"args": [3.0],
+"method": &"moveParrent"
+}, {
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [4.0],
+"method": &"moveParrent"
+}, {
+"args": [3.0],
+"method": &"moveParrent"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_ayaik"]
@@ -355,6 +403,58 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_pc2tx"]
+resource_name = "PullUp"
+length = 1.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("StateMachine/PullUp")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [0.0],
+"method": &"moveParrent"
+}, {
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [6.0],
+"method": &"moveParrent"
+}, {
+"args": [4.0],
+"method": &"moveParrent"
+}, {
+"args": [2.0],
+"method": &"moveParrent"
+}, {
+"args": [5.0],
+"method": &"moveParrent"
+}, {
+"args": [5.0],
+"method": &"moveParrent"
+}, {
+"args": [2.0],
+"method": &"moveParrent"
+}]
+}
+
 [sub_resource type="Animation" id="Animation_qmsvx"]
 length = 0.001
 tracks/0/type = "value"
@@ -385,6 +485,40 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [44, 45, 46, 47, 48, 49, 50, 51, 42, 43]
+}
+
+[sub_resource type="Animation" id="Animation_vt6b3"]
+resource_name = "SlideDown"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [136]
+}
+
+[sub_resource type="Animation" id="Animation_qggjh"]
+resource_name = "SprintIntoClimb"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [149, 150, 151, 152, 153, 154, 155]
 }
 
 [sub_resource type="Animation" id="Animation_lsjcy"]
@@ -506,86 +640,9 @@ tracks/0/keys = {
 "values": [107, 108, 109, 110]
 }
 
-[sub_resource type="Animation" id="Animation_gvj7j"]
-resource_name = "Climb"
-loop_mode = 1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [126, 127, 128, 129, 130, 131, 132, 133, 134, 135]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/Climbing")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"values": [{
-"args": [1.0],
-"method": &"moveParrent"
-}, {
-"args": [4.0],
-"method": &"moveParrent"
-}, {
-"args": [3.0],
-"method": &"moveParrent"
-}, {
-"args": [1.0],
-"method": &"moveParrent"
-}, {
-"args": [4.0],
-"method": &"moveParrent"
-}, {
-"args": [3.0],
-"method": &"moveParrent"
-}]
-}
-tracks/2/type = "method"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("StateMachine/Climbing")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"snapToRung"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_vt6b3"]
-resource_name = "SlideDown"
-length = 0.1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [136]
-}
-
-[sub_resource type="Animation" id="Animation_pc2tx"]
-resource_name = "PullUp"
-length = 1.2
+[sub_resource type="Animation" id="Animation_bcxs1"]
+resource_name = "Hang"
+length = 0.8
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -594,19 +651,23 @@ tracks/0/path = NodePath("PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [137, 138, 139, 140, 141, 142, 143, 144, 145, 146, 147, 148]
-}
-tracks/1/type = "method"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("StateMachine/PullUp")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [156, 157, 158, 159, 160, 161, 162, 163]
+}
+
+[sub_resource type="Animation" id="Animation_lla44"]
+resource_name = "MountLadder"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/MountLadder")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [1.0],
@@ -618,7 +679,7 @@ tracks/1/keys = {
 "args": [6.0],
 "method": &"moveParrent"
 }, {
-"args": [3.0],
+"args": [4.0],
 "method": &"moveParrent"
 }, {
 "args": [2.0],
@@ -634,22 +695,17 @@ tracks/1/keys = {
 "method": &"moveParrent"
 }]
 }
-
-[sub_resource type="Animation" id="Animation_qggjh"]
-resource_name = "SprintIntoClimb"
-length = 0.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [150, 151, 152, 153, 154, 155, 149]
+"values": [148, 147, 146, 145, 144, 143, 142, 141, 140, 139, 138, 137]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]
@@ -660,6 +716,7 @@ _data = {
 &"ChargeAttack": SubResource("Animation_jvlv8"),
 &"Charging": SubResource("Animation_n8cw0"),
 &"Climb": SubResource("Animation_gvj7j"),
+&"Hang": SubResource("Animation_bcxs1"),
 &"HitBlunt": SubResource("Animation_ayaik"),
 &"Idle": SubResource("Animation_mspic"),
 &"JumpCrouch": SubResource("Animation_ssk3x"),
@@ -669,6 +726,7 @@ _data = {
 &"LeaveBlock": SubResource("Animation_oqejv"),
 &"LightAttack": SubResource("Animation_um6lt"),
 &"LightAttack2": SubResource("Animation_4ilhq"),
+&"MountLadder": SubResource("Animation_lla44"),
 &"PullUp": SubResource("Animation_pc2tx"),
 &"RESET": SubResource("Animation_qmsvx"),
 &"Run": SubResource("Animation_13av7"),
@@ -1304,6 +1362,7 @@ _data = {
 [node name="BigPlayer" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 35
+floor_snap_length = 5.0
 script = ExtResource("1_qmsvx")
 
 [node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("21_enlr8")]
@@ -1324,10 +1383,9 @@ shape = SubResource("RectangleShape2D_mspic")
 unique_name_in_owner = true
 clip_children = 2
 texture_filter = 1
-position = Vector2(-1, 0)
 texture = SubResource("CanvasTexture_6anp5")
 flip_h = true
-hframes = 156
+hframes = 165
 frame = 13
 
 [node name="SpriteDirectorComponent" parent="PlayerSprite" node_paths=PackedStringArray("spriteToFlip", "velocityToCheck") instance=ExtResource("3_m83fv")]
@@ -1363,10 +1421,10 @@ stateMachine = NodePath("..")
 
 [node name="Walk" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("5_2t6u2")
-updateWhileHacked = null
 animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
+updateWhileHacked = null
 
 [node name="Fall" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
 script = ExtResource("6_m83fv")
@@ -1434,9 +1492,10 @@ parent = NodePath("../..")
 stateMachine = NodePath("..")
 hurtbox = NodePath("../../Components/HurtboxComponent")
 
-[node name="LeaveBlock" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
+[node name="LeaveBlock" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent")]
 script = ExtResource("18_58u5n")
 animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
 
 [node name="Stagger" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator")]
 script = ExtResource("19_npd63")
@@ -1471,12 +1530,26 @@ animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 
-[node name="SprintToClimb" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "ladderProx")]
+[node name="MountLadder" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine")]
+script = ExtResource("26_lla44")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+
+[node name="SpeedIntoLadder" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "ladderProx")]
 script = ExtResource("26_qggjh")
 animator = NodePath("../../PlayerAnimator")
 parent = NodePath("../..")
 stateMachine = NodePath("..")
 ladderProx = NodePath("../../Components/LadderProximities/GeneralLadderProx")
+
+[node name="Hang" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "parent", "stateMachine", "ladderProx", "topLadderProx")]
+script = ExtResource("27_bcxs1")
+animator = NodePath("../../PlayerAnimator")
+parent = NodePath("../..")
+stateMachine = NodePath("..")
+ladderProx = NodePath("../../Components/LadderProximities/ExstendedReachForFalureToFind")
+topLadderProx = NodePath("../../Components/LadderProximities/TopLadder")
 
 [node name="InteractableManager" parent="." instance=ExtResource("10_axpou")]
 
@@ -1535,6 +1608,7 @@ animation = &"HeartBeat"
 frame_progress = 0.0622152
 
 [node name="FPSLabel" type="Label" parent="UI/SubViewportContainer/SubViewport"]
+visible = false
 offset_left = 3.0
 offset_top = 40.0
 offset_right = 56.0
@@ -1543,12 +1617,21 @@ theme_override_fonts/font = ExtResource("29_6anp5")
 text = "FPS: 60"
 script = ExtResource("29_ht2n7")
 
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="IsTerrainBellow" type="RayCast2D" parent="Raycasts"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(0, -2)
+target_position = Vector2(0, 18)
+collision_mask = 3
+
 [node name="Components" type="Node2D" parent="."]
 
 [node name="StaminaComponent" parent="Components" node_paths=PackedStringArray("hurtboxComponent", "attackComponentsToRegenStamina") instance=ExtResource("20_hpub4")]
 unique_name_in_owner = true
 maxStamina = 1.0
-staminaRegenPerSecound = 1.0
+staminaRegenPerSecound = 10.0
 hurtboxComponent = NodePath("../HurtboxComponent")
 attackComponentsToRegenStamina = [NodePath("../../AttackComponents/LightAttack"), NodePath("../../AttackComponents/HeavyAttack")]
 MAX_HEALTH = 100.0
@@ -1594,6 +1677,7 @@ unique_name_in_owner = true
 collision_mask = 1024
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/LadderProximities/TopLadder"]
+visible = false
 position = Vector2(0, -13.5)
 shape = SubResource("RectangleShape2D_gvj7j")
 
@@ -1602,6 +1686,7 @@ unique_name_in_owner = true
 collision_mask = 1024
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Components/LadderProximities/BottomLadder"]
+visible = false
 position = Vector2(0, 15.5)
 shape = SubResource("RectangleShape2D_gvj7j")
 
@@ -1683,7 +1768,6 @@ libraries = {
 [node name="ShadowNormalDualLight" parent="." instance=ExtResource("36_d0s3x")]
 visible = false
 texture = ExtResource("37_nv3v6")
-height = 0.0
 
 [connection signal="guardBroken" from="Components/StaminaComponent" to="." method="_on_stamina_component_guard_broken"]
 [connection signal="guardBroken" from="Components/StaminaComponent" to="StateMachine" method="_on_stamina_component_guard_broken"]

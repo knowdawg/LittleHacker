@@ -5,7 +5,7 @@ class_name BigPlayerFall
 @export var parent : BigPlayer
 @export var stateMachine : BigPlayerStateMachine
 
-func enter(_p):
+func enter(p : State):
 	if animator.current_animation == "SprintJumpStart":
 		animator.play("SprintJumpPeak")
 	else:

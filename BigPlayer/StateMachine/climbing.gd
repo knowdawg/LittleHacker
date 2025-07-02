@@ -19,10 +19,13 @@ func enter(p : State):
 	elif %ExstendedReachForFalureToFind.getAreas().size() > 0:
 		parent.global_position.x = %ExstendedReachForFalureToFind.getAreas()[0].global_position.x + 1.0
 	
+	if p is not BigPlayerSpeedIntoLadder:
+		snapToRung()
+	
 	animator.play("Climb")
 	animator.speed_scale = 1.5
 
-func update_physics(delta):
+func update_physics(_delta):
 	if Input.is_action_pressed("Up"):
 		animator.play("Climb")
 	else:
@@ -50,16 +53,23 @@ func update_physics(delta):
 
 func snapToRung():
 	parent.global_position.y = round(parent.global_position.y)
-	if ladderProx.getAreas().size() > 0:
-		parent.global_position.y += ladderProx.getAreas()[0].getNearestRung(parent, -15.0)
-	
+	if %ExstendedReachForFalureToFind.getAreas().size() > 0:
+		parent.global_position.y += %ExstendedReachForFalureToFind.getAreas()[0].getNearestRung(parent, -15.0) + 8.0
+		if %IsTerrainBellow.is_colliding():
+			parent.global_position.y -= 8.0
 
 func moveParrent(amount : float):
 	parent.position.y -= amount
+	#for hanging to climbing
+	if topOfLadderProx.position.y < 0.0:
+		topOfLadderProx.position.y += amount
 
 func exit(n : State):
+	#for hanging to climbing
+	topOfLadderProx.position.y = 0.0
+	
 	animator.speed_scale = 1.0
-	if n is BigPlayerSlideDown or n is BigPlayerPullUp:
+	if n is BigPlayerSlideDown or n is BigPlayerPullUp or n is BigPlayerHanging:
 		return
 	parent.climbing = false
 	parent.set_collision_mask_value(1, true)
