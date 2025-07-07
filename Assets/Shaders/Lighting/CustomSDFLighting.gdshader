@@ -31,8 +31,8 @@ void light() {
 	float finished = 0.0;
 
 	//Marching Algorithm
-	for(int i = 0; i < 100; i++){
-		if(distanceNeededToTravel > 0.4){
+	for(int i = 0; i < 80; i++){
+		if(distanceNeededToTravel > 0.7){
 			break;
 		}
 		if((disTraveled + 0.0) > distanceNeededToTravel){
@@ -56,5 +56,5 @@ void light() {
 
 	intensity = smoothstep(shadowIntensitiy, 1.0, intensity);
 
-	LIGHT = vec4(LIGHT_COLOR.rgb * screenVal.rgb * intensity * 8.0, LIGHT_COLOR.a);
+	LIGHT = vec4(LIGHT_COLOR.rgb * screenVal.rgb * intensity * LIGHT_ENERGY, LIGHT_COLOR.a);
 }

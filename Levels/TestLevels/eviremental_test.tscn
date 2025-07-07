@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=30 format=3 uid="uid://dlfxfm3ebd5n7"]
 
 [ext_resource type="Texture2D" uid="uid://fno00145fuo4" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/CarcassOfCreationBleakSetting5.png" id="1_40igy"]
 [ext_resource type="PackedScene" uid="uid://c3bd14h6powqs" path="res://Objects/WorldObjects/Tilemaps/metal_plates_background.tscn" id="1_42e3u"]
@@ -18,10 +18,13 @@
 [ext_resource type="PackedScene" uid="uid://dek8hjta7fnhu" path="res://Objects/WorldEnvierments/TerminalRoomWorldEnvirment.tscn" id="15_ksyuk"]
 [ext_resource type="Texture2D" uid="uid://bf476bf5e1awy" path="res://BigPlayer/BigPlayerDifuseTest.png" id="17_yo6y3"]
 [ext_resource type="Texture2D" uid="uid://bkfiyxqym8kw7" path="res://BigPlayer/BigPlayerNormalTest.png" id="18_25rag"]
+[ext_resource type="Texture2D" uid="uid://dd5myseln132w" path="res://Test/CarcassOfCreationWorshipDog.png" id="18_cqcw5"]
 [ext_resource type="Texture2D" uid="uid://q2wmo5q66tne" path="res://Test/CarcassOfCreationRobotNoble.png" id="19_25rag"]
+[ext_resource type="Texture2D" uid="uid://tamem0rtse4m" path="res://Test/CarcassOfCreationWorshipDogNormal.png" id="19_qr70v"]
 [ext_resource type="Texture2D" uid="uid://dm0qp77gddopx" path="res://Test/CarcassOfCreationRobotNobleNormal.png" id="20_lbh02"]
 [ext_resource type="Texture2D" uid="uid://w6ugjobtxl8h" path="res://Test/CarcassOfCreationInfectedPorcelain.png" id="21_lbh02"]
 [ext_resource type="Texture2D" uid="uid://b2x8we6nj5mop" path="res://Test/CarcassOfCreationInfectedPorcelainNormal.png" id="22_vi2od"]
+[ext_resource type="Texture2D" uid="uid://dt50io5j3rwyn" path="res://Test/CarcassOfCreationRefrances.png" id="25_qr70v"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vi2od"]
 diffuse_texture = ExtResource("19_25rag")
@@ -30,6 +33,10 @@ normal_texture = ExtResource("20_lbh02")
 [sub_resource type="CanvasTexture" id="CanvasTexture_ofiqv"]
 diffuse_texture = ExtResource("21_lbh02")
 normal_texture = ExtResource("22_vi2od")
+
+[sub_resource type="CanvasTexture" id="CanvasTexture_5wmaw"]
+diffuse_texture = ExtResource("18_cqcw5")
+normal_texture = ExtResource("19_qr70v")
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_lbh02"]
 diffuse_texture = ExtResource("17_yo6y3")
@@ -273,8 +280,12 @@ texture = SubResource("CanvasTexture_ofiqv")
 position = Vector2(-402, -19)
 texture = SubResource("CanvasTexture_ofiqv")
 
+[node name="WorshipperDog" type="Sprite2D" parent="."]
+position = Vector2(-366, -14)
+texture = SubResource("CanvasTexture_5wmaw")
+
 [node name="BigPlayer" parent="." instance=ExtResource("3_yyfki")]
-position = Vector2(-324, -21)
+position = Vector2(12, -19)
 
 [node name="ShadowNormalDualLight3" parent="." instance=ExtResource("12_r2q2l")]
 position = Vector2(242, -44)
@@ -336,3 +347,7 @@ position = Vector2(-156, -14)
 texture = SubResource("CanvasTexture_lbh02")
 
 [node name="TerminalRoomWorldEnvirment" parent="." instance=ExtResource("15_ksyuk")]
+
+[node name="CarcassOfCreationRefrances" type="Sprite2D" parent="."]
+position = Vector2(-474, -10)
+texture = ExtResource("25_qr70v")

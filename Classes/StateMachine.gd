@@ -82,6 +82,10 @@ func hackModeFinished():
 func _physics_process(delta):
 	if current_state:
 		current_state.update_physics(delta)
+	custumPhysicsProcess(delta)
+
+func custumPhysicsProcess(_delta):
+	pass
 
 #Called by the signal
 func onChildTransition(state : State, new_state_name):

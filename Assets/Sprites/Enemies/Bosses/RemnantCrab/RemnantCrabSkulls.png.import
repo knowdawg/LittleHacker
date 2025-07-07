@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://boj1mqlr1sbg8"
-path="res://.godot/imported/RemnantCrabSmallHandPresser.png-53babde7d00fab45f02cf65b79f27d6d.ctex"
+uid="uid://btkosfrj5k4rr"
+path="res://.godot/imported/RemnantCrabSkulls.png-da96976774e09553143d1a2941b89f4a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandPresser.png"
-dest_files=["res://.godot/imported/RemnantCrabSmallHandPresser.png-53babde7d00fab45f02cf65b79f27d6d.ctex"]
+source_file="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSkulls.png"
+dest_files=["res://.godot/imported/RemnantCrabSkulls.png-da96976774e09553143d1a2941b89f4a.ctex"]
 
 [params]
 

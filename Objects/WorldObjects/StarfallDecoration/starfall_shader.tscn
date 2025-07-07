@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://n2q3tqtenc73"]
 
-[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="1_kaycs"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/StarfallShader/starfall_shader.gdshader" id="1_kaycs"]
 
 [sub_resource type="Gradient" id="Gradient_hm83j"]
 interpolation_mode = 1

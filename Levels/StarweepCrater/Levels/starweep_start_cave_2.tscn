@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://c80acag1837nm"]
+[gd_scene load_steps=41 format=3 uid="uid://c80acag1837nm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_us2g6"]
 [ext_resource type="PackedScene" uid="uid://bo8tvedjow02d" path="res://Levels/StarweepCrater/EnvirementScenes/starweep_start_cave_2.tscn" id="2_aolvh"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_aolvh"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_01fwu"]
 [ext_resource type="Shader" uid="uid://dv7edr1281u3p" path="res://Assets/Shaders/Outline.gdshader" id="4_dtsy0"]
+[ext_resource type="Texture2D" uid="uid://ckifrsf13bdj7" path="res://Assets/Sprites/Gradiants/CircleGradiant.tres" id="4_kocr5"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="4_l67sm"]
 [ext_resource type="PackedScene" uid="uid://bvdxkosvo3rdd" path="res://Objects/Enemies/CrystalPillbug/crystal_pillbug.tscn" id="5_dtsy0"]
 [ext_resource type="PackedScene" uid="uid://dw4f7rxc2fd23" path="res://Objects/WorldObjects/Tilemaps/background_tilemap.tscn" id="5_uhfbk"]
@@ -50,22 +51,6 @@ polygon = PackedVector2Array(400, 285, 400, 287, 352, 287, 352, 285)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_kocr5"]
 polygon = PackedVector2Array(211, 286, 226, 286, 226, 288, 211, 288)
-
-[sub_resource type="Gradient" id="Gradient_l67sm"]
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_dtsy0"]
-gradient = SubResource("Gradient_l67sm")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.8)
-
-[sub_resource type="Gradient" id="Gradient_dtsy0"]
-offsets = PackedFloat32Array(0.67561, 0.807317)
-colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_wejjc"]
-gradient = SubResource("Gradient_dtsy0")
 
 [sub_resource type="Gradient" id="Gradient_3ufx3"]
 offsets = PackedFloat32Array(0.343902, 0.990244)
@@ -113,7 +98,7 @@ size = Vector2(30, 23)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l67sm"]
 resource_local_to_scene = true
 shader = ExtResource("3_aolvh")
-shader_parameter/brightness = 1.0
+shader_parameter/brightness = 0.2
 shader_parameter/shadowIntensitiy = 0.0
 
 [node name="TutorialRoom2" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
@@ -254,144 +239,33 @@ oneWay = true
 [node name="Lights" type="Node2D" parent="."]
 
 [node name="Lava1" type="PointLight2D" parent="Lights"]
-position = Vector2(382, 229)
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
+position = Vector2(384, 245)
+scale = Vector2(0.5, 0.5)
+color = Color(1, 0.686275, 0.184314, 1)
+energy = 2.0
+blend_mode = 2
+texture = ExtResource("4_kocr5")
 
 [node name="Lava2" type="PointLight2D" parent="Lights"]
-position = Vector2(381, 255)
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
+position = Vector2(381, 182)
+scale = Vector2(0.5, 0.5)
+color = Color(1, 0.686275, 0.184314, 1)
+energy = 2.0
+blend_mode = 2
+texture = ExtResource("4_kocr5")
 
-[node name="Lava4" type="PointLight2D" parent="Lights"]
-position = Vector2(381, 169)
-scale = Vector2(2, 2.59375)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
-
-[node name="Lava5" type="PointLight2D" parent="Lights"]
-position = Vector2(390, 295)
-rotation = -1.57355
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_wejjc")
-
-[node name="Lava6" type="PointLight2D" parent="Lights"]
-position = Vector2(742, 112)
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
-
-[node name="Lava7" type="PointLight2D" parent="Lights"]
-position = Vector2(767, 157)
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
-
-[node name="Lava8" type="PointLight2D" parent="Lights"]
-position = Vector2(782, 207)
-scale = Vector2(2, 2)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
-
-[node name="Lava10" type="PointLight2D" parent="Lights"]
-position = Vector2(776, 187)
-scale = Vector2(2, 1)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
-
-[node name="Lava9" type="PointLight2D" parent="Lights"]
-position = Vector2(781, 223)
-color = Color(0.184314, 0.105882, 0.0666667, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_dtsy0")
+[node name="Lava3" type="PointLight2D" parent="Lights"]
+position = Vector2(381, 145)
+color = Color(1, 0.686275, 0.184314, 1)
+energy = 2.0
+blend_mode = 2
+texture = ExtResource("4_kocr5")
+texture_scale = 0.2
 
 [node name="Crystals1" type="PointLight2D" parent="Lights"]
 position = Vector2(536, 133)
 rotation = -1.57355
 scale = Vector2(2, 2)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals10" type="PointLight2D" parent="Lights"]
-position = Vector2(926, 204)
-rotation = -1.57355
-scale = Vector2(2, 2)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals2" type="PointLight2D" parent="Lights"]
-position = Vector2(523, 136)
-rotation = -2.40319
-scale = Vector2(2, 0.464688)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals11" type="PointLight2D" parent="Lights"]
-position = Vector2(925, 208)
-rotation = -2.40319
-scale = Vector2(2, 0.464688)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals12" type="PointLight2D" parent="Lights"]
-position = Vector2(944, 191)
-rotation = -1.94764
-scale = Vector2(2, 0.464688)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals13" type="PointLight2D" parent="Lights"]
-position = Vector2(941, 203)
-rotation = -2.3228
-scale = Vector2(1.59165, 0.62239)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals14" type="PointLight2D" parent="Lights"]
-position = Vector2(915, 224)
-rotation = -2.8123
-scale = Vector2(1.24894, 0.657316)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals3" type="PointLight2D" parent="Lights"]
-position = Vector2(544, 123)
-rotation = -1.90378
-scale = Vector2(2, 0.464688)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals4" type="PointLight2D" parent="Lights"]
-position = Vector2(552, 120)
-rotation = -2.119
-scale = Vector2(1.21964, 0.464688)
-color = Color(0.0980392, 0.0980392, 0.0980392, 1)
-energy = 0.0
-texture = SubResource("GradientTexture2D_lpd6t")
-
-[node name="Crystals5" type="PointLight2D" parent="Lights"]
-position = Vector2(517, 147)
-rotation = -2.27502
-scale = Vector2(0.891098, 0.464688)
 color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_lpd6t")
@@ -618,9 +492,9 @@ polygon = PackedVector2Array(0, -4, 0, 288, 516, 288, 516, 208, 656, 208, 656, 2
 [node name="SoftLighting" parent="." instance=ExtResource("2_hxm8j")]
 z_index = 1
 material = SubResource("ShaderMaterial_l67sm")
-offset_left = 969.0
-offset_top = 56.0
-offset_right = 1161.0
-offset_bottom = 164.0
+offset_left = 286.0
+offset_top = 174.0
+offset_right = 478.0
+offset_bottom = 282.0
 
 [node name="StarweepWorldEnvierment" parent="." instance=ExtResource("17_qhcp3")]

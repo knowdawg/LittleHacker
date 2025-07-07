@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://lij4hq561e2o"
-path="res://.godot/imported/RemnantCrabSmallHandRight.png-327ec06989c89be098dd6400fe34b510.ctex"
+uid="uid://tamem0rtse4m"
+path="res://.godot/imported/CarcassOfCreationWorshipDogNormal.png-0471e75618d4077358d8c2b7a4f129c6.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHandRight.png"
-dest_files=["res://.godot/imported/RemnantCrabSmallHandRight.png-327ec06989c89be098dd6400fe34b510.ctex"]
+source_file="res://Test/CarcassOfCreationWorshipDogNormal.png"
+dest_files=["res://.godot/imported/CarcassOfCreationWorshipDogNormal.png-0471e75618d4077358d8c2b7a4f129c6.ctex"]
 
 [params]
 

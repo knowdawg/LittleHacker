@@ -1,13 +1,15 @@
-[gd_scene load_steps=56 format=3 uid="uid://bo8tvedjow02d"]
+[gd_scene load_steps=43 format=3 uid="uid://bo8tvedjow02d"]
 
 [ext_resource type="PackedScene" uid="uid://cfy3aart4poj3" path="res://Objects/WorldObjects/Tilemaps/sdf_tilemap.tscn" id="1_ugkb1"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="2_sv81g"]
 [ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="2_ue6xp"]
-[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="3_lgm33"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/StarfallShader/starfall_shader.gdshader" id="3_lgm33"]
 [ext_resource type="Texture2D" uid="uid://ctjut0hyxqlds" path="res://Assets/Sprites/EnvirmentTextures/Crystals/MassiveCrystals.png" id="4_5dfjh"]
 [ext_resource type="Texture2D" uid="uid://dd0ug5to67ucu" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed1.png" id="4_lgm33"]
 [ext_resource type="Texture2D" uid="uid://dtbcjfvjgkpiv" path="res://Assets/Sprites/EnvirmentTextures/WoodenMines/BrokenWoodenSuspensionBridge.png" id="4_sv81g"]
+[ext_resource type="Texture2D" uid="uid://drv0t4ay3pkyc" path="res://Assets/Shaders/Textures/StarfallShader/StarfallShaderNoiseRed.tres" id="4_txudo"]
 [ext_resource type="PackedScene" uid="uid://rr8whno8lay3" path="res://Objects/WorldObjects/Tilemaps/wooden_mine.tscn" id="4_ue6xp"]
+[ext_resource type="Texture2D" uid="uid://ctbmvi3tn8m5y" path="res://Assets/Shaders/Textures/StarfallShader/StarfallShaderNoiseWarpRed.tres" id="5_son0c"]
 [ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="6_ugkb1"]
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_3d8ya"]
@@ -86,35 +88,11 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 10.0
 shader_parameter/surgeSize = 3.0
 
-[sub_resource type="Gradient" id="Gradient_lgm33"]
-offsets = PackedFloat32Array(0.0177515, 0.426035, 0.789941)
-colors = PackedColorArray(0.854902, 0.52549, 0.243137, 1, 0.811765, 0.341176, 0.235294, 1, 0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_txudo"]
-frequency = 0.0111
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_k4efd"]
-width = 128
-height = 128
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = SubResource("Gradient_lgm33")
-noise = SubResource("FastNoiseLite_txudo")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_vvh1h"]
-frequency = 0.001
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5qilq"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_vvh1h")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ooq2"]
 resource_local_to_scene = true
 shader = ExtResource("3_lgm33")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_k4efd")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_5qilq")
+shader_parameter/noiseTex = ExtResource("4_txudo")
+shader_parameter/noiseWarp = ExtResource("5_son0c")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 0.5
 shader_parameter/warpScrollSpeed = -0.5
@@ -122,35 +100,11 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 0.0
 shader_parameter/surgeSize = 3.0
 
-[sub_resource type="Gradient" id="Gradient_5dfjh"]
-offsets = PackedFloat32Array(0.0177515, 0.426035, 0.789941)
-colors = PackedColorArray(0.854902, 0.52549, 0.243137, 1, 0.811765, 0.341176, 0.235294, 1, 0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_ugkb1"]
-frequency = 0.0111
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_txudo"]
-width = 128
-height = 128
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = SubResource("Gradient_5dfjh")
-noise = SubResource("FastNoiseLite_ugkb1")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_son0c"]
-frequency = 0.001
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kjaqp"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_son0c")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_sv81g"]
 resource_local_to_scene = true
 shader = ExtResource("3_lgm33")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_txudo")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_kjaqp")
+shader_parameter/noiseTex = ExtResource("4_txudo")
+shader_parameter/noiseWarp = ExtResource("5_son0c")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -158,36 +112,11 @@ shader_parameter/surgeFrequency = 1.0
 shader_parameter/surgeSpeed = 2.3
 shader_parameter/surgeSize = 2.3
 
-[sub_resource type="Gradient" id="Gradient_ugkb1"]
-offsets = PackedFloat32Array(0.0177515, 0.426035, 0.789941)
-colors = PackedColorArray(0.854902, 0.52549, 0.243137, 1, 0.811765, 0.341176, 0.235294, 1, 0.647059, 0.188235, 0.188235, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_kjaqp"]
-frequency = 0.0111
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_vvh1h"]
-width = 32
-height = 32
-invert = true
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = SubResource("Gradient_ugkb1")
-noise = SubResource("FastNoiseLite_kjaqp")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_5qilq"]
-frequency = 0.001
-fractal_octaves = 10
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_2ooq2"]
-seamless = true
-seamless_blend_skirt = 0.3
-noise = SubResource("FastNoiseLite_5qilq")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ot8jt"]
 resource_local_to_scene = true
 shader = ExtResource("3_lgm33")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_vvh1h")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_2ooq2")
+shader_parameter/noiseTex = ExtResource("4_txudo")
+shader_parameter/noiseWarp = ExtResource("5_son0c")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -242,8 +171,8 @@ height = 1080
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5dfjh"]
 resource_local_to_scene = true
 shader = ExtResource("3_lgm33")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_txudo")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_kjaqp")
+shader_parameter/noiseTex = ExtResource("4_txudo")
+shader_parameter/noiseWarp = ExtResource("5_son0c")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3
@@ -254,8 +183,8 @@ shader_parameter/surgeSize = 2.3
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3d8ya"]
 resource_local_to_scene = true
 shader = ExtResource("3_lgm33")
-shader_parameter/noiseTex = SubResource("NoiseTexture2D_txudo")
-shader_parameter/noiseWarp = SubResource("NoiseTexture2D_kjaqp")
+shader_parameter/noiseTex = ExtResource("4_txudo")
+shader_parameter/noiseWarp = ExtResource("5_son0c")
 shader_parameter/resolution = Vector2(30, 30)
 shader_parameter/textureScollSpeed = 1.0
 shader_parameter/warpScrollSpeed = 1.3

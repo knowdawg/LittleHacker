@@ -1,11 +1,14 @@
-[gd_scene load_steps=15 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=17 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
-[ext_resource type="PackedScene" uid="uid://b5cp00hin8my6" path="res://Objects/Enemies/CrystalElite/crystal_elite.tscn" id="2_mn1fc"]
+[ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="2_1og1s"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_p32do"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_4mm16"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_n4nu2"]
+
+[sub_resource type="Environment" id="Environment_1og1s"]
+background_mode = 3
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_2b6ii"]
 
@@ -34,6 +37,9 @@ shader = ExtResource("3_4mm16")
 shader_parameter/brightness = 1.0
 shader_parameter/shadowIntensitiy = 0.0
 
+[sub_resource type="Environment" id="Environment_mn1fc"]
+background_mode = 3
+
 [node name="LevelForTesting" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_x8kok")
 projectileSpawnNode = NodePath("Proectiles")
@@ -43,6 +49,7 @@ doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParrent")
 respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
+environment = SubResource("Environment_1og1s")
 
 [node name="Main" type="SubViewport" parent="."]
 transparent_bg = true
@@ -79,7 +86,7 @@ position = Vector2(0, 35)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
-position = Vector2(-39, -1)
+position = Vector2(-76, 0)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
@@ -98,7 +105,7 @@ position = Vector2(0, 35)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(109, 0)
+position = Vector2(149, 0)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
@@ -129,8 +136,8 @@ texture = SubResource("ViewportTexture_f40ai")
 
 [node name="Enemies" type="Node2D" parent="."]
 
-[node name="CrystalElite" parent="Enemies" instance=ExtResource("2_mn1fc")]
-position = Vector2(34, 8)
+[node name="RemnantCrab" parent="Enemies" instance=ExtResource("2_1og1s")]
+position = Vector2(23, -8)
 
 [node name="Proectiles" type="Node2D" parent="."]
 
@@ -149,6 +156,8 @@ directionToFaceWhenEnteringTHISDoor = 1
 position = Vector2(-16, 13)
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("6_n4nu2")]
-position = Vector2(61, 36)
-polygon = PackedVector2Array(-133, 4, 11, 4, 11, -56, -133, -56)
-cameraSize = Vector2(107, 60)
+position = Vector2(61, 20)
+polygon = PackedVector2Array(-189, 4, 67, 4, 67, -92, -189, -92)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mn1fc")

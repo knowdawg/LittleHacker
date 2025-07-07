@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="4_ra6ti"]
 [ext_resource type="PackedScene" uid="uid://cfy3aart4poj3" path="res://Objects/WorldObjects/Tilemaps/sdf_tilemap.tscn" id="4_ye2o5"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="5_12dgg"]
-[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="6_hplpw"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/StarfallShader/starfall_shader.gdshader" id="6_hplpw"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="7_7fesy"]
 [ext_resource type="Texture2D" uid="uid://ctjut0hyxqlds" path="res://Assets/Sprites/EnvirmentTextures/Crystals/MassiveCrystals.png" id="8_ra6ti"]
 

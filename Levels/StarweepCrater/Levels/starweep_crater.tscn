@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Environment" uid="uid://dmo71rg36b37b" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tres" id="2_w31va"]
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="4_qqksi"]
-[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="5_1x65e"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/StarfallShader/starfall_shader.gdshader" id="5_1x65e"]
 [ext_resource type="Gradient" uid="uid://brnbs06x4a1b0" path="res://Palletes/StarfallRedPallete.tres" id="6_53fi3"]
 [ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="6_mbqal"]
 [ext_resource type="Texture2D" uid="uid://cdv6us5lootnk" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse2.png" id="6_tpsgt"]

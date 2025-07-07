@@ -204,6 +204,23 @@ tracks/1/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_bcxs1"]
+resource_name = "Hang"
+length = 0.8
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("PlayerSprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [156, 157, 158, 159, 160, 161, 162, 163]
+}
+
 [sub_resource type="Animation" id="Animation_ayaik"]
 resource_name = "HitBlunt"
 length = 0.3
@@ -401,6 +418,57 @@ tracks/1/keys = {
 "args": [],
 "method": &"disable"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_lla44"]
+resource_name = "MountLadder"
+step = 0.05
+tracks/0/type = "method"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("StateMachine/MountLadder")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"values": [{
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [1.0],
+"method": &"moveParrent"
+}, {
+"args": [6.0],
+"method": &"moveParrent"
+}, {
+"args": [4.0],
+"method": &"moveParrent"
+}, {
+"args": [2.0],
+"method": &"moveParrent"
+}, {
+"args": [5.0],
+"method": &"moveParrent"
+}, {
+"args": [5.0],
+"method": &"moveParrent"
+}, {
+"args": [2.0],
+"method": &"moveParrent"
+}]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PlayerSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [148, 147, 146, 145, 144, 143, 142, 141, 140, 139, 138, 137]
 }
 
 [sub_resource type="Animation" id="Animation_pc2tx"]
@@ -638,74 +706,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [107, 108, 109, 110]
-}
-
-[sub_resource type="Animation" id="Animation_bcxs1"]
-resource_name = "Hang"
-length = 0.8
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerSprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [156, 157, 158, 159, 160, 161, 162, 163]
-}
-
-[sub_resource type="Animation" id="Animation_lla44"]
-resource_name = "MountLadder"
-step = 0.05
-tracks/0/type = "method"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("StateMachine/MountLadder")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"values": [{
-"args": [1.0],
-"method": &"moveParrent"
-}, {
-"args": [1.0],
-"method": &"moveParrent"
-}, {
-"args": [6.0],
-"method": &"moveParrent"
-}, {
-"args": [4.0],
-"method": &"moveParrent"
-}, {
-"args": [2.0],
-"method": &"moveParrent"
-}, {
-"args": [5.0],
-"method": &"moveParrent"
-}, {
-"args": [5.0],
-"method": &"moveParrent"
-}, {
-"args": [2.0],
-"method": &"moveParrent"
-}]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerSprite:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.25, 0.35, 0.45, 0.55, 0.65, 0.75, 0.85, 0.95),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [148, 147, 146, 145, 144, 143, 142, 141, 140, 139, 138, 137]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_r3020"]

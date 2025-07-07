@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://n2q3tqtenc73" path="res://Objects/WorldObjects/StarfallDecoration/starfall_shader.tscn" id="3_8fabx"]
 [ext_resource type="Texture2D" uid="uid://dd0ug5to67ucu" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed1.png" id="3_rnoh6"]
 [ext_resource type="Texture2D" uid="uid://wcdyjp68yn1j" path="res://Assets/Sprites/EnvirmentTextures/Crystals/GiantCrystalRed2.png" id="4_8fabx"]
-[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/starfall_shader.gdshader" id="4_kq2wa"]
+[ext_resource type="Shader" uid="uid://cy6dggw61fpd6" path="res://Assets/Shaders/Textures/StarfallShader/starfall_shader.gdshader" id="4_kq2wa"]
 [ext_resource type="Texture2D" uid="uid://ctjut0hyxqlds" path="res://Assets/Sprites/EnvirmentTextures/Crystals/MassiveCrystals.png" id="5_kq2wa"]
 [ext_resource type="PackedScene" uid="uid://rr8whno8lay3" path="res://Objects/WorldObjects/Tilemaps/wooden_mine.tscn" id="6_nri7u"]
 [ext_resource type="Texture2D" uid="uid://t0gq5i3xs6r6" path="res://Assets/Sprites/EnvirmentTextures/WoodenMines/WoodenMinesTiles1.png" id="7_rswck"]
