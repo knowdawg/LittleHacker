@@ -11,7 +11,7 @@ func enter(_p):
 	animator.play("RESET")
 
 func update(_delta):
-	#nextStates.append("SuckIn")
+	nextStates.append("HeadSlam")
 	
 	if nextStates.size() != 0:
 		var nextState = nextStates.pop_front()
@@ -51,4 +51,13 @@ func update(_delta):
 		nextStates.append("RunAway")
 		nextStates.append("SuckIn")
 		prevAttack = sm.phase1Attacks.SuckIn
+		return
+		
+	
+	if a == sm.phase1Attacks.LazerRun:
+		if %RightWallRaycast.is_colliding():
+			return
+		
+		nextStates.append("LaserRun")
+		prevAttack = sm.phase1Attacks.LazerRun
 		return
