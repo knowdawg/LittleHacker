@@ -3,7 +3,9 @@ class_name MovementComponent
 
 @export var parent : Node2D
 @export var gravity : float = 0.0
+@export var externalForceMultiplier : float = 1.0
 @export var forceDecayRate : Vector2 = Vector2(10.0, 10.0)
+
 var g = Vector2.ZERO
 
 var falling : bool = false
@@ -130,7 +132,7 @@ func move(dir : Vector2, amplitude : float, delta):
 
 var force = Vector2.ZERO
 func applyForce(forceVec : Vector2, forceAmplitude : float):
-	force += forceVec.normalized() * forceAmplitude
+	force += forceVec.normalized() * forceAmplitude * externalForceMultiplier
 
 func resetForces():
 	force = Vector2.ZERO

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=71 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -11,11 +11,16 @@
 [ext_resource type="PackedScene" uid="uid://dc8ilsyf3576k" path="res://Components/KnockbackComponents/OmniDirectionalKnockbackComponent/omni_directional_knockback_component.tscn" id="6_1ai65"]
 [ext_resource type="Script" uid="uid://dbpra2k0i46gy" path="res://Objects/Enemies/RemnantCrab/StateMachine/idle.gd" id="7_1ai65"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_2ujic"]
+[ext_resource type="PackedScene" uid="uid://cofe7mw4q1kr1" path="res://Components/ShockwaveComponent/shockwaveComponent.tscn" id="8_1qnwx"]
 [ext_resource type="Script" uid="uid://bkbvcn61p04ge" path="res://Classes/GenericStates/GenericAttackState.gd" id="8_5j67f"]
+[ext_resource type="Shader" uid="uid://0tvivqlcrpgl" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="8_8od5u"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_cbi2v"]
+[ext_resource type="Shader" uid="uid://cuwb5rwdjiv7w" path="res://Assets/Shaders/Textures/LaserSumOfSines.gdshader" id="8_fp8yd"]
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_5j67f"]
+[ext_resource type="Shader" uid="uid://cp0mbfv5ossja" path="res://Assets/Shaders/Filters/BlackHole.gdshader" id="9_oeqg8"]
 [ext_resource type="Script" uid="uid://wfuie18f6ykl" path="res://Objects/Enemies/RemnantCrab/StateMachine/chase.gd" id="9_qmox6"]
 [ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="10_5j67f"]
+[ext_resource type="Texture2D" uid="uid://nufx0s5w82kb" path="res://Assets/Sprites/Noises/RemnantCrabBlockHoleNoise.tres" id="10_oeqg8"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_qmox6"]
 [ext_resource type="Script" uid="uid://dhpi7qq7pbv7t" path="res://Objects/Enemies/RemnantCrab/StateMachine/suck_in.gd" id="10_rt31b"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_rt31b"]
@@ -34,72 +39,43 @@ size = Vector2(47, 19)
 [sub_resource type="CircleShape2D" id="CircleShape2D_jvtmt"]
 radius = 14.0
 
-[sub_resource type="Animation" id="Animation_vx8lb"]
-resource_name = "StartLaser"
-length = 0.1
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Laser:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.025, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [5.0, 2.0, 3.0]
-}
+[sub_resource type="Gradient" id="Gradient_p2dj1"]
+offsets = PackedFloat32Array(0, 0.535294, 1)
+colors = PackedColorArray(0.423529, 0.352941, 0.607843, 0, 0.423529, 0.352941, 0.607843, 1, 1, 1, 1, 1)
 
-[sub_resource type="Animation" id="Animation_jvtmt"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Laser:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [3.0]
-}
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_k1yg2"]
+gradient = SubResource("Gradient_p2dj1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1qnwx"]
+shader = ExtResource("8_fp8yd")
+shader_parameter/gradient = SubResource("GradientTexture1D_k1yg2")
+shader_parameter/numOfLasers = 5
+shader_parameter/waveBaseSize = 1.0
+shader_parameter/waveBaseSpeed = 1.5
+shader_parameter/waveBaseFrequency = 1.0
+shader_parameter/sizeMultiplier = 0.7
+shader_parameter/speedMultiplier = 0.9
+shader_parameter/frequencyMultiplier = 0.9
+shader_parameter/resolution = Vector2(16, 16)
 
 [sub_resource type="Animation" id="Animation_i7s33"]
 resource_name = "EndLaser"
 length = 0.3
 step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Laser:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [3.0, 0.0]
-}
 
 [sub_resource type="Animation" id="Animation_fp8yd"]
 resource_name = "PrepLaser"
 length = 0.1
 loop_mode = 1
 step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Laser:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 1.0]
-}
+
+[sub_resource type="Animation" id="Animation_jvtmt"]
+length = 0.001
+
+[sub_resource type="Animation" id="Animation_vx8lb"]
+resource_name = "StartLaser"
+length = 0.1
+step = 0.025
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i7s33"]
 _data = {
@@ -108,6 +84,38 @@ _data = {
 &"RESET": SubResource("Animation_jvtmt"),
 &"StartLaser": SubResource("Animation_vx8lb")
 }
+
+[sub_resource type="Gradient" id="Gradient_v3dep"]
+offsets = PackedFloat32Array(0, 0.779412)
+colors = PackedColorArray(0.423529, 0.352941, 0.607843, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hhtw5"]
+gradient = SubResource("Gradient_v3dep")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1yg2"]
+resource_local_to_scene = true
+shader = ExtResource("9_oeqg8")
+shader_parameter/resolution = Vector2(24, 24)
+shader_parameter/colorResolution = 100.0
+shader_parameter/distortionIntensity = 1.49012e-07
+shader_parameter/spiralDistortionIntensity = 0.5
+shader_parameter/holeSize = 0.2
+shader_parameter/image = ExtResource("10_oeqg8")
+shader_parameter/rotations = 1.0
+shader_parameter/depth = 0.5
+shader_parameter/spiralIntensity = 1.0
+shader_parameter/shrinkSpeed = 0.1
+shader_parameter/roationSpeed = 0.5
+shader_parameter/haloColor = SubResource("GradientTexture1D_hhtw5")
+
+[sub_resource type="Gradient" id="Gradient_oeqg8"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_d6it3"]
+gradient = SubResource("Gradient_oeqg8")
+width = 24
+height = 24
 
 [sub_resource type="Animation" id="Animation_1ai65"]
 resource_name = "HeadSlam"
@@ -248,6 +256,34 @@ tracks/9/keys = {
 "method": &"disable"
 }]
 }
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5.0],
+"method": &"shakeScreen"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Shockwaves/CenterShockwave")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shockwave"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_2ujic"]
 resource_name = "Idle"
@@ -375,6 +411,54 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, 2), Vector2(0, 2), Vector2(0, 0), Vector2(0, 2), Vector2(0, 3), Vector2(0, 2), Vector2(0, 2), Vector2(0, 0), Vector2(0, 0)]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AttackComponents/JumpSlam")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(1.2, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [3.0],
+"method": &"shakeScreen"
+}, {
+"args": [8.0],
+"method": &"shakeScreen"
+}]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Shockwaves/CenterShockwave")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(2.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shockwave"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_rt31b"]
 resource_name = "LaserRun"
@@ -452,6 +536,44 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
 "values": [15, 16, 17, 13, 14]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1.0],
+"method": &"shakeScreen"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BlackHoleContainer/BlackHole:position")
+tracks/7/interp = 0
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -2), Vector2(0, 0), Vector2(0, 2)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Proximities/Raycasts/LaserRaycast:position")
+tracks/8/interp = 0
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -2), Vector2(0, 0), Vector2(0, 2)]
 }
 
 [sub_resource type="Animation" id="Animation_yiftg"]
@@ -588,6 +710,30 @@ tracks/10/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("BlackHoleContainer/BlackHole:position")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Proximities/Raycasts/LaserRaycast:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -666,6 +812,24 @@ tracks/5/keys = {
 "update": 1,
 "values": [15, 16, 17, 13, 14]
 }
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath(".")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [1.0],
+"method": &"shakeScreen"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_1qnwx"]
+resource_name = "StaggerPhase1"
+step = 0.1
 
 [sub_resource type="Animation" id="Animation_d6it3"]
 resource_name = "StompLeft"
@@ -779,6 +943,65 @@ tracks/8/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 3), Vector2(0, 2), Vector2(0, 0)]
 }
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("AttackComponents/StompLeft")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"createStompProjectile"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath(".")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5.0],
+"method": &"shakeScreen"
+}]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Shockwaves/LeftLegShockwave")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shockwave"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qmox6"]
 resource_name = "StompRight"
@@ -880,6 +1103,65 @@ tracks/7/keys = {
 "update": 0,
 "values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, 3), Vector2(0, 2), Vector2(0, 0)]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("AttackComponents/StompRight")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.6, 0.7),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"createStompProjectile"
+}]
+}
+tracks/10/type = "method"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath(".")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [5.0],
+"method": &"shakeScreen"
+}]
+}
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Shockwaves/RightLegShockwave")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"shockwave"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_5j67f"]
 resource_name = "SuckIn"
@@ -978,6 +1260,7 @@ _data = {
 &"LaserRun": SubResource("Animation_rt31b"),
 &"RESET": SubResource("Animation_yiftg"),
 &"Run": SubResource("Animation_7y5mw"),
+&"StaggerPhase1": SubResource("Animation_1qnwx"),
 &"StompLeft": SubResource("Animation_d6it3"),
 &"StompRight": SubResource("Animation_qmox6"),
 &"SuckIn": SubResource("Animation_5j67f")
@@ -988,6 +1271,18 @@ radius = 120.017
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvtmt"]
 size = Vector2(21, 40)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i7s33"]
+size = Vector2(52, 139)
+
+[sub_resource type="SegmentShape2D" id="SegmentShape2D_i7s33"]
+b = Vector2(37, 38)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fp8yd"]
+size = Vector2(29, 29)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8od5u"]
+size = Vector2(29, 29)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_fp8yd"]
 seed = 153
@@ -1007,11 +1302,33 @@ shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
 
-[node name="RemnantCrab" type="CharacterBody2D"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3dep"]
+resource_local_to_scene = true
+shader = ExtResource("8_8od5u")
+shader_parameter/progress = 2.0
+shader_parameter/intensity = -2.0
+shader_parameter/width = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_oeqg8"]
+resource_local_to_scene = true
+shader = ExtResource("8_8od5u")
+shader_parameter/progress = 2.0
+shader_parameter/intensity = -2.0
+shader_parameter/width = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p2dj1"]
+resource_local_to_scene = true
+shader = ExtResource("8_8od5u")
+shader_parameter/progress = 2.0
+shader_parameter/intensity = -2.0
+shader_parameter/width = 0.3
+
+[node name="RemnantCrab" type="CharacterBody2D" node_paths=PackedStringArray("healthComponent")]
 texture_filter = 1
 collision_layer = 8
 collision_mask = 3
 script = ExtResource("1_7hw05")
+healthComponent = NodePath("GeneralComponents/HealthComponent")
 
 [node name="EnvirementCollisionShape" type="CollisionShape2D" parent="."]
 position = Vector2(0.5, 13.5)
@@ -1032,7 +1349,7 @@ collidable = false
 particle_count_x = 24
 movementForceMultiplier = 1.0
 gravity = Vector2(0, 0.2)
-windAmplitude = 3.0
+windAmplitude = 0.0
 windSpeed = 1.0
 windNoiseScale = 1.0
 lockRight = true
@@ -1060,17 +1377,29 @@ visible = false
 position = Vector2(0, -1)
 shape = SubResource("CircleShape2D_jvtmt")
 
-[node name="LaserDiplacer" type="Node" parent="."]
+[node name="LaserContainer" type="Node2D" parent="."]
 
-[node name="Laser" type="Line2D" parent="LaserDiplacer"]
-width = 3.0
-begin_cap_mode = 2
-end_cap_mode = 2
+[node name="Laser" type="Line2D" parent="LaserContainer"]
+material = SubResource("ShaderMaterial_1qnwx")
+width = 16.0
+texture_mode = 1
+joint_mode = 2
 
-[node name="LazerAnimator" type="AnimationPlayer" parent="LaserDiplacer"]
+[node name="LazerAnimator" type="AnimationPlayer" parent="LaserContainer"]
 libraries = {
 &"": SubResource("AnimationLibrary_i7s33")
 }
+
+[node name="BlackHoleContainer" type="Node2D" parent="."]
+position = Vector2(-0.5, 0)
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="BlackHoleContainer"]
+copy_mode = 2
+
+[node name="BlackHole" type="Sprite2D" parent="BlackHoleContainer"]
+visible = false
+material = SubResource("ShaderMaterial_k1yg2")
+texture = SubResource("GradientTexture2D_d6it3")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
 script = ExtResource("13_vx8lb")
@@ -1089,50 +1418,46 @@ script = ExtResource("7_1ai65")
 sm = NodePath("..")
 animator = NodePath("../../Animator")
 
-[node name="StompLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="StompLeft" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "parent", "movement")]
 script = ExtResource("8_5j67f")
 attackLength = 1.2
 animationName = "StompLeft"
 agroState = NodePath("../Idle")
 parryState = NodePath("../StaggerPhase1")
 animator = NodePath("../../Animator")
-nodeToFlip = NodePath("../../AttackComponents")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.2)])
 
-[node name="StompRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="StompRight" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "parent", "movement")]
 script = ExtResource("8_5j67f")
 attackLength = 1.2
 animationName = "StompRight"
 agroState = NodePath("../Idle")
 parryState = NodePath("../StaggerPhase1")
 animator = NodePath("../../Animator")
-nodeToFlip = NodePath("../../AttackComponents")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.2)])
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "parent", "movement")]
 script = ExtResource("8_5j67f")
 attackLength = 3.3
 animationName = "Jump"
 agroState = NodePath("../Idle")
 parryState = NodePath("../StaggerPhase1")
 animator = NodePath("../../Animator")
-nodeToFlip = NodePath("../../AttackComponents")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 3.3)])
 
-[node name="HeadSlam" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "nodeToFlip", "parent", "movement")]
+[node name="HeadSlam" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "parent", "movement")]
 script = ExtResource("8_5j67f")
 attackLength = 2.2
 animationName = "HeadSlam"
 agroState = NodePath("../Idle")
 parryState = NodePath("../StaggerPhase1")
 animator = NodePath("../../Animator")
-nodeToFlip = NodePath("../../AttackComponents")
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 2.2)])
@@ -1175,22 +1500,26 @@ suckEnd = 1.3
 proximity = NodePath("../../Proximities/ScreamProximity")
 parent = NodePath("../..")
 
-[node name="LaserRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("leftRaycast", "rightRaycast", "laserRaycast", "laserVisual", "laserAnimator", "parent", "animator", "skullSprite", "cloak")]
+[node name="LaserRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("leftRaycast", "rightRaycast", "laserRaycast", "laserContainer", "laserVisual", "laserAnimator", "blackHole", "laserAttackComponent", "laserHitbox", "parent", "animator", "skullSprite", "cloak")]
 script = ExtResource("11_vx8lb")
 leftRaycast = NodePath("../../Proximities/Raycasts/LeftWallRaycast")
 rightRaycast = NodePath("../../Proximities/Raycasts/RightWallRaycast")
 laserRaycast = NodePath("../../Proximities/Raycasts/LaserRaycast")
-laserVisual = NodePath("../../LaserDiplacer/Laser")
-laserAnimator = NodePath("../../LaserDiplacer/LazerAnimator")
+laserContainer = NodePath("../../LaserContainer")
+laserVisual = NodePath("../../LaserContainer/Laser")
+laserAnimator = NodePath("../../LaserContainer/LazerAnimator")
+blackHole = NodePath("../../BlackHoleContainer/BlackHole")
+laserAttackComponent = NodePath("../../AttackComponents/Laser")
+laserHitbox = NodePath("../../AttackComponents/Laser/CollisionShape2D")
 parent = NodePath("../..")
 animator = NodePath("../../Animator")
 skullSprite = NodePath("../../Sprites/Skulls")
 cloak = NodePath("../../Sprites/ClothSim")
 
-[node name="SpikeFloor" type="Node" parent="StateMachine"]
-
 [node name="StaggerPhase1" type="Node" parent="StateMachine"]
 script = ExtResource("10_5j67f")
+
+[node name="PhaseSwitch" type="Node" parent="StateMachine"]
 
 [node name="GravityAmplification" type="Node" parent="StateMachine"]
 
@@ -1225,6 +1554,7 @@ stateMachine = NodePath("../../StateMachine")
 
 [node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_7y5mw")]
 parent = NodePath("../..")
+externalForceMultiplier = 0.0
 
 [node name="OmniDirectionalKnockbackComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent", "movement") instance=ExtResource("6_1ai65")]
 parent = NodePath("../..")
@@ -1295,6 +1625,7 @@ healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 attack_damage = 1.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/HeadSlam"]
+visible = false
 position = Vector2(0.5, 3)
 shape = SubResource("RectangleShape2D_jvtmt")
 
@@ -1305,6 +1636,7 @@ healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 attack_damage = 1.0
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="AttackComponents/HeadSlamRocksLeft"]
+visible = false
 polygon = PackedVector2Array(23, 1, 62, 23, 32, 23)
 
 [node name="HeadSlamRocksRight" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_rt31b")]
@@ -1314,7 +1646,52 @@ healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 attack_damage = 1.0
 
 [node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="AttackComponents/HeadSlamRocksRight"]
+visible = false
 polygon = PackedVector2Array(-23, 1, -62, 23, -32, 23)
+
+[node name="JumpSlam" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_rt31b")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/JumpSlam"]
+visible = false
+position = Vector2(0, -46.5)
+shape = SubResource("RectangleShape2D_i7s33")
+
+[node name="Laser" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_rt31b")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
+isConstant = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/Laser"]
+visible = false
+shape = SubResource("SegmentShape2D_i7s33")
+
+[node name="StompLeft" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_rt31b")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/StompLeft"]
+visible = false
+position = Vector2(-21.5, 8.5)
+shape = SubResource("RectangleShape2D_fp8yd")
+
+[node name="StompRight" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_rt31b")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+healthComponent = NodePath("../../GeneralComponents/HealthComponent")
+attack_damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponents/StompRight"]
+visible = false
+position = Vector2(21.5, 8.5)
+shape = SubResource("RectangleShape2D_8od5u")
 
 [node name="OnHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("12_vx8lb")]
 healthComponent = NodePath("../GeneralComponents/HealthComponent")
@@ -1325,5 +1702,43 @@ knockbackComponent = NodePath("../GeneralComponents/OmniDirectionalKnockbackComp
 material = SubResource("ShaderMaterial_8od5u")
 
 [node name="Sounds" type="Node2D" parent="."]
+
+[node name="Shockwaves" type="Node2D" parent="."]
+z_index = 100
+
+[node name="BackBufferCopy1" type="BackBufferCopy" parent="Shockwaves"]
+position = Vector2(-25, 23)
+scale = Vector2(10, 10)
+copy_mode = 2
+
+[node name="LeftLegShockwave" parent="Shockwaves" instance=ExtResource("8_1qnwx")]
+material = SubResource("ShaderMaterial_v3dep")
+position = Vector2(-26, 23)
+animationSpeed = 2.0
+
+[node name="BackBufferCopy2" type="BackBufferCopy" parent="Shockwaves"]
+position = Vector2(-25, 23)
+scale = Vector2(10, 10)
+copy_mode = 2
+
+[node name="RightLegShockwave" parent="Shockwaves" instance=ExtResource("8_1qnwx")]
+material = SubResource("ShaderMaterial_oeqg8")
+position = Vector2(26, 23)
+animationSpeed = 2.0
+
+[node name="BackBufferCopy3" type="BackBufferCopy" parent="Shockwaves"]
+position = Vector2(-25, 23)
+scale = Vector2(10, 10)
+copy_mode = 2
+
+[node name="CenterShockwave" parent="Shockwaves" instance=ExtResource("8_1qnwx")]
+material = SubResource("ShaderMaterial_p2dj1")
+position = Vector2(0, 23)
+animationSpeed = 2.0
+
+[node name="BackBufferCopy4" type="BackBufferCopy" parent="Shockwaves"]
+position = Vector2(-25, 23)
+scale = Vector2(10, 10)
+copy_mode = 2
 
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]

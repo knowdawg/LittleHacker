@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://dlfxfm3ebd5n7"]
+[gd_scene load_steps=48 format=3 uid="uid://dlfxfm3ebd5n7"]
 
 [ext_resource type="Texture2D" uid="uid://fno00145fuo4" path="res://Assets/Sprites/EnvirmentTextures/CarcassOfCreation/CarcassOfCreationBleakSetting5.png" id="1_40igy"]
 [ext_resource type="PackedScene" uid="uid://c3bd14h6powqs" path="res://Objects/WorldObjects/Tilemaps/metal_plates_background.tscn" id="1_42e3u"]
@@ -25,6 +25,11 @@
 [ext_resource type="Texture2D" uid="uid://w6ugjobtxl8h" path="res://Test/CarcassOfCreationInfectedPorcelain.png" id="21_lbh02"]
 [ext_resource type="Texture2D" uid="uid://b2x8we6nj5mop" path="res://Test/CarcassOfCreationInfectedPorcelainNormal.png" id="22_vi2od"]
 [ext_resource type="Texture2D" uid="uid://dt50io5j3rwyn" path="res://Test/CarcassOfCreationRefrances.png" id="25_qr70v"]
+[ext_resource type="Shader" uid="uid://cuwb5rwdjiv7w" path="res://Assets/Shaders/Textures/LaserSumOfSines.gdshader" id="26_5wmaw"]
+[ext_resource type="PackedScene" uid="uid://dq3tdy1pd44rd" path="res://Assets/Shaders/Effects/Lightning/lightning_effect.tscn" id="26_hvchb"]
+[ext_resource type="Texture2D" uid="uid://6akep0qgpdkn" path="res://Assets/Sprites/Gradiants/SquareGradiant.tres" id="27_bve66"]
+[ext_resource type="Shader" uid="uid://chug3h7c1ft7b" path="res://Assets/Shaders/Effects/Lightning/lightning.gdshader" id="27_wyfss"]
+[ext_resource type="Shader" uid="uid://cp0mbfv5ossja" path="res://Assets/Shaders/Filters/BlackHole.gdshader" id="30_23kha"]
 
 [sub_resource type="CanvasTexture" id="CanvasTexture_vi2od"]
 diffuse_texture = ExtResource("19_25rag")
@@ -41,6 +46,90 @@ normal_texture = ExtResource("19_qr70v")
 [sub_resource type="CanvasTexture" id="CanvasTexture_lbh02"]
 diffuse_texture = ExtResource("17_yo6y3")
 normal_texture = ExtResource("18_25rag")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_23kha"]
+resource_local_to_scene = true
+shader = ExtResource("27_wyfss")
+shader_parameter/octave_count = 5
+shader_parameter/amp_start = 0.2
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/glow = 0.1
+shader_parameter/progress = 0.0
+shader_parameter/numOfLight = 7
+shader_parameter/progressOffset = 0.5
+shader_parameter/seed = 0.0
+shader_parameter/resolution = Vector2(40, 40)
+
+[sub_resource type="Gradient" id="Gradient_bve66"]
+offsets = PackedFloat32Array(0, 0.455696, 0.829114)
+colors = PackedColorArray(1, 0.301961, 0.152941, 0, 1, 0.517647, 0.392157, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hvchb"]
+gradient = SubResource("Gradient_bve66")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wyfss"]
+shader = ExtResource("26_5wmaw")
+shader_parameter/gradient = SubResource("GradientTexture1D_hvchb")
+shader_parameter/numOfLasers = 4
+shader_parameter/waveBaseSize = 1.0
+shader_parameter/waveBaseSpeed = 0.3
+shader_parameter/waveBaseFrequency = 2.0
+shader_parameter/sizeMultiplier = 0.5
+shader_parameter/speedMultiplier = 0.7
+shader_parameter/frequencyMultiplier = 1.0
+shader_parameter/resolution = Vector2(20, 20)
+
+[sub_resource type="Gradient" id="Gradient_wyfss"]
+offsets = PackedFloat32Array(0, 0.779412)
+colors = PackedColorArray(1, 0, 0, 1, 1, 0.317647, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1trnf"]
+gradient = SubResource("Gradient_wyfss")
+
+[sub_resource type="Gradient" id="Gradient_23kha"]
+offsets = PackedFloat32Array(0.155882, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 0.780392, 0.427451, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gj6tf"]
+gradient = SubResource("Gradient_23kha")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_id7hq"]
+seed = 4
+frequency = 0.0059
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_gj6tf"]
+invert = true
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_id7hq")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_50dv8"]
+resource_local_to_scene = true
+shader = ExtResource("30_23kha")
+shader_parameter/resolution = Vector2(100, 100)
+shader_parameter/colorResolution = 100.0
+shader_parameter/distortionIntensity = -10.0
+shader_parameter/spiralDistortionIntensity = 10.0
+shader_parameter/holeSize = 0.1
+shader_parameter/holeColor = SubResource("GradientTexture1D_gj6tf")
+shader_parameter/image = SubResource("NoiseTexture2D_gj6tf")
+shader_parameter/rotations = 3.0
+shader_parameter/depth = 1.7
+shader_parameter/spiralIntensity = 0.1
+shader_parameter/shrinkSpeed = -0.5
+shader_parameter/roationSpeed = 0.1
+shader_parameter/haloColor = SubResource("GradientTexture1D_1trnf")
+
+[sub_resource type="Gradient" id="Gradient_id7hq"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_50dv8"]
+gradient = SubResource("Gradient_id7hq")
+width = 100
+height = 100
 
 [node name="EvirementalTest" type="Node2D"]
 texture_filter = 1
@@ -351,3 +440,42 @@ texture = SubResource("CanvasTexture_lbh02")
 [node name="CarcassOfCreationRefrances" type="Sprite2D" parent="."]
 position = Vector2(-474, -10)
 texture = ExtResource("25_qr70v")
+
+[node name="LightningEffect" parent="." instance=ExtResource("26_hvchb")]
+material = SubResource("ShaderMaterial_23kha")
+position = Vector2(-121, -48)
+points = PackedVector2Array(0, 0, 0, 48)
+startOnReady = true
+
+[node name="LaserLight" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_wyfss")
+position = Vector2(0, -3)
+points = PackedVector2Array(-112, -82, 160, -82)
+width = 20.0
+texture_mode = 1
+
+[node name="ShadowNormalDualLight" parent="LaserLight" instance=ExtResource("12_r2q2l")]
+position = Vector2(22, -82)
+scale = Vector2(4.5, 2)
+texture = ExtResource("27_bve66")
+color = Color(1, 0.517647, 0.392157, 1)
+offset = Vector2(0, 32)
+height = 10.0
+
+[node name="ShadowNormalDualLight2" parent="LaserLight" instance=ExtResource("12_r2q2l")]
+position = Vector2(22, -82)
+rotation = 3.14159
+scale = Vector2(4.5, 2)
+texture = ExtResource("27_bve66")
+color = Color(1, 0.517647, 0.392157, 1)
+offset = Vector2(0, 32)
+height = 10.0
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+position = Vector2(-60, -42)
+copy_mode = 2
+
+[node name="BlackHole3" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_50dv8")
+position = Vector2(190, -36)
+texture = SubResource("GradientTexture2D_50dv8")

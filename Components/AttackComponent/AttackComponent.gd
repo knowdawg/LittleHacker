@@ -23,6 +23,11 @@ class_name AttackComponent
 @export var grabNode : GrabComponent
 @export var attackType : Attack.SHARPNESS = Attack.SHARPNESS.NIETHER
 
+@export_group("ConstantHitbox")
+@export var isConstant : bool = false
+@export var disableTimeOnParry : float = 1.0
+var constantHurtboxActive : bool = false
+
 @export_group("Hit Effects")
 @export var hitEfect : PackedScene
 @export var numberOfHitEffect : int = 1
@@ -35,6 +40,7 @@ signal grabSucessful
 signal attackHit(area)
 
 func _ready() -> void:
+	constantHurtboxActive = !disabled
 	if disabled:
 		disable()
 
@@ -75,6 +81,8 @@ func _on_area_entered(area):
 		
 		if isSpikes:
 			generateAttackID()
+		if isConstant:
+			generateAttackID()
 		
 		attackHit.emit(area)
 		
@@ -95,22 +103,35 @@ func generateAttackID():
 
 func disable():
 	collisionShape.disabled = true
+	constantHurtboxActive = false
 
 func enable():
 	collisionShape.disabled = false
+	constantHurtboxActive = true
 
 func readyAttack():
 	attackID = randf_range(0.0, 10000.0)
 	collisionShape.disabled = false
+	constantHurtboxActive = true
 
 func parried(attack : Attack):
 	if hurtboxSignal.is_connected(parried):
 		hurtboxSignal.disconnect(parried)
 	if healthComponent:
 		healthComponent.set_weakness(healthComponent.get_weakness() + 3)
-	call_deferred("disable")
+	if isConstant:
+		%ConstantHitboxTempDisableTimer.start(disableTimeOnParry)
+		collisionShape.set_deferred("disabled", true)
+	else:
+		call_deferred("disable")
+	
 	gotParried.emit(attack)
 
 func _on_timer_timeout() -> void:
 	if hurtboxSignal.is_connected(parried):
 		hurtboxSignal.disconnect(parried)
+
+
+func _on_constant_hitbox_temp_disable_timer_timeout() -> void:
+	if constantHurtboxActive == true:
+		collisionShape.set_deferred("disabled", false)

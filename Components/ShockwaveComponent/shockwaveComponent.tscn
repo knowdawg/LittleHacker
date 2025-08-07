@@ -1,0 +1,124 @@
+[gd_scene load_steps=11 format=3 uid="uid://cofe7mw4q1kr1"]
+
+[ext_resource type="Script" uid="uid://c8i4n4jouxtwa" path="res://Components/ShockwaveComponent/shockwave_component.gd" id="2_lopqi"]
+
+[sub_resource type="Shader" id="Shader_t3lye"]
+code = "shader_type canvas_item;
+render_mode unshaded;
+
+uniform sampler2D SCREEN_TEXTURE : hint_screen_texture;
+uniform float progress : hint_range(0.0, 2.0);
+uniform float intensity : hint_range(-10.0, 10.0);
+uniform float width : hint_range(0.0, 1.0);
+
+void fragment() {
+	//Convert to Clip Space
+	vec2 clipUV = UV * 2.0 - 1.0;
+	vec2 iResolution = 1.0 / TEXTURE_PIXEL_SIZE;
+	clipUV.x *= iResolution.x / iResolution.y;
+
+	float ring = 1.0 - abs(length(clipUV) - progress);
+	ring = smoothstep(1.0 - width, 1.0, ring);
+
+	vec2 offset = TEXTURE_PIXEL_SIZE * ring * normalize(clipUV);
+
+	vec4 c = texture(SCREEN_TEXTURE, SCREEN_UV - offset * intensity);
+
+	COLOR = c;
+}"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_lopqi"]
+resource_local_to_scene = true
+shader = SubResource("Shader_t3lye")
+shader_parameter/progress = 2.0
+shader_parameter/intensity = 1.0
+shader_parameter/width = 0.05
+
+[sub_resource type="Gradient" id="Gradient_oeqg8"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_p2dj1"]
+gradient = SubResource("Gradient_oeqg8")
+
+[sub_resource type="Animation" id="Animation_30lk2"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.0]
+}
+
+[sub_resource type="Animation" id="Animation_lopqi"]
+resource_name = "Shockwave"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.0]
+}
+
+[sub_resource type="Animation" id="Animation_t3lye"]
+resource_name = "Screem"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 2.0]
+}
+
+[sub_resource type="Animation" id="Animation_ayuva"]
+resource_name = "Suck"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ayuva"]
+_data = {
+&"RESET": SubResource("Animation_30lk2"),
+&"Screem": SubResource("Animation_t3lye"),
+&"Shockwave": SubResource("Animation_lopqi"),
+&"Suck": SubResource("Animation_ayuva")
+}
+
+[node name="LeftLegShockwave" type="Sprite2D"]
+material = SubResource("ShaderMaterial_lopqi")
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_p2dj1")
+script = ExtResource("2_lopqi")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+&"": SubResource("AnimationLibrary_ayuva")
+}

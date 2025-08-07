@@ -1,0 +1,71 @@
+[gd_scene load_steps=7 format=3 uid="uid://dq3tdy1pd44rd"]
+
+[ext_resource type="Shader" uid="uid://chug3h7c1ft7b" path="res://Assets/Shaders/Effects/Lightning/lightning.gdshader" id="1_wr7bs"]
+[ext_resource type="Script" uid="uid://cwycf1od32881" path="res://Assets/Shaders/Effects/Lightning/lightning_effect.gd" id="2_r0f76"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_r0f76"]
+resource_local_to_scene = true
+shader = ExtResource("1_wr7bs")
+shader_parameter/octave_count = 5
+shader_parameter/amp_start = 0.2
+shader_parameter/amp_coeff = 0.5
+shader_parameter/freq_coeff = 2.0
+shader_parameter/glow = 0.1
+shader_parameter/progress = 0.0
+shader_parameter/numOfLight = 7
+shader_parameter/progressOffset = 0.5
+shader_parameter/seed = 4.6
+shader_parameter/resolution = Vector2(40, 40)
+
+[sub_resource type="Animation" id="Animation_r0f76"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_wr7bs"]
+resource_name = "Strike"
+loop_mode = 1
+step = 0.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5kv8q"]
+_data = {
+&"RESET": SubResource("Animation_r0f76"),
+&"Strike": SubResource("Animation_wr7bs")
+}
+
+[node name="LightningEffect" type="Line2D"]
+material = SubResource("ShaderMaterial_r0f76")
+points = PackedVector2Array(0, 0, 0, 89)
+width = 40.0
+default_color = Color(0.729412, 0.25098, 0.117647, 1)
+texture_mode = 1
+joint_mode = 2
+script = ExtResource("2_r0f76")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_5kv8q")
+}
+speed_scale = 0.4

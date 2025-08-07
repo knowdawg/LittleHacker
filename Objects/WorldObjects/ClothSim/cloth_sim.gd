@@ -89,7 +89,7 @@ func polpulateContraints():
 
 var prevPos : Vector2
 func _physics_process(delta_time):
-	
+		
 	if !prevPos:
 		prevPos = global_position
 	else:

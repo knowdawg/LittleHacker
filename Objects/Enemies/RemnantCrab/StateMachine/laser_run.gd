@@ -7,8 +7,13 @@ var curState : state = state.ToWall
 @export var leftRaycast : RayCast2D
 @export var rightRaycast : RayCast2D
 @export var laserRaycast : RayCast2D
+@export var laserContainer : Node2D
 @export var laserVisual : Line2D
 @export var laserAnimator : AnimationPlayer
+@export var blackHole : Sprite2D
+
+@export var laserAttackComponent : AttackComponent
+@export var laserHitbox : CollisionShape2D
 
 @export var parent : CharacterBody2D
 @export var animator : AnimationPlayer
@@ -52,12 +57,14 @@ func update_physics(delta):
 			if abs(runVelocity.x) <= 0.1:
 				laserAnimator.play("StartLaser")
 				curState = state.FirstRun
+				laserAttackComponent.readyAttack()
 			
 		state.FirstRun:
 			dir = Vector2(-1.0, 0.0)
 			runVelocity += dir * acceleration * delta
 			
 			drawLaser()
+			updateLaserAttack()
 			
 			if leftRaycast.is_colliding():
 				curState = state.SecoundRun
@@ -66,6 +73,7 @@ func update_physics(delta):
 			runVelocity += dir * acceleration * delta
 			
 			drawLaser()
+			updateLaserAttack()
 			
 			if rightRaycast.is_colliding():
 				curState = state.FinishUp
@@ -73,8 +81,10 @@ func update_physics(delta):
 			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 200.0)
 			
 			drawLaser()
+			updateLaserAttack()
 			
 			if abs(runVelocity.x) <= 0.1:
+				laserAttackComponent.disable()
 				laserAnimator.play("EndLaser")
 				trasitioned.emit(self, "Idle")
 				return
@@ -84,19 +94,29 @@ func update_physics(delta):
 	
 	var rot : float = (runVelocity.x / maxSpeed) * maxRotation
 	skullSprite.rotation_degrees = rot
-	cloak.rotation_degrees = rot / 2.0
+	cloak.rotation_degrees = rot / 4.0
 	laserRaycast.rotation_degrees = runVelocity.x / 2.0#rot * 3.0
 	
 	parent.velocity += runVelocity
 	
+func updateLaserAttack():
+	if laserHitbox.shape is SegmentShape2D:
+		var s : SegmentShape2D = laserHitbox.shape
+		s.b = laserRaycast.get_collision_point() - parent.global_position
+	else:
+		printerr("Incorect Collision Shape For Remnant Crab Laser")
 
 func drawLaser():
 	if laserRaycast.is_colliding():
+		blackHole.visible = true
+		laserContainer.position = -parent.global_position
 		laserVisual.clear_points()
-		laserVisual.add_point(parent.global_position)
+		laserVisual.add_point(laserRaycast.global_position)
 		laserVisual.add_point(laserRaycast.get_collision_point())
 
 func exit(_n):
+	blackHole.visible = false
+	laserAttackComponent.disable()
 	laserVisual.clear_points()
 	skullSprite.rotation = 0.0
 	cloak.rotation_degrees = 0.0

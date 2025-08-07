@@ -11,5 +11,10 @@ script = ExtResource("1_f6bv1")
 wait_time = 0.15
 one_shot = true
 
+[node name="ConstantHitboxTempDisableTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="ConstantHitboxTempDisableTimer" to="." method="_on_constant_hitbox_temp_disable_timer_timeout"]

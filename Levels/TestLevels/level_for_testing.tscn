@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=25 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
 [ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="2_1og1s"]
@@ -6,6 +6,8 @@
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_4mm16"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_n4nu2"]
+[ext_resource type="Shader" uid="uid://cp0mbfv5ossja" path="res://Assets/Shaders/Filters/BlackHole.gdshader" id="9_1trnf"]
+[ext_resource type="Texture2D" uid="uid://nufx0s5w82kb" path="res://Assets/Sprites/Noises/RemnantCrabBlockHoleNoise.tres" id="9_bgy7s"]
 
 [sub_resource type="Environment" id="Environment_1og1s"]
 background_mode = 3
@@ -14,9 +16,6 @@ background_mode = 3
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_xt0cq"]
 noise = SubResource("FastNoiseLite_2b6ii")
-
-[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_mn1fc"]
-polygon = PackedVector2Array(-49.9994, 163, 15.0006, 163, 15.0002, 55.9999, -50.9998, 55.0002, -49.9999, 15.0002, 55.0001, 14.9998, 56.0007, 203, -52.9993, 203)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bv8ak"]
 size = Vector2(729, 20)
@@ -40,6 +39,46 @@ shader_parameter/shadowIntensitiy = 0.0
 [sub_resource type="Environment" id="Environment_mn1fc"]
 background_mode = 3
 
+[sub_resource type="Gradient" id="Gradient_1trnf"]
+offsets = PackedFloat32Array(0, 0.779412)
+colors = PackedColorArray(0.423529, 0.352941, 0.607843, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_hsyqj"]
+gradient = SubResource("Gradient_1trnf")
+
+[sub_resource type="Gradient" id="Gradient_hsyqj"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gj6tf"]
+gradient = SubResource("Gradient_hsyqj")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gj6tf"]
+resource_local_to_scene = true
+shader = ExtResource("9_1trnf")
+shader_parameter/resolution = Vector2(96, 96)
+shader_parameter/colorResolution = 10.0
+shader_parameter/distortionIntensity = 1.49012e-07
+shader_parameter/spiralDistortionIntensity = 5.0
+shader_parameter/holeSize = 0.15
+shader_parameter/holeColor = SubResource("GradientTexture1D_gj6tf")
+shader_parameter/image = ExtResource("9_bgy7s")
+shader_parameter/rotations = 1.0
+shader_parameter/depth = 0.5
+shader_parameter/spiralIntensity = 1.5
+shader_parameter/shrinkSpeed = 0.2
+shader_parameter/roationSpeed = 0.1
+shader_parameter/haloColor = SubResource("GradientTexture1D_hsyqj")
+
+[sub_resource type="Gradient" id="Gradient_bgy7s"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_bnw8x"]
+gradient = SubResource("Gradient_bgy7s")
+width = 24
+height = 24
+
 [node name="LevelForTesting" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting")]
 script = ExtResource("1_x8kok")
 projectileSpawnNode = NodePath("Proectiles")
@@ -58,15 +97,10 @@ sdf_scale = 0
 size = Vector2i(1000, 432)
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
-modulate = Color(0.392157, 0.392157, 0.392157, 1)
+modulate = Color(0.196078, 0.196078, 0.196078, 1)
 texture_filter = 1
 position = Vector2(0, 25)
 texture = SubResource("NoiseTexture2D_xt0cq")
-
-[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
-position = Vector2(109, 0)
-rotation = 1.5708
-occluder = SubResource("OccluderPolygon2D_mn1fc")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 
@@ -161,3 +195,14 @@ polygon = PackedVector2Array(-189, 4, 67, 4, 67, -92, -189, -92)
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_mn1fc")
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+position = Vector2(59, -38)
+scale = Vector2(4, 4)
+copy_mode = 2
+
+[node name="BlackHole2" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_gj6tf")
+position = Vector2(-23, 4)
+scale = Vector2(4, 4)
+texture = SubResource("GradientTexture2D_bnw8x")

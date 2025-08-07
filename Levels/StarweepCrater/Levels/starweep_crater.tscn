@@ -1,4 +1,4 @@
-[gd_scene load_steps=154 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=156 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Environment" uid="uid://dmo71rg36b37b" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tres" id="2_w31va"]
@@ -41,11 +41,11 @@
 [ext_resource type="AudioStream" uid="uid://0mwpxucrupdp" path="res://Assets/Audio/SoundEffects/StarweepOutsideWind.wav" id="39_w31va"]
 [ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="40_4685e"]
 
-[sub_resource type="Gradient" id="Gradient_sy7vn"]
+[sub_resource type="Gradient" id="Gradient_w31va"]
 colors = PackedColorArray(0.811765, 0.341176, 0.235294, 1, 0, 0, 0, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_hyfn1"]
-gradient = SubResource("Gradient_sy7vn")
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_cg64b"]
+gradient = SubResource("Gradient_w31va")
 
 [sub_resource type="Gradient" id="Gradient_tpsgt"]
 interpolation_mode = 2
@@ -137,6 +137,12 @@ void fragment() {
 	COLOR.rgb = c.rgb;
 }
 "
+
+[sub_resource type="Gradient" id="Gradient_sy7vn"]
+colors = PackedColorArray(1, 0.490196, 0.211765, 1, 0.46, 0.37329, 0.3266, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_hyfn1"]
+gradient = SubResource("Gradient_sy7vn")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_j2jwg"]
 resource_local_to_scene = true
@@ -793,7 +799,7 @@ doorContainerNode = NodePath("Doors")
 whereToAddPlayer = NodePath("PlayerParent")
 respawnPointNode = NodePath("RespawnPoints")
 lighting = NodePath("SoftLighting")
-backgroundGradient = SubResource("GradientTexture2D_hyfn1")
+backgroundGradient = SubResource("GradientTexture2D_cg64b")
 backgroundContainers = [NodePath("VeryFar/SubViewportContainer"), NodePath("Far/SubViewportContainer"), NodePath("MediumFar/SubViewportContainer"), NodePath("Medium/SubViewportContainer"), NodePath("MeduimClose/SubViewportContainer"), NodePath("MeduimClose/SubViewportContainer2"), NodePath("MeduimClose/SubViewportContainer3"), NodePath("Close/SubViewportContainer"), NodePath("VeryClose/SubViewportContainer")]
 environment = ExtResource("2_w31va")
 

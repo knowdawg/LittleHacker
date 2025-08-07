@@ -14,7 +14,9 @@ void vertex() {
 	VERTEX = mesh[VERTEX_ID];
 	bool pin = pinned[VERTEX_ID];
 
-	noiseUV = UV + vec2(-TIME * windSpeed, TIME * windSpeed * 0.5);
+	float qTime = TIME;//round(TIME * 10.0) / 10.0;
+
+	noiseUV = UV + vec2(-qTime * windSpeed, qTime * windSpeed * 0.5);
 	noiseUV *= noiseScale;
 	float n = texture(noise, noiseUV).r - 0.5;
 
@@ -30,7 +32,11 @@ void fragment() {
 	c = texture(TEXTURE, UV);
 
 	float t = texture(noise, noiseUV).r - 0.5;
-	c.rgb -= c.rgb * t * clamp(windAmplitude * 0.1, 0.0, 0.5);
+	float shading = t * clamp(windAmplitude * 0.1, 0.0, 0.5);
+
+	shading = round(shading * 5.0) / 5.0;
+
+	c.rgb -= c.rgb * shading;
 
 	COLOR = c;
 }

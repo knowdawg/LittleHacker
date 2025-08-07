@@ -19,7 +19,7 @@ resource_local_to_scene = true
 shader = ExtResource("4_sywak")
 shader_parameter/progress = 0.0
 shader_parameter/intensity = 0.0
-shader_parameter/width = 0.0
+shader_parameter/width = 0.12
 
 [sub_resource type="Gradient" id="Gradient_q8b2j"]
 offsets = PackedFloat32Array(1)
@@ -177,17 +177,17 @@ texture = SubResource("GradientTexture2D_gqbs6")
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("2_f227o")]
 collision_mask = 8
 collisionShape = NodePath("CollisionShape2D")
-numberOfHitEffect = 0
 attack_damage = 5.0
 weakness_damage = 2.0
 knockback_force = 50.0
+numberOfHitEffect = 0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
 shape = SubResource("CircleShape2D_2wjr0")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_g4s5t")
+&"": SubResource("AnimationLibrary_g4s5t")
 }
 
 [connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

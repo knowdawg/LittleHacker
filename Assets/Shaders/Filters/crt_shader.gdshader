@@ -27,7 +27,7 @@ void fragment() {
 	//CRT electron gun 'scanner' effect
 	float scanner = 1.0 - fract(TIME * 0.3 - curvedUV.y);
 	scanner = smoothstep(0.7, 1.0, scanner);
-	scanner *= 0.01;
+	scanner *= 0.005;
 
 	//Verticle seperators
 	float seperator = abs(sin(0.667 + pixelsWidth * (curvedUV.x * PI)));

@@ -10,7 +10,7 @@ texture_filter = 1
 script = ExtResource("1_ll3o8")
 
 [node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("2_ccg72")]
-collision_mask = 12
+collision_mask = 4
 attackName = "SwordSlashProjectile"
 collisionShape = NodePath("CollisionShape2D")
 disabled = false
@@ -29,10 +29,10 @@ position = Vector2(0, -12)
 texture = ExtResource("3_kou3b")
 
 [node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("4_ubkjq")]
+modulate = Color(1, 1, 1, 0.313726)
 follow = NodePath("../Transform/Sprite2D")
 sprite = NodePath("../Transform/Sprite2D")
 fadeTime = 0.3
-modulate = Color(1, 1, 1, 0.313726)
 
 [node name="Grounded" type="RayCast2D" parent="."]
 position = Vector2(-7, 0)

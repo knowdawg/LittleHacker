@@ -19,5 +19,8 @@ void fragment() {
 
 	vec4 c = texture(SCREEN_TEXTURE, SCREEN_UV - offset * intensity);
 
+	//Darkening Ring
+	//c.rgb -= vec3(length(offset)) * 4.0;
+
 	COLOR = c;
 }

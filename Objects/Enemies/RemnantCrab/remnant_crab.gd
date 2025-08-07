@@ -1,9 +1,6 @@
-extends CharacterBody2D
+extends Enemy
 class_name RemnantCrab
 
-
-#func _ready() -> void:
-	#%Animator.play("Stomp")
 
 
 func _on_state_machine_state_switched(prevState: State, newState: State) -> void:
@@ -35,3 +32,24 @@ func prepareForLanding():
 func launchLand():
 	if %DownCast.is_colliding():
 		global_position.y = %DownCast.get_collision_point().y - 23.0
+
+
+
+var swordProjectile = preload("uid://c7xd4741m8qkc")
+func createStompProjectile():
+	var p : Projectile = swordProjectile.instantiate()
+	p.speed = 240.0
+	var offset := Vector2(0.0, 23.0)
+	if %Legs.flip_h:
+		p.dirVector = Vector2(1.0, 0.0)
+		offset += Vector2(23.0, 0.0)
+	else:
+		p.dirVector = Vector2(-1.0, 0.0)
+		offset += Vector2(-23.0, 0.0)
+	p.flipH = %Legs.flip_h
+	p.global_position = global_position + offset
+	Game.addProjectile(p)
+
+func shakeScreen(amount : float = 5.0):
+	if Game.doesCameraExist():
+		Game.camera.set_min_shake(amount)

@@ -11,7 +11,7 @@ func enter(_p):
 	animator.play("RESET")
 
 func update(_delta):
-	nextStates.append("HeadSlam")
+	#nextStates.append("SuckIn")
 	
 	if nextStates.size() != 0:
 		var nextState = nextStates.pop_front()
@@ -23,6 +23,10 @@ func update(_delta):
 			return
 		trasitioned.emit(self, nextState)
 		return
+	
+	nextStates.append("LaserRun")
+	#nextStates.append("Jump")
+	return
 	
 	var a = sm.getRandomAttack(prevAttack)
 	#print(a)

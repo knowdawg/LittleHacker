@@ -1,11 +1,11 @@
 [gd_scene load_steps=23 format=3 uid="uid://cgmvdcy64j46l"]
 
 [ext_resource type="Script" uid="uid://7psq1hbdlet6" path="res://Objects/LittleGameTerminal/LittleGameTerminal.gd" id="1_8d0dd"]
-[ext_resource type="Shader" uid="uid://cia6a5vcbll7a" path="res://Assets/Shaders/Filters/crt_shader.gdshader" id="1_h3som"]
 [ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="2_7g3uf"]
 [ext_resource type="Script" uid="uid://bbwat6b3fi8ft" path="res://Classes/SceneTransitionManager.gd" id="2_g0xku"]
 [ext_resource type="Script" uid="uid://bvygbydj8mpnq" path="res://Objects/LittleGameTerminal/game_container.gd" id="3_0tjig"]
 [ext_resource type="PackedScene" uid="uid://bqpjlvli0ayt1" path="res://Components/InteractableComponent/interactable_area.tscn" id="3_g0xku"]
+[ext_resource type="Shader" uid="uid://blk8cwj07fqv" path="res://Assets/Shaders/Filters/SoftCRT.gdshader" id="4_5tu4y"]
 [ext_resource type="Texture2D" uid="uid://biai3ccvps32w" path="res://Assets/Sprites/WorldObjects/TerminalSettup.png" id="6_ycxw0"]
 [ext_resource type="PackedScene" uid="uid://dvjxs21wp267s" path="res://Components/ShadowNormalDualLight/shadow_normal_dual_light.tscn" id="8_5tu4y"]
 
@@ -51,9 +51,11 @@ animations = [{
 }]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
-shader = ExtResource("1_h3som")
-shader_parameter/pixelsWidth = 128.0
-shader_parameter/pixelsHight = 72.0
+shader = ExtResource("4_5tu4y")
+shader_parameter/pixelsWidth = 256.0
+shader_parameter/pixelsHeight = 144.0
+shader_parameter/enable_scanlines = true
+shader_parameter/enable_color_bleed = true
 
 [sub_resource type="Animation" id="Animation_ib7ep"]
 resource_name = "FadeIn"
@@ -139,6 +141,7 @@ frame_progress = 0.93576
 
 [node name="GameContainer" type="SubViewportContainer" parent="."]
 material = SubResource("ShaderMaterial_2ty4p")
+clip_contents = true
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -183,21 +186,6 @@ libraries = {
 &"": SubResource("AnimationLibrary_v21w5")
 }
 
-[node name="Border" type="Line2D" parent="."]
-visible = false
-scale = Vector2(0.025, 0.025)
-points = PackedVector2Array(0, -364, 640, -360, 644, 0, 640, 360, 0, 364, -640, 360, -644, 0, -640, -360)
-closed = true
-width = 12.0
-default_color = Color(0, 0, 0, 1)
-antialiased = true
-
-[node name="Border2" type="Polygon2D" parent="."]
-visible = false
-scale = Vector2(0.025, 0.025)
-color = Color(0, 0, 0, 1)
-polygon = PackedVector2Array(-672, -384, 672, -384, 672, 384, -672, 384, -672, 0, -640, 0, -640, 360, 640, 360, 640, -360, -640, -360, -640, 0, -672, 0)
-
 [node name="InteractableArea" parent="." node_paths=PackedStringArray("textPos", "colShape") instance=ExtResource("3_g0xku")]
 unique_name_in_owner = true
 text = "Interact"
@@ -215,7 +203,6 @@ position = Vector2(0, 38)
 visible = false
 texture = SubResource("GradientTexture2D_mueyt")
 color = Color(1, 0.588235, 0.588235, 1)
-height = 0.0
 
 [node name="Darken" type="ColorRect" parent="."]
 unique_name_in_owner = true
