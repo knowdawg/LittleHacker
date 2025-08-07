@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=26 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
 [ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="2_1og1s"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="6_n4nu2"]
 [ext_resource type="Shader" uid="uid://cp0mbfv5ossja" path="res://Assets/Shaders/Filters/BlackHole.gdshader" id="9_1trnf"]
-[ext_resource type="Texture2D" uid="uid://nufx0s5w82kb" path="res://Assets/Sprites/Noises/RemnantCrabBlockHoleNoise.tres" id="9_bgy7s"]
 
 [sub_resource type="Environment" id="Environment_1og1s"]
 background_mode = 3
@@ -53,16 +52,23 @@ colors = PackedColorArray(0, 0, 0, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_gj6tf"]
 gradient = SubResource("Gradient_hsyqj")
 
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_mn1fc"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_kj1k5"]
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_mn1fc")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gj6tf"]
 resource_local_to_scene = true
 shader = ExtResource("9_1trnf")
 shader_parameter/resolution = Vector2(96, 96)
 shader_parameter/colorResolution = 10.0
 shader_parameter/distortionIntensity = 1.0
-shader_parameter/spiralDistortionIntensity = 5.0
+shader_parameter/spiralDistortionIntensity = 10.0
 shader_parameter/holeSize = 0.15
 shader_parameter/holeColor = SubResource("GradientTexture1D_gj6tf")
-shader_parameter/image = ExtResource("9_bgy7s")
+shader_parameter/image = SubResource("NoiseTexture2D_kj1k5")
 shader_parameter/rotations = 1.0
 shader_parameter/depth = 0.5
 shader_parameter/spiralIntensity = 2.0
@@ -203,6 +209,6 @@ copy_mode = 2
 
 [node name="BlackHole2" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_gj6tf")
-position = Vector2(-139, -11)
+position = Vector2(-135, -11)
 scale = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_bnw8x")

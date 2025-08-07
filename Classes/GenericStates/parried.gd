@@ -38,9 +38,13 @@ func enter(prevState):
 				movement.applyForce(kbCom.returnVecFromTwoObjects(parrent, Game.player), knockback)
 
 func update(delta):
+	customUpdate(delta)
 	t += delta
 	if t >= parryLength:
 		trasitioned.emit(self, nextState.name)
+
+func customUpdate(_delta):
+	pass
 
 func customEnter(_prevState):
 	pass

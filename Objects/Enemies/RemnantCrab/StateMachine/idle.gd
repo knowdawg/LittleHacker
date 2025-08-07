@@ -26,6 +26,7 @@ func update(_delta):
 	
 	#nextStates.append("LaserRun")
 	#nextStates.append("SuckIn")
+	#nextStates.append("Jump")
 	#return
 	
 	var a = sm.getRandomAttack(prevAttack)

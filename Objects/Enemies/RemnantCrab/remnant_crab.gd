@@ -2,7 +2,6 @@ extends Enemy
 class_name RemnantCrab
 
 
-
 func _on_state_machine_state_switched(prevState: State, newState: State) -> void:
 	print(newState.name)
 	if newState.name == "StompRight":
@@ -53,3 +52,9 @@ func createStompProjectile():
 func shakeScreen(amount : float = 5.0):
 	if Game.doesCameraExist():
 		Game.camera.set_min_shake(amount)
+
+
+func _on_jump_slam_got_parried(_a : Attack) -> void:
+	if $StateMachine.current_state.name == "Jump":
+		if Game.doesPlayerExist():
+			Game.superParry(Game.player)

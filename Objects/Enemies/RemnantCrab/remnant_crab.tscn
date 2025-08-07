@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=75 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -19,7 +19,6 @@
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="9_5j67f"]
 [ext_resource type="Shader" uid="uid://cp0mbfv5ossja" path="res://Assets/Shaders/Filters/BlackHole.gdshader" id="9_oeqg8"]
 [ext_resource type="Script" uid="uid://wfuie18f6ykl" path="res://Objects/Enemies/RemnantCrab/StateMachine/chase.gd" id="9_qmox6"]
-[ext_resource type="Script" uid="uid://basyud8vcwjn4" path="res://Classes/GenericStates/parried.gd" id="10_5j67f"]
 [ext_resource type="Texture2D" uid="uid://nufx0s5w82kb" path="res://Assets/Sprites/Noises/RemnantCrabBlockHoleNoise.tres" id="10_oeqg8"]
 [ext_resource type="PackedScene" uid="uid://o7pe5pdtqa66" path="res://Components/EnemyParriedComponent/enemy_parried_component.tscn" id="10_qmox6"]
 [ext_resource type="Script" uid="uid://dhpi7qq7pbv7t" path="res://Objects/Enemies/RemnantCrab/StateMachine/suck_in.gd" id="10_rt31b"]
@@ -31,6 +30,7 @@
 [ext_resource type="Script" uid="uid://carwg7getubom" path="res://Objects/Enemies/RemnantCrab/StateMachine/RemnantCrabStateMachine.gd" id="13_vx8lb"]
 [ext_resource type="Shader" uid="uid://c15wiysahdd0y" path="res://Assets/Shaders/Effects/BloodSpray.gdshader" id="14_i7s33"]
 [ext_resource type="Script" uid="uid://bd2pbp6acjwct" path="res://Components/HealthComponent/Phase_Health_Component.gd" id="15_jvtmt"]
+[ext_resource type="Script" uid="uid://ckh47tupsk6me" path="res://Objects/Enemies/RemnantCrab/stagger_phase_1.gd" id="17_oeqg8"]
 [ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="21_i7s33"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
@@ -85,6 +85,24 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Vector2(1.5, 0.5), Vector2(3, 0.1), Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_vx8lb"]
+resource_name = "PrepLaser"
+length = 0.4
+loop_mode = 1
+step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 4.0]
 }
 
 [sub_resource type="Animation" id="Animation_jvtmt"]
@@ -167,24 +185,6 @@ tracks/1/keys = {
 "values": [0.0, 32.0, 16.0, 16.0]
 }
 
-[sub_resource type="Animation" id="Animation_vx8lb"]
-resource_name = "PrepLaser"
-length = 0.4
-loop_mode = 1
-step = 0.025
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Laser:width")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [1.0, 4.0]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i7s33"]
 _data = {
 &"EndLaser": SubResource("Animation_i7s33"),
@@ -232,6 +232,10 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_oeqg8")
 width = 24
 height = 24
+
+[sub_resource type="Curve" id="Curve_oeqg8"]
+_data = [Vector2(0, 1), 0.0, -6.41025, 0, 0, Vector2(0.151899, 0.198821), -0.114661, 0.0, 0, 0, Vector2(0.272152, 0), -5.38652, 0.0, 0, 0]
+point_count = 3
 
 [sub_resource type="Animation" id="Animation_1ai65"]
 resource_name = "HeadSlam"
@@ -692,6 +696,59 @@ tracks/8/keys = {
 "values": [Vector2(0, 1), Vector2(0, -2), Vector2(0, 0), Vector2(0, 2)]
 }
 
+[sub_resource type="Animation" id="Animation_oeqg8"]
+resource_name = "LaserRunEnd"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Skulls:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [34, 35, 36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Legs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Skulls/Arms(Head):position")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 2), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Skulls/Arms(Head):frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
 [sub_resource type="Animation" id="Animation_yiftg"]
 length = 0.001
 tracks/0/type = "value"
@@ -886,6 +943,18 @@ tracks/15/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sprites/Legs:scale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -981,7 +1050,128 @@ tracks/6/keys = {
 
 [sub_resource type="Animation" id="Animation_1qnwx"]
 resource_name = "StaggerPhase1"
+length = 3.0
 step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Legs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.5, 2.6, 2.7, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [51, 52, 35, 36, 37, 38]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Skulls:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [31, 34, 35, 18, 14, 15, 16, 17, 18, 14, 15, 16, 17, 18]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Skulls:position")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-1, 1), Vector2(-5, 13), Vector2(-5, 13), Vector2(-4, 13), Vector2(-2, 12), Vector2(0, 5), Vector2(0, 2), Vector2(0, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Skulls:rotation")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 2.5, 2.6, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [-0.113446, -0.113446, -0.0698132, -0.0174533, 0.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/Skulls/Arms(Head):position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-0.33961, 2.98072), Vector2(-0.679219, 5.96143), Vector2(-0.452813, 3.97429), Vector2(-0.33961, 2.98072), Vector2(0, 2), Vector2(0, 2)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/Skulls/Arms(Head):frame")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [48, 49, 45, 44]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sprites/Legs:scale")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Skulls:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sprites/ClothSim:rotation")
+tracks/8/interp = 0
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.10472, 0.0]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sprites/ClothSim:position")
+tracks/9/interp = 0
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 2.5, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(-3, 7), Vector2(-4, 7), Vector2(0, 7), Vector2(0, 5), Vector2(0, 3), Vector2(0, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_d6it3"]
 resource_name = "StompLeft"
@@ -1452,59 +1642,6 @@ tracks/10/keys = {
 "values": [true, false]
 }
 
-[sub_resource type="Animation" id="Animation_oeqg8"]
-resource_name = "LaserRunEnd"
-length = 0.3
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Skulls:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [34, 35, 36]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/Legs:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/Skulls/Arms(Head):position")
-tracks/2/interp = 0
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0, 3), Vector2(0, 2), Vector2(0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/Skulls/Arms(Head):frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [2]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oara4"]
 _data = {
 &"HeadSlam": SubResource("Animation_1ai65"),
@@ -1593,7 +1730,7 @@ shape = SubResource("RectangleShape2D_rt31b")
 [node name="Legs" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
 texture = ExtResource("2_rt31b")
-hframes = 51
+hframes = 53
 
 [node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 position = Vector2(0, 1)
@@ -1695,16 +1832,16 @@ parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
 dontReactToParryTimes = Array[Vector2]([Vector2(0, 1.2)])
 
-[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "parent", "movement")]
+[node name="Jump" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "attackComponents", "parent", "movement")]
 script = ExtResource("8_5j67f")
 attackLength = 3.3
 animationName = "Jump"
 agroState = NodePath("../Idle")
 parryState = NodePath("../StaggerPhase1")
 animator = NodePath("../../Animator")
+attackComponents = [NodePath("../../AttackComponents/JumpSlam")]
 parent = NodePath("../..")
 movement = NodePath("../../GeneralComponents/MovementComponent")
-dontReactToParryTimes = Array[Vector2]([Vector2(0, 3.3)])
 
 [node name="HeadSlam" type="Node" parent="StateMachine" node_paths=PackedStringArray("agroState", "parryState", "animator", "parent", "movement")]
 script = ExtResource("8_5j67f")
@@ -1772,8 +1909,17 @@ animator = NodePath("../../Animator")
 skullSprite = NodePath("../../Sprites/Skulls")
 cloak = NodePath("../../Sprites/ClothSim")
 
-[node name="StaggerPhase1" type="Node" parent="StateMachine"]
-script = ExtResource("10_5j67f")
+[node name="StaggerPhase1" type="Node" parent="StateMachine" node_paths=PackedStringArray("nextState", "parrent", "animator", "movement", "kbCom")]
+script = ExtResource("17_oeqg8")
+velocityCurve = SubResource("Curve_oeqg8")
+parryLength = 3.0
+animationName = "StaggerPhase1"
+knockback = 0.0
+nextState = NodePath("../Idle")
+parrent = NodePath("../..")
+animator = NodePath("../../Animator")
+movement = NodePath("../../GeneralComponents/MovementComponent")
+kbCom = NodePath("../../GeneralComponents/OmniDirectionalKnockbackComponent")
 
 [node name="PhaseSwitch" type="Node" parent="StateMachine"]
 
@@ -1871,7 +2017,7 @@ target_position = Vector2(0, 400)
 [node name="AttackComponents" type="Node2D" parent="."]
 
 [node name="EnemyParriedComponent" parent="AttackComponents" node_paths=PackedStringArray("attackComponents", "stateMachine") instance=ExtResource("10_qmox6")]
-attackComponents = [NodePath("../HeadSlam")]
+attackComponents = [NodePath("../HeadSlam"), NodePath("../HeadSlamRocksLeft"), NodePath("../HeadSlamRocksRight"), NodePath("../JumpSlam"), NodePath("../Laser"), NodePath("../StompLeft"), NodePath("../StompRight")]
 stateMachine = NodePath("../../StateMachine")
 
 [node name="HeadSlam" parent="AttackComponents" node_paths=PackedStringArray("collisionShape", "healthComponent") instance=ExtResource("11_rt31b")]
@@ -1993,8 +2139,9 @@ position = Vector2(0, 23)
 animationSpeed = 2.0
 
 [node name="BackBufferCopy4" type="BackBufferCopy" parent="Shockwaves"]
-position = Vector2(-25, 23)
+position = Vector2(-24, 4.76837e-07)
 scale = Vector2(10, 10)
 copy_mode = 2
 
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]
+[connection signal="gotParried" from="AttackComponents/JumpSlam" to="." method="_on_jump_slam_got_parried"]

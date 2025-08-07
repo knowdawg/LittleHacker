@@ -35,7 +35,7 @@ var constantHurtboxActive : bool = false
 
 @onready var attackID : float = randf()
 
-signal gotParried
+signal gotParried(a : Attack)
 signal grabSucessful
 signal attackHit(area)
 
