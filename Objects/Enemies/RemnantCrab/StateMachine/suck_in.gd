@@ -2,6 +2,7 @@ extends State
 class_name RamnantCrabSuckIn
 
 @export var animator : AnimationPlayer
+@export var laserAnimator : AnimationPlayer
 @export var length : float = 0.0
 @export var suckStart : float = 0.0
 @export var suckEnd : float = 0.0
@@ -16,6 +17,7 @@ func enter(_p):
 	t = 0.0
 	gotPlayer = proximity.checkForPlayerInside()
 	animator.play("SuckIn")
+	laserAnimator.play("RESET")
 
 func update(delta):
 	t += delta
@@ -38,3 +40,4 @@ func update(delta):
 
 func exit(_n):
 	gotPlayer = false
+	laserAnimator.play("RESET")

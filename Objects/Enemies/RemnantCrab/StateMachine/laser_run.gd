@@ -1,7 +1,7 @@
 extends State
 class_name RemnantCrabLaserCrab
 
-enum state {ToWall, StartLaser, FirstRun, SecoundRun, FinishUp}
+enum state {ToWall, StartLaser, FirstRun, SecoundRun, FinishUp, EndLaser}
 var curState : state = state.ToWall
 
 @export var leftRaycast : RayCast2D
@@ -37,6 +37,7 @@ func enter(_p):
 	metTarget = false
 
 var runVelocity := Vector2.ZERO
+var endLaserTimer = 0.0
 func update_physics(delta):
 	t += delta
 	
@@ -86,6 +87,13 @@ func update_physics(delta):
 			if abs(runVelocity.x) <= 0.1:
 				laserAttackComponent.disable()
 				laserAnimator.play("EndLaser")
+				animator.play("LaserRunEnd")
+				curState = state.EndLaser
+				endLaserTimer = 0.0
+				return
+		state.EndLaser:
+			endLaserTimer += delta
+			if endLaserTimer >= 0.3:
 				trasitioned.emit(self, "Idle")
 				return
 	

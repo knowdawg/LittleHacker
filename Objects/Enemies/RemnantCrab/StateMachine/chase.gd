@@ -54,6 +54,12 @@ func update_physics(delta):
 		if abs(sm.xDisToPlayer) >= 40.0 or t >= 1.0:
 			metTarget = true
 		
+		if runVelocity.x > 0 and sm.nearRightWall:
+			metTarget = true
+		
+		if runVelocity.x < 0 and sm.nearRightWall:
+			metTarget = true
+		
 		if metTarget:
 			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 100.0)
 			if abs(runVelocity.x) <= 0.1:

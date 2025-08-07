@@ -58,14 +58,14 @@ resource_local_to_scene = true
 shader = ExtResource("9_1trnf")
 shader_parameter/resolution = Vector2(96, 96)
 shader_parameter/colorResolution = 10.0
-shader_parameter/distortionIntensity = 1.49012e-07
+shader_parameter/distortionIntensity = 1.0
 shader_parameter/spiralDistortionIntensity = 5.0
 shader_parameter/holeSize = 0.15
 shader_parameter/holeColor = SubResource("GradientTexture1D_gj6tf")
 shader_parameter/image = ExtResource("9_bgy7s")
 shader_parameter/rotations = 1.0
 shader_parameter/depth = 0.5
-shader_parameter/spiralIntensity = 1.5
+shader_parameter/spiralIntensity = 2.0
 shader_parameter/shrinkSpeed = 0.2
 shader_parameter/roationSpeed = 0.1
 shader_parameter/haloColor = SubResource("GradientTexture1D_hsyqj")
@@ -166,12 +166,12 @@ texture = SubResource("ViewportTexture_f40ai")
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
-[node name="PlayerParrent" type="Node2D" parent="."]
-
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="RemnantCrab" parent="Enemies" instance=ExtResource("2_1og1s")]
 position = Vector2(23, -8)
+
+[node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="Proectiles" type="Node2D" parent="."]
 
@@ -203,6 +203,6 @@ copy_mode = 2
 
 [node name="BlackHole2" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_gj6tf")
-position = Vector2(-23, 4)
+position = Vector2(-139, -11)
 scale = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_bnw8x")

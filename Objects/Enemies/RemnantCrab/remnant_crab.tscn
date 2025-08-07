@@ -1,4 +1,4 @@
-[gd_scene load_steps=71 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=74 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -62,27 +62,135 @@ shader_parameter/resolution = Vector2(16, 16)
 resource_name = "EndLaser"
 length = 0.3
 step = 0.025
-
-[sub_resource type="Animation" id="Animation_fp8yd"]
-resource_name = "PrepLaser"
-length = 0.1
-loop_mode = 1
-step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.075, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [16.0, 2.0, 0.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../BlackHoleContainer/BlackHole:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(1.5, 0.5), Vector2(3, 0.1), Vector2(0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_jvtmt"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BlackHoleContainer/BlackHole:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Laser:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../BlackHoleContainer/BlackHole:material:shader_parameter/resolution")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 24)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../BlackHoleContainer/BlackHole:visible")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_fp8yd"]
+resource_name = "StartLaser"
+length = 0.3
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../BlackHoleContainer/BlackHole:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(2, 2), Vector2(1, 1), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Laser:width")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.25, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 32.0, 16.0, 16.0]
+}
 
 [sub_resource type="Animation" id="Animation_vx8lb"]
-resource_name = "StartLaser"
-length = 0.1
+resource_name = "PrepLaser"
+length = 0.4
+loop_mode = 1
 step = 0.025
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Laser:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 4.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_i7s33"]
 _data = {
 &"EndLaser": SubResource("Animation_i7s33"),
-&"PrepLaser": SubResource("Animation_fp8yd"),
+&"PrepLaser": SubResource("Animation_vx8lb"),
 &"RESET": SubResource("Animation_jvtmt"),
-&"StartLaser": SubResource("Animation_vx8lb")
+&"StartLaser": SubResource("Animation_fp8yd")
 }
 
 [sub_resource type="Gradient" id="Gradient_v3dep"]
@@ -92,14 +200,22 @@ colors = PackedColorArray(0.423529, 0.352941, 0.607843, 1, 1, 1, 1, 1)
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_hhtw5"]
 gradient = SubResource("Gradient_v3dep")
 
+[sub_resource type="Gradient" id="Gradient_k1yg2"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_d6it3"]
+gradient = SubResource("Gradient_k1yg2")
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k1yg2"]
 resource_local_to_scene = true
 shader = ExtResource("9_oeqg8")
 shader_parameter/resolution = Vector2(24, 24)
-shader_parameter/colorResolution = 100.0
-shader_parameter/distortionIntensity = 1.49012e-07
-shader_parameter/spiralDistortionIntensity = 0.5
-shader_parameter/holeSize = 0.2
+shader_parameter/colorResolution = 20.0
+shader_parameter/distortionIntensity = -0.5
+shader_parameter/spiralDistortionIntensity = 2.0
+shader_parameter/holeSize = 0.15
+shader_parameter/holeColor = SubResource("GradientTexture1D_d6it3")
 shader_parameter/image = ExtResource("10_oeqg8")
 shader_parameter/rotations = 1.0
 shader_parameter/depth = 0.5
@@ -734,6 +850,42 @@ tracks/12/keys = {
 "update": 0,
 "values": [Vector2(0, 0)]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("BlackHoleContainer/BlackHole:scale")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("BlackHoleContainer/BlackHole:material:shader_parameter/resolution")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 24)]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("BlackHoleContainer/BlackHole:visible")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -1166,7 +1318,7 @@ tracks/11/keys = {
 [sub_resource type="Animation" id="Animation_5j67f"]
 resource_name = "SuckIn"
 length = 1.7
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -1251,6 +1403,107 @@ tracks/6/keys = {
 "update": 0,
 "values": [Vector2(0, 1), Vector2(0, 2), Vector2(0, 6), Vector2(0, 11), Vector2(0, 15), Vector2(0, 19), Vector2(0, 1), Vector2(0, 0)]
 }
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("BlackHoleContainer/BlackHole:scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.35, 0.4, 0.45, 0.5, 0.55, 1.2, 1.3, 1.35, 1.4, 1.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1e-05, 1e-05), Vector2(0.3, 0.3), Vector2(1.3, 1.3), Vector2(2.2, 2.2), Vector2(2, 2), Vector2(2, 2), Vector2(1.5, 1), Vector2(1.5, 0.5), Vector2(3, 0.2), Vector2(0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("BlackHoleContainer/BlackHole:position")
+tracks/8/interp = 0
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0.4, 0.45, 0.5, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-0.5, -13), Vector2(0.5, -12), Vector2(-0.5, -13), Vector2(-0.5, -13), Vector2(0, -6), Vector2(0.5, 9)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("BlackHoleContainer/BlackHole:material:shader_parameter/resolution")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.4, 0.6, 1.2, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(24, 24), Vector2(48, 48), Vector2(48, 48), Vector2(24, 24)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("BlackHoleContainer/BlackHole:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0.4, 1.45),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_oeqg8"]
+resource_name = "LaserRunEnd"
+length = 0.3
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Skulls:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [34, 35, 36]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Legs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Skulls/Arms(Head):position")
+tracks/2/interp = 0
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 3), Vector2(0, 2), Vector2(0, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Skulls/Arms(Head):frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oara4"]
 _data = {
@@ -1258,6 +1511,7 @@ _data = {
 &"Idle": SubResource("Animation_2ujic"),
 &"Jump": SubResource("Animation_oara4"),
 &"LaserRun": SubResource("Animation_rt31b"),
+&"LaserRunEnd": SubResource("Animation_oeqg8"),
 &"RESET": SubResource("Animation_yiftg"),
 &"Run": SubResource("Animation_7y5mw"),
 &"StaggerPhase1": SubResource("Animation_1qnwx"),
@@ -1267,7 +1521,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmox6"]
-radius = 120.017
+radius = 150.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jvtmt"]
 size = Vector2(21, 40)
@@ -1381,7 +1635,8 @@ shape = SubResource("CircleShape2D_jvtmt")
 
 [node name="Laser" type="Line2D" parent="LaserContainer"]
 material = SubResource("ShaderMaterial_1qnwx")
-width = 16.0
+points = PackedVector2Array(0, 0, 33, 30)
+width = 0.0
 texture_mode = 1
 joint_mode = 2
 
@@ -1397,8 +1652,8 @@ position = Vector2(-0.5, 0)
 copy_mode = 2
 
 [node name="BlackHole" type="Sprite2D" parent="BlackHoleContainer"]
-visible = false
 material = SubResource("ShaderMaterial_k1yg2")
+scale = Vector2(1e-05, 1e-05)
 texture = SubResource("GradientTexture2D_d6it3")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
@@ -1491,9 +1746,10 @@ animationName = "Run"
 skullSprite = NodePath("../../Sprites/Skulls")
 cloak = NodePath("../../Sprites/ClothSim")
 
-[node name="SuckIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "proximity", "parent")]
+[node name="SuckIn" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "laserAnimator", "proximity", "parent")]
 script = ExtResource("10_rt31b")
 animator = NodePath("../../Animator")
+laserAnimator = NodePath("../../LaserContainer/LazerAnimator")
 length = 1.7
 suckStart = 0.5
 suckEnd = 1.3

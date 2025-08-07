@@ -24,16 +24,23 @@ func update(_delta):
 		trasitioned.emit(self, nextState)
 		return
 	
-	nextStates.append("LaserRun")
-	#nextStates.append("Jump")
-	return
+	#nextStates.append("LaserRun")
+	#nextStates.append("SuckIn")
+	#return
 	
 	var a = sm.getRandomAttack(prevAttack)
-	#print(a)
+	
+	if abs(sm.xDisToPlayer) >= 60.0:
+		if randf() < 0.5: #50% chance
+			nextStates.append("SuckIn")
+			prevAttack = sm.phase1Attacks.SuckIn
+			return
 	
 	if a == sm.phase1Attacks.Stomp:
-		#nextStates.append("Chase")
-		nextStates.append("RunAway")
+		if sm.xDisToPlayer > 0 and !sm.nearLeftWall:
+			nextStates.append("RunAway")
+		if sm.xDisToPlayer < 0 and !sm.nearRightWall:
+			nextStates.append("RunAway")
 		nextStates.append("Stomp")
 		prevAttack = sm.phase1Attacks.Stomp
 		return
@@ -51,17 +58,11 @@ func update(_delta):
 		prevAttack = sm.phase1Attacks.HeadSlam
 		return
 	
-	if a == sm.phase1Attacks.SuckIn:
-		nextStates.append("RunAway")
-		nextStates.append("SuckIn")
-		prevAttack = sm.phase1Attacks.SuckIn
-		return
-		
-	
 	if a == sm.phase1Attacks.LazerRun:
-		if %RightWallRaycast.is_colliding():
+		if sm.nearRightWall:
 			return
 		
 		nextStates.append("LaserRun")
 		prevAttack = sm.phase1Attacks.LazerRun
 		return
+	

@@ -28,8 +28,8 @@ vec2 toPolar(vec2 cartesian){
 }
 
 //void vertex(){
-	//VERTEX.x += sin(UV.x + TIME * 2.0) * 1.0;
-	//VERTEX.y += cos(UV.y + TIME * 2.0) * 1.0;
+	//VERTEX.x += sin(UV.x + TIME * 2.0) * 10.0;
+	//VERTEX.y += cos(UV.y + TIME * 2.0) * 10.0;
 //}
 
 void fragment() {
@@ -57,7 +57,7 @@ void fragment() {
 	float ring = 1.0 - abs(length(clipUV));
 	ring = smoothstep(0.0, 1.0, ring);
 	vec2 offset = TEXTURE_PIXEL_SIZE * ring * normalize(clipUV);
-	vec2 spiralOffset = TEXTURE_PIXEL_SIZE * max(0.0, 0.5 - centerDis) * vec2(polarTex.r);
+	vec2 spiralOffset = TEXTURE_PIXEL_SIZE * max(0.0, 0.5 - centerDis) * vec2(0.5 - polarTex.r);
 	vec4 s = texture(screen, SCREEN_UV + offset * distortionIntensity + spiralOffset * spiralDistortionIntensity);
 	c.rgb = mix(s.rgb, halo.rgb * 3.0, halo.a);
 

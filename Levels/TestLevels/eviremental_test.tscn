@@ -475,7 +475,7 @@ height = 10.0
 position = Vector2(-60, -42)
 copy_mode = 2
 
-[node name="BlackHole3" type="Sprite2D" parent="."]
+[node name="BlackHole" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_50dv8")
-position = Vector2(190, -36)
+position = Vector2(-250, -113)
 texture = SubResource("GradientTexture2D_50dv8")
