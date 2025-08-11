@@ -52,10 +52,11 @@ animations = [{
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2ty4p"]
 shader = ExtResource("4_5tu4y")
-shader_parameter/pixelsWidth = 256.0
-shader_parameter/pixelsHeight = 144.0
+shader_parameter/pixelsWidth = 128.0
+shader_parameter/pixelsHeight = 72.0
 shader_parameter/enable_scanlines = true
-shader_parameter/enable_color_bleed = true
+shader_parameter/enable_color_bleed = false
+shader_parameter/scanlineIntensity = 7.0
 
 [sub_resource type="Animation" id="Animation_ib7ep"]
 resource_name = "FadeIn"

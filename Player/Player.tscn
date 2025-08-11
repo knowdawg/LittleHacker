@@ -1,4 +1,4 @@
-[gd_scene load_steps=238 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=242 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -85,6 +85,7 @@
 [ext_resource type="AudioStream" uid="uid://bm05kcv4rbj60" path="res://Assets/Audio/SoundEffects/Parry2.wav" id="55_jnt5q"]
 [ext_resource type="AudioStream" uid="uid://c6ssp032sru3x" path="res://Assets/Audio/SoundEffects/HackAttackHit.wav" id="56_2fx77"]
 [ext_resource type="Texture2D" uid="uid://dn4c6ix1gcrii" path="res://Assets/Sprites/UI/EnergyIcon.png" id="56_87gtb"]
+[ext_resource type="Script" uid="uid://05gliv76grm2" path="res://Player/weapon_dislocator.gd" id="56_q8ub3"]
 [ext_resource type="AudioStream" uid="uid://bcnxe0u00cqqc" path="res://Assets/Audio/SoundEffects/Bong.wav" id="56_qavs0"]
 [ext_resource type="AudioStream" uid="uid://bipfgj5orj75l" path="res://Assets/Audio/SoundEffects/HackFailed.wav" id="57_fvjjx"]
 [ext_resource type="PackedScene" uid="uid://ctcag33a3qexi" path="res://Player/HealthBar/HealthNode.tscn" id="57_wjjph"]
@@ -92,6 +93,8 @@
 [ext_resource type="AudioStream" uid="uid://dk8gsdpbda3an" path="res://Assets/Audio/SoundEffects/HackModeAmbience.wav" id="59_ly53n"]
 [ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
 [ext_resource type="AudioStream" uid="uid://7d4y3bn7ksgd" path="res://Assets/Audio/SoundEffects/HackExecuted2.wav" id="69_xqyul"]
+[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="77_1e2fr"]
+[ext_resource type="Texture2D" uid="uid://ufu3hjlwcw66" path="res://Test/SmallPlayerIdeas.png" id="78_oyr7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2bo2"]
 size = Vector2(2, 5)
@@ -1404,6 +1407,11 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cy6n2"]
+shader = ExtResource("77_1e2fr")
+shader_parameter/width = 0.3
+shader_parameter/outlineAlpha = 0.3
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1e2fr"]
 shader = ExtResource("33_rdnj2")
 shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
@@ -3234,7 +3242,9 @@ playerStateMachine = NodePath("../../StateMachine")
 leftAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/GrappleAttackLeft")
 rightAttackComponent = NodePath("../../WeaponDislocator/WeaponSprite/GrappleAttackRight")
 
-[node name="WeaponDislocator" type="Node" parent="."]
+[node name="WeaponDislocator" type="Node2D" parent="." node_paths=PackedStringArray("parent")]
+script = ExtResource("56_q8ub3")
+parent = NodePath("..")
 
 [node name="WeaponSprite" type="Sprite2D" parent="WeaponDislocator" node_paths=PackedStringArray("parent", "audio", "audio2")]
 clip_children = 2
@@ -3621,6 +3631,13 @@ frame = 62
 
 [node name="HitFlashComponent" parent="PlayerVisual/PlayerSprite" instance=ExtResource("23_v12ij")]
 
+[node name="SmallPlayerIdeas" type="Sprite2D" parent="PlayerVisual"]
+visible = false
+texture_filter = 1
+material = SubResource("ShaderMaterial_1e2fr")
+position = Vector2(0, -2.5)
+texture = ExtResource("78_oyr7x")
+
 [node name="SpriteAnimator" type="AnimationPlayer" parent="."]
 libraries = {
 &"": SubResource("AnimationLibrary_n2wqp")
@@ -3854,7 +3871,6 @@ shape = SubResource("CircleShape2D_jfgjt")
 [node name="PlayerCamera" type="Camera2D" parent="Node"]
 unique_name_in_owner = true
 zoom = Vector2(10, 10)
-position_smoothing_speed = 10.0
 script = ExtResource("55_c7l4y")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]

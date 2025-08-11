@@ -25,7 +25,7 @@ func _process(delta: float) -> void:
 	if Game.inHackMode:
 		targetZoom = Vector2(11.0, 11.0)
 	else:
-		targetZoom = Vector2(10.0, 10.0)
+		targetZoom = Vector2(10.0, 10.0)#Vector2(5.0, 5.0)#Vector2(10.0, 10.0)
 
 func onHackModeExit():
 	zoom = Vector2(14.0, 14.0)
