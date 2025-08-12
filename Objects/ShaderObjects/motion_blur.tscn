@@ -318,7 +318,7 @@ _data = {
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8o7ku"]
 shader = ExtResource("6_1v5yc")
-shader_parameter/amount = 40.0
+shader_parameter/resolution = Vector2(192, 108)
 
 [sub_resource type="Animation" id="Animation_8o7ku"]
 resource_name = "FadeIn"

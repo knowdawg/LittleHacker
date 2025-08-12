@@ -241,7 +241,7 @@ _data = {
 &"RESET": SubResource("Animation_5iyrm")
 }
 
-[node name="EnemyHeathbar" type="Node" node_paths=PackedStringArray("nuetralActiveBars", "healthActiveBars", "weaknessActiveBars", "healthBars", "weaknessBars")]
+[node name="EnemyHeathbar" type="Node2D" node_paths=PackedStringArray("nuetralActiveBars", "healthActiveBars", "weaknessActiveBars", "healthBars", "weaknessBars")]
 script = ExtResource("2_vxjlb")
 nuetralActiveBars = [NodePath("Sprite2D/HealthBarNuetral"), NodePath("Sprite2D/WeaknessBarNuetral")]
 healthActiveBars = [NodePath("Sprite2D/HealthBarHealth"), NodePath("Sprite2D/WeaknessBarHealth")]

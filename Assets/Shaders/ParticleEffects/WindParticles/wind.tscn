@@ -8,14 +8,14 @@ colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_73on7"]
 gradient = SubResource("Gradient_1k6sk")
-width = 4
-height = 4
+width = 8
+height = 8
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="Curve" id="Curve_n0e0i"]
-_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.498947, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.491968, 0.260109), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 3
 
 [sub_resource type="CurveTexture" id="CurveTexture_1k6sk"]
@@ -56,7 +56,6 @@ scale_curve = SubResource("CurveTexture_cbcc5")
 alpha_curve = SubResource("CurveTexture_1k6sk")
 
 [node name="Wind" type="GPUParticles2D"]
-amount = 128
 texture = SubResource("GradientTexture2D_73on7")
 lifetime = 5.0
 preprocess = 5.0

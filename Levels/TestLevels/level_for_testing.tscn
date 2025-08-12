@@ -1,6 +1,7 @@
-[gd_scene load_steps=25 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=26 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
+[ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="2_mn1fc"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_p32do"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_4mm16"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_45odj"]
@@ -174,6 +175,9 @@ texture = SubResource("ViewportTexture_f40ai")
 
 [node name="Enemies" type="Node2D" parent="."]
 
+[node name="RemnantCrab" parent="Enemies" instance=ExtResource("2_mn1fc")]
+position = Vector2(47, -8)
+
 [node name="PlayerParrent" type="Node2D" parent="."]
 
 [node name="Proectiles" type="Node2D" parent="."]
@@ -207,6 +211,6 @@ rect = Rect2(0, 0, -96, 96)
 
 [node name="BlackHole2" type="Sprite2D" parent="."]
 material = SubResource("ShaderMaterial_gj6tf")
-position = Vector2(-140, 15)
+position = Vector2(-153, 8)
 scale = Vector2(4, 4)
 texture = SubResource("GradientTexture2D_bnw8x")

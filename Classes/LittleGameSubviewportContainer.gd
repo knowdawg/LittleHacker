@@ -32,6 +32,10 @@ func updateDepth():
 		if scalingContainer:
 			scalingContainer.scale = Vector2(1.0 - depth, 1.0 - depth)
 			scale = Vector2(1.0, 1.0) / Vector2(1.0 - depth, 1.0 - depth)
+	else:
+		if scalingContainer:
+			scalingContainer.scale = Vector2(1.0, 1.0)
+			scale = Vector2(1.0, 1.0)
 	
 	if filterLinear:
 		texture_filter = CanvasItem.TEXTURE_FILTER_LINEAR

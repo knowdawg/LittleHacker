@@ -1,5 +1,5 @@
 @tool
-extends Node
+extends Node2D
 class_name EnemyHealthBar
 
 @export var showBars : bool = true
@@ -61,6 +61,7 @@ func sortHacks(a : HackCommandComponent, b : HackCommandComponent):
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta: float) -> void:
 	if follow:
+		global_position = Vector2.ZERO
 		%Healthbars.global_position = follow.global_position
 	
 	if showBars:

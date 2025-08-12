@@ -1557,6 +1557,7 @@ topLadderProx = NodePath("../../Components/LadderProximities/TopLadder")
 shape = SubResource("RectangleShape2D_axpou")
 
 [node name="UI" type="CanvasLayer" parent="." node_paths=PackedStringArray("staminaComponent")]
+visible = false
 script = ExtResource("13_13av7")
 staminaComponent = NodePath("../Components/StaminaComponent")
 
@@ -1569,7 +1570,7 @@ offset_bottom = 40.0
 transparent_bg = true
 handle_input_locally = false
 size = Vector2i(100, 100)
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="Health" type="TextureProgressBar" parent="UI/SubViewportContainer/SubViewport"]
 unique_name_in_owner = true

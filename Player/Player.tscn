@@ -1,4 +1,4 @@
-[gd_scene load_steps=241 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=245 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -93,7 +93,10 @@
 [ext_resource type="AudioStream" uid="uid://dk8gsdpbda3an" path="res://Assets/Audio/SoundEffects/HackModeAmbience.wav" id="59_ly53n"]
 [ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
 [ext_resource type="AudioStream" uid="uid://7d4y3bn7ksgd" path="res://Assets/Audio/SoundEffects/HackExecuted2.wav" id="69_xqyul"]
+[ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="77_1e2fr"]
 [ext_resource type="Texture2D" uid="uid://ufu3hjlwcw66" path="res://Test/SmallPlayerIdeas.png" id="78_oyr7x"]
+[ext_resource type="Shader" uid="uid://cmkdo446fbnfd" path="res://Assets/Shaders/Textures/Vignette.gdshader" id="89_3om3i"]
+[ext_resource type="Script" uid="uid://csyhe4wnscad5" path="res://Player/vignette.gd" id="89_4k38o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2bo2"]
 size = Vector2(2, 5)
@@ -1605,7 +1608,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_q5dwu"]
 resource_name = "Idle"
-length = 1.4
+length = 4.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -1614,10 +1617,10 @@ tracks/0/path = NodePath("PlayerVisual/PlayerSprite:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 1.2, 1.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.5, 0.6, 0.7, 1.2, 1.3, 1.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [1, 2, 3, 4, 5, 6]
+"values": [1, 2, 3, 4, 5, 6, 1]
 }
 
 [sub_resource type="Animation" id="Animation_ecuml"]
@@ -2689,6 +2692,11 @@ _data = {
 &"RESET": SubResource("Animation_ltc66")
 }
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4k38o"]
+shader = ExtResource("89_3om3i")
+shader_parameter/center = Vector2(0.5, 0.5)
+shader_parameter/strength = -0.5
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_urh35"]
 shader = ExtResource("55_dupvs")
 shader_parameter/BLOOM_THRESHOLD = 0.7
@@ -2860,8 +2868,11 @@ process_material = SubResource("ParticleProcessMaterial_efsdk")
 [node name="PointLight2D" type="PointLight2D" parent="."]
 unique_name_in_owner = true
 visible = false
-color = Color(0.137255, 0.137255, 0.137255, 1)
-energy = 0.0
+texture = SubResource("GradientTexture2D_ufcdm")
+
+[node name="PassiveLight" type="PointLight2D" parent="."]
+visible = false
+energy = 0.5
 texture = SubResource("GradientTexture2D_ufcdm")
 
 [node name="DarkeningAura1" type="Sprite2D" parent="."]
@@ -3619,6 +3630,13 @@ stream = ExtResource("59_ly53n")
 volume_db = -20.0
 bus = &"SoundEffects"
 
+[node name="AfterImageComponent" parent="." node_paths=PackedStringArray("follow", "sprite") instance=ExtResource("77_1e2fr")]
+follow = NodePath("../PlayerVisual/PlayerSprite")
+sprite = NodePath("../PlayerVisual/PlayerSprite")
+frequency = 0.1
+fadeTime = 0.3
+startColor = Color(0.588235, 0.588235, 0.588235, 0.392157)
+
 [node name="PlayerVisual" type="Node2D" parent="."]
 position = Vector2(0, 2)
 
@@ -3768,6 +3786,19 @@ one_shot = true
 unique_name_in_owner = true
 layer = 100
 
+[node name="Vignette" type="CanvasLayer" parent="." node_paths=PackedStringArray("parent")]
+layer = 99
+script = ExtResource("89_4k38o")
+parent = NodePath("..")
+
+[node name="Vignette" type="ColorRect" parent="Vignette"]
+material = SubResource("ShaderMaterial_4k38o")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
 [node name="PlayerUI" type="CanvasLayer" parent="." node_paths=PackedStringArray("healthComponent", "highlight", "backgroundLine", "middleLine")]
 layer = 100
 script = ExtResource("54_qkh22")
@@ -3855,10 +3886,11 @@ anchor_left = 0.01
 anchor_top = 0.01
 anchor_right = 0.1
 anchor_bottom = 0.05
-offset_left = 245.8
-offset_top = 1.2
-offset_right = 285.8
-offset_bottom = 24.2
+offset_left = 27.8
+offset_top = 104.2
+offset_right = 67.8
+offset_bottom = 127.2
+theme_override_font_sizes/font_size = 50
 metadata/_edit_use_anchors_ = true
 
 [node name="CameraBounds" parent="." instance=ExtResource("2_67e55")]
