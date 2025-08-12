@@ -15,8 +15,9 @@ func _notification(what: int) -> void:
 			if parallax_list.is_empty():
 				find_parallax(get_tree().edited_scene_root)
 				window_size = Vector2(
-					ProjectSettings.get_setting_with_override(&"display/window/size/viewport_width"),
-					ProjectSettings.get_setting_with_override(&"display/window/size/viewport_height")
+					#ProjectSettings.get_setting_with_override(&"display/window/size/viewport_width"),
+					#ProjectSettings.get_setting_with_override(&"display/window/size/viewport_height")
+					1920.0, 1080.0
 				)
 				
 				if parallax_list.is_empty():

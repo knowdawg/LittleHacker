@@ -1,4 +1,4 @@
-[gd_scene load_steps=156 format=3 uid="uid://cb2mgf3vv8ptm"]
+[gd_scene load_steps=163 format=3 uid="uid://cb2mgf3vv8ptm"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_4w4bf"]
 [ext_resource type="Environment" uid="uid://dmo71rg36b37b" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tres" id="2_w31va"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="6_mbqal"]
 [ext_resource type="Texture2D" uid="uid://cdv6us5lootnk" path="res://Assets/Sprites/EnvirmentTextures/Backgrounds/WyrmCorpse2.png" id="6_tpsgt"]
 [ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="8_3qqdn"]
+[ext_resource type="Script" uid="uid://0ji7aj4a5x2k" path="res://Classes/LittleGameSubviewportContainer.gd" id="9_4685e"]
 [ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="9_oo6lu"]
 [ext_resource type="PackedScene" uid="uid://cfy3aart4poj3" path="res://Objects/WorldObjects/Tilemaps/sdf_tilemap.tscn" id="10_73joc"]
 [ext_resource type="Shader" uid="uid://cjqlhf5b75g3y" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTexture.gdshader" id="11_j2jwg"]
@@ -54,29 +55,73 @@ colors = PackedColorArray(0.909804, 0.756863, 0.439216, 1, 0.811765, 0.341176, 0
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_86ljy"]
 gradient = SubResource("Gradient_tpsgt")
-width = 106
-height = 60
+width = 192
+height = 108
 fill_from = Vector2(1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_wc3rv"]
+seed = 3
+frequency = 0.0049
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3rg01"]
+width = 50
+height = 500
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_wc3rv")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_g7bsa"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jshoa"]
+width = 500
+height = 500
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_g7bsa")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fqjwc"]
+resource_local_to_scene = true
+shader = ExtResource("9_oo6lu")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_3rg01")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_jshoa")
+shader_parameter/resolution = Vector2(192, 108)
+shader_parameter/speed = 1.0
+shader_parameter/cloudFullness = 1.0
+shader_parameter/cloudPosition = 0.0
+shader_parameter/xDisplacment = 0.0
 
 [sub_resource type="Gradient" id="Gradient_53ke4"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_w31va"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4685e"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_53ke4")
-width = 1280
-height = 720
+width = 1920
+height = 1080
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yop8u"]
+resource_local_to_scene = true
+shader = ExtResource("9_oo6lu")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_3rg01")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_jshoa")
+shader_parameter/resolution = Vector2(192, 108)
+shader_parameter/speed = 1.0
+shader_parameter/cloudFullness = 0.368
+shader_parameter/cloudPosition = 0.124
+shader_parameter/xDisplacment = 0.0
 
 [sub_resource type="Gradient" id="Gradient_k66g4"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.792157, 0.760784, 1)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_4685e"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fck5"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_k66g4")
-width = 1280
-height = 720
+width = 1920
+height = 1080
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vw7xj"]
 seed = 1
@@ -100,21 +145,21 @@ noise = SubResource("FastNoiseLite_xf300")
 shader = ExtResource("9_oo6lu")
 shader_parameter/cloudNoise = SubResource("NoiseTexture2D_o84sx")
 shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
-shader_parameter/resolution = Vector2(128, 72)
+shader_parameter/resolution = Vector2(384, 216)
 shader_parameter/speed = 0.5
-shader_parameter/cloudFullness = 0.544
-shader_parameter/cloudPosition = 0.568
+shader_parameter/cloudFullness = 0.588
+shader_parameter/cloudPosition = 0.289
 shader_parameter/xDisplacment = 0.4
 
 [sub_resource type="Gradient" id="Gradient_kqt26"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_5fck5"]
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qksy1"]
 resource_local_to_scene = true
 gradient = SubResource("Gradient_kqt26")
-width = 1280
-height = 720
+width = 1920
+height = 1080
 
 [sub_resource type="Shader" id="Shader_86ljy"]
 code = "shader_type canvas_item;
@@ -122,19 +167,39 @@ code = "shader_type canvas_item;
 uniform sampler2D fog;
 uniform float depth : hint_range(0.0, 1.0);
 
+uniform float u_radius : hint_range(0.0, 1.0) = 0.0;
+
+vec4 blur(sampler2D image, vec2 uv, vec2 dir, vec2 tps) {
+    vec4 color = texture(image, uv) * 0.2270270270; // Center weight
+    
+    // Optimized 4-tap Gaussian approximation
+    vec2 offset1 = dir * u_radius * 1.3846153846 * tps;
+    vec2 offset2 = dir * u_radius * 3.2307692308 * tps;
+    
+    color += texture(image, uv + offset1) * 0.3162162162;
+    color += texture(image, uv - offset1) * 0.3162162162;
+    color += texture(image, uv + offset2) * 0.0702702703;
+    color += texture(image, uv - offset2) * 0.0702702703;
+    
+	
+	
+    return color;
+}
+
+
 void fragment() {
-	vec4 s = texture(TEXTURE, UV);
+	vec4 f = blur(TEXTURE, UV, vec2(1.0, 0.0), TEXTURE_PIXEL_SIZE);
+	f = mix(f, blur(TEXTURE, UV, vec2(0.0, 1.0), TEXTURE_PIXEL_SIZE), 0.5);
+	
 	vec4 fogColor = texture(fog, vec2(depth, 0.0));
 	vec4 c = vec4(1.0);
 
-	c.rgb = mix(vec3(dot(s.rgb, vec3(0.299, 0.587, 0.114))), s.rgb, 1.0 - depth);
-
-	//c.rgb /= 0.5;
-	//c.rgb = pow(c.rgb, vec3(5.0));
+	c.rgb = mix(vec3(dot(f.rgb, vec3(0.299, 0.587, 0.114))), f.rgb, 1.0 - depth);
 
 	c = mix(c, fogColor, depth);
-
-	COLOR.rgb = c.rgb;
+	c.a = f.a;
+	
+	COLOR = c;
 }
 "
 
@@ -149,18 +214,21 @@ resource_local_to_scene = true
 shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.8
+shader_parameter/u_radius = 0.8
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4685e"]
 resource_local_to_scene = true
 shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.7
+shader_parameter/u_radius = 0.7
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_l0yav"]
 resource_local_to_scene = true
 shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
-shader_parameter/depth = 0.4
+shader_parameter/depth = 0.2
+shader_parameter/u_radius = 0.2
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_qakqs"]
 frequency = 0.0111
@@ -249,7 +317,7 @@ shader = ExtResource("11_j2jwg")
 shader_parameter/noiseTex = ExtResource("12_xrcj4")
 shader_parameter/palete = ExtResource("13_wxdan")
 shader_parameter/paleteSize = 10.0
-shader_parameter/size = Vector2(1920, 1080)
+shader_parameter/size = Vector2(240, 270)
 shader_parameter/noiseResolution = Vector2(64, 64)
 shader_parameter/shading = 0.1
 shader_parameter/invert = -1.0
@@ -262,8 +330,8 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xrcj4"]
 gradient = SubResource("Gradient_arxf6")
-width = 1920
-height = 1080
+width = 240
+height = 270
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8wad2"]
 resource_local_to_scene = true
@@ -354,6 +422,7 @@ resource_local_to_scene = true
 shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.3
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5fck5"]
 resource_local_to_scene = true
@@ -585,6 +654,7 @@ resource_local_to_scene = true
 shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.2
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="Gradient" id="Gradient_ixek2"]
 offsets = PackedFloat32Array(0.0177515, 0.426035, 0.789941)
@@ -627,6 +697,7 @@ resource_local_to_scene = true
 shader = SubResource("Shader_86ljy")
 shader_parameter/fog = SubResource("GradientTexture2D_hyfn1")
 shader_parameter/depth = 0.1
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_5fck5"]
 particles_animation = true
@@ -808,30 +879,35 @@ layer = -1
 
 [node name="Sky" type="Sprite2D" parent="CanvasLayer"]
 texture_filter = 1
-position = Vector2(640, 360)
-scale = Vector2(12.0755, 12)
+position = Vector2(960, 540)
+scale = Vector2(10, 10)
 texture = SubResource("GradientTexture2D_86ljy")
 
 [node name="Clouds3" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
-position = Vector2(641, 355)
-texture = SubResource("GradientTexture2D_w31va")
+visible = false
+material = SubResource("ShaderMaterial_fqjwc")
+position = Vector2(961, 550)
+texture = SubResource("GradientTexture2D_4685e")
 
 [node name="Clouds" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
-position = Vector2(641, 345)
-texture = SubResource("GradientTexture2D_4685e")
+material = SubResource("ShaderMaterial_yop8u")
+position = Vector2(961, 540)
+texture = SubResource("GradientTexture2D_5fck5")
 
 [node name="Clouds2" parent="CanvasLayer" instance=ExtResource("8_3qqdn")]
 material = SubResource("ShaderMaterial_40nsd")
-position = Vector2(641, 401)
-texture = SubResource("GradientTexture2D_5fck5")
+position = Vector2(961, 596)
+texture = SubResource("GradientTexture2D_qksy1")
 
 [node name="Main" type="SubViewport" parent="."]
+disable_3d = true
 transparent_bg = true
+handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(1024, 512)
 script = ExtResource("6_mbqal")
-renderTarget = 4
+renderTarget = 2
 
 [node name="SandstoneEnvirement" parent="Main" instance=ExtResource("14_arq7e")]
 
@@ -839,12 +915,12 @@ renderTarget = 4
 scroll_scale = Vector2(0.1, 0.1)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="VeryFar"]
-texture_filter = 1
+texture_filter = 2
 material = SubResource("ShaderMaterial_j2jwg")
-offset_left = 473.821
-offset_top = 274.562
-offset_right = 985.823
-offset_bottom = 786.562
+offset_left = 776.585
+offset_top = 432.608
+offset_right = 1288.59
+offset_bottom = 944.608
 
 [node name="Main2" type="SubViewport" parent="VeryFar/SubViewportContainer"]
 transparent_bg = true
@@ -863,12 +939,12 @@ texture = ExtResource("14_53ke4")
 scroll_scale = Vector2(0.2, 0.2)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Far"]
-texture_filter = 1
+texture_filter = 2
 material = SubResource("ShaderMaterial_4685e")
-offset_left = 413.2
-offset_top = 224.4
-offset_right = 925.2
-offset_bottom = 736.4
+offset_left = 629.961
+offset_top = 362.677
+offset_right = 1141.96
+offset_bottom = 874.677
 
 [node name="Main2" type="SubViewport" parent="Far/SubViewportContainer"]
 transparent_bg = true
@@ -905,98 +981,116 @@ render_target_update_mode = 0
 [node name="Medium" type="Parallax2D" parent="."]
 scroll_scale = Vector2(0.8, 0.8)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Medium"]
-texture_filter = 1
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Medium"]
+position = Vector2(113.263, 147.468)
+rect = Rect2(0, 0, 128, 128)
+enable_node_path = NodePath("../SubViewportContainer")
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Medium" node_paths=PackedStringArray("subViewport", "oclutionCulling", "scalingContainer")]
+texture_filter = 2
 material = SubResource("ShaderMaterial_l0yav")
-offset_left = 128.46
-offset_top = 68.2952
-offset_right = 640.46
-offset_bottom = 580.296
+offset_left = 167.882
+offset_top = 145.259
+offset_right = 295.882
+offset_bottom = 273.259
+scale = Vector2(1.25, 1.25)
+script = ExtResource("9_4685e")
+subViewport = NodePath("Main2")
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
+scalingContainer = NodePath("Main2/ScalingContainer")
+depth = 0.2
+filterLinear = true
 
 [node name="Main2" type="SubViewport" parent="Medium/SubViewportContainer"]
+disable_3d = true
 transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
-script = ExtResource("6_mbqal")
-renderTarget = 2
+size = Vector2i(128, 128)
+render_target_update_mode = 1
 
-[node name="SDFTilemap" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("10_73joc")]
+[node name="ScalingContainer" type="Node2D" parent="Medium/SubViewportContainer/Main2"]
+scale = Vector2(0.8, 0.8)
+
+[node name="SDFTilemap" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("10_73joc")]
+position = Vector2(14.375, -63.25)
 layer_0/tile_data = PackedInt32Array(1572787, 0, 0, 2031543, 0, 0, 2097080, 0, 0, 2097081, 0, 0, 2097082, 0, 0, 2097083, 0, 0, 2097084, 0, 0, 2031549, 0, 0, 2031550, 0, 0, 1966015, 0, 0, 1900480, 0, 0, 1834944, 0, 0, 1769408, 0, 0, 1703871, 0, 0, 1769407, 0, 0, 1834943, 0, 0, 1900479, 0, 0, 1966016, 0, 0, 2031552, 0, 0, 2031553, 0, 0, 2031554, 0, 0, 2031555, 0, 0, 2031556, 0, 0, 1966020, 0, 0, 1900485, 0, 0, 1834949, 0, 0, 1769412, 0, 0, 1703876, 0, 0, 1179646, 0, 0, 1179645, 0, 0, 1048578, 0, 0, 1048579, 0, 0, 1048580, 0, 0, 1048581, 0, 0, 1048582, 0, 0, 1179650, 0, 0, 1114115, 0, 0, 1114116, 0, 0, 1114117, 0, 0, 1114118, 0, 0, 1114119, 0, 0, 1179652, 0, 0, 1179653, 0, 0, 1179654, 0, 0, 1179651, 0, 0, 1245186, 0, 0, 1245187, 0, 0, 1245188, 0, 0, 1245189, 0, 0, 1245190, 0, 0, 1310722, 0, 0, 1376258, 0, 0, 1441794, 0, 0, 1507330, 0, 0, 1441795, 0, 0, 1376259, 0, 0, 1310723, 0, 0, 1507331, 0, 0, 1572867, 0, 0, 1507332, 0, 0, 1441796, 0, 0, 1376260, 0, 0, 1310724, 0, 0, 1441797, 0, 0, 1507333, 0, 0, 1572869, 0, 0, 1507334, 0, 0, 1441798, 0, 0, 1376262, 0, 0, 1310726, 0, 0, 1572871, 0, 0, 1507335, 0, 0, 1441799, 0, 0, 1376263, 0, 0, 1310725, 0, 0, 1376261, 0, 0, 1245185, 0, 0, 1310721, 0, 0, 1376257, 0, 0, 1441793, 0, 0, 1507329, 0, 0, 1048583, 0, 0, 1048584, 0, 0, 1048585, 0, 0, 1114121, 0, 0, 1114120, 0, 0, 1179656, 0, 0, 1245192, 0, 0, 1310728, 0, 0, 1376264, 0, 0, 1310727, 0, 0, 1245191, 0, 0, 1179655, 0, 0, 1441800, 0, 0, 1179657, 0, 0, 1245193, 0, 0, 1572866, 0, 0, 1572865, 0, 0, 1572868, 0, 0, 1572870, 0, 0, 1638401, 0, 0, 1703938, 0, 0, 1769474, 0, 0, 1835009, 0, 0, 1835010, 0, 0, 1638402, 0, 0, 1769473, 0, 0, 1703937, 0, 0, 1703939, 0, 0, 1769475, 0, 0, 1835011, 0, 0, 1638403, 0, 0, 1703940, 0, 0, 1769476, 0, 0, 1638404, 0, 0, 1835012, 0, 0, 1638405, 0, 0, 1835013, 0, 0, 1769477, 0, 0, 1703941, 0, 0, 1835014, 0, 0, 1769478, 0, 0, 1703942, 0, 0, 1638406, 0, 0, 1769479, 0, 0, 1835015, 0, 0, 1703943, 0, 0, 1638407, 0, 0, 1769480, 0, 0, 1703944, 0, 0, 1835016, 0, 0, 1900545, 0, 0, 1966081, 0, 0, 2031617, 0, 0, 2097153, 0, 0, 2162689, 0, 0, 2097154, 0, 0, 2097155, 0, 0, 2097156, 0, 0, 2097157, 0, 0, 2097158, 0, 0, 2031618, 0, 0, 1900546, 0, 0, 1900547, 0, 0, 1966083, 0, 0, 2162690, 0, 0, 1966082, 0, 0, 2031619, 0, 0, 2031620, 0, 0, 2162692, 0, 0, 1966084, 0, 0, 1900548, 0, 0, 2162693, 0, 0, 2031621, 0, 0, 1966085, 0, 0, 1900549, 0, 0, 2031622, 0, 0, 1966086, 0, 0, 2162694, 0, 0, 2162695, 0, 0, 2097159, 0, 0, 2031623, 0, 0, 1966087, 0, 0, 1900551, 0, 0, 2097160, 0, 0, 2031624, 0, 0, 1966088, 0, 0, 1900552, 0, 0, 2162696, 0, 0, 2162697, 0, 0, 2097161, 0, 0, 2031625, 0, 0, 1966089, 0, 0, 1900553, 0, 0, 1900550, 0, 0, 2162691, 0, 0, 2228228, 0, 0, 983043, 0, 0, 1179649, 0, 0, 983048, 0, 0, 917512, 0, 0, 983047, 0, 0, 1048586, 0, 0, 1048587, 0, 0, 1048588, 0, 0, 1048589, 0, 0, 1048590, 0, 0, 1114122, 0, 0, 1114123, 0, 0, 1114124, 0, 0, 1114125, 0, 0, 1114126, 0, 0, 1114127, 0, 0, 1114128, 0, 0, 1114129, 0, 0, 1114130, 0, 0, 1114131, 0, 0, 1179667, 0, 0, 1179666, 0, 0, 1179665, 0, 0, 1179664, 0, 0, 1179663, 0, 0, 1179662, 0, 0, 1179661, 0, 0, 1179660, 0, 0, 1179659, 0, 0, 1179658, 0, 0, 1245196, 0, 0, 1245197, 0, 0, 1245198, 0, 0, 1245195, 0, 0, 1245194, 0, 0, 1245199, 0, 0, 1245200, 0, 0, 1245201, 0, 0, 1245202, 0, 0, 1310739, 0, 0, 1310738, 0, 0, 1310737, 0, 0, 1310736, 0, 0, 1245203, 0, 0, 2162698, 0, 0, 2162699, 0, 0, 2162700, 0, 0, 2162701, 0, 0, 2162702, 0, 0, 2162703, 0, 0, 2162704, 0, 0, 2162705, 0, 0, 2162706, 0, 0, 2162707, 0, 0, 2097171, 0, 0, 2097170, 0, 0, 2097169, 0, 0, 1835023, 0, 0, 1769487, 0, 0, 1703951, 0, 0, 1638415, 0, 0, 1572879, 0, 0, 1507343, 0, 0, 1441807, 0, 0, 1376271, 0, 0, 1310735, 0, 0, 1310734, 0, 0, 1310733, 0, 0, 1310732, 0, 0, 1310731, 0, 0, 1310730, 0, 0, 1310729, 0, 0, 1376265, 0, 0, 1441801, 0, 0, 1507337, 0, 0, 1507336, 0, 0, 1572872, 0, 0, 1638408, 0, 0, 1638409, 0, 0, 1572873, 0, 0, 1572874, 0, 0, 1507338, 0, 0, 1441802, 0, 0, 1376266, 0, 0, 1376267, 0, 0, 1441803, 0, 0, 1507339, 0, 0, 1572875, 0, 0, 1638411, 0, 0, 1638410, 0, 0, 1703946, 0, 0, 1703945, 0, 0, 1769481, 0, 0, 1835017, 0, 0, 1835018, 0, 0, 1769482, 0, 0, 1769483, 0, 0, 1703947, 0, 0, 1703948, 0, 0, 1638412, 0, 0, 1572876, 0, 0, 1507340, 0, 0, 1441804, 0, 0, 1376268, 0, 0, 1376269, 0, 0, 1441805, 0, 0, 1507341, 0, 0, 1572877, 0, 0, 1638413, 0, 0, 1703949, 0, 0, 1769485, 0, 0, 1769484, 0, 0, 1835020, 0, 0, 1835019, 0, 0, 1900555, 0, 0, 1900554, 0, 0, 1966090, 0, 0, 2031626, 0, 0, 2097162, 0, 0, 2097163, 0, 0, 2031627, 0, 0, 1966091, 0, 0, 1966092, 0, 0, 1900556, 0, 0, 1900557, 0, 0, 1835021, 0, 0, 1835022, 0, 0, 1769486, 0, 0, 1703950, 0, 0, 1638414, 0, 0, 1572878, 0, 0, 1507342, 0, 0, 1441806, 0, 0, 1376270, 0, 0, 1900558, 0, 0, 1966094, 0, 0, 1966093, 0, 0, 2031629, 0, 0, 2031628, 0, 0, 2097164, 0, 0, 2097165, 0, 0, 2097166, 0, 0, 2031630, 0, 0, 2031631, 0, 0, 1966095, 0, 0, 1900559, 0, 0, 1900560, 0, 0, 1835024, 0, 0, 1769488, 0, 0, 1703952, 0, 0, 1638416, 0, 0, 1572880, 0, 0, 1507344, 0, 0, 1441808, 0, 0, 1376272, 0, 0, 1376273, 0, 0, 1441809, 0, 0, 1507345, 0, 0, 1572881, 0, 0, 1638417, 0, 0, 1703953, 0, 0, 1769489, 0, 0, 1835025, 0, 0, 1900561, 0, 0, 1966097, 0, 0, 1966096, 0, 0, 2031632, 0, 0, 2097168, 0, 0, 2097167, 0, 0, 2031633, 0, 0, 2031634, 0, 0, 1966098, 0, 0, 1900562, 0, 0, 1835026, 0, 0, 1769490, 0, 0, 1703954, 0, 0, 1638418, 0, 0, 1572882, 0, 0, 1507346, 0, 0, 1441810, 0, 0, 1376274, 0, 0, 1376275, 0, 0, 1441811, 0, 0, 1507347, 0, 0, 1572883, 0, 0, 1638419, 0, 0, 1703955, 0, 0, 1769491, 0, 0, 1835027, 0, 0, 1900563, 0, 0, 1966099, 0, 0, 2031635, 0, 0, 983053, 0, 0, 1048595, 0, 0, 983059, 0, 0, 1048593, 0, 0, 1048594, 0, 0)
 
-[node name="StarfallShader8" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader8" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 visible = false
 material = SubResource("ShaderMaterial_hmac1")
 position = Vector2(0.608337, -18.3793)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 13.0
 
-[node name="StarfallShader3" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader3" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_6y74p")
-position = Vector2(-423, -221)
+position = Vector2(-408.625, -284.25)
 points = PackedVector2Array(445, 303, 487, 302, 505, 305, 517, 301)
 width = 10.0
 joint_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
-[node name="Sprite2D" type="Sprite2D" parent="Medium/SubViewportContainer/Main2"]
+[node name="Sprite2D" type="Sprite2D" parent="Medium/SubViewportContainer/Main2/ScalingContainer"]
 material = SubResource("ShaderMaterial_qakqs")
+position = Vector2(14.375, -63.25)
 texture = SubResource("GradientTexture2D_xrcj4")
 centered = false
 
-[node name="StarfallShader" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_8wad2")
-position = Vector2(-19, 65)
+position = Vector2(-4.625, 1.75)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 10.0
 
-[node name="StarfallShader4" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader4" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_15735")
-position = Vector2(29, 69)
+position = Vector2(43.375, 5.75)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 10.0
 
-[node name="StarfallShader5" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader5" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_c4g1q")
-position = Vector2(9, 65)
+position = Vector2(23.375, 1.75)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 10.0
 
-[node name="StarfallShader2" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader2" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_ckl1w")
-position = Vector2(-29, 65)
+position = Vector2(-14.625, 1.75)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 4.0
 
-[node name="StarfallShader6" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader6" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_u0iil")
-position = Vector2(-3, 65)
+position = Vector2(11.375, 1.75)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 4.0
 
-[node name="StarfallShader7" parent="Medium/SubViewportContainer/Main2" instance=ExtResource("4_qqksi")]
+[node name="StarfallShader7" parent="Medium/SubViewportContainer/Main2/ScalingContainer" instance=ExtResource("4_qqksi")]
 material = SubResource("ShaderMaterial_fs5a5")
-position = Vector2(39, 64)
+position = Vector2(53.375, 0.75)
 points = PackedVector2Array(52, 15, 52, 104)
 width = 3.0
 
-[node name="Sprite2D2" type="Sprite2D" parent="Medium/SubViewportContainer/Main2"]
+[node name="Sprite2D2" type="Sprite2D" parent="Medium/SubViewportContainer/Main2/ScalingContainer"]
 visible = false
 position = Vector2(54.9356, 110.529)
 scale = Vector2(1.71875, 1)
 texture = SubResource("GradientTexture2D_53ke4")
 
 [node name="MeduimClose" type="Parallax2D" parent="."]
+visible = false
 scroll_scale = Vector2(0.85, 0.85)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="MeduimClose"]
 material = SubResource("ShaderMaterial_i5gi5")
-offset_left = 42.1926
-offset_top = 54.3275
-offset_right = 554.192
-offset_bottom = 566.328
+offset_left = 54.7567
+offset_top = 73.8087
+offset_right = 566.756
+offset_bottom = 585.809
 
 [node name="Main2" type="SubViewport" parent="MeduimClose/SubViewportContainer"]
 transparent_bg = true
@@ -1004,7 +1098,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(128, 256)
-render_target_update_mode = 4
+render_target_update_mode = 0
 script = ExtResource("6_mbqal")
 renderTarget = 2
 
@@ -1074,7 +1168,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(128, 256)
-render_target_update_mode = 4
+render_target_update_mode = 0
 script = ExtResource("6_mbqal")
 renderTarget = 2
 
@@ -1144,7 +1238,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(128, 128)
-render_target_update_mode = 4
+render_target_update_mode = 0
 script = ExtResource("6_mbqal")
 renderTarget = 2
 
@@ -1173,14 +1267,15 @@ points = PackedVector2Array(52, 15, 52, 104)
 width = 5.0
 
 [node name="Close" type="Parallax2D" parent="."]
+visible = false
 scroll_scale = Vector2(0.9, 0.9)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="Close"]
 material = SubResource("ShaderMaterial_86ljy")
-offset_left = -17.3633
-offset_top = 1.53226
-offset_right = 494.636
-offset_bottom = 513.533
+offset_left = 19.4194
+offset_top = 27.6708
+offset_right = 531.419
+offset_bottom = 539.672
 
 [node name="Main2" type="SubViewport" parent="Close/SubViewportContainer"]
 transparent_bg = true
@@ -1188,7 +1283,7 @@ handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
 size = Vector2i(256, 256)
-render_target_update_mode = 4
+render_target_update_mode = 0
 script = ExtResource("6_mbqal")
 renderTarget = 2
 
@@ -1210,6 +1305,7 @@ begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="VeryClose" type="Parallax2D" parent="."]
+visible = false
 scroll_scale = Vector2(0.95, 0.95)
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="VeryClose"]
@@ -1224,7 +1320,7 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-render_target_update_mode = 4
+render_target_update_mode = 0
 
 [node name="SDFTilemap" parent="VeryClose/SubViewportContainer/Main2" instance=ExtResource("10_73joc")]
 layer_0/tile_data = PackedInt32Array(1572787, 0, 0, 2031543, 0, 0, 2097080, 0, 0, 2097081, 0, 0, 2097082, 0, 0, 2097083, 0, 0, 2097084, 0, 0, 2031549, 0, 0, 2031550, 0, 0, 1966015, 0, 0, 1900480, 0, 0, 1834944, 0, 0, 1769408, 0, 0, 1703871, 0, 0, 1769407, 0, 0, 1834943, 0, 0, 1900479, 0, 0, 1966016, 0, 0, 2031552, 0, 0, 2031553, 0, 0, 2031554, 0, 0, 2031555, 0, 0, 2031556, 0, 0, 1966020, 0, 0, 1900485, 0, 0, 1834949, 0, 0, 1769412, 0, 0, 1703876, 0, 0, -131073, 0, 0, -65537, 0, 0, -1, 0, 0, 65535, 0, 0, 131071, 0, 0, 196607, 0, 0, 262143, 0, 0, 327679, 0, 0, 393215, 0, 0, 458751, 0, 0, 524287, 0, 0, 589823, 0, 0, 655359, 0, 0, -196608, 0, 0, -131072, 0, 0, -65536, 0, 0, 0, 0, 0, 65536, 0, 0, 131072, 0, 0, 196608, 0, 0, 262144, 0, 0, 327680, 0, 0, 393216, 0, 0, 458752, 0, 0, 524288, 0, 0, 589824, 0, 0, -196607, 0, 0, -131071, 0, 0, -65535, 0, 0, 1, 0, 0, 65537, 0, 0, 131073, 0, 0, 196609, 0, 0, 262145, 0, 0, 327681, 0, 0, 393217, 0, 0, 458753, 0, 0, 524289, 0, 0, 589825, 0, 0, -196606, 0, 0, -131070, 0, 0, -65534, 0, 0, 2, 0, 0, 65538, 0, 0, 131074, 0, 0, 196610, 0, 0, 262146, 0, 0, 327682, 0, 0, 393218, 0, 0, 458754, 0, 0, 524290, 0, 0, 589826, 0, 0, -196605, 0, 0, -131069, 0, 0, -65533, 0, 0, 3, 0, 0, 65539, 0, 0, 131075, 0, 0, 196611, 0, 0, 262147, 0, 0, 327683, 0, 0, 393219, 0, 0, 458755, 0, 0, 524291, 0, 0, 589827, 0, 0, -196604, 0, 0, -131068, 0, 0, -65532, 0, 0, 4, 0, 0, 65540, 0, 0, 131076, 0, 0, 196612, 0, 0, 262148, 0, 0, 327684, 0, 0, 393220, 0, 0, 458756, 0, 0, 524292, 0, 0, 589828, 0, 0, 655360, 0, 0, 720896, 0, 0, 786432, 0, 0, 851968, 0, 0, 917504, 0, 0, 983040, 0, 0, 655361, 0, 0, 720897, 0, 0, 786433, 0, 0, 851969, 0, 0, 917505, 0, 0, 983041, 0, 0, 655362, 0, 0, 720898, 0, 0, 786434, 0, 0, 851970, 0, 0, 917506, 0, 0, 983042, 0, 0, 655363, 0, 0, 720899, 0, 0, 786435, 0, 0, 851971, 0, 0, 917507, 0, 0, 983043, 0, 0, 655364, 0, 0, 720900, 0, 0, 786436, 0, 0, 851972, 0, 0, 917508, 0, 0, 983044, 0, 0, 1048580, 0, 0, 5, 0, 0, 65541, 0, 0, 131077, 0, 0, 196613, 0, 0, 262149, 0, 0, 327685, 0, 0, 393221, 0, 0, 458757, 0, 0, 524293, 0, 0, 589829, 0, 0, 655365, 0, 0, 720901, 0, 0, 786437, 0, 0, 851973, 0, 0, 917509, 0, 0, 983045, 0, 0, 1048581, 0, 0, 6, 0, 0, 65542, 0, 0, 131078, 0, 0, 196614, 0, 0, 262150, 0, 0, 327686, 0, 0, 393222, 0, 0, 458758, 0, 0, 524294, 0, 0, 589830, 0, 0, 655366, 0, 0, 720902, 0, 0, 786438, 0, 0, 851974, 0, 0, 917510, 0, 0, 983046, 0, 0, 1048582, 0, 0, 7, 0, 0, 65543, 0, 0, 131079, 0, 0, 196615, 0, 0, 262151, 0, 0, 327687, 0, 0, 393223, 0, 0, 458759, 0, 0, 524295, 0, 0, 589831, 0, 0, 655367, 0, 0, 720903, 0, 0, 786439, 0, 0, 851975, 0, 0, 917511, 0, 0, 983047, 0, 0, 1048583, 0, 0, 8, 0, 0, 65544, 0, 0, 131080, 0, 0, 196616, 0, 0, 262152, 0, 0, 327688, 0, 0, 393224, 0, 0, 458760, 0, 0, 524296, 0, 0, 589832, 0, 0, 655368, 0, 0, 720904, 0, 0, 786440, 0, 0, 851976, 0, 0, 917512, 0, 0, 983048, 0, 0, 9, 0, 0, 65545, 0, 0, 131081, 0, 0, 196617, 0, 0, 262153, 0, 0, 327689, 0, 0, 393225, 0, 0, 458761, 0, 0, 524297, 0, 0, 589833, 0, 0, 655369, 0, 0, 720905, 0, 0, 786441, 0, 0, 851977, 0, 0, 917513, 0, 0, 983049, 0, 0, 10, 0, 0, 65546, 0, 0, 131082, 0, 0, 196618, 0, 0, 262154, 0, 0, 327690, 0, 0, 393226, 0, 0, 458762, 0, 0, 524298, 0, 0, 589834, 0, 0, 655370, 0, 0, 720906, 0, 0, 786442, 0, 0, 851978, 0, 0, 917514, 0, 0, 983050, 0, 0, 1114113, 0, 0, 1114114, 0, 0, 1114115, 0, 0, 1048579, 0, 0, 1048578, 0, 0, 1048577, 0, 0, 1114112, 0, 0, 1048576, 0, 0, 1441791, 0, 0, 1507327, 0, 0)
@@ -1244,6 +1340,7 @@ texture = ExtResource("15_ixek2")
 process_material = SubResource("ParticleProcessMaterial_hjomt")
 
 [node name="Wind" parent="." instance=ExtResource("14_86ljy")]
+visible = false
 
 [node name="Enviremnet" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -1505,7 +1602,7 @@ position = Vector2(84, 79)
 color = 1
 
 [node name="CrystalThug2" parent="Enemies" instance=ExtResource("20_xrcj4")]
-position = Vector2(237, 72)
+position = Vector2(208, 41)
 color = 1
 
 [node name="CrystalThug3" parent="Enemies" instance=ExtResource("20_xrcj4")]
@@ -1595,6 +1692,9 @@ layer_0/tile_data = PackedInt32Array(4849642, 3, 131072, 4849636, 3, 196608, 484
 
 [node name="CursorFollower" parent="." instance=ExtResource("29_4ghwm")]
 visible = false
+
+[node name="BackBufferCopy" type="BackBufferCopy" parent="."]
+copy_mode = 2
 
 [node name="SoftLighting" parent="." instance=ExtResource("30_yrukv")]
 material = SubResource("ShaderMaterial_erh47")
@@ -1781,6 +1881,7 @@ position = Vector2(-151, -10)
 visible = false
 position = Vector2(0, 179)
 polygon = PackedVector2Array(-143, -310, -143, 45, 408, 45, 408, -310)
+cameraSize = Vector2(192, 108)
 
 [node name="SetPointCameraZone" parent="CameraBoundriesComponent" node_paths=PackedStringArray("cameraPos") instance=ExtResource("19_4clin")]
 position = Vector2(-120, 253)

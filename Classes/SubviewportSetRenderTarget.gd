@@ -2,7 +2,7 @@ extends SubViewport
 
 @export var renderTarget : UpdateMode = UpdateMode.UPDATE_ONCE
 
-@export var fps := 20.0
+@export var fps := 10.0
 
 var t = 0.0
 func _process(delta: float) -> void:

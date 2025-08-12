@@ -147,7 +147,6 @@ LeaveLittleGame={
 
 [physics]
 
-2d/run_on_separate_thread=true
 2d/default_gravity=500.0
 
 [shader_globals]

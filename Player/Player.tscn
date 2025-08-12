@@ -1,4 +1,4 @@
-[gd_scene load_steps=242 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=241 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -93,7 +93,6 @@
 [ext_resource type="AudioStream" uid="uid://dk8gsdpbda3an" path="res://Assets/Audio/SoundEffects/HackModeAmbience.wav" id="59_ly53n"]
 [ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
 [ext_resource type="AudioStream" uid="uid://7d4y3bn7ksgd" path="res://Assets/Audio/SoundEffects/HackExecuted2.wav" id="69_xqyul"]
-[ext_resource type="Shader" uid="uid://ocmrkwla5je4" path="res://Assets/Shaders/Filters/InverseOutline.gdshader" id="77_1e2fr"]
 [ext_resource type="Texture2D" uid="uid://ufu3hjlwcw66" path="res://Test/SmallPlayerIdeas.png" id="78_oyr7x"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2bo2"]
@@ -1407,9 +1406,12 @@ _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cy6n2"]
-shader = ExtResource("77_1e2fr")
+shader = ExtResource("33_rdnj2")
+shader_parameter/color = Color(0, 0, 0, 1)
 shader_parameter/width = 0.3
-shader_parameter/outlineAlpha = 0.3
+shader_parameter/pattern = 2
+shader_parameter/inside = false
+shader_parameter/modulate = Color(1, 1, 1, 1)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_1e2fr"]
 shader = ExtResource("33_rdnj2")
