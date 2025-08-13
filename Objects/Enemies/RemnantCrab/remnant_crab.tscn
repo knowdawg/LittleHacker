@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=84 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -25,6 +25,7 @@
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="11_rt31b"]
 [ext_resource type="Script" uid="uid://bnbe5fpeotc6j" path="res://Objects/Enemies/RemnantCrab/StateMachine/laser_run.gd" id="11_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://r0ktnn82ap8b" path="res://Objects/WorldObjects/ClothSim/cloth_sim_test.tscn" id="12_jvtmt"]
+[ext_resource type="Script" uid="uid://ce28o3u3sxb30" path="res://Objects/Enemies/RemnantCrab/StateMachine/threaten.gd" id="12_k1yg2"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="12_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://b2m062xdfylkx" path="res://Components/BloodEfectComponent/BloodEffect.tscn" id="13_jvtmt"]
 [ext_resource type="Script" uid="uid://carwg7getubom" path="res://Objects/Enemies/RemnantCrab/StateMachine/RemnantCrabStateMachine.gd" id="13_vx8lb"]
@@ -32,6 +33,9 @@
 [ext_resource type="Script" uid="uid://bd2pbp6acjwct" path="res://Components/HealthComponent/Phase_Health_Component.gd" id="15_jvtmt"]
 [ext_resource type="Script" uid="uid://ckh47tupsk6me" path="res://Objects/Enemies/RemnantCrab/stagger_phase_1.gd" id="17_oeqg8"]
 [ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="21_i7s33"]
+[ext_resource type="Shader" uid="uid://cxu7shoyja0ke" path="res://Assets/Shaders/Effects/PolarScreem.gdshader" id="32_hhtw5"]
+[ext_resource type="FastNoiseLite" uid="uid://qn2vbvo334jh" path="res://Assets/Sprites/Noises/PolarScreemNoise.tres" id="33_d6it3"]
+[ext_resource type="PackedScene" uid="uid://cc28hgwabw7gw" path="res://Objects/ShaderObjects/BossIntro.tscn" id="34_k1yg2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
 size = Vector2(47, 19)
@@ -761,7 +765,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [1]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -954,6 +958,30 @@ tracks/16/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Shockwaves/ScreamShockwave:modulate")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0, 0, 0, 0)]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Shockwaves/ScreamShockwave:position")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5)]
 }
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
@@ -1642,6 +1670,107 @@ tracks/10/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_k1yg2"]
+resource_name = "Threaten"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Skulls:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 29, 28, 17, 18, 13]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/Skulls/Arms(Head):frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 18, 13, 14, 15, 16, 17, 18, 13, 14, 15, 16, 17, 18, 13, 14, 15, 16, 17, 18, 13, 14, 15, 16, 17, 18]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Legs:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 2.6, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [24, 25, 26, 27, 27, 26, 25, 24]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Skulls:position")
+tracks/3/interp = 0
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 2.7, 2.8, 2.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -1), Vector2(0, -5), Vector2(0, -6), Vector2(0, -5), Vector2(0, -1), Vector2(0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/ClothSim:position")
+tracks/4/interp = 0
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.2, 2.7, 2.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 1), Vector2(0, -3), Vector2(0, -3), Vector2(0, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sprites/Skulls:rotation")
+tracks/5/interp = 0
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1, 1.2, 1.3, 1.4, 1.5, 1.6, 1.7, 1.8, 1.9, 2, 2.1, 2.2, 2.3, 2.4, 2.5, 2.6, 2.7, 2.8, 2.9, 3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.174533, -0.20944, -0.0349066, 0.174533, 0.20944, 0.0349066, -0.174533, -0.20944, -0.0349066, 0.174533, 0.20944, 0.0349066, -0.174533, -0.20944, -0.0349066, 0.174533, 0.20944, 0.0349066, -0.174533, -0.20944, -0.0349066, 0.174533, 0.20944, 0.0349066, -0.174533, -0.20944, -0.0349066, 0.0872665, 0.10472, 0.0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Shockwaves/ScreamShockwave:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.3, 2.6, 2.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Shockwaves/ScreamShockwave:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, -5)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oara4"]
 _data = {
 &"HeadSlam": SubResource("Animation_1ai65"),
@@ -1654,7 +1783,8 @@ _data = {
 &"StaggerPhase1": SubResource("Animation_1qnwx"),
 &"StompLeft": SubResource("Animation_d6it3"),
 &"StompRight": SubResource("Animation_qmox6"),
-&"SuckIn": SubResource("Animation_5j67f")
+&"SuckIn": SubResource("Animation_5j67f"),
+&"Threaten": SubResource("Animation_k1yg2")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmox6"]
@@ -1692,6 +1822,32 @@ shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yiftg"]
+height = 64
+seamless = true
+seamless_blend_skirt = 0.3
+noise = ExtResource("33_d6it3")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d6it3"]
+shader = ExtResource("32_hhtw5")
+shader_parameter/image = SubResource("NoiseTexture2D_yiftg")
+shader_parameter/rotations = 1.0
+shader_parameter/depth = 1.0
+shader_parameter/shrinkSpeed = -1.0
+shader_parameter/roationSpeed = 1.49012e-07
+shader_parameter/shreekSpeed = 15.0
+shader_parameter/shreekFreq = 25.0
+shader_parameter/shreekSize = 0.0
+
+[sub_resource type="Gradient" id="Gradient_yiftg"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0, 0, 0, 0.392157)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_oara4"]
+gradient = SubResource("Gradient_yiftg")
+width = 16
+height = 16
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_v3dep"]
 resource_local_to_scene = true
@@ -1731,6 +1887,7 @@ shape = SubResource("RectangleShape2D_rt31b")
 unique_name_in_owner = true
 texture = ExtResource("2_rt31b")
 hframes = 53
+frame = 1
 
 [node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 position = Vector2(0, 1)
@@ -1795,7 +1952,7 @@ texture = SubResource("GradientTexture2D_d6it3")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "animators", "leftGrabPos", "rightGrabPos", "movement")]
 script = ExtResource("13_vx8lb")
-initial_state = NodePath("Idle")
+initial_state = NodePath("Threaten")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
 leftGrabPos = NodePath("HackGrabLoc")
@@ -1804,6 +1961,15 @@ movement = NodePath("../GeneralComponents/MovementComponent")
 
 [node name="HackGrabLoc" type="Marker2D" parent="StateMachine"]
 position = Vector2(0, 21)
+
+[node name="Threaten" type="Node" parent="StateMachine" node_paths=PackedStringArray("bossInro", "parent", "nextState", "animator")]
+script = ExtResource("12_k1yg2")
+bossInro = NodePath("../../BossIntro")
+parent = NodePath("../..")
+nextState = NodePath("../Idle")
+length = 3.0
+animator = NodePath("../../Animator")
+animationName = "Threaten"
 
 [node name="Idle" type="Node" parent="StateMachine" node_paths=PackedStringArray("sm", "animator")]
 script = ExtResource("7_1ai65")
@@ -2108,6 +2274,13 @@ material = SubResource("ShaderMaterial_8od5u")
 [node name="Shockwaves" type="Node2D" parent="."]
 z_index = 100
 
+[node name="ScreamShockwave" type="Sprite2D" parent="Shockwaves"]
+modulate = Color(0, 0, 0, 0)
+material = SubResource("ShaderMaterial_d6it3")
+position = Vector2(0, -5)
+scale = Vector2(30, 30)
+texture = SubResource("GradientTexture2D_oara4")
+
 [node name="BackBufferCopy1" type="BackBufferCopy" parent="Shockwaves"]
 position = Vector2(-25, 23)
 scale = Vector2(10, 10)
@@ -2142,6 +2315,10 @@ animationSpeed = 2.0
 position = Vector2(-24, 4.76837e-07)
 scale = Vector2(10, 10)
 copy_mode = 2
+
+[node name="BossIntro" parent="." instance=ExtResource("34_k1yg2")]
+title = "Carcass Consumer"
+bossName = "Remnant Crab"
 
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]
 [connection signal="gotParried" from="AttackComponents/JumpSlam" to="." method="_on_jump_slam_got_parried"]

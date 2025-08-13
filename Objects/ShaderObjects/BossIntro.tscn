@@ -37,8 +37,8 @@ tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(1248, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -2016, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.366667, 2.6, 3)
+"points": PackedFloat32Array(2062, -0.25, 0, 0.25, 0, -1135, -0.25, 0, 0.25, 0, -1135, -0.25, 0, 0.25, 0, -4417, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 2.6, 3)
 }
 tracks/1/type = "bezier"
 tracks/1/imported = false
@@ -48,8 +48,8 @@ tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "handle_modes": PackedInt32Array(0, 0, 0, 0),
-"points": PackedFloat32Array(704, -0.25, 0, 0.25, 0, 416, -0.25, 0, 0.25, 0, 416, -0.25, 0, 0.25, 0, 192, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.371948, 2.60528, 3)
+"points": PackedFloat32Array(1107, -0.25, 0, 0.25, 0, 639, -0.25, 0, 0.25, 0, 639, -0.25, 0, 0.25, 0, 185, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 2.60528, 3)
 }
 tracks/2/type = "bezier"
 tracks/2/imported = false
@@ -58,9 +58,9 @@ tracks/2/path = NodePath("Line2D2:position:x")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(1952, -0.25, 0, 0.25, 0, 384, -0.25, 0, 0.25, 0, 384, -0.25, 0, 0.25, 0, 384, -0.25, 0, 0.25, 0, 384, -0.25, 0, 0.25, 0, 416, -0.25, 0, 0.25, 0, -1344, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 0.402848, 2.56667, 2.56951, 2.57195, 3)
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(3945, -0.25, 0, 0.25, 0, 937, -0.25, 0, 0.25, 0, 937, -0.25, 0, 0.25, 0, 937, -0.25, 0, 0.25, 0, -2478, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.402848, 2.6, 3)
 }
 tracks/3/type = "bezier"
 tracks/3/imported = false
@@ -69,14 +69,14 @@ tracks/3/path = NodePath("Line2D2:position:y")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"handle_modes": PackedInt32Array(0, 0, 0, 0, 0, 0),
-"points": PackedFloat32Array(-192, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -736, -0.25, 0, 0.25, 0),
-"times": PackedFloat32Array(0, 0.4, 0.402848, 2.56667, 2.56951, 3)
+"handle_modes": PackedInt32Array(0, 0, 0, 0, 0),
+"points": PackedFloat32Array(-50, -0.25, 0, 0.25, 0, -472, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -480, -0.25, 0, 0.25, 0, -928, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.4, 0.402848, 2.6, 3)
 }
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Node2D/Title:position:x")
+tracks/4/path = NodePath("Node2D/ContainerTitle/Title:position:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -87,7 +87,7 @@ tracks/4/keys = {
 tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Node2D/Title:position:y")
+tracks/5/path = NodePath("Node2D/ContainerTitle/Title:position:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -98,7 +98,7 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Node2D/Name:position:x")
+tracks/6/path = NodePath("Node2D/ContainerName/Name:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -109,7 +109,7 @@ tracks/6/keys = {
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Node2D/Name:position:y")
+tracks/7/path = NodePath("Node2D/ContainerName/Name:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -120,7 +120,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Node2D/Name:modulate")
+tracks/8/path = NodePath("Node2D/ContainerName/Name:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -132,7 +132,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Node2D/Title:modulate")
+tracks/9/path = NodePath("Node2D/ContainerTitle/Title:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -140,6 +140,30 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Line2D2:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Line2D:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_qmbr2"]
@@ -191,7 +215,7 @@ tracks/3/keys = {
 tracks/4/type = "bezier"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Node2D/Title:position:x")
+tracks/4/path = NodePath("Node2D/ContainerTitle/Title:position:x")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
@@ -202,7 +226,7 @@ tracks/4/keys = {
 tracks/5/type = "bezier"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("Node2D/Title:position:y")
+tracks/5/path = NodePath("Node2D/ContainerTitle/Title:position:y")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -213,7 +237,7 @@ tracks/5/keys = {
 tracks/6/type = "bezier"
 tracks/6/imported = false
 tracks/6/enabled = true
-tracks/6/path = NodePath("Node2D/Name:position:x")
+tracks/6/path = NodePath("Node2D/ContainerName/Name:position:x")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
@@ -224,7 +248,7 @@ tracks/6/keys = {
 tracks/7/type = "bezier"
 tracks/7/imported = false
 tracks/7/enabled = true
-tracks/7/path = NodePath("Node2D/Name:position:y")
+tracks/7/path = NodePath("Node2D/ContainerName/Name:position:y")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
@@ -235,7 +259,7 @@ tracks/7/keys = {
 tracks/8/type = "value"
 tracks/8/imported = false
 tracks/8/enabled = true
-tracks/8/path = NodePath("Node2D/Name:modulate")
+tracks/8/path = NodePath("Node2D/ContainerName/Name:modulate")
 tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
@@ -247,7 +271,7 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("Node2D/Title:modulate")
+tracks/9/path = NodePath("Node2D/ContainerTitle/Title:modulate")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
@@ -255,6 +279,30 @@ tracks/9/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Line2D2:visible")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Line2D:visible")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_qmbr2"]
@@ -266,20 +314,28 @@ _data = {
 [node name="BossIntro" type="CanvasLayer"]
 script = ExtResource("1_qmbr2")
 
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+offset_right = 1920.0
+offset_bottom = 1080.0
+color = Color(1, 0, 1, 1)
+
 [node name="Line2D2" type="Line2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_qtfbn")
 position = Vector2(2016, -224)
-points = PackedVector2Array(-384, 352, 896, 544)
-width = 450.0
+points = PackedVector2Array(-1316, 216, 2040, 697)
+width = 400.0
 texture_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
 
 [node name="Line2D" type="Line2D" parent="."]
+visible = false
 material = SubResource("ShaderMaterial_qtfbn")
 position = Vector2(1408, 736)
-points = PackedVector2Array(224, 192, 1632, 384)
-width = 450.0
+points = PackedVector2Array(224, 192, 3560, 660)
+width = 1000.0
 texture_mode = 2
 begin_cap_mode = 2
 end_cap_mode = 2
@@ -290,30 +346,35 @@ libraries = {
 }
 
 [node name="Node2D" type="Node2D" parent="."]
-position = Vector2(-106, 16)
+position = Vector2(-45, 307)
+rotation = 0.141169
 
-[node name="Title" type="RichTextLabel" parent="Node2D"]
+[node name="ContainerTitle" type="Node2D" parent="Node2D"]
+position = Vector2(71.3456, -94.9832)
+
+[node name="Title" type="RichTextLabel" parent="Node2D/ContainerTitle"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 offset_left = 27.0
 offset_top = 491.0
-offset_right = 1085.0
+offset_right = 1114.0
 offset_bottom = 652.0
-rotation = 0.11355
 theme_override_fonts/normal_font = ExtResource("3_lwkfr")
-theme_override_font_sizes/normal_font_size = 75
+theme_override_font_sizes/normal_font_size = 110
 bbcode_enabled = true
 text = "[center]TITLE TESTING"
 
-[node name="Name" type="RichTextLabel" parent="Node2D"]
+[node name="ContainerName" type="Node2D" parent="Node2D"]
+position = Vector2(69.501, -86.6407)
+
+[node name="Name" type="RichTextLabel" parent="Node2D/ContainerName"]
 unique_name_in_owner = true
 modulate = Color(1, 1, 1, 0)
 offset_left = 14.0
 offset_top = 509.0
-offset_right = 1098.0
+offset_right = 1077.0
 offset_bottom = 670.0
-rotation = 0.107527
 theme_override_fonts/normal_font = ExtResource("3_lwkfr")
-theme_override_font_sizes/normal_font_size = 140
+theme_override_font_sizes/normal_font_size = 200
 bbcode_enabled = true
-text = "[center]Testing Name"
+text = "[center]Testing"

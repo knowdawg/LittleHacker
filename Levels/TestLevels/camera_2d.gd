@@ -1,16 +1,32 @@
 extends Camera2D
 class_name SmallPlayerCamera
 
+@export var cameraBounds : ProximityAreaComponent
+@export var player : Player
+var nodeToTrack : Node2D
+
 var shake : float = 0.0
+
+func setNodeToTrack(n : Node2D):
+	nodeToTrack = n
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	Game.camera = self
 	Game.exitHackMode.connect(onHackModeExit)
+	setNodeToTrack(player)
 
 var targetZoom := Vector2(10.0, 10.0)
 
 func _process(delta: float) -> void:
+	if !is_instance_valid(nodeToTrack):
+		setNodeToTrack(player)
+	
+	var p : CameraCoundriesComponent = cameraBounds.get_camera_bounds()
+	if p:
+		var targetPos = p.closest_rectangle_position(nodeToTrack.global_position)
+		global_position = targetPos
+	
 	if shake > 0:
 		shake = lerpf(shake, 0, 10.0 * delta)
 		

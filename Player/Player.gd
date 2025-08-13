@@ -110,15 +110,15 @@ func _process(delta: float) -> void:
 	else:
 		%HurtboxComponent.scale = Vector2(1.0, 1.0)
 	
-	var c : Camera2D = Game.camera
-	var camPos = c.global_position
-	var snapDis = (camPos - floor(camPos) - Vector2(0.0, 1.0)) / Vector2(128, 72)
-	RenderingServer.global_shader_parameter_set("CameraSnapDistance", snapDis)
-	
-	var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
-	if p:
-		var targetPos = p.closest_rectangle_position(global_position)
-		%PlayerCamera.global_position = targetPos
+	#var c : Camera2D = Game.camera
+	#var camPos = c.global_position
+	#var snapDis = (camPos - floor(camPos) - Vector2(0.0, 1.0)) / Vector2(128, 72)
+	#RenderingServer.global_shader_parameter_set("CameraSnapDistance", snapDis)
+	#
+	#var p : CameraCoundriesComponent = $CameraBounds.get_camera_bounds()
+	#if p:
+		#var targetPos = p.closest_rectangle_position(global_position)
+		#%PlayerCamera.global_position = targetPos
 		#lerpT -= delta
 		#if lerpT == -delta: #Lock onto player when spawn in
 			#%PlayerCamera.global_position = targetPos

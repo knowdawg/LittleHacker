@@ -28,8 +28,14 @@ func update(delta):
 	customUpdate(delta)
 
 
+func exit(n):
+	customExit(n)
+
 func customUpdate(_delta):
 	pass
 
 func beforeTransition():
+	pass
+
+func customExit(_n):
 	pass

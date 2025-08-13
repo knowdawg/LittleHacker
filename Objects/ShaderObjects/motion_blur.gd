@@ -11,11 +11,12 @@ func blur(node : Node2D):
 	$HackAnimator.play("Blur")
 	
 func passiveBlur(node : Node2D):
-	var p : Vector2 = node.get_global_transform_with_canvas().origin
-	p.x /= get_viewport().size.x
-	p.y /=  get_viewport().size.y
-	$Hack.material.set_shader_parameter("blurCenter", p)
-	$HackAnimator.play("PassiveBlur")
+	if is_instance_valid(node):
+		var p : Vector2 = node.get_global_transform_with_canvas().origin
+		p.x /= get_viewport().size.x
+		p.y /=  get_viewport().size.y
+		$Hack.material.set_shader_parameter("blurCenter", p)
+		$HackAnimator.play("PassiveBlur")
 
 func stopBlur():
 	if $HackAnimator.current_animation == "Blur":

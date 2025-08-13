@@ -3902,10 +3902,12 @@ shape = SubResource("CircleShape2D_jfgjt")
 
 [node name="Node" type="Node" parent="."]
 
-[node name="PlayerCamera" type="Camera2D" parent="Node"]
+[node name="PlayerCamera" type="Camera2D" parent="Node" node_paths=PackedStringArray("cameraBounds", "player")]
 unique_name_in_owner = true
 zoom = Vector2(10, 10)
 script = ExtResource("55_c7l4y")
+cameraBounds = NodePath("../../CameraBounds")
+player = NodePath("../..")
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 

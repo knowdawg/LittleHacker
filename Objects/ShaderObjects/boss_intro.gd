@@ -1,4 +1,5 @@
 extends CanvasLayer
+class_name BossIntro
 
 @export var shake : float = 3.0;
 @export var title : String

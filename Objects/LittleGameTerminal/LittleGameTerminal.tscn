@@ -56,7 +56,7 @@ shader_parameter/pixelsWidth = 128.0
 shader_parameter/pixelsHeight = 72.0
 shader_parameter/enable_scanlines = false
 shader_parameter/enable_color_bleed = false
-shader_parameter/scanlineIntensity = 7.0
+shader_parameter/scanlineIntensity = 1.0
 
 [sub_resource type="Animation" id="Animation_ib7ep"]
 resource_name = "FadeIn"
