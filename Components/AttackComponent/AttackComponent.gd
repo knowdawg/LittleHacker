@@ -102,11 +102,11 @@ func generateAttackID():
 	attackID = randf_range(0.0, 10000.0)
 
 func disable():
-	collisionShape.disabled = true
+	collisionShape.set_deferred("disabled", true)
 	constantHurtboxActive = false
 
 func enable():
-	collisionShape.disabled = false
+	collisionShape.set_deferred("disabled", false)
 	constantHurtboxActive = true
 
 func readyAttack():

@@ -1,0 +1,189 @@
+[gd_scene load_steps=13 format=3 uid="uid://d0sqdwt14okl0"]
+
+[ext_resource type="Script" uid="uid://dnsyut50g5euh" path="res://Objects/Projectiles/RemnantCrabLaserPillar/laser_pillar.gd" id="1_g8aod"]
+[ext_resource type="Shader" uid="uid://cuwb5rwdjiv7w" path="res://Assets/Shaders/Textures/LaserSumOfSines.gdshader" id="2_gcf8c"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="3_ykkj5"]
+
+[sub_resource type="Gradient" id="Gradient_p2dj1"]
+offsets = PackedFloat32Array(0, 0.380795, 0.804636)
+colors = PackedColorArray(0.423529, 0.352941, 0.607843, 0, 0.423529, 0.352941, 0.607843, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ykkj5"]
+gradient = SubResource("Gradient_p2dj1")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_su0b4"]
+resource_local_to_scene = true
+shader = ExtResource("2_gcf8c")
+shader_parameter/gradient = SubResource("GradientTexture1D_ykkj5")
+shader_parameter/numOfLasers = 4
+shader_parameter/waveBaseSize = 1.0
+shader_parameter/waveBaseSpeed = 4.0
+shader_parameter/waveBaseFrequency = 1.0
+shader_parameter/sizeMultiplier = 0.5
+shader_parameter/speedMultiplier = 0.7
+shader_parameter/frequencyMultiplier = 1.0
+shader_parameter/resolution = Vector2(32, 32)
+
+[sub_resource type="Gradient" id="Gradient_gcf8c"]
+offsets = PackedFloat32Array(0.431694, 1)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ykkj5"]
+gradient = SubResource("Gradient_gcf8c")
+fill = 1
+fill_from = Vector2(0.523504, 1)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Animation" id="Animation_og3l4"]
+resource_name = "Fire"
+length = 1.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.03333, 1.06667, 1.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 48.0, 32.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1, 1.06667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.3, 0.9, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.03, 0.2), Vector2(0.03, 1), Vector2(0.03, 1), Vector2(0.03, 2)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AttackComponent")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(1.03333, 1.13333),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
+}
+tracks/4/type = "method"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"setup"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_su0b4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Line2D:width")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.03, 0.5)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a27km"]
+_data = {
+&"Fire": SubResource("Animation_og3l4"),
+&"RESET": SubResource("Animation_su0b4")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ykkj5"]
+size = Vector2(6, 1)
+
+[node name="LaserPillar" type="Node2D"]
+script = ExtResource("1_g8aod")
+
+[node name="Line2D" type="Line2D" parent="."]
+material = SubResource("ShaderMaterial_su0b4")
+width = 0.0
+texture_mode = 1
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.03, 0.5)
+texture = SubResource("GradientTexture2D_ykkj5")
+offset = Vector2(0, -32)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_a27km")
+}
+
+[node name="AttackComponent" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("3_ykkj5")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+attack_damage = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackComponent"]
+position = Vector2(0, -0.5)
+shape = SubResource("RectangleShape2D_ykkj5")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+position = Vector2(0, -1)
+target_position = Vector2(0, -100)
+hit_from_inside = true
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

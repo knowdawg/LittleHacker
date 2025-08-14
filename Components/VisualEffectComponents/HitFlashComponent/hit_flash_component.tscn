@@ -51,3 +51,10 @@ libraries = {
 &"": SubResource("AnimationLibrary_7fr1b")
 }
 speed_scale = 0.75
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+ignore_time_scale = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

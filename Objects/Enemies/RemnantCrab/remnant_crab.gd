@@ -49,6 +49,16 @@ func createStompProjectile():
 	p.global_position = global_position + offset
 	Game.addProjectile(p)
 
+var laserPillarProjectile = preload("uid://d0sqdwt14okl0")
+func createLaserPillars():
+	for i in range(20):
+		var p : LaserPillar = laserPillarProjectile.instantiate()
+		p.global_position = global_position + Vector2(randf_range(-100.0, 100.0), 23.0)
+		Game.addProjectile(p)
+		p.speedScale = randf_range(0.5, 1.0)
+		p.activate()
+
+
 func shakeScreen(amount : float = 5.0):
 	if Game.doesCameraExist():
 		Game.camera.set_min_shake(amount)
@@ -58,3 +68,16 @@ func _on_jump_slam_got_parried(_a : Attack) -> void:
 	if $StateMachine.current_state.name == "Jump":
 		if Game.doesPlayerExist():
 			Game.superParry(Game.player)
+
+
+func _on_health_component_on_lock_hit(lockName : String) -> void:
+	if lockName == "PhaseTransition":
+		%StateMachine.switchStates("PhaseSwitch")
+		%StateMachine.phase = 2
+		$StateMachine/Idle.nextStates.clear()
+
+
+func _on_health_component_hit(attack: Attack) -> void:
+	%Skulls.offset = attack.knockback_vector * 10.0
+	var t : Tween = create_tween()
+	t.tween_property(%Skulls, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)

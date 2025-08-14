@@ -5,13 +5,14 @@ class_name RemnantCrabIdle
 @export var animator : AnimationPlayer
 
 var prevAttack = -1
+var prevAttackPhase2 = -1
 var nextStates : Array[String] = []
 
-func enter(_p):
-	animator.play("RESET")
+#func enter(_p):
+	#animator.play("RESET")
 
 func update(_delta):
-	#nextStates.append("SuckIn")
+	#nextStates.append("MassiveLaser")
 	
 	if nextStates.size() != 0:
 		var nextState = nextStates.pop_front()
@@ -24,46 +25,65 @@ func update(_delta):
 		trasitioned.emit(self, nextState)
 		return
 	
+	nextStates.append("MassiveLaser")
+	#nextStates.append("BlackHoleDisk")
 	#nextStates.append("LaserRun")
 	#nextStates.append("SuckIn")
 	#nextStates.append("Jump")
-	#return
+	return
 	
-	var a = sm.getRandomAttack(prevAttack)
-	
-	if abs(sm.xDisToPlayer) >= 60.0:
-		if randf() < 0.5: #50% chance
-			nextStates.append("SuckIn")
-			prevAttack = sm.phase1Attacks.SuckIn
-			return
-	
-	if a == sm.phase1Attacks.Stomp:
-		if sm.xDisToPlayer > 0 and !sm.nearLeftWall:
-			nextStates.append("RunAway")
-		if sm.xDisToPlayer < 0 and !sm.nearRightWall:
-			nextStates.append("RunAway")
-		nextStates.append("Stomp")
-		prevAttack = sm.phase1Attacks.Stomp
-		return
-	
-	if a == sm.phase1Attacks.Jump:
-		nextStates.append("Chase")
-		nextStates.append("Jump")
-		prevAttack = sm.phase1Attacks.Jump
-		return
-	
-	if a == sm.phase1Attacks.HeadSlam:
-		nextStates.append("Chase")
-		nextStates.append("RunTowards")
-		nextStates.append("HeadSlam")
-		prevAttack = sm.phase1Attacks.HeadSlam
-		return
-	
-	if a == sm.phase1Attacks.LazerRun:
-		if sm.nearRightWall:
+	if sm.phase == 2:
+		var a = sm.getRandomAttackPhase2(prevAttackPhase2)
+		
+		if a == sm.phase2Attacks.MassiveLaser:
+			nextStates.append("RunToCenter")
+			nextStates.append("MassiveLaser")
+			prevAttackPhase2 = sm.phase2Attacks.MassiveLaser
 			return
 		
-		nextStates.append("LaserRun")
-		prevAttack = sm.phase1Attacks.LazerRun
-		return
+		if a == sm.phase2Attacks.BlackHoleDisk:
+			nextStates.append("BlackHoleDisk")
+			prevAttackPhase2 = sm.phase2Attacks.BlackHoleDisk
+			return
+	
+	
+	
+	if sm.phase == 1:
+		var a = sm.getRandomAttack(prevAttack)
+	
+		if abs(sm.xDisToPlayer) >= 60.0:
+			if randf() < 0.5: #50% chance
+				nextStates.append("SuckIn")
+				prevAttack = sm.phase1Attacks.SuckIn
+				return
+		
+		if a == sm.phase1Attacks.Stomp:
+			if sm.xDisToPlayer > 0 and !sm.nearLeftWall:
+				nextStates.append("RunAway")
+			if sm.xDisToPlayer < 0 and !sm.nearRightWall:
+				nextStates.append("RunAway")
+			nextStates.append("Stomp")
+			prevAttack = sm.phase1Attacks.Stomp
+			return
+		
+		if a == sm.phase1Attacks.Jump:
+			nextStates.append("Chase")
+			nextStates.append("Jump")
+			prevAttack = sm.phase1Attacks.Jump
+			return
+		
+		if a == sm.phase1Attacks.HeadSlam:
+			nextStates.append("Chase")
+			nextStates.append("RunTowards")
+			nextStates.append("HeadSlam")
+			prevAttack = sm.phase1Attacks.HeadSlam
+			return
+		
+		if a == sm.phase1Attacks.LazerRun:
+			if sm.nearRightWall:
+				return
+			
+			nextStates.append("LaserRun")
+			prevAttack = sm.phase1Attacks.LazerRun
+			return
 	

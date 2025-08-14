@@ -28,7 +28,7 @@ func enter(_p):
 	animator.play("Run")
 	
 	if direction == style.ChasePlayer:
-		length = randf_range(1.0, 2.0)
+		length = randf_range(0.5, 1.0)
 	if direction == style.ToPlayer:
 		dir = Vector2(sm.vectorToPlayer.x, 0.0).normalized()
 	if direction == style.AwayFromPlayer:

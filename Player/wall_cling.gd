@@ -8,6 +8,9 @@ class_name PlayerWallCling
 @export var playerStateMachine : PlayerStateMachine
 @export var slideSpeedCurve : Curve
 
+@export var leftWallRaycast : RayCast2D
+@export var rightWallRaycast : RayCast2D
+
 var slideTimer = 0.0
 func update_physics(delta):
 	slideTimer += delta * 4.0
@@ -26,10 +29,23 @@ func update_physics(delta):
 		playerSprite.flip_h = !playerSprite.flip_h
 		trasitioned.emit(self, "Fall")
 		return
-	if !player.is_on_wall():
-		playerSprite.flip_h = !playerSprite.flip_h
-		trasitioned.emit(self, "Fall")
-		return
+	
+	if !playerSprite.flip_h:
+		if !leftWallRaycast.is_colliding():
+			playerSprite.flip_h = !playerSprite.flip_h
+			trasitioned.emit(self, "Fall")
+			return
+			
+	if playerSprite.flip_h:
+		if !rightWallRaycast.is_colliding():
+			playerSprite.flip_h = !playerSprite.flip_h
+			trasitioned.emit(self, "Fall")
+			return
+	
+	#if !player.is_on_wall():
+		#playerSprite.flip_h = !playerSprite.flip_h
+		#trasitioned.emit(self, "Fall")
+		#return
 
 func enter(_prevState):
 	slideTimer = 0.0

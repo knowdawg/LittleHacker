@@ -12,6 +12,7 @@ var t : float = 0.0
 func enter(prevState):
 	t = 0.0
 	if animator:
+		animator.stop()
 		animator.play(animationName)
 	customEnter(prevState)
 

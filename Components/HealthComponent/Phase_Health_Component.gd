@@ -1,6 +1,6 @@
 extends HealthComponent
 
-signal onLockHit
+signal onLockHit(lockName : String)
 @export var lockPoints : Dictionary[float, String]
 @onready var lowestHealth : float = MAX_HEALTH #ensure that the same locks arent hit multiple times due to healing
 

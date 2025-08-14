@@ -56,7 +56,7 @@ void fragment() {
 	vec4 s = texture(screen, SCREEN_UV + offset * distortionIntensity + spiralOffset * spiralDistortionIntensity);
 	c.rgb = mix(s.rgb, halo.rgb * 3.0, halo.a);
 
-	c.a = length(c.rgb);
+	//c.a = length(c.rgb);
 
 	//Black Hole
 	float blackHole = smoothstep(holeSize - 0.05, holeSize, centerDis);
@@ -65,5 +65,3 @@ void fragment() {
 
 	COLOR = c;
 }
-
-

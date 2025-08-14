@@ -2975,7 +2975,7 @@ rollSpeedCurve = SubResource("Curve_k2pfp")
 rollSpeedMultiplier = 3000.0
 animator = NodePath("../../SpriteAnimator")
 
-[node name="WallCling" type="Node" parent="StateMachine" node_paths=PackedStringArray("playerSprite", "animator", "player", "scaleAnimtor", "playerStateMachine")]
+[node name="WallCling" type="Node" parent="StateMachine" node_paths=PackedStringArray("playerSprite", "animator", "player", "scaleAnimtor", "playerStateMachine", "leftWallRaycast", "rightWallRaycast")]
 script = ExtResource("16_i10sr")
 playerSprite = NodePath("../../PlayerVisual/PlayerSprite")
 animator = NodePath("../../SpriteAnimator")
@@ -2983,6 +2983,8 @@ player = NodePath("../..")
 scaleAnimtor = NodePath("../../ScaleAnimator")
 playerStateMachine = NodePath("..")
 slideSpeedCurve = SubResource("Curve_udogh")
+leftWallRaycast = NodePath("../../Raycasts/LeftWallRaycast")
+rightWallRaycast = NodePath("../../Raycasts/RightWallRaycast")
 
 [node name="HackAttack" type="Node" parent="StateMachine" node_paths=PackedStringArray("animator", "scaleAnimator", "player", "hurtboxComponent")]
 script = ExtResource("17_expy4")
@@ -3467,7 +3469,7 @@ position = Vector2(0, 2)
 script = ExtResource("35_4cxex")
 player = NodePath("..")
 blur = NodePath("../MotionBlur")
-camera = NodePath("../Node/PlayerCamera")
+camera = NodePath("../CameraContainer/PlayerCamera")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="HackUI"]
 libraries = {
@@ -3900,9 +3902,9 @@ collision_mask = 256
 visible = false
 shape = SubResource("CircleShape2D_jfgjt")
 
-[node name="Node" type="Node" parent="."]
+[node name="CameraContainer" type="Node" parent="."]
 
-[node name="PlayerCamera" type="Camera2D" parent="Node" node_paths=PackedStringArray("cameraBounds", "player")]
+[node name="PlayerCamera" type="Camera2D" parent="CameraContainer" node_paths=PackedStringArray("cameraBounds", "player")]
 unique_name_in_owner = true
 zoom = Vector2(10, 10)
 script = ExtResource("55_c7l4y")
@@ -3919,6 +3921,14 @@ one_shot = true
 [node name="GrappleAreaVisualized" type="Sprite2D" parent="."]
 visible = false
 texture = SubResource("GradientTexture2D_q8ub3")
+
+[node name="Raycasts" type="Node2D" parent="."]
+
+[node name="LeftWallRaycast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(-2, 0)
+
+[node name="RightWallRaycast" type="RayCast2D" parent="Raycasts"]
+target_position = Vector2(2, 0)
 
 [connection signal="death" from="HealthComponent" to="." method="_on_health_component_death"]
 [connection signal="death" from="HealthComponent" to="StateMachine" method="_on_health_component_death"]
