@@ -44,12 +44,15 @@ func update_physics(delta):
 	t += delta
 	updateDir()
 	
-	runVelocity += dir * acceleration * delta
-	runVelocity.x = clamp(runVelocity.x, -maxSpeed, maxSpeed)
-	parent.velocity += runVelocity
-	
-	if switches >= 3:
-		trasitioned.emit(self, "Idle")
+	if switches < 1:
+		runVelocity += dir * acceleration * delta
+		runVelocity.x = clamp(runVelocity.x, -maxSpeed, maxSpeed)
+		parent.velocity += runVelocity
+	elif switches >= 1:
+		runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 120.0)
+		if abs(runVelocity.x) <= 0.1:
+			trasitioned.emit(self, "Idle")
+			return
 	
 
 func exit(_n):

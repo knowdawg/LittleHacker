@@ -13,8 +13,12 @@ func setup():
 	$Line2D.clear_points()
 	$Line2D.add_point(Vector2(0.0, 0.0))
 	if $RayCast2D.is_colliding():
-		$Line2D.add_point($RayCast2D.get_collision_point() - global_position)
-		$AttackComponent.scale.y = ($RayCast2D.get_collision_point() - global_position).y
+		if $RayCast2D.get_collision_point().x - global_position.x <= 1.0:
+			$Line2D.clear_points()
+			$AttackComponent.scale.y = 0.0
+		else:
+			$Line2D.add_point($RayCast2D.get_collision_point() - global_position)
+			$AttackComponent.scale.y = ($RayCast2D.get_collision_point() - global_position).y
 	else:
 		$Line2D.add_point(Vector2(0.0, -100.0))
 		$AttackComponent.scale.y = 100.0

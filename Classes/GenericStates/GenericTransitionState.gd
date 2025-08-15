@@ -16,8 +16,6 @@ func enter(prevState):
 		animator.play(animationName)
 	customEnter(prevState)
 
-func customEnter(_prevState):
-	pass
 
 func update(delta):
 	t += delta
@@ -31,6 +29,9 @@ func update(delta):
 
 func exit(n):
 	customExit(n)
+
+func customEnter(_prevState):
+	pass
 
 func customUpdate(_delta):
 	pass

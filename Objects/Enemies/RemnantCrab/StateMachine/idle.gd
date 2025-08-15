@@ -25,8 +25,12 @@ func update(_delta):
 		trasitioned.emit(self, nextState)
 		return
 	
-	nextStates.append("MassiveLaser")
+	#nextStates.append("MassiveLaser")
 	#nextStates.append("BlackHoleDisk")
+	#nextStates.append("RunToCenter")
+	#nextStates.append("GravityAmplification")
+	#nextStates.append("DoubleHeadSwing")
+	nextStates.append("Jump2")
 	#nextStates.append("LaserRun")
 	#nextStates.append("SuckIn")
 	#nextStates.append("Jump")
@@ -36,14 +40,26 @@ func update(_delta):
 		var a = sm.getRandomAttackPhase2(prevAttackPhase2)
 		
 		if a == sm.phase2Attacks.MassiveLaser:
-			nextStates.append("RunToCenter")
+			nextStates.append("Chase")
 			nextStates.append("MassiveLaser")
 			prevAttackPhase2 = sm.phase2Attacks.MassiveLaser
 			return
 		
 		if a == sm.phase2Attacks.BlackHoleDisk:
+			nextStates.append("RunAway")
 			nextStates.append("BlackHoleDisk")
 			prevAttackPhase2 = sm.phase2Attacks.BlackHoleDisk
+			return
+	
+		if a == sm.phase2Attacks.DoubleHeadSwing:
+			nextStates.append("RunTowards")
+			nextStates.append("DoubleHeadSwing")
+			prevAttackPhase2 = sm.phase2Attacks.DoubleHeadSwing
+			return
+			
+		if a == sm.phase2Attacks.Jump2:
+			nextStates.append("Jump2")
+			prevAttackPhase2 = sm.phase2Attacks.Jump2
 			return
 	
 	

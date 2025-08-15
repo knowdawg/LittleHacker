@@ -1,9 +1,57 @@
-[gd_scene load_steps=5 format=3 uid="uid://c7xd4741m8qkc"]
+[gd_scene load_steps=11 format=3 uid="uid://c7xd4741m8qkc"]
 
 [ext_resource type="Script" uid="uid://cpnhqe6ew3gun" path="res://Objects/Projectiles/CrystalEliteProjectile/crystal_elite_projectile.gd" id="1_ll3o8"]
 [ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="2_ccg72"]
+[ext_resource type="Shader" uid="uid://bvpghrvhnudmx" path="res://Assets/Shaders/Filters/NoiseFade.gdshader" id="3_ccg72"]
 [ext_resource type="Texture2D" uid="uid://cr3qqpd3vl3gq" path="res://Assets/Sprites/Projectiles/CrystalEliteSlashProj.png" id="3_kou3b"]
+[ext_resource type="Texture2D" uid="uid://5r2igt8g1n0s" path="res://Assets/Sprites/Noises/BaseNoise.tres" id="4_kou3b"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="4_ubkjq"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ubkjq"]
+resource_local_to_scene = true
+shader = ExtResource("3_ccg72")
+shader_parameter/noise = ExtResource("4_kou3b")
+shader_parameter/hFrames = 1.0
+shader_parameter/spriteRes = Vector2(16, 24)
+shader_parameter/progess = 0.0
+
+[sub_resource type="Animation" id="Animation_ccg72"]
+resource_name = "Delete"
+length = 0.2
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transform/Sprite2D:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+
+[sub_resource type="Animation" id="Animation_kou3b"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Transform/Sprite2D:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ubkjq"]
+_data = {
+&"Delete": SubResource("Animation_ccg72"),
+&"RESET": SubResource("Animation_kou3b")
+}
 
 [node name="CrystalEliteProjectile" type="Node2D"]
 texture_filter = 1
@@ -25,6 +73,7 @@ polygon = PackedVector2Array(-4, 3, -4, -10, 3, -17, 11, -21, 2, -10, 1, -2, 7, 
 [node name="Transform" type="Node2D" parent="."]
 
 [node name="Sprite2D" type="Sprite2D" parent="Transform"]
+material = SubResource("ShaderMaterial_ubkjq")
 position = Vector2(0, -12)
 texture = ExtResource("3_kou3b")
 
@@ -44,4 +93,19 @@ position = Vector2(7, 0)
 target_position = Vector2(0, 5)
 collision_mask = 3
 
+[node name="LeftWall" type="RayCast2D" parent="."]
+position = Vector2(-4, -10)
+target_position = Vector2(-5, 0)
+hit_from_inside = true
+
+[node name="RightWall" type="RayCast2D" parent="."]
+position = Vector2(4, -10)
+target_position = Vector2(5, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ubkjq")
+}
+
 [connection signal="gotParried" from="AttackComponent" to="." method="_on_attack_component_got_parried"]
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

@@ -8,7 +8,7 @@ class_name RamnantCrabSuckIn
 @export var suckEnd : float = 0.0
 
 @export var proximity : ProximityAreaComponent
-@export var parent : CharacterBody2D
+@export var parent : RemnantCrab
 
 var t := 0.0
 var gotPlayer := false
@@ -28,10 +28,7 @@ func update(delta):
 	
 	
 	if t >= suckStart and t <= suckEnd:
-		if Game.doesPlayerExist():
-			Game.player.global_position.x = lerpf(Game.player.global_position.x, parent.global_position.x, delta * 5.0)
-			if Game.doesCameraExist():
-				Game.camera.set_min_shake(1.0)
+		parent.suckInPlayer(delta, 5.0)
 			
 	
 	if t >= length:

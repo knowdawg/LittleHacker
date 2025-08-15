@@ -23,9 +23,6 @@ func customUpdate(delta):
 		switchedAnimation = true
 		animator.play("PhaseTransition")
 	if (t >= 3.5 and t <= 6.0) or (t >= 7.0 and t <= 8.7):
-		if Game.doesPlayerExist():
-			Game.player.global_position.x = lerpf(Game.player.global_position.x, parent.global_position.x, delta * 5.0)
-			if Game.doesCameraExist():
-				Game.camera.set_min_shake(1.0)
+		parent.suckInPlayer(delta, 5.0)
 	
 	

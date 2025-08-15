@@ -176,7 +176,7 @@ texture = SubResource("ViewportTexture_f40ai")
 [node name="Enemies" type="Node2D" parent="."]
 
 [node name="RemnantCrab" parent="Enemies" instance=ExtResource("2_mn1fc")]
-position = Vector2(-1, -8)
+position = Vector2(9, -8)
 
 [node name="PlayerParrent" type="Node2D" parent="."]
 

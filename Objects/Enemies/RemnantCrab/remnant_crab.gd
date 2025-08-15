@@ -49,25 +49,63 @@ func createStompProjectile():
 	p.global_position = global_position + offset
 	Game.addProjectile(p)
 
+
+func GravityAmpLeftStomp():
+	var p : CrystalEliteProjectile = swordProjectile.instantiate()
+	p.speed = 240.0
+	var offset := Vector2(-23.0, 23.0)
+	p.recal = true
+	p.recalVec = Vector2(-1.0, 0.0)
+	p.dirVector = Vector2(-1.0, 0.0)
+	p.flipH = false
+	p.global_position = global_position + offset
+	Game.addProjectile(p)
+
+func GravityAmpRightStomp():
+	var p : CrystalEliteProjectile = swordProjectile.instantiate()
+	p.speed = 240.0
+	var offset := Vector2(23.0, 23.0)
+	p.recal = true
+	p.recalVec = Vector2(1.0, 0.0)
+	p.dirVector = Vector2(1.0, 0.0)
+	p.flipH = true
+	p.global_position = global_position + offset
+	Game.addProjectile(p)
+
+
 var laserPillarProjectile = preload("uid://d0sqdwt14okl0")
-func createLaserPillars():
-	for i in range(20):
+func createLaserPillars(numOfPillars : int = 14, maxDis : float = 100.0):
+	for i in range(numOfPillars):
 		var p : LaserPillar = laserPillarProjectile.instantiate()
-		p.global_position = global_position + Vector2(randf_range(-100.0, 100.0), 23.0)
+		p.global_position = global_position + Vector2(randf_range(-maxDis, maxDis), 23.0)
 		Game.addProjectile(p)
-		p.speedScale = randf_range(0.5, 1.0)
+		p.speedScale = randf_range(0.7, 1.0)
 		p.activate()
 
+
+func suckInPlayer(delta, amount : float = 5.0, fromVisual : bool = false):
+	if Game.doesPlayerExist():
+		var targetPos : float = global_position.x
+		if fromVisual:
+			targetPos = %BlackHole.global_position.x
+		Game.player.global_position.x = lerpf(Game.player.global_position.x, targetPos, delta * amount)
+		if Game.doesCameraExist():
+			Game.camera.set_min_shake(1.0)
 
 func shakeScreen(amount : float = 5.0):
 	if Game.doesCameraExist():
 		Game.camera.set_min_shake(amount)
 
 
-func _on_jump_slam_got_parried(_a : Attack) -> void:
+func _on_jump_slam_got_parried(a : Attack) -> void:
 	if $StateMachine.current_state.name == "Jump":
 		if Game.doesPlayerExist():
 			Game.superParry(Game.player)
+	if $StateMachine.current_state.name == "Jump2":
+		var s : GenericAttackState = $StateMachine.current_state
+		if s.canParry(a):
+			if Game.doesPlayerExist():
+				Game.superParry(Game.player)
 
 
 func _on_health_component_on_lock_hit(lockName : String) -> void:

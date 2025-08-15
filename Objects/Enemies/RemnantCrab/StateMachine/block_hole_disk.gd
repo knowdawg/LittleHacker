@@ -9,6 +9,7 @@ class_name RemnantCrabBlackHoleDisk
 @export var blackHoleVisual : Sprite2D
 @export var blackHoleContainer : Node2D
 @export var legs : Node2D
+@export var attackCom : AttackComponent
 
 @export var attackLength : float = 0.0
 
@@ -51,13 +52,27 @@ func launchBlackHole():
 	if dir > 0.0:
 		if rightRaycast.is_colliding():
 			blackHoleContainer.global_position.x = rightRaycast.get_collision_point().x
+			var dis : float = rightRaycast.get_collision_point().x - parent.global_position.x
+			attackCom.scale.x = dis + 16.0
 	else:
 		if leftRaycast.is_colliding():
 			blackHoleContainer.global_position.x = leftRaycast.get_collision_point().x
+			var dis : float = leftRaycast.get_collision_point().x - parent.global_position.x
+			attackCom.scale.x = dis - 16.0
 
 func recoverBlackHole():
 	blackHoleContainer.position = Vector2.ZERO
 	legs.flip_h = !legs.flip_h
+
+func setUpHitboxes():
+	if dir > 0.0:
+		if rightRaycast.is_colliding():
+			var dis : float = rightRaycast.get_collision_point().x - parent.global_position.x
+			attackCom.scale.x = dis + 16.0
+	else:
+		if leftRaycast.is_colliding():
+			var dis : float = leftRaycast.get_collision_point().x - parent.global_position.x
+			attackCom.scale.x = (dis + 16.0) * -1.0
 
 func update(delta):
 	t += delta

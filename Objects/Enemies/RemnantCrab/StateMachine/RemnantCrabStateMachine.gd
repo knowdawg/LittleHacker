@@ -2,9 +2,9 @@ extends StateMachine
 class_name RemnantCrabStateMachine
 
 
-var phase : int = 1
+var phase : int = 2
 enum phase1Attacks {Stomp, Jump, HeadSlam, LazerRun, SuckIn, SpikeFloor}
-enum phase2Attacks {MassiveLaser, BlackHoleDisk}
+enum phase2Attacks {MassiveLaser, BlackHoleDisk, DoubleHeadSwing, Jump2}
 
 func getRandomAttack(ignore : phase1Attacks = -1):
 	var a : phase1Attacks = ignore

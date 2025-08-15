@@ -6,6 +6,8 @@ class_name AttackComponent
 @export var healthComponent : HealthComponent
 @export var disabled : bool = true
 
+@export var mulitpleShapes : Array[CollisionShape2D]
+
 @export_group("Damage")
 @export var attack_damage : float
 @export var weakness_damage : float
@@ -83,6 +85,12 @@ func _on_area_entered(area):
 			generateAttackID()
 		if isConstant:
 			generateAttackID()
+			collisionShape.position += Vector2(-1000000.0, 1000000.0)
+			
+			for c in mulitpleShapes:
+				c.position += Vector2(-1000000.0, 1000000.0)
+			
+			$ConstantHitboxHitRefresh.start()
 		
 		attackHit.emit(area)
 		
@@ -103,15 +111,21 @@ func generateAttackID():
 
 func disable():
 	collisionShape.set_deferred("disabled", true)
+	for c in mulitpleShapes:
+		c.set_deferred("disabled", true)
 	constantHurtboxActive = false
 
 func enable():
 	collisionShape.set_deferred("disabled", false)
+	for c in mulitpleShapes:
+		c.set_deferred("disabled", false)
 	constantHurtboxActive = true
 
 func readyAttack():
 	attackID = randf_range(0.0, 10000.0)
 	collisionShape.disabled = false
+	for c in mulitpleShapes:
+		c.disabled = false
 	constantHurtboxActive = true
 
 func parried(attack : Attack):
@@ -122,6 +136,8 @@ func parried(attack : Attack):
 	if isConstant:
 		%ConstantHitboxTempDisableTimer.start(disableTimeOnParry)
 		collisionShape.set_deferred("disabled", true)
+		for c in mulitpleShapes:
+			c.set_deferred("disabled", true)
 	else:
 		call_deferred("disable")
 	
@@ -135,3 +151,11 @@ func _on_timer_timeout() -> void:
 func _on_constant_hitbox_temp_disable_timer_timeout() -> void:
 	if constantHurtboxActive == true:
 		collisionShape.set_deferred("disabled", false)
+		for c in mulitpleShapes:
+			c.set_deferred("disabled", false)
+
+
+func _on_constant_hitbox_hit_refresh_timeout() -> void:
+	collisionShape.position -= Vector2(-1000000.0, 1000000.0)
+	for c in mulitpleShapes:
+		c.position -= Vector2(-1000000.0, 1000000.0)
