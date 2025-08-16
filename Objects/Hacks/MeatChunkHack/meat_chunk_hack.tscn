@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://ukyidbi4xqqt"]
+
+[ext_resource type="Script" uid="uid://ov7cbg8atn7f" path="res://Objects/Hacks/MeatChunkHack/meat_chunk_hack.gd" id="1_4fu8o"]
+
+[node name="MeatChunkHack" type="Line2D"]
+script = ExtResource("1_4fu8o")

@@ -24,6 +24,7 @@ var t = 0.0
 func enter(prevState):
 	customEnter(prevState)
 	t = 0.0
+	animator.stop()
 	animator.play(animationName)
 	if knockbackBasedOnDir:
 		if sprite.flip_h:
@@ -42,9 +43,17 @@ func update(delta):
 	t += delta
 	if t >= parryLength:
 		trasitioned.emit(self, nextState.name)
+		return
+
+func exit(n : State):
+	customExit(n)
+
 
 func customUpdate(_delta):
 	pass
 
 func customEnter(_prevState):
+	pass
+
+func customExit(_n):
 	pass

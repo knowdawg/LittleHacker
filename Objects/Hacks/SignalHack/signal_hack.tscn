@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://c5urxtwbj0g1y"]
+
+[ext_resource type="Script" uid="uid://dbfecpkbxej7x" path="res://Objects/Hacks/SignalHack/signal_hack.gd" id="1_0qtg5"]
+
+[node name="SignalHack" type="Line2D"]
+script = ExtResource("1_0qtg5")

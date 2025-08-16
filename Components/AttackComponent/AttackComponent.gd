@@ -18,6 +18,7 @@ class_name AttackComponent
 @export var knockbackVector : Vector2
 
 @export_group("Flags")
+@export var isFullAttack : bool = false #For full parries
 @export var isSpikes : bool = false
 @export var isHackAttack : bool = false
 @export var isPogo : bool = false
@@ -64,6 +65,7 @@ func _on_area_entered(area):
 		attack.attack_position = global_position
 		attack.attackID = attackID
 		attack.attackName = attackName
+		attack.isFullAttack = isFullAttack
 		attack.isHackAttack = isHackAttack
 		attack.isPogo = isPogo
 		attack.isGrabAttack = isGrabAttack

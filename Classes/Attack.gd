@@ -9,6 +9,7 @@ var attack_position : Vector2 = Vector2.ZERO
 var knockback_vector : Vector2 = Vector2.ZERO
 var parryPosition : Vector2 = Vector2.ZERO
 
+var isFullAttack : bool = false #For full parrying
 var isParryable : bool = true
 var isHazard : bool = false
 var isHackAttack : bool = false
@@ -22,3 +23,6 @@ var attackType : SHARPNESS = SHARPNESS.NIETHER
 var healthComponent : HealthComponent
 
 var attackID : float = 0.0
+
+func getRandomNormalizedVector(minAngle : float, maxAngle : float) -> Vector2:
+	return Vector2.from_angle(randf_range(minAngle, maxAngle))

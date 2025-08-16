@@ -3,7 +3,7 @@ class_name MovementComponent
 
 @export var parent : Node2D
 @export var gravity : float = 0.0
-@export var externalForceMultiplier : float = 1.0
+@export var externalForceMultiplier : Vector2 = Vector2(1.0, 1.0)
 @export var forceDecayRate : Vector2 = Vector2(10.0, 10.0)
 
 var g = Vector2.ZERO

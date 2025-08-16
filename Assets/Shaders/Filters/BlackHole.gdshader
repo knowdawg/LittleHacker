@@ -20,6 +20,8 @@ uniform float spiralIntensity : hint_range(-10.0, 10.0, 0.1) = 1.0; // The amoun
 uniform float shrinkSpeed : hint_range(-10.0, 10.0, 0.1) = 0.2; //Speed at which the texture moves towards the center
 uniform float roationSpeed : hint_range(-10.0, 10.0, 0.1) = 0.1; //Speed at which the texture roates around the center
 uniform sampler2D haloColor; //Color of the spiral, use a gradient
+uniform sampler2D haloColor2;
+uniform float haloProgress : hint_range(0.0, 1.0) = 0.0;
 
 vec2 toPolar(vec2 cartesian){
 	float distance = length(cartesian);
@@ -44,6 +46,8 @@ void fragment() {
 	//Polar Texture
 	vec4 polarTex = texture(image, vec2(polarUV.x + TIME * roationSpeed, polarUV.y + TIME * shrinkSpeed));
 	vec4 halo = texture(haloColor, vec2(smoothstep(0.7, 1.0, 1.0 - length(offsetUV)), offsetUV.y));
+	vec4 halo2 = texture(haloColor2, vec2(smoothstep(0.7, 1.0, 1.0 - length(offsetUV)), offsetUV.y));
+	halo = mix(halo, halo2, haloProgress);
 	halo = mix(halo, polarTex * halo, 0.7);
 	halo.a *= smoothstep(0.0, 0.5, 0.5 - centerDis);
 	halo.rgb = ceil(halo.rgb * colorResolution) / colorResolution;

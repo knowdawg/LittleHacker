@@ -20,6 +20,12 @@ var spikesIfr : float = 0.0
 
 var attackIDIveBeenHitBy = []
 
+#########
+#Full parrying lets you parry all attacks, full and not full
+#When a full attack is parried, you can no longer full parry until you parry again
+#Enemy attacks are usaul full, projectiles are usaualy not
+#########
+var fullParrying : bool = false 
 func _process(delta):
 	ift -= delta
 	spikesIfr -= delta
@@ -43,8 +49,9 @@ func damage(attack: Attack):
 		return
 	
 	if parrying and attack.attackStrength <= parryStrength:
-		parryStuff(attack)
-		return
+		if !attack.isFullAttack or (attack.isFullAttack and fullParrying):
+			parryStuff(attack)
+			return
 	if blocking and attack.attackStrength == 1:
 		attackBlocked(attack)
 		return
@@ -56,6 +63,8 @@ func damage(attack: Attack):
 
 func parryStuff(attack : Attack):
 	parry.emit(attack)
+	if attack.isFullAttack:
+		fullParrying = false
 
 func attackBlocked(attack : Attack):
 	blocked.emit(attack)
@@ -63,8 +72,9 @@ func attackBlocked(attack : Attack):
 var attackBuffer : Attack
 func damageStuff():
 	if parrying == true and attackBuffer.attackStrength <= parryStrength:
-		parryStuff(attackBuffer)
-		return
+		if !attackBuffer.isFullAttack or (attackBuffer.isFullAttack and fullParrying):
+			parryStuff(attackBuffer)
+			return
 	if blocking and attackBuffer.attackStrength == 1:
 		attackBlocked(attackBuffer)
 		return
@@ -100,9 +110,11 @@ func setIFrameTimer(val : float):
 func setParry(isParrying : bool, strength = 1):
 	if isParrying:
 		parrying = true
+		fullParrying = true
 		parryStrength = strength
 	else:
 		parrying = false
+		fullParrying = false
 		parryStrength = 0
 
 func setBlock(isBlocking : bool):

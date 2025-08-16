@@ -4,7 +4,7 @@ class_name RemnantCrabGravityAmplification
 @export var parent : RemnantCrab
 @export var numOfReapeats : int = 4
 
-@export var attackCom : AttackComponent
+@export var attackComs : Array[AttackComponent]
 
 enum states {START, REPEAT, END}
 var state : states = states.START
@@ -48,4 +48,5 @@ func lightPillars():
 		parent.createLaserPillars(5)
 
 func customExit(_n):
-	attackCom.call_deferred("disable")
+	for c in attackComs:
+		c.call_deferred("disable")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://dmv3cbnk3ejby"]
+[gd_scene load_steps=27 format=3 uid="uid://dmv3cbnk3ejby"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_x8kok"]
 [ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="2_mn1fc"]
@@ -17,7 +17,7 @@ background_mode = 3
 noise = SubResource("FastNoiseLite_2b6ii")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bv8ak"]
-size = Vector2(729, 20)
+size = Vector2(729.5, 19.9987)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_gs7hc"]
 
@@ -25,6 +25,9 @@ size = Vector2(729, 20)
 width = 400
 height = 40
 noise = SubResource("FastNoiseLite_gs7hc")
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mn1fc"]
+size = Vector2(729.5, 39.9987)
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_f40ai"]
 viewport_path = NodePath("Main")
@@ -75,6 +78,7 @@ shader_parameter/spiralIntensity = 2.0
 shader_parameter/shrinkSpeed = 0.2
 shader_parameter/roationSpeed = 0.1
 shader_parameter/haloColor = SubResource("GradientTexture1D_1og1s")
+shader_parameter/haloProgress = 0.0
 
 [sub_resource type="Gradient" id="Gradient_bgy7s"]
 offsets = PackedFloat32Array(1)
@@ -161,6 +165,32 @@ offset_bottom = 35.0
 [node name="Sprite2D" type="Sprite2D" parent="StaticBody2D3"]
 texture_filter = 1
 position = Vector2(0, 35)
+texture = SubResource("NoiseTexture2D_uh3go")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="."]
+position = Vector2(0, 358)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
+position = Vector2(-1.24997, 35.0007)
+shape = SubResource("RectangleShape2D_mn1fc")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D4"]
+texture_filter = 1
+position = Vector2(-166, 35.0006)
+texture = SubResource("NoiseTexture2D_uh3go")
+
+[node name="StaticBody2D5" type="StaticBody2D" parent="."]
+position = Vector2(89, 358)
+rotation = 1.5708
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]
+position = Vector2(-1.24997, 35.0007)
+shape = SubResource("RectangleShape2D_mn1fc")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D5"]
+texture_filter = 1
+position = Vector2(-166, 35.0006)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="Collisions" type="Node2D" parent="."]

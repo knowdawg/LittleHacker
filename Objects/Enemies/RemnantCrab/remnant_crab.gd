@@ -12,6 +12,9 @@ func _on_state_machine_state_switched(prevState: State, newState: State) -> void
 	#if prevState:
 		#print(prevState.name)
 
+func _ready() -> void:
+	%HeartAnimator.play("Beat")
+
 func _physics_process(delta: float) -> void:
 	velocity.y += 1000.0 * delta
 	
@@ -31,8 +34,12 @@ func prepareForLanding():
 func launchLand():
 	if %DownCast.is_colliding():
 		global_position.y = %DownCast.get_collision_point().y - 23.0
-
-
+	
+	if legsBroken:
+		var a : Attack = Attack.new()
+		a.attack_damage = 5.0
+		a.knockback_vector = a.getRandomNormalizedVector(-PI, PI)
+		healthComponent.damage(a)
 
 var swordProjectile = preload("uid://c7xd4741m8qkc")
 func createStompProjectile():
@@ -92,30 +99,48 @@ func suckInPlayer(delta, amount : float = 5.0, fromVisual : bool = false):
 		if Game.doesCameraExist():
 			Game.camera.set_min_shake(1.0)
 
+
 func shakeScreen(amount : float = 5.0):
 	if Game.doesCameraExist():
 		Game.camera.set_min_shake(amount)
 
 
+func makeBlackHoleSafe():
+	%BlackHoleColorChanger.play("Safe")
+
+func makeBlackHoleDangerous():
+	%BlackHoleColorChanger.play("Dangerous")
+
 func _on_jump_slam_got_parried(a : Attack) -> void:
 	if $StateMachine.current_state.name == "Jump":
 		if Game.doesPlayerExist():
 			Game.superParry(Game.player)
-	if $StateMachine.current_state.name == "Jump2":
-		var s : GenericAttackState = $StateMachine.current_state
-		if s.canParry(a):
-			if Game.doesPlayerExist():
-				Game.superParry(Game.player)
 
+func _on_jump_slam_black_hole_got_parried(a: Attack) -> void:
+	if $StateMachine.current_state.name == "Jump2":
+		if Game.doesPlayerExist():
+			Game.superParry(Game.player)
+			%StateMachine.switchStates("StaggerPhase2")
 
 func _on_health_component_on_lock_hit(lockName : String) -> void:
 	if lockName == "PhaseTransition":
 		%StateMachine.switchStates("PhaseSwitch")
-		%StateMachine.phase = 2
+		%StateMachine.switchPhases()
 		$StateMachine/Idle.nextStates.clear()
 
 
 func _on_health_component_hit(attack: Attack) -> void:
-	%Skulls.offset = attack.knockback_vector * 10.0
 	var t : Tween = create_tween()
-	t.tween_property(%Skulls, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)
+	if %StateMachine.phase == 1:
+		%Skulls.offset = attack.knockback_vector * 10.0
+		t.tween_property(%Skulls, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)
+	
+	if %StateMachine.phase == 2:
+		%Heart.offset = attack.knockback_vector * 5.0
+		t.tween_property(%Heart, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)
+		%CageAnimator.stop()
+		%CageAnimator.play("Hit")
+
+var legsBroken : bool = false
+func _on_break_legs_executed() -> void:
+	legsBroken = true

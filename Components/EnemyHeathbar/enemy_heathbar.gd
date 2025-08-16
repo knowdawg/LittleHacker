@@ -3,6 +3,7 @@ extends Node2D
 class_name EnemyHealthBar
 
 @export var showBars : bool = true
+@export var hideWeaknessBar : bool = false
 
 @export var parent : CharacterBody2D
 @export var follow : Node2D
@@ -66,6 +67,8 @@ func _process(_delta: float) -> void:
 	
 	if showBars:
 		%Healthbars.visible = true
+		if hideWeaknessBar == true:
+			%Weakness.visible = false
 	else:
 		%Healthbars.visible = false
 	

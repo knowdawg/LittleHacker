@@ -5,6 +5,13 @@ enum type {CLIP, MODULATE}
 
 @export var node : Node2D
 
+@export_group("TriggerOnHit")
+@export var healthComponent : HealthComponent
+
+func _ready() -> void:
+	if healthComponent:
+		healthComponent.hit.connect(hitEfect)
+
 func hitEfect(_attack : Attack):
 	if typeOFFlash == type.CLIP:
 		$AnimationPlayer.play("Animate")

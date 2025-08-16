@@ -30,6 +30,10 @@ func _ready():
 		stateSwitched.emit(null, initial_state)
 	
 	Game.exitHackMode.connect(hackModeFinished)
+	customReady()
+
+func customReady():
+	pass
 
 func _process(delta):
 	#update the state only if the game is not in hack mode
@@ -76,8 +80,9 @@ func hackModeFinished():
 	#Resume the animators once hack mode is finished
 	for a in animators:
 		#prevent finished animations from playign again
-		if a.current_animation_length != a.current_animation_position:
-			a.play() 
+		if a.current_animation:
+			if a.current_animation_length != a.current_animation_position:
+				a.play() 
 
 func _physics_process(delta):
 	if current_state:

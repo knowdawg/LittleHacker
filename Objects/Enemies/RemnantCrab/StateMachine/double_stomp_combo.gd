@@ -24,7 +24,7 @@ class_name RemnantCrabDoubleHeadSwing
 
 var dir = 1.0
 var t = 0.0
-func enter(prevState):
+func enter(_prevState):
 	t = 0.0
 	orientateFlipNode()
 	

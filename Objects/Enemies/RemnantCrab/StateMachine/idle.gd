@@ -9,7 +9,7 @@ var prevAttackPhase2 = -1
 var nextStates : Array[String] = []
 
 #func enter(_p):
-	#animator.play("RESET")
+	#animator.stop()
 
 func update(_delta):
 	#nextStates.append("MassiveLaser")
@@ -30,17 +30,19 @@ func update(_delta):
 	#nextStates.append("RunToCenter")
 	#nextStates.append("GravityAmplification")
 	#nextStates.append("DoubleHeadSwing")
-	nextStates.append("Jump2")
+	#nextStates.append("Jump2")
 	#nextStates.append("LaserRun")
 	#nextStates.append("SuckIn")
 	#nextStates.append("Jump")
-	return
+	#nextStates.append("StompLeft")
+	#nextStates.append("Chase")
+	#nextStates.append("PhaseSwitch")
+	#return
 	
 	if sm.phase == 2:
 		var a = sm.getRandomAttackPhase2(prevAttackPhase2)
 		
 		if a == sm.phase2Attacks.MassiveLaser:
-			nextStates.append("Chase")
 			nextStates.append("MassiveLaser")
 			prevAttackPhase2 = sm.phase2Attacks.MassiveLaser
 			return

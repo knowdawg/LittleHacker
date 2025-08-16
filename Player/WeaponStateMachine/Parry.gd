@@ -12,6 +12,8 @@ var t = 0.0
 func enter(_prevState):
 	t = 0.0
 	
+	playerHurtBox.setParry(true, 1)
+	
 	weaponAnimator.stop()
 	weaponAnimator.play("Parry")
 	
@@ -44,7 +46,8 @@ func update(delta):
 	
 	t += delta
 	if t <= 0.2:
-		playerHurtBox.setParry(true, 1)
+		pass
+		#playerHurtBox.setParry(true, 1)
 	else:
 		playerHurtBox.setParry(false)
 	
@@ -57,4 +60,4 @@ func onParry(_attack : Attack):
 
 func exit(_newState):
 	player.setParry(false)
-	playerHurtBox.parrying = false
+	playerHurtBox.setParry(false)

@@ -1,4 +1,5 @@
 extends Node2D
+class_name HealOrbProjectile
 
 @export var speed : float = 100.0
 @export var healAmount : float = 0.3
@@ -9,6 +10,6 @@ func _process(delta: float) -> void:
 	vec = -vec.normalized()
 	position += vec * delta * speed
 	
-	if global_position.distance_to(Game.player.global_position) < 1.0:
+	if global_position.distance_to(Game.player.global_position) < 3.0:
 		Game.player.heal(healAmount)
 		queue_free()

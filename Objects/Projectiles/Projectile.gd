@@ -10,6 +10,30 @@ var flipH : bool = false
 var flipV : bool = false
 @export var friendly = false
 
+@export_group("AttackComponentDelay")
+@export var delay : float = 0.0
+@export var delayTimer : Timer
+@export var attackComponent : AttackComponent
+
+
+func _ready() -> void:
+	delayAttackComponent()
+
+func delayAttackComponent() -> void:
+	if !attackComponent:
+		return
+	if delay == 0.0:
+		enableAttackComponent()
+	else:
+		if delayTimer:
+			delayTimer.timeout.connect(enableAttackComponent)
+			delayTimer.start(delay)
+			
+
+func enableAttackComponent():
+	if attackComponent:
+		attackComponent.call_deferred("enable")
+
 func move(dir : Vector2, s : float, delta):
 	position += dir * s * delta
 

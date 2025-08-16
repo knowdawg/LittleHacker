@@ -15,7 +15,7 @@ var curState : state = state.ToWall
 @export var laserAttackComponent : AttackComponent
 @export var laserHitbox : CollisionShape2D
 
-@export var parent : CharacterBody2D
+@export var parent : RemnantCrab
 @export var animator : AnimationPlayer
 
 @export var skullSprite : Sprite2D
@@ -48,6 +48,7 @@ func update_physics(delta):
 			runVelocity += dir * acceleration * delta
 			
 			if rightRaycast.is_colliding():
+				parent.makeBlackHoleDangerous()
 				laserAnimator.play("PrepLaser")
 				curState = state.StartLaser
 		state.StartLaser:
@@ -90,6 +91,7 @@ func update_physics(delta):
 				animator.play("LaserRunEnd")
 				curState = state.EndLaser
 				endLaserTimer = 0.0
+				parent.makeBlackHoleSafe()
 				return
 		state.EndLaser:
 			endLaserTimer += delta
