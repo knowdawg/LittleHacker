@@ -80,9 +80,9 @@ func hackModeFinished():
 	#Resume the animators once hack mode is finished
 	for a in animators:
 		#prevent finished animations from playign again
-		if a.current_animation:
-			if a.current_animation_length != a.current_animation_position:
-				a.play() 
+		#Do not check if a has a current animation cause it will always be false when the animator is paused
+		if a.current_animation_length != a.current_animation_position:
+			a.play() 
 
 func _physics_process(delta):
 	if current_state:

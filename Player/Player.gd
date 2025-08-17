@@ -147,8 +147,8 @@ func canCoyoteJump():
 func facingRight():
 	return sprite.flip_h
 
-func jump():
-	v.y = JUMP_VELOCITY
+func jump(multiplier : float = 1.0):
+	v.y = JUMP_VELOCITY * multiplier
 
 func killJump():
 	v.y /= 2.0;
@@ -157,28 +157,27 @@ var parrying = false
 func setParry(isParry : bool):
 	parrying = isParry
 
-func _on_attack_down_area_entered(_area: Area2D) -> void:
-	jump()
 
-func hitFromLeft(_attack : Attack):
-	knockbackVector.x = 100.0
-	v.x = 0.0
-	if !stateMachine.current_state is PlayerGrabbed:
-		$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
-	hitEffects()
-
-func hitFromRight(_attack : Attack):
-	knockbackVector.x = -100.0
-	v.x = 0.0
-	if !stateMachine.current_state is PlayerGrabbed:
-		$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
-	hitEffects()
+#func hitFromLeft(_attack : Attack):
+	#knockbackVector.x = 100.0
+	#v.x = 0.0
+	#if !stateMachine.current_state is PlayerGrabbed:
+		#$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	#hitEffects()
+#
+#func hitFromRight(_attack : Attack):
+	#knockbackVector.x = -100.0
+	#v.x = 0.0
+	#if !stateMachine.current_state is PlayerGrabbed:
+		#$StateMachine.onChildTransition($StateMachine.current_state, "Stun")
+	#hitEffects()
 
 func hitEffects():
 	$Sounds/PlayerHitMain.play()
 	$Sounds/PlayerHitSecoundary.play()
 	$MotionBlur.glitch()
 	Game.camera.set_shake(10.0)
+	Game.freezeFrame(0.1)
 
 var parryStunTime = 0.3
 var parriedAttack : Attack
@@ -251,3 +250,18 @@ func _on_health_component_hazard(_attack: Attack) -> void:
 	knockbackVector = Vector2.ZERO
 	
 	global_position = Game.platformingRespawnPos
+
+
+func _on_attack_left_area_entered(area: Area2D) -> void:
+	if !is_on_floor():
+		jump()
+
+func _on_attack_right_area_entered(area: Area2D) -> void:
+	if !is_on_floor():
+		jump()
+
+func _on_attack_down_area_entered(_area: Area2D) -> void:
+	jump()
+
+func _on_health_component_hit(attack: Attack) -> void:
+	hitEffects()

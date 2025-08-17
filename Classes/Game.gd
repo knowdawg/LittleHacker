@@ -46,16 +46,33 @@ signal exitHackMode
 signal onLevelSwitch(data : SceneSwitchData)
 
 func slowTime(timeScale : float):
-	Engine.time_scale = timeScale
+	pass
+	#freezeFrame(0.1)
+	#Engine.time_scale = timeScale
 
 func setTimeScale(timeScale : float):
-	Engine.time_scale = timeScale
+	pass
+	#freezeFrame(0.1)
+	#Engine.time_scale = timeScale
+
+func shakeCameraLittleGame(amount : float):
+	if doesCameraExist():
+		camera.set_min_shake(amount)
+
+func freezeFrame(duration : float, forLittleGame : bool = true):
+	if forLittleGame and !inLittleGame:
+		return
+	
+	Engine.time_scale = 0
+	await(get_tree().create_timer(duration, true, false, true).timeout)
+	Engine.time_scale = 1
 
 func _process(delta: float) -> void:
-	if inHackMode:
-		Engine.time_scale = move_toward(Engine.time_scale, 0.1, delta * 60.0)
-	else:
-		Engine.time_scale = move_toward(Engine.time_scale, 1.0, delta * 5.0)
+	pass
+	#if inHackMode:
+		#Engine.time_scale = move_toward(Engine.time_scale, 0.1, delta * 60.0)
+	#else:
+		#Engine.time_scale = move_toward(Engine.time_scale, 1.0, delta * 5.0)
 
 func setHackMode(on : bool):
 	if inHackMode != on:

@@ -168,7 +168,7 @@ position = Vector2(0, 35)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="StaticBody2D4" type="StaticBody2D" parent="."]
-position = Vector2(0, 358)
+position = Vector2(-1, 395)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
@@ -181,7 +181,7 @@ position = Vector2(-166, 35.0006)
 texture = SubResource("NoiseTexture2D_uh3go")
 
 [node name="StaticBody2D5" type="StaticBody2D" parent="."]
-position = Vector2(89, 358)
+position = Vector2(88, 395)
 rotation = 1.5708
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D5"]

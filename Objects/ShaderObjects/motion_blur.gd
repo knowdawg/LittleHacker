@@ -38,7 +38,7 @@ func superParry(node : Node2D):
 	$SuperParryAnimator.play("SuperParry")
 	Game.camera.set_shake(5.0)
 	Game.camera.zoom = Vector2(12.0, 12.0)
-	Game.setTimeScale(0.1)
+	Game.freezeFrame(0.2)
 
 
 func showStatic():

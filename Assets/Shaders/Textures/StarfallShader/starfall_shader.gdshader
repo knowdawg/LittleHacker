@@ -28,5 +28,7 @@ void fragment() {
 	c *= 2.0;
 	c.rgb = pow(c.rgb, vec3(3.0));
 
+	c.rgb = round(3.0 * c.rgb) / 3.0;
+
 	COLOR *= c;
 }

@@ -101,8 +101,8 @@ fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tm7ga"]
 shader = ExtResource("11_0jdrv")
-shader_parameter/color = Color(0, 0, 0, 1)
-shader_parameter/width = 0.3
+shader_parameter/color = Color(0.254902, 0.113725, 0.192157, 1)
+shader_parameter/width = 0.5
 shader_parameter/pattern = 0
 shader_parameter/inside = false
 shader_parameter/modulate = Color(1, 1, 1, 1)

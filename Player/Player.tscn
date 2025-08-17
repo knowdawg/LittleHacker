@@ -1,4 +1,4 @@
-[gd_scene load_steps=245 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=247 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -7,7 +7,6 @@
 [ext_resource type="PackedScene" uid="uid://brujq4dkn34nd" path="res://Components/ProximityAreaComponent/proximity_area.tscn" id="2_67e55"]
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="2_hn6pj"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="2_l0uvv"]
-[ext_resource type="PackedScene" uid="uid://baqyhnw0fd6r0" path="res://Components/VelocityBufferComponent/color_rect.tscn" id="2_mnd2b"]
 [ext_resource type="PackedScene" uid="uid://c4bfd28vwo2p0" path="res://Components/VisualEffectComponents/HitParticles/hit_particles.tscn" id="3_412y7"]
 [ext_resource type="PackedScene" uid="uid://bov1lwrx7vmuy" path="res://Components/EnemyHitComponent/enemy_hit_component.tscn" id="3_nr8gu"]
 [ext_resource type="AudioStream" uid="uid://dbcrjgsxk4a1x" path="res://Assets/Audio/SoundEffects/SmallPlayerHit.wav" id="3_t3i0y"]
@@ -15,12 +14,10 @@
 [ext_resource type="Script" uid="uid://dfe6cgg0ys780" path="res://Player/Run.gd" id="4_jsdmc"]
 [ext_resource type="PackedScene" uid="uid://boaqnrhkb5ukt" path="res://Components/VisualEffectComponents/DirectionalHitParticlesComponent/directional_hit_particles_component.tscn" id="4_xxukg"]
 [ext_resource type="Script" uid="uid://dlyxus8gbvgpg" path="res://Player/Jump.gd" id="5_8j04r"]
-[ext_resource type="PackedScene" uid="uid://bta4purlxvmqj" path="res://Components/KnockbackComponents/BiDirectionalKnockbackComponent/bidirectional_knockback_component.tscn" id="5_38mkd"]
 [ext_resource type="AudioStream" uid="uid://c642tuqh4371h" path="res://Assets/Audio/SoundEffects/GrappleLaunched.wav" id="6_5vwdf"]
 [ext_resource type="Script" uid="uid://biiby66878j3i" path="res://Player/Fall.gd" id="6_yew1w"]
 [ext_resource type="Script" uid="uid://b1hv4d0vfdvam" path="res://Player/Roll.gd" id="7_5l01g"]
 [ext_resource type="AudioStream" uid="uid://cafh4a3eq71pk" path="res://Assets/Audio/SoundEffects/Grappling.wav" id="7_q8ub3"]
-[ext_resource type="Material" uid="uid://olhvuev8j23b" path="res://Assets/Shaders/ScreenUvShader.tres" id="7_xqyul"]
 [ext_resource type="Script" uid="uid://niqkbox7hwx4" path="res://Player/Parry.gd" id="8_oxv8y"]
 [ext_resource type="AudioStream" uid="uid://j4wm582r0jos" path="res://Assets/Audio/SoundEffects/GrappleLand.wav" id="8_oyr7x"]
 [ext_resource type="Script" uid="uid://crybyms0fhukm" path="res://Player/WeaponStateMachine/AttackHorizontal.gd" id="10_d677x"]
@@ -95,14 +92,13 @@
 [ext_resource type="AudioStream" uid="uid://7d4y3bn7ksgd" path="res://Assets/Audio/SoundEffects/HackExecuted2.wav" id="69_xqyul"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="77_1e2fr"]
 [ext_resource type="Texture2D" uid="uid://ufu3hjlwcw66" path="res://Test/SmallPlayerIdeas.png" id="78_oyr7x"]
+[ext_resource type="PackedScene" uid="uid://dw0pl76cdbwc7" path="res://Components/BigStagger/big_stagger_effect.tscn" id="86_rlc46"]
+[ext_resource type="Shader" uid="uid://bwtnrv43ddv4c" path="res://Assets/Shaders/Effects/big_stagger_effect.gdshader" id="87_n5tgw"]
 [ext_resource type="Shader" uid="uid://cmkdo446fbnfd" path="res://Assets/Shaders/Textures/Vignette.gdshader" id="89_3om3i"]
 [ext_resource type="Script" uid="uid://csyhe4wnscad5" path="res://Player/vignette.gd" id="89_4k38o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_e2bo2"]
 size = Vector2(2, 5)
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_e2bo2"]
-radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gvghi"]
 size = Vector2(31, 12)
@@ -2692,6 +2688,30 @@ _data = {
 &"RESET": SubResource("Animation_ltc66")
 }
 
+[sub_resource type="Gradient" id="Gradient_o5dyx"]
+offsets = PackedFloat32Array(0.52381, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rcw8i"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ot2uj"]
+height = 64
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = SubResource("Gradient_o5dyx")
+noise = SubResource("FastNoiseLite_rcw8i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_es2bh"]
+resource_local_to_scene = true
+shader = ExtResource("87_n5tgw")
+shader_parameter/image = SubResource("NoiseTexture2D_ot2uj")
+shader_parameter/rotations = 2.0
+shader_parameter/shrinkSpeed = -0.2
+shader_parameter/roationSpeed = -0.0999999
+shader_parameter/shreekSpeed = 1.1
+shader_parameter/resolution = Vector2(64, 64)
+shader_parameter/progress = 1.0
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4k38o"]
 shader = ExtResource("89_3om3i")
 shader_parameter/center = Vector2(0.5, 0.5)
@@ -2755,14 +2775,6 @@ screenEffects = NodePath("MotionBlur")
 position = Vector2(0, -0.5)
 shape = SubResource("RectangleShape2D_e2bo2")
 
-[node name="ClothArea" type="Area2D" parent="."]
-collision_layer = 512
-collision_mask = 0
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ClothArea"]
-visible = false
-shape = SubResource("CircleShape2D_e2bo2")
-
 [node name="InteractableManager" parent="." instance=ExtResource("2_5vwdf")]
 inLittleGame = true
 
@@ -2792,12 +2804,6 @@ bus = &"SoundEffects"
 stream = ExtResource("8_oyr7x")
 bus = &"SoundEffects"
 
-[node name="ColorRect" parent="." node_paths=PackedStringArray("thingToTrack") instance=ExtResource("2_mnd2b")]
-material = ExtResource("7_xqyul")
-offset_top = -2.0
-offset_bottom = 2.0
-thingToTrack = NodePath("..")
-
 [node name="HackTargetDetectionBox" type="Area2D" parent="."]
 position = Vector2(0, 2)
 collision_layer = 0
@@ -2817,7 +2823,7 @@ MAX_WEAKNESS = 0.0
 [node name="EnemyHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("3_nr8gu")]
 healthComponent = NodePath("../HealthComponent")
 hitEffects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
-knockbackComponent = NodePath("BidirectionalKnockbackComponent")
+knockbackComponent = NodePath("")
 
 [node name="HitParticles" parent="EnemyHitComponent" instance=ExtResource("3_412y7")]
 rotation = 3.14159
@@ -2826,10 +2832,6 @@ texture = SubResource("GradientTexture2D_qtevq")
 [node name="DirectionalParticlesComponent" parent="EnemyHitComponent" instance=ExtResource("4_xxukg")]
 rotation = 3.14159
 texture = SubResource("GradientTexture2D_qtevq")
-
-[node name="BidirectionalKnockbackComponent" parent="EnemyHitComponent" node_paths=PackedStringArray("parent") instance=ExtResource("5_38mkd")]
-rotation = 3.14159
-parent = NodePath("../..")
 
 [node name="HurtboxComponent" parent="." node_paths=PackedStringArray("parryForgivenesTimer", "health_componnet") instance=ExtResource("2_hn6pj")]
 unique_name_in_owner = true
@@ -3684,7 +3686,7 @@ occluder_light_mask = 0
 
 [node name="ParryIntercepterComponent" parent="." node_paths=PackedStringArray("hurtBoxToIntercept", "efects", "parent", "sounds") instance=ExtResource("28_7xl6g")]
 hurtBoxToIntercept = NodePath("../HurtboxComponent")
-efects = [NodePath("../WeaponDislocator/WeaponSprite/HitFlashComponent"), NodePath("HitParticles"), NodePath("ParryParticles"), NodePath("PointLight2D"), NodePath("ParryExplotion")]
+efects = [NodePath("../WeaponDislocator/WeaponSprite/HitFlashComponent"), NodePath("HitParticles"), NodePath("ParryParticles"), NodePath("PointLight2D"), NodePath("ParryExplotion"), NodePath("BigStaggerEffect")]
 parent = NodePath("..")
 sounds = [NodePath("ParrySound"), NodePath("ParrySound2")]
 
@@ -3710,6 +3712,7 @@ process_material = SubResource("ParticleProcessMaterial_3xn0i")
 script = ExtResource("29_tbcwx")
 
 [node name="PointLight2D" type="PointLight2D" parent="ParryIntercepterComponent"]
+visible = false
 color = Color(0, 0, 0, 1)
 energy = 0.0
 texture = SubResource("GradientTexture2D_b4yi8")
@@ -3770,6 +3773,11 @@ script = ExtResource("33_ntv7t")
 libraries = {
 &"": SubResource("AnimationLibrary_w7p1b")
 }
+
+[node name="BigStaggerEffect" parent="ParryIntercepterComponent" node_paths=PackedStringArray("parent") instance=ExtResource("86_rlc46")]
+material = SubResource("ShaderMaterial_es2bh")
+scale = Vector2(4, 4)
+parent = NodePath("../..")
 
 [node name="ParrySound" type="AudioStreamPlayer" parent="ParryIntercepterComponent"]
 stream = ExtResource("56_qavs0")
@@ -3935,6 +3943,9 @@ target_position = Vector2(2, 0)
 [connection signal="death" from="HealthComponent" to="WeaponStateMachine" method="_on_health_component_death"]
 [connection signal="death" from="HealthComponent" to="PlayerUI" method="_on_health_component_death"]
 [connection signal="hazard" from="HealthComponent" to="." method="_on_health_component_hazard"]
+[connection signal="hit" from="HealthComponent" to="." method="_on_health_component_hit"]
+[connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackLeft" to="." method="_on_attack_left_area_entered"]
+[connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackRight" to="." method="_on_attack_right_area_entered"]
 [connection signal="area_entered" from="WeaponDislocator/WeaponSprite/AttackDown" to="." method="_on_attack_down_area_entered"]
 [connection signal="animation_finished" from="WeaponAnimator" to="WeaponStateMachine/SwapSides" method="_on_weapon_animator_animation_finished"]
 [connection signal="timeout" from="RespawnTimer" to="." method="_on_respawn_timer_timeout"]

@@ -3,14 +3,11 @@ class_name RemnantCrab
 
 
 func _on_state_machine_state_switched(prevState: State, newState: State) -> void:
-	print(newState.name)
 	if newState.name == "StompRight":
 		%Legs.flip_h = true
 	if prevState:
 		if prevState.name == "StompRight":
 			%Legs.flip_h = false
-	#if prevState:
-		#print(prevState.name)
 
 func _ready() -> void:
 	%HeartAnimator.play("Beat")
@@ -105,11 +102,19 @@ func shakeScreen(amount : float = 5.0):
 		Game.camera.set_min_shake(amount)
 
 
+func kill():
+	healthComponent.kill()
+
 func makeBlackHoleSafe():
 	%BlackHoleColorChanger.play("Safe")
 
 func makeBlackHoleDangerous():
 	%BlackHoleColorChanger.play("Dangerous")
+
+func staggerEffect():
+	%BigStaggerEffect.effect()
+	Game.freezeFrame(0.1)
+	Game.shakeCameraLittleGame(10.0)
 
 func _on_jump_slam_got_parried(a : Attack) -> void:
 	if $StateMachine.current_state.name == "Jump":
@@ -127,6 +132,7 @@ func _on_health_component_on_lock_hit(lockName : String) -> void:
 		%StateMachine.switchStates("PhaseSwitch")
 		%StateMachine.switchPhases()
 		$StateMachine/Idle.nextStates.clear()
+		staggerEffect()
 
 
 func _on_health_component_hit(attack: Attack) -> void:

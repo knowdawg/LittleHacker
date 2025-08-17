@@ -2998,8 +2998,7 @@ follow = NodePath("..")
 [node name="Explosion" type="AnimatedSprite2D" parent="GlobalPositionSetterComponent"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_856in")
-animation = &"Explode"
-frame = 30
+animation = &"Hide"
 frame_progress = 1.0
 offset = Vector2(3, -5)
 

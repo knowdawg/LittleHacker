@@ -37,6 +37,7 @@ func update(_delta):
 	#nextStates.append("StompLeft")
 	#nextStates.append("Chase")
 	#nextStates.append("PhaseSwitch")
+	#nextStates.append("Death")
 	#return
 	
 	if sm.phase == 2:

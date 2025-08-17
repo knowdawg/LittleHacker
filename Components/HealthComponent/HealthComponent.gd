@@ -10,6 +10,7 @@ var health : float
 var weakness : float = 0.0
 
 @export var locked = false
+@export var dieOnZeroHealth : bool = true
 
 var dead : bool = false
 signal death(attack : Attack)
@@ -50,7 +51,12 @@ func set_weakness(val : float):
 	if val > MAX_WEAKNESS:
 		weakness = MAX_WEAKNESS
 	else:
-		weakness = val
+		if health <= 0.0: #Double Weakness Values when at 0 or less health
+			var d = val - weakness
+			if d > 0.0:
+				weakness += 2.0 * d
+		else:
+			weakness = val
 
 func damage(attack : Attack):
 	if attack.isGrabAttack:
@@ -58,13 +64,14 @@ func damage(attack : Attack):
 	if locked == true:
 		#can put in a resource / class that can be changed / created as I wish
 		return
-	if health <= 0:
+	if health <= 0 and dieOnZeroHealth:
 		return
 	
 	if attack.isHazard and !isPlayerHealth:
 		set_health(0)
 	else:
 		set_health(health - attack.attack_damage)
+	
 	set_weakness(weakness + attack.weakness_damage)
 	
 	hit.emit(attack)
@@ -72,7 +79,7 @@ func damage(attack : Attack):
 	if attack.isHazard:
 		hazard.emit(attack)
 	
-	if health <= 0:
+	if health <= 0 and dieOnZeroHealth:
 		dead = true
 		death.emit(attack)
 	

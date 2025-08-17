@@ -1,0 +1,152 @@
+[gd_scene load_steps=14 format=3 uid="uid://dw0pl76cdbwc7"]
+
+[ext_resource type="Shader" uid="uid://bwtnrv43ddv4c" path="res://Assets/Shaders/Effects/big_stagger_effect.gdshader" id="1_rcw8i"]
+[ext_resource type="Script" uid="uid://bp1frumnaliav" path="res://Components/BigStagger/big_stagger_effect.gd" id="2_rcw8i"]
+
+[sub_resource type="Gradient" id="Gradient_o5dyx"]
+offsets = PackedFloat32Array(0.52381, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rcw8i"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ot2uj"]
+height = 64
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = SubResource("Gradient_o5dyx")
+noise = SubResource("FastNoiseLite_rcw8i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gf278"]
+resource_local_to_scene = true
+shader = ExtResource("1_rcw8i")
+shader_parameter/image = SubResource("NoiseTexture2D_ot2uj")
+shader_parameter/rotations = 3.0
+shader_parameter/shrinkSpeed = -0.2
+shader_parameter/roationSpeed = 0.1
+shader_parameter/shreekSpeed = 1.1
+shader_parameter/resolution = Vector2(128, 128)
+shader_parameter/progress = 1.0
+
+[sub_resource type="Gradient" id="Gradient_fwerg"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_o5dyx"]
+gradient = SubResource("Gradient_fwerg")
+width = 16
+height = 16
+
+[sub_resource type="Gradient" id="Gradient_rcw8i"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0.28481, 1)
+colors = PackedColorArray(1, 1, 1, 0.588235, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ot2uj"]
+gradient = SubResource("Gradient_rcw8i")
+width = 32
+height = 32
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
+
+[sub_resource type="Animation" id="Animation_o5dyx"]
+resource_name = "Effect"
+length = 0.4
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.2, 0.6, 0.65, 1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 0
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0.2, 0.2), Vector2(0.4, 0.4), Vector2(0.45, 0.45), Vector2(0.46, 0.46)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rcw8i"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:material:shader_parameter/progress")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.2, 0.2)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ot2uj"]
+_data = {
+&"Effect": SubResource("Animation_o5dyx"),
+&"RESET": SubResource("Animation_rcw8i")
+}
+
+[node name="BigStaggerEffect" type="Sprite2D"]
+material = SubResource("ShaderMaterial_gf278")
+scale = Vector2(8, 8)
+texture = SubResource("GradientTexture2D_o5dyx")
+script = ExtResource("2_rcw8i")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+scale = Vector2(0.2, 0.2)
+texture = SubResource("GradientTexture2D_ot2uj")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ot2uj")
+}

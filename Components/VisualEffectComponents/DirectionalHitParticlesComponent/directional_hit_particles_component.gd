@@ -2,6 +2,13 @@ extends GPUParticles2D
 
 @export var omniDirectional : bool = true
 
+@export_group("TriggerOnHit")
+@export var healthComponent : HealthComponent
+
+func _ready() -> void:
+	if healthComponent:
+		healthComponent.hit.connect(hitEfect)
+
 func hitEfect(attack : Attack):
 	restart()
 	if omniDirectional:
