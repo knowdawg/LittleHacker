@@ -9,7 +9,9 @@ uniform float shreekSpeed : hint_range(-25, 25.0) = 1.1;
 
 uniform vec2 resolution;
 
-uniform float progress : hint_range(0.0, 1.0);
+uniform float progress : hint_range(-1.0, 1.0) = 0.0;
+
+uniform sampler2D grad;
 
 vec2 toPolar(vec2 cartesian){
 	float distance = length(cartesian);
@@ -30,6 +32,7 @@ void fragment() {
 	vec4 c = vec4(0.0, 0.0, 0.0, 1.0);
 
 	vec4 t = texture(image, vec2(polarUV.x + progress * roationSpeed, polarUV.y + progress * shrinkSpeed));
+	float tval = t.a;
 	t.a -= dis * 1.4;
 
 	float val = abs(sin(dis - progress * shreekSpeed));
@@ -38,6 +41,7 @@ void fragment() {
 
 
 	c = t;
+	c *= texture(grad, vec2(tval));
 
-	COLOR = c;
+	COLOR *= c;
 }

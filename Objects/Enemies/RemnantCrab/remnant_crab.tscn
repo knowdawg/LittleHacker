@@ -1,4 +1,4 @@
-[gd_scene load_steps=180 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=194 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -12,6 +12,7 @@
 [ext_resource type="PackedScene" uid="uid://cnqya0851pype" path="res://Components/HurtboxComponent/Hurtbox_component.tscn" id="7_2ujic"]
 [ext_resource type="PackedScene" uid="uid://cofe7mw4q1kr1" path="res://Components/ShockwaveComponent/shockwaveComponent.tscn" id="8_1qnwx"]
 [ext_resource type="Script" uid="uid://bkbvcn61p04ge" path="res://Classes/GenericStates/GenericAttackState.gd" id="8_5j67f"]
+[ext_resource type="Texture2D" uid="uid://d0gljjs0ic3gl" path="res://Assets/Sprites/Noises/BigStaggerNoise.tres" id="8_6uj3i"]
 [ext_resource type="Shader" uid="uid://0tvivqlcrpgl" path="res://Assets/Shaders/Filters/Shockwave.gdshader" id="8_8od5u"]
 [ext_resource type="PackedScene" uid="uid://c80slj0a6d2vi" path="res://Components/EnemyHeathbar/enemy_heathbar.tscn" id="8_cbi2v"]
 [ext_resource type="Shader" uid="uid://cuwb5rwdjiv7w" path="res://Assets/Shaders/Textures/LaserSumOfSines.gdshader" id="8_fp8yd"]
@@ -64,6 +65,7 @@
 [ext_resource type="AudioStream" uid="uid://tabkl2xjddd8" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit5.wav" id="57_fr5br"]
 [ext_resource type="AudioStream" uid="uid://dsgs4x2l2v0qq" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabBoneHit.wav" id="58_vjc32"]
 [ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="59_vf400"]
+[ext_resource type="AudioStream" uid="uid://cf2ymbmoxwoyx" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabStep.wav" id="61_61qot"]
 [ext_resource type="AudioStream" uid="uid://d0157jxu2ovkd" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabJumpSlam.wav" id="61_fr5br"]
 [ext_resource type="AudioStream" uid="uid://cs7idcndgv3ap" path="res://Assets/Audio/SoundEffects/RemnantCrab/TeethShatter.wav" id="61_wbp0r"]
 [ext_resource type="AudioStream" uid="uid://baa145llsbpfh" path="res://Assets/Audio/SoundEffects/RemnantCrab/SmallSlam.wav" id="62_eflyl"]
@@ -72,6 +74,10 @@
 [ext_resource type="AudioStream" uid="uid://t7gqimpc6r6q" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabLaugh.wav" id="64_xhvvt"]
 [ext_resource type="AudioStream" uid="uid://dqphoexq3gihn" path="res://Assets/Audio/SoundEffects/RemnantCrab/TeethDrop.wav" id="65_4bkfm"]
 [ext_resource type="AudioStream" uid="uid://jxfv7dq33w4d" path="res://Assets/Audio/SoundEffects/RemnantCrab/Teeth.wav" id="66_qj3xi"]
+[ext_resource type="AudioStream" uid="uid://dyg1tpqiyovao" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabPreSlamBreathIn.wav" id="68_01wlv"]
+[ext_resource type="AudioStream" uid="uid://bcs4sk0ik7q7v" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSlamExhale.wav" id="69_gyq3p"]
+[ext_resource type="AudioStream" uid="uid://di1gpnkauf1j1" path="res://Assets/Audio/SoundEffects/RemnantCrab/GatherRocks.wav" id="70_l1akb"]
+[ext_resource type="AudioStream" uid="uid://bimqimy60kiw1" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleBreath.wav" id="72_h3o4s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
 size = Vector2(47, 19)
@@ -87,6 +93,65 @@ colors = PackedColorArray(1, 1, 1, 1)
 gradient = SubResource("Gradient_pks7v")
 width = 2
 height = 2
+
+[sub_resource type="Gradient" id="Gradient_6uj3i"]
+colors = PackedColorArray(0.478431, 0.282353, 0.254902, 0, 0.870588, 0.619608, 0.254902, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_h3o4s"]
+gradient = SubResource("Gradient_6uj3i")
+width = 8
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_h3o4s"]
+shader = ExtResource("48_peg4x")
+shader_parameter/image = ExtResource("8_6uj3i")
+shader_parameter/rotations = 2.0
+shader_parameter/shrinkSpeed = -0.2
+shader_parameter/roationSpeed = -1.0
+shader_parameter/shreekSpeed = 1.1
+shader_parameter/resolution = Vector2(64, 64)
+shader_parameter/progress = 1.0
+shader_parameter/grad = SubResource("GradientTexture1D_h3o4s")
+
+[sub_resource type="Gradient" id="Gradient_61qot"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_rycj0"]
+gradient = SubResource("Gradient_61qot")
+width = 8
+height = 8
+
+[sub_resource type="Gradient" id="Gradient_rycj0"]
+offsets = PackedFloat32Array(0.0179211, 0.623656)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_it3bd"]
+seed = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_dknms"]
+height = 64
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = SubResource("Gradient_rycj0")
+noise = SubResource("FastNoiseLite_it3bd")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6uj3i"]
+shader = ExtResource("48_peg4x")
+shader_parameter/image = SubResource("NoiseTexture2D_dknms")
+shader_parameter/rotations = 3.0
+shader_parameter/shrinkSpeed = -0.2
+shader_parameter/roationSpeed = 1.49012e-07
+shader_parameter/shreekSpeed = 1.1
+shader_parameter/resolution = Vector2(76.8, 44.8)
+shader_parameter/progress = 4.75e-08
+shader_parameter/grad = SubResource("GradientTexture1D_h3o4s")
+
+[sub_resource type="Gradient" id="Gradient_h3o4s"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_61qot"]
+gradient = SubResource("Gradient_h3o4s")
 
 [sub_resource type="Gradient" id="Gradient_cm20j"]
 offsets = PackedFloat32Array(0, 0.429348, 0.798913)
@@ -2288,7 +2353,7 @@ tracks/8/keys = {
 [sub_resource type="Animation" id="Animation_1ai65"]
 resource_name = "HeadSlam"
 length = 2.2
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -2491,6 +2556,118 @@ tracks/14/keys = {
 "args": [],
 "method": &"playSound"
 }]
+}
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/PreSlamBreath")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/SmallSlamExhale")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Sounds/GatherRocks:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Sprites/RockSuckInLeft:material:shader_parameter/progress")
+tracks/18/interp = 0
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 0.714286, 0.43, 0.142857, -0.142857, -0.4, -1.0]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Sprites/RockSuckInLeft:position")
+tracks/19/interp = 0
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(-24, -11), Vector2(-21, -13), Vector2(-16, -17), Vector2(-14, -19), Vector2(-15, -18), Vector2(-16, -18)]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Sprites/RockSuckInRigth:position")
+tracks/20/interp = 0
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(24, -11), Vector2(21, -12), Vector2(16, -17), Vector2(14, -19), Vector2(15, -18), Vector2(16, -18)]
+}
+tracks/21/type = "value"
+tracks/21/imported = false
+tracks/21/enabled = true
+tracks/21/path = NodePath("Sprites/RightRockThrow/Sprite2D:material:shader_parameter/progress")
+tracks/21/interp = 0
+tracks/21/loop_wrap = true
+tracks/21/keys = {
+"times": PackedFloat32Array(0, 1, 1.05, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-1.0, 0.5, 0.6, -1.0]
+}
+tracks/22/type = "value"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Sprites/RightRockThrow:visible")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Sprites/LeftRockThrow:visible")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [false, true, false]
 }
 
 [sub_resource type="Animation" id="Animation_2ujic"]
@@ -3061,6 +3238,20 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(0, 1), Vector2(0, -2), Vector2(0, 0), Vector2(0, 2)]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/Step")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_oeqg8"]
@@ -4171,12 +4362,120 @@ tracks/40/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/41/type = "value"
+tracks/41/imported = false
+tracks/41/enabled = true
+tracks/41/path = NodePath("Sounds/GatherRocks:playing")
+tracks/41/interp = 1
+tracks/41/loop_wrap = true
+tracks/41/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/42/type = "value"
+tracks/42/imported = false
+tracks/42/enabled = true
+tracks/42/path = NodePath("Sprites/RockSuckInLeft:material:shader_parameter/progress")
+tracks/42/interp = 1
+tracks/42/loop_wrap = true
+tracks/42/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+tracks/43/type = "value"
+tracks/43/imported = false
+tracks/43/enabled = true
+tracks/43/path = NodePath("Sprites/RockSuckInLeft:position")
+tracks/43/interp = 1
+tracks/43/loop_wrap = true
+tracks/43/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-24, -11)]
+}
+tracks/44/type = "value"
+tracks/44/imported = false
+tracks/44/enabled = true
+tracks/44/path = NodePath("Sprites/RockSuckInRigth:position")
+tracks/44/interp = 1
+tracks/44/loop_wrap = true
+tracks/44/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, -10)]
+}
+tracks/45/type = "value"
+tracks/45/imported = false
+tracks/45/enabled = true
+tracks/45/path = NodePath("Sprites/RightRockThrow/Sprite2D:material:shader_parameter/progress")
+tracks/45/interp = 1
+tracks/45/loop_wrap = true
+tracks/45/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4.75e-08]
+}
+tracks/46/type = "value"
+tracks/46/imported = false
+tracks/46/enabled = true
+tracks/46/path = NodePath("Sprites/RightRockThrow:visible")
+tracks/46/interp = 1
+tracks/46/loop_wrap = true
+tracks/46/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/47/type = "value"
+tracks/47/imported = false
+tracks/47/enabled = true
+tracks/47/path = NodePath("Sprites/LeftRockThrow:visible")
+tracks/47/interp = 1
+tracks/47/loop_wrap = true
+tracks/47/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/48/type = "value"
+tracks/48/imported = false
+tracks/48/enabled = true
+tracks/48/path = NodePath("Sounds/BlackHoleSuck:playing")
+tracks/48/interp = 1
+tracks/48/loop_wrap = true
+tracks/48/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/49/type = "value"
+tracks/49/imported = false
+tracks/49/enabled = true
+tracks/49/path = NodePath("Sounds/BlackHoleBreath:playing")
+tracks/49/interp = 1
+tracks/49/loop_wrap = true
+tracks/49/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
 length = 0.5
 loop_mode = 1
-step = 0.1
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -4271,6 +4570,34 @@ tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
 "times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/Step")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/TeethDrop")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [],
@@ -5358,6 +5685,44 @@ tracks/10/keys = {
 "update": 1,
 "values": [true, false]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sounds/BlackHoleSuck:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/BlackHoleBreath:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.05),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/Step")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_k1yg2"]
 resource_name = "Threaten"
@@ -5558,23 +5923,10 @@ height = 41.188
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fkjw2"]
 size = Vector2(52, 139)
 
-[sub_resource type="Gradient" id="Gradient_o5dyx"]
-offsets = PackedFloat32Array(0.361111, 1)
-colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_rcw8i"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ot2uj"]
-height = 64
-seamless = true
-seamless_blend_skirt = 0.3
-color_ramp = SubResource("Gradient_o5dyx")
-noise = SubResource("FastNoiseLite_rcw8i")
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_js2i4"]
 resource_local_to_scene = true
 shader = ExtResource("48_peg4x")
-shader_parameter/image = SubResource("NoiseTexture2D_ot2uj")
+shader_parameter/image = ExtResource("8_6uj3i")
 shader_parameter/rotations = 3.0
 shader_parameter/shrinkSpeed = -0.2
 shader_parameter/roationSpeed = 0.1
@@ -5649,7 +6001,7 @@ position = Vector2(0, 23)
 texture = ExtResource("2_rt31b")
 offset = Vector2(0, -23)
 hframes = 79
-frame = 24
+frame = 39
 
 [node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 position = Vector2(0, 1)
@@ -5668,15 +6020,16 @@ lockBottom = true
 
 [node name="Skulls" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
+position = Vector2(0, 1)
 texture = ExtResource("4_2ujic")
 hframes = 65
-frame = 24
+frame = 31
 
 [node name="Arms(Head)" type="Sprite2D" parent="Sprites/Skulls"]
 show_behind_parent = true
 texture = ExtResource("2_vx8lb")
 hframes = 51
-frame = 24
+frame = 15
 
 [node name="HurtboxComponent" parent="Sprites/Skulls" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_2ujic")]
 collision_layer = 8
@@ -5691,6 +6044,44 @@ shape = SubResource("CircleShape2D_jvtmt")
 [node name="DirectionalParticlesComponent" parent="Sprites/Skulls" node_paths=PackedStringArray("healthComponent") instance=ExtResource("9_4nfid")]
 texture = SubResource("GradientTexture2D_4nfid")
 healthComponent = NodePath("../../../GeneralComponents/HealthComponent")
+
+[node name="RockSuckInLeft" type="Sprite2D" parent="Sprites"]
+material = SubResource("ShaderMaterial_h3o4s")
+position = Vector2(-24, -11)
+scale = Vector2(8, 8)
+texture = SubResource("GradientTexture2D_rycj0")
+
+[node name="RockSuckInRigth" type="Sprite2D" parent="Sprites"]
+material = SubResource("ShaderMaterial_h3o4s")
+position = Vector2(24, -10)
+rotation = 1.5708
+scale = Vector2(8, 8)
+texture = SubResource("GradientTexture2D_rycj0")
+
+[node name="RightRockThrow" type="Polygon2D" parent="Sprites"]
+visible = false
+clip_children = 1
+position = Vector2(0, 14)
+polygon = PackedVector2Array(23, -13, 24, -13, 24, -12, 26, -12, 26, -11, 28, -11, 28, -10, 30, -10, 30, -9, 31, -9, 31, -8, 33, -8, 33, -7, 35, -7, 35, -6, 36, -6, 36, -5, 38, -5, 38, -4, 40, -4, 40, -3, 42, -3, 42, -2, 44, -2, 44, -1, 45, -1, 45, 0, 47, 0, 47, 1, 49, 1, 49, 2, 51, 2, 51, 3, 52, 3, 52, 4, 54, 4, 54, 5, 56, 5, 56, 6, 58, 6, 58, 7, 60, 7, 60, 8, 62, 8, 62, 9, 31, 9, 31, 6, 30, 6, 30, 3, 29, 3, 29, 0, 28, 0, 28, -2, 27, -2, 27, -5, 26, -5, 26, -7, 25, -7, 25, -9, 24, -9, 24, -11, 23, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites/RightRockThrow"]
+material = SubResource("ShaderMaterial_6uj3i")
+position = Vector2(23, -13)
+scale = Vector2(1.2, 0.7)
+texture = SubResource("GradientTexture2D_61qot")
+
+[node name="LeftRockThrow" type="Polygon2D" parent="Sprites"]
+visible = false
+clip_children = 1
+position = Vector2(0, 14)
+scale = Vector2(-1, 1)
+polygon = PackedVector2Array(23, -13, 24, -13, 24, -12, 26, -12, 26, -11, 28, -11, 28, -10, 30, -10, 30, -9, 31, -9, 31, -8, 33, -8, 33, -7, 35, -7, 35, -6, 36, -6, 36, -5, 38, -5, 38, -4, 40, -4, 40, -3, 42, -3, 42, -2, 44, -2, 44, -1, 45, -1, 45, 0, 47, 0, 47, 1, 49, 1, 49, 2, 51, 2, 51, 3, 52, 3, 52, 4, 54, 4, 54, 5, 56, 5, 56, 6, 58, 6, 58, 7, 60, 7, 60, 8, 62, 8, 62, 9, 31, 9, 31, 6, 30, 6, 30, 3, 29, 3, 29, 0, 28, 0, 28, -2, 27, -2, 27, -5, 26, -5, 26, -7, 25, -7, 25, -9, 24, -9, 24, -11, 23, -11)
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprites/LeftRockThrow"]
+material = SubResource("ShaderMaterial_6uj3i")
+position = Vector2(23, -13)
+scale = Vector2(1.2, 0.7)
+texture = SubResource("GradientTexture2D_61qot")
 
 [node name="HitFlashComponent" parent="Sprites" node_paths=PackedStringArray("node", "healthComponent") instance=ExtResource("8_oara4")]
 typeOFFlash = 1
@@ -5733,6 +6124,7 @@ copy_mode = 2
 unique_name_in_owner = true
 visible = false
 material = SubResource("ShaderMaterial_k1yg2")
+position = Vector2(0, 1)
 scale = Vector2(1e-05, 1e-05)
 texture = SubResource("GradientTexture2D_d6it3")
 
@@ -6425,7 +6817,7 @@ parent = NodePath("../..")
 
 [node name="Sounds" type="Node2D" parent="."]
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+[node name="BlackHoleSuck" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("50_4nfid")
 bus = &"SoundEffects"
 
@@ -6436,6 +6828,7 @@ bus = &"SoundEffects"
 [node name="Phase1Hit" parent="Sounds" instance=ExtResource("52_keupk")]
 unique_name_in_owner = true
 volume_db = -5.0
+bus = &"SoundEffects"
 sounds = Array[AudioStream]([ExtResource("53_evxfn"), ExtResource("54_vjc32"), ExtResource("55_vf400"), ExtResource("56_wbp0r"), ExtResource("57_fr5br")])
 
 [node name="Phase1BoneHit" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -6445,18 +6838,13 @@ bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(0.8, 1.2)
 
-[node name="FootStep" type="AudioStreamPlayer2D" parent="Sounds"]
-max_distance = 100.0
-max_polyphony = 4
-script = ExtResource("59_vf400")
-pitchRange = Vector2(0.8, 1.2)
-
 [node name="Bite" type="AudioStreamPlayer2D" parent="Sounds"]
 unique_name_in_owner = true
 stream = ExtResource("61_wbp0r")
 volume_db = -80.0
 max_distance = 100.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 
 [node name="JumpSlam" type="AudioStreamPlayer2D" parent="Sounds"]
@@ -6475,12 +6863,14 @@ bus = &"SoundEffects"
 stream = ExtResource("62_fr5br")
 max_distance = 100.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 
 [node name="JumpBreath" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("63_unt5d")
 max_distance = 1000.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(1, 1)
 
@@ -6490,6 +6880,7 @@ volume_db = -5.0
 pitch_scale = 1.3
 max_distance = 100.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(1.3, 1.3)
 
@@ -6498,6 +6889,7 @@ stream = ExtResource("65_4bkfm")
 pitch_scale = 0.8
 max_distance = 100.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(0.7, 0.8)
 
@@ -6506,13 +6898,56 @@ stream = ExtResource("66_qj3xi")
 volume_db = 10.0
 max_distance = 100.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 
 [node name="Teeth" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("66_qj3xi")
+pitch_scale = 0.7
 max_distance = 100.0
 max_polyphony = 4
+bus = &"SoundEffects"
 script = ExtResource("59_vf400")
+pitchRange = Vector2(0.75, 0.85)
+
+[node name="PreSlamBreath" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("68_01wlv")
+max_distance = 100.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+
+[node name="SmallSlamExhale" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("69_gyq3p")
+volume_db = 10.0
+max_distance = 100.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+
+[node name="GatherRocks" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("70_l1akb")
+volume_db = 5.0
+max_distance = 100.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+
+[node name="BlackHoleBreath" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("72_h3o4s")
+max_distance = 100.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+
+[node name="Step" parent="Sounds" instance=ExtResource("52_keupk")]
+stream = ExtResource("61_61qot")
+volume_db = -5.0
+max_polyphony = 8
+sounds = Array[AudioStream]([ExtResource("61_61qot")])
 
 [node name="Shockwaves" type="Node2D" parent="."]
 z_index = 100
@@ -6555,7 +6990,7 @@ position = Vector2(0, 23)
 animationSpeed = 2.0
 
 [node name="BackBufferCopy4" type="BackBufferCopy" parent="Shockwaves"]
-position = Vector2(-24, 4.76837e-07)
+position = Vector2(-23, 2.84217e-14)
 scale = Vector2(10, 10)
 copy_mode = 2
 

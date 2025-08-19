@@ -35,10 +35,11 @@ func update(_delta):
 	#nextStates.append("SuckIn")
 	#nextStates.append("Jump")
 	#nextStates.append("StompRight")
-	nextStates.append("HeadSlam")
+	#nextStates.append("HeadSlam")
 	#nextStates.append("Chase")
 	#nextStates.append("PhaseSwitch")
 	#nextStates.append("Death")
+	nextStates.append("Chase")
 	return
 	
 	if sm.phase == 2:

@@ -13,7 +13,7 @@ class_name RemnantCrabStateMachine
 
 
 var phase : int = 1
-enum phase1Attacks {Stomp, Jump, HeadSlam, LazerRun, SuckIn, SpikeFloor}
+enum phase1Attacks {Stomp, Jump, HeadSlam, LazerRun, SuckIn}
 enum phase2Attacks {MassiveLaser, BlackHoleDisk, DoubleHeadSwing, Jump2}
 
 func customReady():
