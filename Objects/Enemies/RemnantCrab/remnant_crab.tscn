@@ -1,4 +1,4 @@
-[gd_scene load_steps=161 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=180 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -54,6 +54,24 @@
 [ext_resource type="PackedScene" uid="uid://chkylrbd78k57" path="res://Components/VisualEffectComponents/trailComponent/trail_component.tscn" id="44_02cj8"]
 [ext_resource type="PackedScene" uid="uid://dw0pl76cdbwc7" path="res://Components/BigStagger/big_stagger_effect.tscn" id="47_h3tgo"]
 [ext_resource type="Shader" uid="uid://bwtnrv43ddv4c" path="res://Assets/Shaders/Effects/big_stagger_effect.gdshader" id="48_peg4x"]
+[ext_resource type="AudioStream" uid="uid://uefqel0bj0y6" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleSuck.wav" id="50_4nfid"]
+[ext_resource type="AudioStream" uid="uid://bfej5o6pxwh01" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabPreStompBreath.wav" id="51_34diw"]
+[ext_resource type="PackedScene" uid="uid://bdtm313ybvdbo" path="res://Components/RandomAudioPlayer/random_audio_player.tscn" id="52_keupk"]
+[ext_resource type="AudioStream" uid="uid://dbvswguv20aa1" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit1.wav" id="53_evxfn"]
+[ext_resource type="AudioStream" uid="uid://db1dxsib68ygh" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit2.wav" id="54_vjc32"]
+[ext_resource type="AudioStream" uid="uid://bg5xsl6wv78yj" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit3.wav" id="55_vf400"]
+[ext_resource type="AudioStream" uid="uid://baq1dyppwmrn2" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit4.wav" id="56_wbp0r"]
+[ext_resource type="AudioStream" uid="uid://tabkl2xjddd8" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit5.wav" id="57_fr5br"]
+[ext_resource type="AudioStream" uid="uid://dsgs4x2l2v0qq" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabBoneHit.wav" id="58_vjc32"]
+[ext_resource type="Script" uid="uid://bpxrwtfbholkc" path="res://Classes/RandomPitchAudio/RandomPitchAudio.gd" id="59_vf400"]
+[ext_resource type="AudioStream" uid="uid://d0157jxu2ovkd" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabJumpSlam.wav" id="61_fr5br"]
+[ext_resource type="AudioStream" uid="uid://cs7idcndgv3ap" path="res://Assets/Audio/SoundEffects/RemnantCrab/TeethShatter.wav" id="61_wbp0r"]
+[ext_resource type="AudioStream" uid="uid://baa145llsbpfh" path="res://Assets/Audio/SoundEffects/RemnantCrab/SmallSlam.wav" id="62_eflyl"]
+[ext_resource type="AudioStream" uid="uid://bligiwtu2g7wa" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSlamBreath.wav" id="62_fr5br"]
+[ext_resource type="AudioStream" uid="uid://mmipumst3eu2" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabJumpBreath.wav" id="63_unt5d"]
+[ext_resource type="AudioStream" uid="uid://t7gqimpc6r6q" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabLaugh.wav" id="64_xhvvt"]
+[ext_resource type="AudioStream" uid="uid://dqphoexq3gihn" path="res://Assets/Audio/SoundEffects/RemnantCrab/TeethDrop.wav" id="65_4bkfm"]
+[ext_resource type="AudioStream" uid="uid://jxfv7dq33w4d" path="res://Assets/Audio/SoundEffects/RemnantCrab/Teeth.wav" id="66_qj3xi"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
 size = Vector2(47, 19)
@@ -1837,9 +1855,12 @@ tracks/10/path = NodePath(".")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(0.3),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.3),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"staggerEffect"
+}, {
 "args": [],
 "method": &"makeBlackHoleDangerous"
 }]
@@ -2431,6 +2452,46 @@ tracks/11/keys = {
 "method": &"shockwave"
 }]
 }
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/TeethDrop")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/SmallSlam:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/TeethLoud")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_2ujic"]
 resource_name = "Idle"
@@ -2604,6 +2665,88 @@ tracks/10/keys = {
 "values": [{
 "args": [],
 "method": &"shockwave"
+}]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sounds/JumpSlam:playing")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/JumpSlamBreath")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/JumpBreath")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/Laugh")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/TeethDrop")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/TeethLoud")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
 }]
 }
 
@@ -2975,7 +3118,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_uhgxb"]
 resource_name = "MassiveLaser"
-length = 6.1
+length = 6.4
 step = 0.1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -2984,7 +3127,7 @@ tracks/0/path = NodePath("Sprites/Legs:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 5.4, 5.5, 5.6, 5.7, 5.8),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 5.4, 5.5, 5.6, 6, 6.1),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [44, 45, 46, 47, 49, 50, 49, 47, 45, 46, 1]
@@ -3032,10 +3175,10 @@ tracks/4/path = NodePath("BlackHoleContainer/BlackHole:position")
 tracks/4/interp = 0
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 5.3, 5.4, 5.5, 5.6, 5.7, 5.8, 5.9, 6),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 5.3, 5.4, 5.5, 5.6, 5.7, 5.9, 6, 6.1, 6.2, 6.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(0, 3), Vector2(0, -2), Vector2(0, -5), Vector2(0, -12), Vector2(0, -15), Vector2(0, -18), Vector2(0, -19), Vector2(0, -19), Vector2(0, -18), Vector2(0, -13), Vector2(0, -6), Vector2(0, 6), Vector2(0, 8), Vector2(0, 4), Vector2(0, -2), Vector2(0, -4)]
+"values": [Vector2(0, 3), Vector2(0, -2), Vector2(0, -5), Vector2(0, -12), Vector2(0, -15), Vector2(0, -18), Vector2(0, -19), Vector2(0, -19), Vector2(0, -18), Vector2(0, -13), Vector2(0, -6), Vector2(0, 15), Vector2(0, 16), Vector2(0, 15), Vector2(0, 13), Vector2(0, 0), Vector2(0, -2), Vector2(0, -4)]
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -3209,6 +3352,53 @@ tracks/13/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [-0.5, -0.5, -10.0, 10.0, 10.0, -0.5, -0.5, -10.0, 10.0, 10.0, -0.5, -0.5, -10.0, 10.0, 10.0, -0.5]
+}
+
+[sub_resource type="Animation" id="Animation_wbp0r"]
+resource_name = "PhantomSkulls"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("BlackHoleContainer/BlackHole:position")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -5), Vector2(0, -8), Vector2(0, -9), Vector2(0, -8), Vector2(0, 17)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"makeBlackHoleDangerous"
+}]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AttackComponents/HeadSlam")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"readyAttack"
+}, {
+"args": [],
+"method": &"disable"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_gi6ip"]
@@ -3945,6 +4135,42 @@ tracks/37/keys = {
 "update": 1,
 "values": [1]
 }
+tracks/38/type = "value"
+tracks/38/imported = false
+tracks/38/enabled = true
+tracks/38/path = NodePath("Sounds/StompSuckIn:playing")
+tracks/38/interp = 1
+tracks/38/loop_wrap = true
+tracks/38/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/39/type = "value"
+tracks/39/imported = false
+tracks/39/enabled = true
+tracks/39/path = NodePath("Sounds/JumpSlam:playing")
+tracks/39/interp = 1
+tracks/39/loop_wrap = true
+tracks/39/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/40/type = "value"
+tracks/40/imported = false
+tracks/40/enabled = true
+tracks/40/path = NodePath("Sounds/SmallSlam:playing")
+tracks/40/interp = 1
+tracks/40/loop_wrap = true
+tracks/40/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -4035,6 +4261,20 @@ tracks/6/keys = {
 "values": [{
 "args": [1.0],
 "method": &"shakeScreen"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sounds/Teeth")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
 }]
 }
 
@@ -4717,6 +4957,58 @@ tracks/12/keys = {
 "method": &"shockwave"
 }]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/StompSuckIn:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/TeethDrop")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/SmallSlam:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/Teeth")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qmox6"]
 resource_name = "StompRight"
@@ -4875,6 +5167,58 @@ tracks/11/keys = {
 "values": [{
 "args": [],
 "method": &"shockwave"
+}]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/StompSuckIn:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/TeethDrop")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/SmallSlam:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/Teeth")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.7),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
 }]
 }
 
@@ -5146,6 +5490,7 @@ _data = {
 &"LaserRun": SubResource("Animation_rt31b"),
 &"LaserRunEnd": SubResource("Animation_oeqg8"),
 &"MassiveLaser": SubResource("Animation_uhgxb"),
+&"PhantomSkulls": SubResource("Animation_wbp0r"),
 &"PhaseTransition": SubResource("Animation_gi6ip"),
 &"RESET": SubResource("Animation_yiftg"),
 &"Run": SubResource("Animation_7y5mw"),
@@ -5304,7 +5649,7 @@ position = Vector2(0, 23)
 texture = ExtResource("2_rt31b")
 offset = Vector2(0, -23)
 hframes = 79
-frame = 1
+frame = 24
 
 [node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 position = Vector2(0, 1)
@@ -5325,7 +5670,7 @@ lockBottom = true
 unique_name_in_owner = true
 texture = ExtResource("4_2ujic")
 hframes = 65
-frame = 39
+frame = 24
 
 [node name="Arms(Head)" type="Sprite2D" parent="Sprites/Skulls"]
 show_behind_parent = true
@@ -5750,7 +6095,7 @@ script = ExtResource("15_jvtmt")
 lockPoints = Dictionary[float, String]({
 50.0: "PhaseTransition"
 })
-MAX_HEALTH = 100.0
+MAX_HEALTH = 200.0
 dieOnZeroHealth = false
 
 [node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_7y5mw")]
@@ -6080,6 +6425,95 @@ parent = NodePath("../..")
 
 [node name="Sounds" type="Node2D" parent="."]
 
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("50_4nfid")
+bus = &"SoundEffects"
+
+[node name="StompSuckIn" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("51_34diw")
+bus = &"SoundEffects"
+
+[node name="Phase1Hit" parent="Sounds" instance=ExtResource("52_keupk")]
+unique_name_in_owner = true
+volume_db = -5.0
+sounds = Array[AudioStream]([ExtResource("53_evxfn"), ExtResource("54_vjc32"), ExtResource("55_vf400"), ExtResource("56_wbp0r"), ExtResource("57_fr5br")])
+
+[node name="Phase1BoneHit" type="AudioStreamPlayer2D" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("58_vjc32")
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(0.8, 1.2)
+
+[node name="FootStep" type="AudioStreamPlayer2D" parent="Sounds"]
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+pitchRange = Vector2(0.8, 1.2)
+
+[node name="Bite" type="AudioStreamPlayer2D" parent="Sounds"]
+unique_name_in_owner = true
+stream = ExtResource("61_wbp0r")
+volume_db = -80.0
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+
+[node name="JumpSlam" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("61_fr5br")
+volume_db = 12.0
+max_distance = 200.0
+bus = &"SoundEffects"
+
+[node name="SmallSlam" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("62_eflyl")
+volume_db = 5.0
+max_distance = 200.0
+bus = &"SoundEffects"
+
+[node name="JumpSlamBreath" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("62_fr5br")
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+
+[node name="JumpBreath" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("63_unt5d")
+max_distance = 1000.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+
+[node name="Laugh" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("64_xhvvt")
+volume_db = -5.0
+pitch_scale = 1.3
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1.3, 1.3)
+
+[node name="TeethDrop" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("65_4bkfm")
+pitch_scale = 0.8
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+pitchRange = Vector2(0.7, 0.8)
+
+[node name="TeethLoud" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("66_qj3xi")
+volume_db = 10.0
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+
+[node name="Teeth" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("66_qj3xi")
+max_distance = 100.0
+max_polyphony = 4
+script = ExtResource("59_vf400")
+
 [node name="Shockwaves" type="Node2D" parent="."]
 z_index = 100
 
@@ -6129,6 +6563,7 @@ copy_mode = 2
 title = "Carcass Gourmet"
 bossName = "Remnant Crab"
 
+[connection signal="frame_changed" from="Sprites/Skulls" to="." method="_on_skulls_frame_changed"]
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]
 [connection signal="hit" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_hit"]
 [connection signal="onLockHit" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_on_lock_hit"]

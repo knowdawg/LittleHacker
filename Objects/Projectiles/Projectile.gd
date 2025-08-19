@@ -10,14 +10,25 @@ var flipH : bool = false
 var flipV : bool = false
 @export var friendly = false
 
+var healthComponent : HealthComponent #For making the projectiles build up weakness
+@export var attackComponents : Array[AttackComponent]
+
 @export_group("AttackComponentDelay")
 @export var delay : float = 0.0
 @export var delayTimer : Timer
 @export var attackComponent : AttackComponent
 
 
+
 func _ready() -> void:
 	delayAttackComponent()
+	for a in attackComponents:
+		if healthComponent:
+			a.healthComponent = healthComponent
+	customReady()
+
+func customReady():
+	pass
 
 func delayAttackComponent() -> void:
 	if !attackComponent:

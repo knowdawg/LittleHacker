@@ -2820,10 +2820,9 @@ isPlayerHealth = true
 MAX_HEALTH = 5.0
 MAX_WEAKNESS = 0.0
 
-[node name="EnemyHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects", "knockbackComponent") instance=ExtResource("3_nr8gu")]
+[node name="EnemyHitComponent" parent="." node_paths=PackedStringArray("healthComponent", "hitEffects") instance=ExtResource("3_nr8gu")]
 healthComponent = NodePath("../HealthComponent")
 hitEffects = [NodePath("HitParticles"), NodePath("DirectionalParticlesComponent")]
-knockbackComponent = NodePath("")
 
 [node name="HitParticles" parent="EnemyHitComponent" instance=ExtResource("3_412y7")]
 rotation = 3.14159

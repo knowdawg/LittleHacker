@@ -138,6 +138,8 @@ func _on_health_component_on_lock_hit(lockName : String) -> void:
 func _on_health_component_hit(attack: Attack) -> void:
 	var t : Tween = create_tween()
 	if %StateMachine.phase == 1:
+		%Phase1Hit.playSound()
+		%Phase1BoneHit.playSound()
 		%Skulls.offset = attack.knockback_vector * 10.0
 		t.tween_property(%Skulls, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)
 	
@@ -150,3 +152,10 @@ func _on_health_component_hit(attack: Attack) -> void:
 var legsBroken : bool = false
 func _on_break_legs_executed() -> void:
 	legsBroken = true
+
+
+var biteFrames : Array[int] = [17, 32]
+func _on_skulls_frame_changed() -> void:
+	for i in biteFrames:
+		if %Skulls.frame == i:
+			%Bite.playSound()

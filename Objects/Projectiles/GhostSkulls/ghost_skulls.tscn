@@ -1,0 +1,257 @@
+[gd_scene load_steps=15 format=3 uid="uid://c26qqa5hfqagh"]
+
+[ext_resource type="Script" uid="uid://bgyw0r1dt0p36" path="res://ghost_skulls.gd" id="1_b6q0s"]
+[ext_resource type="Shader" uid="uid://bvpghrvhnudmx" path="res://Assets/Shaders/Filters/NoiseFade.gdshader" id="2_fa77p"]
+[ext_resource type="Texture2D" uid="uid://c4ti7p1vyjtsq" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabGhostSkullSmall.png" id="2_sklbw"]
+[ext_resource type="Texture2D" uid="uid://c36qjkptswedl" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabGhostSkullBig.png" id="3_6lri1"]
+[ext_resource type="Texture2D" uid="uid://5r2igt8g1n0s" path="res://Assets/Sprites/Noises/BaseNoise.tres" id="3_ebqwy"]
+[ext_resource type="PackedScene" uid="uid://basi3gkp6u5gf" path="res://Components/AttackComponent/attack_component.tscn" id="4_sklbw"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3rvux"]
+shader = ExtResource("2_fa77p")
+shader_parameter/noise = ExtResource("3_ebqwy")
+shader_parameter/hFrames = 7.0
+shader_parameter/spriteRes = Vector2(32, 32)
+shader_parameter/progess = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_prr3p"]
+shader = ExtResource("2_fa77p")
+shader_parameter/noise = ExtResource("3_ebqwy")
+shader_parameter/hFrames = 7.0
+shader_parameter/spriteRes = Vector2(32, 32)
+shader_parameter/progess = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1w3v6"]
+shader = ExtResource("2_fa77p")
+shader_parameter/noise = ExtResource("3_ebqwy")
+shader_parameter/hFrames = 7.0
+shader_parameter/spriteRes = Vector2(32, 32)
+shader_parameter/progess = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sklbw"]
+radius = 8.0
+
+[sub_resource type="Animation" id="Animation_ebqwy"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-7, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(8, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Big:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Left:material:shader_parameter/progess")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Right:material:shader_parameter/progess")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Big:material:shader_parameter/progess")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_fa77p"]
+resource_name = "ShowGhostSkulls"
+length = 0.8
+step = 0.1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Left:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-7, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right:position:x")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(8, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "bezier"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Big:position:x")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/3/type = "bezier"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Left:material:shader_parameter/progess")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/4/type = "bezier"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Right:material:shader_parameter/progess")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.5, 0.8)
+}
+tracks/5/type = "bezier"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Big:material:shader_parameter/progess")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"handle_modes": PackedInt32Array(0, 0),
+"points": PackedFloat32Array(1, -0.25, 0, 0.25, 0, 0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 0.3)
+}
+
+[sub_resource type="Animation" id="Animation_3rvux"]
+resource_name = "FireGhostSkulls"
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Big:material:shader_parameter/progess")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Right:material:shader_parameter/progess")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Left:material:shader_parameter/progess")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ebqwy"]
+_data = {
+&"FireGhostSkulls": SubResource("Animation_3rvux"),
+&"RESET": SubResource("Animation_ebqwy"),
+&"ShowGhostSkulls": SubResource("Animation_fa77p")
+}
+
+[node name="GhostSkulls" type="Node2D"]
+texture_filter = 1
+script = ExtResource("1_b6q0s")
+
+[node name="Left" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_3rvux")
+position = Vector2(-7, 3)
+texture = ExtResource("2_sklbw")
+hframes = 7
+
+[node name="Right" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_prr3p")
+position = Vector2(8, 3)
+texture = ExtResource("2_sklbw")
+flip_h = true
+hframes = 7
+
+[node name="Big" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_1w3v6")
+position = Vector2(1, -2)
+texture = ExtResource("3_6lri1")
+hframes = 7
+
+[node name="SkullBite" parent="." node_paths=PackedStringArray("collisionShape") instance=ExtResource("4_sklbw")]
+collision_mask = 4
+collisionShape = NodePath("CollisionShape2D")
+attack_damage = 1.0
+isFullAttack = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SkullBite"]
+visible = false
+shape = SubResource("CircleShape2D_sklbw")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_ebqwy")
+}
