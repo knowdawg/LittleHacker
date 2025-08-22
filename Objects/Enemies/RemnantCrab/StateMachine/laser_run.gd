@@ -25,6 +25,8 @@ var curState : state = state.ToWall
 @export var maxSpeed : float = 100.0
 @export var acceleration : float = 200.0
 
+@export var audio : AudioLooper
+
 var t = 0.0
 var length = 2.0
 var dir := Vector2.ZERO
@@ -51,6 +53,7 @@ func update_physics(delta):
 				parent.makeBlackHoleDangerous()
 				laserAnimator.play("PrepLaser")
 				curState = state.StartLaser
+				return
 		state.StartLaser:
 			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 200.0)
 			
@@ -58,8 +61,10 @@ func update_physics(delta):
 			
 			if abs(runVelocity.x) <= 0.1:
 				laserAnimator.play("StartLaser")
+				audio.playSound()
 				curState = state.FirstRun
 				laserAttackComponent.readyAttack()
+				return
 			
 		state.FirstRun:
 			dir = Vector2(-1.0, 0.0)
@@ -70,6 +75,7 @@ func update_physics(delta):
 			
 			if leftRaycast.is_colliding():
 				curState = state.SecoundRun
+				return
 		state.SecoundRun:
 			dir = Vector2(1.0, 0.0)
 			runVelocity += dir * acceleration * delta
@@ -79,6 +85,7 @@ func update_physics(delta):
 			
 			if rightRaycast.is_colliding():
 				curState = state.FinishUp
+				return
 		state.FinishUp:
 			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 200.0)
 			
@@ -89,6 +96,7 @@ func update_physics(delta):
 				laserAttackComponent.disable()
 				laserAnimator.play("EndLaser")
 				animator.play("LaserRunEnd")
+				audio.forceEnd()
 				curState = state.EndLaser
 				endLaserTimer = 0.0
 				parent.makeBlackHoleSafe()

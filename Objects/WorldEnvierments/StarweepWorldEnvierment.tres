@@ -1,7 +1,7 @@
 [gd_resource type="Environment" load_steps=3 format=3 uid="uid://dmo71rg36b37b"]
 
 [sub_resource type="Gradient" id="Gradient_fhqyc"]
-colors = PackedColorArray(0, 0, 0.0392157, 1, 1, 0.941176, 0.901961, 1)
+colors = PackedColorArray(0.0901961, 0.0352941, 0.0588235, 1, 1, 0.941176, 0.862745, 1)
 
 [sub_resource type="GradientTexture1D" id="GradientTexture1D_cbcc5"]
 gradient = SubResource("Gradient_fhqyc")
@@ -9,9 +9,8 @@ gradient = SubResource("Gradient_fhqyc")
 [resource]
 background_mode = 3
 tonemap_mode = 1
-tonemap_exposure = 0.6
-tonemap_white = 0.6
-glow_enabled = true
+tonemap_exposure = 0.8
+tonemap_white = 0.7
 glow_intensity = 2.0
 glow_strength = 0.3
 glow_bloom = 0.5

@@ -1,4 +1,4 @@
-[gd_scene load_steps=194 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=198 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -58,6 +58,7 @@
 [ext_resource type="AudioStream" uid="uid://uefqel0bj0y6" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleSuck.wav" id="50_4nfid"]
 [ext_resource type="AudioStream" uid="uid://bfej5o6pxwh01" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabPreStompBreath.wav" id="51_34diw"]
 [ext_resource type="PackedScene" uid="uid://bdtm313ybvdbo" path="res://Components/RandomAudioPlayer/random_audio_player.tscn" id="52_keupk"]
+[ext_resource type="AudioStream" uid="uid://b6ruorywjipe8" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserLoop.wav" id="52_rycj0"]
 [ext_resource type="AudioStream" uid="uid://dbvswguv20aa1" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit1.wav" id="53_evxfn"]
 [ext_resource type="AudioStream" uid="uid://db1dxsib68ygh" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit2.wav" id="54_vjc32"]
 [ext_resource type="AudioStream" uid="uid://bg5xsl6wv78yj" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit3.wav" id="55_vf400"]
@@ -78,6 +79,9 @@
 [ext_resource type="AudioStream" uid="uid://bcs4sk0ik7q7v" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSlamExhale.wav" id="69_gyq3p"]
 [ext_resource type="AudioStream" uid="uid://di1gpnkauf1j1" path="res://Assets/Audio/SoundEffects/RemnantCrab/GatherRocks.wav" id="70_l1akb"]
 [ext_resource type="AudioStream" uid="uid://bimqimy60kiw1" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleBreath.wav" id="72_h3o4s"]
+[ext_resource type="PackedScene" uid="uid://dsek6j7rt5c4" path="res://Components/AudioLooper/audio_looper.tscn" id="74_it3bd"]
+[ext_resource type="AudioStream" uid="uid://cr2j1203j2vst" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserStart.wav" id="75_dknms"]
+[ext_resource type="AudioStream" uid="uid://cliodglo0m35g" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserEnd.wav" id="77_7uh3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
 size = Vector2(47, 19)
@@ -3253,6 +3257,18 @@ tracks/9/keys = {
 "method": &"playSound"
 }]
 }
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("BlackHoleContainer/BlackHole:material:shader_parameter/resolution")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(24, 24)]
+}
 
 [sub_resource type="Animation" id="Animation_oeqg8"]
 resource_name = "LaserRunEnd"
@@ -4470,6 +4486,18 @@ tracks/49/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/50/type = "value"
+tracks/50/imported = false
+tracks/50/enabled = true
+tracks/50/path = NodePath("Sounds/TeethLoud:playing")
+tracks/50/interp = 1
+tracks/50/loop_wrap = true
+tracks/50/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -4753,6 +4781,52 @@ tracks/11/keys = {
 "values": [{
 "args": [],
 "method": &"makeBlackHoleSafe"
+}]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/TeethLoud:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/TeethDrop")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/Teeth")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(2.3, 2.8),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
 }]
 }
 
@@ -6328,7 +6402,7 @@ suckEnd = 1.3
 proximity = NodePath("../../Proximities/ScreamProximity")
 parent = NodePath("../..")
 
-[node name="LaserRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("leftRaycast", "rightRaycast", "laserRaycast", "laserContainer", "laserVisual", "laserAnimator", "blackHole", "laserAttackComponent", "laserHitbox", "parent", "animator", "skullSprite", "cloak")]
+[node name="LaserRun" type="Node" parent="StateMachine" node_paths=PackedStringArray("leftRaycast", "rightRaycast", "laserRaycast", "laserContainer", "laserVisual", "laserAnimator", "blackHole", "laserAttackComponent", "laserHitbox", "parent", "animator", "skullSprite", "cloak", "audio")]
 script = ExtResource("11_vx8lb")
 leftRaycast = NodePath("../../Proximities/Raycasts/LeftWallRaycast")
 rightRaycast = NodePath("../../Proximities/Raycasts/RightWallRaycast")
@@ -6343,6 +6417,7 @@ parent = NodePath("../..")
 animator = NodePath("../../Animator")
 skullSprite = NodePath("../../Sprites/Skulls")
 cloak = NodePath("../../Sprites/ClothSim")
+audio = NodePath("../../Sounds/Laser")
 
 [node name="BlackHoleMalfunction" type="Node" parent="StateMachine" node_paths=PackedStringArray("skulls", "blackHole", "parent", "healthCom", "nextState", "animator")]
 script = ExtResource("25_8261e")
@@ -6948,6 +7023,15 @@ stream = ExtResource("61_61qot")
 volume_db = -5.0
 max_polyphony = 8
 sounds = Array[AudioStream]([ExtResource("61_61qot")])
+
+[node name="Laser" parent="Sounds" instance=ExtResource("74_it3bd")]
+volume_db = 5.0
+max_distance = 300.0
+attenuation = 0.267943
+bus = &"SoundEffects"
+startSound = ExtResource("75_dknms")
+loopSound = ExtResource("52_rycj0")
+endSound = ExtResource("77_7uh3k")
 
 [node name="Shockwaves" type="Node2D" parent="."]
 z_index = 100

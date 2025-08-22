@@ -12,6 +12,7 @@ class_name LittleGameSubviewportContainer
 
 @export_group("Sub Viewport")
 @export var subViewport : SubViewport
+#RenderTarget : Disabled is how you set custom refresh FPS
 @export var renderTarget : SubViewport.UpdateMode = SubViewport.UpdateMode.UPDATE_DISABLED
 @export var fps := 10.0
 @export var oclutionCulling : VisibleOnScreenEnabler2D
@@ -48,6 +49,8 @@ var t = 0.0
 func _process(delta: float) -> void:
 	if !subViewport:
 		return
+	if Engine.is_editor_hint():
+		return
 	
 	if renderTarget == SubViewport.UpdateMode.UPDATE_DISABLED:
 		t += delta
@@ -68,8 +71,10 @@ func _ready() -> void:
 	
 	if !subViewport:
 		return
+	if Engine.is_editor_hint():
+		return
 	subViewport.render_target_update_mode = renderTarget
-	t = randf_range(0, 1.0 / fps)
+	t = randf_range(1.0 / fps, 2.0 / fps)
 
 func updateOclutionCulling():
 	if oclutionCulling:

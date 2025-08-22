@@ -9,7 +9,7 @@ class_name Player
 
 @export var screenEffects : ScreenEffects
 
-const SPEED = 70.0 * 0.45 * 1.0
+const SPEED = 70.0 * 0.45 * 1.3
 const JUMP_VELOCITY = -145.0 * 0.5
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.

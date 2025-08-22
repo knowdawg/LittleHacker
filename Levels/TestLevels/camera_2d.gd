@@ -21,6 +21,8 @@ var targetZoom := Vector2(10.0, 10.0)
 func _process(delta: float) -> void:
 	if !is_instance_valid(nodeToTrack):
 		setNodeToTrack(player)
+	if !cameraBounds:
+		return
 	
 	var p : CameraCoundriesComponent = cameraBounds.get_camera_bounds()
 	if p:

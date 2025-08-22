@@ -1,64 +1,55 @@
 [gd_scene load_steps=16 format=3 uid="uid://bm0s7ek1l7gcu"]
 
 [ext_resource type="Script" uid="uid://ccci0j2aa7wf7" path="res://Levels/TestLevels/envirmental_test_sall_level.gd" id="1_sahbk"]
-[ext_resource type="Script" uid="uid://l0dvqyto8hcq" path="res://Classes/SubviewportSetRenderTarget.gd" id="2_5yegh"]
+[ext_resource type="Script" uid="uid://0ji7aj4a5x2k" path="res://Classes/LittleGameSubviewportContainer.gd" id="2_5yegh"]
+[ext_resource type="Shader" uid="uid://i03ciagfq0lc" path="res://Assets/Shaders/Filters/backgroundFog.gdshader" id="2_evqcy"]
 [ext_resource type="PackedScene" uid="uid://rkf2bgau1n04" path="res://Objects/ShaderObjects/soft_lighting.tscn" id="2_w4aep"]
 [ext_resource type="Shader" uid="uid://c7qmnv5wb50ci" path="res://Assets/Shaders/Lighting/CustomSDFLighting.gdshader" id="3_qjk1c"]
 [ext_resource type="PackedScene" uid="uid://xssqw5n2yax2" path="res://Components/PlatformRespawnArea/platform_respawn_area.tscn" id="4_bmg0s"]
 [ext_resource type="PackedScene" uid="uid://btt7rxu85gjgo" path="res://Objects/LevelTransition/level_transition.tscn" id="4_jvbrh"]
 [ext_resource type="PackedScene" uid="uid://b0rw13dj3fjac" path="res://Components/CameraBoundriesComponent/camera_boundries_component.tscn" id="5_cjsib"]
 
-[sub_resource type="Shader" id="Shader_73joc"]
-code = "shader_type canvas_item;
-
-uniform sampler2D fog;
-uniform float depth : hint_range(0.0, 1.0);
-
-void fragment() {
-	vec4 s = texture(TEXTURE, UV);
-	vec4 fogColor = texture(fog, vec2(depth, 0.0));
-	vec4 c = vec4(1.0);
-
-	c.rgb = mix(vec3(dot(s.rgb, vec3(0.299, 0.587, 0.114))), s.rgb, 1.0 - depth);
-
-	//c.rgb /= 0.5;
-	//c.rgb = pow(c.rgb, vec3(5.0));
-
-	c = mix(c, fogColor, depth);
-
-	COLOR.rgb = c.rgb;
-}
-"
-
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cjsib"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = ExtResource("2_evqcy")
 shader_parameter/depth = 0.8
+shader_parameter/darken = 0.0
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bmg0s"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = ExtResource("2_evqcy")
 shader_parameter/depth = 0.7
+shader_parameter/darken = 0.0
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5yegh"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = ExtResource("2_evqcy")
 shader_parameter/depth = 0.4
+shader_parameter/darken = 0.0
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_evqcy"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = ExtResource("2_evqcy")
 shader_parameter/depth = 0.3
+shader_parameter/darken = 0.0
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tjry8"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = ExtResource("2_evqcy")
 shader_parameter/depth = 0.2
+shader_parameter/darken = 0.0
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4a3ey"]
 resource_local_to_scene = true
-shader = SubResource("Shader_73joc")
+shader = ExtResource("2_evqcy")
 shader_parameter/depth = 0.1
+shader_parameter/darken = 0.0
+shader_parameter/u_radius = 0.0
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3bpdn"]
 resource_local_to_scene = true
@@ -68,7 +59,7 @@ shader_parameter/shadowIntensitiy = 0.0
 
 [node name="DefaultLevel" type="Node2D" node_paths=PackedStringArray("projectileSpawnNode", "enemySpawnLocation", "doorToSpawnPlayerOnFailure", "doorContainerNode", "whereToAddPlayer", "respawnPointNode", "lighting", "backgroundContainers")]
 script = ExtResource("1_sahbk")
-projectileSpawnNode = NodePath("Proectiles")
+projectileSpawnNode = NodePath("Projectiles")
 enemySpawnLocation = NodePath("Enemies")
 doorToSpawnPlayerOnFailure = NodePath("Doors/LevelTransition")
 doorContainerNode = NodePath("Doors")
@@ -93,11 +84,17 @@ color = Color(0, 0, 0, 1)
 [node name="VeryFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.1, 0.1)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryFar"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/VeryFar"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryFar" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_cjsib")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryFar/SubViewportContainer"]
@@ -106,17 +103,23 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
 [node name="Far" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.2, 0.2)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Far"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/Far"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Far" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_bmg0s")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Far/SubViewportContainer"]
@@ -125,17 +128,23 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
 [node name="MediumFar" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.5, 0.5)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MediumFar"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/MediumFar"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MediumFar" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_bmg0s")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/MediumFar/SubViewportContainer"]
@@ -144,17 +153,23 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
 [node name="Medium" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.8, 0.8)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Medium"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/Medium"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Medium" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 texture_filter = 1
 material = SubResource("ShaderMaterial_5yegh")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Medium/SubViewportContainer"]
@@ -163,16 +178,22 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
 [node name="MeduimClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.85, 0.85)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MeduimClose"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/MeduimClose"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/MeduimClose" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 material = SubResource("ShaderMaterial_evqcy")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/MeduimClose/SubViewportContainer"]
@@ -181,16 +202,22 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
 [node name="Close" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.9, 0.9)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Close"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/Close"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/Close" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 material = SubResource("ShaderMaterial_tjry8")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 metadata/_edit_use_anchors_ = true
 
 [node name="Main2" type="SubViewport" parent="Paralax/Close/SubViewportContainer"]
@@ -199,16 +226,22 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
 [node name="VeryClose" type="Parallax2D" parent="Paralax"]
 scroll_scale = Vector2(0.95, 0.95)
 
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryClose"]
+[node name="VisibleOnScreenEnabler2D" type="VisibleOnScreenEnabler2D" parent="Paralax/VeryClose"]
+rect = Rect2(0, 0, 0, 0)
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Paralax/VeryClose" node_paths=PackedStringArray("subViewport", "oclutionCulling")]
 material = SubResource("ShaderMaterial_4a3ey")
-offset_right = 512.0
-offset_bottom = 512.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main2")
+renderTarget = 1
+oclutionCulling = NodePath("../VisibleOnScreenEnabler2D")
 
 [node name="Main2" type="SubViewport" parent="Paralax/VeryClose/SubViewportContainer"]
 disable_3d = true
@@ -216,22 +249,28 @@ transparent_bg = true
 handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
+size = Vector2i(2, 2)
 render_target_update_mode = 4
-script = ExtResource("2_5yegh")
 
-[node name="Main" type="SubViewport" parent="."]
+[node name="Main" type="SubViewportContainer" parent="." node_paths=PackedStringArray("subViewport")]
+offset_right = 40.0
+offset_bottom = 40.0
+stretch = true
+script = ExtResource("2_5yegh")
+subViewport = NodePath("Main")
+
+[node name="Main" type="SubViewport" parent="Main"]
+disable_3d = true
 transparent_bg = true
+handle_input_locally = false
 sdf_oversize = 0
 sdf_scale = 0
-size = Vector2i(1000, 432)
+size = Vector2i(40, 40)
+render_target_update_mode = 4
 
 [node name="Collisions" type="Node2D" parent="."]
 
 [node name="Lights" type="Node2D" parent="."]
-
-[node name="Envirement" type="Sprite2D" parent="."]
-texture_filter = 1
-centered = false
 
 [node name="RespawnPoints" type="Node2D" parent="."]
 
@@ -239,7 +278,7 @@ centered = false
 
 [node name="PlayerParrent" type="Node2D" parent="."]
 
-[node name="Proectiles" type="Node2D" parent="."]
+[node name="Projectiles" type="Node2D" parent="."]
 
 [node name="SoftLighting" parent="." instance=ExtResource("2_w4aep")]
 material = SubResource("ShaderMaterial_3bpdn")
@@ -259,3 +298,4 @@ enterPosition = NodePath("Marker2D")
 [node name="Marker2D" type="Marker2D" parent="Doors/LevelTransition"]
 
 [node name="CameraBoundriesComponent" parent="." instance=ExtResource("5_cjsib")]
+cameraSize = Vector2(192, 108)

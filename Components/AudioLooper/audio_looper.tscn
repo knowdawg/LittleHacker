@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://dsek6j7rt5c4"]
+
+[ext_resource type="Script" uid="uid://dy0knnpoqxtx7" path="res://Components/AudioLooper/audio_looper.gd" id="1_jgjyg"]
+
+[node name="AudioLooper" type="AudioStreamPlayer2D" node_paths=PackedStringArray("audioChildren")]
+script = ExtResource("1_jgjyg")
+audioChildren = [NodePath("Start"), NodePath("Loop"), NodePath("End")]
+
+[node name="Start" type="AudioStreamPlayer2D" parent="."]
+
+[node name="Loop" type="AudioStreamPlayer2D" parent="."]
+
+[node name="End" type="AudioStreamPlayer2D" parent="."]
+
+[connection signal="finished" from="Start" to="." method="_on_start_finished"]
+[connection signal="finished" from="Loop" to="." method="_on_loop_finished"]
+[connection signal="finished" from="End" to="." method="_on_end_finished"]

@@ -10,6 +10,7 @@ uniform float invert : hint_range(-1.0, 1.0, 2.0);
 
 uniform bool warpBorder = false;
 uniform sampler2D warpBorderNoise : repeat_enable;
+uniform vec2 warpIntensity;
 
 void fragment() {
 	vec2 quantizedUV = UV;//floor(UV * size) / size;
@@ -20,9 +21,9 @@ void fragment() {
 
 	vec2 o = vec2(0.0);
 	if(warpBorder){
-		float v = texture(warpBorderNoise, quantizedUV).r;
+		float v = texture(warpBorderNoise, quantizedUV * size * 0.001).r;
 		v = (v - 0.5) * 2.0 * 10.0;
-		o = vec2(v, v * 0.3);
+		o = vec2(v, v) * warpIntensity;
 	}
 	float sdfVal = invert * texture_sdf(screen_uv_to_sdf(quatizedScreenUV) + o);
 

@@ -23,7 +23,7 @@ func update_physics(delta):
 	#if t >= 0.7:
 	
 	
-	if t >= 6.1:
+	if t >= 6.4:
 		trasitioned.emit(self, "Idle")
 		return
 

@@ -1,0 +1,116 @@
+[gd_scene load_steps=19 format=3 uid="uid://cg2npv1bqmu1c"]
+
+[ext_resource type="PackedScene" uid="uid://dd8erj16sujy" path="res://Objects/WorldObjects/Clouds/clouds.tscn" id="1_27jjl"]
+[ext_resource type="Shader" uid="uid://21epj0fbrdnh" path="res://Assets/Shaders/Textures/clouds.gdshader" id="2_cmafj"]
+
+[sub_resource type="Gradient" id="Gradient_tpsgt"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.417143, 0.702857, 1)
+colors = PackedColorArray(0.909804, 0.756863, 0.439216, 1, 0.811765, 0.341176, 0.235294, 1, 0.254902, 0.113725, 0.192157, 1, 0.0901961, 0.12549, 0.219608, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x03er"]
+gradient = SubResource("Gradient_tpsgt")
+width = 192
+height = 108
+fill_from = Vector2(1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6yh84"]
+seed = 3
+frequency = 0.0049
+fractal_type = 3
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_3rg01"]
+width = 50
+height = 500
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_6yh84")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_gt4go"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jshoa"]
+width = 500
+height = 500
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_gt4go")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7ivjs"]
+resource_local_to_scene = true
+shader = ExtResource("2_cmafj")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_3rg01")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_jshoa")
+shader_parameter/resolution = Vector2(192, 108)
+shader_parameter/speed = 1.0
+shader_parameter/cloudFullness = 0.368
+shader_parameter/cloudPosition = 0.124
+shader_parameter/xDisplacment = 0.0
+
+[sub_resource type="Gradient" id="Gradient_k66g4"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0.792157, 0.760784, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6xiy4"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_k66g4")
+width = 192
+height = 108
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_6copa"]
+seed = 1
+frequency = 0.008
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_o84sx"]
+width = 64
+seamless = true
+seamless_blend_skirt = 0.3
+noise = SubResource("FastNoiseLite_6copa")
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_d6bcm"]
+frequency = 0.0022
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_m61x4"]
+seamless = true
+seamless_blend_skirt = 0.5
+noise = SubResource("FastNoiseLite_d6bcm")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_k1oi7"]
+shader = ExtResource("2_cmafj")
+shader_parameter/cloudNoise = SubResource("NoiseTexture2D_o84sx")
+shader_parameter/cloudWarp = SubResource("NoiseTexture2D_m61x4")
+shader_parameter/resolution = Vector2(384, 216)
+shader_parameter/speed = 0.5
+shader_parameter/cloudFullness = 0.588
+shader_parameter/cloudPosition = 0.289
+shader_parameter/xDisplacment = 0.4
+
+[sub_resource type="Gradient" id="Gradient_kqt26"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 0.588235, 0.588235, 0.184314)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_ue1en"]
+resource_local_to_scene = true
+gradient = SubResource("Gradient_kqt26")
+width = 192
+height = 108
+
+[node name="StarweepCraterCloudySky" type="Node2D"]
+
+[node name="Sky" type="Sprite2D" parent="."]
+texture_filter = 1
+position = Vector2(960, 540)
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_x03er")
+
+[node name="Clouds" parent="." instance=ExtResource("1_27jjl")]
+material = SubResource("ShaderMaterial_7ivjs")
+position = Vector2(961, 540)
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_6xiy4")
+
+[node name="Clouds2" parent="." instance=ExtResource("1_27jjl")]
+material = SubResource("ShaderMaterial_k1oi7")
+position = Vector2(961, 596)
+scale = Vector2(10, 10)
+texture = SubResource("GradientTexture2D_ue1en")

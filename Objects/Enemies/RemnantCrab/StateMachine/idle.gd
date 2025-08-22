@@ -31,7 +31,6 @@ func update(_delta):
 	#nextStates.append("GravityAmplification")
 	#nextStates.append("DoubleHeadSwing")
 	#nextStates.append("Jump2")
-	#nextStates.append("LaserRun")
 	#nextStates.append("SuckIn")
 	#nextStates.append("Jump")
 	#nextStates.append("StompRight")
@@ -39,8 +38,9 @@ func update(_delta):
 	#nextStates.append("Chase")
 	#nextStates.append("PhaseSwitch")
 	#nextStates.append("Death")
-	nextStates.append("Chase")
-	return
+	#nextStates.append("Chase")
+	#nextStates.append("LaserRun")
+	#return
 	
 	if sm.phase == 2:
 		var a = sm.getRandomAttackPhase2(prevAttackPhase2)

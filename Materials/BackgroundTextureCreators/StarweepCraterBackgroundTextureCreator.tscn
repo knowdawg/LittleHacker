@@ -1,0 +1,42 @@
+[gd_scene load_steps=9 format=3 uid="uid://bqf5ykeufc317"]
+
+[ext_resource type="Script" uid="uid://cbd8qoc7g4ume" path="res://Classes/SubviewportScreenshot.gd" id="1_6xckn"]
+[ext_resource type="Shader" uid="uid://bqj4py375klxx" path="res://Assets/Shaders/ProceduralTexturesShaders/SingleNoiseSDFTextureBackground.gdshader" id="1_42q1t"]
+[ext_resource type="Texture2D" uid="uid://dae6vqkwsp626" path="res://Materials/SandstoneTexture.png" id="2_6xckn"]
+
+[sub_resource type="Gradient" id="Gradient_uu4rp"]
+colors = PackedColorArray(0.203922, 0.109804, 0.152941, 1, 0.376471, 0.172549, 0.172549, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_1jovb"]
+gradient = SubResource("Gradient_uu4rp")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_n4jjc"]
+shader = ExtResource("1_42q1t")
+shader_parameter/noiseTex = ExtResource("2_6xckn")
+shader_parameter/palete = SubResource("GradientTexture1D_1jovb")
+shader_parameter/colors = 20.0
+shader_parameter/size = Vector2(128, 128)
+shader_parameter/noiseResolution = Vector2(256, 128)
+
+[sub_resource type="Gradient" id="Gradient_q3i4s"]
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_x1uuj"]
+gradient = SubResource("Gradient_q3i4s")
+width = 128
+height = 128
+
+[node name="StarweepBackgroundTextureCreator" type="Node2D"]
+
+[node name="Background" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_n4jjc")
+position = Vector2(93, 76)
+texture = SubResource("GradientTexture2D_x1uuj")
+
+[node name="BackgroundConatiner" type="SubViewport" parent="."]
+size = Vector2i(128, 128)
+render_target_update_mode = 1
+script = ExtResource("1_6xckn")
+savePath = "res://Assets/Sprites/EnvirmentTextures/Sandstone"
+imageName = "SandstoneBackground2"
