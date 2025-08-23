@@ -4,7 +4,7 @@ render_mode blend_premul_alpha; //Workaround for the godot bug with subviewports
 
 uniform sampler2D fog;
 uniform float depth : hint_range(0.0, 1.0);
-uniform float darken : hint_range(0.0, 1.0) = 0.0;
+uniform float darken : hint_range(-1.0, 1.0) = 0.0;
 
 uniform float u_radius : hint_range(0.0, 1.0) = 0.0;
 
@@ -31,11 +31,11 @@ void fragment() {
 	vec4 fogColor = texture(fog, vec2(depth, 0.0)) * f.a;
 	vec4 c = vec4(1.0);
 
-	f.rgb = mix(f.rgb, vec3(dot(f.rgb, vec3(0.299, 0.587, 0.114))), 0.3 + (depth * 0.7));
+	f.rgb = mix(f.rgb, vec3(dot(f.rgb, vec3(0.299, 0.587, 0.114))), depth);
 	//f.rgb -= vec3(depth);
 	f.rgb *= vec3(1.0 - darken);
 
-	c = mix(f, fogColor, 0.0 + (depth * 1.0));
+	c = mix(f, fogColor, depth);
 	//c = f;
 	c.a = f.a;
 

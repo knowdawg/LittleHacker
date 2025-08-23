@@ -17,7 +17,7 @@ void fragment() {
 	vec4 c = vec4(1.0);
 	float surge = abs(sin(quantizedUV.x * surgeFrequency - TIME * surgeSpeed));
 	vec4 nWarp = texture(noiseWarp, quantizedUV - vec2(TIME * warpScrollSpeed, 0.0));
-	vec4 nTex = texture(noiseTex, quantizedUV + vec2(-TIME * textureScollSpeed + surge * 0.2, 0.0) + vec2(nWarp.x, nWarp.y));
+	vec4 nTex = texture(noiseTex, 0.2 * quantizedUV + vec2(-TIME * textureScollSpeed + surge * 0.2, 0.0) + vec2(nWarp.x, nWarp.y));
 	nTex.rgb += surge * 0.1;
 	nTex.a -= smoothstep(0.2, 0.5, abs(quantizedUV.y - 0.5));
 	float nTexAmplitude = (nTex.r + nTex.g + nTex.b) * 0.3 + (surge * surgeSize);

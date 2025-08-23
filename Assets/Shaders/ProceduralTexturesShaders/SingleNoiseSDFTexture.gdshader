@@ -19,6 +19,7 @@ void fragment() {
 	//Sample the noise based on quantized UV
 	float val = texture(noiseTex, (quantizedUV * size * 2.0) * (1.0 / noiseResolution)).r;
 
+
 	vec2 o = vec2(0.0);
 	if(warpBorder){
 		float v = texture(warpBorderNoise, quantizedUV * size * 0.001).r;
@@ -31,6 +32,7 @@ void fragment() {
 
 	val += step(sdfVal - 1.0, 1.0); //Outline
 	val -= smoothstep(0.0, 1.0, sdfVal * (shading)); //Creates the Gradiant
+
 
 	//Sample the palete based on Noise and SDF
 	val = ceil(val * paleteSize) / paleteSize;

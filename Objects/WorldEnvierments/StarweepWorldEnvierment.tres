@@ -9,10 +9,10 @@ gradient = SubResource("Gradient_fhqyc")
 [resource]
 background_mode = 3
 tonemap_mode = 1
-tonemap_exposure = 0.8
+tonemap_exposure = 0.7
 tonemap_white = 0.7
 glow_intensity = 2.0
-glow_strength = 0.3
+glow_strength = 0.2
 glow_bloom = 0.5
 glow_blend_mode = 0
 adjustment_color_correction = SubResource("GradientTexture1D_cbcc5")

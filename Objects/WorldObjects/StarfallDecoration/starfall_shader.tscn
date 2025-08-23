@@ -35,6 +35,7 @@ shader_parameter/textureScollSpeed = 2.0
 shader_parameter/warpScrollSpeed = 3.0
 shader_parameter/surgeFrequency = 2.0
 shader_parameter/surgeSpeed = 5.0
+shader_parameter/surgeSize = 1.0
 
 [node name="StarfallShader" type="Line2D"]
 material = SubResource("ShaderMaterial_4hbly")

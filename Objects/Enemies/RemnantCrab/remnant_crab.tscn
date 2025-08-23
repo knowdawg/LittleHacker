@@ -593,21 +593,21 @@ _data = {
 offsets = PackedFloat32Array(0, 0.779412)
 colors = PackedColorArray(0.423529, 0.352941, 0.607843, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_hhtw5"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_7uh3k"]
 gradient = SubResource("Gradient_v3dep")
 
 [sub_resource type="Gradient" id="Gradient_fkjw2"]
 offsets = PackedFloat32Array(0.00815217, 0.798913)
 colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_cm20j"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_vuqly"]
 gradient = SubResource("Gradient_fkjw2")
 
 [sub_resource type="Gradient" id="Gradient_k1yg2"]
 offsets = PackedFloat32Array(0)
 colors = PackedColorArray(0.0352941, 0.0392157, 0.0784314, 1)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_d6it3"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_td578"]
 gradient = SubResource("Gradient_k1yg2")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_k1yg2"]
@@ -618,23 +618,23 @@ shader_parameter/colorResolution = 20.0
 shader_parameter/distortionIntensity = -0.5
 shader_parameter/spiralDistortionIntensity = 2.0
 shader_parameter/holeSize = 0.15
-shader_parameter/holeColor = SubResource("GradientTexture1D_d6it3")
+shader_parameter/holeColor = SubResource("GradientTexture1D_td578")
 shader_parameter/image = ExtResource("10_oeqg8")
 shader_parameter/rotations = 1.0
 shader_parameter/depth = 0.5
 shader_parameter/spiralIntensity = 1.0
 shader_parameter/shrinkSpeed = 0.1
 shader_parameter/roationSpeed = 0.5
-shader_parameter/haloColor = SubResource("GradientTexture1D_hhtw5")
-shader_parameter/haloColor2 = SubResource("GradientTexture1D_cm20j")
+shader_parameter/haloColor = SubResource("GradientTexture1D_7uh3k")
+shader_parameter/haloColor2 = SubResource("GradientTexture1D_vuqly")
 shader_parameter/haloProgress = 0.0
 
-[sub_resource type="Gradient" id="Gradient_oeqg8"]
+[sub_resource type="Gradient" id="Gradient_os4kr"]
 offsets = PackedFloat32Array(1)
 colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_d6it3"]
-gradient = SubResource("Gradient_oeqg8")
+gradient = SubResource("Gradient_os4kr")
 width = 24
 height = 24
 
@@ -741,7 +741,7 @@ seed = 153
 frequency = 0.0041
 fractal_octaves = 3
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_y7t4u"]
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_jubo4"]
 seamless = true
 seamless_blend_skirt = 0.3
 noise = SubResource("FastNoiseLite_5k1dr")
@@ -749,7 +749,7 @@ noise = SubResource("FastNoiseLite_5k1dr")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8261e"]
 resource_local_to_scene = true
 shader = ExtResource("14_i7s33")
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/noise = SubResource("NoiseTexture2D_jubo4")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
@@ -757,7 +757,7 @@ shader_parameter/speed = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_exc6n"]
 resource_local_to_scene = true
 shader = ExtResource("14_i7s33")
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/noise = SubResource("NoiseTexture2D_jubo4")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
@@ -765,7 +765,7 @@ shader_parameter/speed = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_8hasc"]
 resource_local_to_scene = true
 shader = ExtResource("14_i7s33")
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/noise = SubResource("NoiseTexture2D_jubo4")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
@@ -773,7 +773,7 @@ shader_parameter/speed = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yjvqw"]
 resource_local_to_scene = true
 shader = ExtResource("14_i7s33")
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/noise = SubResource("NoiseTexture2D_jubo4")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
@@ -781,7 +781,7 @@ shader_parameter/speed = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ppdcs"]
 resource_local_to_scene = true
 shader = ExtResource("14_i7s33")
-shader_parameter/noise = SubResource("NoiseTexture2D_y7t4u")
+shader_parameter/noise = SubResource("NoiseTexture2D_jubo4")
 shader_parameter/col = Color(0.654902, 0, 0, 1)
 shader_parameter/progress = 1.0
 shader_parameter/speed = 1.0
@@ -6295,7 +6295,7 @@ phase1Hurtbox = NodePath("../Sprites/Skulls/HurtboxComponent")
 phase1Hacks = [NodePath("../GeneralComponents/EnemyHeathbar/MeatChunkHack"), NodePath("../GeneralComponents/EnemyHeathbar/VoidMalfunction"), NodePath("../GeneralComponents/EnemyHeathbar/BreakLegs")]
 phase2Hurtbox = NodePath("../BlackHoleContainer/BlackHole/Heart/HurtboxComponent")
 phase2Hacks = [NodePath("../GeneralComponents/EnemyHeathbar/GravityAmplification"), NodePath("../GeneralComponents/EnemyHeathbar/LifeDrainHeal")]
-initial_state = NodePath("Idle")
+initial_state = NodePath("Threaten")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
 leftGrabPos = NodePath("HackGrabLoc")

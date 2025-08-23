@@ -1,4 +1,4 @@
-[gd_scene load_steps=247 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=248 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -141,19 +141,6 @@ colors = PackedColorArray(1, 1, 1, 0.541176, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_ufcdm"]
 gradient = SubResource("Gradient_efsdk")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.8, 0.8)
-
-[sub_resource type="Gradient" id="Gradient_xqyul"]
-interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.516746, 1)
-colors = PackedColorArray(0, 0, 0, 0.470588, 0, 0, 0, 0.117647, 0, 0, 0, 0)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_6d7k2"]
-gradient = SubResource("Gradient_xqyul")
-width = 256
-height = 256
 fill = 1
 fill_from = Vector2(0.5, 0.5)
 fill_to = Vector2(0.8, 0.8)
@@ -1403,6 +1390,22 @@ shader_parameter/progress = 0.0
 [sub_resource type="Curve" id="Curve_uwynt"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3om3i"]
+blend_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_3om3i"]
+interpolation_mode = 2
+offsets = PackedFloat32Array(0, 0.233108, 1)
+colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0.186145, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4k38o"]
+gradient = SubResource("Gradient_3om3i")
+width = 256
+height = 256
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.8, 0.8)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_cy6n2"]
 shader = ExtResource("33_rdnj2")
@@ -2715,7 +2718,7 @@ shader_parameter/progress = 1.0
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4k38o"]
 shader = ExtResource("89_3om3i")
 shader_parameter/center = Vector2(0.5, 0.5)
-shader_parameter/strength = -0.5
+shader_parameter/strength = -0.3
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_urh35"]
 shader = ExtResource("55_dupvs")
@@ -2875,19 +2878,6 @@ texture = SubResource("GradientTexture2D_ufcdm")
 visible = false
 energy = 0.5
 texture = SubResource("GradientTexture2D_ufcdm")
-
-[node name="DarkeningAura1" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.588235)
-z_index = -1
-scale = Vector2(0.5, 0.5)
-texture = SubResource("GradientTexture2D_6d7k2")
-
-[node name="DarkeningAura2" type="Sprite2D" parent="."]
-visible = false
-modulate = Color(1, 1, 1, 0.588235)
-scale = Vector2(0.5, 0.5)
-texture = SubResource("GradientTexture2D_6d7k2")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state", "parent", "hurtboxComponent", "attackComponentsThatCanBeParried")]
 script = ExtResource("1_8slbu")
@@ -3639,6 +3629,12 @@ sprite = NodePath("../PlayerVisual/PlayerSprite")
 frequency = 0.1
 fadeTime = 0.3
 startColor = Color(0.588235, 0.588235, 0.588235, 0.392157)
+
+[node name="Spotlight" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.588235)
+material = SubResource("CanvasItemMaterial_3om3i")
+scale = Vector2(0.4, 0.4)
+texture = SubResource("GradientTexture2D_4k38o")
 
 [node name="PlayerVisual" type="Node2D" parent="."]
 position = Vector2(0, 2)
