@@ -1,4 +1,4 @@
-[gd_scene load_steps=248 format=3 uid="uid://d3dlqrfslc2a0"]
+[gd_scene load_steps=253 format=3 uid="uid://d3dlqrfslc2a0"]
 
 [ext_resource type="Script" uid="uid://5kjo2wgmlx2i" path="res://Player/PlayerStateMachine.gd" id="1_8slbu"]
 [ext_resource type="Script" uid="uid://bkkisrxca23fk" path="res://Player/Player.gd" id="1_lek16"]
@@ -89,6 +89,7 @@
 [ext_resource type="AudioStream" uid="uid://brm1d5tuxe1ab" path="res://Assets/Audio/SoundEffects/Fire.wav" id="58_o6fl6"]
 [ext_resource type="AudioStream" uid="uid://dk8gsdpbda3an" path="res://Assets/Audio/SoundEffects/HackModeAmbience.wav" id="59_ly53n"]
 [ext_resource type="PackedScene" uid="uid://d03i3jperca7o" path="res://Objects/ShaderObjects/motion_blur.tscn" id="60_mf4dy"]
+[ext_resource type="Texture2D" uid="uid://ckifrsf13bdj7" path="res://Assets/Sprites/Gradiants/CircleGradiant.tres" id="64_4k38o"]
 [ext_resource type="AudioStream" uid="uid://7d4y3bn7ksgd" path="res://Assets/Audio/SoundEffects/HackExecuted2.wav" id="69_xqyul"]
 [ext_resource type="PackedScene" uid="uid://du8t0dwelcj4j" path="res://Components/AfterImageComponent/after_image_component.tscn" id="77_1e2fr"]
 [ext_resource type="Texture2D" uid="uid://ufu3hjlwcw66" path="res://Test/SmallPlayerIdeas.png" id="78_oyr7x"]
@@ -259,6 +260,9 @@ shader_parameter/color = Color(0.647059, 0.188235, 0.188235, 1)
 shader_parameter/noise = SubResource("NoiseTexture2D_atljg")
 shader_parameter/progress = 0.0
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_1sos5"]
+blend_mode = 1
+
 [sub_resource type="Curve" id="Curve_pxddw"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.257732, 1), 0.0, 0.0, 0, 0, Vector2(0.797357, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -266,16 +270,26 @@ point_count = 4
 [sub_resource type="CurveTexture" id="CurveTexture_2avp6"]
 curve = SubResource("Curve_pxddw")
 
+[sub_resource type="Curve" id="Curve_rlc46"]
+_limits = [0.0, 3.0, 0.0, 1.0]
+_data = [Vector2(0, 1.53424), 0.0, 0.0, 0, 0, Vector2(1, 0.644038), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n5tgw"]
+curve = SubResource("Curve_rlc46")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_j7tth"]
 lifetime_randomness = 1.0
 particle_flag_disable_z = true
 direction = Vector3(-1, 0, 0)
 spread = 20.0
-initial_velocity_min = 200.0
-initial_velocity_max = 300.0
+initial_velocity_min = 20.0
+initial_velocity_max = 30.0
 gravity = Vector3(0, 0, 0)
 scale_min = 0.0
+scale_max = 0.01
 scale_curve = SubResource("CurveTexture_2avp6")
+scale_over_velocity_curve = SubResource("CurveTexture_n5tgw")
 color = Color(1, 0.188235, 0.188235, 1)
 hue_variation_min = -0.03
 hue_variation_max = 0.03
@@ -1349,6 +1363,8 @@ scale_max = 2.0
 scale_curve = SubResource("CurveTexture_qqxpm")
 color = Color(0, 0, 0, 1)
 
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_4k38o"]
+
 [sub_resource type="Curve" id="Curve_5a7al"]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.257732, 1), 0.0, 0.0, 0, 0, Vector2(0.616592, 0), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
 point_count = 4
@@ -1368,7 +1384,7 @@ spread = 0.0
 initial_velocity_min = 1500.0
 initial_velocity_max = 2000.0
 gravity = Vector3(0, 0, 0)
-scale_min = 0.5
+scale_max = 2.0
 scale_curve = SubResource("CurveTexture_quroc")
 hue_variation_min = -0.03
 hue_variation_max = 0.03
@@ -3424,14 +3440,16 @@ width = 40.0
 texture_mode = 2
 
 [node name="RedParticles" type="GPUParticles2D" parent="HackEffects"]
+material = SubResource("CanvasItemMaterial_1sos5")
 position = Vector2(-3, -2.5)
 emitting = false
 amount = 64
-lifetime = 0.3
+texture = ExtResource("64_4k38o")
+lifetime = 3.0
 fixed_fps = 300
 interpolate = false
 trail_enabled = true
-trail_lifetime = 0.04
+trail_lifetime = 0.4
 process_material = SubResource("ParticleProcessMaterial_j7tth")
 
 [node name="RedParticles2" type="GPUParticles2D" parent="HackEffects"]
@@ -3452,6 +3470,7 @@ process_material = SubResource("ParticleProcessMaterial_brlsd")
 libraries = {
 &"": SubResource("AnimationLibrary_ax80n")
 }
+speed_scale = 0.1
 
 [node name="HackUI" type="Node2D" parent="." node_paths=PackedStringArray("player", "blur", "camera")]
 visible = false
@@ -3468,10 +3487,10 @@ libraries = {
 }
 
 [node name="Top" type="RichTextLabel" parent="HackUI"]
-offset_left = -27.0
-offset_top = -9.5
-offset_right = 73.0
-offset_bottom = 13.5
+offset_left = -20.4414
+offset_top = -6.89844
+offset_right = 79.5586
+offset_bottom = 16.1016
 rotation = 0.0872665
 scale = Vector2(0.35, 0.35)
 theme_override_constants/outline_size = 3
@@ -3508,18 +3527,18 @@ trail_lifetime = 0.02
 process_material = SubResource("ParticleProcessMaterial_3ysx1")
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
-offset_left = -27.0
-offset_top = -2.0
-offset_right = 73.0
-offset_bottom = 21.0
+offset_left = -20.4414
+offset_top = -3.41797
+offset_right = 79.5586
+offset_bottom = 19.582
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
-offset_left = -30.0
+offset_left = -25.3789
 offset_top = -7.0
-offset_right = 31.0
+offset_right = 35.6211
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)
@@ -3562,13 +3581,14 @@ process_material = SubResource("ParticleProcessMaterial_3ysx1")
 copy_mode = 2
 
 [node name="SelectParticles" type="GPUParticles2D" parent="HackUI/SelectLineContainer"]
+material = SubResource("CanvasItemMaterial_4k38o")
 position = Vector2(-9.53674e-07, -3)
 emitting = false
 amount = 32
-lifetime = 0.1
+lifetime = 0.5
 one_shot = true
 preprocess = 0.05
-explosiveness = 0.6
+explosiveness = 0.84
 fixed_fps = 600
 interpolate = false
 trail_enabled = true

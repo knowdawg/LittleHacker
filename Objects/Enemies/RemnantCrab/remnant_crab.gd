@@ -1,6 +1,8 @@
 extends Enemy
 class_name RemnantCrab
 
+signal landed
+signal impact
 
 func _on_state_machine_state_switched(prevState: State, newState: State) -> void:
 	if newState.name == "StompRight":
@@ -21,6 +23,9 @@ func _physics_process(delta: float) -> void:
 	
 	move_and_slide()
 
+func smallImpact():
+	impact.emit()
+
 func launch():
 	velocity.y = -5000.0
 
@@ -31,6 +36,7 @@ func prepareForLanding():
 func launchLand():
 	if %DownCast.is_colliding():
 		global_position.y = %DownCast.get_collision_point().y - 23.0
+		landed.emit()
 	
 	if legsBroken:
 		var a : Attack = Attack.new()

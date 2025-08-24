@@ -8,8 +8,10 @@ var prevAttack = -1
 var prevAttackPhase2 = -1
 var nextStates : Array[String] = []
 
-#func enter(_p):
-	#animator.stop()
+func enter(p : State):
+	if p is RemnantCrabEating:
+		nextStates.append("RunAwayShort")
+		nextStates.append("Threaten")
 
 func update(_delta):
 	#nextStates.append("MassiveLaser")

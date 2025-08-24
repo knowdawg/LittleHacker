@@ -1,9 +1,10 @@
-[gd_scene load_steps=198 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=207 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
 [ext_resource type="Texture2D" uid="uid://crnt7cd0ay1b4" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSmallHands.png" id="2_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://dlsbtdtj5tk8j" path="res://Components/HealthComponent/health_component.tscn" id="3_1hgma"]
+[ext_resource type="Texture2D" uid="uid://cwl3ldhrg7dma" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegsEating.png" id="3_td578"]
 [ext_resource type="Texture2D" uid="uid://btkosfrj5k4rr" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabSkulls.png" id="4_2ujic"]
 [ext_resource type="Texture2D" uid="uid://bp427dx8l64ns" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabCloakSingle.png" id="4_vx8lb"]
 [ext_resource type="PackedScene" uid="uid://bhj03cicy3xut" path="res://Components/MovementComponent/movement_component.tscn" id="5_7y5mw"]
@@ -42,6 +43,7 @@
 [ext_resource type="Script" uid="uid://bme2wl85htt0r" path="res://Objects/Enemies/RemnantCrab/StateMachine/massive_laser.gd" id="21_uhgxb"]
 [ext_resource type="Script" uid="uid://c6gkbknri6gt8" path="res://Objects/Enemies/RemnantCrab/StateMachine/block_hole_disk.gd" id="22_clfli"]
 [ext_resource type="Script" uid="uid://dx1qqkpkfssuo" path="res://Objects/Enemies/RemnantCrab/StateMachine/gravity_amplification.gd" id="23_6gxvo"]
+[ext_resource type="Script" uid="uid://prfd8ajdh6ve" path="res://Objects/Enemies/RemnantCrab/StateMachine/eating.gd" id="23_td578"]
 [ext_resource type="Script" uid="uid://bn6j7lwaxtffv" path="res://Objects/Enemies/RemnantCrab/StateMachine/double_stomp_combo.gd" id="24_wcfhf"]
 [ext_resource type="Script" uid="uid://dc77k3pcc5p8w" path="res://Objects/Enemies/RemnantCrab/StateMachine/black_hole_malfunction.gd" id="25_8261e"]
 [ext_resource type="Script" uid="uid://ednt4tkc0dm2" path="res://Objects/Enemies/RemnantCrab/StateMachine/stagger_phase_2.gd" id="26_fkjw2"]
@@ -81,6 +83,9 @@
 [ext_resource type="AudioStream" uid="uid://bimqimy60kiw1" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleBreath.wav" id="72_h3o4s"]
 [ext_resource type="PackedScene" uid="uid://dsek6j7rt5c4" path="res://Components/AudioLooper/audio_looper.tscn" id="74_it3bd"]
 [ext_resource type="AudioStream" uid="uid://cr2j1203j2vst" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserStart.wav" id="75_dknms"]
+[ext_resource type="AudioStream" uid="uid://bsi6jsiqk43hi" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabEatingBite.wav" id="75_os4kr"]
+[ext_resource type="AudioStream" uid="uid://do5atbdf8evh1" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSuprised.wav" id="76_jubo4"]
+[ext_resource type="AudioStream" uid="uid://bxhiergxp8yma" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabThreaten.wav" id="77_5po4a"]
 [ext_resource type="AudioStream" uid="uid://cliodglo0m35g" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserEnd.wav" id="77_7uh3k"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
@@ -156,6 +161,17 @@ colors = PackedColorArray(1, 1, 1, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_61qot"]
 gradient = SubResource("Gradient_h3o4s")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5po4a"]
+resource_local_to_scene = true
+shader = ExtResource("48_peg4x")
+shader_parameter/image = ExtResource("8_6uj3i")
+shader_parameter/rotations = 2.0
+shader_parameter/shrinkSpeed = -0.2
+shader_parameter/roationSpeed = 0.1
+shader_parameter/shreekSpeed = 1.1
+shader_parameter/resolution = Vector2(64, 64)
+shader_parameter/progress = 1.0
 
 [sub_resource type="Gradient" id="Gradient_cm20j"]
 offsets = PackedFloat32Array(0, 0.429348, 0.798913)
@@ -1059,6 +1075,20 @@ tracks/11/keys = {
 "method": &"disable"
 }]
 }
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(2.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_02cj8"]
 resource_name = "BlackHoleDiskRight"
@@ -1246,6 +1276,20 @@ tracks/11/keys = {
 }, {
 "args": [],
 "method": &"disable"
+}]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath(".")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(2.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
 }]
 }
 
@@ -1557,6 +1601,20 @@ tracks/16/keys = {
 "update": 1,
 "values": [true, false, true]
 }
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath(".")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yjvqw"]
 resource_name = "DoubleHeadSwingRight"
@@ -1787,6 +1845,20 @@ tracks/16/keys = {
 }, {
 "args": [],
 "method": &"disable"
+}]
+}
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath(".")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
 }]
 }
 
@@ -2353,6 +2425,23 @@ tracks/8/keys = {
 "method": &"disable"
 }]
 }
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath(".")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.5, 1.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
+}, {
+"args": [],
+"method": &"smallImpact"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_1ai65"]
 resource_name = "HeadSlam"
@@ -2500,9 +2589,12 @@ tracks/10/path = NodePath(".")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(1.1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(1, 1.1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
+"args": [],
+"method": &"smallImpact"
+}, {
 "args": [5.0],
 "method": &"shakeScreen"
 }]
@@ -4498,6 +4590,30 @@ tracks/50/keys = {
 "update": 1,
 "values": [false]
 }
+tracks/51/type = "value"
+tracks/51/imported = false
+tracks/51/enabled = true
+tracks/51/path = NodePath("Sprites/EatingLegs:frame")
+tracks/51/interp = 1
+tracks/51/loop_wrap = true
+tracks/51/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/52/type = "value"
+tracks/52/imported = false
+tracks/52/enabled = true
+tracks/52/path = NodePath("Sprites/EatingLegs:visible")
+tracks/52/interp = 1
+tracks/52/loop_wrap = true
+tracks/52/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -4776,11 +4892,14 @@ tracks/11/path = NodePath(".")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"makeBlackHoleSafe"
+}, {
+"args": [],
+"method": &"smallImpact"
 }]
 }
 tracks/12/type = "value"
@@ -4973,11 +5092,14 @@ tracks/11/path = NodePath(".")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"makeBlackHoleSafe"
+}, {
+"args": [],
+"method": &"smallImpact"
 }]
 }
 
@@ -5076,11 +5198,14 @@ tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"makeBlackHoleSafe"
+}, {
+"args": [],
+"method": &"smallImpact"
 }]
 }
 
@@ -5179,11 +5304,14 @@ tracks/7/path = NodePath(".")
 tracks/7/interp = 1
 tracks/7/loop_wrap = true
 tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
 "method": &"makeBlackHoleSafe"
+}, {
+"args": [],
+"method": &"smallImpact"
 }]
 }
 
@@ -5410,6 +5538,20 @@ tracks/16/keys = {
 "method": &"playSound"
 }]
 }
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath(".")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_qmox6"]
 resource_name = "StompRight"
@@ -5620,6 +5762,20 @@ tracks/15/keys = {
 "values": [{
 "args": [],
 "method": &"playSound"
+}]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath(".")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(0.6),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"smallImpact"
 }]
 }
 
@@ -5910,6 +6066,165 @@ tracks/8/keys = {
 "update": 0,
 "values": [15.0]
 }
+tracks/9/type = "method"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/Threaten")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Sprites/Skulls:scale")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vuqly"]
+resource_name = "Eating"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Legs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [87]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/EatingLegs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Skulls:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Skulls/Arms(Head):frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 13, 14, 15, 16, 17]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/EatingLegs:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/TeethLoud")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/EatingBite")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Chomp")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"effect"
+}, {
+"args": [],
+"method": &"effect"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_jubo4"]
+resource_name = "Suprised"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Skulls:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 1.5), Vector2(1.2, 0.8), Vector2(1, 1)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oara4"]
 _data = {
@@ -5918,6 +6233,7 @@ _data = {
 &"BlackHoleMalfunction": SubResource("Animation_vjc32"),
 &"DoubleHeadSwingLeft": SubResource("Animation_8hasc"),
 &"DoubleHeadSwingRight": SubResource("Animation_yjvqw"),
+&"Eating": SubResource("Animation_vuqly"),
 &"GravityAmplification": SubResource("Animation_cm20j"),
 &"GravityAmplificationEnd": SubResource("Animation_8261e"),
 &"GravityAmplificationEndFinal": SubResource("Animation_vf400"),
@@ -5940,8 +6256,12 @@ _data = {
 &"StompLeft": SubResource("Animation_d6it3"),
 &"StompRight": SubResource("Animation_qmox6"),
 &"SuckIn": SubResource("Animation_5j67f"),
+&"Suprised": SubResource("Animation_jubo4"),
 &"Threaten": SubResource("Animation_k1yg2")
 }
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_td578"]
+radius = 54.0093
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qmox6"]
 radius = 150.0
@@ -6074,8 +6394,8 @@ unique_name_in_owner = true
 position = Vector2(0, 23)
 texture = ExtResource("2_rt31b")
 offset = Vector2(0, -23)
-hframes = 79
-frame = 39
+hframes = 88
+frame = 1
 
 [node name="ClothSim" parent="Sprites" instance=ExtResource("12_jvtmt")]
 position = Vector2(0, 1)
@@ -6094,16 +6414,15 @@ lockBottom = true
 
 [node name="Skulls" type="Sprite2D" parent="Sprites"]
 unique_name_in_owner = true
-position = Vector2(0, 1)
 texture = ExtResource("4_2ujic")
-hframes = 65
-frame = 31
+hframes = 90
+frame = 39
 
 [node name="Arms(Head)" type="Sprite2D" parent="Sprites/Skulls"]
 show_behind_parent = true
 texture = ExtResource("2_vx8lb")
 hframes = 51
-frame = 15
+frame = 24
 
 [node name="HurtboxComponent" parent="Sprites/Skulls" node_paths=PackedStringArray("stateMachine", "health_componnet") instance=ExtResource("7_2ujic")]
 collision_layer = 8
@@ -6118,6 +6437,11 @@ shape = SubResource("CircleShape2D_jvtmt")
 [node name="DirectionalParticlesComponent" parent="Sprites/Skulls" node_paths=PackedStringArray("healthComponent") instance=ExtResource("9_4nfid")]
 texture = SubResource("GradientTexture2D_4nfid")
 healthComponent = NodePath("../../../GeneralComponents/HealthComponent")
+
+[node name="EatingLegs" type="Sprite2D" parent="Sprites"]
+visible = false
+texture = ExtResource("3_td578")
+hframes = 10
 
 [node name="RockSuckInLeft" type="Sprite2D" parent="Sprites"]
 material = SubResource("ShaderMaterial_h3o4s")
@@ -6162,6 +6486,11 @@ typeOFFlash = 1
 node = NodePath("../Skulls")
 healthComponent = NodePath("../../GeneralComponents/HealthComponent")
 
+[node name="Chomp" parent="Sprites" node_paths=PackedStringArray("parent") instance=ExtResource("47_h3tgo")]
+material = SubResource("ShaderMaterial_5po4a")
+scale = Vector2(4, 4)
+parent = NodePath("../..")
+
 [node name="LaserContainer" type="Node2D" parent="."]
 
 [node name="Laser" type="Line2D" parent="LaserContainer"]
@@ -6196,9 +6525,7 @@ copy_mode = 2
 
 [node name="BlackHole" type="Sprite2D" parent="BlackHoleContainer"]
 unique_name_in_owner = true
-visible = false
 material = SubResource("ShaderMaterial_k1yg2")
-position = Vector2(0, 1)
 scale = Vector2(1e-05, 1e-05)
 texture = SubResource("GradientTexture2D_d6it3")
 
@@ -6295,7 +6622,7 @@ phase1Hurtbox = NodePath("../Sprites/Skulls/HurtboxComponent")
 phase1Hacks = [NodePath("../GeneralComponents/EnemyHeathbar/MeatChunkHack"), NodePath("../GeneralComponents/EnemyHeathbar/VoidMalfunction"), NodePath("../GeneralComponents/EnemyHeathbar/BreakLegs")]
 phase2Hurtbox = NodePath("../BlackHoleContainer/BlackHole/Heart/HurtboxComponent")
 phase2Hacks = [NodePath("../GeneralComponents/EnemyHeathbar/GravityAmplification"), NodePath("../GeneralComponents/EnemyHeathbar/LifeDrainHeal")]
-initial_state = NodePath("Threaten")
+initial_state = NodePath("Eating")
 parent = NodePath("..")
 animators = [NodePath("../Animator")]
 leftGrabPos = NodePath("HackGrabLoc")
@@ -6304,6 +6631,29 @@ movement = NodePath("../GeneralComponents/MovementComponent")
 
 [node name="HackGrabLoc" type="Marker2D" parent="StateMachine"]
 position = Vector2(0, 21)
+
+[node name="Eating" type="Node" parent="StateMachine" node_paths=PackedStringArray("eatingArms", "sm", "interuptedSound", "agroState", "animator", "playerProximity")]
+script = ExtResource("23_td578")
+eatingArms = NodePath("../../Sprites/EatingLegs")
+sm = NodePath("..")
+interuptedSound = NodePath("../../Sounds/Suprised")
+agroState = NodePath("../Idle")
+animator = NodePath("../../Animator")
+animationName = "Eating"
+playerProximity = NodePath("../../Proximities/ProximityArea")
+
+[node name="RunAwayShort" type="Node" parent="StateMachine" node_paths=PackedStringArray("parent", "sm", "animator", "skullSprite", "cloak")]
+script = ExtResource("9_qmox6")
+parent = NodePath("../..")
+sm = NodePath("..")
+animator = NodePath("../../Animator")
+animationName = "Run"
+skullSprite = NodePath("../../Sprites/Skulls")
+cloak = NodePath("../../Sprites/ClothSim")
+acceleration = 500.0
+direction = 1
+decelerate = 150.0
+lengthRange = Vector2(0.2, 0.2)
 
 [node name="Threaten" type="Node" parent="StateMachine" node_paths=PackedStringArray("bossInro", "parent", "nextState", "animator")]
 script = ExtResource("12_k1yg2")
@@ -6550,7 +6900,6 @@ hurtboxesToDisable = [NodePath("../../Sprites/Skulls/HurtboxComponent"), NodePat
 
 [node name="Animator" type="AnimationPlayer" parent="."]
 unique_name_in_owner = true
-reset_on_save = false
 libraries = {
 &"": SubResource("AnimationLibrary_oara4")
 }
@@ -6620,6 +6969,11 @@ position = Vector2(0, 26)
 
 [node name="ProximityArea" parent="Proximities" instance=ExtResource("9_5j67f")]
 collision_mask = 4
+requireLineOfSight = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Proximities/ProximityArea"]
+visible = false
+shape = SubResource("CircleShape2D_td578")
 
 [node name="ScreamProximity" parent="Proximities" instance=ExtResource("9_5j67f")]
 collision_mask = 4
@@ -7018,6 +7372,33 @@ bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(1, 1)
 
+[node name="EatingBite" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("75_os4kr")
+volume_db = 5.0
+pitch_scale = 0.5
+max_distance = 300.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(0.4, 0.6)
+
+[node name="Suprised" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("76_jubo4")
+max_distance = 300.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+
+[node name="Threaten" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("77_5po4a")
+volume_db = 5.0
+max_distance = 4096.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+
 [node name="Step" parent="Sounds" instance=ExtResource("52_keupk")]
 stream = ExtResource("61_61qot")
 volume_db = -5.0
@@ -7085,6 +7466,7 @@ bossName = "Remnant Crab"
 [connection signal="frame_changed" from="Sprites/Skulls" to="." method="_on_skulls_frame_changed"]
 [connection signal="stateSwitched" from="StateMachine" to="." method="_on_state_machine_state_switched"]
 [connection signal="hit" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_hit"]
+[connection signal="hit" from="GeneralComponents/HealthComponent" to="StateMachine/Eating" method="_on_health_component_hit"]
 [connection signal="onLockHit" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_on_lock_hit"]
 [connection signal="executed" from="GeneralComponents/EnemyHeathbar/BreakLegs" to="." method="_on_break_legs_executed"]
 [connection signal="gotParried" from="AttackComponents/JumpSlam" to="." method="_on_jump_slam_got_parried"]

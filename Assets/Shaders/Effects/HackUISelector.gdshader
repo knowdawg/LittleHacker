@@ -8,7 +8,7 @@ uniform float progress : hint_range(0.0, 1.0);
 void fragment() {
 	vec4 c = texture(screen, SCREEN_UV);
 	c.rgb = 1.0 - c.rgb;
-	vec4 n = texture(noise, UV + vec2(-TIME * 10.0, 0));
+	vec4 n = texture(noise, UV + vec2(-TIME * 1.0, 0));
 
 	c.a = n.r;
 	c.a += (1.0 - UV.x);

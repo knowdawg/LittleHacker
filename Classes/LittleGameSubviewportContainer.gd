@@ -19,6 +19,7 @@ class_name LittleGameSubviewportContainer
 
 
 @export_group("Depth of Field")
+@export var level : GenericLevel
 @export var scalingContainer : Node2D
 @export_range(0.0, 1.0) var depth : float = 0.0
 @export var scaleBasedOnDepth : bool = true
@@ -26,6 +27,7 @@ class_name LittleGameSubviewportContainer
 @export_tool_button("Update Depth", "Callable") var u = updateDepth
 
 func updateDepth():
+	material.set_shader_parameter("fog", level.backgroundGradient)
 	material.set_shader_parameter("depth", depth)
 	material.set_shader_parameter("u_radius", depth)
 	

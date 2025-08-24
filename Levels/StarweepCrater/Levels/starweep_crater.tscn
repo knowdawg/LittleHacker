@@ -43,7 +43,8 @@
 [ext_resource type="Script" uid="uid://cy0j711roqm06" path="res://Classes/AudioScripts/AmbientAudioFadeInOut.gd" id="40_4685e"]
 
 [sub_resource type="Gradient" id="Gradient_w31va"]
-colors = PackedColorArray(0.647059, 0.188235, 0.188235, 1, 0.105882, 0.0392157, 0.0666667, 1)
+offsets = PackedFloat32Array(1)
+colors = PackedColorArray(0.3, 0.1372, 0.078, 1)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_cg64b"]
 gradient = SubResource("Gradient_w31va")

@@ -27,20 +27,35 @@ func setSelfAsStartingLevel():
 @export var lighting : ColorRect
 @export var lightingBrightness : float = 1.0
 @export var backgroundGradient : GradientTexture2D
-@export var backgroundContainers : Array[SubViewportContainer] = []
-@export_tool_button("Set Backround Gradients", "Callable") var setGradientFog = setFog
 @export_subgroup("WorldEnvironment")
 @export var environment : Environment
 
+@export_group("Audio")
+@export var ambiences : Array[AudioStreamPlayer]
+@export var reverb : AudioEffectReverb
+
 func _ready() -> void:
 	Game.enterLittleGame.connect(setEnvirement)
+	if reverb:
+		var busIndex : int = AudioServer.get_bus_index("SoundEffects")
+		#Clear Existing effects
+		for i in range(AudioServer.get_bus_effect_count(busIndex)):
+			AudioServer.remove_bus_effect(busIndex, 0)
+		#Add This room's effects
+		AudioServer.add_bus_effect(busIndex, reverb)
+	
+	for a in ambiences:
+		a.play()
+	
+	customReady()
+
+func customReady():
+	pass
 
 #Called by SceneTransitionManager When the level is ready
 func initializeLevel(sceneData : SceneSwitchData) -> void:
 	if lighting:
 			lighting.material.set_shader_parameter("brightness", lightingBrightness)
-	
-	setFog()
 	
 	if !sceneData.respawnPlayer:
 		var p = Game.createPlayer()
@@ -70,11 +85,6 @@ func initializeLevel(sceneData : SceneSwitchData) -> void:
 			p.position = doorToSpawnPlayerOnFailure.enterPosition.global_position
 			return
 		r.spawnPlayer(sceneData)
-
-func setFog():
-	for b in backgroundContainers:
-		b.material.set_shader_parameter("fog", backgroundGradient)
-	
 
 func setEnvirement():
 	if environment:

@@ -16,6 +16,8 @@ class_name RemnantCrabChase
 enum style {ToPlayer, AwayFromPlayer, ChasePlayer}
 @export var direction : style = style.ToPlayer
 
+@export var decelerate : float = 100.0
+@export var lengthRange : Vector2 = Vector2(0.5, 1.0)
 var t = 0.0
 var length = 2.0
 var dir := Vector2.ZERO
@@ -27,8 +29,7 @@ func enter(_p):
 	metTarget = false
 	animator.play("Run")
 	
-	if direction == style.ChasePlayer:
-		length = randf_range(0.5, 1.0)
+	length = randf_range(lengthRange.x, lengthRange.y)
 	if direction == style.ToPlayer:
 		dir = Vector2(sm.vectorToPlayer.x, 0.0).normalized()
 	if direction == style.AwayFromPlayer:
@@ -43,7 +44,7 @@ func update_physics(delta):
 			metTarget = true
 		
 		if metTarget:
-			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 100.0)
+			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * decelerate)
 			if abs(runVelocity.x) <= 0.1:
 				trasitioned.emit(self, "Idle")
 				return
@@ -51,6 +52,9 @@ func update_physics(delta):
 			runVelocity += dir * acceleration * delta
 				
 	if direction == style.AwayFromPlayer:
+		if t > length:
+			metTarget = true
+		
 		if abs(sm.xDisToPlayer) >= 40.0 or t >= 1.0:
 			metTarget = true
 		
@@ -61,7 +65,7 @@ func update_physics(delta):
 			metTarget = true
 		
 		if metTarget:
-			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 100.0)
+			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * decelerate)
 			if abs(runVelocity.x) <= 0.1:
 				trasitioned.emit(self, "Idle")
 				return
@@ -73,7 +77,7 @@ func update_physics(delta):
 			dir = Vector2(sm.vectorToPlayer.x, 0.0).normalized()
 			runVelocity += dir * acceleration * delta
 		elif t > length:
-			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * 100.0)
+			runVelocity = runVelocity.move_toward(Vector2.ZERO, delta * decelerate)
 			if abs(runVelocity.x) <= 0.1:
 				trasitioned.emit(self, "Idle")
 				return

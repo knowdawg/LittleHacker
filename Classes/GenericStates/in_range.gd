@@ -1,15 +1,9 @@
 extends State
 
-@export var parent : Node2D
-@export var movementComponent : MovementComponent
 @export var proximity : ProximityAreaComponent
 @export var nextStates : Array[State] = []
 
 
-@export_subgroup("Stop Arguments")
-@export var timeStopped : float = 0.3
-@export_subgroup("Move Arguments")
-@export var movementForce : float = 50
 
 
 # Called when the node enters the scene tree for the first time.

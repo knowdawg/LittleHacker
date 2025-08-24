@@ -6,7 +6,7 @@ uniform float progress : hint_range(0.0, 1.0);
 
 void fragment() {
 	vec4 r = color;
-	vec4 b = texture(noise, UV + vec2(-TIME  * 5.5, 0.0));
+	vec4 b = texture(noise, UV + vec2(-TIME  * 0.5, 0.0));
 
 	r.a = b.r;
 	r.a -= smoothstep(0.5, 1.2, UV.x);
