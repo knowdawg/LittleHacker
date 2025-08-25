@@ -26,6 +26,9 @@ func _physics_process(delta: float) -> void:
 func smallImpact():
 	impact.emit()
 
+func bigImpact():
+	landed.emit()
+
 func launch():
 	velocity.y = -5000.0
 
@@ -150,6 +153,7 @@ func _on_health_component_hit(attack: Attack) -> void:
 		t.tween_property(%Skulls, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)
 	
 	if %StateMachine.phase == 2:
+		%Phase2Hit.playSound()
 		%Heart.offset = attack.knockback_vector * 5.0
 		t.tween_property(%Heart, "offset", Vector2.ZERO, 0.1).set_ease(Tween.EASE_OUT)
 		%CageAnimator.stop()

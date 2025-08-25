@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends FollowAudio
 class_name AudioLooper
 
 @export_group("Sounds")

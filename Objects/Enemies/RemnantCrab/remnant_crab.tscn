@@ -1,4 +1,4 @@
-[gd_scene load_steps=207 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=216 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -57,10 +57,10 @@
 [ext_resource type="PackedScene" uid="uid://chkylrbd78k57" path="res://Components/VisualEffectComponents/trailComponent/trail_component.tscn" id="44_02cj8"]
 [ext_resource type="PackedScene" uid="uid://dw0pl76cdbwc7" path="res://Components/BigStagger/big_stagger_effect.tscn" id="47_h3tgo"]
 [ext_resource type="Shader" uid="uid://bwtnrv43ddv4c" path="res://Assets/Shaders/Effects/big_stagger_effect.gdshader" id="48_peg4x"]
-[ext_resource type="AudioStream" uid="uid://uefqel0bj0y6" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleSuck.wav" id="50_4nfid"]
 [ext_resource type="AudioStream" uid="uid://bfej5o6pxwh01" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabPreStompBreath.wav" id="51_34diw"]
 [ext_resource type="PackedScene" uid="uid://bdtm313ybvdbo" path="res://Components/RandomAudioPlayer/random_audio_player.tscn" id="52_keupk"]
 [ext_resource type="AudioStream" uid="uid://b6ruorywjipe8" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserLoop.wav" id="52_rycj0"]
+[ext_resource type="AudioStream" uid="uid://cp0b6tmfhyucv" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleSuckQuick.wav" id="53_5po4a"]
 [ext_resource type="AudioStream" uid="uid://dbvswguv20aa1" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit1.wav" id="53_evxfn"]
 [ext_resource type="AudioStream" uid="uid://db1dxsib68ygh" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit2.wav" id="54_vjc32"]
 [ext_resource type="AudioStream" uid="uid://bg5xsl6wv78yj" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabHit3.wav" id="55_vf400"]
@@ -87,6 +87,15 @@
 [ext_resource type="AudioStream" uid="uid://do5atbdf8evh1" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSuprised.wav" id="76_jubo4"]
 [ext_resource type="AudioStream" uid="uid://bxhiergxp8yma" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabThreaten.wav" id="77_5po4a"]
 [ext_resource type="AudioStream" uid="uid://cliodglo0m35g" path="res://Assets/Audio/SoundEffects/RemnantCrab/RamnantCrabLaserEnd.wav" id="77_7uh3k"]
+[ext_resource type="AudioStream" uid="uid://c5g1yrr1vscb0" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleWhoosh.wav" id="78_rm07l"]
+[ext_resource type="AudioStream" uid="uid://c5xusn61ohrl7" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleWhooshQuick.wav" id="79_5h41f"]
+[ext_resource type="AudioStream" uid="uid://bcmh7vwt2shlt" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleChainsaw.wav" id="79_ptga1"]
+[ext_resource type="AudioStream" uid="uid://dbqfdyrik8q01" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleChainsawRecall.wav" id="80_q31fm"]
+[ext_resource type="AudioStream" uid="uid://cn0b4g1y8xra5" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleBigLaser.wav" id="81_uadfa"]
+[ext_resource type="AudioStream" uid="uid://ceb4i5nuush7j" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleTeleport.wav" id="83_573ef"]
+[ext_resource type="AudioStream" uid="uid://cl5fwsrlyvo3h" path="res://Assets/Audio/SoundEffects/RemnantCrab/HeartHit.wav" id="84_8tnk5"]
+[ext_resource type="PackedScene" uid="uid://ct1f4buc43e6f" path="res://Components/EaseInAudio/ease_in_loop_audio.tscn" id="86_22ih1"]
+[ext_resource type="AudioStream" uid="uid://cxne0rwvdoht7" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleExtendedSuckLoop.wav" id="87_5h41f"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
 size = Vector2(47, 19)
@@ -1089,6 +1098,61 @@ tracks/12/keys = {
 "method": &"smallImpact"
 }]
 }
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/SmallSlam:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/BlacHoleChainsaw")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/15/type = "method"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/BlackHoleWhoosh")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(1.2, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/BlacHoleChainsawRecall:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_02cj8"]
 resource_name = "BlackHoleDiskRight"
@@ -1292,6 +1356,61 @@ tracks/12/keys = {
 "method": &"smallImpact"
 }]
 }
+tracks/13/type = "method"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/BlackHoleWhoosh")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(1.2, 2.2),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/BlacHoleChainsaw")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0.3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/BlacHoleChainsawRecall:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(1.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/SmallSlam:playing")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(2.8),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
 
 [sub_resource type="Animation" id="Animation_vjc32"]
 resource_name = "BlackHoleMalfunction"
@@ -1368,6 +1487,35 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.1, 0.5]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 2.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"endSound"
+}]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sounds/BlackHoleSuckInLoop:pitch_scale")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 1.2]
 }
 
 [sub_resource type="Animation" id="Animation_8hasc"]
@@ -1613,6 +1761,52 @@ tracks/17/keys = {
 "values": [{
 "args": [],
 "method": &"smallImpact"
+}]
+}
+tracks/18/type = "method"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Sounds/BlackHoleSuck")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0.4, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Sounds/SmallSlam:playing")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/20/type = "method"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Sounds/BlackHoleWhoosh")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(0.9, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
 }]
 }
 
@@ -1861,6 +2055,168 @@ tracks/17/keys = {
 "method": &"smallImpact"
 }]
 }
+tracks/18/type = "method"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("Sounds/BlackHoleSuck")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(0.4, 1.5),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/19/type = "method"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("Sounds/BlackHoleWhoosh")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0.9, 2.3),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/20/type = "value"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("Sounds/SmallSlam:playing")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_vuqly"]
+resource_name = "Eating"
+loop_mode = 1
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Legs:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [87]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprites/EatingLegs:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprites/Skulls:frame")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprites/Skulls/Arms(Head):frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [13, 14, 15, 16, 17, 13, 14, 15, 16, 17]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Sprites/EatingLegs:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Sounds/TeethLoud")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Sounds/EatingBite")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/7/type = "method"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Sprites/Chomp")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0.1, 0.6),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [],
+"method": &"effect"
+}, {
+"args": [],
+"method": &"effect"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_cm20j"]
 resource_name = "GravityAmplification"
@@ -2006,6 +2362,32 @@ tracks/10/keys = {
 "method": &"makeBlackHoleDangerous"
 }]
 }
+tracks/11/type = "method"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/BlackHoleSuckInLoop:pitch_scale")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
 
 [sub_resource type="Animation" id="Animation_8261e"]
 resource_name = "GravityAmplificationEnd"
@@ -2110,6 +2492,32 @@ tracks/7/keys = {
 "args": [],
 "method": &"makeBlackHoleSafe"
 }]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(2.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"endSound"
+}]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("Sounds/BlackHoleSuckInLoop:pitch_scale")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0.7, 2.1, 3.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 1.2, 1.2]
 }
 
 [sub_resource type="Animation" id="Animation_vf400"]
@@ -2289,6 +2697,32 @@ tracks/13/keys = {
 "args": [],
 "method": &"staggerEffect"
 }]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(4.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"endSound"
+}]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/BlackHoleSuckInLoop:pitch_scale")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0.7, 4.9, 6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [1.0, 2.0, 2.0]
 }
 
 [sub_resource type="Animation" id="Animation_exc6n"]
@@ -3046,8 +3480,8 @@ tracks/1/path = NodePath(".")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(1.2, 1.5, 2.2, 3, 4.2),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"times": PackedFloat32Array(1.2, 1.5, 2.2, 3, 3.2, 4.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"launch"
@@ -3062,6 +3496,9 @@ tracks/1/keys = {
 "method": &"createLaserPillars"
 }, {
 "args": [],
+"method": &"bigImpact"
+}, {
+"args": [],
 "method": &"makeBlackHoleSafe"
 }]
 }
@@ -3072,15 +3509,9 @@ tracks/2/path = NodePath("AttackComponents/JumpSlam")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(2.2, 2.3, 3, 3.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
+"times": PackedFloat32Array(2.2, 2.3),
+"transitions": PackedFloat32Array(1, 1),
 "values": [{
-"args": [],
-"method": &"readyAttack"
-}, {
-"args": [],
-"method": &"disable"
-}, {
 "args": [],
 "method": &"readyAttack"
 }, {
@@ -3209,7 +3640,7 @@ tracks/11/path = NodePath("AttackComponents/JumpSlamBlackHole")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(3.2, 3.3),
+"times": PackedFloat32Array(3, 3.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -3217,6 +3648,46 @@ tracks/11/keys = {
 }, {
 "args": [],
 "method": &"disable"
+}]
+}
+tracks/12/type = "method"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Sounds/BlackHoleBigLaser")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(3.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Sounds/JumpSlam:playing")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/BlackHoleWhooshQuick")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
 }]
 }
 
@@ -3652,6 +4123,81 @@ tracks/13/keys = {
 "update": 0,
 "values": [-0.5, -0.5, -10.0, 10.0, 10.0, -0.5, -0.5, -10.0, 10.0, 10.0, -0.5, -0.5, -10.0, 10.0, 10.0, -0.5]
 }
+tracks/14/type = "method"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("Sounds/BlackHoleBigLaser")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(1.8, 3.2, 4.6),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("Sounds/SmallSlam:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(5.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath(".")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(1.8, 3.2, 4.6, 5.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"bigImpact"
+}, {
+"args": [],
+"method": &"bigImpact"
+}, {
+"args": [],
+"method": &"bigImpact"
+}, {
+"args": [],
+"method": &"smallImpact"
+}]
+}
+tracks/17/type = "method"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("Sounds/Teleport")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(1.1, 2.5, 3.9),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_wbp0r"]
 resource_name = "PhantomSkulls"
@@ -3974,6 +4520,53 @@ tracks/21/keys = {
 "args": [&"BreakFree", -1, 1.0, false],
 "method": &"play"
 }]
+}
+tracks/22/type = "method"
+tracks/22/imported = false
+tracks/22/enabled = true
+tracks/22/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/22/interp = 1
+tracks/22/loop_wrap = true
+tracks/22/keys = {
+"times": PackedFloat32Array(0.4, 3.1, 3.9, 6.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"endSound"
+}, {
+"args": [],
+"method": &"playSound"
+}, {
+"args": [],
+"method": &"endSound"
+}]
+}
+tracks/23/type = "value"
+tracks/23/imported = false
+tracks/23/enabled = true
+tracks/23/path = NodePath("Sounds/BlackHoleSuckInLoop:pitch_scale")
+tracks/23/interp = 1
+tracks/23/loop_wrap = true
+tracks/23/keys = {
+"times": PackedFloat32Array(0, 3.9, 6.4, 7),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [1.0, 1.0, 1.2, 1.2]
+}
+tracks/24/type = "value"
+tracks/24/imported = false
+tracks/24/enabled = true
+tracks/24/path = NodePath("Sounds/BlackHoleBreath:playing")
+tracks/24/interp = 1
+tracks/24/loop_wrap = true
+tracks/24/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_yiftg"]
@@ -4613,6 +5206,30 @@ tracks/52/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [false]
+}
+tracks/53/type = "value"
+tracks/53/imported = false
+tracks/53/enabled = true
+tracks/53/path = NodePath("Sounds/BlacHoleChainsawRecall:playing")
+tracks/53/interp = 1
+tracks/53/loop_wrap = true
+tracks/53/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/54/type = "value"
+tracks/54/imported = false
+tracks/54/enabled = true
+tracks/54/path = NodePath("Sounds/BlackHoleSuckInLoop:pitch_scale")
+tracks/54/interp = 1
+tracks/54/loop_wrap = true
+tracks/54/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
 }
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
@@ -5954,6 +6571,23 @@ tracks/13/keys = {
 }]
 }
 
+[sub_resource type="Animation" id="Animation_jubo4"]
+resource_name = "Suprised"
+length = 0.1
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprites/Skulls:scale")
+tracks/0/interp = 0
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.7, 1.5), Vector2(1.2, 0.8), Vector2(1, 1)]
+}
+
 [sub_resource type="Animation" id="Animation_k1yg2"]
 resource_name = "Threaten"
 length = 3.0
@@ -6091,139 +6725,6 @@ tracks/10/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1, 1)]
-}
-
-[sub_resource type="Animation" id="Animation_vuqly"]
-resource_name = "Eating"
-loop_mode = 1
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Legs:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [87]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprites/EatingLegs:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprites/Skulls:frame")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [79, 80, 81, 82, 83, 84, 85, 86, 87, 88]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprites/Skulls/Arms(Head):frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [13, 14, 15, 16, 17, 13, 14, 15, 16, 17]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Sprites/EatingLegs:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "method"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Sounds/TeethLoud")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"playSound"
-}, {
-"args": [],
-"method": &"playSound"
-}]
-}
-tracks/6/type = "method"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("Sounds/EatingBite")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"playSound"
-}, {
-"args": [],
-"method": &"playSound"
-}]
-}
-tracks/7/type = "method"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("Sprites/Chomp")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0.1, 0.6),
-"transitions": PackedFloat32Array(1, 1),
-"values": [{
-"args": [],
-"method": &"effect"
-}, {
-"args": [],
-"method": &"effect"
-}]
-}
-
-[sub_resource type="Animation" id="Animation_jubo4"]
-resource_name = "Suprised"
-length = 0.1
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprites/Skulls:scale")
-tracks/0/interp = 0
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(0.7, 1.5), Vector2(1.2, 0.8), Vector2(1, 1)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_oara4"]
@@ -6911,7 +7412,7 @@ script = ExtResource("15_jvtmt")
 lockPoints = Dictionary[float, String]({
 50.0: "PhaseTransition"
 })
-MAX_HEALTH = 200.0
+MAX_HEALTH = 60.0
 dieOnZeroHealth = false
 
 [node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_7y5mw")]
@@ -7246,9 +7747,14 @@ parent = NodePath("../..")
 
 [node name="Sounds" type="Node2D" parent="."]
 
-[node name="BlackHoleSuck" type="AudioStreamPlayer2D" parent="Sounds"]
-stream = ExtResource("50_4nfid")
+[node name="BlackHoleSuck" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("53_5po4a")
+volume_db = 5.0
+pitch_scale = 0.8
+max_polyphony = 2
 bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+follow = NodePath("../../BlackHoleContainer/BlackHole")
 
 [node name="StompSuckIn" type="AudioStreamPlayer2D" parent="Sounds"]
 stream = ExtResource("51_34diw")
@@ -7256,7 +7762,6 @@ bus = &"SoundEffects"
 
 [node name="Phase1Hit" parent="Sounds" instance=ExtResource("52_keupk")]
 unique_name_in_owner = true
-volume_db = -5.0
 bus = &"SoundEffects"
 sounds = Array[AudioStream]([ExtResource("53_evxfn"), ExtResource("54_vjc32"), ExtResource("55_vf400"), ExtResource("56_wbp0r"), ExtResource("57_fr5br")])
 
@@ -7399,6 +7904,78 @@ bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(1, 1)
 
+[node name="BlackHoleWhoosh" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("78_rm07l")
+volume_db = 10.0
+max_distance = 100.0
+attenuation = 0.25
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="BlackHoleWhooshQuick" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("79_5h41f")
+volume_db = 10.0
+max_distance = 4096.0
+attenuation = 0.25
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="BlacHoleChainsaw" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("79_ptga1")
+volume_db = 10.0
+max_distance = 1000.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="BlacHoleChainsawRecall" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("80_q31fm")
+volume_db = 10.0
+pitch_scale = 1.5
+max_distance = 1000.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="BlackHoleBigLaser" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("81_uadfa")
+volume_db = 15.0
+max_distance = 1000.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="Teleport" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("83_573ef")
+volume_db = 10.0
+pitch_scale = 1.2
+max_distance = 1000.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(0.8, 1.2)
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="Phase2Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+unique_name_in_owner = true
+stream = ExtResource("84_8tnk5")
+volume_db = 5.0
+max_distance = 1000.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(0.7, 1.3)
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
 [node name="Step" parent="Sounds" instance=ExtResource("52_keupk")]
 stream = ExtResource("61_61qot")
 volume_db = -5.0
@@ -7413,6 +7990,9 @@ bus = &"SoundEffects"
 startSound = ExtResource("75_dknms")
 loopSound = ExtResource("52_rycj0")
 endSound = ExtResource("77_7uh3k")
+
+[node name="BlackHoleSuckInLoop" parent="Sounds" instance=ExtResource("86_22ih1")]
+stream = ExtResource("87_5h41f")
 
 [node name="Shockwaves" type="Node2D" parent="."]
 z_index = 100

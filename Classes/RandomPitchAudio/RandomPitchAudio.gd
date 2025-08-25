@@ -1,4 +1,4 @@
-extends AudioStreamPlayer2D
+extends FollowAudio
 class_name RandomPitchAudio
 
 @export var pitchRange := Vector2(0.9, 1.1)
