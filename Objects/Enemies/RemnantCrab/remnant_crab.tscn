@@ -1,4 +1,4 @@
-[gd_scene load_steps=216 format=3 uid="uid://dxc6glqrf4hu8"]
+[gd_scene load_steps=226 format=3 uid="uid://dxc6glqrf4hu8"]
 
 [ext_resource type="Script" uid="uid://bb7ly8t6g2fas" path="res://Objects/Enemies/RemnantCrab/remnant_crab.gd" id="1_7hw05"]
 [ext_resource type="Texture2D" uid="uid://dq5vmvl70gvbi" path="res://Assets/Sprites/Enemies/Bosses/RemnantCrab/RemnantCrabLegs.png" id="2_rt31b"]
@@ -39,6 +39,7 @@
 [ext_resource type="Script" uid="uid://ckh47tupsk6me" path="res://Objects/Enemies/RemnantCrab/stagger_phase_1.gd" id="17_oeqg8"]
 [ext_resource type="Script" uid="uid://bgbo35ve6hofy" path="res://Objects/Enemies/RemnantCrab/StateMachine/phase_switch.gd" id="19_yiftg"]
 [ext_resource type="Script" uid="uid://xq3m7wohys4y" path="res://Objects/Enemies/RemnantCrab/StateMachine/run_to_center.gd" id="20_gi6ip"]
+[ext_resource type="Script" uid="uid://bu3vcqc7drhe" path="res://Objects/Enemies/RemnantCrab/heart_blood_effects.gd" id="21_6rm0b"]
 [ext_resource type="PackedScene" uid="uid://c0wt2u2k2pkt7" path="res://Objects/Hacks/LifeDrain/life_drain_heal.tscn" id="21_i7s33"]
 [ext_resource type="Script" uid="uid://bme2wl85htt0r" path="res://Objects/Enemies/RemnantCrab/StateMachine/massive_laser.gd" id="21_uhgxb"]
 [ext_resource type="Script" uid="uid://c6gkbknri6gt8" path="res://Objects/Enemies/RemnantCrab/StateMachine/block_hole_disk.gd" id="22_clfli"]
@@ -94,8 +95,11 @@
 [ext_resource type="AudioStream" uid="uid://cn0b4g1y8xra5" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleBigLaser.wav" id="81_uadfa"]
 [ext_resource type="AudioStream" uid="uid://ceb4i5nuush7j" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleTeleport.wav" id="83_573ef"]
 [ext_resource type="AudioStream" uid="uid://cl5fwsrlyvo3h" path="res://Assets/Audio/SoundEffects/RemnantCrab/HeartHit.wav" id="84_8tnk5"]
+[ext_resource type="AudioStream" uid="uid://cpgkp2hlu80s0" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSkullCrack.wav" id="85_37u80"]
+[ext_resource type="AudioStream" uid="uid://dnttqyv4lvhex" path="res://Assets/Audio/SoundEffects/RemnantCrab/RemnantCrabSkullExplode.wav" id="86_8jm47"]
 [ext_resource type="PackedScene" uid="uid://ct1f4buc43e6f" path="res://Components/EaseInAudio/ease_in_loop_audio.tscn" id="86_22ih1"]
 [ext_resource type="AudioStream" uid="uid://cxne0rwvdoht7" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleExtendedSuckLoop.wav" id="87_5h41f"]
+[ext_resource type="AudioStream" uid="uid://bxtdg0yqo0pg6" path="res://Assets/Audio/SoundEffects/RemnantCrab/BlackHoleAmbience.wav" id="88_jl28o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rt31b"]
 size = Vector2(47, 19)
@@ -1069,7 +1073,7 @@ tracks/10/keys = {
 }
 tracks/11/type = "method"
 tracks/11/imported = false
-tracks/11/enabled = true
+tracks/11/enabled = false
 tracks/11/path = NodePath("AttackComponents/BlackHoleDiskCenter")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
@@ -2724,6 +2728,20 @@ tracks/15/keys = {
 "update": 0,
 "values": [1.0, 2.0, 2.0]
 }
+tracks/16/type = "method"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("Sounds/Phase2Ambience")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(4.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"stop"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_exc6n"]
 resource_name = "GravityAmplificationRepeat"
@@ -3626,7 +3644,7 @@ tracks/10/path = NodePath("LaserContainer/MassiveLaserAnimator")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
-"times": PackedFloat32Array(3),
+"times": PackedFloat32Array(3.05),
 "transitions": PackedFloat32Array(1),
 "values": [{
 "args": [&"Pulse", -1, 1.0, false],
@@ -3640,7 +3658,7 @@ tracks/11/path = NodePath("AttackComponents/JumpSlamBlackHole")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(3, 3.3),
+"times": PackedFloat32Array(3.1, 3.3),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [],
@@ -4568,6 +4586,74 @@ tracks/24/keys = {
 "update": 1,
 "values": [true]
 }
+tracks/25/type = "method"
+tracks/25/imported = false
+tracks/25/enabled = true
+tracks/25/path = NodePath("Sounds/SkullCrack")
+tracks/25/interp = 1
+tracks/25/loop_wrap = true
+tracks/25/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/26/type = "method"
+tracks/26/imported = false
+tracks/26/enabled = true
+tracks/26/path = NodePath("Sounds/SkullExplode")
+tracks/26/interp = 1
+tracks/26/loop_wrap = true
+tracks/26/keys = {
+"times": PackedFloat32Array(3.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/27/type = "value"
+tracks/27/imported = false
+tracks/27/enabled = true
+tracks/27/path = NodePath("VFXs/PhaseTransitionBlood:material:shader_parameter/progress")
+tracks/27/interp = 1
+tracks/27/loop_wrap = true
+tracks/27/keys = {
+"times": PackedFloat32Array(0, 3.9, 4, 4.1, 4.2, 4.4, 4.5, 4.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-1.0, -1.0, 4.75e-08, 0.2, 0.3, 0.4, 4.75e-08, -1.0]
+}
+tracks/28/type = "method"
+tracks/28/imported = false
+tracks/28/enabled = true
+tracks/28/path = NodePath("Sounds/Teleport")
+tracks/28/interp = 1
+tracks/28/loop_wrap = true
+tracks/28/keys = {
+"times": PackedFloat32Array(3),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
+tracks/29/type = "method"
+tracks/29/imported = false
+tracks/29/enabled = true
+tracks/29/path = NodePath("Sounds/Phase2Ambience")
+tracks/29/interp = 1
+tracks/29/loop_wrap = true
+tracks/29/keys = {
+"times": PackedFloat32Array(4.1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"playSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_yiftg"]
 length = 0.001
@@ -5231,6 +5317,18 @@ tracks/54/keys = {
 "update": 0,
 "values": [1.0]
 }
+tracks/55/type = "value"
+tracks/55/imported = false
+tracks/55/enabled = true
+tracks/55/path = NodePath("VFXs/PhaseTransitionBlood:material:shader_parameter/progress")
+tracks/55/interp = 1
+tracks/55/loop_wrap = true
+tracks/55/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [-1.0]
+}
 
 [sub_resource type="Animation" id="Animation_7y5mw"]
 resource_name = "Run"
@@ -5825,6 +5923,20 @@ tracks/7/keys = {
 "method": &"smallImpact"
 }]
 }
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"forceEndSound"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_js2i4"]
 resource_name = "StaggerPhase2Right"
@@ -5929,6 +6041,20 @@ tracks/7/keys = {
 }, {
 "args": [],
 "method": &"smallImpact"
+}]
+}
+tracks/8/type = "method"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Sounds/BlackHoleSuckInLoop")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"forceEndSound"
 }]
 }
 
@@ -6829,6 +6955,37 @@ shader_parameter/shreekSpeed = 1.1
 shader_parameter/resolution = Vector2(128, 128)
 shader_parameter/progress = 1.0
 
+[sub_resource type="Gradient" id="Gradient_8jm47"]
+colors = PackedColorArray(0.1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_jl28o"]
+gradient = SubResource("Gradient_8jm47")
+
+[sub_resource type="Gradient" id="Gradient_jl28o"]
+offsets = PackedFloat32Array(0.235669, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_rcw8i"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_ot2uj"]
+height = 64
+seamless = true
+seamless_blend_skirt = 0.3
+color_ramp = SubResource("Gradient_jl28o")
+noise = SubResource("FastNoiseLite_rcw8i")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_upsn7"]
+resource_local_to_scene = true
+shader = ExtResource("48_peg4x")
+shader_parameter/image = SubResource("NoiseTexture2D_ot2uj")
+shader_parameter/rotations = 3.0
+shader_parameter/shrinkSpeed = -0.2
+shader_parameter/roationSpeed = 0.1
+shader_parameter/shreekSpeed = 1.1
+shader_parameter/resolution = Vector2(128, 128)
+shader_parameter/progress = 1.0
+shader_parameter/grad = SubResource("GradientTexture1D_jl28o")
+
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_yiftg"]
 height = 64
 seamless = true
@@ -7077,9 +7234,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_6jn3g")
 }
 
-[node name="HeartBloodEffects" type="Node2D" parent="BlackHoleContainer/BlackHole"]
+[node name="HeartBloodEffects" type="Node2D" parent="BlackHoleContainer/BlackHole" node_paths=PackedStringArray("stateMachine")]
 position = Vector2(0, 0.333333)
 scale = Vector2(0.333, 0.333)
+script = ExtResource("21_6rm0b")
+stateMachine = NodePath("../../../StateMachine")
 
 [node name="BloodEffect" parent="BlackHoleContainer/BlackHole/HeartBloodEffects" node_paths=PackedStringArray("healthComponent") instance=ExtResource("13_jvtmt")]
 material = SubResource("ShaderMaterial_8261e")
@@ -7412,7 +7571,7 @@ script = ExtResource("15_jvtmt")
 lockPoints = Dictionary[float, String]({
 50.0: "PhaseTransition"
 })
-MAX_HEALTH = 60.0
+MAX_HEALTH = 200.0
 dieOnZeroHealth = false
 
 [node name="MovementComponent" parent="GeneralComponents" node_paths=PackedStringArray("parent") instance=ExtResource("5_7y5mw")]
@@ -7745,6 +7904,10 @@ unique_name_in_owner = true
 material = SubResource("ShaderMaterial_js2i4")
 parent = NodePath("../..")
 
+[node name="PhaseTransitionBlood" parent="VFXs" instance=ExtResource("47_h3tgo")]
+material = SubResource("ShaderMaterial_upsn7")
+position = Vector2(0, -13)
+
 [node name="Sounds" type="Node2D" parent="."]
 
 [node name="BlackHoleSuck" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
@@ -7965,6 +8128,28 @@ script = ExtResource("59_vf400")
 pitchRange = Vector2(0.8, 1.2)
 follow = NodePath("../../BlackHoleContainer/BlackHole")
 
+[node name="SkullCrack" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("85_37u80")
+volume_db = 10.0
+max_distance = 1000.0
+attenuation = 0.353553
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="SkullExplode" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
+stream = ExtResource("86_8jm47")
+volume_db = 10.0
+max_distance = 1000.0
+attenuation = 0.353553
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
+follow = NodePath("../../BlackHoleContainer/BlackHole")
+
 [node name="Phase2Hit" type="AudioStreamPlayer2D" parent="Sounds" node_paths=PackedStringArray("follow")]
 unique_name_in_owner = true
 stream = ExtResource("84_8tnk5")
@@ -7975,6 +8160,14 @@ bus = &"SoundEffects"
 script = ExtResource("59_vf400")
 pitchRange = Vector2(0.7, 1.3)
 follow = NodePath("../../BlackHoleContainer/BlackHole")
+
+[node name="Phase2Ambience" type="AudioStreamPlayer2D" parent="Sounds"]
+stream = ExtResource("88_jl28o")
+max_distance = 150.0
+max_polyphony = 4
+bus = &"SoundEffects"
+script = ExtResource("59_vf400")
+pitchRange = Vector2(1, 1)
 
 [node name="Step" parent="Sounds" instance=ExtResource("52_keupk")]
 stream = ExtResource("61_61qot")
@@ -7993,6 +8186,7 @@ endSound = ExtResource("77_7uh3k")
 
 [node name="BlackHoleSuckInLoop" parent="Sounds" instance=ExtResource("86_22ih1")]
 stream = ExtResource("87_5h41f")
+easeOutTime = 0.5
 
 [node name="Shockwaves" type="Node2D" parent="."]
 z_index = 100
@@ -8050,4 +8244,6 @@ bossName = "Remnant Crab"
 [connection signal="onLockHit" from="GeneralComponents/HealthComponent" to="." method="_on_health_component_on_lock_hit"]
 [connection signal="executed" from="GeneralComponents/EnemyHeathbar/BreakLegs" to="." method="_on_break_legs_executed"]
 [connection signal="gotParried" from="AttackComponents/JumpSlam" to="." method="_on_jump_slam_got_parried"]
+[connection signal="gotParried" from="AttackComponents/StompLeft" to="." method="_on_stomp_left_got_parried"]
+[connection signal="gotParried" from="AttackComponents/StompRight" to="." method="_on_stomp_right_got_parried"]
 [connection signal="gotParried" from="AttackComponents/JumpSlamBlackHole" to="." method="_on_jump_slam_black_hole_got_parried"]

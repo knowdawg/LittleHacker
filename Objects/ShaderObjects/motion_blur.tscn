@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://d03i3jperca7o"]
+[gd_scene load_steps=35 format=3 uid="uid://d03i3jperca7o"]
 
 [ext_resource type="Texture2D" uid="uid://dumx1gfulor0p" path="res://Assets/Sprites/EnvirmentTextures/Sandstone/SandstoneBackground.png" id="1_eaain"]
 [ext_resource type="Shader" uid="uid://d0bq1fctgvawk" path="res://Assets/Shaders/Filters/MotionBlur.gdshader" id="1_fumwe"]
@@ -7,6 +7,7 @@
 [ext_resource type="Shader" uid="uid://dojcoea80jhuv" path="res://Assets/Shaders/Filters/ImpactFrame.gdshader" id="5_oarrq"]
 [ext_resource type="Shader" uid="uid://bnifbh210do7s" path="res://Assets/Shaders/Effects/StaticNoise.gdshader" id="6_1v5yc"]
 [ext_resource type="AudioStream" uid="uid://ciuc1idxd08us" path="res://Assets/Audio/SoundEffects/StaticScreen.wav" id="7_8o7ku"]
+[ext_resource type="AudioStream" uid="uid://beyorl7fgr76f" path="res://Assets/Audio/SoundEffects/SuperParry.wav" id="8_nswdb"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_4vfml"]
 seed = 3
@@ -454,6 +455,10 @@ color = Color(0, 0, 0, 1)
 libraries = {
 &"": SubResource("AnimationLibrary_qjhj6")
 }
+
+[node name="SuperParrySoundEffect" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("8_nswdb")
 
 [connection signal="animation_finished" from="HackAnimator" to="." method="_on_animation_player_animation_finished"]
 [connection signal="timeout" from="StaticNoise/StaticNoiseTimer" to="." method="_on_timer_timeout"]

@@ -43,7 +43,6 @@ gradient = SubResource("Gradient_w31va")
 [sub_resource type="AudioEffectReverb" id="AudioEffectReverb_r28yb"]
 room_size = 1.0
 hipass = 0.5
-dry = 0.8
 wet = 0.2
 
 [sub_resource type="Shader" id="Shader_73joc"]
@@ -1450,7 +1449,7 @@ texture = SubResource("GradientTexture2D_r28yb")
 [node name="Doors" type="Node2D" parent="."]
 
 [node name="LevelTransition" parent="Doors" node_paths=PackedStringArray("enterPosition") instance=ExtResource("7_acv4u")]
-position = Vector2(353, 156)
+position = Vector2(203, 186)
 enterPosition = NodePath("Marker2D")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Doors/LevelTransition"]

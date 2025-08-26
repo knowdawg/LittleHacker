@@ -7,3 +7,7 @@ func _process(delta: float) -> void:
 	if is_instance_valid(follow):
 		global_position = follow.global_position
 	
+	customProcess(delta)
+
+func customProcess(delta):
+	pass

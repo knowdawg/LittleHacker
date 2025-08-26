@@ -24,4 +24,6 @@ func setup():
 		$AttackComponent.scale.y = 100.0
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
+	$Timer.start()
+	await $Timer.timeout
 	queue_free()

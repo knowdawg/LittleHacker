@@ -31,6 +31,7 @@ func glitch():
 	$GlitchAnimator.play("Glitch")
 
 func superParry(node : Node2D):
+	%SuperParrySoundEffect.play()
 	var p : Vector2 = node.get_global_transform_with_canvas().origin
 	p.x /= get_viewport().size.x
 	p.y /=  get_viewport().size.y

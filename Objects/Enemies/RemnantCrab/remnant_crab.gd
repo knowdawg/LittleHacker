@@ -169,3 +169,16 @@ func _on_skulls_frame_changed() -> void:
 	for i in biteFrames:
 		if %Skulls.frame == i:
 			%Bite.playSound()
+
+
+func _on_stomp_left_got_parried(_a: Attack) -> void:
+	if $StateMachine.current_state.name == "BlackHoleDisk":
+		if Game.doesPlayerExist():
+			Game.superParry(Game.player)
+			%StateMachine.switchStates("StaggerPhase2")
+
+func _on_stomp_right_got_parried(_a: Attack) -> void:
+	if $StateMachine.current_state.name == "BlackHoleDisk":
+		if Game.doesPlayerExist():
+			Game.superParry(Game.player)
+			%StateMachine.switchStates("StaggerPhase2")
