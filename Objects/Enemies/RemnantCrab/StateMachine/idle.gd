@@ -9,7 +9,7 @@ var prevAttackPhase2 = -1
 var nextStates : Array[String] = []
 
 func enter(p : State):
-	#nextStates.append("PhaseSwitch")
+	#nextStates.append("MassiveLaser")
 	#return
 	if p is RemnantCrabEating:
 		nextStates.append("RunAwayShort")

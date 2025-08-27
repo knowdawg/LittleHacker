@@ -1,4 +1,4 @@
-[gd_scene load_steps=102 format=3 uid="uid://barphc8f57f5"]
+[gd_scene load_steps=103 format=3 uid="uid://barphc8f57f5"]
 
 [ext_resource type="Script" uid="uid://d2li3xtoqnhpw" path="res://Levels/StarweepCrater/Levels/RemnantCrabAreana.gd" id="1_ue1en"]
 [ext_resource type="Environment" uid="uid://dmo71rg36b37b" path="res://Objects/WorldEnvierments/StarweepWorldEnvierment.tres" id="2_hnefq"]
@@ -30,6 +30,7 @@
 [ext_resource type="Texture2D" uid="uid://c3m0a85vbvr6w" path="res://Assets/Sprites/WorldObjects/WyrmSpinePieceLarge1Front.png" id="17_gt4go"]
 [ext_resource type="Texture2D" uid="uid://byuw2arasagqb" path="res://Assets/Sprites/WorldObjects/WyrmSpinePieceMassive1Front.png" id="22_6xiy4"]
 [ext_resource type="PackedScene" uid="uid://dxc6glqrf4hu8" path="res://Objects/Enemies/RemnantCrab/remnant_crab.tscn" id="24_ue1en"]
+[ext_resource type="Texture2D" uid="uid://k7b3j1872g3m" path="res://Assets/Sprites/UI/Healthbars/RemnantCrabHealthbar.png" id="30_642rf"]
 [ext_resource type="AudioStream" uid="uid://d3ephsjmk5i5a" path="res://Assets/Audio/SoundEffects/FireStoke.wav" id="32_642rf"]
 [ext_resource type="AudioStream" uid="uid://cm6lbswbbrc0c" path="res://Assets/Audio/SoundEffects/AmbientSoundScapes/LavaAmbience.wav" id="32_r28yb"]
 
@@ -1461,6 +1462,15 @@ position = Vector2(-7, 0)
 color = Color(1, 1, 1, 0.0392157)
 polygon = PackedVector2Array(372, 216, 372, 59, 8, 59, 8, 216)
 cameraSize = Vector2(192, 108)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+visible = false
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+texture_filter = 1
+position = Vector2(960, 980)
+scale = Vector2(10, 10)
+texture = ExtResource("30_642rf")
 
 [node name="StarweepWorldEnvierment" parent="." instance=ExtResource("13_11dhq")]
 

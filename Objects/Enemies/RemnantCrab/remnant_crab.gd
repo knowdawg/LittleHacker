@@ -87,10 +87,12 @@ func GravityAmpRightStomp():
 
 
 var laserPillarProjectile = preload("uid://d0sqdwt14okl0")
-func createLaserPillars(numOfPillars : int = 14, maxDis : float = 100.0):
+func createLaserPillars(numOfPillars : int = 14, maxDis : float = 100.0, minDis : float = 0.0):
 	for i in range(numOfPillars):
 		var p : LaserPillar = laserPillarProjectile.instantiate()
-		p.global_position = global_position + Vector2(randf_range(-maxDis, maxDis), 23.0)
+		var randXPos : float = randf_range(minDis, maxDis)
+		randXPos *= -1.0 if randf() > 0.5 else 1.0
+		p.global_position = global_position + Vector2(randXPos, 23.0)
 		Game.addProjectile(p)
 		p.speedScale = randf_range(0.7, 1.0)
 		p.activate()

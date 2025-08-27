@@ -1412,7 +1412,7 @@ blend_mode = 1
 
 [sub_resource type="Gradient" id="Gradient_3om3i"]
 interpolation_mode = 2
-offsets = PackedFloat32Array(0, 0.233108, 1)
+offsets = PackedFloat32Array(0, 0.177249, 1)
 colors = PackedColorArray(1, 1, 1, 0.392157, 1, 1, 1, 0.186145, 1, 1, 1, 0)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_4k38o"]
@@ -3487,10 +3487,10 @@ libraries = {
 }
 
 [node name="Top" type="RichTextLabel" parent="HackUI"]
-offset_left = -20.4414
-offset_top = -6.89844
-offset_right = 79.5586
-offset_bottom = 16.1016
+offset_left = -27.0
+offset_top = -9.5
+offset_right = 73.0
+offset_bottom = 13.5
 rotation = 0.0872665
 scale = Vector2(0.35, 0.35)
 theme_override_constants/outline_size = 3
@@ -3527,18 +3527,18 @@ trail_lifetime = 0.02
 process_material = SubResource("ParticleProcessMaterial_3ysx1")
 
 [node name="Bottom" parent="HackUI" instance=ExtResource("37_ss1gu")]
-offset_left = -20.4414
-offset_top = -3.41797
-offset_right = 79.5586
-offset_bottom = 19.582
+offset_left = -27.0
+offset_top = -2.0
+offset_right = 73.0
+offset_bottom = 21.0
 rotation = -0.0872665
 scale = Vector2(0.35, 0.35)
 script = ExtResource("38_o42eg")
 
 [node name="Middle" type="RichTextLabel" parent="HackUI"]
-offset_left = -25.3789
+offset_left = -30.0
 offset_top = -7.0
-offset_right = 35.6211
+offset_right = 31.0
 offset_bottom = 16.0
 rotation = 0.00056552
 scale = Vector2(0.5, 0.5)

@@ -4061,7 +4061,7 @@ tracks/9/keys = {
 "args": [],
 "method": &"prepareForLanding"
 }, {
-"args": [20, 200.0],
+"args": [20, 200.0, 30.0],
 "method": &"createLaserPillars"
 }, {
 "args": [],
